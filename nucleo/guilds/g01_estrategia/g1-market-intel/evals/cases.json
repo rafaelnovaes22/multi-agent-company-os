@@ -1,0 +1,5 @@
+[
+  {"id": "mi-01", "desc": "vertical passa hard-filters", "candidate": {"vertical": "Exemplo A", "est_companies_brazil": 80000, "founder_led_share": 0.6, "process_pain_evidence": 4, "tier2_sources": ["diretorio X", "associacao Y"], "regulatory_risk": 1}, "expected": {"passes_hard_filters": true}},
+  {"id": "mi-02", "desc": "sem dor de processo -> F2 falha", "candidate": {"vertical": "Exemplo B", "est_companies_brazil": 50000, "founder_led_share": 0.5, "process_pain_evidence": 1, "tier2_sources": ["fonte Z"], "regulatory_risk": 1}, "expected": {"passes_hard_filters": false}},
+  {"id": "mi-03", "desc": "sem fonte Tier 2 -> F4 falha", "candidate": {"vertical": "Exemplo C", "est_companies_brazil": 90000, "founder_led_share": 0.7, "process_pain_evidence": 4, "tier2_sources": [], "regulatory_risk": 2}, "expected": {"passes_hard_filters": false}}
+]

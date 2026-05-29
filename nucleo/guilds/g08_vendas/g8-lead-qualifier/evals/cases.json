@@ -1,0 +1,7 @@
+[
+  {"id": "lq-01", "desc": "high-fit completo", "lead": {"id": "L-h1", "revenue_brl_year": 2500000, "founder_led": true, "sells_well": true, "lacks_process": true, "firefighter": true}, "expected": {"decision": "qualified", "track": "assistido (SDR/closer)"}},
+  {"id": "lq-02", "desc": "pequeno demais (<R$1M)", "lead": {"id": "L-s1", "revenue_brl_year": 400000, "founder_led": true, "lacks_process": true}, "expected": {"decision": "disqualified"}},
+  {"id": "lq-03", "desc": "operacao madura (sinal negativo)", "lead": {"id": "L-m1", "revenue_brl_year": 3000000, "founder_led": false, "sells_well": true, "ops_mature": true}, "expected": {"decision": "disqualified"}},
+  {"id": "lq-04", "desc": "fit medio -> self-serve", "lead": {"id": "L-md1", "revenue_brl_year": 1800000, "founder_led": true, "firefighter": true}, "expected": {"decision": "qualified", "track": "self-serve (ativacao no produto)"}},
+  {"id": "lq-05", "desc": "grande demais (>R$5M)", "lead": {"id": "L-b1", "revenue_brl_year": 9000000, "founder_led": false, "sells_well": true}, "expected": {"decision": "disqualified"}}
+]

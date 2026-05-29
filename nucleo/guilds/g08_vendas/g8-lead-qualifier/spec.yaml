@@ -1,0 +1,45 @@
+id: g8-lead-qualifier
+guild: G08-vendas-receita
+ledger: billable           # parte do motor comercial -> C3 aplica (custo <= 25%)
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW               # C4 - nasce aqui; so qualifica de verdade apos gate
+act_handler: lead_qualifier  # skill executada no no act (ver kernel/skills.py)
+
+# C2 - cláusula de outcome
+outcome_clause:
+  statement: "Qualifica cada lead contra o ICP em <=5min, com score, trilha e sinais de fit citáveis."
+  positive_examples:
+    - "Lead high-fit (R$1-5M, founder-led, vende bem sem processo) -> qualified, trilha assistida, sinais citados"
+    - "Lead fora-do-ICP -> disqualified com motivo auditável, sem consumir SDR"
+    - "Lead com operação já madura -> disqualified (sinal negativo do ICP)"
+  negative_examples:
+    - "Lead qualificado sem citar nenhum sinal de fit do ICP"
+    - "Score atribuído sem carregar o ICP (company/icp.md)"
+    - "PII crua do lead exposta no payload do evento"
+  delivered_event: "lead.qualified emitido com lead_id, score, track, icp_fit_signals[] no Brain"
+
+# C3 - billable exige economics (a trava de custo)
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+
+# C5 - contexto L0 que este agente consome
+consumes_l0:
+  - company/icp.md          # via nucleo.kernel.loaders.load_icp
+
+guardians:
+  - po-guardian
+  - security-privacy-guardian
+  - observability-guardian
+  - artifact-architect
+
+tools:                      # interfaces (C7)
+  - brain.query
+  - brain.write
+  - crm.read
+  - enrichment.lookup
+
+soul_ref: soul.md
+memory_ref: memory.md

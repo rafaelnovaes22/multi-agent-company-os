@@ -1,0 +1,28 @@
+id: painel-dono
+fleet: product
+guild: GP-painel
+ledger: billable
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+multi_tenant: true
+act_handler: painel_dono
+
+outcome_clause:
+  statement: "Para o fundador, sintetiza a saúde da empresa em um semáforo (verde/amarelo/vermelho) e os principais alertas, agregando os sinais dos outros agentes — agnóstico de segmento (empresa queryable, YC#3)."
+  positive_examples:
+    - "Caixa projetado negativo -> semáforo vermelho com alerta"
+    - "Margem apertada ou urgências -> amarelo"
+    - "Tudo saudável -> verde sem alertas"
+  negative_examples:
+    - "Misturar métricas de tenants diferentes"
+    - "Semáforo sem os alertas que o justificam"
+    - "Entregar fora do modo SHADOW antes de o cliente aprovar"
+  delivered_event: "painel.snapshot publicado (por tenant) com semaforo e top_alerts no Brain"
+
+economics: {cost_model: cost_per_outcome, max_ratio: 0.25}
+guardians: [po-guardian, observability-guardian]
+tools: [brain.query, brain.write]
+soul_ref: soul.md
+memory_ref: memory.md

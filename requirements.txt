@@ -1,0 +1,7 @@
+# NÚCLEO — Sprint 0 (kernel + Fábrica + guilda-piloto)
+langgraph>=0.2
+langchain-core>=0.3
+pydantic>=2
+PyYAML>=6
+# Opcional — LLM real (C7). Sem isto, roda offline com FakeLLMProvider (SHADOW):
+#   pip install anthropic   e   set ANTHROPIC_API_KEY=...

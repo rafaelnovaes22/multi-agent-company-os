@@ -1,0 +1,37 @@
+id: g13-po-guardian
+guild: G13-governanca
+ledger: operating          # interno -> governado por ROI-vs-headcount (token-max), nao por C3
+tier: L0
+ai_enabled: true
+model_role: guardian       # supervisores/guardians usam modelo forte (C7)
+act_handler: outcome_clause_validator  # skill executada no no act (ver kernel/skills.py)
+mode: SHADOW               # C4 - nasce sempre aqui
+
+# C2 - a propria cláusula de outcome DESTE agente (ele valida a cláusula dos outros)
+outcome_clause:
+  statement: "Valida que a cláusula de outcome (C2) de uma spec tem statement, >=3 exemplos positivos, >=3 negativos e delivered_event; aprova ou bloqueia."
+  positive_examples:
+    - "Spec com statement mensurável, 3 positivos, 3 negativos e delivered_event técnico -> APROVADA"
+    - "Spec de produto cujo evento DELIVERED é verificável -> APROVADA"
+    - "Spec de automação com critério de aceite e evento de conclusão -> APROVADA"
+  negative_examples:
+    - "Spec sem delivered_event -> BLOQUEADA"
+    - "Spec com apenas 1 exemplo positivo -> BLOQUEADA"
+    - "Spec com outcome vago, sem statement mensurável -> BLOQUEADA"
+  delivered_event: "po_guardian_review.published == true"
+
+# C3 - presente por disciplina; como ledger=operating, NÃO trava promoção
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+
+guardians:
+  - artifact-architect
+  - observability-guardian
+
+tools:                     # interfaces (C7) - nunca SDK direto
+  - brain.query
+  - brain.write
+
+soul_ref: soul.md
+memory_ref: memory.md

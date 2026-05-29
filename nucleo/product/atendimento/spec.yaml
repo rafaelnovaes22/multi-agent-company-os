@@ -1,0 +1,28 @@
+id: atendimento
+fleet: product
+guild: GP-comercial
+ledger: billable
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+multi_tenant: true
+act_handler: atendimento
+
+outcome_clause:
+  statement: "Para a empresa do cliente, prioriza a fila de respostas a clientes e o follow-up de orçamentos, destacando o que está atrasado — agnóstico de segmento."
+  positive_examples:
+    - "Fila ordenada por tempo de espera, com as 3 respostas mais urgentes"
+    - "Sinaliza pedidos esperando > 24h"
+    - "Sem pendências -> fila vazia"
+  negative_examples:
+    - "Misturar atendimentos de tenants diferentes"
+    - "Responder externamente fora do modo SHADOW antes de aprovação"
+    - "Ignorar consentimento/LGPD no contato"
+  delivered_event: "atendimento.queue publicada (por tenant) com reply_queue_count e overdue_replies no Brain"
+
+economics: {cost_model: cost_per_outcome, max_ratio: 0.25}
+guardians: [po-guardian, security-privacy-guardian, observability-guardian]
+tools: [tenant.requests.read, MessagingProvider, brain.write]
+soul_ref: soul.md
+memory_ref: memory.md

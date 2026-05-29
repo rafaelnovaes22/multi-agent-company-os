@@ -1,0 +1,38 @@
+id: inbox-triage
+fleet: product
+guild: GP-atendimento
+ledger: billable
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+multi_tenant: true
+act_handler: inbox_triage
+
+outcome_clause:
+  statement: "Para a empresa do cliente, classifica cada mensagem/pedido recebido (comercial, financeiro, suporte, compras, geral), marca urgência e roteia para o agente/humano certo — agnóstico de segmento."
+  positive_examples:
+    - "Pedido de orçamento classificado como comercial e roteado ao atendimento"
+    - "Mensagem com 'urgente'/'parado' marcada como urgência alta"
+    - "Boleto/atraso classificado como financeiro e roteado ao fin-caixa"
+  negative_examples:
+    - "Misturar mensagens de tenants diferentes"
+    - "Deixar mensagem sem categoria nem rota"
+    - "Entregar/responder fora do modo SHADOW antes de o cliente aprovar"
+  delivered_event: "inbox.triaged publicado (por tenant) com triaged[], counts_by_category e urgent_count no Brain"
+
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+
+guardians:
+  - po-guardian
+  - security-privacy-guardian
+  - observability-guardian
+
+tools:
+  - tenant.inbox.read
+  - brain.write
+
+soul_ref: soul.md
+memory_ref: memory.md

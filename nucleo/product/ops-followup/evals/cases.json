@@ -1,0 +1,4 @@
+[
+  {"id": "of-01", "desc": "parada + atrasada sem dono", "tenant_id": "t-eval-1", "ops": {"today": "2026-05-29", "tasks": [{"title": "Proposta Cond X", "status": "parado", "owner": "ana"}, {"title": "Renovar contrato Y", "status": "open", "due_date": "2026-05-01", "owner": ""}, {"title": "Pagar fornecedor", "status": "done", "owner": "ana"}]}, "expected": {"stalled_count": 2, "has_actions": true}},
+  {"id": "of-02", "desc": "tudo em dia", "tenant_id": "t-eval-2", "ops": {"today": "2026-05-29", "tasks": [{"title": "T1", "status": "done", "owner": "x"}]}, "expected": {"stalled_count": 0, "has_actions": false}}
+]

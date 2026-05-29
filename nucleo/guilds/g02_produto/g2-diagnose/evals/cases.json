@@ -1,0 +1,5 @@
+[
+  {"id": "dg-01", "desc": "high-fit com baseline -> go", "client": {"id": "C-h1", "revenue_brl_year": 2500000, "founder_led": true, "sells_well": true, "lacks_process": true, "firefighter": true, "monthly_volume": 200, "hours_per_unit": 0.5, "hourly_cost_brl": 60, "process": "triagem de pedidos", "pain": "triagem manual consome o dia"}, "expected": {"recommendation": "go", "baseline_gt": 0}},
+  {"id": "dg-02", "desc": "fora do ICP -> no-go", "client": {"id": "C-s1", "revenue_brl_year": 300000, "founder_led": true, "monthly_volume": 5, "hours_per_unit": 0.2, "hourly_cost_brl": 50}, "expected": {"recommendation": "no-go"}},
+  {"id": "dg-03", "desc": "fit alto mas sem baseline -> no-go", "client": {"id": "C-n1", "revenue_brl_year": 2000000, "founder_led": true, "lacks_process": true}, "expected": {"recommendation": "no-go"}}
+]

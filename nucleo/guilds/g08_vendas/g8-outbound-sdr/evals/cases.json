@@ -1,0 +1,5 @@
+[
+  {"id": "ob-01", "desc": "conta high-fit gera sequencia", "lead": {"id": "L-h1", "company": "Acme"}, "qualification": {"decision": "qualified", "icp_fit_signals": {"sem_processo": true, "perfil_bombeiro": true}}, "expected": {"min_steps": 3, "consent_required": true}},
+  {"id": "ob-02", "desc": "personalizacao presente", "lead": {"id": "L-h2", "company": "Beta"}, "qualification": {"decision": "qualified", "icp_fit_signals": {"vende_bem": true}}, "expected": {"personalized": true}},
+  {"id": "ob-03", "desc": "consentimento exigido", "lead": {"id": "L-h3", "company": "Gama"}, "qualification": {"decision": "qualified", "icp_fit_signals": {"founder_led": true}}, "expected": {"consent_required": true}}
+]

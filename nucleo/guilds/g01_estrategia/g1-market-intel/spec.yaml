@@ -1,0 +1,37 @@
+id: g1-market-intel
+guild: G01-estrategia-founder-office
+ledger: operating
+tier: L0
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: market_intel
+
+outcome_clause:
+  statement: "Avalia um vertical candidato contra o ICP: estima o pool de ICP, lista fontes Tier 2 e aplica os hard-filters (F1/F2/F4), com fontes citáveis."
+  positive_examples:
+    - "Vertical com pool de ICP > 0, dor de processo >= 3 e fontes Tier 2 -> passa hard-filters"
+    - "Assessment cita o ICP e marca o nível de confiança"
+    - "Vertical sem fonte de scraping -> reprovado em F4 com motivo"
+  negative_examples:
+    - "Afirmar densidade de ICP sem fonte"
+    - "Recomendar vertical sem dor de processo (F2 falha)"
+    - "Descrever um vertical assumido como decidido (o vertical ainda não foi escolhido)"
+  delivered_event: "intel.assessment publicado com vertical, icp_pool_estimate, tier2_sources, hard_filters no Brain"
+
+consumes_l0:
+  - company/icp.md
+
+guardians:
+  - po-guardian
+  - observability-guardian
+  - artifact-architect
+
+tools:
+  - brain.query
+  - brain.write
+  - WebSearchProvider
+  - WebFetchProvider
+
+soul_ref: soul.md
+memory_ref: memory.md

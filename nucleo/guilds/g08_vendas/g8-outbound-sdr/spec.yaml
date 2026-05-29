@@ -1,0 +1,37 @@
+id: g8-outbound-sdr
+guild: G08-vendas-receita
+ledger: operating          # prospecção é trabalho interno (token-max), não output vendido
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: outbound_sdr   # ver kernel/skills.py
+
+outcome_clause:
+  statement: "Para cada conta qualificada, gera uma sequência de cold B2B outreach personalizada e permissionless, respeitando consentimento/LGPD."
+  positive_examples:
+    - "Conta high-fit recebe sequência multi-toque ancorada nas dores do ICP -> SQL com contexto"
+    - "Opt-out respeitado e contato removido da cadência imediatamente"
+    - "Mensagem personalizada com os sinais de fit do lead (não genérica)"
+  negative_examples:
+    - "Mensagem enviada sem base legal de contato (LGPD)"
+    - "Sequência genérica sem nenhum elemento de personalização"
+    - "Outreach disparado para lead fora-do-ICP"
+  delivered_event: "outbound.sql_created emitido com account_id, touch_history[], consent_status no Brain"
+
+consumes_l0:
+  - company/icp.md
+
+guardians:
+  - po-guardian
+  - security-privacy-guardian
+  - observability-guardian
+
+tools:
+  - brain.query
+  - brain.write
+  - MessagingProvider
+  - consent.check
+
+soul_ref: soul.md
+memory_ref: memory.md

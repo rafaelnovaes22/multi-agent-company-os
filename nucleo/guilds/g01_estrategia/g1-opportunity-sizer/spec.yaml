@@ -1,0 +1,35 @@
+id: g1-opportunity-sizer
+guild: G01-estrategia-founder-office
+ledger: operating
+tier: L0
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: opportunity_sizer
+
+outcome_clause:
+  statement: "Dimensiona TAM/SAM/SOM de um vertical candidato a partir de premissas explícitas (nº empresas, alcance, conversão, ticket), com rastreabilidade."
+  positive_examples:
+    - "TAM/SAM/SOM derivados com premissas declaradas e citáveis"
+    - "SOM reconcilia com o pool de ICP do market-intel"
+    - "Sizing parametrizado para o scenario-planner rodar sensibilidade"
+  negative_examples:
+    - "Número de TAM sem premissa declarada"
+    - "SOM maior que SAM (inconsistência)"
+    - "Sizing de um vertical assumido como decidido"
+  delivered_event: "sizing.model publicado com tam_brl, sam_brl, som_brl e assumptions no Brain"
+
+consumes_l0:
+  - company/icp.md
+
+guardians:
+  - po-guardian
+  - unit-economist-guardian
+  - artifact-architect
+
+tools:
+  - brain.query
+  - brain.write
+
+soul_ref: soul.md
+memory_ref: memory.md

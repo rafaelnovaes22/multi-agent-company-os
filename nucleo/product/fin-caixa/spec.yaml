@@ -1,0 +1,40 @@
+id: fin-caixa
+fleet: product             # AGENTE DE PRODUTO (vendido ao cliente) — não é fleet interno
+guild: GP-financeiro
+ledger: billable           # é o produto cobrado -> C3 aplica
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW               # nasce em SHADOW na conta do cliente; sobe por gates (C4)
+multi_tenant: true         # contexto e memória por tenant (empresa-cliente)
+act_handler: fin_cashflow
+
+# Agnóstico de segmento: toda PME tem caixa, recebíveis e pagáveis.
+outcome_clause:
+  statement: "Para a empresa do cliente, apura a posição de caixa, lista os recebíveis vencidos a cobrar, sinaliza risco de caixa/margem e recomenda ações — sem depender do segmento."
+  positive_examples:
+    - "Lista inadimplentes a cobrar com valor e total, ordenados por impacto"
+    - "Alerta quando o caixa projetado fica negativo, com ação sugerida"
+    - "Aponta margem apertada a partir de receita/custo do mês do cliente"
+  negative_examples:
+    - "Recomendação sem citar os números de caixa do cliente"
+    - "Misturar dados de tenants diferentes (vazamento entre clientes)"
+    - "Entregar/agir fora do modo SHADOW antes de o cliente aprovar (C4)"
+  delivered_event: "fin.cashflow_report publicado (por tenant) com cash_position, total_overdue e recommended_actions no Brain"
+
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+
+guardians:
+  - po-guardian
+  - security-privacy-guardian
+  - observability-guardian
+  - unit-economist-guardian
+
+tools:                      # interfaces (C7) — dados do tenant, nunca SDK direto
+  - tenant.finance.read
+  - brain.write
+
+soul_ref: soul.md
+memory_ref: memory.md

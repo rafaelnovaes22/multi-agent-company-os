@@ -1,0 +1,42 @@
+id: g2-diagnose
+guild: G02-produto-discovery
+ledger: billable           # é o PRIMEIRO entregável cobrável (diagnóstico) -> C3 aplica
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: diagnose       # ver kernel/skills.py — implementa o princípio C1
+
+# Implementa C1 (diagnose-before-build): vende-se o diagnóstico antes de construir o produto.
+outcome_clause:
+  statement: "Produz um diagnóstico estruturado e cobrável do cliente: problema, baseline humano, outcome proposto, métrica de sucesso e até 3 candidatos a SKU automatizável."
+  positive_examples:
+    - "Cliente high-fit com baseline mensurável -> diagnóstico 'go' com 3 candidatos a SKU"
+    - "Baseline humano calculado (volume x horas x custo) e citável"
+    - "Outcome proposto escrito como cláusula verificável (preparado p/ C2)"
+  negative_examples:
+    - "Diagnóstico sem baseline humano (não dá para medir economia)"
+    - "Recomendar 'go' para cliente fora-do-ICP"
+    - "Outcome vago, não verificável por evento técnico"
+  delivered_event: "diagnostic.published com problem, baseline, proposed_outcome, success_metric, sku_candidates no Brain"
+
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+
+consumes_l0:
+  - company/icp.md
+  - company/offerings.md     # opcional até o workshop de vertical
+
+guardians:
+  - po-guardian
+  - unit-economist-guardian
+  - observability-guardian
+  - artifact-architect
+
+tools:
+  - brain.query
+  - brain.write
+
+soul_ref: soul.md
+memory_ref: memory.md

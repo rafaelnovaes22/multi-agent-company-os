@@ -1,0 +1,7 @@
+[
+  {"id": "ev-01", "desc": "spec completa", "target_spec": {"outcome_clause": {"statement": "Qualifica lead em <=2min com 95% de acuracia", "positive_examples": ["a", "b", "c"], "negative_examples": ["x", "y", "z"], "delivered_event": "lead.qualified == true"}}, "expected": {"valid": true}},
+  {"id": "ev-02", "desc": "sem delivered_event", "target_spec": {"outcome_clause": {"statement": "Faz algo util", "positive_examples": ["a", "b", "c"], "negative_examples": ["x", "y", "z"], "delivered_event": ""}}, "expected": {"valid": false}},
+  {"id": "ev-03", "desc": "poucos positivos", "target_spec": {"outcome_clause": {"statement": "Resolve ticket", "positive_examples": ["a"], "negative_examples": ["x", "y", "z"], "delivered_event": "ticket.resolved == true"}}, "expected": {"valid": false}},
+  {"id": "ev-04", "desc": "sem statement", "target_spec": {"outcome_clause": {"statement": "", "positive_examples": ["a", "b", "c"], "negative_examples": ["x", "y", "z"], "delivered_event": "x == true"}}, "expected": {"valid": false}},
+  {"id": "ev-05", "desc": "sem negativos", "target_spec": {"outcome_clause": {"statement": "Gera relatorio", "positive_examples": ["a", "b", "c"], "negative_examples": [], "delivered_event": "report.generated == true"}}, "expected": {"valid": false}}
+]

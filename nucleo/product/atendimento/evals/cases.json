@@ -1,0 +1,4 @@
+[
+  {"id": "at-01", "desc": "fila com 1 atrasada", "tenant_id": "t-eval-1", "atendimento": {"requests": [{"customer": "A", "type": "orçamento", "waiting_hours": 30}, {"customer": "B", "type": "dúvida", "waiting_hours": 5}]}, "expected": {"reply_queue_count": 2, "overdue_replies": 1}},
+  {"id": "at-02", "desc": "sem pendências", "tenant_id": "t-eval-2", "atendimento": {"requests": []}, "expected": {"reply_queue_count": 0, "overdue_replies": 0}}
+]

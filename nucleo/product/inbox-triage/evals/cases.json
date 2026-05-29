@@ -1,0 +1,5 @@
+[
+  {"id": "ib-01", "desc": "3 categorias distintas", "tenant_id": "t-eval-1", "inbox": {"messages": [{"id": 1, "text": "Quero um orçamento para o próximo mês"}, {"id": 2, "text": "Segue o boleto, pagamento em atraso"}, {"id": 3, "text": "Obrigado pelo atendimento"}]}, "expected": {"total": 3, "urgent_count": 0, "counts": {"comercial": 1, "financeiro": 1, "geral": 1}}},
+  {"id": "ib-02", "desc": "suporte + urgente", "tenant_id": "t-eval-2", "inbox": {"messages": [{"id": 1, "text": "URGENTE: o sistema não funciona"}]}, "expected": {"total": 1, "urgent_count": 1, "counts": {"suporte": 1}}},
+  {"id": "ib-03", "desc": "comercial + compras", "tenant_id": "t-eval-3", "inbox": {"messages": [{"id": 1, "text": "Preciso de uma proposta"}, {"id": 2, "text": "Quando chega o pedido do fornecedor?"}]}, "expected": {"total": 2, "counts": {"comercial": 1, "compras": 1}}}
+]

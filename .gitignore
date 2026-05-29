@@ -1,0 +1,30 @@
+# Runtime do NÚCLEO (Company Brain / stores efêmeros — não versionar)
+.brain/
+.brain-*/
+**/.brain/
+**/.brain-*/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# SO / editor
+.DS_Store
+Thumbs.db
+.idea/
+*.swp
+
+# Config local do Claude Code (pessoal, não versionar)
+.claude/settings.local.json
+
+# Segredos (nunca versionar)
+.env
+.env.*
+*.key
+secrets.*

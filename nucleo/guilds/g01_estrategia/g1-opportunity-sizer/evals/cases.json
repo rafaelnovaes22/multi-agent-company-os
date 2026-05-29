@@ -1,0 +1,4 @@
+[
+  {"id": "os-01", "desc": "sizing coerente", "candidate": {"vertical": "Exemplo A", "icp_pool_estimate": 48000, "reachable_share": 0.3, "conversion": 0.05, "avg_ticket_brl_year": 24000}, "expected": {"som_le_sam": true, "sam_le_tam": true}},
+  {"id": "os-02", "desc": "ticket alto, pool menor", "candidate": {"vertical": "Exemplo B", "icp_pool_estimate": 8000, "reachable_share": 0.4, "conversion": 0.08, "avg_ticket_brl_year": 60000}, "expected": {"som_gt_0": true}}
+]

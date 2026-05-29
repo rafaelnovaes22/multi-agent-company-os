@@ -1,0 +1,5 @@
+[
+  {"id": "pd-01", "desc": "caixa negativo -> vermelho", "tenant_id": "t-eval-1", "metrics": {"cash_position": 4000, "projected_cash": -2000, "total_overdue": 6000, "margin_pct": 13}, "expected": {"semaforo": "vermelho"}},
+  {"id": "pd-02", "desc": "margem apertada -> amarelo", "tenant_id": "t-eval-2", "metrics": {"cash_position": 5000, "projected_cash": 5000, "margin_pct": 8, "total_overdue": 0}, "expected": {"semaforo": "amarelo"}},
+  {"id": "pd-03", "desc": "saudável -> verde", "tenant_id": "t-eval-3", "metrics": {"cash_position": 5000, "projected_cash": 5000, "margin_pct": 20, "total_overdue": 0, "urgent_msgs": 0, "stalled_tasks": 0}, "expected": {"semaforo": "verde"}}
+]

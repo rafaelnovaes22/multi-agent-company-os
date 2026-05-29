@@ -1,0 +1,28 @@
+id: ops-followup
+fleet: product
+guild: GP-operacoes
+ledger: billable
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+multi_tenant: true
+act_handler: ops_followup
+
+outcome_clause:
+  statement: "Para a empresa do cliente, identifica o que está parado, atrasado ou sem dono, e recomenda as ações de destravamento — agnóstico de segmento."
+  positive_examples:
+    - "Lista tarefas paradas/atrasadas ordenadas e sugere destravar as 3 mais críticas"
+    - "Aponta tarefas sem dono para atribuição"
+    - "Empresa saudável (nada parado) -> nenhuma ação"
+  negative_examples:
+    - "Misturar tarefas de tenants diferentes"
+    - "Marcar como parada uma tarefa concluída"
+    - "Agir fora do modo SHADOW antes de o cliente aprovar"
+  delivered_event: "ops.followup_report publicado (por tenant) com stalled_count e recommended_actions no Brain"
+
+economics: {cost_model: cost_per_outcome, max_ratio: 0.25}
+guardians: [po-guardian, security-privacy-guardian, observability-guardian]
+tools: [tenant.tasks.read, brain.write]
+soul_ref: soul.md
+memory_ref: memory.md

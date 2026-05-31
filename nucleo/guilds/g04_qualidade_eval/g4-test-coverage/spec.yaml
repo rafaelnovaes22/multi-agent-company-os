@@ -1,0 +1,40 @@
+id: g4-test-coverage
+guild: G04-qualidade-eval
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: guardian
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Guardião de Cobertura entrega test_coverage.artifact verificável para:
+    impor e manter cobertura de testes ≥80% para que o gate determinístico tenha base
+    confiável.'
+  positive_examples:
+  - Recebe input válido e publica test_coverage.artifact com status ready e evidência
+    rastreável.
+  - Roteia ou bloqueia trabalho com critério explícito quando risco alto exige revisão
+    humana.
+  - Registra artefato, rota e rationale sem depender de tenant, segmento ou fornecedor
+    hardcoded.
+  negative_examples:
+  - Declara sucesso sem artefato verificável ou sem status explícito.
+  - Executa ação de alto risco sem sinalizar revisão humana.
+  - Codifica regra específica de cliente, segmento, alíquota ou fornecedor no código
+    do agente.
+  delivered_event: g4-test-coverage.delivered == true and artifact_type == 'test_coverage.artifact'
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- eval-engineer-guardian
+- observability-guardian
+tools:
+- brain.query
+- brain.write
+- queue.dispatch
+- policy.check
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g3-code-reviewer-py-01",
+    "desc": "Revisor de Python caso 1: risco low, ready",
+    "request": "Executar Revisor de Python para cenário sintético 1",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "build",
+      "review"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 1
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "build"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-02",
+    "desc": "Revisor de Python caso 2: risco medium, ready",
+    "request": "Executar Revisor de Python para cenário sintético 2",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "review",
+      "route"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 2
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "review"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-03",
+    "desc": "Revisor de Python caso 3: risco high, ready",
+    "request": "Executar Revisor de Python para cenário sintético 3",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "route",
+      "verify"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 3
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "route"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-04",
+    "desc": "Revisor de Python caso 4: risco critical, ready",
+    "request": "Executar Revisor de Python para cenário sintético 4",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "verify",
+      "remediate"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 4
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "verify"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-05",
+    "desc": "Revisor de Python caso 5: risco low, ready",
+    "request": "Executar Revisor de Python para cenário sintético 5",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "remediate",
+      "plan"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 5
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "remediate"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-06",
+    "desc": "Revisor de Python caso 6: risco medium, ready",
+    "request": "Executar Revisor de Python para cenário sintético 6",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "plan",
+      "build"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 6
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "plan"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-07",
+    "desc": "Revisor de Python caso 7: risco high, ready",
+    "request": "Executar Revisor de Python para cenário sintético 7",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "build",
+      "review"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 7
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "build"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-08",
+    "desc": "Revisor de Python caso 8: risco critical, ready",
+    "request": "Executar Revisor de Python para cenário sintético 8",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "review",
+      "route"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 8
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "review"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-09",
+    "desc": "Revisor de Python caso 9: risco low, ready",
+    "request": "Executar Revisor de Python para cenário sintético 9",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "route",
+      "verify"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 9
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "route"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-10",
+    "desc": "Revisor de Python caso 10: risco medium, bloqueio",
+    "request": "Executar Revisor de Python para cenário sintético 10",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "verify",
+      "remediate"
+    ],
+    "signals": {
+      "blocked": true,
+      "case_index": 10
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "verify"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-11",
+    "desc": "Revisor de Python caso 11: risco high, ready",
+    "request": "Executar Revisor de Python para cenário sintético 11",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "remediate",
+      "plan"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 11
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "remediate"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-12",
+    "desc": "Revisor de Python caso 12: risco critical, ready",
+    "request": "Executar Revisor de Python para cenário sintético 12",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "plan",
+      "build"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 12
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "plan"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-13",
+    "desc": "Revisor de Python caso 13: risco low, ready",
+    "request": "Executar Revisor de Python para cenário sintético 13",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "build",
+      "review"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 13
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "build"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-14",
+    "desc": "Revisor de Python caso 14: risco medium, ready",
+    "request": "Executar Revisor de Python para cenário sintético 14",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "review",
+      "route"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 14
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "review"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-15",
+    "desc": "Revisor de Python caso 15: risco high, ready",
+    "request": "Executar Revisor de Python para cenário sintético 15",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "route",
+      "verify"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 15
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "route"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-16",
+    "desc": "Revisor de Python caso 16: risco critical, ready",
+    "request": "Executar Revisor de Python para cenário sintético 16",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "verify",
+      "remediate"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 16
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "verify"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-17",
+    "desc": "Revisor de Python caso 17: risco low, ready",
+    "request": "Executar Revisor de Python para cenário sintético 17",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "remediate",
+      "plan"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 17
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "remediate"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-18",
+    "desc": "Revisor de Python caso 18: risco medium, ready",
+    "request": "Executar Revisor de Python para cenário sintético 18",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "plan",
+      "build"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 18
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "plan"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-19",
+    "desc": "Revisor de Python caso 19: risco high, ready",
+    "request": "Executar Revisor de Python para cenário sintético 19",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "build",
+      "review"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 19
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "build"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-20",
+    "desc": "Revisor de Python caso 20: risco critical, bloqueio",
+    "request": "Executar Revisor de Python para cenário sintético 20",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "review",
+      "route"
+    ],
+    "signals": {
+      "blocked": true,
+      "case_index": 20
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "review"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-21",
+    "desc": "Revisor de Python caso 21: risco low, ready",
+    "request": "Executar Revisor de Python para cenário sintético 21",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "route",
+      "verify"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 21
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "route"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-22",
+    "desc": "Revisor de Python caso 22: risco medium, ready",
+    "request": "Executar Revisor de Python para cenário sintético 22",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "verify",
+      "remediate"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 22
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "verify"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-23",
+    "desc": "Revisor de Python caso 23: risco high, ready",
+    "request": "Executar Revisor de Python para cenário sintético 23",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "remediate",
+      "plan"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 23
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "remediate"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-24",
+    "desc": "Revisor de Python caso 24: risco critical, ready",
+    "request": "Executar Revisor de Python para cenário sintético 24",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "plan",
+      "build"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 24
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "plan"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-25",
+    "desc": "Revisor de Python caso 25: risco low, ready",
+    "request": "Executar Revisor de Python para cenário sintético 25",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "build",
+      "review"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 25
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "build"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-26",
+    "desc": "Revisor de Python caso 26: risco medium, ready",
+    "request": "Executar Revisor de Python para cenário sintético 26",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "review",
+      "route"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 26
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "review"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-27",
+    "desc": "Revisor de Python caso 27: risco high, ready",
+    "request": "Executar Revisor de Python para cenário sintético 27",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "route",
+      "verify"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 27
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "route"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-28",
+    "desc": "Revisor de Python caso 28: risco critical, ready",
+    "request": "Executar Revisor de Python para cenário sintético 28",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "verify",
+      "remediate"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 28
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "verify"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-29",
+    "desc": "Revisor de Python caso 29: risco low, ready",
+    "request": "Executar Revisor de Python para cenário sintético 29",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "remediate",
+      "plan"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 29
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "remediate"
+      ]
+    }
+  },
+  {
+    "id": "g3-code-reviewer-py-30",
+    "desc": "Revisor de Python caso 30: risco medium, bloqueio",
+    "request": "Executar Revisor de Python para cenário sintético 30",
+    "artifact_type": "code_reviewer_py.artifact",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g3-code-reviewer-py",
+    "capabilities": [
+      "plan",
+      "build"
+    ],
+    "signals": {
+      "blocked": true,
+      "case_index": 30
+    },
+    "expected": {
+      "agent_id": "g3-code-reviewer-py",
+      "handler_kind": "guardian_check",
+      "artifact_type": "code_reviewer_py.artifact",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g3-code-reviewer-py",
+      "capabilities_any": [
+        "plan"
+      ]
+    }
+  }
+]

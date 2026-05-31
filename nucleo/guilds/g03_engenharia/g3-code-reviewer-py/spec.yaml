@@ -1,0 +1,40 @@
+id: g3-code-reviewer-py
+guild: G03-engenharia
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: guardian
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Revisor de Python entrega code_reviewer_py.artifact verificável para:
+    revisar PRs de Python quanto a correção, segurança, C7/C8 e taste, antes do merge.'
+  positive_examples:
+  - Recebe input válido e publica code_reviewer_py.artifact com status ready e evidência
+    rastreável.
+  - Roteia ou bloqueia trabalho com critério explícito quando risco alto exige revisão
+    humana.
+  - Registra artefato, rota e rationale sem depender de tenant, segmento ou fornecedor
+    hardcoded.
+  negative_examples:
+  - Declara sucesso sem artefato verificável ou sem status explícito.
+  - Executa ação de alto risco sem sinalizar revisão humana.
+  - Codifica regra específica de cliente, segmento, alíquota ou fornecedor no código
+    do agente.
+  delivered_event: g3-code-reviewer-py.delivered == true and artifact_type == 'code_reviewer_py.artifact'
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+- security-privacy-guardian
+tools:
+- brain.query
+- brain.write
+- queue.dispatch
+- policy.check
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

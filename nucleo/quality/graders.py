@@ -142,3 +142,21 @@ def _g_painel(out, exp):
     if "alert_count" in exp:
         ok = ok and out.get("alert_count") == exp["alert_count"]
     return ok
+
+
+def _g_catalog_contract(out, exp):
+    if not out:
+        return False
+    ok = True
+    for key in ("agent_id", "handler_kind", "artifact_type", "status", "risk", "requires_human_review", "routed_to"):
+        if key in exp:
+            ok = ok and out.get(key) == exp[key]
+    if "capabilities_any" in exp:
+        caps = set(out.get("capabilities") or [])
+        ok = ok and any(c in caps for c in exp["capabilities_any"])
+    return ok
+
+
+register("spec_driven")(_g_catalog_contract)
+register("supervisor_route")(_g_catalog_contract)
+register("guardian_check")(_g_catalog_contract)

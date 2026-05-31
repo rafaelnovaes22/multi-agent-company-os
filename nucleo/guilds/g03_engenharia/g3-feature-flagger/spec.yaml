@@ -1,0 +1,40 @@
+id: g3-feature-flagger
+guild: G03-engenharia
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Gestor de Feature Flags e Rollout entrega feature_flagger.artifact verificável
+    para: habilitar ship diário com rollout progressivo seguro e kill-switch instantâneo
+    via feature flags.'
+  positive_examples:
+  - Recebe input válido e publica feature_flagger.artifact com status ready e evidência
+    rastreável.
+  - Roteia ou bloqueia trabalho com critério explícito quando risco alto exige revisão
+    humana.
+  - Registra artefato, rota e rationale sem depender de tenant, segmento ou fornecedor
+    hardcoded.
+  negative_examples:
+  - Declara sucesso sem artefato verificável ou sem status explícito.
+  - Executa ação de alto risco sem sinalizar revisão humana.
+  - Codifica regra específica de cliente, segmento, alíquota ou fornecedor no código
+    do agente.
+  delivered_event: g3-feature-flagger.delivered == true and artifact_type == 'feature_flagger.artifact'
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query
+- brain.write
+- queue.dispatch
+- policy.check
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

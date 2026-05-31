@@ -1,0 +1,40 @@
+id: g4-quality-supervisor
+guild: G04-qualidade-eval
+ledger: operating
+tier: L0
+ai_enabled: true
+model_role: supervisor
+mode: SHADOW
+act_handler: supervisor_route
+outcome_clause:
+  statement: 'Supervisor de Qualidade & Eval entrega quality_supervisor.artifact verificável
+    para: orquestrar todo o ciclo de eval e QA da empresa, decidindo o que é testado,
+    quando, com que rigor, e se um agente/release pode promover de modo (C4).'
+  positive_examples:
+  - Recebe input válido e publica quality_supervisor.artifact com status ready e evidência
+    rastreável.
+  - Roteia ou bloqueia trabalho com critério explícito quando risco alto exige revisão
+    humana.
+  - Registra artefato, rota e rationale sem depender de tenant, segmento ou fornecedor
+    hardcoded.
+  negative_examples:
+  - Declara sucesso sem artefato verificável ou sem status explícito.
+  - Executa ação de alto risco sem sinalizar revisão humana.
+  - Codifica regra específica de cliente, segmento, alíquota ou fornecedor no código
+    do agente.
+  delivered_event: g4-quality-supervisor.delivered == true and artifact_type == 'quality_supervisor.artifact'
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- eval-engineer-guardian
+- observability-guardian
+tools:
+- brain.query
+- brain.write
+- queue.dispatch
+- policy.check
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

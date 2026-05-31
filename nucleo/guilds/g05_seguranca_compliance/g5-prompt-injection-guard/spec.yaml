@@ -1,0 +1,41 @@
+id: g5-prompt-injection-guard
+guild: G05-seguranca-compliance
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: guardian
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Prompt Injection Guard entrega prompt_injection_guard.artifact verificável
+    para: defender as entradas dos agentes contra injeção de prompt, exfiltração de
+    instruções e tool-abuse via conteúdo não-confiável.'
+  positive_examples:
+  - Recebe input válido e publica prompt_injection_guard.artifact com status ready
+    e evidência rastreável.
+  - Roteia ou bloqueia trabalho com critério explícito quando risco alto exige revisão
+    humana.
+  - Registra artefato, rota e rationale sem depender de tenant, segmento ou fornecedor
+    hardcoded.
+  negative_examples:
+  - Declara sucesso sem artefato verificável ou sem status explícito.
+  - Executa ação de alto risco sem sinalizar revisão humana.
+  - Codifica regra específica de cliente, segmento, alíquota ou fornecedor no código
+    do agente.
+  delivered_event: g5-prompt-injection-guard.delivered == true and artifact_type ==
+    'prompt_injection_guard.artifact'
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- security-privacy-guardian
+- observability-guardian
+tools:
+- brain.query
+- brain.write
+- queue.dispatch
+- policy.check
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

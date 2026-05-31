@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g3-api-contract-01",
+    "desc": "Guardião de Contratos de API caso 1: risco low, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 1",
+    "artifact_type": "api_contract.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "build",
+      "review"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 1
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "build"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-02",
+    "desc": "Guardião de Contratos de API caso 2: risco medium, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 2",
+    "artifact_type": "api_contract.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "review",
+      "route"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 2
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "review"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-03",
+    "desc": "Guardião de Contratos de API caso 3: risco high, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 3",
+    "artifact_type": "api_contract.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "route",
+      "verify"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 3
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "route"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-04",
+    "desc": "Guardião de Contratos de API caso 4: risco critical, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 4",
+    "artifact_type": "api_contract.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "verify",
+      "remediate"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 4
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "verify"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-05",
+    "desc": "Guardião de Contratos de API caso 5: risco low, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 5",
+    "artifact_type": "api_contract.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "remediate",
+      "plan"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 5
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "remediate"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-06",
+    "desc": "Guardião de Contratos de API caso 6: risco medium, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 6",
+    "artifact_type": "api_contract.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "plan",
+      "build"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 6
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "plan"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-07",
+    "desc": "Guardião de Contratos de API caso 7: risco high, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 7",
+    "artifact_type": "api_contract.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "build",
+      "review"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 7
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "build"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-08",
+    "desc": "Guardião de Contratos de API caso 8: risco critical, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 8",
+    "artifact_type": "api_contract.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "review",
+      "route"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 8
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "review"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-09",
+    "desc": "Guardião de Contratos de API caso 9: risco low, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 9",
+    "artifact_type": "api_contract.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "route",
+      "verify"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 9
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "route"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-10",
+    "desc": "Guardião de Contratos de API caso 10: risco medium, bloqueio",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 10",
+    "artifact_type": "api_contract.artifact",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "verify",
+      "remediate"
+    ],
+    "signals": {
+      "blocked": true,
+      "case_index": 10
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "verify"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-11",
+    "desc": "Guardião de Contratos de API caso 11: risco high, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 11",
+    "artifact_type": "api_contract.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "remediate",
+      "plan"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 11
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "remediate"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-12",
+    "desc": "Guardião de Contratos de API caso 12: risco critical, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 12",
+    "artifact_type": "api_contract.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "plan",
+      "build"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 12
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "plan"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-13",
+    "desc": "Guardião de Contratos de API caso 13: risco low, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 13",
+    "artifact_type": "api_contract.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "build",
+      "review"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 13
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "build"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-14",
+    "desc": "Guardião de Contratos de API caso 14: risco medium, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 14",
+    "artifact_type": "api_contract.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "review",
+      "route"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 14
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "review"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-15",
+    "desc": "Guardião de Contratos de API caso 15: risco high, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 15",
+    "artifact_type": "api_contract.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "route",
+      "verify"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 15
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "route"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-16",
+    "desc": "Guardião de Contratos de API caso 16: risco critical, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 16",
+    "artifact_type": "api_contract.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "verify",
+      "remediate"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 16
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "verify"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-17",
+    "desc": "Guardião de Contratos de API caso 17: risco low, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 17",
+    "artifact_type": "api_contract.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "remediate",
+      "plan"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 17
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "remediate"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-18",
+    "desc": "Guardião de Contratos de API caso 18: risco medium, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 18",
+    "artifact_type": "api_contract.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "plan",
+      "build"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 18
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "plan"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-19",
+    "desc": "Guardião de Contratos de API caso 19: risco high, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 19",
+    "artifact_type": "api_contract.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "build",
+      "review"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 19
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "build"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-20",
+    "desc": "Guardião de Contratos de API caso 20: risco critical, bloqueio",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 20",
+    "artifact_type": "api_contract.artifact",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "review",
+      "route"
+    ],
+    "signals": {
+      "blocked": true,
+      "case_index": 20
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "review"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-21",
+    "desc": "Guardião de Contratos de API caso 21: risco low, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 21",
+    "artifact_type": "api_contract.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "route",
+      "verify"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 21
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "route"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-22",
+    "desc": "Guardião de Contratos de API caso 22: risco medium, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 22",
+    "artifact_type": "api_contract.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "verify",
+      "remediate"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 22
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "verify"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-23",
+    "desc": "Guardião de Contratos de API caso 23: risco high, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 23",
+    "artifact_type": "api_contract.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "remediate",
+      "plan"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 23
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "remediate"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-24",
+    "desc": "Guardião de Contratos de API caso 24: risco critical, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 24",
+    "artifact_type": "api_contract.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "plan",
+      "build"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 24
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "plan"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-25",
+    "desc": "Guardião de Contratos de API caso 25: risco low, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 25",
+    "artifact_type": "api_contract.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "build",
+      "review"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 25
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "build"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-26",
+    "desc": "Guardião de Contratos de API caso 26: risco medium, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 26",
+    "artifact_type": "api_contract.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "review",
+      "route"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 26
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "review"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-27",
+    "desc": "Guardião de Contratos de API caso 27: risco high, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 27",
+    "artifact_type": "api_contract.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "route",
+      "verify"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 27
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "route"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-28",
+    "desc": "Guardião de Contratos de API caso 28: risco critical, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 28",
+    "artifact_type": "api_contract.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "verify",
+      "remediate"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 28
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "verify"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-29",
+    "desc": "Guardião de Contratos de API caso 29: risco low, ready",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 29",
+    "artifact_type": "api_contract.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "remediate",
+      "plan"
+    ],
+    "signals": {
+      "blocked": false,
+      "case_index": 29
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "remediate"
+      ]
+    }
+  },
+  {
+    "id": "g3-api-contract-30",
+    "desc": "Guardião de Contratos de API caso 30: risco medium, bloqueio",
+    "request": "Executar Guardião de Contratos de API para cenário sintético 30",
+    "artifact_type": "api_contract.artifact",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g3-api-contract",
+    "capabilities": [
+      "plan",
+      "build"
+    ],
+    "signals": {
+      "blocked": true,
+      "case_index": 30
+    },
+    "expected": {
+      "agent_id": "g3-api-contract",
+      "handler_kind": "spec_driven",
+      "artifact_type": "api_contract.artifact",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g3-api-contract",
+      "capabilities_any": [
+        "plan"
+      ]
+    }
+  }
+]

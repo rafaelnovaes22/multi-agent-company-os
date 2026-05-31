@@ -227,6 +227,64 @@ def _bucket(value, thresholds):
     return score
 
 
+# ---------------------------------------------------------------------------
+# Factory batch — handlers genéricos para materializar agentes do catálogo
+# ---------------------------------------------------------------------------
+def _catalog_agent_output(state, *, llm, spec, handler_kind: str):
+    """Materializa agentes spec-driven sem duplicar lógica por agente.
+
+    A variação fica na spec/eval-case (C8): cada caso informa o tipo de
+    artefato, risco, rotas/capabilities esperadas e se exige revisão humana.
+    O handler só normaliza o contrato comum usado por G03/G04/G05.
+    """
+    task = state["task"]
+    signals = task.get("signals", {}) or {}
+    risk = task.get("risk", "low") or "low"
+    blocked = bool(task.get("blocked", False) or signals.get("blocked", False))
+    requires_review = bool(task.get("requires_human_review", risk in ("high", "critical")))
+    artifact_type = task.get("artifact_type") or spec["id"]
+    routed_to = task.get("routed_to") or spec["id"]
+    status = "blocked" if blocked else "ready"
+    rationale = llm.complete(
+        f"Voce e {spec['id']}. Handler={handler_kind}. Artefato={artifact_type}. "
+        f"Risco={risk}. Status={status}. Revisao humana={requires_review}."
+    )
+    return {
+        "output": {
+            "agent_id": spec["id"],
+            "handler_kind": handler_kind,
+            "artifact_type": artifact_type,
+            "status": status,
+            "risk": risk,
+            "requires_human_review": requires_review,
+            "routed_to": routed_to,
+            "capabilities": task.get("capabilities", []) or [],
+            "rationale": rationale,
+            "by": spec["id"],
+        },
+        "cost_tokens": _tokens(rationale),
+        "citations": ["spec:" + spec["id"], "catalog:" + str(spec.get("guild", "?"))],
+    }
+
+
+@register("spec_driven")
+def spec_driven(state, *, llm, store, spec):
+    """Agente de catálogo que produz um artefato definido por spec/eval-case."""
+    return _catalog_agent_output(state, llm=llm, spec=spec, handler_kind="spec_driven")
+
+
+@register("supervisor_route")
+def supervisor_route(state, *, llm, store, spec):
+    """Supervisor de guilda: decide rota/estado de um job usando contrato comum."""
+    return _catalog_agent_output(state, llm=llm, spec=spec, handler_kind="supervisor_route")
+
+
+@register("guardian_check")
+def guardian_check(state, *, llm, store, spec):
+    """Guardião/checker: emite veredito pronto/bloqueado com evidência configurada."""
+    return _catalog_agent_output(state, llm=llm, spec=spec, handler_kind="guardian_check")
+
+
 @register("fin_cashflow")
 def fin_cashflow(state, *, llm, store, spec):
     """AGENTE DE PRODUTO (multi-tenant) — gestão de caixa da empresa DO CLIENTE.

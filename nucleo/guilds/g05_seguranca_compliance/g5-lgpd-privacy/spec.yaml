@@ -1,0 +1,40 @@
+id: g5-lgpd-privacy
+guild: G05-seguranca-compliance
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: guardian
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'LGPD & Privacy entrega lgpd_privacy.artifact verificável para: garantir
+    conformidade LGPD em toda a empresa, mapeando categorias de PII e governando seu
+    tratamento em todo artefato e telemetria (C6).'
+  positive_examples:
+  - Recebe input válido e publica lgpd_privacy.artifact com status ready e evidência
+    rastreável.
+  - Roteia ou bloqueia trabalho com critério explícito quando risco alto exige revisão
+    humana.
+  - Registra artefato, rota e rationale sem depender de tenant, segmento ou fornecedor
+    hardcoded.
+  negative_examples:
+  - Declara sucesso sem artefato verificável ou sem status explícito.
+  - Executa ação de alto risco sem sinalizar revisão humana.
+  - Codifica regra específica de cliente, segmento, alíquota ou fornecedor no código
+    do agente.
+  delivered_event: g5-lgpd-privacy.delivered == true and artifact_type == 'lgpd_privacy.artifact'
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- security-privacy-guardian
+- observability-guardian
+tools:
+- brain.query
+- brain.write
+- queue.dispatch
+- policy.check
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

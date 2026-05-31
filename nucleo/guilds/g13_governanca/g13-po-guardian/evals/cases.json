@@ -1,7 +1,707 @@
 [
-  {"id": "ev-01", "desc": "spec completa", "target_spec": {"outcome_clause": {"statement": "Qualifica lead em <=2min com 95% de acuracia", "positive_examples": ["a", "b", "c"], "negative_examples": ["x", "y", "z"], "delivered_event": "lead.qualified == true"}}, "expected": {"valid": true}},
-  {"id": "ev-02", "desc": "sem delivered_event", "target_spec": {"outcome_clause": {"statement": "Faz algo util", "positive_examples": ["a", "b", "c"], "negative_examples": ["x", "y", "z"], "delivered_event": ""}}, "expected": {"valid": false}},
-  {"id": "ev-03", "desc": "poucos positivos", "target_spec": {"outcome_clause": {"statement": "Resolve ticket", "positive_examples": ["a"], "negative_examples": ["x", "y", "z"], "delivered_event": "ticket.resolved == true"}}, "expected": {"valid": false}},
-  {"id": "ev-04", "desc": "sem statement", "target_spec": {"outcome_clause": {"statement": "", "positive_examples": ["a", "b", "c"], "negative_examples": ["x", "y", "z"], "delivered_event": "x == true"}}, "expected": {"valid": false}},
-  {"id": "ev-05", "desc": "sem negativos", "target_spec": {"outcome_clause": {"statement": "Gera relatorio", "positive_examples": ["a", "b", "c"], "negative_examples": [], "delivered_event": "report.generated == true"}}, "expected": {"valid": false}}
+  {
+    "id": "ev-01",
+    "desc": "spec completa",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "Qualifica lead em <=2min com 95% de acuracia",
+        "positive_examples": [
+          "a",
+          "b",
+          "c"
+        ],
+        "negative_examples": [
+          "x",
+          "y",
+          "z"
+        ],
+        "delivered_event": "lead.qualified == true"
+      }
+    },
+    "expected": {
+      "valid": true
+    }
+  },
+  {
+    "id": "ev-02",
+    "desc": "sem delivered_event",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "Faz algo util",
+        "positive_examples": [
+          "a",
+          "b",
+          "c"
+        ],
+        "negative_examples": [
+          "x",
+          "y",
+          "z"
+        ],
+        "delivered_event": ""
+      }
+    },
+    "expected": {
+      "valid": false
+    }
+  },
+  {
+    "id": "ev-03",
+    "desc": "poucos positivos",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "Resolve ticket",
+        "positive_examples": [
+          "a"
+        ],
+        "negative_examples": [
+          "x",
+          "y",
+          "z"
+        ],
+        "delivered_event": "ticket.resolved == true"
+      }
+    },
+    "expected": {
+      "valid": false
+    }
+  },
+  {
+    "id": "ev-04",
+    "desc": "sem statement",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "",
+        "positive_examples": [
+          "a",
+          "b",
+          "c"
+        ],
+        "negative_examples": [
+          "x",
+          "y",
+          "z"
+        ],
+        "delivered_event": "x == true"
+      }
+    },
+    "expected": {
+      "valid": false
+    }
+  },
+  {
+    "id": "ev-05",
+    "desc": "sem negativos",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "Gera relatorio",
+        "positive_examples": [
+          "a",
+          "b",
+          "c"
+        ],
+        "negative_examples": [],
+        "delivered_event": "report.generated == true"
+      }
+    },
+    "expected": {
+      "valid": false
+    }
+  },
+  {
+    "id": "ev-06",
+    "desc": "variação outcome clause 6",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "Entrega outcome verificável 6",
+        "positive_examples": [
+          "positivo 6-0",
+          "positivo 6-1"
+        ],
+        "negative_examples": [
+          "negativo 6-0",
+          "negativo 6-1",
+          "negativo 6-2"
+        ],
+        "delivered_event": "agent.6.delivered == true"
+      }
+    },
+    "expected": {
+      "valid": false
+    }
+  },
+  {
+    "id": "ev-07",
+    "desc": "variação outcome clause 7",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "Entrega outcome verificável 7",
+        "positive_examples": [
+          "positivo 7-0",
+          "positivo 7-1",
+          "positivo 7-2",
+          "positivo 7-3"
+        ],
+        "negative_examples": [
+          "negativo 7-0"
+        ],
+        "delivered_event": "agent.7.delivered == true"
+      }
+    },
+    "expected": {
+      "valid": false
+    }
+  },
+  {
+    "id": "ev-08",
+    "desc": "variação outcome clause 8",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "",
+        "positive_examples": [
+          "positivo 8-0",
+          "positivo 8-1",
+          "positivo 8-2",
+          "positivo 8-3",
+          "positivo 8-4"
+        ],
+        "negative_examples": [
+          "negativo 8-0",
+          "negativo 8-1",
+          "negativo 8-2"
+        ],
+        "delivered_event": "agent.8.delivered == true"
+      }
+    },
+    "expected": {
+      "valid": false
+    }
+  },
+  {
+    "id": "ev-09",
+    "desc": "variação outcome clause 9",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "Entrega outcome verificável 9",
+        "positive_examples": [
+          "positivo 9-0",
+          "positivo 9-1",
+          "positivo 9-2"
+        ],
+        "negative_examples": [
+          "negativo 9-0",
+          "negativo 9-1",
+          "negativo 9-2",
+          "negativo 9-3"
+        ],
+        "delivered_event": "agent.9.delivered == true"
+      }
+    },
+    "expected": {
+      "valid": true
+    }
+  },
+  {
+    "id": "ev-10",
+    "desc": "variação outcome clause 10",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "Entrega outcome verificável 10",
+        "positive_examples": [
+          "positivo 10-0",
+          "positivo 10-1",
+          "positivo 10-2",
+          "positivo 10-3"
+        ],
+        "negative_examples": [
+          "negativo 10-0",
+          "negativo 10-1",
+          "negativo 10-2"
+        ],
+        "delivered_event": ""
+      }
+    },
+    "expected": {
+      "valid": false
+    }
+  },
+  {
+    "id": "ev-11",
+    "desc": "variação outcome clause 11",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "Entrega outcome verificável 11",
+        "positive_examples": [
+          "positivo 11-0",
+          "positivo 11-1",
+          "positivo 11-2",
+          "positivo 11-3",
+          "positivo 11-4"
+        ],
+        "negative_examples": [
+          "negativo 11-0",
+          "negativo 11-1",
+          "negativo 11-2",
+          "negativo 11-3"
+        ],
+        "delivered_event": "agent.11.delivered == true"
+      }
+    },
+    "expected": {
+      "valid": true
+    }
+  },
+  {
+    "id": "ev-12",
+    "desc": "variação outcome clause 12",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "",
+        "positive_examples": [
+          "positivo 12-0",
+          "positivo 12-1"
+        ],
+        "negative_examples": [
+          "negativo 12-0",
+          "negativo 12-1",
+          "negativo 12-2"
+        ],
+        "delivered_event": "agent.12.delivered == true"
+      }
+    },
+    "expected": {
+      "valid": false
+    }
+  },
+  {
+    "id": "ev-13",
+    "desc": "variação outcome clause 13",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "Entrega outcome verificável 13",
+        "positive_examples": [
+          "positivo 13-0",
+          "positivo 13-1",
+          "positivo 13-2",
+          "positivo 13-3"
+        ],
+        "negative_examples": [
+          "negativo 13-0",
+          "negativo 13-1",
+          "negativo 13-2",
+          "negativo 13-3"
+        ],
+        "delivered_event": "agent.13.delivered == true"
+      }
+    },
+    "expected": {
+      "valid": true
+    }
+  },
+  {
+    "id": "ev-14",
+    "desc": "variação outcome clause 14",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "Entrega outcome verificável 14",
+        "positive_examples": [
+          "positivo 14-0",
+          "positivo 14-1",
+          "positivo 14-2",
+          "positivo 14-3",
+          "positivo 14-4"
+        ],
+        "negative_examples": [
+          "negativo 14-0"
+        ],
+        "delivered_event": "agent.14.delivered == true"
+      }
+    },
+    "expected": {
+      "valid": false
+    }
+  },
+  {
+    "id": "ev-15",
+    "desc": "variação outcome clause 15",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "Entrega outcome verificável 15",
+        "positive_examples": [
+          "positivo 15-0",
+          "positivo 15-1",
+          "positivo 15-2"
+        ],
+        "negative_examples": [
+          "negativo 15-0",
+          "negativo 15-1",
+          "negativo 15-2",
+          "negativo 15-3"
+        ],
+        "delivered_event": ""
+      }
+    },
+    "expected": {
+      "valid": false
+    }
+  },
+  {
+    "id": "ev-16",
+    "desc": "variação outcome clause 16",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "",
+        "positive_examples": [
+          "positivo 16-0",
+          "positivo 16-1",
+          "positivo 16-2",
+          "positivo 16-3"
+        ],
+        "negative_examples": [
+          "negativo 16-0",
+          "negativo 16-1",
+          "negativo 16-2"
+        ],
+        "delivered_event": "agent.16.delivered == true"
+      }
+    },
+    "expected": {
+      "valid": false
+    }
+  },
+  {
+    "id": "ev-17",
+    "desc": "variação outcome clause 17",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "Entrega outcome verificável 17",
+        "positive_examples": [
+          "positivo 17-0",
+          "positivo 17-1",
+          "positivo 17-2",
+          "positivo 17-3",
+          "positivo 17-4"
+        ],
+        "negative_examples": [
+          "negativo 17-0",
+          "negativo 17-1",
+          "negativo 17-2",
+          "negativo 17-3"
+        ],
+        "delivered_event": "agent.17.delivered == true"
+      }
+    },
+    "expected": {
+      "valid": true
+    }
+  },
+  {
+    "id": "ev-18",
+    "desc": "variação outcome clause 18",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "Entrega outcome verificável 18",
+        "positive_examples": [
+          "positivo 18-0",
+          "positivo 18-1"
+        ],
+        "negative_examples": [
+          "negativo 18-0",
+          "negativo 18-1",
+          "negativo 18-2"
+        ],
+        "delivered_event": "agent.18.delivered == true"
+      }
+    },
+    "expected": {
+      "valid": false
+    }
+  },
+  {
+    "id": "ev-19",
+    "desc": "variação outcome clause 19",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "Entrega outcome verificável 19",
+        "positive_examples": [
+          "positivo 19-0",
+          "positivo 19-1",
+          "positivo 19-2",
+          "positivo 19-3"
+        ],
+        "negative_examples": [
+          "negativo 19-0",
+          "negativo 19-1",
+          "negativo 19-2",
+          "negativo 19-3"
+        ],
+        "delivered_event": "agent.19.delivered == true"
+      }
+    },
+    "expected": {
+      "valid": true
+    }
+  },
+  {
+    "id": "ev-20",
+    "desc": "variação outcome clause 20",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "",
+        "positive_examples": [
+          "positivo 20-0",
+          "positivo 20-1",
+          "positivo 20-2",
+          "positivo 20-3",
+          "positivo 20-4"
+        ],
+        "negative_examples": [
+          "negativo 20-0",
+          "negativo 20-1",
+          "negativo 20-2"
+        ],
+        "delivered_event": ""
+      }
+    },
+    "expected": {
+      "valid": false
+    }
+  },
+  {
+    "id": "ev-21",
+    "desc": "variação outcome clause 21",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "Entrega outcome verificável 21",
+        "positive_examples": [
+          "positivo 21-0",
+          "positivo 21-1",
+          "positivo 21-2"
+        ],
+        "negative_examples": [
+          "negativo 21-0"
+        ],
+        "delivered_event": "agent.21.delivered == true"
+      }
+    },
+    "expected": {
+      "valid": false
+    }
+  },
+  {
+    "id": "ev-22",
+    "desc": "variação outcome clause 22",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "Entrega outcome verificável 22",
+        "positive_examples": [
+          "positivo 22-0",
+          "positivo 22-1",
+          "positivo 22-2",
+          "positivo 22-3"
+        ],
+        "negative_examples": [
+          "negativo 22-0",
+          "negativo 22-1",
+          "negativo 22-2"
+        ],
+        "delivered_event": "agent.22.delivered == true"
+      }
+    },
+    "expected": {
+      "valid": true
+    }
+  },
+  {
+    "id": "ev-23",
+    "desc": "variação outcome clause 23",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "Entrega outcome verificável 23",
+        "positive_examples": [
+          "positivo 23-0",
+          "positivo 23-1",
+          "positivo 23-2",
+          "positivo 23-3",
+          "positivo 23-4"
+        ],
+        "negative_examples": [
+          "negativo 23-0",
+          "negativo 23-1",
+          "negativo 23-2",
+          "negativo 23-3"
+        ],
+        "delivered_event": "agent.23.delivered == true"
+      }
+    },
+    "expected": {
+      "valid": true
+    }
+  },
+  {
+    "id": "ev-24",
+    "desc": "variação outcome clause 24",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "",
+        "positive_examples": [
+          "positivo 24-0",
+          "positivo 24-1"
+        ],
+        "negative_examples": [
+          "negativo 24-0",
+          "negativo 24-1",
+          "negativo 24-2"
+        ],
+        "delivered_event": "agent.24.delivered == true"
+      }
+    },
+    "expected": {
+      "valid": false
+    }
+  },
+  {
+    "id": "ev-25",
+    "desc": "variação outcome clause 25",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "Entrega outcome verificável 25",
+        "positive_examples": [
+          "positivo 25-0",
+          "positivo 25-1",
+          "positivo 25-2",
+          "positivo 25-3"
+        ],
+        "negative_examples": [
+          "negativo 25-0",
+          "negativo 25-1",
+          "negativo 25-2",
+          "negativo 25-3"
+        ],
+        "delivered_event": ""
+      }
+    },
+    "expected": {
+      "valid": false
+    }
+  },
+  {
+    "id": "ev-26",
+    "desc": "variação outcome clause 26",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "Entrega outcome verificável 26",
+        "positive_examples": [
+          "positivo 26-0",
+          "positivo 26-1",
+          "positivo 26-2",
+          "positivo 26-3",
+          "positivo 26-4"
+        ],
+        "negative_examples": [
+          "negativo 26-0",
+          "negativo 26-1",
+          "negativo 26-2"
+        ],
+        "delivered_event": "agent.26.delivered == true"
+      }
+    },
+    "expected": {
+      "valid": true
+    }
+  },
+  {
+    "id": "ev-27",
+    "desc": "variação outcome clause 27",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "Entrega outcome verificável 27",
+        "positive_examples": [
+          "positivo 27-0",
+          "positivo 27-1",
+          "positivo 27-2"
+        ],
+        "negative_examples": [
+          "negativo 27-0",
+          "negativo 27-1",
+          "negativo 27-2",
+          "negativo 27-3"
+        ],
+        "delivered_event": "agent.27.delivered == true"
+      }
+    },
+    "expected": {
+      "valid": true
+    }
+  },
+  {
+    "id": "ev-28",
+    "desc": "variação outcome clause 28",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "",
+        "positive_examples": [
+          "positivo 28-0",
+          "positivo 28-1",
+          "positivo 28-2",
+          "positivo 28-3"
+        ],
+        "negative_examples": [
+          "negativo 28-0"
+        ],
+        "delivered_event": "agent.28.delivered == true"
+      }
+    },
+    "expected": {
+      "valid": false
+    }
+  },
+  {
+    "id": "ev-29",
+    "desc": "variação outcome clause 29",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "Entrega outcome verificável 29",
+        "positive_examples": [
+          "positivo 29-0",
+          "positivo 29-1",
+          "positivo 29-2",
+          "positivo 29-3",
+          "positivo 29-4"
+        ],
+        "negative_examples": [
+          "negativo 29-0",
+          "negativo 29-1",
+          "negativo 29-2",
+          "negativo 29-3"
+        ],
+        "delivered_event": "agent.29.delivered == true"
+      }
+    },
+    "expected": {
+      "valid": true
+    }
+  },
+  {
+    "id": "ev-30",
+    "desc": "variação outcome clause 30",
+    "target_spec": {
+      "outcome_clause": {
+        "statement": "Entrega outcome verificável 30",
+        "positive_examples": [
+          "positivo 30-0",
+          "positivo 30-1"
+        ],
+        "negative_examples": [
+          "negativo 30-0",
+          "negativo 30-1",
+          "negativo 30-2"
+        ],
+        "delivered_event": ""
+      }
+    },
+    "expected": {
+      "valid": false
+    }
+  }
 ]

@@ -1,5 +1,503 @@
 [
-  {"id": "mi-01", "desc": "vertical passa hard-filters", "candidate": {"vertical": "Exemplo A", "est_companies_brazil": 80000, "founder_led_share": 0.6, "process_pain_evidence": 4, "tier2_sources": ["diretorio X", "associacao Y"], "regulatory_risk": 1}, "expected": {"passes_hard_filters": true}},
-  {"id": "mi-02", "desc": "sem dor de processo -> F2 falha", "candidate": {"vertical": "Exemplo B", "est_companies_brazil": 50000, "founder_led_share": 0.5, "process_pain_evidence": 1, "tier2_sources": ["fonte Z"], "regulatory_risk": 1}, "expected": {"passes_hard_filters": false}},
-  {"id": "mi-03", "desc": "sem fonte Tier 2 -> F4 falha", "candidate": {"vertical": "Exemplo C", "est_companies_brazil": 90000, "founder_led_share": 0.7, "process_pain_evidence": 4, "tier2_sources": [], "regulatory_risk": 2}, "expected": {"passes_hard_filters": false}}
+  {
+    "id": "mi-01",
+    "desc": "vertical passa hard-filters",
+    "candidate": {
+      "vertical": "Exemplo A",
+      "est_companies_brazil": 80000,
+      "founder_led_share": 0.6,
+      "process_pain_evidence": 4,
+      "tier2_sources": [
+        "diretorio X",
+        "associacao Y"
+      ],
+      "regulatory_risk": 1
+    },
+    "expected": {
+      "passes_hard_filters": true
+    }
+  },
+  {
+    "id": "mi-02",
+    "desc": "sem dor de processo -> F2 falha",
+    "candidate": {
+      "vertical": "Exemplo B",
+      "est_companies_brazil": 50000,
+      "founder_led_share": 0.5,
+      "process_pain_evidence": 1,
+      "tier2_sources": [
+        "fonte Z"
+      ],
+      "regulatory_risk": 1
+    },
+    "expected": {
+      "passes_hard_filters": false
+    }
+  },
+  {
+    "id": "mi-03",
+    "desc": "sem fonte Tier 2 -> F4 falha",
+    "candidate": {
+      "vertical": "Exemplo C",
+      "est_companies_brazil": 90000,
+      "founder_led_share": 0.7,
+      "process_pain_evidence": 4,
+      "tier2_sources": [],
+      "regulatory_risk": 2
+    },
+    "expected": {
+      "passes_hard_filters": false
+    }
+  },
+  {
+    "id": "mi-04",
+    "desc": "variação hard-filter 4",
+    "candidate": {
+      "vertical": "Vertical 4",
+      "est_companies_brazil": 0,
+      "founder_led_share": 0,
+      "process_pain_evidence": 0,
+      "tier2_sources": [
+        "fonte-tier2-4"
+      ],
+      "regulatory_risk": 4
+    },
+    "expected": {
+      "passes_hard_filters": false
+    }
+  },
+  {
+    "id": "mi-05",
+    "desc": "variação hard-filter 5",
+    "candidate": {
+      "vertical": "Vertical 5",
+      "est_companies_brazil": 1,
+      "founder_led_share": 0.1,
+      "process_pain_evidence": 2,
+      "tier2_sources": [
+        "fonte-tier2-5"
+      ],
+      "regulatory_risk": 0
+    },
+    "expected": {
+      "passes_hard_filters": false
+    }
+  },
+  {
+    "id": "mi-06",
+    "desc": "variação hard-filter 6",
+    "candidate": {
+      "vertical": "Vertical 6",
+      "est_companies_brazil": 999,
+      "founder_led_share": 0.5,
+      "process_pain_evidence": 3,
+      "tier2_sources": [
+        "fonte-tier2-6"
+      ],
+      "regulatory_risk": 1
+    },
+    "expected": {
+      "passes_hard_filters": true
+    }
+  },
+  {
+    "id": "mi-07",
+    "desc": "variação hard-filter 7",
+    "candidate": {
+      "vertical": "Vertical 7",
+      "est_companies_brazil": 1000,
+      "founder_led_share": 1.0,
+      "process_pain_evidence": 4,
+      "tier2_sources": [],
+      "regulatory_risk": 2
+    },
+    "expected": {
+      "passes_hard_filters": false
+    }
+  },
+  {
+    "id": "mi-08",
+    "desc": "variação hard-filter 8",
+    "candidate": {
+      "vertical": "Vertical 8",
+      "est_companies_brazil": 9999,
+      "founder_led_share": 0.25,
+      "process_pain_evidence": 5,
+      "tier2_sources": [
+        "fonte-tier2-8"
+      ],
+      "regulatory_risk": 3
+    },
+    "expected": {
+      "passes_hard_filters": true
+    }
+  },
+  {
+    "id": "mi-09",
+    "desc": "variação hard-filter 9",
+    "candidate": {
+      "vertical": "Vertical 9",
+      "est_companies_brazil": 10000,
+      "founder_led_share": 0.75,
+      "process_pain_evidence": 1,
+      "tier2_sources": [
+        "fonte-tier2-9"
+      ],
+      "regulatory_risk": 4
+    },
+    "expected": {
+      "passes_hard_filters": false
+    }
+  },
+  {
+    "id": "mi-10",
+    "desc": "variação hard-filter 10",
+    "candidate": {
+      "vertical": "Vertical 10",
+      "est_companies_brazil": 49999,
+      "founder_led_share": 0.6,
+      "process_pain_evidence": 3,
+      "tier2_sources": [
+        "fonte-tier2-10"
+      ],
+      "regulatory_risk": 0
+    },
+    "expected": {
+      "passes_hard_filters": true
+    }
+  },
+  {
+    "id": "mi-11",
+    "desc": "variação hard-filter 11",
+    "candidate": {
+      "vertical": "Vertical 11",
+      "est_companies_brazil": 50000,
+      "founder_led_share": 0.8,
+      "process_pain_evidence": 4,
+      "tier2_sources": [
+        "fonte-tier2-11"
+      ],
+      "regulatory_risk": 1
+    },
+    "expected": {
+      "passes_hard_filters": true
+    }
+  },
+  {
+    "id": "mi-12",
+    "desc": "variação hard-filter 12",
+    "candidate": {
+      "vertical": "Vertical 12",
+      "est_companies_brazil": 199999,
+      "founder_led_share": 0.05,
+      "process_pain_evidence": 5,
+      "tier2_sources": [],
+      "regulatory_risk": 2
+    },
+    "expected": {
+      "passes_hard_filters": false
+    }
+  },
+  {
+    "id": "mi-13",
+    "desc": "variação hard-filter 13",
+    "candidate": {
+      "vertical": "Vertical 13",
+      "est_companies_brazil": 200000,
+      "founder_led_share": 0.33,
+      "process_pain_evidence": 2,
+      "tier2_sources": [
+        "fonte-tier2-13"
+      ],
+      "regulatory_risk": 3
+    },
+    "expected": {
+      "passes_hard_filters": false
+    }
+  },
+  {
+    "id": "mi-14",
+    "desc": "variação hard-filter 14",
+    "candidate": {
+      "vertical": "Vertical 14",
+      "est_companies_brazil": 75000,
+      "founder_led_share": 0.4,
+      "process_pain_evidence": 3,
+      "tier2_sources": [
+        "fonte-tier2-14"
+      ],
+      "regulatory_risk": 4
+    },
+    "expected": {
+      "passes_hard_filters": true
+    }
+  },
+  {
+    "id": "mi-15",
+    "desc": "variação hard-filter 15",
+    "candidate": {
+      "vertical": "Vertical 15",
+      "est_companies_brazil": 120000,
+      "founder_led_share": 0.9,
+      "process_pain_evidence": 4,
+      "tier2_sources": [
+        "fonte-tier2-15"
+      ],
+      "regulatory_risk": 0
+    },
+    "expected": {
+      "passes_hard_filters": true
+    }
+  },
+  {
+    "id": "mi-16",
+    "desc": "variação hard-filter 16",
+    "candidate": {
+      "vertical": "Vertical 16",
+      "est_companies_brazil": 4500,
+      "founder_led_share": 0.2,
+      "process_pain_evidence": 5,
+      "tier2_sources": [
+        "fonte-tier2-16"
+      ],
+      "regulatory_risk": 1
+    },
+    "expected": {
+      "passes_hard_filters": true
+    }
+  },
+  {
+    "id": "mi-17",
+    "desc": "variação hard-filter 17",
+    "candidate": {
+      "vertical": "Vertical 17",
+      "est_companies_brazil": 25000,
+      "founder_led_share": 0.7,
+      "process_pain_evidence": 3,
+      "tier2_sources": [
+        "fonte-tier2-17"
+      ],
+      "regulatory_risk": 2
+    },
+    "expected": {
+      "passes_hard_filters": true
+    }
+  },
+  {
+    "id": "mi-18",
+    "desc": "variação hard-filter 18",
+    "candidate": {
+      "vertical": "Vertical 18",
+      "est_companies_brazil": 300000,
+      "founder_led_share": 0.55,
+      "process_pain_evidence": 4,
+      "tier2_sources": [
+        "fonte-tier2-18"
+      ],
+      "regulatory_risk": 3
+    },
+    "expected": {
+      "passes_hard_filters": true
+    }
+  },
+  {
+    "id": "mi-19",
+    "desc": "variação hard-filter 19",
+    "candidate": {
+      "vertical": "Vertical 19",
+      "est_companies_brazil": 60000,
+      "founder_led_share": 0.65,
+      "process_pain_evidence": 5,
+      "tier2_sources": [],
+      "regulatory_risk": 4
+    },
+    "expected": {
+      "passes_hard_filters": false
+    }
+  },
+  {
+    "id": "mi-20",
+    "desc": "variação hard-filter 20",
+    "candidate": {
+      "vertical": "Vertical 20",
+      "est_companies_brazil": 15000,
+      "founder_led_share": 0.15,
+      "process_pain_evidence": 2,
+      "tier2_sources": [
+        "fonte-tier2-20"
+      ],
+      "regulatory_risk": 0
+    },
+    "expected": {
+      "passes_hard_filters": false
+    }
+  },
+  {
+    "id": "mi-21",
+    "desc": "variação hard-filter 21",
+    "candidate": {
+      "vertical": "Vertical 21",
+      "est_companies_brazil": 85000,
+      "founder_led_share": 0.45,
+      "process_pain_evidence": 3,
+      "tier2_sources": [
+        "fonte-tier2-21"
+      ],
+      "regulatory_risk": 1
+    },
+    "expected": {
+      "passes_hard_filters": true
+    }
+  },
+  {
+    "id": "mi-22",
+    "desc": "variação hard-filter 22",
+    "candidate": {
+      "vertical": "Vertical 22",
+      "est_companies_brazil": 42000,
+      "founder_led_share": 0.35,
+      "process_pain_evidence": 4,
+      "tier2_sources": [
+        "fonte-tier2-22"
+      ],
+      "regulatory_risk": 2
+    },
+    "expected": {
+      "passes_hard_filters": true
+    }
+  },
+  {
+    "id": "mi-23",
+    "desc": "variação hard-filter 23",
+    "candidate": {
+      "vertical": "Vertical 23",
+      "est_companies_brazil": 110000,
+      "founder_led_share": 0.85,
+      "process_pain_evidence": 5,
+      "tier2_sources": [
+        "fonte-tier2-23"
+      ],
+      "regulatory_risk": 3
+    },
+    "expected": {
+      "passes_hard_filters": true
+    }
+  },
+  {
+    "id": "mi-24",
+    "desc": "variação hard-filter 24",
+    "candidate": {
+      "vertical": "Vertical 24",
+      "est_companies_brazil": 500,
+      "founder_led_share": 0.12,
+      "process_pain_evidence": 1,
+      "tier2_sources": [
+        "fonte-tier2-24"
+      ],
+      "regulatory_risk": 4
+    },
+    "expected": {
+      "passes_hard_filters": false
+    }
+  },
+  {
+    "id": "mi-25",
+    "desc": "variação hard-filter 25",
+    "candidate": {
+      "vertical": "Vertical 25",
+      "est_companies_brazil": 35000,
+      "founder_led_share": 0.52,
+      "process_pain_evidence": 3,
+      "tier2_sources": [],
+      "regulatory_risk": 0
+    },
+    "expected": {
+      "passes_hard_filters": false
+    }
+  },
+  {
+    "id": "mi-26",
+    "desc": "variação hard-filter 26",
+    "candidate": {
+      "vertical": "Vertical 26",
+      "est_companies_brazil": 65000,
+      "founder_led_share": 0.62,
+      "process_pain_evidence": 4,
+      "tier2_sources": [
+        "fonte-tier2-26"
+      ],
+      "regulatory_risk": 1
+    },
+    "expected": {
+      "passes_hard_filters": true
+    }
+  },
+  {
+    "id": "mi-27",
+    "desc": "variação hard-filter 27",
+    "candidate": {
+      "vertical": "Vertical 27",
+      "est_companies_brazil": 95000,
+      "founder_led_share": 0.72,
+      "process_pain_evidence": 5,
+      "tier2_sources": [
+        "fonte-tier2-27"
+      ],
+      "regulatory_risk": 2
+    },
+    "expected": {
+      "passes_hard_filters": true
+    }
+  },
+  {
+    "id": "mi-28",
+    "desc": "variação hard-filter 28",
+    "candidate": {
+      "vertical": "Vertical 28",
+      "est_companies_brazil": 180000,
+      "founder_led_share": 0.82,
+      "process_pain_evidence": 3,
+      "tier2_sources": [
+        "fonte-tier2-28"
+      ],
+      "regulatory_risk": 3
+    },
+    "expected": {
+      "passes_hard_filters": true
+    }
+  },
+  {
+    "id": "mi-29",
+    "desc": "variação hard-filter 29",
+    "candidate": {
+      "vertical": "Vertical 29",
+      "est_companies_brazil": 220000,
+      "founder_led_share": 0.92,
+      "process_pain_evidence": 4,
+      "tier2_sources": [
+        "fonte-tier2-29"
+      ],
+      "regulatory_risk": 4
+    },
+    "expected": {
+      "passes_hard_filters": true
+    }
+  },
+  {
+    "id": "mi-30",
+    "desc": "variação hard-filter 30",
+    "candidate": {
+      "vertical": "Vertical 30",
+      "est_companies_brazil": 125000,
+      "founder_led_share": 1.0,
+      "process_pain_evidence": 5,
+      "tier2_sources": [
+        "fonte-tier2-30"
+      ],
+      "regulatory_risk": 0
+    },
+    "expected": {
+      "passes_hard_filters": true
+    }
+  }
 ]

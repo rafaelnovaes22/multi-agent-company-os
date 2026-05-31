@@ -1,4 +1,817 @@
 [
-  {"id": "at-01", "desc": "fila com 1 atrasada", "tenant_id": "t-eval-1", "atendimento": {"requests": [{"customer": "A", "type": "orçamento", "waiting_hours": 30}, {"customer": "B", "type": "dúvida", "waiting_hours": 5}]}, "expected": {"reply_queue_count": 2, "overdue_replies": 1}},
-  {"id": "at-02", "desc": "sem pendências", "tenant_id": "t-eval-2", "atendimento": {"requests": []}, "expected": {"reply_queue_count": 0, "overdue_replies": 0}}
+  {
+    "id": "at-01",
+    "desc": "fila com 1 atrasada",
+    "tenant_id": "t-eval-1",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "A",
+          "type": "orçamento",
+          "waiting_hours": 30
+        },
+        {
+          "customer": "B",
+          "type": "dúvida",
+          "waiting_hours": 5
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 2,
+      "overdue_replies": 1
+    }
+  },
+  {
+    "id": "at-02",
+    "desc": "sem pendências",
+    "tenant_id": "t-eval-2",
+    "atendimento": {
+      "requests": []
+    },
+    "expected": {
+      "reply_queue_count": 0,
+      "overdue_replies": 0
+    }
+  },
+  {
+    "id": "at-03",
+    "desc": "variação atendimento 3",
+    "tenant_id": "t-eval-3",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 3-0",
+          "type": "orçamento",
+          "waiting_hours": 23
+        },
+        {
+          "customer": "Cliente 3-1",
+          "type": "dúvida",
+          "waiting_hours": 24
+        },
+        {
+          "customer": "Cliente 3-2",
+          "type": "suporte",
+          "waiting_hours": 25
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 3,
+      "overdue_replies": 1
+    }
+  },
+  {
+    "id": "at-04",
+    "desc": "variação atendimento 4",
+    "tenant_id": "t-eval-4",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 4-0",
+          "type": "orçamento",
+          "waiting_hours": 24
+        },
+        {
+          "customer": "Cliente 4-1",
+          "type": "dúvida",
+          "waiting_hours": 25
+        },
+        {
+          "customer": "Cliente 4-2",
+          "type": "suporte",
+          "waiting_hours": 48
+        },
+        {
+          "customer": "Cliente 4-3",
+          "type": "follow-up",
+          "waiting_hours": 72
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 4,
+      "overdue_replies": 3
+    }
+  },
+  {
+    "id": "at-05",
+    "desc": "variação atendimento 5",
+    "tenant_id": "t-eval-5",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 5-0",
+          "type": "orçamento",
+          "waiting_hours": 25
+        },
+        {
+          "customer": "Cliente 5-1",
+          "type": "dúvida",
+          "waiting_hours": 48
+        },
+        {
+          "customer": "Cliente 5-2",
+          "type": "suporte",
+          "waiting_hours": 72
+        },
+        {
+          "customer": "Cliente 5-3",
+          "type": "follow-up",
+          "waiting_hours": 0
+        },
+        {
+          "customer": "Cliente 5-4",
+          "type": "orçamento",
+          "waiting_hours": 1
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 5,
+      "overdue_replies": 3
+    }
+  },
+  {
+    "id": "at-06",
+    "desc": "variação atendimento 6",
+    "tenant_id": "t-eval-6",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 6-0",
+          "type": "orçamento",
+          "waiting_hours": 48
+        },
+        {
+          "customer": "Cliente 6-1",
+          "type": "dúvida",
+          "waiting_hours": 72
+        },
+        {
+          "customer": "Cliente 6-2",
+          "type": "suporte",
+          "waiting_hours": 0
+        },
+        {
+          "customer": "Cliente 6-3",
+          "type": "follow-up",
+          "waiting_hours": 1
+        },
+        {
+          "customer": "Cliente 6-4",
+          "type": "orçamento",
+          "waiting_hours": 5
+        },
+        {
+          "customer": "Cliente 6-5",
+          "type": "dúvida",
+          "waiting_hours": 23
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 6,
+      "overdue_replies": 2
+    }
+  },
+  {
+    "id": "at-07",
+    "desc": "variação atendimento 7",
+    "tenant_id": "t-eval-7",
+    "atendimento": {
+      "requests": []
+    },
+    "expected": {
+      "reply_queue_count": 0,
+      "overdue_replies": 0
+    }
+  },
+  {
+    "id": "at-08",
+    "desc": "variação atendimento 8",
+    "tenant_id": "t-eval-8",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 8-0",
+          "type": "orçamento",
+          "waiting_hours": 0
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 1,
+      "overdue_replies": 0
+    }
+  },
+  {
+    "id": "at-09",
+    "desc": "variação atendimento 9",
+    "tenant_id": "t-eval-9",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 9-0",
+          "type": "orçamento",
+          "waiting_hours": 1
+        },
+        {
+          "customer": "Cliente 9-1",
+          "type": "dúvida",
+          "waiting_hours": 5
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 2,
+      "overdue_replies": 0
+    }
+  },
+  {
+    "id": "at-10",
+    "desc": "variação atendimento 10",
+    "tenant_id": "t-eval-10",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 10-0",
+          "type": "orçamento",
+          "waiting_hours": 5
+        },
+        {
+          "customer": "Cliente 10-1",
+          "type": "dúvida",
+          "waiting_hours": 23
+        },
+        {
+          "customer": "Cliente 10-2",
+          "type": "suporte",
+          "waiting_hours": 24
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 3,
+      "overdue_replies": 0
+    }
+  },
+  {
+    "id": "at-11",
+    "desc": "variação atendimento 11",
+    "tenant_id": "t-eval-11",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 11-0",
+          "type": "orçamento",
+          "waiting_hours": 23
+        },
+        {
+          "customer": "Cliente 11-1",
+          "type": "dúvida",
+          "waiting_hours": 24
+        },
+        {
+          "customer": "Cliente 11-2",
+          "type": "suporte",
+          "waiting_hours": 25
+        },
+        {
+          "customer": "Cliente 11-3",
+          "type": "follow-up",
+          "waiting_hours": 48
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 4,
+      "overdue_replies": 2
+    }
+  },
+  {
+    "id": "at-12",
+    "desc": "variação atendimento 12",
+    "tenant_id": "t-eval-12",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 12-0",
+          "type": "orçamento",
+          "waiting_hours": 24
+        },
+        {
+          "customer": "Cliente 12-1",
+          "type": "dúvida",
+          "waiting_hours": 25
+        },
+        {
+          "customer": "Cliente 12-2",
+          "type": "suporte",
+          "waiting_hours": 48
+        },
+        {
+          "customer": "Cliente 12-3",
+          "type": "follow-up",
+          "waiting_hours": 72
+        },
+        {
+          "customer": "Cliente 12-4",
+          "type": "orçamento",
+          "waiting_hours": 0
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 5,
+      "overdue_replies": 3
+    }
+  },
+  {
+    "id": "at-13",
+    "desc": "variação atendimento 13",
+    "tenant_id": "t-eval-13",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 13-0",
+          "type": "orçamento",
+          "waiting_hours": 25
+        },
+        {
+          "customer": "Cliente 13-1",
+          "type": "dúvida",
+          "waiting_hours": 48
+        },
+        {
+          "customer": "Cliente 13-2",
+          "type": "suporte",
+          "waiting_hours": 72
+        },
+        {
+          "customer": "Cliente 13-3",
+          "type": "follow-up",
+          "waiting_hours": 0
+        },
+        {
+          "customer": "Cliente 13-4",
+          "type": "orçamento",
+          "waiting_hours": 1
+        },
+        {
+          "customer": "Cliente 13-5",
+          "type": "dúvida",
+          "waiting_hours": 5
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 6,
+      "overdue_replies": 3
+    }
+  },
+  {
+    "id": "at-14",
+    "desc": "variação atendimento 14",
+    "tenant_id": "t-eval-14",
+    "atendimento": {
+      "requests": []
+    },
+    "expected": {
+      "reply_queue_count": 0,
+      "overdue_replies": 0
+    }
+  },
+  {
+    "id": "at-15",
+    "desc": "variação atendimento 15",
+    "tenant_id": "t-eval-15",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 15-0",
+          "type": "orçamento",
+          "waiting_hours": 72
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 1,
+      "overdue_replies": 1
+    }
+  },
+  {
+    "id": "at-16",
+    "desc": "variação atendimento 16",
+    "tenant_id": "t-eval-16",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 16-0",
+          "type": "orçamento",
+          "waiting_hours": 0
+        },
+        {
+          "customer": "Cliente 16-1",
+          "type": "dúvida",
+          "waiting_hours": 1
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 2,
+      "overdue_replies": 0
+    }
+  },
+  {
+    "id": "at-17",
+    "desc": "variação atendimento 17",
+    "tenant_id": "t-eval-17",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 17-0",
+          "type": "orçamento",
+          "waiting_hours": 1
+        },
+        {
+          "customer": "Cliente 17-1",
+          "type": "dúvida",
+          "waiting_hours": 5
+        },
+        {
+          "customer": "Cliente 17-2",
+          "type": "suporte",
+          "waiting_hours": 23
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 3,
+      "overdue_replies": 0
+    }
+  },
+  {
+    "id": "at-18",
+    "desc": "variação atendimento 18",
+    "tenant_id": "t-eval-18",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 18-0",
+          "type": "orçamento",
+          "waiting_hours": 5
+        },
+        {
+          "customer": "Cliente 18-1",
+          "type": "dúvida",
+          "waiting_hours": 23
+        },
+        {
+          "customer": "Cliente 18-2",
+          "type": "suporte",
+          "waiting_hours": 24
+        },
+        {
+          "customer": "Cliente 18-3",
+          "type": "follow-up",
+          "waiting_hours": 25
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 4,
+      "overdue_replies": 1
+    }
+  },
+  {
+    "id": "at-19",
+    "desc": "variação atendimento 19",
+    "tenant_id": "t-eval-19",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 19-0",
+          "type": "orçamento",
+          "waiting_hours": 23
+        },
+        {
+          "customer": "Cliente 19-1",
+          "type": "dúvida",
+          "waiting_hours": 24
+        },
+        {
+          "customer": "Cliente 19-2",
+          "type": "suporte",
+          "waiting_hours": 25
+        },
+        {
+          "customer": "Cliente 19-3",
+          "type": "follow-up",
+          "waiting_hours": 48
+        },
+        {
+          "customer": "Cliente 19-4",
+          "type": "orçamento",
+          "waiting_hours": 72
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 5,
+      "overdue_replies": 3
+    }
+  },
+  {
+    "id": "at-20",
+    "desc": "variação atendimento 20",
+    "tenant_id": "t-eval-20",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 20-0",
+          "type": "orçamento",
+          "waiting_hours": 24
+        },
+        {
+          "customer": "Cliente 20-1",
+          "type": "dúvida",
+          "waiting_hours": 25
+        },
+        {
+          "customer": "Cliente 20-2",
+          "type": "suporte",
+          "waiting_hours": 48
+        },
+        {
+          "customer": "Cliente 20-3",
+          "type": "follow-up",
+          "waiting_hours": 72
+        },
+        {
+          "customer": "Cliente 20-4",
+          "type": "orçamento",
+          "waiting_hours": 0
+        },
+        {
+          "customer": "Cliente 20-5",
+          "type": "dúvida",
+          "waiting_hours": 1
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 6,
+      "overdue_replies": 3
+    }
+  },
+  {
+    "id": "at-21",
+    "desc": "variação atendimento 21",
+    "tenant_id": "t-eval-21",
+    "atendimento": {
+      "requests": []
+    },
+    "expected": {
+      "reply_queue_count": 0,
+      "overdue_replies": 0
+    }
+  },
+  {
+    "id": "at-22",
+    "desc": "variação atendimento 22",
+    "tenant_id": "t-eval-22",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 22-0",
+          "type": "orçamento",
+          "waiting_hours": 48
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 1,
+      "overdue_replies": 1
+    }
+  },
+  {
+    "id": "at-23",
+    "desc": "variação atendimento 23",
+    "tenant_id": "t-eval-23",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 23-0",
+          "type": "orçamento",
+          "waiting_hours": 72
+        },
+        {
+          "customer": "Cliente 23-1",
+          "type": "dúvida",
+          "waiting_hours": 0
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 2,
+      "overdue_replies": 1
+    }
+  },
+  {
+    "id": "at-24",
+    "desc": "variação atendimento 24",
+    "tenant_id": "t-eval-24",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 24-0",
+          "type": "orçamento",
+          "waiting_hours": 0
+        },
+        {
+          "customer": "Cliente 24-1",
+          "type": "dúvida",
+          "waiting_hours": 1
+        },
+        {
+          "customer": "Cliente 24-2",
+          "type": "suporte",
+          "waiting_hours": 5
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 3,
+      "overdue_replies": 0
+    }
+  },
+  {
+    "id": "at-25",
+    "desc": "variação atendimento 25",
+    "tenant_id": "t-eval-25",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 25-0",
+          "type": "orçamento",
+          "waiting_hours": 1
+        },
+        {
+          "customer": "Cliente 25-1",
+          "type": "dúvida",
+          "waiting_hours": 5
+        },
+        {
+          "customer": "Cliente 25-2",
+          "type": "suporte",
+          "waiting_hours": 23
+        },
+        {
+          "customer": "Cliente 25-3",
+          "type": "follow-up",
+          "waiting_hours": 24
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 4,
+      "overdue_replies": 0
+    }
+  },
+  {
+    "id": "at-26",
+    "desc": "variação atendimento 26",
+    "tenant_id": "t-eval-26",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 26-0",
+          "type": "orçamento",
+          "waiting_hours": 5
+        },
+        {
+          "customer": "Cliente 26-1",
+          "type": "dúvida",
+          "waiting_hours": 23
+        },
+        {
+          "customer": "Cliente 26-2",
+          "type": "suporte",
+          "waiting_hours": 24
+        },
+        {
+          "customer": "Cliente 26-3",
+          "type": "follow-up",
+          "waiting_hours": 25
+        },
+        {
+          "customer": "Cliente 26-4",
+          "type": "orçamento",
+          "waiting_hours": 48
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 5,
+      "overdue_replies": 2
+    }
+  },
+  {
+    "id": "at-27",
+    "desc": "variação atendimento 27",
+    "tenant_id": "t-eval-27",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 27-0",
+          "type": "orçamento",
+          "waiting_hours": 23
+        },
+        {
+          "customer": "Cliente 27-1",
+          "type": "dúvida",
+          "waiting_hours": 24
+        },
+        {
+          "customer": "Cliente 27-2",
+          "type": "suporte",
+          "waiting_hours": 25
+        },
+        {
+          "customer": "Cliente 27-3",
+          "type": "follow-up",
+          "waiting_hours": 48
+        },
+        {
+          "customer": "Cliente 27-4",
+          "type": "orçamento",
+          "waiting_hours": 72
+        },
+        {
+          "customer": "Cliente 27-5",
+          "type": "dúvida",
+          "waiting_hours": 0
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 6,
+      "overdue_replies": 3
+    }
+  },
+  {
+    "id": "at-28",
+    "desc": "variação atendimento 28",
+    "tenant_id": "t-eval-28",
+    "atendimento": {
+      "requests": []
+    },
+    "expected": {
+      "reply_queue_count": 0,
+      "overdue_replies": 0
+    }
+  },
+  {
+    "id": "at-29",
+    "desc": "variação atendimento 29",
+    "tenant_id": "t-eval-29",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 29-0",
+          "type": "orçamento",
+          "waiting_hours": 25
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 1,
+      "overdue_replies": 1
+    }
+  },
+  {
+    "id": "at-30",
+    "desc": "variação atendimento 30",
+    "tenant_id": "t-eval-30",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 30-0",
+          "type": "orçamento",
+          "waiting_hours": 48
+        },
+        {
+          "customer": "Cliente 30-1",
+          "type": "dúvida",
+          "waiting_hours": 72
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 2,
+      "overdue_replies": 2
+    }
+  }
 ]

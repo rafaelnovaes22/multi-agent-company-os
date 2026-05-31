@@ -1,4 +1,953 @@
 [
-  {"id": "of-01", "desc": "parada + atrasada sem dono", "tenant_id": "t-eval-1", "ops": {"today": "2026-05-29", "tasks": [{"title": "Proposta Cond X", "status": "parado", "owner": "ana"}, {"title": "Renovar contrato Y", "status": "open", "due_date": "2026-05-01", "owner": ""}, {"title": "Pagar fornecedor", "status": "done", "owner": "ana"}]}, "expected": {"stalled_count": 2, "has_actions": true}},
-  {"id": "of-02", "desc": "tudo em dia", "tenant_id": "t-eval-2", "ops": {"today": "2026-05-29", "tasks": [{"title": "T1", "status": "done", "owner": "x"}]}, "expected": {"stalled_count": 0, "has_actions": false}}
+  {
+    "id": "of-01",
+    "desc": "parada + atrasada sem dono",
+    "tenant_id": "t-eval-1",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Proposta Cond X",
+          "status": "parado",
+          "owner": "ana"
+        },
+        {
+          "title": "Renovar contrato Y",
+          "status": "open",
+          "due_date": "2026-05-01",
+          "owner": ""
+        },
+        {
+          "title": "Pagar fornecedor",
+          "status": "done",
+          "owner": "ana"
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 2,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "of-02",
+    "desc": "tudo em dia",
+    "tenant_id": "t-eval-2",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "T1",
+          "status": "done",
+          "owner": "x"
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 0,
+      "has_actions": false
+    }
+  },
+  {
+    "id": "of-03",
+    "desc": "variação ops 3",
+    "tenant_id": "t-eval-3",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 3-0",
+          "status": "bloqueado",
+          "due_date": "2026-05-01",
+          "owner": ""
+        },
+        {
+          "title": "Tarefa 3-1",
+          "status": "done",
+          "due_date": "2026-04-01",
+          "owner": "p1"
+        },
+        {
+          "title": "Tarefa 3-2",
+          "status": "concluido",
+          "due_date": "",
+          "owner": "p2"
+        },
+        {
+          "title": "Tarefa 3-3",
+          "status": "in_progress",
+          "due_date": "2026-06-01",
+          "owner": ""
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 1,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "of-04",
+    "desc": "variação ops 4",
+    "tenant_id": "t-eval-4",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 4-0",
+          "status": "done",
+          "due_date": "2026-05-01",
+          "owner": "p0"
+        },
+        {
+          "title": "Tarefa 4-1",
+          "status": "concluido",
+          "due_date": "2026-05-01",
+          "owner": "p1"
+        },
+        {
+          "title": "Tarefa 4-2",
+          "status": "in_progress",
+          "due_date": "2026-05-01",
+          "owner": ""
+        },
+        {
+          "title": "Tarefa 4-3",
+          "status": "open",
+          "due_date": "2026-05-01",
+          "owner": "p3"
+        },
+        {
+          "title": "Tarefa 4-4",
+          "status": "parado",
+          "due_date": "2026-05-01",
+          "owner": "p4"
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 3,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "of-05",
+    "desc": "variação ops 5",
+    "tenant_id": "t-eval-5",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 5-0",
+          "status": "concluido",
+          "due_date": "2026-05-01",
+          "owner": "p0"
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 0,
+      "has_actions": false
+    }
+  },
+  {
+    "id": "of-06",
+    "desc": "variação ops 6",
+    "tenant_id": "t-eval-6",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 6-0",
+          "status": "in_progress",
+          "due_date": "2026-05-01",
+          "owner": ""
+        },
+        {
+          "title": "Tarefa 6-1",
+          "status": "open",
+          "due_date": "2026-06-01",
+          "owner": "p1"
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 1,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "of-07",
+    "desc": "variação ops 7",
+    "tenant_id": "t-eval-7",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 7-0",
+          "status": "open",
+          "due_date": "2026-05-01",
+          "owner": "p0"
+        },
+        {
+          "title": "Tarefa 7-1",
+          "status": "parado",
+          "due_date": "",
+          "owner": "p1"
+        },
+        {
+          "title": "Tarefa 7-2",
+          "status": "blocked",
+          "due_date": "2026-05-29",
+          "owner": ""
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 3,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "of-08",
+    "desc": "variação ops 8",
+    "tenant_id": "t-eval-8",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 8-0",
+          "status": "parado",
+          "due_date": "2026-05-01",
+          "owner": "p0"
+        },
+        {
+          "title": "Tarefa 8-1",
+          "status": "blocked",
+          "due_date": "2026-04-01",
+          "owner": ""
+        },
+        {
+          "title": "Tarefa 8-2",
+          "status": "bloqueado",
+          "due_date": "",
+          "owner": "p2"
+        },
+        {
+          "title": "Tarefa 8-3",
+          "status": "done",
+          "due_date": "2026-06-01",
+          "owner": "p3"
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 3,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "of-09",
+    "desc": "variação ops 9",
+    "tenant_id": "t-eval-9",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 9-0",
+          "status": "blocked",
+          "due_date": "2026-05-01",
+          "owner": ""
+        },
+        {
+          "title": "Tarefa 9-1",
+          "status": "bloqueado",
+          "due_date": "2026-05-01",
+          "owner": "p1"
+        },
+        {
+          "title": "Tarefa 9-2",
+          "status": "done",
+          "due_date": "2026-05-01",
+          "owner": "p2"
+        },
+        {
+          "title": "Tarefa 9-3",
+          "status": "concluido",
+          "due_date": "2026-05-01",
+          "owner": ""
+        },
+        {
+          "title": "Tarefa 9-4",
+          "status": "in_progress",
+          "due_date": "2026-05-01",
+          "owner": "p4"
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 3,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "of-10",
+    "desc": "variação ops 10",
+    "tenant_id": "t-eval-10",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 10-0",
+          "status": "bloqueado",
+          "due_date": "2026-05-01",
+          "owner": "p0"
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 1,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "of-11",
+    "desc": "variação ops 11",
+    "tenant_id": "t-eval-11",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 11-0",
+          "status": "done",
+          "due_date": "2026-05-01",
+          "owner": "p0"
+        },
+        {
+          "title": "Tarefa 11-1",
+          "status": "concluido",
+          "due_date": "2026-06-01",
+          "owner": ""
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 0,
+      "has_actions": false
+    }
+  },
+  {
+    "id": "of-12",
+    "desc": "variação ops 12",
+    "tenant_id": "t-eval-12",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 12-0",
+          "status": "concluido",
+          "due_date": "2026-05-01",
+          "owner": ""
+        },
+        {
+          "title": "Tarefa 12-1",
+          "status": "in_progress",
+          "due_date": "",
+          "owner": "p1"
+        },
+        {
+          "title": "Tarefa 12-2",
+          "status": "open",
+          "due_date": "2026-05-29",
+          "owner": "p2"
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 0,
+      "has_actions": false
+    }
+  },
+  {
+    "id": "of-13",
+    "desc": "variação ops 13",
+    "tenant_id": "t-eval-13",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 13-0",
+          "status": "in_progress",
+          "due_date": "2026-05-01",
+          "owner": "p0"
+        },
+        {
+          "title": "Tarefa 13-1",
+          "status": "open",
+          "due_date": "2026-04-01",
+          "owner": "p1"
+        },
+        {
+          "title": "Tarefa 13-2",
+          "status": "parado",
+          "due_date": "",
+          "owner": ""
+        },
+        {
+          "title": "Tarefa 13-3",
+          "status": "blocked",
+          "due_date": "2026-06-01",
+          "owner": "p3"
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 4,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "of-14",
+    "desc": "variação ops 14",
+    "tenant_id": "t-eval-14",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 14-0",
+          "status": "open",
+          "due_date": "2026-05-01",
+          "owner": "p0"
+        },
+        {
+          "title": "Tarefa 14-1",
+          "status": "parado",
+          "due_date": "2026-05-01",
+          "owner": ""
+        },
+        {
+          "title": "Tarefa 14-2",
+          "status": "blocked",
+          "due_date": "2026-05-01",
+          "owner": "p2"
+        },
+        {
+          "title": "Tarefa 14-3",
+          "status": "bloqueado",
+          "due_date": "2026-05-01",
+          "owner": "p3"
+        },
+        {
+          "title": "Tarefa 14-4",
+          "status": "done",
+          "due_date": "2026-05-01",
+          "owner": ""
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 4,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "of-15",
+    "desc": "variação ops 15",
+    "tenant_id": "t-eval-15",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 15-0",
+          "status": "parado",
+          "due_date": "2026-05-01",
+          "owner": ""
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 1,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "of-16",
+    "desc": "variação ops 16",
+    "tenant_id": "t-eval-16",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 16-0",
+          "status": "blocked",
+          "due_date": "2026-05-01",
+          "owner": "p0"
+        },
+        {
+          "title": "Tarefa 16-1",
+          "status": "bloqueado",
+          "due_date": "2026-06-01",
+          "owner": "p1"
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 2,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "of-17",
+    "desc": "variação ops 17",
+    "tenant_id": "t-eval-17",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 17-0",
+          "status": "bloqueado",
+          "due_date": "2026-05-01",
+          "owner": "p0"
+        },
+        {
+          "title": "Tarefa 17-1",
+          "status": "done",
+          "due_date": "",
+          "owner": ""
+        },
+        {
+          "title": "Tarefa 17-2",
+          "status": "concluido",
+          "due_date": "2026-05-29",
+          "owner": "p2"
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 1,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "of-18",
+    "desc": "variação ops 18",
+    "tenant_id": "t-eval-18",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 18-0",
+          "status": "done",
+          "due_date": "2026-05-01",
+          "owner": ""
+        },
+        {
+          "title": "Tarefa 18-1",
+          "status": "concluido",
+          "due_date": "2026-04-01",
+          "owner": "p1"
+        },
+        {
+          "title": "Tarefa 18-2",
+          "status": "in_progress",
+          "due_date": "",
+          "owner": "p2"
+        },
+        {
+          "title": "Tarefa 18-3",
+          "status": "open",
+          "due_date": "2026-06-01",
+          "owner": ""
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 0,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "of-19",
+    "desc": "variação ops 19",
+    "tenant_id": "t-eval-19",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 19-0",
+          "status": "concluido",
+          "due_date": "2026-05-01",
+          "owner": "p0"
+        },
+        {
+          "title": "Tarefa 19-1",
+          "status": "in_progress",
+          "due_date": "2026-05-01",
+          "owner": "p1"
+        },
+        {
+          "title": "Tarefa 19-2",
+          "status": "open",
+          "due_date": "2026-05-01",
+          "owner": ""
+        },
+        {
+          "title": "Tarefa 19-3",
+          "status": "parado",
+          "due_date": "2026-05-01",
+          "owner": "p3"
+        },
+        {
+          "title": "Tarefa 19-4",
+          "status": "blocked",
+          "due_date": "2026-05-01",
+          "owner": "p4"
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 4,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "of-20",
+    "desc": "variação ops 20",
+    "tenant_id": "t-eval-20",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 20-0",
+          "status": "in_progress",
+          "due_date": "2026-05-01",
+          "owner": "p0"
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 1,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "of-21",
+    "desc": "variação ops 21",
+    "tenant_id": "t-eval-21",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 21-0",
+          "status": "open",
+          "due_date": "2026-05-01",
+          "owner": ""
+        },
+        {
+          "title": "Tarefa 21-1",
+          "status": "parado",
+          "due_date": "2026-06-01",
+          "owner": "p1"
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 2,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "of-22",
+    "desc": "variação ops 22",
+    "tenant_id": "t-eval-22",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 22-0",
+          "status": "parado",
+          "due_date": "2026-05-01",
+          "owner": "p0"
+        },
+        {
+          "title": "Tarefa 22-1",
+          "status": "blocked",
+          "due_date": "",
+          "owner": "p1"
+        },
+        {
+          "title": "Tarefa 22-2",
+          "status": "bloqueado",
+          "due_date": "2026-05-29",
+          "owner": ""
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 3,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "of-23",
+    "desc": "variação ops 23",
+    "tenant_id": "t-eval-23",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 23-0",
+          "status": "blocked",
+          "due_date": "2026-05-01",
+          "owner": "p0"
+        },
+        {
+          "title": "Tarefa 23-1",
+          "status": "bloqueado",
+          "due_date": "2026-04-01",
+          "owner": ""
+        },
+        {
+          "title": "Tarefa 23-2",
+          "status": "done",
+          "due_date": "",
+          "owner": "p2"
+        },
+        {
+          "title": "Tarefa 23-3",
+          "status": "concluido",
+          "due_date": "2026-06-01",
+          "owner": "p3"
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 2,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "of-24",
+    "desc": "variação ops 24",
+    "tenant_id": "t-eval-24",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 24-0",
+          "status": "bloqueado",
+          "due_date": "2026-05-01",
+          "owner": ""
+        },
+        {
+          "title": "Tarefa 24-1",
+          "status": "done",
+          "due_date": "2026-05-01",
+          "owner": "p1"
+        },
+        {
+          "title": "Tarefa 24-2",
+          "status": "concluido",
+          "due_date": "2026-05-01",
+          "owner": "p2"
+        },
+        {
+          "title": "Tarefa 24-3",
+          "status": "in_progress",
+          "due_date": "2026-05-01",
+          "owner": ""
+        },
+        {
+          "title": "Tarefa 24-4",
+          "status": "open",
+          "due_date": "2026-05-01",
+          "owner": "p4"
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 3,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "of-25",
+    "desc": "variação ops 25",
+    "tenant_id": "t-eval-25",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 25-0",
+          "status": "done",
+          "due_date": "2026-05-01",
+          "owner": "p0"
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 0,
+      "has_actions": false
+    }
+  },
+  {
+    "id": "of-26",
+    "desc": "variação ops 26",
+    "tenant_id": "t-eval-26",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 26-0",
+          "status": "concluido",
+          "due_date": "2026-05-01",
+          "owner": "p0"
+        },
+        {
+          "title": "Tarefa 26-1",
+          "status": "in_progress",
+          "due_date": "2026-06-01",
+          "owner": ""
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 0,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "of-27",
+    "desc": "variação ops 27",
+    "tenant_id": "t-eval-27",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 27-0",
+          "status": "in_progress",
+          "due_date": "2026-05-01",
+          "owner": ""
+        },
+        {
+          "title": "Tarefa 27-1",
+          "status": "open",
+          "due_date": "",
+          "owner": "p1"
+        },
+        {
+          "title": "Tarefa 27-2",
+          "status": "parado",
+          "due_date": "2026-05-29",
+          "owner": "p2"
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 2,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "of-28",
+    "desc": "variação ops 28",
+    "tenant_id": "t-eval-28",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 28-0",
+          "status": "open",
+          "due_date": "2026-05-01",
+          "owner": "p0"
+        },
+        {
+          "title": "Tarefa 28-1",
+          "status": "parado",
+          "due_date": "2026-04-01",
+          "owner": "p1"
+        },
+        {
+          "title": "Tarefa 28-2",
+          "status": "blocked",
+          "due_date": "",
+          "owner": ""
+        },
+        {
+          "title": "Tarefa 28-3",
+          "status": "bloqueado",
+          "due_date": "2026-06-01",
+          "owner": "p3"
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 4,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "of-29",
+    "desc": "variação ops 29",
+    "tenant_id": "t-eval-29",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 29-0",
+          "status": "parado",
+          "due_date": "2026-05-01",
+          "owner": "p0"
+        },
+        {
+          "title": "Tarefa 29-1",
+          "status": "blocked",
+          "due_date": "2026-05-01",
+          "owner": ""
+        },
+        {
+          "title": "Tarefa 29-2",
+          "status": "bloqueado",
+          "due_date": "2026-05-01",
+          "owner": "p2"
+        },
+        {
+          "title": "Tarefa 29-3",
+          "status": "done",
+          "due_date": "2026-05-01",
+          "owner": "p3"
+        },
+        {
+          "title": "Tarefa 29-4",
+          "status": "concluido",
+          "due_date": "2026-05-01",
+          "owner": ""
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 3,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "of-30",
+    "desc": "variação ops 30",
+    "tenant_id": "t-eval-30",
+    "ops": {
+      "today": "2026-05-29",
+      "tasks": [
+        {
+          "title": "Tarefa 30-0",
+          "status": "blocked",
+          "due_date": "2026-05-01",
+          "owner": ""
+        }
+      ]
+    },
+    "expected": {
+      "stalled_count": 1,
+      "has_actions": true
+    }
+  }
 ]

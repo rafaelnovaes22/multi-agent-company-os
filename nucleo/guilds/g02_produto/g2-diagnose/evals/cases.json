@@ -1,5 +1,609 @@
 [
-  {"id": "dg-01", "desc": "high-fit com baseline -> go", "client": {"id": "C-h1", "revenue_brl_year": 2500000, "founder_led": true, "sells_well": true, "lacks_process": true, "firefighter": true, "monthly_volume": 200, "hours_per_unit": 0.5, "hourly_cost_brl": 60, "process": "triagem de pedidos", "pain": "triagem manual consome o dia"}, "expected": {"recommendation": "go", "baseline_gt": 0}},
-  {"id": "dg-02", "desc": "fora do ICP -> no-go", "client": {"id": "C-s1", "revenue_brl_year": 300000, "founder_led": true, "monthly_volume": 5, "hours_per_unit": 0.2, "hourly_cost_brl": 50}, "expected": {"recommendation": "no-go"}},
-  {"id": "dg-03", "desc": "fit alto mas sem baseline -> no-go", "client": {"id": "C-n1", "revenue_brl_year": 2000000, "founder_led": true, "lacks_process": true}, "expected": {"recommendation": "no-go"}}
+  {
+    "id": "dg-01",
+    "desc": "high-fit com baseline -> go",
+    "client": {
+      "id": "C-h1",
+      "revenue_brl_year": 2500000,
+      "founder_led": true,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": true,
+      "monthly_volume": 200,
+      "hours_per_unit": 0.5,
+      "hourly_cost_brl": 60,
+      "process": "triagem de pedidos",
+      "pain": "triagem manual consome o dia"
+    },
+    "expected": {
+      "recommendation": "go",
+      "baseline_gt": 0
+    }
+  },
+  {
+    "id": "dg-02",
+    "desc": "fora do ICP -> no-go",
+    "client": {
+      "id": "C-s1",
+      "revenue_brl_year": 300000,
+      "founder_led": true,
+      "monthly_volume": 5,
+      "hours_per_unit": 0.2,
+      "hourly_cost_brl": 50
+    },
+    "expected": {
+      "recommendation": "no-go"
+    }
+  },
+  {
+    "id": "dg-03",
+    "desc": "fit alto mas sem baseline -> no-go",
+    "client": {
+      "id": "C-n1",
+      "revenue_brl_year": 2000000,
+      "founder_led": true,
+      "lacks_process": true
+    },
+    "expected": {
+      "recommendation": "no-go"
+    }
+  },
+  {
+    "id": "dg-04",
+    "desc": "variação diagnóstico 4",
+    "client": {
+      "id": "C-04",
+      "revenue_brl_year": 0,
+      "founder_led": true,
+      "sells_well": true,
+      "lacks_process": false,
+      "firefighter": false,
+      "monthly_volume": 25,
+      "hours_per_unit": 1.0,
+      "hourly_cost_brl": 120,
+      "process": "processo 4",
+      "pain": "dor operacional 4"
+    },
+    "expected": {
+      "recommendation": "no-go"
+    }
+  },
+  {
+    "id": "dg-05",
+    "desc": "variação diagnóstico 5",
+    "client": {
+      "id": "C-05",
+      "revenue_brl_year": 500000,
+      "founder_led": false,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": true,
+      "monthly_volume": 50,
+      "hours_per_unit": 1.5,
+      "hourly_cost_brl": 0,
+      "process": "processo 5",
+      "pain": "dor operacional 5"
+    },
+    "expected": {
+      "recommendation": "no-go"
+    }
+  },
+  {
+    "id": "dg-06",
+    "desc": "variação diagnóstico 6",
+    "client": {
+      "id": "C-06",
+      "revenue_brl_year": 999999,
+      "founder_led": true,
+      "sells_well": false,
+      "lacks_process": true,
+      "firefighter": true,
+      "monthly_volume": 100,
+      "hours_per_unit": 0,
+      "hourly_cost_brl": 40,
+      "process": "processo 6",
+      "pain": "dor operacional 6",
+      "ops_mature": true
+    },
+    "expected": {
+      "recommendation": "no-go"
+    }
+  },
+  {
+    "id": "dg-07",
+    "desc": "variação diagnóstico 7",
+    "client": {
+      "id": "C-07",
+      "revenue_brl_year": 1000000,
+      "founder_led": false,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": false,
+      "monthly_volume": 200,
+      "hours_per_unit": 0.1,
+      "hourly_cost_brl": 60,
+      "process": "processo 7",
+      "pain": "dor operacional 7"
+    },
+    "expected": {
+      "recommendation": "go",
+      "baseline_gt": 0
+    }
+  },
+  {
+    "id": "dg-08",
+    "desc": "variação diagnóstico 8",
+    "client": {
+      "id": "C-08",
+      "revenue_brl_year": 1500000,
+      "founder_led": true,
+      "sells_well": true,
+      "lacks_process": false,
+      "firefighter": false,
+      "monthly_volume": 300,
+      "hours_per_unit": 0.25,
+      "hourly_cost_brl": 80,
+      "process": "processo 8",
+      "pain": "dor operacional 8"
+    },
+    "expected": {
+      "recommendation": "go",
+      "baseline_gt": 0
+    }
+  },
+  {
+    "id": "dg-09",
+    "desc": "variação diagnóstico 9",
+    "client": {
+      "id": "C-09",
+      "revenue_brl_year": 2500000,
+      "founder_led": false,
+      "sells_well": false,
+      "lacks_process": true,
+      "firefighter": false,
+      "monthly_volume": 0,
+      "hours_per_unit": 0.5,
+      "hourly_cost_brl": 120,
+      "process": "processo 9",
+      "pain": "dor operacional 9",
+      "adhd_traits": true
+    },
+    "expected": {
+      "recommendation": "no-go"
+    }
+  },
+  {
+    "id": "dg-10",
+    "desc": "variação diagnóstico 10",
+    "client": {
+      "id": "C-10",
+      "revenue_brl_year": 5000000,
+      "founder_led": true,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": true,
+      "monthly_volume": 1,
+      "hours_per_unit": 1.0,
+      "hourly_cost_brl": 0,
+      "process": "processo 10",
+      "pain": "dor operacional 10"
+    },
+    "expected": {
+      "recommendation": "no-go"
+    }
+  },
+  {
+    "id": "dg-11",
+    "desc": "variação diagnóstico 11",
+    "client": {
+      "id": "C-11",
+      "revenue_brl_year": 5000001,
+      "founder_led": false,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": true,
+      "monthly_volume": 5,
+      "hours_per_unit": 1.5,
+      "hourly_cost_brl": 40,
+      "process": "processo 11",
+      "pain": "dor operacional 11"
+    },
+    "expected": {
+      "recommendation": "no-go"
+    }
+  },
+  {
+    "id": "dg-12",
+    "desc": "variação diagnóstico 12",
+    "client": {
+      "id": "C-12",
+      "revenue_brl_year": 9000000,
+      "founder_led": true,
+      "sells_well": false,
+      "lacks_process": false,
+      "firefighter": false,
+      "monthly_volume": 10,
+      "hours_per_unit": 0,
+      "hourly_cost_brl": 60,
+      "process": "processo 12",
+      "pain": "dor operacional 12"
+    },
+    "expected": {
+      "recommendation": "no-go"
+    }
+  },
+  {
+    "id": "dg-13",
+    "desc": "variação diagnóstico 13",
+    "client": {
+      "id": "C-13",
+      "revenue_brl_year": 3000000,
+      "founder_led": false,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": false,
+      "monthly_volume": 25,
+      "hours_per_unit": 0.1,
+      "hourly_cost_brl": 80,
+      "process": "processo 13",
+      "pain": "dor operacional 13"
+    },
+    "expected": {
+      "recommendation": "go",
+      "baseline_gt": 0
+    }
+  },
+  {
+    "id": "dg-14",
+    "desc": "variação diagnóstico 14",
+    "client": {
+      "id": "C-14",
+      "revenue_brl_year": 4200000,
+      "founder_led": true,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": false,
+      "monthly_volume": 50,
+      "hours_per_unit": 0.25,
+      "hourly_cost_brl": 120,
+      "process": "processo 14",
+      "pain": "dor operacional 14",
+      "ops_mature": true
+    },
+    "expected": {
+      "recommendation": "go",
+      "baseline_gt": 0
+    }
+  },
+  {
+    "id": "dg-15",
+    "desc": "variação diagnóstico 15",
+    "client": {
+      "id": "C-15",
+      "revenue_brl_year": 1200000,
+      "founder_led": false,
+      "sells_well": false,
+      "lacks_process": true,
+      "firefighter": true,
+      "monthly_volume": 100,
+      "hours_per_unit": 0.5,
+      "hourly_cost_brl": 0,
+      "process": "processo 15",
+      "pain": "dor operacional 15"
+    },
+    "expected": {
+      "recommendation": "no-go"
+    }
+  },
+  {
+    "id": "dg-16",
+    "desc": "variação diagnóstico 16",
+    "client": {
+      "id": "C-16",
+      "revenue_brl_year": 800000,
+      "founder_led": true,
+      "sells_well": true,
+      "lacks_process": false,
+      "firefighter": true,
+      "monthly_volume": 200,
+      "hours_per_unit": 1.0,
+      "hourly_cost_brl": 40,
+      "process": "processo 16",
+      "pain": "dor operacional 16"
+    },
+    "expected": {
+      "recommendation": "no-go"
+    }
+  },
+  {
+    "id": "dg-17",
+    "desc": "variação diagnóstico 17",
+    "client": {
+      "id": "C-17",
+      "revenue_brl_year": 2200000,
+      "founder_led": false,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": false,
+      "monthly_volume": 300,
+      "hours_per_unit": 1.5,
+      "hourly_cost_brl": 60,
+      "process": "processo 17",
+      "pain": "dor operacional 17"
+    },
+    "expected": {
+      "recommendation": "go",
+      "baseline_gt": 0
+    }
+  },
+  {
+    "id": "dg-18",
+    "desc": "variação diagnóstico 18",
+    "client": {
+      "id": "C-18",
+      "revenue_brl_year": 3500000,
+      "founder_led": true,
+      "sells_well": false,
+      "lacks_process": true,
+      "firefighter": false,
+      "monthly_volume": 0,
+      "hours_per_unit": 0,
+      "hourly_cost_brl": 80,
+      "process": "processo 18",
+      "pain": "dor operacional 18",
+      "adhd_traits": true
+    },
+    "expected": {
+      "recommendation": "no-go"
+    }
+  },
+  {
+    "id": "dg-19",
+    "desc": "variação diagnóstico 19",
+    "client": {
+      "id": "C-19",
+      "revenue_brl_year": 4800000,
+      "founder_led": false,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": false,
+      "monthly_volume": 1,
+      "hours_per_unit": 0.1,
+      "hourly_cost_brl": 120,
+      "process": "processo 19",
+      "pain": "dor operacional 19"
+    },
+    "expected": {
+      "recommendation": "go",
+      "baseline_gt": 0
+    }
+  },
+  {
+    "id": "dg-20",
+    "desc": "variação diagnóstico 20",
+    "client": {
+      "id": "C-20",
+      "revenue_brl_year": 6000000,
+      "founder_led": true,
+      "sells_well": true,
+      "lacks_process": false,
+      "firefighter": true,
+      "monthly_volume": 5,
+      "hours_per_unit": 0.25,
+      "hourly_cost_brl": 0,
+      "process": "processo 20",
+      "pain": "dor operacional 20"
+    },
+    "expected": {
+      "recommendation": "no-go"
+    }
+  },
+  {
+    "id": "dg-21",
+    "desc": "variação diagnóstico 21",
+    "client": {
+      "id": "C-21",
+      "revenue_brl_year": 1800000,
+      "founder_led": false,
+      "sells_well": false,
+      "lacks_process": true,
+      "firefighter": true,
+      "monthly_volume": 10,
+      "hours_per_unit": 0.5,
+      "hourly_cost_brl": 40,
+      "process": "processo 21",
+      "pain": "dor operacional 21"
+    },
+    "expected": {
+      "recommendation": "go",
+      "baseline_gt": 0
+    }
+  },
+  {
+    "id": "dg-22",
+    "desc": "variação diagnóstico 22",
+    "client": {
+      "id": "C-22",
+      "revenue_brl_year": 2700000,
+      "founder_led": true,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": false,
+      "monthly_volume": 25,
+      "hours_per_unit": 1.0,
+      "hourly_cost_brl": 60,
+      "process": "processo 22",
+      "pain": "dor operacional 22",
+      "ops_mature": true
+    },
+    "expected": {
+      "recommendation": "go",
+      "baseline_gt": 0
+    }
+  },
+  {
+    "id": "dg-23",
+    "desc": "variação diagnóstico 23",
+    "client": {
+      "id": "C-23",
+      "revenue_brl_year": 3900000,
+      "founder_led": false,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": false,
+      "monthly_volume": 50,
+      "hours_per_unit": 1.5,
+      "hourly_cost_brl": 80,
+      "process": "processo 23",
+      "pain": "dor operacional 23"
+    },
+    "expected": {
+      "recommendation": "go",
+      "baseline_gt": 0
+    }
+  },
+  {
+    "id": "dg-24",
+    "desc": "variação diagnóstico 24",
+    "client": {
+      "id": "C-24",
+      "revenue_brl_year": 450000,
+      "founder_led": true,
+      "sells_well": false,
+      "lacks_process": false,
+      "firefighter": false,
+      "monthly_volume": 100,
+      "hours_per_unit": 0,
+      "hourly_cost_brl": 120,
+      "process": "processo 24",
+      "pain": "dor operacional 24"
+    },
+    "expected": {
+      "recommendation": "no-go"
+    }
+  },
+  {
+    "id": "dg-25",
+    "desc": "variação diagnóstico 25",
+    "client": {
+      "id": "C-25",
+      "revenue_brl_year": 5100000,
+      "founder_led": false,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": true,
+      "monthly_volume": 200,
+      "hours_per_unit": 0.1,
+      "hourly_cost_brl": 0,
+      "process": "processo 25",
+      "pain": "dor operacional 25"
+    },
+    "expected": {
+      "recommendation": "no-go"
+    }
+  },
+  {
+    "id": "dg-26",
+    "desc": "variação diagnóstico 26",
+    "client": {
+      "id": "C-26",
+      "revenue_brl_year": 1300000,
+      "founder_led": true,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": true,
+      "monthly_volume": 300,
+      "hours_per_unit": 0.25,
+      "hourly_cost_brl": 40,
+      "process": "processo 26",
+      "pain": "dor operacional 26"
+    },
+    "expected": {
+      "recommendation": "go",
+      "baseline_gt": 0
+    }
+  },
+  {
+    "id": "dg-27",
+    "desc": "variação diagnóstico 27",
+    "client": {
+      "id": "C-27",
+      "revenue_brl_year": 2400000,
+      "founder_led": false,
+      "sells_well": false,
+      "lacks_process": true,
+      "firefighter": false,
+      "monthly_volume": 0,
+      "hours_per_unit": 0.5,
+      "hourly_cost_brl": 60,
+      "process": "processo 27",
+      "pain": "dor operacional 27",
+      "adhd_traits": true
+    },
+    "expected": {
+      "recommendation": "no-go"
+    }
+  },
+  {
+    "id": "dg-28",
+    "desc": "variação diagnóstico 28",
+    "client": {
+      "id": "C-28",
+      "revenue_brl_year": 3300000,
+      "founder_led": true,
+      "sells_well": true,
+      "lacks_process": false,
+      "firefighter": false,
+      "monthly_volume": 1,
+      "hours_per_unit": 1.0,
+      "hourly_cost_brl": 80,
+      "process": "processo 28",
+      "pain": "dor operacional 28"
+    },
+    "expected": {
+      "recommendation": "go",
+      "baseline_gt": 0
+    }
+  },
+  {
+    "id": "dg-29",
+    "desc": "variação diagnóstico 29",
+    "client": {
+      "id": "C-29",
+      "revenue_brl_year": 4400000,
+      "founder_led": false,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": false,
+      "monthly_volume": 5,
+      "hours_per_unit": 1.5,
+      "hourly_cost_brl": 120,
+      "process": "processo 29",
+      "pain": "dor operacional 29"
+    },
+    "expected": {
+      "recommendation": "go",
+      "baseline_gt": 0
+    }
+  },
+  {
+    "id": "dg-30",
+    "desc": "variação diagnóstico 30",
+    "client": {
+      "id": "C-30",
+      "revenue_brl_year": 2000000,
+      "founder_led": true,
+      "sells_well": false,
+      "lacks_process": true,
+      "firefighter": true,
+      "monthly_volume": 10,
+      "hours_per_unit": 0,
+      "hourly_cost_brl": 0,
+      "process": "processo 30",
+      "pain": "dor operacional 30"
+    },
+    "expected": {
+      "recommendation": "no-go"
+    }
+  }
 ]

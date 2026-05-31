@@ -1,5 +1,633 @@
 [
-  {"id": "ob-01", "desc": "conta high-fit gera sequencia", "lead": {"id": "L-h1", "company": "Acme"}, "qualification": {"decision": "qualified", "icp_fit_signals": {"sem_processo": true, "perfil_bombeiro": true}}, "expected": {"min_steps": 3, "consent_required": true}},
-  {"id": "ob-02", "desc": "personalizacao presente", "lead": {"id": "L-h2", "company": "Beta"}, "qualification": {"decision": "qualified", "icp_fit_signals": {"vende_bem": true}}, "expected": {"personalized": true}},
-  {"id": "ob-03", "desc": "consentimento exigido", "lead": {"id": "L-h3", "company": "Gama"}, "qualification": {"decision": "qualified", "icp_fit_signals": {"founder_led": true}}, "expected": {"consent_required": true}}
+  {
+    "id": "ob-01",
+    "desc": "conta high-fit gera sequencia",
+    "lead": {
+      "id": "L-h1",
+      "company": "Acme"
+    },
+    "qualification": {
+      "decision": "qualified",
+      "icp_fit_signals": {
+        "sem_processo": true,
+        "perfil_bombeiro": true
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true
+    }
+  },
+  {
+    "id": "ob-02",
+    "desc": "personalizacao presente",
+    "lead": {
+      "id": "L-h2",
+      "company": "Beta"
+    },
+    "qualification": {
+      "decision": "qualified",
+      "icp_fit_signals": {
+        "vende_bem": true
+      }
+    },
+    "expected": {
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-03",
+    "desc": "consentimento exigido",
+    "lead": {
+      "id": "L-h3",
+      "company": "Gama"
+    },
+    "qualification": {
+      "decision": "qualified",
+      "icp_fit_signals": {
+        "founder_led": true
+      }
+    },
+    "expected": {
+      "consent_required": true
+    }
+  },
+  {
+    "id": "ob-04",
+    "desc": "variação outbound 4",
+    "lead": {
+      "id": "L-ob-04",
+      "company": "Conta 4"
+    },
+    "qualification": {
+      "decision": "qualified",
+      "icp_fit_signals": {
+        "sem_processo": false,
+        "perfil_bombeiro": false,
+        "vende_bem": true,
+        "founder_led": false,
+        "faturamento_1a5M": false
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-05",
+    "desc": "variação outbound 5",
+    "lead": {
+      "id": "L-ob-05",
+      "company": "Conta 5"
+    },
+    "qualification": {
+      "decision": "disqualified",
+      "icp_fit_signals": {
+        "perfil_bombeiro": true,
+        "faturamento_1a5M": true
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-06",
+    "desc": "variação outbound 6",
+    "lead": {
+      "id": "L-ob-06",
+      "company": "Conta 6"
+    },
+    "qualification": {
+      "decision": "qualified",
+      "icp_fit_signals": {
+        "sem_processo": true,
+        "perfil_bombeiro": false,
+        "vende_bem": false,
+        "founder_led": true,
+        "faturamento_1a5M": false
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-07",
+    "desc": "variação outbound 7",
+    "lead": {
+      "id": "L-ob-07",
+      "company": "Conta 7"
+    },
+    "qualification": {
+      "decision": "qualified",
+      "icp_fit_signals": {
+        "vende_bem": true
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-08",
+    "desc": "variação outbound 8",
+    "lead": {
+      "id": "L-ob-08",
+      "company": "Conta 8"
+    },
+    "qualification": {
+      "decision": "qualified",
+      "icp_fit_signals": {
+        "sem_processo": false,
+        "perfil_bombeiro": true,
+        "vende_bem": false,
+        "founder_led": false,
+        "faturamento_1a5M": true
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-09",
+    "desc": "variação outbound 9",
+    "lead": {
+      "id": "L-ob-09",
+      "company": "Conta 9"
+    },
+    "qualification": {
+      "decision": "qualified",
+      "icp_fit_signals": {
+        "sem_processo": true,
+        "founder_led": true
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-10",
+    "desc": "variação outbound 10",
+    "lead": {
+      "id": "L-ob-10",
+      "company": "Conta 10"
+    },
+    "qualification": {
+      "decision": "disqualified",
+      "icp_fit_signals": {
+        "sem_processo": false,
+        "perfil_bombeiro": false,
+        "vende_bem": true,
+        "founder_led": false,
+        "faturamento_1a5M": false
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-11",
+    "desc": "variação outbound 11",
+    "lead": {
+      "id": "L-ob-11",
+      "company": "Conta 11"
+    },
+    "qualification": {
+      "decision": "qualified",
+      "icp_fit_signals": {
+        "perfil_bombeiro": true,
+        "faturamento_1a5M": true
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-12",
+    "desc": "variação outbound 12",
+    "lead": {
+      "id": "L-ob-12",
+      "company": "Conta 12"
+    },
+    "qualification": {
+      "decision": "qualified",
+      "icp_fit_signals": {
+        "sem_processo": true,
+        "perfil_bombeiro": false,
+        "vende_bem": false,
+        "founder_led": true,
+        "faturamento_1a5M": false
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-13",
+    "desc": "variação outbound 13",
+    "lead": {
+      "id": "L-ob-13",
+      "company": "Conta 13"
+    },
+    "qualification": {
+      "decision": "qualified",
+      "icp_fit_signals": {
+        "vende_bem": true
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-14",
+    "desc": "variação outbound 14",
+    "lead": {
+      "id": "L-ob-14",
+      "company": "Conta 14"
+    },
+    "qualification": {
+      "decision": "qualified",
+      "icp_fit_signals": {
+        "sem_processo": false,
+        "perfil_bombeiro": true,
+        "vende_bem": false,
+        "founder_led": false,
+        "faturamento_1a5M": true
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-15",
+    "desc": "variação outbound 15",
+    "lead": {
+      "id": "L-ob-15",
+      "company": "Conta 15"
+    },
+    "qualification": {
+      "decision": "disqualified",
+      "icp_fit_signals": {
+        "sem_processo": true,
+        "founder_led": true
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-16",
+    "desc": "variação outbound 16",
+    "lead": {
+      "id": "L-ob-16",
+      "company": "Conta 16"
+    },
+    "qualification": {
+      "decision": "qualified",
+      "icp_fit_signals": {
+        "sem_processo": false,
+        "perfil_bombeiro": false,
+        "vende_bem": true,
+        "founder_led": false,
+        "faturamento_1a5M": false
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-17",
+    "desc": "variação outbound 17",
+    "lead": {
+      "id": "L-ob-17",
+      "company": "Conta 17"
+    },
+    "qualification": {
+      "decision": "qualified",
+      "icp_fit_signals": {
+        "perfil_bombeiro": true,
+        "faturamento_1a5M": true
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-18",
+    "desc": "variação outbound 18",
+    "lead": {
+      "id": "L-ob-18",
+      "company": "Conta 18"
+    },
+    "qualification": {
+      "decision": "qualified",
+      "icp_fit_signals": {
+        "sem_processo": true,
+        "perfil_bombeiro": false,
+        "vende_bem": false,
+        "founder_led": true,
+        "faturamento_1a5M": false
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-19",
+    "desc": "variação outbound 19",
+    "lead": {
+      "id": "L-ob-19",
+      "company": "Conta 19"
+    },
+    "qualification": {
+      "decision": "qualified",
+      "icp_fit_signals": {
+        "vende_bem": true
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-20",
+    "desc": "variação outbound 20",
+    "lead": {
+      "id": "L-ob-20",
+      "company": "Conta 20"
+    },
+    "qualification": {
+      "decision": "disqualified",
+      "icp_fit_signals": {
+        "sem_processo": false,
+        "perfil_bombeiro": true,
+        "vende_bem": false,
+        "founder_led": false,
+        "faturamento_1a5M": true
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-21",
+    "desc": "variação outbound 21",
+    "lead": {
+      "id": "L-ob-21",
+      "company": "Conta 21"
+    },
+    "qualification": {
+      "decision": "qualified",
+      "icp_fit_signals": {
+        "sem_processo": true,
+        "founder_led": true
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-22",
+    "desc": "variação outbound 22",
+    "lead": {
+      "id": "L-ob-22",
+      "company": "Conta 22"
+    },
+    "qualification": {
+      "decision": "qualified",
+      "icp_fit_signals": {
+        "sem_processo": false,
+        "perfil_bombeiro": false,
+        "vende_bem": true,
+        "founder_led": false,
+        "faturamento_1a5M": false
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-23",
+    "desc": "variação outbound 23",
+    "lead": {
+      "id": "L-ob-23",
+      "company": "Conta 23"
+    },
+    "qualification": {
+      "decision": "qualified",
+      "icp_fit_signals": {
+        "perfil_bombeiro": true,
+        "faturamento_1a5M": true
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-24",
+    "desc": "variação outbound 24",
+    "lead": {
+      "id": "L-ob-24",
+      "company": "Conta 24"
+    },
+    "qualification": {
+      "decision": "qualified",
+      "icp_fit_signals": {
+        "sem_processo": true,
+        "perfil_bombeiro": false,
+        "vende_bem": false,
+        "founder_led": true,
+        "faturamento_1a5M": false
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-25",
+    "desc": "variação outbound 25",
+    "lead": {
+      "id": "L-ob-25",
+      "company": "Conta 25"
+    },
+    "qualification": {
+      "decision": "disqualified",
+      "icp_fit_signals": {
+        "vende_bem": true
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-26",
+    "desc": "variação outbound 26",
+    "lead": {
+      "id": "L-ob-26",
+      "company": "Conta 26"
+    },
+    "qualification": {
+      "decision": "qualified",
+      "icp_fit_signals": {
+        "sem_processo": false,
+        "perfil_bombeiro": true,
+        "vende_bem": false,
+        "founder_led": false,
+        "faturamento_1a5M": true
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-27",
+    "desc": "variação outbound 27",
+    "lead": {
+      "id": "L-ob-27",
+      "company": "Conta 27"
+    },
+    "qualification": {
+      "decision": "qualified",
+      "icp_fit_signals": {
+        "sem_processo": true,
+        "founder_led": true
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-28",
+    "desc": "variação outbound 28",
+    "lead": {
+      "id": "L-ob-28",
+      "company": "Conta 28"
+    },
+    "qualification": {
+      "decision": "qualified",
+      "icp_fit_signals": {
+        "sem_processo": false,
+        "perfil_bombeiro": false,
+        "vende_bem": true,
+        "founder_led": false,
+        "faturamento_1a5M": false
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-29",
+    "desc": "variação outbound 29",
+    "lead": {
+      "id": "L-ob-29",
+      "company": "Conta 29"
+    },
+    "qualification": {
+      "decision": "qualified",
+      "icp_fit_signals": {
+        "perfil_bombeiro": true,
+        "faturamento_1a5M": true
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  },
+  {
+    "id": "ob-30",
+    "desc": "variação outbound 30",
+    "lead": {
+      "id": "L-ob-30",
+      "company": "Conta 30"
+    },
+    "qualification": {
+      "decision": "disqualified",
+      "icp_fit_signals": {
+        "sem_processo": true,
+        "perfil_bombeiro": false,
+        "vende_bem": false,
+        "founder_led": true,
+        "faturamento_1a5M": false
+      }
+    },
+    "expected": {
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
+    }
+  }
 ]

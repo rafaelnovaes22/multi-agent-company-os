@@ -1,7 +1,482 @@
 [
-  {"id": "lq-01", "desc": "high-fit completo", "lead": {"id": "L-h1", "revenue_brl_year": 2500000, "founder_led": true, "sells_well": true, "lacks_process": true, "firefighter": true}, "expected": {"decision": "qualified", "track": "assistido (SDR/closer)"}},
-  {"id": "lq-02", "desc": "pequeno demais (<R$1M)", "lead": {"id": "L-s1", "revenue_brl_year": 400000, "founder_led": true, "lacks_process": true}, "expected": {"decision": "disqualified"}},
-  {"id": "lq-03", "desc": "operacao madura (sinal negativo)", "lead": {"id": "L-m1", "revenue_brl_year": 3000000, "founder_led": false, "sells_well": true, "ops_mature": true}, "expected": {"decision": "disqualified"}},
-  {"id": "lq-04", "desc": "fit medio -> self-serve", "lead": {"id": "L-md1", "revenue_brl_year": 1800000, "founder_led": true, "firefighter": true}, "expected": {"decision": "qualified", "track": "self-serve (ativacao no produto)"}},
-  {"id": "lq-05", "desc": "grande demais (>R$5M)", "lead": {"id": "L-b1", "revenue_brl_year": 9000000, "founder_led": false, "sells_well": true}, "expected": {"decision": "disqualified"}}
+  {
+    "id": "lq-01",
+    "desc": "high-fit completo",
+    "lead": {
+      "id": "L-h1",
+      "revenue_brl_year": 2500000,
+      "founder_led": true,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": true
+    },
+    "expected": {
+      "decision": "qualified",
+      "track": "assistido (SDR/closer)"
+    }
+  },
+  {
+    "id": "lq-02",
+    "desc": "pequeno demais (<R$1M)",
+    "lead": {
+      "id": "L-s1",
+      "revenue_brl_year": 400000,
+      "founder_led": true,
+      "lacks_process": true
+    },
+    "expected": {
+      "decision": "disqualified",
+      "track": "descarte"
+    }
+  },
+  {
+    "id": "lq-03",
+    "desc": "operacao madura (sinal negativo)",
+    "lead": {
+      "id": "L-m1",
+      "revenue_brl_year": 3000000,
+      "founder_led": false,
+      "sells_well": true,
+      "ops_mature": true
+    },
+    "expected": {
+      "decision": "disqualified",
+      "track": "descarte"
+    }
+  },
+  {
+    "id": "lq-04",
+    "desc": "fit medio -> self-serve",
+    "lead": {
+      "id": "L-md1",
+      "revenue_brl_year": 1800000,
+      "founder_led": true,
+      "firefighter": true
+    },
+    "expected": {
+      "decision": "qualified",
+      "track": "self-serve (ativacao no produto)"
+    }
+  },
+  {
+    "id": "lq-05",
+    "desc": "grande demais (>R$5M)",
+    "lead": {
+      "id": "L-b1",
+      "revenue_brl_year": 9000000,
+      "founder_led": false,
+      "sells_well": true
+    },
+    "expected": {
+      "decision": "disqualified",
+      "track": "descarte"
+    }
+  },
+  {
+    "id": "lq-06",
+    "desc": "variação lead qualifier 6",
+    "lead": {
+      "id": "L-06",
+      "revenue_brl_year": 0,
+      "founder_led": true,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": false
+    },
+    "expected": {
+      "decision": "disqualified",
+      "track": "descarte"
+    }
+  },
+  {
+    "id": "lq-07",
+    "desc": "variação lead qualifier 7",
+    "lead": {
+      "id": "L-07",
+      "revenue_brl_year": 250000,
+      "founder_led": false,
+      "sells_well": false,
+      "lacks_process": false,
+      "firefighter": true
+    },
+    "expected": {
+      "decision": "disqualified",
+      "track": "descarte"
+    }
+  },
+  {
+    "id": "lq-08",
+    "desc": "variação lead qualifier 8",
+    "lead": {
+      "id": "L-08",
+      "revenue_brl_year": 999999,
+      "founder_led": true,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": false
+    },
+    "expected": {
+      "decision": "disqualified",
+      "track": "descarte"
+    }
+  },
+  {
+    "id": "lq-09",
+    "desc": "variação lead qualifier 9",
+    "lead": {
+      "id": "L-09",
+      "revenue_brl_year": 1000000,
+      "founder_led": false,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": false
+    },
+    "expected": {
+      "decision": "qualified",
+      "track": "self-serve (ativacao no produto)"
+    }
+  },
+  {
+    "id": "lq-10",
+    "desc": "variação lead qualifier 10",
+    "lead": {
+      "id": "L-10",
+      "revenue_brl_year": 1250000,
+      "founder_led": true,
+      "sells_well": false,
+      "lacks_process": true,
+      "firefighter": true,
+      "adhd_traits": true
+    },
+    "expected": {
+      "decision": "qualified",
+      "track": "assistido (SDR/closer)"
+    }
+  },
+  {
+    "id": "lq-11",
+    "desc": "variação lead qualifier 11",
+    "lead": {
+      "id": "L-11",
+      "revenue_brl_year": 2000000,
+      "founder_led": false,
+      "sells_well": true,
+      "lacks_process": false,
+      "firefighter": false,
+      "ops_mature": true
+    },
+    "expected": {
+      "decision": "disqualified",
+      "track": "descarte"
+    }
+  },
+  {
+    "id": "lq-12",
+    "desc": "variação lead qualifier 12",
+    "lead": {
+      "id": "L-12",
+      "revenue_brl_year": 3500000,
+      "founder_led": true,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": true
+    },
+    "expected": {
+      "decision": "qualified",
+      "track": "assistido (SDR/closer)"
+    }
+  },
+  {
+    "id": "lq-13",
+    "desc": "variação lead qualifier 13",
+    "lead": {
+      "id": "L-13",
+      "revenue_brl_year": 5000000,
+      "founder_led": false,
+      "sells_well": false,
+      "lacks_process": true,
+      "firefighter": false
+    },
+    "expected": {
+      "decision": "disqualified",
+      "track": "descarte"
+    }
+  },
+  {
+    "id": "lq-14",
+    "desc": "variação lead qualifier 14",
+    "lead": {
+      "id": "L-14",
+      "revenue_brl_year": 5000001,
+      "founder_led": true,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": false
+    },
+    "expected": {
+      "decision": "disqualified",
+      "track": "descarte"
+    }
+  },
+  {
+    "id": "lq-15",
+    "desc": "variação lead qualifier 15",
+    "lead": {
+      "id": "L-15",
+      "revenue_brl_year": 7500000,
+      "founder_led": false,
+      "sells_well": true,
+      "lacks_process": false,
+      "firefighter": true
+    },
+    "expected": {
+      "decision": "disqualified",
+      "track": "descarte"
+    }
+  },
+  {
+    "id": "lq-16",
+    "desc": "variação lead qualifier 16",
+    "lead": {
+      "id": "L-16",
+      "revenue_brl_year": 1500000,
+      "founder_led": true,
+      "sells_well": false,
+      "lacks_process": true,
+      "firefighter": false
+    },
+    "expected": {
+      "decision": "qualified",
+      "track": "assistido (SDR/closer)"
+    }
+  },
+  {
+    "id": "lq-17",
+    "desc": "variação lead qualifier 17",
+    "lead": {
+      "id": "L-17",
+      "revenue_brl_year": 2800000,
+      "founder_led": false,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": true,
+      "ops_mature": true
+    },
+    "expected": {
+      "decision": "disqualified",
+      "track": "descarte"
+    }
+  },
+  {
+    "id": "lq-18",
+    "desc": "variação lead qualifier 18",
+    "lead": {
+      "id": "L-18",
+      "revenue_brl_year": 4200000,
+      "founder_led": true,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": false
+    },
+    "expected": {
+      "decision": "qualified",
+      "track": "assistido (SDR/closer)"
+    }
+  },
+  {
+    "id": "lq-19",
+    "desc": "variação lead qualifier 19",
+    "lead": {
+      "id": "L-19",
+      "revenue_brl_year": 4900000,
+      "founder_led": false,
+      "sells_well": false,
+      "lacks_process": false,
+      "firefighter": false
+    },
+    "expected": {
+      "decision": "disqualified",
+      "track": "descarte"
+    }
+  },
+  {
+    "id": "lq-20",
+    "desc": "variação lead qualifier 20",
+    "lead": {
+      "id": "L-20",
+      "revenue_brl_year": 5100000,
+      "founder_led": true,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": true,
+      "adhd_traits": true
+    },
+    "expected": {
+      "decision": "qualified",
+      "track": "self-serve (ativacao no produto)"
+    }
+  },
+  {
+    "id": "lq-21",
+    "desc": "variação lead qualifier 21",
+    "lead": {
+      "id": "L-21",
+      "revenue_brl_year": 3300000,
+      "founder_led": false,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": false
+    },
+    "expected": {
+      "decision": "qualified",
+      "track": "self-serve (ativacao no produto)"
+    }
+  },
+  {
+    "id": "lq-22",
+    "desc": "variação lead qualifier 22",
+    "lead": {
+      "id": "L-22",
+      "revenue_brl_year": 4400000,
+      "founder_led": true,
+      "sells_well": false,
+      "lacks_process": true,
+      "firefighter": true
+    },
+    "expected": {
+      "decision": "qualified",
+      "track": "assistido (SDR/closer)"
+    }
+  },
+  {
+    "id": "lq-23",
+    "desc": "variação lead qualifier 23",
+    "lead": {
+      "id": "L-23",
+      "revenue_brl_year": 1200000,
+      "founder_led": false,
+      "sells_well": true,
+      "lacks_process": false,
+      "firefighter": false,
+      "ops_mature": true
+    },
+    "expected": {
+      "decision": "disqualified",
+      "track": "descarte"
+    }
+  },
+  {
+    "id": "lq-24",
+    "desc": "variação lead qualifier 24",
+    "lead": {
+      "id": "L-24",
+      "revenue_brl_year": 600000,
+      "founder_led": true,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": false
+    },
+    "expected": {
+      "decision": "disqualified",
+      "track": "descarte"
+    }
+  },
+  {
+    "id": "lq-25",
+    "desc": "variação lead qualifier 25",
+    "lead": {
+      "id": "L-25",
+      "revenue_brl_year": 1800000,
+      "founder_led": false,
+      "sells_well": false,
+      "lacks_process": true,
+      "firefighter": true
+    },
+    "expected": {
+      "decision": "qualified",
+      "track": "self-serve (ativacao no produto)"
+    }
+  },
+  {
+    "id": "lq-26",
+    "desc": "variação lead qualifier 26",
+    "lead": {
+      "id": "L-26",
+      "revenue_brl_year": 2600000,
+      "founder_led": true,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": false
+    },
+    "expected": {
+      "decision": "qualified",
+      "track": "assistido (SDR/closer)"
+    }
+  },
+  {
+    "id": "lq-27",
+    "desc": "variação lead qualifier 27",
+    "lead": {
+      "id": "L-27",
+      "revenue_brl_year": 3700000,
+      "founder_led": false,
+      "sells_well": true,
+      "lacks_process": false,
+      "firefighter": true
+    },
+    "expected": {
+      "decision": "qualified",
+      "track": "self-serve (ativacao no produto)"
+    }
+  },
+  {
+    "id": "lq-28",
+    "desc": "variação lead qualifier 28",
+    "lead": {
+      "id": "L-28",
+      "revenue_brl_year": 4700000,
+      "founder_led": true,
+      "sells_well": false,
+      "lacks_process": true,
+      "firefighter": false
+    },
+    "expected": {
+      "decision": "qualified",
+      "track": "assistido (SDR/closer)"
+    }
+  },
+  {
+    "id": "lq-29",
+    "desc": "variação lead qualifier 29",
+    "lead": {
+      "id": "L-29",
+      "revenue_brl_year": 5200000,
+      "founder_led": false,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": false,
+      "ops_mature": true
+    },
+    "expected": {
+      "decision": "disqualified",
+      "track": "descarte"
+    }
+  },
+  {
+    "id": "lq-30",
+    "desc": "variação lead qualifier 30",
+    "lead": {
+      "id": "L-30",
+      "revenue_brl_year": 3000000,
+      "founder_led": true,
+      "sells_well": true,
+      "lacks_process": true,
+      "firefighter": true,
+      "adhd_traits": true
+    },
+    "expected": {
+      "decision": "qualified",
+      "track": "assistido (SDR/closer)"
+    }
+  }
 ]

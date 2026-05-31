@@ -7,6 +7,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 multi_tenant: true
+reconciled_with: g9-support-triage
 act_handler: ops_followup
 
 outcome_clause:

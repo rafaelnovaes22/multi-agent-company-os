@@ -1,5 +1,1188 @@
 [
-  {"id": "fc-01", "desc": "2 recebíveis vencidos -> cobrar", "tenant_id": "t-eval-1", "finance": {"today": "2026-05-29", "balance": 10000, "receivables": [{"customer": "A", "amount": 1000, "due_date": "2026-05-01", "status": "open"}, {"customer": "B", "amount": 500, "due_date": "2026-05-10", "status": "open"}, {"customer": "C", "amount": 2000, "due_date": "2026-06-30", "status": "open"}], "payables": [{"amount": 3000, "due_date": "2026-06-05"}]}, "expected": {"total_overdue": 1500, "has_actions": true}},
-  {"id": "fc-02", "desc": "caixa projetado negativo -> alerta", "tenant_id": "t-eval-2", "finance": {"today": "2026-05-29", "balance": 1000, "receivables": [{"customer": "D", "amount": 500, "due_date": "2026-05-01", "status": "open"}], "payables": [{"amount": 4000, "due_date": "2026-06-01"}]}, "expected": {"total_overdue": 500, "has_actions": true}},
-  {"id": "fc-03", "desc": "saudável -> sem ações", "tenant_id": "t-eval-3", "finance": {"today": "2026-05-29", "balance": 50000, "receivables": [{"customer": "E", "amount": 1000, "due_date": "2026-06-30", "status": "open"}], "payables": [{"amount": 2000, "due_date": "2026-06-10"}]}, "expected": {"total_overdue": 0, "has_actions": false}}
+  {
+    "id": "fc-01",
+    "desc": "2 recebíveis vencidos -> cobrar",
+    "tenant_id": "t-eval-1",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 10000,
+      "receivables": [
+        {
+          "customer": "A",
+          "amount": 1000,
+          "due_date": "2026-05-01",
+          "status": "open"
+        },
+        {
+          "customer": "B",
+          "amount": 500,
+          "due_date": "2026-05-10",
+          "status": "open"
+        },
+        {
+          "customer": "C",
+          "amount": 2000,
+          "due_date": "2026-06-30",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 3000,
+          "due_date": "2026-06-05"
+        }
+      ]
+    },
+    "expected": {
+      "total_overdue": 1500,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-02",
+    "desc": "caixa projetado negativo -> alerta",
+    "tenant_id": "t-eval-2",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 1000,
+      "receivables": [
+        {
+          "customer": "D",
+          "amount": 500,
+          "due_date": "2026-05-01",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 4000,
+          "due_date": "2026-06-01"
+        }
+      ]
+    },
+    "expected": {
+      "total_overdue": 500,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-03",
+    "desc": "saudável -> sem ações",
+    "tenant_id": "t-eval-3",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 50000,
+      "receivables": [
+        {
+          "customer": "E",
+          "amount": 1000,
+          "due_date": "2026-06-30",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 2000,
+          "due_date": "2026-06-10"
+        }
+      ]
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": false
+    }
+  },
+  {
+    "id": "fc-04",
+    "desc": "variação caixa 4",
+    "tenant_id": "t-eval-4",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 50000,
+      "receivables": [
+        {
+          "customer": "C4-1",
+          "amount": 200,
+          "due_date": "2026-05-29",
+          "status": "open"
+        },
+        {
+          "customer": "C4-2",
+          "amount": 300,
+          "due_date": "2026-06-01",
+          "status": "open"
+        },
+        {
+          "customer": "C4-3",
+          "amount": 400,
+          "due_date": "2026-04-15",
+          "status": "paid"
+        },
+        {
+          "customer": "C4-4",
+          "amount": 500,
+          "due_date": "",
+          "status": "open"
+        },
+        {
+          "customer": "C4-5",
+          "amount": 600,
+          "due_date": "2026-05-01",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 200,
+          "due_date": "2026-06-05"
+        }
+      ]
+    },
+    "expected": {
+      "total_overdue": 600,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-05",
+    "desc": "variação caixa 5",
+    "tenant_id": "t-eval-5",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 0,
+      "receivables": [
+        {
+          "customer": "C5-1",
+          "amount": 225,
+          "due_date": "2026-05-29",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 900,
+          "due_date": "2026-06-05"
+        }
+      ],
+      "revenue_month": 10000,
+      "cost_month": 9500
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-06",
+    "desc": "variação caixa 6",
+    "tenant_id": "t-eval-6",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 500,
+      "receivables": [
+        {
+          "customer": "C6-1",
+          "amount": 250,
+          "due_date": "2026-05-29",
+          "status": "paid"
+        },
+        {
+          "customer": "C6-2",
+          "amount": 350,
+          "due_date": "2026-06-01",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 1600,
+          "due_date": "2026-06-05"
+        }
+      ],
+      "revenue_month": 20000,
+      "cost_month": 15000
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-07",
+    "desc": "variação caixa 7",
+    "tenant_id": "t-eval-7",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 2000,
+      "receivables": [
+        {
+          "customer": "C7-1",
+          "amount": 275,
+          "due_date": "2026-05-29",
+          "status": "open"
+        },
+        {
+          "customer": "C7-2",
+          "amount": 375,
+          "due_date": "2026-06-01",
+          "status": "open"
+        },
+        {
+          "customer": "C7-3",
+          "amount": 475,
+          "due_date": "2026-04-15",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 2300,
+          "due_date": "2026-06-05"
+        }
+      ],
+      "revenue_month": 5000,
+      "cost_month": 6000
+    },
+    "expected": {
+      "total_overdue": 475,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-08",
+    "desc": "variação caixa 8",
+    "tenant_id": "t-eval-8",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 10000,
+      "receivables": [
+        {
+          "customer": "C8-1",
+          "amount": 300,
+          "due_date": "2026-05-29",
+          "status": "open"
+        },
+        {
+          "customer": "C8-2",
+          "amount": 400,
+          "due_date": "2026-06-01",
+          "status": "open"
+        },
+        {
+          "customer": "C8-3",
+          "amount": 500,
+          "due_date": "2026-04-15",
+          "status": "open"
+        },
+        {
+          "customer": "C8-4",
+          "amount": 600,
+          "due_date": "",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 200,
+          "due_date": "2026-06-05"
+        }
+      ]
+    },
+    "expected": {
+      "total_overdue": 500,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-09",
+    "desc": "variação caixa 9",
+    "tenant_id": "t-eval-9",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 50000,
+      "receivables": [
+        {
+          "customer": "C9-1",
+          "amount": 325,
+          "due_date": "2026-05-29",
+          "status": "open"
+        },
+        {
+          "customer": "C9-2",
+          "amount": 425,
+          "due_date": "2026-06-01",
+          "status": "open"
+        },
+        {
+          "customer": "C9-3",
+          "amount": 525,
+          "due_date": "2026-04-15",
+          "status": "open"
+        },
+        {
+          "customer": "C9-4",
+          "amount": 625,
+          "due_date": "",
+          "status": "open"
+        },
+        {
+          "customer": "C9-5",
+          "amount": 725,
+          "due_date": "2026-05-01",
+          "status": "paid"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 900,
+          "due_date": "2026-06-05"
+        }
+      ],
+      "revenue_month": 10000,
+      "cost_month": 9500
+    },
+    "expected": {
+      "total_overdue": 525,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-10",
+    "desc": "variação caixa 10",
+    "tenant_id": "t-eval-10",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 0,
+      "receivables": [
+        {
+          "customer": "C10-1",
+          "amount": 350,
+          "due_date": "2026-05-29",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 1600,
+          "due_date": "2026-06-05"
+        }
+      ],
+      "revenue_month": 20000,
+      "cost_month": 15000
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-11",
+    "desc": "variação caixa 11",
+    "tenant_id": "t-eval-11",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 500,
+      "receivables": [
+        {
+          "customer": "C11-1",
+          "amount": 375,
+          "due_date": "2026-05-29",
+          "status": "open"
+        },
+        {
+          "customer": "C11-2",
+          "amount": 475,
+          "due_date": "2026-06-01",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 2300,
+          "due_date": "2026-06-05"
+        }
+      ],
+      "revenue_month": 5000,
+      "cost_month": 6000
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-12",
+    "desc": "variação caixa 12",
+    "tenant_id": "t-eval-12",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 2000,
+      "receivables": [
+        {
+          "customer": "C12-1",
+          "amount": 400,
+          "due_date": "2026-05-29",
+          "status": "open"
+        },
+        {
+          "customer": "C12-2",
+          "amount": 500,
+          "due_date": "2026-06-01",
+          "status": "paid"
+        },
+        {
+          "customer": "C12-3",
+          "amount": 600,
+          "due_date": "2026-04-15",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 200,
+          "due_date": "2026-06-05"
+        }
+      ]
+    },
+    "expected": {
+      "total_overdue": 600,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-13",
+    "desc": "variação caixa 13",
+    "tenant_id": "t-eval-13",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 10000,
+      "receivables": [
+        {
+          "customer": "C13-1",
+          "amount": 425,
+          "due_date": "2026-05-29",
+          "status": "paid"
+        },
+        {
+          "customer": "C13-2",
+          "amount": 525,
+          "due_date": "2026-06-01",
+          "status": "open"
+        },
+        {
+          "customer": "C13-3",
+          "amount": 625,
+          "due_date": "2026-04-15",
+          "status": "open"
+        },
+        {
+          "customer": "C13-4",
+          "amount": 725,
+          "due_date": "",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 900,
+          "due_date": "2026-06-05"
+        }
+      ],
+      "revenue_month": 10000,
+      "cost_month": 9500
+    },
+    "expected": {
+      "total_overdue": 625,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-14",
+    "desc": "variação caixa 14",
+    "tenant_id": "t-eval-14",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 50000,
+      "receivables": [
+        {
+          "customer": "C14-1",
+          "amount": 450,
+          "due_date": "2026-05-29",
+          "status": "open"
+        },
+        {
+          "customer": "C14-2",
+          "amount": 550,
+          "due_date": "2026-06-01",
+          "status": "open"
+        },
+        {
+          "customer": "C14-3",
+          "amount": 650,
+          "due_date": "2026-04-15",
+          "status": "open"
+        },
+        {
+          "customer": "C14-4",
+          "amount": 750,
+          "due_date": "",
+          "status": "open"
+        },
+        {
+          "customer": "C14-5",
+          "amount": 850,
+          "due_date": "2026-05-01",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 1600,
+          "due_date": "2026-06-05"
+        }
+      ],
+      "revenue_month": 20000,
+      "cost_month": 15000
+    },
+    "expected": {
+      "total_overdue": 1500,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-15",
+    "desc": "variação caixa 15",
+    "tenant_id": "t-eval-15",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 0,
+      "receivables": [
+        {
+          "customer": "C15-1",
+          "amount": 475,
+          "due_date": "2026-05-29",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 2300,
+          "due_date": "2026-06-05"
+        }
+      ],
+      "revenue_month": 5000,
+      "cost_month": 6000
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-16",
+    "desc": "variação caixa 16",
+    "tenant_id": "t-eval-16",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 500,
+      "receivables": [
+        {
+          "customer": "C16-1",
+          "amount": 500,
+          "due_date": "2026-05-29",
+          "status": "open"
+        },
+        {
+          "customer": "C16-2",
+          "amount": 600,
+          "due_date": "2026-06-01",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 200,
+          "due_date": "2026-06-05"
+        }
+      ]
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": false
+    }
+  },
+  {
+    "id": "fc-17",
+    "desc": "variação caixa 17",
+    "tenant_id": "t-eval-17",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 2000,
+      "receivables": [
+        {
+          "customer": "C17-1",
+          "amount": 525,
+          "due_date": "2026-05-29",
+          "status": "open"
+        },
+        {
+          "customer": "C17-2",
+          "amount": 625,
+          "due_date": "2026-06-01",
+          "status": "open"
+        },
+        {
+          "customer": "C17-3",
+          "amount": 725,
+          "due_date": "2026-04-15",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 900,
+          "due_date": "2026-06-05"
+        }
+      ],
+      "revenue_month": 10000,
+      "cost_month": 9500
+    },
+    "expected": {
+      "total_overdue": 725,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-18",
+    "desc": "variação caixa 18",
+    "tenant_id": "t-eval-18",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 10000,
+      "receivables": [
+        {
+          "customer": "C18-1",
+          "amount": 550,
+          "due_date": "2026-05-29",
+          "status": "open"
+        },
+        {
+          "customer": "C18-2",
+          "amount": 650,
+          "due_date": "2026-06-01",
+          "status": "open"
+        },
+        {
+          "customer": "C18-3",
+          "amount": 750,
+          "due_date": "2026-04-15",
+          "status": "paid"
+        },
+        {
+          "customer": "C18-4",
+          "amount": 850,
+          "due_date": "",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 1600,
+          "due_date": "2026-06-05"
+        }
+      ],
+      "revenue_month": 20000,
+      "cost_month": 15000
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": false
+    }
+  },
+  {
+    "id": "fc-19",
+    "desc": "variação caixa 19",
+    "tenant_id": "t-eval-19",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 50000,
+      "receivables": [
+        {
+          "customer": "C19-1",
+          "amount": 575,
+          "due_date": "2026-05-29",
+          "status": "open"
+        },
+        {
+          "customer": "C19-2",
+          "amount": 675,
+          "due_date": "2026-06-01",
+          "status": "paid"
+        },
+        {
+          "customer": "C19-3",
+          "amount": 775,
+          "due_date": "2026-04-15",
+          "status": "open"
+        },
+        {
+          "customer": "C19-4",
+          "amount": 875,
+          "due_date": "",
+          "status": "open"
+        },
+        {
+          "customer": "C19-5",
+          "amount": 975,
+          "due_date": "2026-05-01",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 2300,
+          "due_date": "2026-06-05"
+        }
+      ],
+      "revenue_month": 5000,
+      "cost_month": 6000
+    },
+    "expected": {
+      "total_overdue": 1750,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-20",
+    "desc": "variação caixa 20",
+    "tenant_id": "t-eval-20",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 0,
+      "receivables": [
+        {
+          "customer": "C20-1",
+          "amount": 600,
+          "due_date": "2026-05-29",
+          "status": "paid"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 200,
+          "due_date": "2026-06-05"
+        }
+      ]
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-21",
+    "desc": "variação caixa 21",
+    "tenant_id": "t-eval-21",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 500,
+      "receivables": [
+        {
+          "customer": "C21-1",
+          "amount": 625,
+          "due_date": "2026-05-29",
+          "status": "open"
+        },
+        {
+          "customer": "C21-2",
+          "amount": 725,
+          "due_date": "2026-06-01",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 900,
+          "due_date": "2026-06-05"
+        }
+      ],
+      "revenue_month": 10000,
+      "cost_month": 9500
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-22",
+    "desc": "variação caixa 22",
+    "tenant_id": "t-eval-22",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 2000,
+      "receivables": [
+        {
+          "customer": "C22-1",
+          "amount": 650,
+          "due_date": "2026-05-29",
+          "status": "open"
+        },
+        {
+          "customer": "C22-2",
+          "amount": 750,
+          "due_date": "2026-06-01",
+          "status": "open"
+        },
+        {
+          "customer": "C22-3",
+          "amount": 850,
+          "due_date": "2026-04-15",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 1600,
+          "due_date": "2026-06-05"
+        }
+      ],
+      "revenue_month": 20000,
+      "cost_month": 15000
+    },
+    "expected": {
+      "total_overdue": 850,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-23",
+    "desc": "variação caixa 23",
+    "tenant_id": "t-eval-23",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 10000,
+      "receivables": [
+        {
+          "customer": "C23-1",
+          "amount": 675,
+          "due_date": "2026-05-29",
+          "status": "open"
+        },
+        {
+          "customer": "C23-2",
+          "amount": 775,
+          "due_date": "2026-06-01",
+          "status": "open"
+        },
+        {
+          "customer": "C23-3",
+          "amount": 875,
+          "due_date": "2026-04-15",
+          "status": "open"
+        },
+        {
+          "customer": "C23-4",
+          "amount": 975,
+          "due_date": "",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 2300,
+          "due_date": "2026-06-05"
+        }
+      ],
+      "revenue_month": 5000,
+      "cost_month": 6000
+    },
+    "expected": {
+      "total_overdue": 875,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-24",
+    "desc": "variação caixa 24",
+    "tenant_id": "t-eval-24",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 50000,
+      "receivables": [
+        {
+          "customer": "C24-1",
+          "amount": 700,
+          "due_date": "2026-05-29",
+          "status": "open"
+        },
+        {
+          "customer": "C24-2",
+          "amount": 800,
+          "due_date": "2026-06-01",
+          "status": "open"
+        },
+        {
+          "customer": "C24-3",
+          "amount": 900,
+          "due_date": "2026-04-15",
+          "status": "open"
+        },
+        {
+          "customer": "C24-4",
+          "amount": 1000,
+          "due_date": "",
+          "status": "paid"
+        },
+        {
+          "customer": "C24-5",
+          "amount": 1100,
+          "due_date": "2026-05-01",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 200,
+          "due_date": "2026-06-05"
+        }
+      ]
+    },
+    "expected": {
+      "total_overdue": 2000,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-25",
+    "desc": "variação caixa 25",
+    "tenant_id": "t-eval-25",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 0,
+      "receivables": [
+        {
+          "customer": "C25-1",
+          "amount": 725,
+          "due_date": "2026-05-29",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 900,
+          "due_date": "2026-06-05"
+        }
+      ],
+      "revenue_month": 10000,
+      "cost_month": 9500
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-26",
+    "desc": "variação caixa 26",
+    "tenant_id": "t-eval-26",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 500,
+      "receivables": [
+        {
+          "customer": "C26-1",
+          "amount": 750,
+          "due_date": "2026-05-29",
+          "status": "open"
+        },
+        {
+          "customer": "C26-2",
+          "amount": 850,
+          "due_date": "2026-06-01",
+          "status": "paid"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 1600,
+          "due_date": "2026-06-05"
+        }
+      ],
+      "revenue_month": 20000,
+      "cost_month": 15000
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-27",
+    "desc": "variação caixa 27",
+    "tenant_id": "t-eval-27",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 2000,
+      "receivables": [
+        {
+          "customer": "C27-1",
+          "amount": 775,
+          "due_date": "2026-05-29",
+          "status": "paid"
+        },
+        {
+          "customer": "C27-2",
+          "amount": 875,
+          "due_date": "2026-06-01",
+          "status": "open"
+        },
+        {
+          "customer": "C27-3",
+          "amount": 975,
+          "due_date": "2026-04-15",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 2300,
+          "due_date": "2026-06-05"
+        }
+      ],
+      "revenue_month": 5000,
+      "cost_month": 6000
+    },
+    "expected": {
+      "total_overdue": 975,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-28",
+    "desc": "variação caixa 28",
+    "tenant_id": "t-eval-28",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 10000,
+      "receivables": [
+        {
+          "customer": "C28-1",
+          "amount": 800,
+          "due_date": "2026-05-29",
+          "status": "open"
+        },
+        {
+          "customer": "C28-2",
+          "amount": 900,
+          "due_date": "2026-06-01",
+          "status": "open"
+        },
+        {
+          "customer": "C28-3",
+          "amount": 1000,
+          "due_date": "2026-04-15",
+          "status": "open"
+        },
+        {
+          "customer": "C28-4",
+          "amount": 1100,
+          "due_date": "",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 200,
+          "due_date": "2026-06-05"
+        }
+      ]
+    },
+    "expected": {
+      "total_overdue": 1000,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-29",
+    "desc": "variação caixa 29",
+    "tenant_id": "t-eval-29",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 50000,
+      "receivables": [
+        {
+          "customer": "C29-1",
+          "amount": 825,
+          "due_date": "2026-05-29",
+          "status": "open"
+        },
+        {
+          "customer": "C29-2",
+          "amount": 925,
+          "due_date": "2026-06-01",
+          "status": "open"
+        },
+        {
+          "customer": "C29-3",
+          "amount": 1025,
+          "due_date": "2026-04-15",
+          "status": "open"
+        },
+        {
+          "customer": "C29-4",
+          "amount": 1125,
+          "due_date": "",
+          "status": "open"
+        },
+        {
+          "customer": "C29-5",
+          "amount": 1225,
+          "due_date": "2026-05-01",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 900,
+          "due_date": "2026-06-05"
+        }
+      ],
+      "revenue_month": 10000,
+      "cost_month": 9500
+    },
+    "expected": {
+      "total_overdue": 2250,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "fc-30",
+    "desc": "variação caixa 30",
+    "tenant_id": "t-eval-30",
+    "finance": {
+      "today": "2026-05-29",
+      "balance": 0,
+      "receivables": [
+        {
+          "customer": "C30-1",
+          "amount": 850,
+          "due_date": "2026-05-29",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "amount": 1600,
+          "due_date": "2026-06-05"
+        }
+      ],
+      "revenue_month": 20000,
+      "cost_month": 15000
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": true
+    }
+  }
 ]

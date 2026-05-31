@@ -1,5 +1,505 @@
 [
-  {"id": "pd-01", "desc": "caixa negativo -> vermelho", "tenant_id": "t-eval-1", "metrics": {"cash_position": 4000, "projected_cash": -2000, "total_overdue": 6000, "margin_pct": 13}, "expected": {"semaforo": "vermelho"}},
-  {"id": "pd-02", "desc": "margem apertada -> amarelo", "tenant_id": "t-eval-2", "metrics": {"cash_position": 5000, "projected_cash": 5000, "margin_pct": 8, "total_overdue": 0}, "expected": {"semaforo": "amarelo"}},
-  {"id": "pd-03", "desc": "saudável -> verde", "tenant_id": "t-eval-3", "metrics": {"cash_position": 5000, "projected_cash": 5000, "margin_pct": 20, "total_overdue": 0, "urgent_msgs": 0, "stalled_tasks": 0}, "expected": {"semaforo": "verde"}}
+  {
+    "id": "pd-01",
+    "desc": "caixa negativo -> vermelho",
+    "tenant_id": "t-eval-1",
+    "metrics": {
+      "cash_position": 4000,
+      "projected_cash": -2000,
+      "total_overdue": 6000,
+      "margin_pct": 13
+    },
+    "expected": {
+      "semaforo": "vermelho"
+    }
+  },
+  {
+    "id": "pd-02",
+    "desc": "margem apertada -> amarelo",
+    "tenant_id": "t-eval-2",
+    "metrics": {
+      "cash_position": 5000,
+      "projected_cash": 5000,
+      "margin_pct": 8,
+      "total_overdue": 0
+    },
+    "expected": {
+      "semaforo": "amarelo"
+    }
+  },
+  {
+    "id": "pd-03",
+    "desc": "saudável -> verde",
+    "tenant_id": "t-eval-3",
+    "metrics": {
+      "cash_position": 5000,
+      "projected_cash": 5000,
+      "margin_pct": 20,
+      "total_overdue": 0,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "verde"
+    }
+  },
+  {
+    "id": "pd-04",
+    "desc": "variação painel 4",
+    "tenant_id": "t-eval-4",
+    "metrics": {
+      "cash_position": 0,
+      "projected_cash": 10000,
+      "total_overdue": 100,
+      "margin_pct": 20,
+      "urgent_msgs": 1,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 2
+    }
+  },
+  {
+    "id": "pd-05",
+    "desc": "variação painel 5",
+    "tenant_id": "t-eval-5",
+    "metrics": {
+      "cash_position": 1000,
+      "projected_cash": -5000,
+      "total_overdue": 2500,
+      "margin_pct": null,
+      "urgent_msgs": 3,
+      "stalled_tasks": 2
+    },
+    "expected": {
+      "semaforo": "vermelho",
+      "alert_count": 4
+    }
+  },
+  {
+    "id": "pd-06",
+    "desc": "variação painel 6",
+    "tenant_id": "t-eval-6",
+    "metrics": {
+      "cash_position": 5000,
+      "projected_cash": -1,
+      "total_overdue": 0,
+      "margin_pct": 5,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "vermelho",
+      "alert_count": 2
+    }
+  },
+  {
+    "id": "pd-07",
+    "desc": "variação painel 7",
+    "tenant_id": "t-eval-7",
+    "metrics": {
+      "cash_position": 20000,
+      "projected_cash": 0,
+      "total_overdue": 100,
+      "margin_pct": 9.9,
+      "urgent_msgs": 1,
+      "stalled_tasks": 2
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 4
+    }
+  },
+  {
+    "id": "pd-08",
+    "desc": "variação painel 8",
+    "tenant_id": "t-eval-8",
+    "metrics": {
+      "cash_position": 0,
+      "projected_cash": 1000,
+      "total_overdue": 2500,
+      "margin_pct": 10,
+      "urgent_msgs": 3,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 2
+    }
+  },
+  {
+    "id": "pd-09",
+    "desc": "variação painel 9",
+    "tenant_id": "t-eval-9",
+    "metrics": {
+      "cash_position": 1000,
+      "projected_cash": 10000,
+      "total_overdue": 0,
+      "margin_pct": 20,
+      "urgent_msgs": 0,
+      "stalled_tasks": 2
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 1
+    }
+  },
+  {
+    "id": "pd-10",
+    "desc": "variação painel 10",
+    "tenant_id": "t-eval-10",
+    "metrics": {
+      "cash_position": 5000,
+      "projected_cash": -5000,
+      "total_overdue": 100,
+      "margin_pct": null,
+      "urgent_msgs": 1,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "vermelho",
+      "alert_count": 3
+    }
+  },
+  {
+    "id": "pd-11",
+    "desc": "variação painel 11",
+    "tenant_id": "t-eval-11",
+    "metrics": {
+      "cash_position": 20000,
+      "projected_cash": -1,
+      "total_overdue": 2500,
+      "margin_pct": 5,
+      "urgent_msgs": 3,
+      "stalled_tasks": 2
+    },
+    "expected": {
+      "semaforo": "vermelho",
+      "alert_count": 5
+    }
+  },
+  {
+    "id": "pd-12",
+    "desc": "variação painel 12",
+    "tenant_id": "t-eval-12",
+    "metrics": {
+      "cash_position": 0,
+      "projected_cash": 0,
+      "total_overdue": 0,
+      "margin_pct": 9.9,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 1
+    }
+  },
+  {
+    "id": "pd-13",
+    "desc": "variação painel 13",
+    "tenant_id": "t-eval-13",
+    "metrics": {
+      "cash_position": 1000,
+      "projected_cash": 1000,
+      "total_overdue": 100,
+      "margin_pct": 10,
+      "urgent_msgs": 1,
+      "stalled_tasks": 2
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 3
+    }
+  },
+  {
+    "id": "pd-14",
+    "desc": "variação painel 14",
+    "tenant_id": "t-eval-14",
+    "metrics": {
+      "cash_position": 5000,
+      "projected_cash": 10000,
+      "total_overdue": 2500,
+      "margin_pct": 20,
+      "urgent_msgs": 3,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 2
+    }
+  },
+  {
+    "id": "pd-15",
+    "desc": "variação painel 15",
+    "tenant_id": "t-eval-15",
+    "metrics": {
+      "cash_position": 20000,
+      "projected_cash": -5000,
+      "total_overdue": 0,
+      "margin_pct": null,
+      "urgent_msgs": 0,
+      "stalled_tasks": 2
+    },
+    "expected": {
+      "semaforo": "vermelho",
+      "alert_count": 2
+    }
+  },
+  {
+    "id": "pd-16",
+    "desc": "variação painel 16",
+    "tenant_id": "t-eval-16",
+    "metrics": {
+      "cash_position": 0,
+      "projected_cash": -1,
+      "total_overdue": 100,
+      "margin_pct": 5,
+      "urgent_msgs": 1,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "vermelho",
+      "alert_count": 4
+    }
+  },
+  {
+    "id": "pd-17",
+    "desc": "variação painel 17",
+    "tenant_id": "t-eval-17",
+    "metrics": {
+      "cash_position": 1000,
+      "projected_cash": 0,
+      "total_overdue": 2500,
+      "margin_pct": 9.9,
+      "urgent_msgs": 3,
+      "stalled_tasks": 2
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 4
+    }
+  },
+  {
+    "id": "pd-18",
+    "desc": "variação painel 18",
+    "tenant_id": "t-eval-18",
+    "metrics": {
+      "cash_position": 5000,
+      "projected_cash": 1000,
+      "total_overdue": 0,
+      "margin_pct": 10,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "verde",
+      "alert_count": 0
+    }
+  },
+  {
+    "id": "pd-19",
+    "desc": "variação painel 19",
+    "tenant_id": "t-eval-19",
+    "metrics": {
+      "cash_position": 20000,
+      "projected_cash": 10000,
+      "total_overdue": 100,
+      "margin_pct": 20,
+      "urgent_msgs": 1,
+      "stalled_tasks": 2
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 3
+    }
+  },
+  {
+    "id": "pd-20",
+    "desc": "variação painel 20",
+    "tenant_id": "t-eval-20",
+    "metrics": {
+      "cash_position": 0,
+      "projected_cash": -5000,
+      "total_overdue": 2500,
+      "margin_pct": null,
+      "urgent_msgs": 3,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "vermelho",
+      "alert_count": 3
+    }
+  },
+  {
+    "id": "pd-21",
+    "desc": "variação painel 21",
+    "tenant_id": "t-eval-21",
+    "metrics": {
+      "cash_position": 1000,
+      "projected_cash": -1,
+      "total_overdue": 0,
+      "margin_pct": 5,
+      "urgent_msgs": 0,
+      "stalled_tasks": 2
+    },
+    "expected": {
+      "semaforo": "vermelho",
+      "alert_count": 3
+    }
+  },
+  {
+    "id": "pd-22",
+    "desc": "variação painel 22",
+    "tenant_id": "t-eval-22",
+    "metrics": {
+      "cash_position": 5000,
+      "projected_cash": 0,
+      "total_overdue": 100,
+      "margin_pct": 9.9,
+      "urgent_msgs": 1,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 3
+    }
+  },
+  {
+    "id": "pd-23",
+    "desc": "variação painel 23",
+    "tenant_id": "t-eval-23",
+    "metrics": {
+      "cash_position": 20000,
+      "projected_cash": 1000,
+      "total_overdue": 2500,
+      "margin_pct": 10,
+      "urgent_msgs": 3,
+      "stalled_tasks": 2
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 3
+    }
+  },
+  {
+    "id": "pd-24",
+    "desc": "variação painel 24",
+    "tenant_id": "t-eval-24",
+    "metrics": {
+      "cash_position": 0,
+      "projected_cash": 10000,
+      "total_overdue": 0,
+      "margin_pct": 20,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "verde",
+      "alert_count": 0
+    }
+  },
+  {
+    "id": "pd-25",
+    "desc": "variação painel 25",
+    "tenant_id": "t-eval-25",
+    "metrics": {
+      "cash_position": 1000,
+      "projected_cash": -5000,
+      "total_overdue": 100,
+      "margin_pct": null,
+      "urgent_msgs": 1,
+      "stalled_tasks": 2
+    },
+    "expected": {
+      "semaforo": "vermelho",
+      "alert_count": 4
+    }
+  },
+  {
+    "id": "pd-26",
+    "desc": "variação painel 26",
+    "tenant_id": "t-eval-26",
+    "metrics": {
+      "cash_position": 5000,
+      "projected_cash": -1,
+      "total_overdue": 2500,
+      "margin_pct": 5,
+      "urgent_msgs": 3,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "vermelho",
+      "alert_count": 4
+    }
+  },
+  {
+    "id": "pd-27",
+    "desc": "variação painel 27",
+    "tenant_id": "t-eval-27",
+    "metrics": {
+      "cash_position": 20000,
+      "projected_cash": 0,
+      "total_overdue": 0,
+      "margin_pct": 9.9,
+      "urgent_msgs": 0,
+      "stalled_tasks": 2
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 2
+    }
+  },
+  {
+    "id": "pd-28",
+    "desc": "variação painel 28",
+    "tenant_id": "t-eval-28",
+    "metrics": {
+      "cash_position": 0,
+      "projected_cash": 1000,
+      "total_overdue": 100,
+      "margin_pct": 10,
+      "urgent_msgs": 1,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 2
+    }
+  },
+  {
+    "id": "pd-29",
+    "desc": "variação painel 29",
+    "tenant_id": "t-eval-29",
+    "metrics": {
+      "cash_position": 1000,
+      "projected_cash": 10000,
+      "total_overdue": 2500,
+      "margin_pct": 20,
+      "urgent_msgs": 3,
+      "stalled_tasks": 2
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 3
+    }
+  },
+  {
+    "id": "pd-30",
+    "desc": "variação painel 30",
+    "tenant_id": "t-eval-30",
+    "metrics": {
+      "cash_position": 5000,
+      "projected_cash": -5000,
+      "total_overdue": 0,
+      "margin_pct": null,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "vermelho",
+      "alert_count": 1
+    }
+  }
 ]

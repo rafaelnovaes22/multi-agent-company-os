@@ -1,5 +1,1052 @@
 [
-  {"id": "ib-01", "desc": "3 categorias distintas", "tenant_id": "t-eval-1", "inbox": {"messages": [{"id": 1, "text": "Quero um orçamento para o próximo mês"}, {"id": 2, "text": "Segue o boleto, pagamento em atraso"}, {"id": 3, "text": "Obrigado pelo atendimento"}]}, "expected": {"total": 3, "urgent_count": 0, "counts": {"comercial": 1, "financeiro": 1, "geral": 1}}},
-  {"id": "ib-02", "desc": "suporte + urgente", "tenant_id": "t-eval-2", "inbox": {"messages": [{"id": 1, "text": "URGENTE: o sistema não funciona"}]}, "expected": {"total": 1, "urgent_count": 1, "counts": {"suporte": 1}}},
-  {"id": "ib-03", "desc": "comercial + compras", "tenant_id": "t-eval-3", "inbox": {"messages": [{"id": 1, "text": "Preciso de uma proposta"}, {"id": 2, "text": "Quando chega o pedido do fornecedor?"}]}, "expected": {"total": 2, "counts": {"comercial": 1, "compras": 1}}}
+  {
+    "id": "ib-01",
+    "desc": "3 categorias distintas",
+    "tenant_id": "t-eval-1",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "text": "Quero um orçamento para o próximo mês"
+        },
+        {
+          "id": 2,
+          "text": "Segue o boleto, pagamento em atraso"
+        },
+        {
+          "id": 3,
+          "text": "Obrigado pelo atendimento"
+        }
+      ]
+    },
+    "expected": {
+      "total": 3,
+      "urgent_count": 0,
+      "counts": {
+        "comercial": 1,
+        "financeiro": 1,
+        "geral": 1
+      }
+    }
+  },
+  {
+    "id": "ib-02",
+    "desc": "suporte + urgente",
+    "tenant_id": "t-eval-2",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "text": "URGENTE: o sistema não funciona"
+        }
+      ]
+    },
+    "expected": {
+      "total": 1,
+      "urgent_count": 1,
+      "counts": {
+        "suporte": 1
+      }
+    }
+  },
+  {
+    "id": "ib-03",
+    "desc": "comercial + compras",
+    "tenant_id": "t-eval-3",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "text": "Preciso de uma proposta"
+        },
+        {
+          "id": 2,
+          "text": "Quando chega o pedido do fornecedor?"
+        }
+      ]
+    },
+    "expected": {
+      "total": 2,
+      "counts": {
+        "comercial": 1,
+        "compras": 1
+      }
+    }
+  },
+  {
+    "id": "ib-04",
+    "desc": "variação inbox 4",
+    "tenant_id": "t-eval-4",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "Obrigado pelo atendimento imediato"
+        },
+        {
+          "id": 2,
+          "from": "user1",
+          "text": "preciso de proposta agora"
+        },
+        {
+          "id": 3,
+          "from": "user2",
+          "text": "nota fiscal em atraso hoje"
+        },
+        {
+          "id": 4,
+          "from": "user3",
+          "text": "quero cancelar e pedir reembolso"
+        },
+        {
+          "id": 5,
+          "from": "user4",
+          "text": "insumo parado no fornecedor agora"
+        }
+      ]
+    },
+    "expected": {
+      "total": 5,
+      "urgent_count": 4,
+      "counts": {
+        "geral": 1,
+        "comercial": 1,
+        "financeiro": 1,
+        "suporte": 1,
+        "compras": 1
+      }
+    }
+  },
+  {
+    "id": "ib-05",
+    "desc": "variação inbox 5",
+    "tenant_id": "t-eval-5",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "preciso de proposta agora"
+        },
+        {
+          "id": 2,
+          "from": "user1",
+          "text": "nota fiscal em atraso hoje"
+        },
+        {
+          "id": 3,
+          "from": "user2",
+          "text": "quero cancelar e pedir reembolso"
+        },
+        {
+          "id": 4,
+          "from": "user3",
+          "text": "insumo parado no fornecedor agora"
+        },
+        {
+          "id": 5,
+          "from": "user4",
+          "text": "olá bom dia"
+        },
+        {
+          "id": 6,
+          "from": "user5",
+          "text": "Quero um orçamento para amanhã"
+        }
+      ]
+    },
+    "expected": {
+      "total": 6,
+      "urgent_count": 3,
+      "counts": {
+        "comercial": 2,
+        "financeiro": 1,
+        "suporte": 1,
+        "compras": 1,
+        "geral": 1
+      }
+    }
+  },
+  {
+    "id": "ib-06",
+    "desc": "variação inbox 6",
+    "tenant_id": "t-eval-6",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "nota fiscal em atraso hoje"
+        }
+      ]
+    },
+    "expected": {
+      "total": 1,
+      "urgent_count": 1,
+      "counts": {
+        "financeiro": 1
+      }
+    }
+  },
+  {
+    "id": "ib-07",
+    "desc": "variação inbox 7",
+    "tenant_id": "t-eval-7",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "quero cancelar e pedir reembolso"
+        },
+        {
+          "id": 2,
+          "from": "user1",
+          "text": "insumo parado no fornecedor agora"
+        }
+      ]
+    },
+    "expected": {
+      "total": 2,
+      "urgent_count": 1,
+      "counts": {
+        "suporte": 1,
+        "compras": 1
+      }
+    }
+  },
+  {
+    "id": "ib-08",
+    "desc": "variação inbox 8",
+    "tenant_id": "t-eval-8",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "insumo parado no fornecedor agora"
+        },
+        {
+          "id": 2,
+          "from": "user1",
+          "text": "olá bom dia"
+        },
+        {
+          "id": 3,
+          "from": "user2",
+          "text": "Quero um orçamento para amanhã"
+        }
+      ]
+    },
+    "expected": {
+      "total": 3,
+      "urgent_count": 1,
+      "counts": {
+        "compras": 1,
+        "geral": 1,
+        "comercial": 1
+      }
+    }
+  },
+  {
+    "id": "ib-09",
+    "desc": "variação inbox 9",
+    "tenant_id": "t-eval-9",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "olá bom dia"
+        },
+        {
+          "id": 2,
+          "from": "user1",
+          "text": "Quero um orçamento para amanhã"
+        },
+        {
+          "id": 3,
+          "from": "user2",
+          "text": "Segue boleto para pagamento"
+        },
+        {
+          "id": 4,
+          "from": "user3",
+          "text": "URGENTE: sistema não funciona urgente"
+        }
+      ]
+    },
+    "expected": {
+      "total": 4,
+      "urgent_count": 1,
+      "counts": {
+        "geral": 1,
+        "comercial": 1,
+        "financeiro": 1,
+        "suporte": 1
+      }
+    }
+  },
+  {
+    "id": "ib-10",
+    "desc": "variação inbox 10",
+    "tenant_id": "t-eval-10",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "Quero um orçamento para amanhã"
+        },
+        {
+          "id": 2,
+          "from": "user1",
+          "text": "Segue boleto para pagamento"
+        },
+        {
+          "id": 3,
+          "from": "user2",
+          "text": "URGENTE: sistema não funciona urgente"
+        },
+        {
+          "id": 4,
+          "from": "user3",
+          "text": "pedido do fornecedor chegou?"
+        },
+        {
+          "id": 5,
+          "from": "user4",
+          "text": "Obrigado pelo atendimento"
+        }
+      ]
+    },
+    "expected": {
+      "total": 5,
+      "urgent_count": 1,
+      "counts": {
+        "comercial": 1,
+        "financeiro": 1,
+        "suporte": 1,
+        "compras": 1,
+        "geral": 1
+      }
+    }
+  },
+  {
+    "id": "ib-11",
+    "desc": "variação inbox 11",
+    "tenant_id": "t-eval-11",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "Segue boleto para pagamento"
+        },
+        {
+          "id": 2,
+          "from": "user1",
+          "text": "URGENTE: sistema não funciona urgente"
+        },
+        {
+          "id": 3,
+          "from": "user2",
+          "text": "pedido do fornecedor chegou?"
+        },
+        {
+          "id": 4,
+          "from": "user3",
+          "text": "Obrigado pelo atendimento"
+        },
+        {
+          "id": 5,
+          "from": "user4",
+          "text": "preciso de proposta agora"
+        },
+        {
+          "id": 6,
+          "from": "user5",
+          "text": "nota fiscal em atraso hoje imediato"
+        }
+      ]
+    },
+    "expected": {
+      "total": 6,
+      "urgent_count": 3,
+      "counts": {
+        "financeiro": 2,
+        "suporte": 1,
+        "compras": 1,
+        "geral": 1,
+        "comercial": 1
+      }
+    }
+  },
+  {
+    "id": "ib-12",
+    "desc": "variação inbox 12",
+    "tenant_id": "t-eval-12",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "URGENTE: sistema não funciona urgente"
+        }
+      ]
+    },
+    "expected": {
+      "total": 1,
+      "urgent_count": 1,
+      "counts": {
+        "suporte": 1
+      }
+    }
+  },
+  {
+    "id": "ib-13",
+    "desc": "variação inbox 13",
+    "tenant_id": "t-eval-13",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "pedido do fornecedor chegou?"
+        },
+        {
+          "id": 2,
+          "from": "user1",
+          "text": "Obrigado pelo atendimento"
+        }
+      ]
+    },
+    "expected": {
+      "total": 2,
+      "urgent_count": 0,
+      "counts": {
+        "compras": 1,
+        "geral": 1
+      }
+    }
+  },
+  {
+    "id": "ib-14",
+    "desc": "variação inbox 14",
+    "tenant_id": "t-eval-14",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "Obrigado pelo atendimento"
+        },
+        {
+          "id": 2,
+          "from": "user1",
+          "text": "preciso de proposta agora"
+        },
+        {
+          "id": 3,
+          "from": "user2",
+          "text": "nota fiscal em atraso hoje imediato"
+        }
+      ]
+    },
+    "expected": {
+      "total": 3,
+      "urgent_count": 2,
+      "counts": {
+        "geral": 1,
+        "comercial": 1,
+        "financeiro": 1
+      }
+    }
+  },
+  {
+    "id": "ib-15",
+    "desc": "variação inbox 15",
+    "tenant_id": "t-eval-15",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "preciso de proposta agora"
+        },
+        {
+          "id": 2,
+          "from": "user1",
+          "text": "nota fiscal em atraso hoje imediato"
+        },
+        {
+          "id": 3,
+          "from": "user2",
+          "text": "quero cancelar e pedir reembolso"
+        },
+        {
+          "id": 4,
+          "from": "user3",
+          "text": "insumo parado no fornecedor"
+        }
+      ]
+    },
+    "expected": {
+      "total": 4,
+      "urgent_count": 3,
+      "counts": {
+        "comercial": 1,
+        "financeiro": 1,
+        "suporte": 1,
+        "compras": 1
+      }
+    }
+  },
+  {
+    "id": "ib-16",
+    "desc": "variação inbox 16",
+    "tenant_id": "t-eval-16",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "nota fiscal em atraso hoje imediato"
+        },
+        {
+          "id": 2,
+          "from": "user1",
+          "text": "quero cancelar e pedir reembolso"
+        },
+        {
+          "id": 3,
+          "from": "user2",
+          "text": "insumo parado no fornecedor"
+        },
+        {
+          "id": 4,
+          "from": "user3",
+          "text": "olá bom dia"
+        },
+        {
+          "id": 5,
+          "from": "user4",
+          "text": "Quero um orçamento para amanhã agora"
+        }
+      ]
+    },
+    "expected": {
+      "total": 5,
+      "urgent_count": 3,
+      "counts": {
+        "financeiro": 1,
+        "suporte": 1,
+        "compras": 1,
+        "geral": 1,
+        "comercial": 1
+      }
+    }
+  },
+  {
+    "id": "ib-17",
+    "desc": "variação inbox 17",
+    "tenant_id": "t-eval-17",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "quero cancelar e pedir reembolso"
+        },
+        {
+          "id": 2,
+          "from": "user1",
+          "text": "insumo parado no fornecedor"
+        },
+        {
+          "id": 3,
+          "from": "user2",
+          "text": "olá bom dia"
+        },
+        {
+          "id": 4,
+          "from": "user3",
+          "text": "Quero um orçamento para amanhã agora"
+        },
+        {
+          "id": 5,
+          "from": "user4",
+          "text": "Segue boleto para pagamento"
+        },
+        {
+          "id": 6,
+          "from": "user5",
+          "text": "URGENTE: sistema não funciona"
+        }
+      ]
+    },
+    "expected": {
+      "total": 6,
+      "urgent_count": 3,
+      "counts": {
+        "suporte": 2,
+        "compras": 1,
+        "geral": 1,
+        "comercial": 1,
+        "financeiro": 1
+      }
+    }
+  },
+  {
+    "id": "ib-18",
+    "desc": "variação inbox 18",
+    "tenant_id": "t-eval-18",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "insumo parado no fornecedor"
+        }
+      ]
+    },
+    "expected": {
+      "total": 1,
+      "urgent_count": 1,
+      "counts": {
+        "compras": 1
+      }
+    }
+  },
+  {
+    "id": "ib-19",
+    "desc": "variação inbox 19",
+    "tenant_id": "t-eval-19",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "olá bom dia"
+        },
+        {
+          "id": 2,
+          "from": "user1",
+          "text": "Quero um orçamento para amanhã agora"
+        }
+      ]
+    },
+    "expected": {
+      "total": 2,
+      "urgent_count": 1,
+      "counts": {
+        "geral": 1,
+        "comercial": 1
+      }
+    }
+  },
+  {
+    "id": "ib-20",
+    "desc": "variação inbox 20",
+    "tenant_id": "t-eval-20",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "Quero um orçamento para amanhã agora"
+        },
+        {
+          "id": 2,
+          "from": "user1",
+          "text": "Segue boleto para pagamento"
+        },
+        {
+          "id": 3,
+          "from": "user2",
+          "text": "URGENTE: sistema não funciona"
+        }
+      ]
+    },
+    "expected": {
+      "total": 3,
+      "urgent_count": 2,
+      "counts": {
+        "comercial": 1,
+        "financeiro": 1,
+        "suporte": 1
+      }
+    }
+  },
+  {
+    "id": "ib-21",
+    "desc": "variação inbox 21",
+    "tenant_id": "t-eval-21",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "Segue boleto para pagamento"
+        },
+        {
+          "id": 2,
+          "from": "user1",
+          "text": "URGENTE: sistema não funciona"
+        },
+        {
+          "id": 3,
+          "from": "user2",
+          "text": "pedido do fornecedor chegou?"
+        },
+        {
+          "id": 4,
+          "from": "user3",
+          "text": "Obrigado pelo atendimento urgente"
+        }
+      ]
+    },
+    "expected": {
+      "total": 4,
+      "urgent_count": 2,
+      "counts": {
+        "financeiro": 1,
+        "suporte": 1,
+        "compras": 1,
+        "geral": 1
+      }
+    }
+  },
+  {
+    "id": "ib-22",
+    "desc": "variação inbox 22",
+    "tenant_id": "t-eval-22",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "URGENTE: sistema não funciona"
+        },
+        {
+          "id": 2,
+          "from": "user1",
+          "text": "pedido do fornecedor chegou?"
+        },
+        {
+          "id": 3,
+          "from": "user2",
+          "text": "Obrigado pelo atendimento urgente"
+        },
+        {
+          "id": 4,
+          "from": "user3",
+          "text": "preciso de proposta agora"
+        },
+        {
+          "id": 5,
+          "from": "user4",
+          "text": "nota fiscal em atraso hoje"
+        }
+      ]
+    },
+    "expected": {
+      "total": 5,
+      "urgent_count": 4,
+      "counts": {
+        "suporte": 1,
+        "compras": 1,
+        "geral": 1,
+        "comercial": 1,
+        "financeiro": 1
+      }
+    }
+  },
+  {
+    "id": "ib-23",
+    "desc": "variação inbox 23",
+    "tenant_id": "t-eval-23",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "pedido do fornecedor chegou?"
+        },
+        {
+          "id": 2,
+          "from": "user1",
+          "text": "Obrigado pelo atendimento urgente"
+        },
+        {
+          "id": 3,
+          "from": "user2",
+          "text": "preciso de proposta agora"
+        },
+        {
+          "id": 4,
+          "from": "user3",
+          "text": "nota fiscal em atraso hoje"
+        },
+        {
+          "id": 5,
+          "from": "user4",
+          "text": "quero cancelar e pedir reembolso"
+        },
+        {
+          "id": 6,
+          "from": "user5",
+          "text": "insumo parado no fornecedor imediato"
+        }
+      ]
+    },
+    "expected": {
+      "total": 6,
+      "urgent_count": 4,
+      "counts": {
+        "compras": 2,
+        "geral": 1,
+        "comercial": 1,
+        "financeiro": 1,
+        "suporte": 1
+      }
+    }
+  },
+  {
+    "id": "ib-24",
+    "desc": "variação inbox 24",
+    "tenant_id": "t-eval-24",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "Obrigado pelo atendimento urgente"
+        }
+      ]
+    },
+    "expected": {
+      "total": 1,
+      "urgent_count": 1,
+      "counts": {
+        "geral": 1
+      }
+    }
+  },
+  {
+    "id": "ib-25",
+    "desc": "variação inbox 25",
+    "tenant_id": "t-eval-25",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "preciso de proposta agora"
+        },
+        {
+          "id": 2,
+          "from": "user1",
+          "text": "nota fiscal em atraso hoje"
+        }
+      ]
+    },
+    "expected": {
+      "total": 2,
+      "urgent_count": 2,
+      "counts": {
+        "comercial": 1,
+        "financeiro": 1
+      }
+    }
+  },
+  {
+    "id": "ib-26",
+    "desc": "variação inbox 26",
+    "tenant_id": "t-eval-26",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "nota fiscal em atraso hoje"
+        },
+        {
+          "id": 2,
+          "from": "user1",
+          "text": "quero cancelar e pedir reembolso"
+        },
+        {
+          "id": 3,
+          "from": "user2",
+          "text": "insumo parado no fornecedor imediato"
+        }
+      ]
+    },
+    "expected": {
+      "total": 3,
+      "urgent_count": 2,
+      "counts": {
+        "financeiro": 1,
+        "suporte": 1,
+        "compras": 1
+      }
+    }
+  },
+  {
+    "id": "ib-27",
+    "desc": "variação inbox 27",
+    "tenant_id": "t-eval-27",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "quero cancelar e pedir reembolso"
+        },
+        {
+          "id": 2,
+          "from": "user1",
+          "text": "insumo parado no fornecedor imediato"
+        },
+        {
+          "id": 3,
+          "from": "user2",
+          "text": "olá bom dia"
+        },
+        {
+          "id": 4,
+          "from": "user3",
+          "text": "Quero um orçamento para amanhã"
+        }
+      ]
+    },
+    "expected": {
+      "total": 4,
+      "urgent_count": 1,
+      "counts": {
+        "suporte": 1,
+        "compras": 1,
+        "geral": 1,
+        "comercial": 1
+      }
+    }
+  },
+  {
+    "id": "ib-28",
+    "desc": "variação inbox 28",
+    "tenant_id": "t-eval-28",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "insumo parado no fornecedor imediato"
+        },
+        {
+          "id": 2,
+          "from": "user1",
+          "text": "olá bom dia"
+        },
+        {
+          "id": 3,
+          "from": "user2",
+          "text": "Quero um orçamento para amanhã"
+        },
+        {
+          "id": 4,
+          "from": "user3",
+          "text": "Segue boleto para pagamento"
+        },
+        {
+          "id": 5,
+          "from": "user4",
+          "text": "URGENTE: sistema não funciona agora"
+        }
+      ]
+    },
+    "expected": {
+      "total": 5,
+      "urgent_count": 2,
+      "counts": {
+        "compras": 1,
+        "geral": 1,
+        "comercial": 1,
+        "financeiro": 1,
+        "suporte": 1
+      }
+    }
+  },
+  {
+    "id": "ib-29",
+    "desc": "variação inbox 29",
+    "tenant_id": "t-eval-29",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "olá bom dia"
+        },
+        {
+          "id": 2,
+          "from": "user1",
+          "text": "Quero um orçamento para amanhã"
+        },
+        {
+          "id": 3,
+          "from": "user2",
+          "text": "Segue boleto para pagamento"
+        },
+        {
+          "id": 4,
+          "from": "user3",
+          "text": "URGENTE: sistema não funciona agora"
+        },
+        {
+          "id": 5,
+          "from": "user4",
+          "text": "pedido do fornecedor chegou?"
+        },
+        {
+          "id": 6,
+          "from": "user5",
+          "text": "Obrigado pelo atendimento"
+        }
+      ]
+    },
+    "expected": {
+      "total": 6,
+      "urgent_count": 1,
+      "counts": {
+        "geral": 2,
+        "comercial": 1,
+        "financeiro": 1,
+        "suporte": 1,
+        "compras": 1
+      }
+    }
+  },
+  {
+    "id": "ib-30",
+    "desc": "variação inbox 30",
+    "tenant_id": "t-eval-30",
+    "inbox": {
+      "messages": [
+        {
+          "id": 1,
+          "from": "user0",
+          "text": "Quero um orçamento para amanhã"
+        }
+      ]
+    },
+    "expected": {
+      "total": 1,
+      "urgent_count": 0,
+      "counts": {
+        "comercial": 1
+      }
+    }
+  }
 ]

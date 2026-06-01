@@ -1,902 +1,632 @@
 [
   {
     "id": "g10-burn-monitor-01",
-    "desc": "Runway & Burn vs. Plano: cenário 01 risco=low status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 1,
-      "blocked": false
+    "desc": "burn scenario 1",
+    "burn": {
+      "cash_balance_brl": 50000,
+      "gross_burn_brl": 8000,
+      "monthly_revenue_brl": 0,
+      "planned_burn_brl": 9000,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "net_burn_brl": 8000.0,
+      "runway_months": 6.25,
+      "burn_vs_plan_variance_pct": -11.11,
+      "severity": "warning",
+      "alert": true
     }
   },
   {
     "id": "g10-burn-monitor-02",
-    "desc": "Runway & Burn vs. Plano: cenário 02 risco=medium status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-burn-monitor",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 2,
-      "blocked": false
+    "desc": "burn scenario 2",
+    "burn": {
+      "cash_balance_brl": 70000,
+      "gross_burn_brl": 11000,
+      "monthly_revenue_brl": 1500,
+      "planned_burn_brl": 11500,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g10-burn-monitor",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "net_burn_brl": 9500.0,
+      "runway_months": 7.37,
+      "burn_vs_plan_variance_pct": -4.35,
+      "severity": "warning",
+      "alert": true
     }
   },
   {
     "id": "g10-burn-monitor-03",
-    "desc": "Runway & Burn vs. Plano: cenário 03 risco=high status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-burn-monitor",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 3,
-      "blocked": false
+    "desc": "burn scenario 3",
+    "burn": {
+      "cash_balance_brl": 90000,
+      "gross_burn_brl": 14000,
+      "monthly_revenue_brl": 3000,
+      "planned_burn_brl": 14000,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g10-burn-monitor",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "net_burn_brl": 11000.0,
+      "runway_months": 8.18,
+      "burn_vs_plan_variance_pct": 0.0,
+      "severity": "warning",
+      "alert": true
     }
   },
   {
     "id": "g10-burn-monitor-04",
-    "desc": "Runway & Burn vs. Plano: cenário 04 risco=critical status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-burn-monitor",
-    "capabilities": [
-      "config_driven",
-      "financial_traceability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 4,
-      "blocked": false
+    "desc": "burn scenario 4",
+    "burn": {
+      "cash_balance_brl": 110000,
+      "gross_burn_brl": 17000,
+      "monthly_revenue_brl": 4500,
+      "planned_burn_brl": 16500,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-burn-monitor",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "net_burn_brl": 12500.0,
+      "runway_months": 8.8,
+      "burn_vs_plan_variance_pct": 3.03,
+      "severity": "warning",
+      "alert": true
     }
   },
   {
     "id": "g10-burn-monitor-05",
-    "desc": "Runway & Burn vs. Plano: cenário 05 risco=low status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-burn-monitor",
-    "capabilities": [
-      "financial_traceability",
-      "unit_economics"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 5,
-      "blocked": false
+    "desc": "burn scenario 5",
+    "burn": {
+      "cash_balance_brl": 130000,
+      "gross_burn_brl": 20000,
+      "monthly_revenue_brl": 6000,
+      "planned_burn_brl": 9000,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g10-burn-monitor",
-      "capabilities_any": [
-        "financial_traceability"
-      ]
+      "net_burn_brl": 14000.0,
+      "runway_months": 9.29,
+      "burn_vs_plan_variance_pct": 122.22,
+      "severity": "warning",
+      "alert": true
     }
   },
   {
     "id": "g10-burn-monitor-06",
-    "desc": "Runway & Burn vs. Plano: cenário 06 risco=medium status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-burn-monitor",
-    "capabilities": [
-      "unit_economics",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 6,
-      "blocked": false
+    "desc": "burn scenario 6",
+    "burn": {
+      "cash_balance_brl": 150000,
+      "gross_burn_brl": 23000,
+      "monthly_revenue_brl": 0,
+      "planned_burn_brl": 11500,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g10-burn-monitor",
-      "capabilities_any": [
-        "unit_economics"
-      ]
+      "net_burn_brl": 23000.0,
+      "runway_months": 6.52,
+      "burn_vs_plan_variance_pct": 100.0,
+      "severity": "warning",
+      "alert": true
     }
   },
   {
     "id": "g10-burn-monitor-07",
-    "desc": "Runway & Burn vs. Plano: cenário 07 risco=high status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 7,
-      "blocked": false
+    "desc": "burn scenario 7",
+    "burn": {
+      "cash_balance_brl": 170000,
+      "gross_burn_brl": 8000,
+      "monthly_revenue_brl": 1500,
+      "planned_burn_brl": 14000,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "net_burn_brl": 6500.0,
+      "runway_months": 26.15,
+      "burn_vs_plan_variance_pct": -42.86,
+      "severity": "ok",
+      "alert": false
     }
   },
   {
     "id": "g10-burn-monitor-08",
-    "desc": "Runway & Burn vs. Plano: cenário 08 risco=critical status=blocked",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "critical",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g10-burn-monitor",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 8,
-      "blocked": true
+    "desc": "burn scenario 8",
+    "burn": {
+      "cash_balance_brl": 190000,
+      "gross_burn_brl": 11000,
+      "monthly_revenue_brl": 3000,
+      "planned_burn_brl": 16500,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "blocked",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-burn-monitor",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "net_burn_brl": 8000.0,
+      "runway_months": 23.75,
+      "burn_vs_plan_variance_pct": -33.33,
+      "severity": "ok",
+      "alert": false
     }
   },
   {
     "id": "g10-burn-monitor-09",
-    "desc": "Runway & Burn vs. Plano: cenário 09 risco=low status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-burn-monitor",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 9,
-      "blocked": false
+    "desc": "burn scenario 9",
+    "burn": {
+      "cash_balance_brl": 210000,
+      "gross_burn_brl": 14000,
+      "monthly_revenue_brl": 4500,
+      "planned_burn_brl": 9000,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g10-burn-monitor",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "net_burn_brl": 9500.0,
+      "runway_months": 22.11,
+      "burn_vs_plan_variance_pct": 55.56,
+      "severity": "warning",
+      "alert": true
     }
   },
   {
     "id": "g10-burn-monitor-10",
-    "desc": "Runway & Burn vs. Plano: cenário 10 risco=medium status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-burn-monitor",
-    "capabilities": [
-      "config_driven",
-      "financial_traceability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 10,
-      "blocked": false
+    "desc": "burn scenario 10",
+    "burn": {
+      "cash_balance_brl": 230000,
+      "gross_burn_brl": 17000,
+      "monthly_revenue_brl": 6000,
+      "planned_burn_brl": 11500,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g10-burn-monitor",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "net_burn_brl": 11000.0,
+      "runway_months": 20.91,
+      "burn_vs_plan_variance_pct": 47.83,
+      "severity": "warning",
+      "alert": true
     }
   },
   {
     "id": "g10-burn-monitor-11",
-    "desc": "Runway & Burn vs. Plano: cenário 11 risco=high status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-burn-monitor",
-    "capabilities": [
-      "financial_traceability",
-      "unit_economics"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 11,
-      "blocked": false
+    "desc": "burn scenario 11",
+    "burn": {
+      "cash_balance_brl": 50000,
+      "gross_burn_brl": 20000,
+      "monthly_revenue_brl": 0,
+      "planned_burn_brl": 14000,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g10-burn-monitor",
-      "capabilities_any": [
-        "financial_traceability"
-      ]
+      "net_burn_brl": 20000.0,
+      "runway_months": 2.5,
+      "burn_vs_plan_variance_pct": 42.86,
+      "severity": "critical",
+      "alert": true
     }
   },
   {
     "id": "g10-burn-monitor-12",
-    "desc": "Runway & Burn vs. Plano: cenário 12 risco=critical status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-burn-monitor",
-    "capabilities": [
-      "unit_economics",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 12,
-      "blocked": false
+    "desc": "burn scenario 12",
+    "burn": {
+      "cash_balance_brl": 70000,
+      "gross_burn_brl": 23000,
+      "monthly_revenue_brl": 1500,
+      "planned_burn_brl": 16500,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-burn-monitor",
-      "capabilities_any": [
-        "unit_economics"
-      ]
+      "net_burn_brl": 21500.0,
+      "runway_months": 3.26,
+      "burn_vs_plan_variance_pct": 39.39,
+      "severity": "critical",
+      "alert": true
     }
   },
   {
     "id": "g10-burn-monitor-13",
-    "desc": "Runway & Burn vs. Plano: cenário 13 risco=low status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 13,
-      "blocked": false
+    "desc": "burn scenario 13",
+    "burn": {
+      "cash_balance_brl": 90000,
+      "gross_burn_brl": 8000,
+      "monthly_revenue_brl": 3000,
+      "planned_burn_brl": 9000,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "net_burn_brl": 5000.0,
+      "runway_months": 18.0,
+      "burn_vs_plan_variance_pct": -11.11,
+      "severity": "ok",
+      "alert": false
     }
   },
   {
     "id": "g10-burn-monitor-14",
-    "desc": "Runway & Burn vs. Plano: cenário 14 risco=medium status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-burn-monitor",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 14,
-      "blocked": false
+    "desc": "burn scenario 14",
+    "burn": {
+      "cash_balance_brl": 110000,
+      "gross_burn_brl": 11000,
+      "monthly_revenue_brl": 4500,
+      "planned_burn_brl": 11500,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g10-burn-monitor",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "net_burn_brl": 6500.0,
+      "runway_months": 16.92,
+      "burn_vs_plan_variance_pct": -4.35,
+      "severity": "ok",
+      "alert": false
     }
   },
   {
     "id": "g10-burn-monitor-15",
-    "desc": "Runway & Burn vs. Plano: cenário 15 risco=high status=blocked",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "high",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g10-burn-monitor",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 15,
-      "blocked": true
+    "desc": "burn scenario 15",
+    "burn": {
+      "cash_balance_brl": 130000,
+      "gross_burn_brl": 14000,
+      "monthly_revenue_brl": 6000,
+      "planned_burn_brl": 14000,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "blocked",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g10-burn-monitor",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "net_burn_brl": 8000.0,
+      "runway_months": 16.25,
+      "burn_vs_plan_variance_pct": 0.0,
+      "severity": "ok",
+      "alert": false
     }
   },
   {
     "id": "g10-burn-monitor-16",
-    "desc": "Runway & Burn vs. Plano: cenário 16 risco=critical status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-burn-monitor",
-    "capabilities": [
-      "config_driven",
-      "financial_traceability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 16,
-      "blocked": false
+    "desc": "burn scenario 16",
+    "burn": {
+      "cash_balance_brl": 150000,
+      "gross_burn_brl": 17000,
+      "monthly_revenue_brl": 0,
+      "planned_burn_brl": 16500,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-burn-monitor",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "net_burn_brl": 17000.0,
+      "runway_months": 8.82,
+      "burn_vs_plan_variance_pct": 3.03,
+      "severity": "warning",
+      "alert": true
     }
   },
   {
     "id": "g10-burn-monitor-17",
-    "desc": "Runway & Burn vs. Plano: cenário 17 risco=low status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-burn-monitor",
-    "capabilities": [
-      "financial_traceability",
-      "unit_economics"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 17,
-      "blocked": false
+    "desc": "burn scenario 17",
+    "burn": {
+      "cash_balance_brl": 170000,
+      "gross_burn_brl": 20000,
+      "monthly_revenue_brl": 1500,
+      "planned_burn_brl": 9000,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g10-burn-monitor",
-      "capabilities_any": [
-        "financial_traceability"
-      ]
+      "net_burn_brl": 18500.0,
+      "runway_months": 9.19,
+      "burn_vs_plan_variance_pct": 122.22,
+      "severity": "warning",
+      "alert": true
     }
   },
   {
     "id": "g10-burn-monitor-18",
-    "desc": "Runway & Burn vs. Plano: cenário 18 risco=medium status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-burn-monitor",
-    "capabilities": [
-      "unit_economics",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 18,
-      "blocked": false
+    "desc": "burn scenario 18",
+    "burn": {
+      "cash_balance_brl": 190000,
+      "gross_burn_brl": 23000,
+      "monthly_revenue_brl": 3000,
+      "planned_burn_brl": 11500,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g10-burn-monitor",
-      "capabilities_any": [
-        "unit_economics"
-      ]
+      "net_burn_brl": 20000.0,
+      "runway_months": 9.5,
+      "burn_vs_plan_variance_pct": 100.0,
+      "severity": "warning",
+      "alert": true
     }
   },
   {
     "id": "g10-burn-monitor-19",
-    "desc": "Runway & Burn vs. Plano: cenário 19 risco=high status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 19,
-      "blocked": false
+    "desc": "burn scenario 19",
+    "burn": {
+      "cash_balance_brl": 210000,
+      "gross_burn_brl": 8000,
+      "monthly_revenue_brl": 4500,
+      "planned_burn_brl": 14000,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "net_burn_brl": 3500.0,
+      "runway_months": 60.0,
+      "burn_vs_plan_variance_pct": -42.86,
+      "severity": "ok",
+      "alert": false
     }
   },
   {
     "id": "g10-burn-monitor-20",
-    "desc": "Runway & Burn vs. Plano: cenário 20 risco=critical status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-burn-monitor",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 20,
-      "blocked": false
+    "desc": "burn scenario 20",
+    "burn": {
+      "cash_balance_brl": 230000,
+      "gross_burn_brl": 11000,
+      "monthly_revenue_brl": 6000,
+      "planned_burn_brl": 16500,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-burn-monitor",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "net_burn_brl": 5000.0,
+      "runway_months": 46.0,
+      "burn_vs_plan_variance_pct": -33.33,
+      "severity": "ok",
+      "alert": false
     }
   },
   {
     "id": "g10-burn-monitor-21",
-    "desc": "Runway & Burn vs. Plano: cenário 21 risco=low status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-burn-monitor",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 21,
-      "blocked": false
+    "desc": "burn scenario 21",
+    "burn": {
+      "cash_balance_brl": 50000,
+      "gross_burn_brl": 14000,
+      "monthly_revenue_brl": 0,
+      "planned_burn_brl": 9000,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g10-burn-monitor",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "net_burn_brl": 14000.0,
+      "runway_months": 3.57,
+      "burn_vs_plan_variance_pct": 55.56,
+      "severity": "critical",
+      "alert": true
     }
   },
   {
     "id": "g10-burn-monitor-22",
-    "desc": "Runway & Burn vs. Plano: cenário 22 risco=medium status=blocked",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g10-burn-monitor",
-    "capabilities": [
-      "config_driven",
-      "financial_traceability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 22,
-      "blocked": true
+    "desc": "burn scenario 22",
+    "burn": {
+      "cash_balance_brl": 70000,
+      "gross_burn_brl": 17000,
+      "monthly_revenue_brl": 1500,
+      "planned_burn_brl": 11500,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g10-burn-monitor",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "net_burn_brl": 15500.0,
+      "runway_months": 4.52,
+      "burn_vs_plan_variance_pct": 47.83,
+      "severity": "critical",
+      "alert": true
     }
   },
   {
     "id": "g10-burn-monitor-23",
-    "desc": "Runway & Burn vs. Plano: cenário 23 risco=high status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-burn-monitor",
-    "capabilities": [
-      "financial_traceability",
-      "unit_economics"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 23,
-      "blocked": false
+    "desc": "burn scenario 23",
+    "burn": {
+      "cash_balance_brl": 90000,
+      "gross_burn_brl": 20000,
+      "monthly_revenue_brl": 3000,
+      "planned_burn_brl": 14000,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g10-burn-monitor",
-      "capabilities_any": [
-        "financial_traceability"
-      ]
+      "net_burn_brl": 17000.0,
+      "runway_months": 5.29,
+      "burn_vs_plan_variance_pct": 42.86,
+      "severity": "critical",
+      "alert": true
     }
   },
   {
     "id": "g10-burn-monitor-24",
-    "desc": "Runway & Burn vs. Plano: cenário 24 risco=critical status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-burn-monitor",
-    "capabilities": [
-      "unit_economics",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 24,
-      "blocked": false
+    "desc": "burn scenario 24",
+    "burn": {
+      "cash_balance_brl": 110000,
+      "gross_burn_brl": 23000,
+      "monthly_revenue_brl": 4500,
+      "planned_burn_brl": 16500,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-burn-monitor",
-      "capabilities_any": [
-        "unit_economics"
-      ]
+      "net_burn_brl": 18500.0,
+      "runway_months": 5.95,
+      "burn_vs_plan_variance_pct": 39.39,
+      "severity": "critical",
+      "alert": true
     }
   },
   {
     "id": "g10-burn-monitor-25",
-    "desc": "Runway & Burn vs. Plano: cenário 25 risco=low status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 25,
-      "blocked": false
+    "desc": "burn scenario 25",
+    "burn": {
+      "cash_balance_brl": 130000,
+      "gross_burn_brl": 8000,
+      "monthly_revenue_brl": 6000,
+      "planned_burn_brl": 9000,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "net_burn_brl": 2000.0,
+      "runway_months": 65.0,
+      "burn_vs_plan_variance_pct": -11.11,
+      "severity": "ok",
+      "alert": false
     }
   },
   {
     "id": "g10-burn-monitor-26",
-    "desc": "Runway & Burn vs. Plano: cenário 26 risco=medium status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-burn-monitor",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 26,
-      "blocked": false
+    "desc": "burn scenario 26",
+    "burn": {
+      "cash_balance_brl": 150000,
+      "gross_burn_brl": 11000,
+      "monthly_revenue_brl": 0,
+      "planned_burn_brl": 11500,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g10-burn-monitor",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "net_burn_brl": 11000.0,
+      "runway_months": 13.64,
+      "burn_vs_plan_variance_pct": -4.35,
+      "severity": "ok",
+      "alert": false
     }
   },
   {
     "id": "g10-burn-monitor-27",
-    "desc": "Runway & Burn vs. Plano: cenário 27 risco=high status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-burn-monitor",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 27,
-      "blocked": false
+    "desc": "burn scenario 27",
+    "burn": {
+      "cash_balance_brl": 170000,
+      "gross_burn_brl": 14000,
+      "monthly_revenue_brl": 1500,
+      "planned_burn_brl": 14000,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g10-burn-monitor",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "net_burn_brl": 12500.0,
+      "runway_months": 13.6,
+      "burn_vs_plan_variance_pct": 0.0,
+      "severity": "ok",
+      "alert": false
     }
   },
   {
     "id": "g10-burn-monitor-28",
-    "desc": "Runway & Burn vs. Plano: cenário 28 risco=critical status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-burn-monitor",
-    "capabilities": [
-      "config_driven",
-      "financial_traceability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 28,
-      "blocked": false
+    "desc": "burn scenario 28",
+    "burn": {
+      "cash_balance_brl": 190000,
+      "gross_burn_brl": 17000,
+      "monthly_revenue_brl": 3000,
+      "planned_burn_brl": 16500,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-burn-monitor",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "net_burn_brl": 14000.0,
+      "runway_months": 13.57,
+      "burn_vs_plan_variance_pct": 3.03,
+      "severity": "ok",
+      "alert": false
     }
   },
   {
     "id": "g10-burn-monitor-29",
-    "desc": "Runway & Burn vs. Plano: cenário 29 risco=low status=blocked",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "low",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g10-burn-monitor",
-    "capabilities": [
-      "financial_traceability",
-      "unit_economics"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 29,
-      "blocked": true
+    "desc": "burn scenario 29",
+    "burn": {
+      "cash_balance_brl": 210000,
+      "gross_burn_brl": 20000,
+      "monthly_revenue_brl": 4500,
+      "planned_burn_brl": 9000,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "blocked",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g10-burn-monitor",
-      "capabilities_any": [
-        "financial_traceability"
-      ]
+      "net_burn_brl": 15500.0,
+      "runway_months": 13.55,
+      "burn_vs_plan_variance_pct": 122.22,
+      "severity": "warning",
+      "alert": true
     }
   },
   {
     "id": "g10-burn-monitor-30",
-    "desc": "Runway & Burn vs. Plano: cenário 30 risco=medium status=ready",
-    "artifact_type": "burn-monitor.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-burn-monitor",
-    "capabilities": [
-      "unit_economics",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 30,
-      "blocked": false
+    "desc": "burn scenario 30",
+    "burn": {
+      "cash_balance_brl": 230000,
+      "gross_burn_brl": 23000,
+      "monthly_revenue_brl": 6000,
+      "planned_burn_brl": 11500,
+      "thresholds": {
+        "warning_runway_months": 9,
+        "critical_runway_months": 6
+      }
     },
     "expected": {
-      "agent_id": "g10-burn-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "burn-monitor.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g10-burn-monitor",
-      "capabilities_any": [
-        "unit_economics"
-      ]
+      "net_burn_brl": 17000.0,
+      "runway_months": 13.53,
+      "burn_vs_plan_variance_pct": 100.0,
+      "severity": "warning",
+      "alert": true
     }
   }
 ]

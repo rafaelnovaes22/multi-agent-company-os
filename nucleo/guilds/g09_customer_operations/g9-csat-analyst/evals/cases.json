@@ -1,902 +1,1502 @@
 [
   {
     "id": "g9-csat-analyst-01",
-    "desc": "Analista de CSAT/NPS: cenário 01 risco=low status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 1,
-      "blocked": false
+    "desc": "csat scenario 1",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 4,
+          "nps": 10,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 4,
+          "nps": 9,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 3,
+          "nps": 6,
+          "tags": [
+            "quality"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "response_count": 4,
+      "avg_csat": 3.75,
+      "csat_pct": 75.0,
+      "nps": 25.0,
+      "promoters": 2,
+      "detractors": 1,
+      "top_driver": "quality",
+      "health": "yellow"
     }
   },
   {
     "id": "g9-csat-analyst-02",
-    "desc": "Analista de CSAT/NPS: cenário 02 risco=medium status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g9-csat-analyst",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 2,
-      "blocked": false
+    "desc": "csat scenario 2",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 3,
+          "nps": 6,
+          "tags": [
+            "bug"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 2,
+          "nps": 5,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 5,
+          "nps": 9,
+          "tags": [
+            "bug"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "speed"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g9-csat-analyst",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "response_count": 4,
+      "avg_csat": 3.5,
+      "csat_pct": 50.0,
+      "nps": -25.0,
+      "promoters": 1,
+      "detractors": 2,
+      "top_driver": "bug",
+      "health": "red"
     }
   },
   {
     "id": "g9-csat-analyst-03",
-    "desc": "Analista de CSAT/NPS: cenário 03 risco=high status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-csat-analyst",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 3,
-      "blocked": false
+    "desc": "csat scenario 3",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 5,
+          "nps": 10,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 5,
+          "nps": 9,
+          "tags": [
+            "support"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 4,
+          "nps": 9,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "support"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g9-csat-analyst",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "response_count": 4,
+      "avg_csat": 4.5,
+      "csat_pct": 100.0,
+      "nps": 75.0,
+      "promoters": 3,
+      "detractors": 0,
+      "top_driver": "quality",
+      "health": "green"
     }
   },
   {
     "id": "g9-csat-analyst-04",
-    "desc": "Analista de CSAT/NPS: cenário 04 risco=critical status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-csat-analyst",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 4,
-      "blocked": false
+    "desc": "csat scenario 4",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 5,
+          "nps": 10,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 4,
+          "nps": 9,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 3,
+          "nps": 6,
+          "tags": [
+            "quality"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g9-csat-analyst",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "response_count": 4,
+      "avg_csat": 4.0,
+      "csat_pct": 75.0,
+      "nps": 25.0,
+      "promoters": 2,
+      "detractors": 1,
+      "top_driver": "quality",
+      "health": "yellow"
     }
   },
   {
     "id": "g9-csat-analyst-05",
-    "desc": "Analista de CSAT/NPS: cenário 05 risco=low status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g9-csat-analyst",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 5,
-      "blocked": false
+    "desc": "csat scenario 5",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 3,
+          "nps": 6,
+          "tags": [
+            "bug"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 2,
+          "nps": 5,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 5,
+          "nps": 9,
+          "tags": [
+            "bug"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "speed"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g9-csat-analyst",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "response_count": 4,
+      "avg_csat": 3.5,
+      "csat_pct": 50.0,
+      "nps": -25.0,
+      "promoters": 1,
+      "detractors": 2,
+      "top_driver": "bug",
+      "health": "red"
     }
   },
   {
     "id": "g9-csat-analyst-06",
-    "desc": "Analista de CSAT/NPS: cenário 06 risco=medium status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-csat-analyst",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 6,
-      "blocked": false
+    "desc": "csat scenario 6",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 5,
+          "nps": 10,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 5,
+          "nps": 9,
+          "tags": [
+            "support"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 4,
+          "nps": 9,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "support"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g9-csat-analyst",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "response_count": 4,
+      "avg_csat": 4.5,
+      "csat_pct": 100.0,
+      "nps": 75.0,
+      "promoters": 3,
+      "detractors": 0,
+      "top_driver": "quality",
+      "health": "green"
     }
   },
   {
     "id": "g9-csat-analyst-07",
-    "desc": "Analista de CSAT/NPS: cenário 07 risco=high status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 7,
-      "blocked": false
+    "desc": "csat scenario 7",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 5,
+          "nps": 10,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 4,
+          "nps": 9,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 3,
+          "nps": 6,
+          "tags": [
+            "quality"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "response_count": 4,
+      "avg_csat": 4.0,
+      "csat_pct": 75.0,
+      "nps": 25.0,
+      "promoters": 2,
+      "detractors": 1,
+      "top_driver": "quality",
+      "health": "yellow"
     }
   },
   {
     "id": "g9-csat-analyst-08",
-    "desc": "Analista de CSAT/NPS: cenário 08 risco=critical status=blocked",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "critical",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g9-csat-analyst",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 8,
-      "blocked": true
+    "desc": "csat scenario 8",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 2,
+          "nps": 6,
+          "tags": [
+            "bug"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 2,
+          "nps": 5,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 5,
+          "nps": 9,
+          "tags": [
+            "bug"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "speed"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "blocked",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g9-csat-analyst",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "response_count": 4,
+      "avg_csat": 3.25,
+      "csat_pct": 50.0,
+      "nps": -25.0,
+      "promoters": 1,
+      "detractors": 2,
+      "top_driver": "bug",
+      "health": "red"
     }
   },
   {
     "id": "g9-csat-analyst-09",
-    "desc": "Analista de CSAT/NPS: cenário 09 risco=low status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g9-csat-analyst",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 9,
-      "blocked": false
+    "desc": "csat scenario 9",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 5,
+          "nps": 10,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 5,
+          "nps": 9,
+          "tags": [
+            "support"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 4,
+          "nps": 9,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "support"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g9-csat-analyst",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "response_count": 4,
+      "avg_csat": 4.5,
+      "csat_pct": 100.0,
+      "nps": 75.0,
+      "promoters": 3,
+      "detractors": 0,
+      "top_driver": "quality",
+      "health": "green"
     }
   },
   {
     "id": "g9-csat-analyst-10",
-    "desc": "Analista de CSAT/NPS: cenário 10 risco=medium status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g9-csat-analyst",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 10,
-      "blocked": false
+    "desc": "csat scenario 10",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 5,
+          "nps": 10,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 4,
+          "nps": 9,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 3,
+          "nps": 6,
+          "tags": [
+            "quality"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g9-csat-analyst",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "response_count": 4,
+      "avg_csat": 4.0,
+      "csat_pct": 75.0,
+      "nps": 25.0,
+      "promoters": 2,
+      "detractors": 1,
+      "top_driver": "quality",
+      "health": "yellow"
     }
   },
   {
     "id": "g9-csat-analyst-11",
-    "desc": "Analista de CSAT/NPS: cenário 11 risco=high status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-csat-analyst",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 11,
-      "blocked": false
+    "desc": "csat scenario 11",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 3,
+          "nps": 6,
+          "tags": [
+            "bug"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 2,
+          "nps": 5,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 5,
+          "nps": 9,
+          "tags": [
+            "bug"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "speed"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g9-csat-analyst",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "response_count": 4,
+      "avg_csat": 3.5,
+      "csat_pct": 50.0,
+      "nps": -25.0,
+      "promoters": 1,
+      "detractors": 2,
+      "top_driver": "bug",
+      "health": "red"
     }
   },
   {
     "id": "g9-csat-analyst-12",
-    "desc": "Analista de CSAT/NPS: cenário 12 risco=critical status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-csat-analyst",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 12,
-      "blocked": false
+    "desc": "csat scenario 12",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 5,
+          "nps": 10,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 5,
+          "nps": 9,
+          "tags": [
+            "support"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 4,
+          "nps": 9,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "support"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g9-csat-analyst",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "response_count": 4,
+      "avg_csat": 4.5,
+      "csat_pct": 100.0,
+      "nps": 75.0,
+      "promoters": 3,
+      "detractors": 0,
+      "top_driver": "quality",
+      "health": "green"
     }
   },
   {
     "id": "g9-csat-analyst-13",
-    "desc": "Analista de CSAT/NPS: cenário 13 risco=low status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 13,
-      "blocked": false
+    "desc": "csat scenario 13",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 5,
+          "nps": 10,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 4,
+          "nps": 9,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 3,
+          "nps": 6,
+          "tags": [
+            "quality"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "response_count": 4,
+      "avg_csat": 4.0,
+      "csat_pct": 75.0,
+      "nps": 25.0,
+      "promoters": 2,
+      "detractors": 1,
+      "top_driver": "quality",
+      "health": "yellow"
     }
   },
   {
     "id": "g9-csat-analyst-14",
-    "desc": "Analista de CSAT/NPS: cenário 14 risco=medium status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g9-csat-analyst",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 14,
-      "blocked": false
+    "desc": "csat scenario 14",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 3,
+          "nps": 6,
+          "tags": [
+            "bug"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 2,
+          "nps": 5,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 5,
+          "nps": 9,
+          "tags": [
+            "bug"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "speed"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g9-csat-analyst",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "response_count": 4,
+      "avg_csat": 3.5,
+      "csat_pct": 50.0,
+      "nps": -25.0,
+      "promoters": 1,
+      "detractors": 2,
+      "top_driver": "bug",
+      "health": "red"
     }
   },
   {
     "id": "g9-csat-analyst-15",
-    "desc": "Analista de CSAT/NPS: cenário 15 risco=high status=blocked",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "high",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g9-csat-analyst",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 15,
-      "blocked": true
+    "desc": "csat scenario 15",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 4,
+          "nps": 10,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 5,
+          "nps": 9,
+          "tags": [
+            "support"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 4,
+          "nps": 9,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "support"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "blocked",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g9-csat-analyst",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "response_count": 4,
+      "avg_csat": 4.25,
+      "csat_pct": 100.0,
+      "nps": 75.0,
+      "promoters": 3,
+      "detractors": 0,
+      "top_driver": "quality",
+      "health": "green"
     }
   },
   {
     "id": "g9-csat-analyst-16",
-    "desc": "Analista de CSAT/NPS: cenário 16 risco=critical status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-csat-analyst",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 16,
-      "blocked": false
+    "desc": "csat scenario 16",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 5,
+          "nps": 10,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 4,
+          "nps": 9,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 3,
+          "nps": 6,
+          "tags": [
+            "quality"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g9-csat-analyst",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "response_count": 4,
+      "avg_csat": 4.0,
+      "csat_pct": 75.0,
+      "nps": 25.0,
+      "promoters": 2,
+      "detractors": 1,
+      "top_driver": "quality",
+      "health": "yellow"
     }
   },
   {
     "id": "g9-csat-analyst-17",
-    "desc": "Analista de CSAT/NPS: cenário 17 risco=low status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g9-csat-analyst",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 17,
-      "blocked": false
+    "desc": "csat scenario 17",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 3,
+          "nps": 6,
+          "tags": [
+            "bug"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 2,
+          "nps": 5,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 5,
+          "nps": 9,
+          "tags": [
+            "bug"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "speed"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g9-csat-analyst",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "response_count": 4,
+      "avg_csat": 3.5,
+      "csat_pct": 50.0,
+      "nps": -25.0,
+      "promoters": 1,
+      "detractors": 2,
+      "top_driver": "bug",
+      "health": "red"
     }
   },
   {
     "id": "g9-csat-analyst-18",
-    "desc": "Analista de CSAT/NPS: cenário 18 risco=medium status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-csat-analyst",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 18,
-      "blocked": false
+    "desc": "csat scenario 18",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 5,
+          "nps": 10,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 5,
+          "nps": 9,
+          "tags": [
+            "support"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 4,
+          "nps": 9,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "support"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g9-csat-analyst",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "response_count": 4,
+      "avg_csat": 4.5,
+      "csat_pct": 100.0,
+      "nps": 75.0,
+      "promoters": 3,
+      "detractors": 0,
+      "top_driver": "quality",
+      "health": "green"
     }
   },
   {
     "id": "g9-csat-analyst-19",
-    "desc": "Analista de CSAT/NPS: cenário 19 risco=high status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 19,
-      "blocked": false
+    "desc": "csat scenario 19",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 5,
+          "nps": 10,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 4,
+          "nps": 9,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 3,
+          "nps": 6,
+          "tags": [
+            "quality"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "response_count": 4,
+      "avg_csat": 4.0,
+      "csat_pct": 75.0,
+      "nps": 25.0,
+      "promoters": 2,
+      "detractors": 1,
+      "top_driver": "quality",
+      "health": "yellow"
     }
   },
   {
     "id": "g9-csat-analyst-20",
-    "desc": "Analista de CSAT/NPS: cenário 20 risco=critical status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-csat-analyst",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 20,
-      "blocked": false
+    "desc": "csat scenario 20",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 3,
+          "nps": 6,
+          "tags": [
+            "bug"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 2,
+          "nps": 5,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 5,
+          "nps": 9,
+          "tags": [
+            "bug"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "speed"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g9-csat-analyst",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "response_count": 4,
+      "avg_csat": 3.5,
+      "csat_pct": 50.0,
+      "nps": -25.0,
+      "promoters": 1,
+      "detractors": 2,
+      "top_driver": "bug",
+      "health": "red"
     }
   },
   {
     "id": "g9-csat-analyst-21",
-    "desc": "Analista de CSAT/NPS: cenário 21 risco=low status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g9-csat-analyst",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 21,
-      "blocked": false
+    "desc": "csat scenario 21",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 5,
+          "nps": 10,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 5,
+          "nps": 9,
+          "tags": [
+            "support"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 4,
+          "nps": 9,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "support"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g9-csat-analyst",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "response_count": 4,
+      "avg_csat": 4.5,
+      "csat_pct": 100.0,
+      "nps": 75.0,
+      "promoters": 3,
+      "detractors": 0,
+      "top_driver": "quality",
+      "health": "green"
     }
   },
   {
     "id": "g9-csat-analyst-22",
-    "desc": "Analista de CSAT/NPS: cenário 22 risco=medium status=blocked",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g9-csat-analyst",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 22,
-      "blocked": true
+    "desc": "csat scenario 22",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 4,
+          "nps": 10,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 4,
+          "nps": 9,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 3,
+          "nps": 6,
+          "tags": [
+            "quality"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g9-csat-analyst",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "response_count": 4,
+      "avg_csat": 3.75,
+      "csat_pct": 75.0,
+      "nps": 25.0,
+      "promoters": 2,
+      "detractors": 1,
+      "top_driver": "quality",
+      "health": "yellow"
     }
   },
   {
     "id": "g9-csat-analyst-23",
-    "desc": "Analista de CSAT/NPS: cenário 23 risco=high status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-csat-analyst",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 23,
-      "blocked": false
+    "desc": "csat scenario 23",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 3,
+          "nps": 6,
+          "tags": [
+            "bug"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 2,
+          "nps": 5,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 5,
+          "nps": 9,
+          "tags": [
+            "bug"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "speed"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g9-csat-analyst",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "response_count": 4,
+      "avg_csat": 3.5,
+      "csat_pct": 50.0,
+      "nps": -25.0,
+      "promoters": 1,
+      "detractors": 2,
+      "top_driver": "bug",
+      "health": "red"
     }
   },
   {
     "id": "g9-csat-analyst-24",
-    "desc": "Analista de CSAT/NPS: cenário 24 risco=critical status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-csat-analyst",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 24,
-      "blocked": false
+    "desc": "csat scenario 24",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 5,
+          "nps": 10,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 5,
+          "nps": 9,
+          "tags": [
+            "support"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 4,
+          "nps": 9,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "support"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g9-csat-analyst",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "response_count": 4,
+      "avg_csat": 4.5,
+      "csat_pct": 100.0,
+      "nps": 75.0,
+      "promoters": 3,
+      "detractors": 0,
+      "top_driver": "quality",
+      "health": "green"
     }
   },
   {
     "id": "g9-csat-analyst-25",
-    "desc": "Analista de CSAT/NPS: cenário 25 risco=low status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 25,
-      "blocked": false
+    "desc": "csat scenario 25",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 5,
+          "nps": 10,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 4,
+          "nps": 9,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 3,
+          "nps": 6,
+          "tags": [
+            "quality"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "response_count": 4,
+      "avg_csat": 4.0,
+      "csat_pct": 75.0,
+      "nps": 25.0,
+      "promoters": 2,
+      "detractors": 1,
+      "top_driver": "quality",
+      "health": "yellow"
     }
   },
   {
     "id": "g9-csat-analyst-26",
-    "desc": "Analista de CSAT/NPS: cenário 26 risco=medium status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g9-csat-analyst",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 26,
-      "blocked": false
+    "desc": "csat scenario 26",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 3,
+          "nps": 6,
+          "tags": [
+            "bug"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 2,
+          "nps": 5,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 5,
+          "nps": 9,
+          "tags": [
+            "bug"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "speed"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g9-csat-analyst",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "response_count": 4,
+      "avg_csat": 3.5,
+      "csat_pct": 50.0,
+      "nps": -25.0,
+      "promoters": 1,
+      "detractors": 2,
+      "top_driver": "bug",
+      "health": "red"
     }
   },
   {
     "id": "g9-csat-analyst-27",
-    "desc": "Analista de CSAT/NPS: cenário 27 risco=high status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-csat-analyst",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 27,
-      "blocked": false
+    "desc": "csat scenario 27",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 5,
+          "nps": 10,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 5,
+          "nps": 9,
+          "tags": [
+            "support"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 4,
+          "nps": 9,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "support"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g9-csat-analyst",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "response_count": 4,
+      "avg_csat": 4.5,
+      "csat_pct": 100.0,
+      "nps": 75.0,
+      "promoters": 3,
+      "detractors": 0,
+      "top_driver": "quality",
+      "health": "green"
     }
   },
   {
     "id": "g9-csat-analyst-28",
-    "desc": "Analista de CSAT/NPS: cenário 28 risco=critical status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-csat-analyst",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 28,
-      "blocked": false
+    "desc": "csat scenario 28",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 5,
+          "nps": 10,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 4,
+          "nps": 9,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 3,
+          "nps": 6,
+          "tags": [
+            "quality"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g9-csat-analyst",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "response_count": 4,
+      "avg_csat": 4.0,
+      "csat_pct": 75.0,
+      "nps": 25.0,
+      "promoters": 2,
+      "detractors": 1,
+      "top_driver": "quality",
+      "health": "yellow"
     }
   },
   {
     "id": "g9-csat-analyst-29",
-    "desc": "Analista de CSAT/NPS: cenário 29 risco=low status=blocked",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "low",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g9-csat-analyst",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 29,
-      "blocked": true
+    "desc": "csat scenario 29",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 2,
+          "nps": 6,
+          "tags": [
+            "bug"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 2,
+          "nps": 5,
+          "tags": [
+            "speed"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 5,
+          "nps": 9,
+          "tags": [
+            "bug"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "speed"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "blocked",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g9-csat-analyst",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "response_count": 4,
+      "avg_csat": 3.25,
+      "csat_pct": 50.0,
+      "nps": -25.0,
+      "promoters": 1,
+      "detractors": 2,
+      "top_driver": "bug",
+      "health": "red"
     }
   },
   {
     "id": "g9-csat-analyst-30",
-    "desc": "Analista de CSAT/NPS: cenário 30 risco=medium status=ready",
-    "artifact_type": "csat-analyst.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-csat-analyst",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 30,
-      "blocked": false
+    "desc": "csat scenario 30",
+    "survey": {
+      "responses": [
+        {
+          "id": "r0",
+          "csat": 5,
+          "nps": 10,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r1",
+          "csat": 5,
+          "nps": 9,
+          "tags": [
+            "support"
+          ]
+        },
+        {
+          "id": "r2",
+          "csat": 4,
+          "nps": 9,
+          "tags": [
+            "quality"
+          ]
+        },
+        {
+          "id": "r3",
+          "csat": 4,
+          "nps": 8,
+          "tags": [
+            "support"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-csat-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "csat-analyst.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g9-csat-analyst",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "response_count": 4,
+      "avg_csat": 4.5,
+      "csat_pct": 100.0,
+      "nps": 75.0,
+      "promoters": 3,
+      "detractors": 0,
+      "top_driver": "quality",
+      "health": "green"
     }
   }
 ]

@@ -1,902 +1,1031 @@
 [
   {
     "id": "g10-token-cost-accountant-01",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 01 risco=low status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 1,
-      "blocked": false
+    "desc": "token cost scenario 1",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 10
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 5
+        },
+        {
+          "guild": null,
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "total_cost_brl": 17.0,
+      "allocated_cost_brl": 15.0,
+      "unattributed_cost_brl": 2.0,
+      "over_budget_guilds": [],
+      "throttle_required": false,
+      "allocation_complete": false
     }
   },
   {
     "id": "g10-token-cost-accountant-02",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 02 risco=medium status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-token-cost-accountant",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 2,
-      "blocked": false
+    "desc": "token cost scenario 2",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 11
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 8
+        },
+        {
+          "guild": "G09",
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g10-token-cost-accountant",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "total_cost_brl": 21.0,
+      "allocated_cost_brl": 21.0,
+      "unattributed_cost_brl": 0.0,
+      "over_budget_guilds": [],
+      "throttle_required": false,
+      "allocation_complete": true
     }
   },
   {
     "id": "g10-token-cost-accountant-03",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 03 risco=high status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-token-cost-accountant",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 3,
-      "blocked": false
+    "desc": "token cost scenario 3",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 12
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 11
+        },
+        {
+          "guild": "G09",
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g10-token-cost-accountant",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "total_cost_brl": 25.0,
+      "allocated_cost_brl": 25.0,
+      "unattributed_cost_brl": 0.0,
+      "over_budget_guilds": [],
+      "throttle_required": false,
+      "allocation_complete": true
     }
   },
   {
     "id": "g10-token-cost-accountant-04",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 04 risco=critical status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-token-cost-accountant",
-    "capabilities": [
-      "config_driven",
-      "financial_traceability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 4,
-      "blocked": false
+    "desc": "token cost scenario 4",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 13
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 14
+        },
+        {
+          "guild": "G09",
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-token-cost-accountant",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "total_cost_brl": 29.0,
+      "allocated_cost_brl": 29.0,
+      "unattributed_cost_brl": 0.0,
+      "over_budget_guilds": [
+        "G10"
+      ],
+      "throttle_required": true,
+      "allocation_complete": true
     }
   },
   {
     "id": "g10-token-cost-accountant-05",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 05 risco=low status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-token-cost-accountant",
-    "capabilities": [
-      "financial_traceability",
-      "unit_economics"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 5,
-      "blocked": false
+    "desc": "token cost scenario 5",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 14
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 5
+        },
+        {
+          "guild": "G09",
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g10-token-cost-accountant",
-      "capabilities_any": [
-        "financial_traceability"
-      ]
+      "total_cost_brl": 21.0,
+      "allocated_cost_brl": 21.0,
+      "unattributed_cost_brl": 0.0,
+      "over_budget_guilds": [],
+      "throttle_required": false,
+      "allocation_complete": true
     }
   },
   {
     "id": "g10-token-cost-accountant-06",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 06 risco=medium status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-token-cost-accountant",
-    "capabilities": [
-      "unit_economics",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 6,
-      "blocked": false
+    "desc": "token cost scenario 6",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 15
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 8
+        },
+        {
+          "guild": "G09",
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g10-token-cost-accountant",
-      "capabilities_any": [
-        "unit_economics"
-      ]
+      "total_cost_brl": 25.0,
+      "allocated_cost_brl": 25.0,
+      "unattributed_cost_brl": 0.0,
+      "over_budget_guilds": [],
+      "throttle_required": false,
+      "allocation_complete": true
     }
   },
   {
     "id": "g10-token-cost-accountant-07",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 07 risco=high status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 7,
-      "blocked": false
+    "desc": "token cost scenario 7",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 16
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 11
+        },
+        {
+          "guild": null,
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "total_cost_brl": 29.0,
+      "allocated_cost_brl": 27.0,
+      "unattributed_cost_brl": 2.0,
+      "over_budget_guilds": [],
+      "throttle_required": false,
+      "allocation_complete": false
     }
   },
   {
     "id": "g10-token-cost-accountant-08",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 08 risco=critical status=blocked",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "critical",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g10-token-cost-accountant",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 8,
-      "blocked": true
+    "desc": "token cost scenario 8",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 17
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 14
+        },
+        {
+          "guild": "G09",
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "blocked",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-token-cost-accountant",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "total_cost_brl": 33.0,
+      "allocated_cost_brl": 33.0,
+      "unattributed_cost_brl": 0.0,
+      "over_budget_guilds": [
+        "G10"
+      ],
+      "throttle_required": true,
+      "allocation_complete": true
     }
   },
   {
     "id": "g10-token-cost-accountant-09",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 09 risco=low status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-token-cost-accountant",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 9,
-      "blocked": false
+    "desc": "token cost scenario 9",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 18
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 5
+        },
+        {
+          "guild": "G09",
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g10-token-cost-accountant",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "total_cost_brl": 25.0,
+      "allocated_cost_brl": 25.0,
+      "unattributed_cost_brl": 0.0,
+      "over_budget_guilds": [],
+      "throttle_required": false,
+      "allocation_complete": true
     }
   },
   {
     "id": "g10-token-cost-accountant-10",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 10 risco=medium status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-token-cost-accountant",
-    "capabilities": [
-      "config_driven",
-      "financial_traceability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 10,
-      "blocked": false
+    "desc": "token cost scenario 10",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 19
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 8
+        },
+        {
+          "guild": "G09",
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g10-token-cost-accountant",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "total_cost_brl": 29.0,
+      "allocated_cost_brl": 29.0,
+      "unattributed_cost_brl": 0.0,
+      "over_budget_guilds": [],
+      "throttle_required": false,
+      "allocation_complete": true
     }
   },
   {
     "id": "g10-token-cost-accountant-11",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 11 risco=high status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-token-cost-accountant",
-    "capabilities": [
-      "financial_traceability",
-      "unit_economics"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 11,
-      "blocked": false
+    "desc": "token cost scenario 11",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 20
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 11
+        },
+        {
+          "guild": "G09",
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g10-token-cost-accountant",
-      "capabilities_any": [
-        "financial_traceability"
-      ]
+      "total_cost_brl": 33.0,
+      "allocated_cost_brl": 33.0,
+      "unattributed_cost_brl": 0.0,
+      "over_budget_guilds": [],
+      "throttle_required": false,
+      "allocation_complete": true
     }
   },
   {
     "id": "g10-token-cost-accountant-12",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 12 risco=critical status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-token-cost-accountant",
-    "capabilities": [
-      "unit_economics",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 12,
-      "blocked": false
+    "desc": "token cost scenario 12",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 21
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 14
+        },
+        {
+          "guild": "G09",
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-token-cost-accountant",
-      "capabilities_any": [
-        "unit_economics"
-      ]
+      "total_cost_brl": 37.0,
+      "allocated_cost_brl": 37.0,
+      "unattributed_cost_brl": 0.0,
+      "over_budget_guilds": [
+        "G10"
+      ],
+      "throttle_required": true,
+      "allocation_complete": true
     }
   },
   {
     "id": "g10-token-cost-accountant-13",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 13 risco=low status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 13,
-      "blocked": false
+    "desc": "token cost scenario 13",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 22
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 5
+        },
+        {
+          "guild": null,
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "total_cost_brl": 29.0,
+      "allocated_cost_brl": 27.0,
+      "unattributed_cost_brl": 2.0,
+      "over_budget_guilds": [],
+      "throttle_required": false,
+      "allocation_complete": false
     }
   },
   {
     "id": "g10-token-cost-accountant-14",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 14 risco=medium status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-token-cost-accountant",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 14,
-      "blocked": false
+    "desc": "token cost scenario 14",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 23
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 8
+        },
+        {
+          "guild": "G09",
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g10-token-cost-accountant",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "total_cost_brl": 33.0,
+      "allocated_cost_brl": 33.0,
+      "unattributed_cost_brl": 0.0,
+      "over_budget_guilds": [],
+      "throttle_required": false,
+      "allocation_complete": true
     }
   },
   {
     "id": "g10-token-cost-accountant-15",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 15 risco=high status=blocked",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "high",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g10-token-cost-accountant",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 15,
-      "blocked": true
+    "desc": "token cost scenario 15",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 24
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 11
+        },
+        {
+          "guild": "G09",
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "blocked",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g10-token-cost-accountant",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "total_cost_brl": 37.0,
+      "allocated_cost_brl": 37.0,
+      "unattributed_cost_brl": 0.0,
+      "over_budget_guilds": [],
+      "throttle_required": false,
+      "allocation_complete": true
     }
   },
   {
     "id": "g10-token-cost-accountant-16",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 16 risco=critical status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-token-cost-accountant",
-    "capabilities": [
-      "config_driven",
-      "financial_traceability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 16,
-      "blocked": false
+    "desc": "token cost scenario 16",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 25
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 14
+        },
+        {
+          "guild": "G09",
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-token-cost-accountant",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "total_cost_brl": 41.0,
+      "allocated_cost_brl": 41.0,
+      "unattributed_cost_brl": 0.0,
+      "over_budget_guilds": [
+        "G10"
+      ],
+      "throttle_required": true,
+      "allocation_complete": true
     }
   },
   {
     "id": "g10-token-cost-accountant-17",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 17 risco=low status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-token-cost-accountant",
-    "capabilities": [
-      "financial_traceability",
-      "unit_economics"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 17,
-      "blocked": false
+    "desc": "token cost scenario 17",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 26
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 5
+        },
+        {
+          "guild": "G09",
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g10-token-cost-accountant",
-      "capabilities_any": [
-        "financial_traceability"
-      ]
+      "total_cost_brl": 33.0,
+      "allocated_cost_brl": 33.0,
+      "unattributed_cost_brl": 0.0,
+      "over_budget_guilds": [
+        "G08"
+      ],
+      "throttle_required": true,
+      "allocation_complete": true
     }
   },
   {
     "id": "g10-token-cost-accountant-18",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 18 risco=medium status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-token-cost-accountant",
-    "capabilities": [
-      "unit_economics",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 18,
-      "blocked": false
+    "desc": "token cost scenario 18",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 27
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 8
+        },
+        {
+          "guild": "G09",
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g10-token-cost-accountant",
-      "capabilities_any": [
-        "unit_economics"
-      ]
+      "total_cost_brl": 37.0,
+      "allocated_cost_brl": 37.0,
+      "unattributed_cost_brl": 0.0,
+      "over_budget_guilds": [
+        "G08"
+      ],
+      "throttle_required": true,
+      "allocation_complete": true
     }
   },
   {
     "id": "g10-token-cost-accountant-19",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 19 risco=high status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 19,
-      "blocked": false
+    "desc": "token cost scenario 19",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 28
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 11
+        },
+        {
+          "guild": null,
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "total_cost_brl": 41.0,
+      "allocated_cost_brl": 39.0,
+      "unattributed_cost_brl": 2.0,
+      "over_budget_guilds": [
+        "G08"
+      ],
+      "throttle_required": true,
+      "allocation_complete": false
     }
   },
   {
     "id": "g10-token-cost-accountant-20",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 20 risco=critical status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-token-cost-accountant",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 20,
-      "blocked": false
+    "desc": "token cost scenario 20",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 29
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 14
+        },
+        {
+          "guild": "G09",
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-token-cost-accountant",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "total_cost_brl": 45.0,
+      "allocated_cost_brl": 45.0,
+      "unattributed_cost_brl": 0.0,
+      "over_budget_guilds": [
+        "G08",
+        "G10"
+      ],
+      "throttle_required": true,
+      "allocation_complete": true
     }
   },
   {
     "id": "g10-token-cost-accountant-21",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 21 risco=low status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-token-cost-accountant",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 21,
-      "blocked": false
+    "desc": "token cost scenario 21",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 30
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 5
+        },
+        {
+          "guild": "G09",
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g10-token-cost-accountant",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "total_cost_brl": 37.0,
+      "allocated_cost_brl": 37.0,
+      "unattributed_cost_brl": 0.0,
+      "over_budget_guilds": [
+        "G08"
+      ],
+      "throttle_required": true,
+      "allocation_complete": true
     }
   },
   {
     "id": "g10-token-cost-accountant-22",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 22 risco=medium status=blocked",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g10-token-cost-accountant",
-    "capabilities": [
-      "config_driven",
-      "financial_traceability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 22,
-      "blocked": true
+    "desc": "token cost scenario 22",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 31
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 8
+        },
+        {
+          "guild": "G09",
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g10-token-cost-accountant",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "total_cost_brl": 41.0,
+      "allocated_cost_brl": 41.0,
+      "unattributed_cost_brl": 0.0,
+      "over_budget_guilds": [
+        "G08"
+      ],
+      "throttle_required": true,
+      "allocation_complete": true
     }
   },
   {
     "id": "g10-token-cost-accountant-23",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 23 risco=high status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-token-cost-accountant",
-    "capabilities": [
-      "financial_traceability",
-      "unit_economics"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 23,
-      "blocked": false
+    "desc": "token cost scenario 23",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 32
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 11
+        },
+        {
+          "guild": "G09",
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g10-token-cost-accountant",
-      "capabilities_any": [
-        "financial_traceability"
-      ]
+      "total_cost_brl": 45.0,
+      "allocated_cost_brl": 45.0,
+      "unattributed_cost_brl": 0.0,
+      "over_budget_guilds": [
+        "G08"
+      ],
+      "throttle_required": true,
+      "allocation_complete": true
     }
   },
   {
     "id": "g10-token-cost-accountant-24",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 24 risco=critical status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-token-cost-accountant",
-    "capabilities": [
-      "unit_economics",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 24,
-      "blocked": false
+    "desc": "token cost scenario 24",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 33
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 14
+        },
+        {
+          "guild": "G09",
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-token-cost-accountant",
-      "capabilities_any": [
-        "unit_economics"
-      ]
+      "total_cost_brl": 49.0,
+      "allocated_cost_brl": 49.0,
+      "unattributed_cost_brl": 0.0,
+      "over_budget_guilds": [
+        "G08",
+        "G10"
+      ],
+      "throttle_required": true,
+      "allocation_complete": true
     }
   },
   {
     "id": "g10-token-cost-accountant-25",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 25 risco=low status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 25,
-      "blocked": false
+    "desc": "token cost scenario 25",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 34
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 5
+        },
+        {
+          "guild": null,
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "total_cost_brl": 41.0,
+      "allocated_cost_brl": 39.0,
+      "unattributed_cost_brl": 2.0,
+      "over_budget_guilds": [
+        "G08"
+      ],
+      "throttle_required": true,
+      "allocation_complete": false
     }
   },
   {
     "id": "g10-token-cost-accountant-26",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 26 risco=medium status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-token-cost-accountant",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 26,
-      "blocked": false
+    "desc": "token cost scenario 26",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 35
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 8
+        },
+        {
+          "guild": "G09",
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g10-token-cost-accountant",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "total_cost_brl": 45.0,
+      "allocated_cost_brl": 45.0,
+      "unattributed_cost_brl": 0.0,
+      "over_budget_guilds": [
+        "G08"
+      ],
+      "throttle_required": true,
+      "allocation_complete": true
     }
   },
   {
     "id": "g10-token-cost-accountant-27",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 27 risco=high status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-token-cost-accountant",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 27,
-      "blocked": false
+    "desc": "token cost scenario 27",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 36
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 11
+        },
+        {
+          "guild": "G09",
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g10-token-cost-accountant",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "total_cost_brl": 49.0,
+      "allocated_cost_brl": 49.0,
+      "unattributed_cost_brl": 0.0,
+      "over_budget_guilds": [
+        "G08"
+      ],
+      "throttle_required": true,
+      "allocation_complete": true
     }
   },
   {
     "id": "g10-token-cost-accountant-28",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 28 risco=critical status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-token-cost-accountant",
-    "capabilities": [
-      "config_driven",
-      "financial_traceability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 28,
-      "blocked": false
+    "desc": "token cost scenario 28",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 37
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 14
+        },
+        {
+          "guild": "G09",
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-token-cost-accountant",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "total_cost_brl": 53.0,
+      "allocated_cost_brl": 53.0,
+      "unattributed_cost_brl": 0.0,
+      "over_budget_guilds": [
+        "G08",
+        "G10"
+      ],
+      "throttle_required": true,
+      "allocation_complete": true
     }
   },
   {
     "id": "g10-token-cost-accountant-29",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 29 risco=low status=blocked",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "low",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g10-token-cost-accountant",
-    "capabilities": [
-      "financial_traceability",
-      "unit_economics"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 29,
-      "blocked": true
+    "desc": "token cost scenario 29",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 38
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 5
+        },
+        {
+          "guild": "G09",
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "blocked",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g10-token-cost-accountant",
-      "capabilities_any": [
-        "financial_traceability"
-      ]
+      "total_cost_brl": 45.0,
+      "allocated_cost_brl": 45.0,
+      "unattributed_cost_brl": 0.0,
+      "over_budget_guilds": [
+        "G08"
+      ],
+      "throttle_required": true,
+      "allocation_complete": true
     }
   },
   {
     "id": "g10-token-cost-accountant-30",
-    "desc": "Rateio de Custo de Tokens & Verba de Freemium: cenário 30 risco=medium status=ready",
-    "artifact_type": "token-cost-accountant.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-token-cost-accountant",
-    "capabilities": [
-      "unit_economics",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 30,
-      "blocked": false
+    "desc": "token cost scenario 30",
+    "token_costs": {
+      "usage": [
+        {
+          "guild": "G08",
+          "cost_brl": 39
+        },
+        {
+          "guild": "G10",
+          "cost_brl": 8
+        },
+        {
+          "guild": "G09",
+          "cost_brl": 2
+        }
+      ],
+      "budgets_brl": {
+        "G08": 25,
+        "G10": 12,
+        "G09": 10
+      }
     },
     "expected": {
-      "agent_id": "g10-token-cost-accountant",
-      "handler_kind": "spec_driven",
-      "artifact_type": "token-cost-accountant.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g10-token-cost-accountant",
-      "capabilities_any": [
-        "unit_economics"
-      ]
+      "total_cost_brl": 49.0,
+      "allocated_cost_brl": 49.0,
+      "unattributed_cost_brl": 0.0,
+      "over_budget_guilds": [
+        "G08"
+      ],
+      "throttle_required": true,
+      "allocation_complete": true
     }
   }
 ]

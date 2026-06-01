@@ -5,7 +5,7 @@ tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: guardian_check
+act_handler: burn_monitor
 outcome_clause:
   statement: 'Runway & Burn vs. Plano entrega burn-monitor.verdict verificável para:
     medir continuamente o consumo de caixa e o runway da empresa contra o plano, sinalizando

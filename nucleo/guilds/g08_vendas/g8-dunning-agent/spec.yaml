@@ -5,7 +5,7 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: spec_driven
+act_handler: dunning_agent
 outcome_clause:
   statement: "cada fatura em atraso passa por uma régua de recuperação completa e auditável antes de qualquer escalonamento humano."
   positive_examples:

@@ -1,902 +1,2532 @@
 [
   {
     "id": "g10-reconciliation-01",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 01 risco=low status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 1,
-      "blocked": false
+    "desc": "reconciliation cenário 01",
+    "reconciliation": {
+      "period": "2026-01",
+      "ledger_transactions": [
+        {
+          "id": "l-0-0",
+          "external_id": "ref-0-0",
+          "amount_brl": 100
+        },
+        {
+          "id": "l-0-1",
+          "external_id": "ref-0-1",
+          "amount_brl": 125
+        },
+        {
+          "id": "l-0-2",
+          "external_id": "ref-0-2",
+          "amount_brl": 150
+        },
+        {
+          "id": "l-0-3",
+          "external_id": "ref-0-3",
+          "amount_brl": 175
+        },
+        {
+          "id": "l-0-4",
+          "external_id": "ref-0-4",
+          "amount_brl": 200
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-0-0",
+          "external_id": "ref-0-0",
+          "amount_brl": 100
+        },
+        {
+          "id": "b-0-1",
+          "external_id": "ref-0-1",
+          "amount_brl": 125
+        },
+        {
+          "id": "b-0-2",
+          "external_id": "ref-0-2",
+          "amount_brl": 150
+        },
+        {
+          "id": "b-0-3",
+          "external_id": "ref-0-3",
+          "amount_brl": 175
+        },
+        {
+          "id": "b-0-4",
+          "external_id": "ref-0-4",
+          "amount_brl": 200
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "matched_count": 5,
+      "exception_count": 0,
+      "match_rate": 1.0,
+      "unreconciled_balance_brl": 0.0,
+      "status": "reconciled",
+      "requires_human_review": false
     }
   },
   {
     "id": "g10-reconciliation-02",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 02 risco=medium status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-reconciliation",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 2,
-      "blocked": false
+    "desc": "reconciliation cenário 02",
+    "reconciliation": {
+      "period": "2026-02",
+      "ledger_transactions": [
+        {
+          "id": "l-1-0",
+          "external_id": "ref-1-0",
+          "amount_brl": 101
+        },
+        {
+          "id": "l-1-1",
+          "external_id": "ref-1-1",
+          "amount_brl": 126
+        },
+        {
+          "id": "l-1-2",
+          "external_id": "ref-1-2",
+          "amount_brl": 151
+        },
+        {
+          "id": "l-1-3",
+          "external_id": "ref-1-3",
+          "amount_brl": 176
+        },
+        {
+          "id": "l-1-4",
+          "external_id": "ref-1-4",
+          "amount_brl": 201
+        },
+        {
+          "id": "l-1-5",
+          "external_id": "ref-1-5",
+          "amount_brl": 226
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-1-0",
+          "external_id": "ref-1-0",
+          "amount_brl": 101
+        },
+        {
+          "id": "b-1-1",
+          "external_id": "ref-1-1",
+          "amount_brl": 126
+        },
+        {
+          "id": "b-1-2",
+          "external_id": "ref-1-2",
+          "amount_brl": 151
+        },
+        {
+          "id": "b-1-3",
+          "external_id": "ref-1-3",
+          "amount_brl": 176
+        },
+        {
+          "id": "b-1-4",
+          "external_id": "ref-1-4",
+          "amount_brl": 201
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g10-reconciliation",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "matched_count": 5,
+      "exception_count": 1,
+      "match_rate": 0.8333,
+      "unreconciled_balance_brl": 226.0,
+      "status": "exceptions_opened",
+      "requires_human_review": true
     }
   },
   {
     "id": "g10-reconciliation-03",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 03 risco=high status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-reconciliation",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 3,
-      "blocked": false
+    "desc": "reconciliation cenário 03",
+    "reconciliation": {
+      "period": "2026-03",
+      "ledger_transactions": [
+        {
+          "id": "l-2-0",
+          "external_id": "ref-2-0",
+          "amount_brl": 102
+        },
+        {
+          "id": "l-2-1",
+          "external_id": "ref-2-1",
+          "amount_brl": 127
+        },
+        {
+          "id": "l-2-2",
+          "external_id": "ref-2-2",
+          "amount_brl": 152
+        },
+        {
+          "id": "l-2-3",
+          "external_id": "ref-2-3",
+          "amount_brl": 177
+        },
+        {
+          "id": "l-2-4",
+          "external_id": "ref-2-4",
+          "amount_brl": 202
+        },
+        {
+          "id": "l-2-5",
+          "external_id": "ref-2-5",
+          "amount_brl": 227
+        },
+        {
+          "id": "l-2-6",
+          "external_id": "ref-2-6",
+          "amount_brl": 252
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-2-0",
+          "external_id": "ref-2-0",
+          "amount_brl": 102
+        },
+        {
+          "id": "b-2-1",
+          "external_id": "ref-2-1",
+          "amount_brl": 127
+        },
+        {
+          "id": "b-2-2",
+          "external_id": "ref-2-2",
+          "amount_brl": 152
+        },
+        {
+          "id": "b-2-3",
+          "external_id": "ref-2-3",
+          "amount_brl": 177
+        },
+        {
+          "id": "b-2-4",
+          "external_id": "ref-2-4",
+          "amount_brl": 202
+        },
+        {
+          "id": "b-2-5",
+          "external_id": "ref-2-5",
+          "amount_brl": 227
+        },
+        {
+          "id": "b-2-6",
+          "external_id": "ref-2-6",
+          "amount_brl": 262
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g10-reconciliation",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "matched_count": 6,
+      "exception_count": 2,
+      "match_rate": 0.8571,
+      "unreconciled_balance_brl": -10.0,
+      "status": "exceptions_opened",
+      "requires_human_review": true
     }
   },
   {
     "id": "g10-reconciliation-04",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 04 risco=critical status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-reconciliation",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 4,
-      "blocked": false
+    "desc": "reconciliation cenário 04",
+    "reconciliation": {
+      "period": "2026-04",
+      "ledger_transactions": [
+        {
+          "id": "l-3-0",
+          "external_id": "ref-3-0",
+          "amount_brl": 103
+        },
+        {
+          "id": "l-3-1",
+          "external_id": "ref-3-1",
+          "amount_brl": 128
+        },
+        {
+          "id": "l-3-2",
+          "external_id": "ref-3-2",
+          "amount_brl": 153
+        },
+        {
+          "id": "l-3-3",
+          "external_id": "ref-3-3",
+          "amount_brl": 178
+        },
+        {
+          "id": "l-3-4",
+          "external_id": "ref-3-4",
+          "amount_brl": 203
+        },
+        {
+          "id": "l-3-5",
+          "external_id": "ref-3-5",
+          "amount_brl": 228
+        },
+        {
+          "id": "l-3-6",
+          "external_id": "ref-3-6",
+          "amount_brl": 253
+        },
+        {
+          "id": "l-3-7",
+          "external_id": "ref-3-7",
+          "amount_brl": 278
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-3-0",
+          "external_id": "ref-3-0",
+          "amount_brl": 103
+        },
+        {
+          "id": "b-3-1",
+          "external_id": "ref-3-1",
+          "amount_brl": 128
+        },
+        {
+          "id": "b-3-2",
+          "external_id": "ref-3-2",
+          "amount_brl": 153
+        },
+        {
+          "id": "b-3-3",
+          "external_id": "ref-3-3",
+          "amount_brl": 178
+        },
+        {
+          "id": "b-3-4",
+          "external_id": "ref-3-4",
+          "amount_brl": 203
+        },
+        {
+          "id": "b-3-5",
+          "external_id": "ref-3-5",
+          "amount_brl": 228
+        },
+        {
+          "id": "b-3-6",
+          "external_id": "ref-3-6",
+          "amount_brl": 253
+        },
+        {
+          "id": "b-3-7",
+          "external_id": "ref-3-7",
+          "amount_brl": 278
+        },
+        {
+          "id": "b-3-extra",
+          "external_id": "extra-3",
+          "amount_brl": 33
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-reconciliation",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "matched_count": 8,
+      "exception_count": 1,
+      "match_rate": 1.0,
+      "unreconciled_balance_brl": -33.0,
+      "status": "exceptions_opened",
+      "requires_human_review": true
     }
   },
   {
     "id": "g10-reconciliation-05",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 05 risco=low status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-reconciliation",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 5,
-      "blocked": false
+    "desc": "reconciliation cenário 05",
+    "reconciliation": {
+      "period": "2026-05",
+      "ledger_transactions": [
+        {
+          "id": "l-4-0",
+          "external_id": "ref-4-0",
+          "amount_brl": 104
+        },
+        {
+          "id": "l-4-1",
+          "external_id": "ref-4-1",
+          "amount_brl": 129
+        },
+        {
+          "id": "l-4-2",
+          "external_id": "ref-4-2",
+          "amount_brl": 154
+        },
+        {
+          "id": "l-4-3",
+          "external_id": "ref-4-3",
+          "amount_brl": 179
+        },
+        {
+          "id": "l-4-4",
+          "external_id": "ref-4-4",
+          "amount_brl": 204
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-4-0",
+          "external_id": "ref-4-0",
+          "amount_brl": 104
+        },
+        {
+          "id": "b-4-1",
+          "external_id": "ref-4-1",
+          "amount_brl": 129
+        },
+        {
+          "id": "b-4-2",
+          "external_id": "ref-4-2",
+          "amount_brl": 154
+        },
+        {
+          "id": "b-4-3",
+          "external_id": "ref-4-3",
+          "amount_brl": 179
+        },
+        {
+          "id": "b-4-4",
+          "external_id": "ref-4-4",
+          "amount_brl": 204
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g10-reconciliation",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "matched_count": 5,
+      "exception_count": 0,
+      "match_rate": 1.0,
+      "unreconciled_balance_brl": 0.0,
+      "status": "reconciled",
+      "requires_human_review": false
     }
   },
   {
     "id": "g10-reconciliation-06",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 06 risco=medium status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-reconciliation",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 6,
-      "blocked": false
+    "desc": "reconciliation cenário 06",
+    "reconciliation": {
+      "period": "2026-06",
+      "ledger_transactions": [
+        {
+          "id": "l-5-0",
+          "external_id": "ref-5-0",
+          "amount_brl": 105
+        },
+        {
+          "id": "l-5-1",
+          "external_id": "ref-5-1",
+          "amount_brl": 130
+        },
+        {
+          "id": "l-5-2",
+          "external_id": "ref-5-2",
+          "amount_brl": 155
+        },
+        {
+          "id": "l-5-3",
+          "external_id": "ref-5-3",
+          "amount_brl": 180
+        },
+        {
+          "id": "l-5-4",
+          "external_id": "ref-5-4",
+          "amount_brl": 205
+        },
+        {
+          "id": "l-5-5",
+          "external_id": "ref-5-5",
+          "amount_brl": 230
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-5-0",
+          "external_id": "ref-5-0",
+          "amount_brl": 105
+        },
+        {
+          "id": "b-5-1",
+          "external_id": "ref-5-1",
+          "amount_brl": 130
+        },
+        {
+          "id": "b-5-2",
+          "external_id": "ref-5-2",
+          "amount_brl": 155
+        },
+        {
+          "id": "b-5-3",
+          "external_id": "ref-5-3",
+          "amount_brl": 180
+        },
+        {
+          "id": "b-5-4",
+          "external_id": "ref-5-4",
+          "amount_brl": 205
+        },
+        {
+          "id": "b-5-5",
+          "external_id": "ref-5-5",
+          "amount_brl": 230
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g10-reconciliation",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "matched_count": 6,
+      "exception_count": 0,
+      "match_rate": 1.0,
+      "unreconciled_balance_brl": 0.0,
+      "status": "reconciled",
+      "requires_human_review": false
     }
   },
   {
     "id": "g10-reconciliation-07",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 07 risco=high status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 7,
-      "blocked": false
+    "desc": "reconciliation cenário 07",
+    "reconciliation": {
+      "period": "2026-07",
+      "ledger_transactions": [
+        {
+          "id": "l-6-0",
+          "external_id": "ref-6-0",
+          "amount_brl": 106
+        },
+        {
+          "id": "l-6-1",
+          "external_id": "ref-6-1",
+          "amount_brl": 131
+        },
+        {
+          "id": "l-6-2",
+          "external_id": "ref-6-2",
+          "amount_brl": 156
+        },
+        {
+          "id": "l-6-3",
+          "external_id": "ref-6-3",
+          "amount_brl": 181
+        },
+        {
+          "id": "l-6-4",
+          "external_id": "ref-6-4",
+          "amount_brl": 206
+        },
+        {
+          "id": "l-6-5",
+          "external_id": "ref-6-5",
+          "amount_brl": 231
+        },
+        {
+          "id": "l-6-6",
+          "external_id": "ref-6-6",
+          "amount_brl": 256
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-6-0",
+          "external_id": "ref-6-0",
+          "amount_brl": 106
+        },
+        {
+          "id": "b-6-1",
+          "external_id": "ref-6-1",
+          "amount_brl": 131
+        },
+        {
+          "id": "b-6-2",
+          "external_id": "ref-6-2",
+          "amount_brl": 156
+        },
+        {
+          "id": "b-6-3",
+          "external_id": "ref-6-3",
+          "amount_brl": 181
+        },
+        {
+          "id": "b-6-4",
+          "external_id": "ref-6-4",
+          "amount_brl": 206
+        },
+        {
+          "id": "b-6-5",
+          "external_id": "ref-6-5",
+          "amount_brl": 231
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "matched_count": 6,
+      "exception_count": 1,
+      "match_rate": 0.8571,
+      "unreconciled_balance_brl": 256.0,
+      "status": "exceptions_opened",
+      "requires_human_review": true
     }
   },
   {
     "id": "g10-reconciliation-08",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 08 risco=critical status=blocked",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "critical",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g10-reconciliation",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 8,
-      "blocked": true
+    "desc": "reconciliation cenário 08",
+    "reconciliation": {
+      "period": "2026-08",
+      "ledger_transactions": [
+        {
+          "id": "l-7-0",
+          "external_id": "ref-7-0",
+          "amount_brl": 107
+        },
+        {
+          "id": "l-7-1",
+          "external_id": "ref-7-1",
+          "amount_brl": 132
+        },
+        {
+          "id": "l-7-2",
+          "external_id": "ref-7-2",
+          "amount_brl": 157
+        },
+        {
+          "id": "l-7-3",
+          "external_id": "ref-7-3",
+          "amount_brl": 182
+        },
+        {
+          "id": "l-7-4",
+          "external_id": "ref-7-4",
+          "amount_brl": 207
+        },
+        {
+          "id": "l-7-5",
+          "external_id": "ref-7-5",
+          "amount_brl": 232
+        },
+        {
+          "id": "l-7-6",
+          "external_id": "ref-7-6",
+          "amount_brl": 257
+        },
+        {
+          "id": "l-7-7",
+          "external_id": "ref-7-7",
+          "amount_brl": 282
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-7-0",
+          "external_id": "ref-7-0",
+          "amount_brl": 107
+        },
+        {
+          "id": "b-7-1",
+          "external_id": "ref-7-1",
+          "amount_brl": 132
+        },
+        {
+          "id": "b-7-2",
+          "external_id": "ref-7-2",
+          "amount_brl": 157
+        },
+        {
+          "id": "b-7-3",
+          "external_id": "ref-7-3",
+          "amount_brl": 182
+        },
+        {
+          "id": "b-7-4",
+          "external_id": "ref-7-4",
+          "amount_brl": 207
+        },
+        {
+          "id": "b-7-5",
+          "external_id": "ref-7-5",
+          "amount_brl": 232
+        },
+        {
+          "id": "b-7-6",
+          "external_id": "ref-7-6",
+          "amount_brl": 257
+        },
+        {
+          "id": "b-7-7",
+          "external_id": "ref-7-7",
+          "amount_brl": 292
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "blocked",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-reconciliation",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "matched_count": 7,
+      "exception_count": 2,
+      "match_rate": 0.875,
+      "unreconciled_balance_brl": -10.0,
+      "status": "exceptions_opened",
+      "requires_human_review": true
     }
   },
   {
     "id": "g10-reconciliation-09",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 09 risco=low status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-reconciliation",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 9,
-      "blocked": false
+    "desc": "reconciliation cenário 09",
+    "reconciliation": {
+      "period": "2026-09",
+      "ledger_transactions": [
+        {
+          "id": "l-8-0",
+          "external_id": "ref-8-0",
+          "amount_brl": 108
+        },
+        {
+          "id": "l-8-1",
+          "external_id": "ref-8-1",
+          "amount_brl": 133
+        },
+        {
+          "id": "l-8-2",
+          "external_id": "ref-8-2",
+          "amount_brl": 158
+        },
+        {
+          "id": "l-8-3",
+          "external_id": "ref-8-3",
+          "amount_brl": 183
+        },
+        {
+          "id": "l-8-4",
+          "external_id": "ref-8-4",
+          "amount_brl": 208
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-8-0",
+          "external_id": "ref-8-0",
+          "amount_brl": 108
+        },
+        {
+          "id": "b-8-1",
+          "external_id": "ref-8-1",
+          "amount_brl": 133
+        },
+        {
+          "id": "b-8-2",
+          "external_id": "ref-8-2",
+          "amount_brl": 158
+        },
+        {
+          "id": "b-8-3",
+          "external_id": "ref-8-3",
+          "amount_brl": 183
+        },
+        {
+          "id": "b-8-4",
+          "external_id": "ref-8-4",
+          "amount_brl": 208
+        },
+        {
+          "id": "b-8-extra",
+          "external_id": "extra-8",
+          "amount_brl": 33
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g10-reconciliation",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "matched_count": 5,
+      "exception_count": 1,
+      "match_rate": 1.0,
+      "unreconciled_balance_brl": -33.0,
+      "status": "exceptions_opened",
+      "requires_human_review": true
     }
   },
   {
     "id": "g10-reconciliation-10",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 10 risco=medium status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-reconciliation",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 10,
-      "blocked": false
+    "desc": "reconciliation cenário 10",
+    "reconciliation": {
+      "period": "2026-10",
+      "ledger_transactions": [
+        {
+          "id": "l-9-0",
+          "external_id": "ref-9-0",
+          "amount_brl": 109
+        },
+        {
+          "id": "l-9-1",
+          "external_id": "ref-9-1",
+          "amount_brl": 134
+        },
+        {
+          "id": "l-9-2",
+          "external_id": "ref-9-2",
+          "amount_brl": 159
+        },
+        {
+          "id": "l-9-3",
+          "external_id": "ref-9-3",
+          "amount_brl": 184
+        },
+        {
+          "id": "l-9-4",
+          "external_id": "ref-9-4",
+          "amount_brl": 209
+        },
+        {
+          "id": "l-9-5",
+          "external_id": "ref-9-5",
+          "amount_brl": 234
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-9-0",
+          "external_id": "ref-9-0",
+          "amount_brl": 109
+        },
+        {
+          "id": "b-9-1",
+          "external_id": "ref-9-1",
+          "amount_brl": 134
+        },
+        {
+          "id": "b-9-2",
+          "external_id": "ref-9-2",
+          "amount_brl": 159
+        },
+        {
+          "id": "b-9-3",
+          "external_id": "ref-9-3",
+          "amount_brl": 184
+        },
+        {
+          "id": "b-9-4",
+          "external_id": "ref-9-4",
+          "amount_brl": 209
+        },
+        {
+          "id": "b-9-5",
+          "external_id": "ref-9-5",
+          "amount_brl": 234
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g10-reconciliation",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "matched_count": 6,
+      "exception_count": 0,
+      "match_rate": 1.0,
+      "unreconciled_balance_brl": 0.0,
+      "status": "reconciled",
+      "requires_human_review": false
     }
   },
   {
     "id": "g10-reconciliation-11",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 11 risco=high status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-reconciliation",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 11,
-      "blocked": false
+    "desc": "reconciliation cenário 11",
+    "reconciliation": {
+      "period": "2026-11",
+      "ledger_transactions": [
+        {
+          "id": "l-10-0",
+          "external_id": "ref-10-0",
+          "amount_brl": 110
+        },
+        {
+          "id": "l-10-1",
+          "external_id": "ref-10-1",
+          "amount_brl": 135
+        },
+        {
+          "id": "l-10-2",
+          "external_id": "ref-10-2",
+          "amount_brl": 160
+        },
+        {
+          "id": "l-10-3",
+          "external_id": "ref-10-3",
+          "amount_brl": 185
+        },
+        {
+          "id": "l-10-4",
+          "external_id": "ref-10-4",
+          "amount_brl": 210
+        },
+        {
+          "id": "l-10-5",
+          "external_id": "ref-10-5",
+          "amount_brl": 235
+        },
+        {
+          "id": "l-10-6",
+          "external_id": "ref-10-6",
+          "amount_brl": 260
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-10-0",
+          "external_id": "ref-10-0",
+          "amount_brl": 110
+        },
+        {
+          "id": "b-10-1",
+          "external_id": "ref-10-1",
+          "amount_brl": 135
+        },
+        {
+          "id": "b-10-2",
+          "external_id": "ref-10-2",
+          "amount_brl": 160
+        },
+        {
+          "id": "b-10-3",
+          "external_id": "ref-10-3",
+          "amount_brl": 185
+        },
+        {
+          "id": "b-10-4",
+          "external_id": "ref-10-4",
+          "amount_brl": 210
+        },
+        {
+          "id": "b-10-5",
+          "external_id": "ref-10-5",
+          "amount_brl": 235
+        },
+        {
+          "id": "b-10-6",
+          "external_id": "ref-10-6",
+          "amount_brl": 260
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g10-reconciliation",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "matched_count": 7,
+      "exception_count": 0,
+      "match_rate": 1.0,
+      "unreconciled_balance_brl": 0.0,
+      "status": "reconciled",
+      "requires_human_review": false
     }
   },
   {
     "id": "g10-reconciliation-12",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 12 risco=critical status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-reconciliation",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 12,
-      "blocked": false
+    "desc": "reconciliation cenário 12",
+    "reconciliation": {
+      "period": "2026-12",
+      "ledger_transactions": [
+        {
+          "id": "l-11-0",
+          "external_id": "ref-11-0",
+          "amount_brl": 111
+        },
+        {
+          "id": "l-11-1",
+          "external_id": "ref-11-1",
+          "amount_brl": 136
+        },
+        {
+          "id": "l-11-2",
+          "external_id": "ref-11-2",
+          "amount_brl": 161
+        },
+        {
+          "id": "l-11-3",
+          "external_id": "ref-11-3",
+          "amount_brl": 186
+        },
+        {
+          "id": "l-11-4",
+          "external_id": "ref-11-4",
+          "amount_brl": 211
+        },
+        {
+          "id": "l-11-5",
+          "external_id": "ref-11-5",
+          "amount_brl": 236
+        },
+        {
+          "id": "l-11-6",
+          "external_id": "ref-11-6",
+          "amount_brl": 261
+        },
+        {
+          "id": "l-11-7",
+          "external_id": "ref-11-7",
+          "amount_brl": 286
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-11-0",
+          "external_id": "ref-11-0",
+          "amount_brl": 111
+        },
+        {
+          "id": "b-11-1",
+          "external_id": "ref-11-1",
+          "amount_brl": 136
+        },
+        {
+          "id": "b-11-2",
+          "external_id": "ref-11-2",
+          "amount_brl": 161
+        },
+        {
+          "id": "b-11-3",
+          "external_id": "ref-11-3",
+          "amount_brl": 186
+        },
+        {
+          "id": "b-11-4",
+          "external_id": "ref-11-4",
+          "amount_brl": 211
+        },
+        {
+          "id": "b-11-5",
+          "external_id": "ref-11-5",
+          "amount_brl": 236
+        },
+        {
+          "id": "b-11-6",
+          "external_id": "ref-11-6",
+          "amount_brl": 261
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-reconciliation",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "matched_count": 7,
+      "exception_count": 1,
+      "match_rate": 0.875,
+      "unreconciled_balance_brl": 286.0,
+      "status": "exceptions_opened",
+      "requires_human_review": true
     }
   },
   {
     "id": "g10-reconciliation-13",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 13 risco=low status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 13,
-      "blocked": false
+    "desc": "reconciliation cenário 13",
+    "reconciliation": {
+      "period": "2026-01",
+      "ledger_transactions": [
+        {
+          "id": "l-12-0",
+          "external_id": "ref-12-0",
+          "amount_brl": 112
+        },
+        {
+          "id": "l-12-1",
+          "external_id": "ref-12-1",
+          "amount_brl": 137
+        },
+        {
+          "id": "l-12-2",
+          "external_id": "ref-12-2",
+          "amount_brl": 162
+        },
+        {
+          "id": "l-12-3",
+          "external_id": "ref-12-3",
+          "amount_brl": 187
+        },
+        {
+          "id": "l-12-4",
+          "external_id": "ref-12-4",
+          "amount_brl": 212
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-12-0",
+          "external_id": "ref-12-0",
+          "amount_brl": 112
+        },
+        {
+          "id": "b-12-1",
+          "external_id": "ref-12-1",
+          "amount_brl": 137
+        },
+        {
+          "id": "b-12-2",
+          "external_id": "ref-12-2",
+          "amount_brl": 162
+        },
+        {
+          "id": "b-12-3",
+          "external_id": "ref-12-3",
+          "amount_brl": 187
+        },
+        {
+          "id": "b-12-4",
+          "external_id": "ref-12-4",
+          "amount_brl": 222
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "matched_count": 4,
+      "exception_count": 2,
+      "match_rate": 0.8,
+      "unreconciled_balance_brl": -10.0,
+      "status": "exceptions_opened",
+      "requires_human_review": true
     }
   },
   {
     "id": "g10-reconciliation-14",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 14 risco=medium status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-reconciliation",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 14,
-      "blocked": false
+    "desc": "reconciliation cenário 14",
+    "reconciliation": {
+      "period": "2026-02",
+      "ledger_transactions": [
+        {
+          "id": "l-13-0",
+          "external_id": "ref-13-0",
+          "amount_brl": 113
+        },
+        {
+          "id": "l-13-1",
+          "external_id": "ref-13-1",
+          "amount_brl": 138
+        },
+        {
+          "id": "l-13-2",
+          "external_id": "ref-13-2",
+          "amount_brl": 163
+        },
+        {
+          "id": "l-13-3",
+          "external_id": "ref-13-3",
+          "amount_brl": 188
+        },
+        {
+          "id": "l-13-4",
+          "external_id": "ref-13-4",
+          "amount_brl": 213
+        },
+        {
+          "id": "l-13-5",
+          "external_id": "ref-13-5",
+          "amount_brl": 238
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-13-0",
+          "external_id": "ref-13-0",
+          "amount_brl": 113
+        },
+        {
+          "id": "b-13-1",
+          "external_id": "ref-13-1",
+          "amount_brl": 138
+        },
+        {
+          "id": "b-13-2",
+          "external_id": "ref-13-2",
+          "amount_brl": 163
+        },
+        {
+          "id": "b-13-3",
+          "external_id": "ref-13-3",
+          "amount_brl": 188
+        },
+        {
+          "id": "b-13-4",
+          "external_id": "ref-13-4",
+          "amount_brl": 213
+        },
+        {
+          "id": "b-13-5",
+          "external_id": "ref-13-5",
+          "amount_brl": 238
+        },
+        {
+          "id": "b-13-extra",
+          "external_id": "extra-13",
+          "amount_brl": 33
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g10-reconciliation",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "matched_count": 6,
+      "exception_count": 1,
+      "match_rate": 1.0,
+      "unreconciled_balance_brl": -33.0,
+      "status": "exceptions_opened",
+      "requires_human_review": true
     }
   },
   {
     "id": "g10-reconciliation-15",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 15 risco=high status=blocked",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "high",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g10-reconciliation",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 15,
-      "blocked": true
+    "desc": "reconciliation cenário 15",
+    "reconciliation": {
+      "period": "2026-03",
+      "ledger_transactions": [
+        {
+          "id": "l-14-0",
+          "external_id": "ref-14-0",
+          "amount_brl": 114
+        },
+        {
+          "id": "l-14-1",
+          "external_id": "ref-14-1",
+          "amount_brl": 139
+        },
+        {
+          "id": "l-14-2",
+          "external_id": "ref-14-2",
+          "amount_brl": 164
+        },
+        {
+          "id": "l-14-3",
+          "external_id": "ref-14-3",
+          "amount_brl": 189
+        },
+        {
+          "id": "l-14-4",
+          "external_id": "ref-14-4",
+          "amount_brl": 214
+        },
+        {
+          "id": "l-14-5",
+          "external_id": "ref-14-5",
+          "amount_brl": 239
+        },
+        {
+          "id": "l-14-6",
+          "external_id": "ref-14-6",
+          "amount_brl": 264
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-14-0",
+          "external_id": "ref-14-0",
+          "amount_brl": 114
+        },
+        {
+          "id": "b-14-1",
+          "external_id": "ref-14-1",
+          "amount_brl": 139
+        },
+        {
+          "id": "b-14-2",
+          "external_id": "ref-14-2",
+          "amount_brl": 164
+        },
+        {
+          "id": "b-14-3",
+          "external_id": "ref-14-3",
+          "amount_brl": 189
+        },
+        {
+          "id": "b-14-4",
+          "external_id": "ref-14-4",
+          "amount_brl": 214
+        },
+        {
+          "id": "b-14-5",
+          "external_id": "ref-14-5",
+          "amount_brl": 239
+        },
+        {
+          "id": "b-14-6",
+          "external_id": "ref-14-6",
+          "amount_brl": 264
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "blocked",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g10-reconciliation",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "matched_count": 7,
+      "exception_count": 0,
+      "match_rate": 1.0,
+      "unreconciled_balance_brl": 0.0,
+      "status": "reconciled",
+      "requires_human_review": false
     }
   },
   {
     "id": "g10-reconciliation-16",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 16 risco=critical status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-reconciliation",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 16,
-      "blocked": false
+    "desc": "reconciliation cenário 16",
+    "reconciliation": {
+      "period": "2026-04",
+      "ledger_transactions": [
+        {
+          "id": "l-15-0",
+          "external_id": "ref-15-0",
+          "amount_brl": 115
+        },
+        {
+          "id": "l-15-1",
+          "external_id": "ref-15-1",
+          "amount_brl": 140
+        },
+        {
+          "id": "l-15-2",
+          "external_id": "ref-15-2",
+          "amount_brl": 165
+        },
+        {
+          "id": "l-15-3",
+          "external_id": "ref-15-3",
+          "amount_brl": 190
+        },
+        {
+          "id": "l-15-4",
+          "external_id": "ref-15-4",
+          "amount_brl": 215
+        },
+        {
+          "id": "l-15-5",
+          "external_id": "ref-15-5",
+          "amount_brl": 240
+        },
+        {
+          "id": "l-15-6",
+          "external_id": "ref-15-6",
+          "amount_brl": 265
+        },
+        {
+          "id": "l-15-7",
+          "external_id": "ref-15-7",
+          "amount_brl": 290
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-15-0",
+          "external_id": "ref-15-0",
+          "amount_brl": 115
+        },
+        {
+          "id": "b-15-1",
+          "external_id": "ref-15-1",
+          "amount_brl": 140
+        },
+        {
+          "id": "b-15-2",
+          "external_id": "ref-15-2",
+          "amount_brl": 165
+        },
+        {
+          "id": "b-15-3",
+          "external_id": "ref-15-3",
+          "amount_brl": 190
+        },
+        {
+          "id": "b-15-4",
+          "external_id": "ref-15-4",
+          "amount_brl": 215
+        },
+        {
+          "id": "b-15-5",
+          "external_id": "ref-15-5",
+          "amount_brl": 240
+        },
+        {
+          "id": "b-15-6",
+          "external_id": "ref-15-6",
+          "amount_brl": 265
+        },
+        {
+          "id": "b-15-7",
+          "external_id": "ref-15-7",
+          "amount_brl": 290
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-reconciliation",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "matched_count": 8,
+      "exception_count": 0,
+      "match_rate": 1.0,
+      "unreconciled_balance_brl": 0.0,
+      "status": "reconciled",
+      "requires_human_review": false
     }
   },
   {
     "id": "g10-reconciliation-17",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 17 risco=low status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-reconciliation",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 17,
-      "blocked": false
+    "desc": "reconciliation cenário 17",
+    "reconciliation": {
+      "period": "2026-05",
+      "ledger_transactions": [
+        {
+          "id": "l-16-0",
+          "external_id": "ref-16-0",
+          "amount_brl": 116
+        },
+        {
+          "id": "l-16-1",
+          "external_id": "ref-16-1",
+          "amount_brl": 141
+        },
+        {
+          "id": "l-16-2",
+          "external_id": "ref-16-2",
+          "amount_brl": 166
+        },
+        {
+          "id": "l-16-3",
+          "external_id": "ref-16-3",
+          "amount_brl": 191
+        },
+        {
+          "id": "l-16-4",
+          "external_id": "ref-16-4",
+          "amount_brl": 216
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-16-0",
+          "external_id": "ref-16-0",
+          "amount_brl": 116
+        },
+        {
+          "id": "b-16-1",
+          "external_id": "ref-16-1",
+          "amount_brl": 141
+        },
+        {
+          "id": "b-16-2",
+          "external_id": "ref-16-2",
+          "amount_brl": 166
+        },
+        {
+          "id": "b-16-3",
+          "external_id": "ref-16-3",
+          "amount_brl": 191
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g10-reconciliation",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "matched_count": 4,
+      "exception_count": 1,
+      "match_rate": 0.8,
+      "unreconciled_balance_brl": 216.0,
+      "status": "exceptions_opened",
+      "requires_human_review": true
     }
   },
   {
     "id": "g10-reconciliation-18",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 18 risco=medium status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-reconciliation",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 18,
-      "blocked": false
+    "desc": "reconciliation cenário 18",
+    "reconciliation": {
+      "period": "2026-06",
+      "ledger_transactions": [
+        {
+          "id": "l-17-0",
+          "external_id": "ref-17-0",
+          "amount_brl": 117
+        },
+        {
+          "id": "l-17-1",
+          "external_id": "ref-17-1",
+          "amount_brl": 142
+        },
+        {
+          "id": "l-17-2",
+          "external_id": "ref-17-2",
+          "amount_brl": 167
+        },
+        {
+          "id": "l-17-3",
+          "external_id": "ref-17-3",
+          "amount_brl": 192
+        },
+        {
+          "id": "l-17-4",
+          "external_id": "ref-17-4",
+          "amount_brl": 217
+        },
+        {
+          "id": "l-17-5",
+          "external_id": "ref-17-5",
+          "amount_brl": 242
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-17-0",
+          "external_id": "ref-17-0",
+          "amount_brl": 117
+        },
+        {
+          "id": "b-17-1",
+          "external_id": "ref-17-1",
+          "amount_brl": 142
+        },
+        {
+          "id": "b-17-2",
+          "external_id": "ref-17-2",
+          "amount_brl": 167
+        },
+        {
+          "id": "b-17-3",
+          "external_id": "ref-17-3",
+          "amount_brl": 192
+        },
+        {
+          "id": "b-17-4",
+          "external_id": "ref-17-4",
+          "amount_brl": 217
+        },
+        {
+          "id": "b-17-5",
+          "external_id": "ref-17-5",
+          "amount_brl": 252
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g10-reconciliation",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "matched_count": 5,
+      "exception_count": 2,
+      "match_rate": 0.8333,
+      "unreconciled_balance_brl": -10.0,
+      "status": "exceptions_opened",
+      "requires_human_review": true
     }
   },
   {
     "id": "g10-reconciliation-19",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 19 risco=high status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 19,
-      "blocked": false
+    "desc": "reconciliation cenário 19",
+    "reconciliation": {
+      "period": "2026-07",
+      "ledger_transactions": [
+        {
+          "id": "l-18-0",
+          "external_id": "ref-18-0",
+          "amount_brl": 118
+        },
+        {
+          "id": "l-18-1",
+          "external_id": "ref-18-1",
+          "amount_brl": 143
+        },
+        {
+          "id": "l-18-2",
+          "external_id": "ref-18-2",
+          "amount_brl": 168
+        },
+        {
+          "id": "l-18-3",
+          "external_id": "ref-18-3",
+          "amount_brl": 193
+        },
+        {
+          "id": "l-18-4",
+          "external_id": "ref-18-4",
+          "amount_brl": 218
+        },
+        {
+          "id": "l-18-5",
+          "external_id": "ref-18-5",
+          "amount_brl": 243
+        },
+        {
+          "id": "l-18-6",
+          "external_id": "ref-18-6",
+          "amount_brl": 268
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-18-0",
+          "external_id": "ref-18-0",
+          "amount_brl": 118
+        },
+        {
+          "id": "b-18-1",
+          "external_id": "ref-18-1",
+          "amount_brl": 143
+        },
+        {
+          "id": "b-18-2",
+          "external_id": "ref-18-2",
+          "amount_brl": 168
+        },
+        {
+          "id": "b-18-3",
+          "external_id": "ref-18-3",
+          "amount_brl": 193
+        },
+        {
+          "id": "b-18-4",
+          "external_id": "ref-18-4",
+          "amount_brl": 218
+        },
+        {
+          "id": "b-18-5",
+          "external_id": "ref-18-5",
+          "amount_brl": 243
+        },
+        {
+          "id": "b-18-6",
+          "external_id": "ref-18-6",
+          "amount_brl": 268
+        },
+        {
+          "id": "b-18-extra",
+          "external_id": "extra-18",
+          "amount_brl": 33
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "matched_count": 7,
+      "exception_count": 1,
+      "match_rate": 1.0,
+      "unreconciled_balance_brl": -33.0,
+      "status": "exceptions_opened",
+      "requires_human_review": true
     }
   },
   {
     "id": "g10-reconciliation-20",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 20 risco=critical status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-reconciliation",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 20,
-      "blocked": false
+    "desc": "reconciliation cenário 20",
+    "reconciliation": {
+      "period": "2026-08",
+      "ledger_transactions": [
+        {
+          "id": "l-19-0",
+          "external_id": "ref-19-0",
+          "amount_brl": 119
+        },
+        {
+          "id": "l-19-1",
+          "external_id": "ref-19-1",
+          "amount_brl": 144
+        },
+        {
+          "id": "l-19-2",
+          "external_id": "ref-19-2",
+          "amount_brl": 169
+        },
+        {
+          "id": "l-19-3",
+          "external_id": "ref-19-3",
+          "amount_brl": 194
+        },
+        {
+          "id": "l-19-4",
+          "external_id": "ref-19-4",
+          "amount_brl": 219
+        },
+        {
+          "id": "l-19-5",
+          "external_id": "ref-19-5",
+          "amount_brl": 244
+        },
+        {
+          "id": "l-19-6",
+          "external_id": "ref-19-6",
+          "amount_brl": 269
+        },
+        {
+          "id": "l-19-7",
+          "external_id": "ref-19-7",
+          "amount_brl": 294
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-19-0",
+          "external_id": "ref-19-0",
+          "amount_brl": 119
+        },
+        {
+          "id": "b-19-1",
+          "external_id": "ref-19-1",
+          "amount_brl": 144
+        },
+        {
+          "id": "b-19-2",
+          "external_id": "ref-19-2",
+          "amount_brl": 169
+        },
+        {
+          "id": "b-19-3",
+          "external_id": "ref-19-3",
+          "amount_brl": 194
+        },
+        {
+          "id": "b-19-4",
+          "external_id": "ref-19-4",
+          "amount_brl": 219
+        },
+        {
+          "id": "b-19-5",
+          "external_id": "ref-19-5",
+          "amount_brl": 244
+        },
+        {
+          "id": "b-19-6",
+          "external_id": "ref-19-6",
+          "amount_brl": 269
+        },
+        {
+          "id": "b-19-7",
+          "external_id": "ref-19-7",
+          "amount_brl": 294
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-reconciliation",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "matched_count": 8,
+      "exception_count": 0,
+      "match_rate": 1.0,
+      "unreconciled_balance_brl": 0.0,
+      "status": "reconciled",
+      "requires_human_review": false
     }
   },
   {
     "id": "g10-reconciliation-21",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 21 risco=low status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-reconciliation",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 21,
-      "blocked": false
+    "desc": "reconciliation cenário 21",
+    "reconciliation": {
+      "period": "2026-09",
+      "ledger_transactions": [
+        {
+          "id": "l-20-0",
+          "external_id": "ref-20-0",
+          "amount_brl": 120
+        },
+        {
+          "id": "l-20-1",
+          "external_id": "ref-20-1",
+          "amount_brl": 145
+        },
+        {
+          "id": "l-20-2",
+          "external_id": "ref-20-2",
+          "amount_brl": 170
+        },
+        {
+          "id": "l-20-3",
+          "external_id": "ref-20-3",
+          "amount_brl": 195
+        },
+        {
+          "id": "l-20-4",
+          "external_id": "ref-20-4",
+          "amount_brl": 220
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-20-0",
+          "external_id": "ref-20-0",
+          "amount_brl": 120
+        },
+        {
+          "id": "b-20-1",
+          "external_id": "ref-20-1",
+          "amount_brl": 145
+        },
+        {
+          "id": "b-20-2",
+          "external_id": "ref-20-2",
+          "amount_brl": 170
+        },
+        {
+          "id": "b-20-3",
+          "external_id": "ref-20-3",
+          "amount_brl": 195
+        },
+        {
+          "id": "b-20-4",
+          "external_id": "ref-20-4",
+          "amount_brl": 220
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g10-reconciliation",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "matched_count": 5,
+      "exception_count": 0,
+      "match_rate": 1.0,
+      "unreconciled_balance_brl": 0.0,
+      "status": "reconciled",
+      "requires_human_review": false
     }
   },
   {
     "id": "g10-reconciliation-22",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 22 risco=medium status=blocked",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g10-reconciliation",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 22,
-      "blocked": true
+    "desc": "reconciliation cenário 22",
+    "reconciliation": {
+      "period": "2026-10",
+      "ledger_transactions": [
+        {
+          "id": "l-21-0",
+          "external_id": "ref-21-0",
+          "amount_brl": 121
+        },
+        {
+          "id": "l-21-1",
+          "external_id": "ref-21-1",
+          "amount_brl": 146
+        },
+        {
+          "id": "l-21-2",
+          "external_id": "ref-21-2",
+          "amount_brl": 171
+        },
+        {
+          "id": "l-21-3",
+          "external_id": "ref-21-3",
+          "amount_brl": 196
+        },
+        {
+          "id": "l-21-4",
+          "external_id": "ref-21-4",
+          "amount_brl": 221
+        },
+        {
+          "id": "l-21-5",
+          "external_id": "ref-21-5",
+          "amount_brl": 246
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-21-0",
+          "external_id": "ref-21-0",
+          "amount_brl": 121
+        },
+        {
+          "id": "b-21-1",
+          "external_id": "ref-21-1",
+          "amount_brl": 146
+        },
+        {
+          "id": "b-21-2",
+          "external_id": "ref-21-2",
+          "amount_brl": 171
+        },
+        {
+          "id": "b-21-3",
+          "external_id": "ref-21-3",
+          "amount_brl": 196
+        },
+        {
+          "id": "b-21-4",
+          "external_id": "ref-21-4",
+          "amount_brl": 221
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g10-reconciliation",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "matched_count": 5,
+      "exception_count": 1,
+      "match_rate": 0.8333,
+      "unreconciled_balance_brl": 246.0,
+      "status": "exceptions_opened",
+      "requires_human_review": true
     }
   },
   {
     "id": "g10-reconciliation-23",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 23 risco=high status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-reconciliation",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 23,
-      "blocked": false
+    "desc": "reconciliation cenário 23",
+    "reconciliation": {
+      "period": "2026-11",
+      "ledger_transactions": [
+        {
+          "id": "l-22-0",
+          "external_id": "ref-22-0",
+          "amount_brl": 122
+        },
+        {
+          "id": "l-22-1",
+          "external_id": "ref-22-1",
+          "amount_brl": 147
+        },
+        {
+          "id": "l-22-2",
+          "external_id": "ref-22-2",
+          "amount_brl": 172
+        },
+        {
+          "id": "l-22-3",
+          "external_id": "ref-22-3",
+          "amount_brl": 197
+        },
+        {
+          "id": "l-22-4",
+          "external_id": "ref-22-4",
+          "amount_brl": 222
+        },
+        {
+          "id": "l-22-5",
+          "external_id": "ref-22-5",
+          "amount_brl": 247
+        },
+        {
+          "id": "l-22-6",
+          "external_id": "ref-22-6",
+          "amount_brl": 272
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-22-0",
+          "external_id": "ref-22-0",
+          "amount_brl": 122
+        },
+        {
+          "id": "b-22-1",
+          "external_id": "ref-22-1",
+          "amount_brl": 147
+        },
+        {
+          "id": "b-22-2",
+          "external_id": "ref-22-2",
+          "amount_brl": 172
+        },
+        {
+          "id": "b-22-3",
+          "external_id": "ref-22-3",
+          "amount_brl": 197
+        },
+        {
+          "id": "b-22-4",
+          "external_id": "ref-22-4",
+          "amount_brl": 222
+        },
+        {
+          "id": "b-22-5",
+          "external_id": "ref-22-5",
+          "amount_brl": 247
+        },
+        {
+          "id": "b-22-6",
+          "external_id": "ref-22-6",
+          "amount_brl": 282
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g10-reconciliation",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "matched_count": 6,
+      "exception_count": 2,
+      "match_rate": 0.8571,
+      "unreconciled_balance_brl": -10.0,
+      "status": "exceptions_opened",
+      "requires_human_review": true
     }
   },
   {
     "id": "g10-reconciliation-24",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 24 risco=critical status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-reconciliation",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 24,
-      "blocked": false
+    "desc": "reconciliation cenário 24",
+    "reconciliation": {
+      "period": "2026-12",
+      "ledger_transactions": [
+        {
+          "id": "l-23-0",
+          "external_id": "ref-23-0",
+          "amount_brl": 123
+        },
+        {
+          "id": "l-23-1",
+          "external_id": "ref-23-1",
+          "amount_brl": 148
+        },
+        {
+          "id": "l-23-2",
+          "external_id": "ref-23-2",
+          "amount_brl": 173
+        },
+        {
+          "id": "l-23-3",
+          "external_id": "ref-23-3",
+          "amount_brl": 198
+        },
+        {
+          "id": "l-23-4",
+          "external_id": "ref-23-4",
+          "amount_brl": 223
+        },
+        {
+          "id": "l-23-5",
+          "external_id": "ref-23-5",
+          "amount_brl": 248
+        },
+        {
+          "id": "l-23-6",
+          "external_id": "ref-23-6",
+          "amount_brl": 273
+        },
+        {
+          "id": "l-23-7",
+          "external_id": "ref-23-7",
+          "amount_brl": 298
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-23-0",
+          "external_id": "ref-23-0",
+          "amount_brl": 123
+        },
+        {
+          "id": "b-23-1",
+          "external_id": "ref-23-1",
+          "amount_brl": 148
+        },
+        {
+          "id": "b-23-2",
+          "external_id": "ref-23-2",
+          "amount_brl": 173
+        },
+        {
+          "id": "b-23-3",
+          "external_id": "ref-23-3",
+          "amount_brl": 198
+        },
+        {
+          "id": "b-23-4",
+          "external_id": "ref-23-4",
+          "amount_brl": 223
+        },
+        {
+          "id": "b-23-5",
+          "external_id": "ref-23-5",
+          "amount_brl": 248
+        },
+        {
+          "id": "b-23-6",
+          "external_id": "ref-23-6",
+          "amount_brl": 273
+        },
+        {
+          "id": "b-23-7",
+          "external_id": "ref-23-7",
+          "amount_brl": 298
+        },
+        {
+          "id": "b-23-extra",
+          "external_id": "extra-23",
+          "amount_brl": 33
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-reconciliation",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "matched_count": 8,
+      "exception_count": 1,
+      "match_rate": 1.0,
+      "unreconciled_balance_brl": -33.0,
+      "status": "exceptions_opened",
+      "requires_human_review": true
     }
   },
   {
     "id": "g10-reconciliation-25",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 25 risco=low status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 25,
-      "blocked": false
+    "desc": "reconciliation cenário 25",
+    "reconciliation": {
+      "period": "2026-01",
+      "ledger_transactions": [
+        {
+          "id": "l-24-0",
+          "external_id": "ref-24-0",
+          "amount_brl": 124
+        },
+        {
+          "id": "l-24-1",
+          "external_id": "ref-24-1",
+          "amount_brl": 149
+        },
+        {
+          "id": "l-24-2",
+          "external_id": "ref-24-2",
+          "amount_brl": 174
+        },
+        {
+          "id": "l-24-3",
+          "external_id": "ref-24-3",
+          "amount_brl": 199
+        },
+        {
+          "id": "l-24-4",
+          "external_id": "ref-24-4",
+          "amount_brl": 224
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-24-0",
+          "external_id": "ref-24-0",
+          "amount_brl": 124
+        },
+        {
+          "id": "b-24-1",
+          "external_id": "ref-24-1",
+          "amount_brl": 149
+        },
+        {
+          "id": "b-24-2",
+          "external_id": "ref-24-2",
+          "amount_brl": 174
+        },
+        {
+          "id": "b-24-3",
+          "external_id": "ref-24-3",
+          "amount_brl": 199
+        },
+        {
+          "id": "b-24-4",
+          "external_id": "ref-24-4",
+          "amount_brl": 224
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "matched_count": 5,
+      "exception_count": 0,
+      "match_rate": 1.0,
+      "unreconciled_balance_brl": 0.0,
+      "status": "reconciled",
+      "requires_human_review": false
     }
   },
   {
     "id": "g10-reconciliation-26",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 26 risco=medium status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-reconciliation",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 26,
-      "blocked": false
+    "desc": "reconciliation cenário 26",
+    "reconciliation": {
+      "period": "2026-02",
+      "ledger_transactions": [
+        {
+          "id": "l-25-0",
+          "external_id": "ref-25-0",
+          "amount_brl": 125
+        },
+        {
+          "id": "l-25-1",
+          "external_id": "ref-25-1",
+          "amount_brl": 150
+        },
+        {
+          "id": "l-25-2",
+          "external_id": "ref-25-2",
+          "amount_brl": 175
+        },
+        {
+          "id": "l-25-3",
+          "external_id": "ref-25-3",
+          "amount_brl": 200
+        },
+        {
+          "id": "l-25-4",
+          "external_id": "ref-25-4",
+          "amount_brl": 225
+        },
+        {
+          "id": "l-25-5",
+          "external_id": "ref-25-5",
+          "amount_brl": 250
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-25-0",
+          "external_id": "ref-25-0",
+          "amount_brl": 125
+        },
+        {
+          "id": "b-25-1",
+          "external_id": "ref-25-1",
+          "amount_brl": 150
+        },
+        {
+          "id": "b-25-2",
+          "external_id": "ref-25-2",
+          "amount_brl": 175
+        },
+        {
+          "id": "b-25-3",
+          "external_id": "ref-25-3",
+          "amount_brl": 200
+        },
+        {
+          "id": "b-25-4",
+          "external_id": "ref-25-4",
+          "amount_brl": 225
+        },
+        {
+          "id": "b-25-5",
+          "external_id": "ref-25-5",
+          "amount_brl": 250
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g10-reconciliation",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "matched_count": 6,
+      "exception_count": 0,
+      "match_rate": 1.0,
+      "unreconciled_balance_brl": 0.0,
+      "status": "reconciled",
+      "requires_human_review": false
     }
   },
   {
     "id": "g10-reconciliation-27",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 27 risco=high status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-reconciliation",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 27,
-      "blocked": false
+    "desc": "reconciliation cenário 27",
+    "reconciliation": {
+      "period": "2026-03",
+      "ledger_transactions": [
+        {
+          "id": "l-26-0",
+          "external_id": "ref-26-0",
+          "amount_brl": 126
+        },
+        {
+          "id": "l-26-1",
+          "external_id": "ref-26-1",
+          "amount_brl": 151
+        },
+        {
+          "id": "l-26-2",
+          "external_id": "ref-26-2",
+          "amount_brl": 176
+        },
+        {
+          "id": "l-26-3",
+          "external_id": "ref-26-3",
+          "amount_brl": 201
+        },
+        {
+          "id": "l-26-4",
+          "external_id": "ref-26-4",
+          "amount_brl": 226
+        },
+        {
+          "id": "l-26-5",
+          "external_id": "ref-26-5",
+          "amount_brl": 251
+        },
+        {
+          "id": "l-26-6",
+          "external_id": "ref-26-6",
+          "amount_brl": 276
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-26-0",
+          "external_id": "ref-26-0",
+          "amount_brl": 126
+        },
+        {
+          "id": "b-26-1",
+          "external_id": "ref-26-1",
+          "amount_brl": 151
+        },
+        {
+          "id": "b-26-2",
+          "external_id": "ref-26-2",
+          "amount_brl": 176
+        },
+        {
+          "id": "b-26-3",
+          "external_id": "ref-26-3",
+          "amount_brl": 201
+        },
+        {
+          "id": "b-26-4",
+          "external_id": "ref-26-4",
+          "amount_brl": 226
+        },
+        {
+          "id": "b-26-5",
+          "external_id": "ref-26-5",
+          "amount_brl": 251
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g10-reconciliation",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "matched_count": 6,
+      "exception_count": 1,
+      "match_rate": 0.8571,
+      "unreconciled_balance_brl": 276.0,
+      "status": "exceptions_opened",
+      "requires_human_review": true
     }
   },
   {
     "id": "g10-reconciliation-28",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 28 risco=critical status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-reconciliation",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 28,
-      "blocked": false
+    "desc": "reconciliation cenário 28",
+    "reconciliation": {
+      "period": "2026-04",
+      "ledger_transactions": [
+        {
+          "id": "l-27-0",
+          "external_id": "ref-27-0",
+          "amount_brl": 127
+        },
+        {
+          "id": "l-27-1",
+          "external_id": "ref-27-1",
+          "amount_brl": 152
+        },
+        {
+          "id": "l-27-2",
+          "external_id": "ref-27-2",
+          "amount_brl": 177
+        },
+        {
+          "id": "l-27-3",
+          "external_id": "ref-27-3",
+          "amount_brl": 202
+        },
+        {
+          "id": "l-27-4",
+          "external_id": "ref-27-4",
+          "amount_brl": 227
+        },
+        {
+          "id": "l-27-5",
+          "external_id": "ref-27-5",
+          "amount_brl": 252
+        },
+        {
+          "id": "l-27-6",
+          "external_id": "ref-27-6",
+          "amount_brl": 277
+        },
+        {
+          "id": "l-27-7",
+          "external_id": "ref-27-7",
+          "amount_brl": 302
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-27-0",
+          "external_id": "ref-27-0",
+          "amount_brl": 127
+        },
+        {
+          "id": "b-27-1",
+          "external_id": "ref-27-1",
+          "amount_brl": 152
+        },
+        {
+          "id": "b-27-2",
+          "external_id": "ref-27-2",
+          "amount_brl": 177
+        },
+        {
+          "id": "b-27-3",
+          "external_id": "ref-27-3",
+          "amount_brl": 202
+        },
+        {
+          "id": "b-27-4",
+          "external_id": "ref-27-4",
+          "amount_brl": 227
+        },
+        {
+          "id": "b-27-5",
+          "external_id": "ref-27-5",
+          "amount_brl": 252
+        },
+        {
+          "id": "b-27-6",
+          "external_id": "ref-27-6",
+          "amount_brl": 277
+        },
+        {
+          "id": "b-27-7",
+          "external_id": "ref-27-7",
+          "amount_brl": 312
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-reconciliation",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "matched_count": 7,
+      "exception_count": 2,
+      "match_rate": 0.875,
+      "unreconciled_balance_brl": -10.0,
+      "status": "exceptions_opened",
+      "requires_human_review": true
     }
   },
   {
     "id": "g10-reconciliation-29",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 29 risco=low status=blocked",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "low",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g10-reconciliation",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 29,
-      "blocked": true
+    "desc": "reconciliation cenário 29",
+    "reconciliation": {
+      "period": "2026-05",
+      "ledger_transactions": [
+        {
+          "id": "l-28-0",
+          "external_id": "ref-28-0",
+          "amount_brl": 128
+        },
+        {
+          "id": "l-28-1",
+          "external_id": "ref-28-1",
+          "amount_brl": 153
+        },
+        {
+          "id": "l-28-2",
+          "external_id": "ref-28-2",
+          "amount_brl": 178
+        },
+        {
+          "id": "l-28-3",
+          "external_id": "ref-28-3",
+          "amount_brl": 203
+        },
+        {
+          "id": "l-28-4",
+          "external_id": "ref-28-4",
+          "amount_brl": 228
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-28-0",
+          "external_id": "ref-28-0",
+          "amount_brl": 128
+        },
+        {
+          "id": "b-28-1",
+          "external_id": "ref-28-1",
+          "amount_brl": 153
+        },
+        {
+          "id": "b-28-2",
+          "external_id": "ref-28-2",
+          "amount_brl": 178
+        },
+        {
+          "id": "b-28-3",
+          "external_id": "ref-28-3",
+          "amount_brl": 203
+        },
+        {
+          "id": "b-28-4",
+          "external_id": "ref-28-4",
+          "amount_brl": 228
+        },
+        {
+          "id": "b-28-extra",
+          "external_id": "extra-28",
+          "amount_brl": 33
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "blocked",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g10-reconciliation",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "matched_count": 5,
+      "exception_count": 1,
+      "match_rate": 1.0,
+      "unreconciled_balance_brl": -33.0,
+      "status": "exceptions_opened",
+      "requires_human_review": true
     }
   },
   {
     "id": "g10-reconciliation-30",
-    "desc": "Conciliação Bancária e de Pagamentos: cenário 30 risco=medium status=ready",
-    "artifact_type": "reconciliation.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-reconciliation",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 30,
-      "blocked": false
+    "desc": "reconciliation cenário 30",
+    "reconciliation": {
+      "period": "2026-06",
+      "ledger_transactions": [
+        {
+          "id": "l-29-0",
+          "external_id": "ref-29-0",
+          "amount_brl": 129
+        },
+        {
+          "id": "l-29-1",
+          "external_id": "ref-29-1",
+          "amount_brl": 154
+        },
+        {
+          "id": "l-29-2",
+          "external_id": "ref-29-2",
+          "amount_brl": 179
+        },
+        {
+          "id": "l-29-3",
+          "external_id": "ref-29-3",
+          "amount_brl": 204
+        },
+        {
+          "id": "l-29-4",
+          "external_id": "ref-29-4",
+          "amount_brl": 229
+        },
+        {
+          "id": "l-29-5",
+          "external_id": "ref-29-5",
+          "amount_brl": 254
+        }
+      ],
+      "bank_entries": [
+        {
+          "id": "b-29-0",
+          "external_id": "ref-29-0",
+          "amount_brl": 129
+        },
+        {
+          "id": "b-29-1",
+          "external_id": "ref-29-1",
+          "amount_brl": 154
+        },
+        {
+          "id": "b-29-2",
+          "external_id": "ref-29-2",
+          "amount_brl": 179
+        },
+        {
+          "id": "b-29-3",
+          "external_id": "ref-29-3",
+          "amount_brl": 204
+        },
+        {
+          "id": "b-29-4",
+          "external_id": "ref-29-4",
+          "amount_brl": 229
+        },
+        {
+          "id": "b-29-5",
+          "external_id": "ref-29-5",
+          "amount_brl": 254
+        }
+      ]
     },
     "expected": {
       "agent_id": "g10-reconciliation",
-      "handler_kind": "spec_driven",
-      "artifact_type": "reconciliation.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g10-reconciliation",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "matched_count": 6,
+      "exception_count": 0,
+      "match_rate": 1.0,
+      "unreconciled_balance_brl": 0.0,
+      "status": "reconciled",
+      "requires_human_review": false
     }
   }
 ]

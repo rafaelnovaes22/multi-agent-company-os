@@ -1,902 +1,842 @@
 [
   {
     "id": "g8-dunning-agent-01",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 01 risco=low status=ready",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g8-dunning-agent",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 1,
-      "blocked": false
+    "desc": "dunning cenário 01",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-0-a",
+          "amount_brl": 300,
+          "overdue_days": 2,
+          "status": "overdue"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "ready",
-      "risk": "low",
+      "overdue_count": 1,
+      "attempt_count": 1,
+      "recovery_amount_brl": 300.0,
+      "max_overdue_days": 2,
       "requires_human_review": false,
-      "routed_to": "g8-dunning-agent",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "status": "run_cycle"
     }
   },
   {
     "id": "g8-dunning-agent-02",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 02 risco=medium status=ready",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g8-dunning-agent",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 2,
-      "blocked": false
+    "desc": "dunning cenário 02",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-1-a",
+          "amount_brl": 900,
+          "overdue_days": 12,
+          "status": "failed"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "ready",
-      "risk": "medium",
+      "overdue_count": 1,
+      "attempt_count": 1,
+      "recovery_amount_brl": 900.0,
+      "max_overdue_days": 12,
       "requires_human_review": false,
-      "routed_to": "g8-dunning-agent",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "status": "run_cycle"
     }
   },
   {
     "id": "g8-dunning-agent-03",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 03 risco=high status=ready",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-dri",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 3,
-      "blocked": false
+    "desc": "dunning cenário 03",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-2-a",
+          "amount_brl": 5100,
+          "overdue_days": 10,
+          "status": "overdue"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "ready",
-      "risk": "high",
+      "overdue_count": 1,
+      "attempt_count": 1,
+      "recovery_amount_brl": 5100.0,
+      "max_overdue_days": 10,
       "requires_human_review": true,
-      "routed_to": "human-dri",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "status": "escalate"
     }
   },
   {
     "id": "g8-dunning-agent-04",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 04 risco=critical status=ready",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g8-dunning-agent",
-    "capabilities": [
-      "config_driven",
-      "policy_check"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 4,
-      "blocked": false
+    "desc": "dunning cenário 04",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-3-a",
+          "amount_brl": 700,
+          "overdue_days": 70,
+          "status": "overdue"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "ready",
-      "risk": "critical",
+      "overdue_count": 1,
+      "attempt_count": 1,
+      "recovery_amount_brl": 700.0,
+      "max_overdue_days": 70,
       "requires_human_review": true,
-      "routed_to": "g8-dunning-agent",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "status": "escalate"
     }
   },
   {
     "id": "g8-dunning-agent-05",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 05 risco=low status=blocked",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "low",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g8-dunning-agent",
-    "capabilities": [
-      "policy_check",
-      "human_escalation"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 5,
-      "blocked": true
+    "desc": "dunning cenário 05",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-4-a",
+          "amount_brl": 100,
+          "overdue_days": 0,
+          "status": "paid"
+        },
+        {
+          "id": "inv-4-b",
+          "amount_brl": 200,
+          "overdue_days": 6,
+          "status": "overdue"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "blocked",
-      "risk": "low",
+      "overdue_count": 1,
+      "attempt_count": 1,
+      "recovery_amount_brl": 200.0,
+      "max_overdue_days": 6,
       "requires_human_review": false,
-      "routed_to": "g8-dunning-agent",
-      "capabilities_any": [
-        "policy_check"
-      ]
+      "status": "run_cycle"
     }
   },
   {
     "id": "g8-dunning-agent-06",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 06 risco=medium status=ready",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g8-dunning-agent",
-    "capabilities": [
-      "human_escalation",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 6,
-      "blocked": false
+    "desc": "dunning cenário 06",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-5-a",
+          "amount_brl": 6500,
+          "overdue_days": 65,
+          "status": "failed"
+        },
+        {
+          "id": "inv-5-b",
+          "amount_brl": 800,
+          "overdue_days": 4,
+          "status": "overdue"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g8-dunning-agent",
-      "capabilities_any": [
-        "human_escalation"
-      ]
+      "overdue_count": 2,
+      "attempt_count": 2,
+      "recovery_amount_brl": 7300.0,
+      "max_overdue_days": 65,
+      "requires_human_review": true,
+      "status": "escalate"
     }
   },
   {
     "id": "g8-dunning-agent-07",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 07 risco=high status=ready",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-dri",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 7,
-      "blocked": false
+    "desc": "dunning cenário 07",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-6-a",
+          "amount_brl": 300,
+          "overdue_days": 2,
+          "status": "overdue"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-dri",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "overdue_count": 1,
+      "attempt_count": 1,
+      "recovery_amount_brl": 300.0,
+      "max_overdue_days": 2,
+      "requires_human_review": false,
+      "status": "run_cycle"
     }
   },
   {
     "id": "g8-dunning-agent-08",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 08 risco=critical status=ready",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g8-dunning-agent",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 8,
-      "blocked": false
+    "desc": "dunning cenário 08",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-7-a",
+          "amount_brl": 900,
+          "overdue_days": 12,
+          "status": "failed"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g8-dunning-agent",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "overdue_count": 1,
+      "attempt_count": 1,
+      "recovery_amount_brl": 900.0,
+      "max_overdue_days": 12,
+      "requires_human_review": false,
+      "status": "run_cycle"
     }
   },
   {
     "id": "g8-dunning-agent-09",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 09 risco=low status=ready",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g8-dunning-agent",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 9,
-      "blocked": false
+    "desc": "dunning cenário 09",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-8-a",
+          "amount_brl": 5100,
+          "overdue_days": 10,
+          "status": "overdue"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g8-dunning-agent",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "overdue_count": 1,
+      "attempt_count": 1,
+      "recovery_amount_brl": 5100.0,
+      "max_overdue_days": 10,
+      "requires_human_review": true,
+      "status": "escalate"
     }
   },
   {
     "id": "g8-dunning-agent-10",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 10 risco=medium status=blocked",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g8-dunning-agent",
-    "capabilities": [
-      "config_driven",
-      "policy_check"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 10,
-      "blocked": true
+    "desc": "dunning cenário 10",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-9-a",
+          "amount_brl": 700,
+          "overdue_days": 70,
+          "status": "overdue"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g8-dunning-agent",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "overdue_count": 1,
+      "attempt_count": 1,
+      "recovery_amount_brl": 700.0,
+      "max_overdue_days": 70,
+      "requires_human_review": true,
+      "status": "escalate"
     }
   },
   {
     "id": "g8-dunning-agent-11",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 11 risco=high status=ready",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-dri",
-    "capabilities": [
-      "policy_check",
-      "human_escalation"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 11,
-      "blocked": false
+    "desc": "dunning cenário 11",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-10-a",
+          "amount_brl": 100,
+          "overdue_days": 0,
+          "status": "paid"
+        },
+        {
+          "id": "inv-10-b",
+          "amount_brl": 200,
+          "overdue_days": 6,
+          "status": "overdue"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-dri",
-      "capabilities_any": [
-        "policy_check"
-      ]
+      "overdue_count": 1,
+      "attempt_count": 1,
+      "recovery_amount_brl": 200.0,
+      "max_overdue_days": 6,
+      "requires_human_review": false,
+      "status": "run_cycle"
     }
   },
   {
     "id": "g8-dunning-agent-12",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 12 risco=critical status=ready",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g8-dunning-agent",
-    "capabilities": [
-      "human_escalation",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 12,
-      "blocked": false
+    "desc": "dunning cenário 12",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-11-a",
+          "amount_brl": 6500,
+          "overdue_days": 65,
+          "status": "failed"
+        },
+        {
+          "id": "inv-11-b",
+          "amount_brl": 800,
+          "overdue_days": 4,
+          "status": "overdue"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "ready",
-      "risk": "critical",
+      "overdue_count": 2,
+      "attempt_count": 2,
+      "recovery_amount_brl": 7300.0,
+      "max_overdue_days": 65,
       "requires_human_review": true,
-      "routed_to": "g8-dunning-agent",
-      "capabilities_any": [
-        "human_escalation"
-      ]
+      "status": "escalate"
     }
   },
   {
     "id": "g8-dunning-agent-13",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 13 risco=low status=ready",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g8-dunning-agent",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 13,
-      "blocked": false
+    "desc": "dunning cenário 13",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-12-a",
+          "amount_brl": 300,
+          "overdue_days": 2,
+          "status": "overdue"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "ready",
-      "risk": "low",
+      "overdue_count": 1,
+      "attempt_count": 1,
+      "recovery_amount_brl": 300.0,
+      "max_overdue_days": 2,
       "requires_human_review": false,
-      "routed_to": "g8-dunning-agent",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "status": "run_cycle"
     }
   },
   {
     "id": "g8-dunning-agent-14",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 14 risco=medium status=ready",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g8-dunning-agent",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 14,
-      "blocked": false
+    "desc": "dunning cenário 14",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-13-a",
+          "amount_brl": 900,
+          "overdue_days": 12,
+          "status": "failed"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "ready",
-      "risk": "medium",
+      "overdue_count": 1,
+      "attempt_count": 1,
+      "recovery_amount_brl": 900.0,
+      "max_overdue_days": 12,
       "requires_human_review": false,
-      "routed_to": "g8-dunning-agent",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "status": "run_cycle"
     }
   },
   {
     "id": "g8-dunning-agent-15",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 15 risco=high status=blocked",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "high",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "human-dri",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 15,
-      "blocked": true
+    "desc": "dunning cenário 15",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-14-a",
+          "amount_brl": 5100,
+          "overdue_days": 10,
+          "status": "overdue"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "blocked",
-      "risk": "high",
+      "overdue_count": 1,
+      "attempt_count": 1,
+      "recovery_amount_brl": 5100.0,
+      "max_overdue_days": 10,
       "requires_human_review": true,
-      "routed_to": "human-dri",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "status": "escalate"
     }
   },
   {
     "id": "g8-dunning-agent-16",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 16 risco=critical status=ready",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g8-dunning-agent",
-    "capabilities": [
-      "config_driven",
-      "policy_check"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 16,
-      "blocked": false
+    "desc": "dunning cenário 16",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-15-a",
+          "amount_brl": 700,
+          "overdue_days": 70,
+          "status": "overdue"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "ready",
-      "risk": "critical",
+      "overdue_count": 1,
+      "attempt_count": 1,
+      "recovery_amount_brl": 700.0,
+      "max_overdue_days": 70,
       "requires_human_review": true,
-      "routed_to": "g8-dunning-agent",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "status": "escalate"
     }
   },
   {
     "id": "g8-dunning-agent-17",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 17 risco=low status=ready",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g8-dunning-agent",
-    "capabilities": [
-      "policy_check",
-      "human_escalation"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 17,
-      "blocked": false
+    "desc": "dunning cenário 17",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-16-a",
+          "amount_brl": 100,
+          "overdue_days": 0,
+          "status": "paid"
+        },
+        {
+          "id": "inv-16-b",
+          "amount_brl": 200,
+          "overdue_days": 6,
+          "status": "overdue"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "ready",
-      "risk": "low",
+      "overdue_count": 1,
+      "attempt_count": 1,
+      "recovery_amount_brl": 200.0,
+      "max_overdue_days": 6,
       "requires_human_review": false,
-      "routed_to": "g8-dunning-agent",
-      "capabilities_any": [
-        "policy_check"
-      ]
+      "status": "run_cycle"
     }
   },
   {
     "id": "g8-dunning-agent-18",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 18 risco=medium status=ready",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g8-dunning-agent",
-    "capabilities": [
-      "human_escalation",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 18,
-      "blocked": false
+    "desc": "dunning cenário 18",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-17-a",
+          "amount_brl": 6500,
+          "overdue_days": 65,
+          "status": "failed"
+        },
+        {
+          "id": "inv-17-b",
+          "amount_brl": 800,
+          "overdue_days": 4,
+          "status": "overdue"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g8-dunning-agent",
-      "capabilities_any": [
-        "human_escalation"
-      ]
+      "overdue_count": 2,
+      "attempt_count": 2,
+      "recovery_amount_brl": 7300.0,
+      "max_overdue_days": 65,
+      "requires_human_review": true,
+      "status": "escalate"
     }
   },
   {
     "id": "g8-dunning-agent-19",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 19 risco=high status=ready",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-dri",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 19,
-      "blocked": false
+    "desc": "dunning cenário 19",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-18-a",
+          "amount_brl": 300,
+          "overdue_days": 2,
+          "status": "overdue"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-dri",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "overdue_count": 1,
+      "attempt_count": 1,
+      "recovery_amount_brl": 300.0,
+      "max_overdue_days": 2,
+      "requires_human_review": false,
+      "status": "run_cycle"
     }
   },
   {
     "id": "g8-dunning-agent-20",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 20 risco=critical status=blocked",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "critical",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g8-dunning-agent",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 20,
-      "blocked": true
+    "desc": "dunning cenário 20",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-19-a",
+          "amount_brl": 900,
+          "overdue_days": 12,
+          "status": "failed"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "blocked",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g8-dunning-agent",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "overdue_count": 1,
+      "attempt_count": 1,
+      "recovery_amount_brl": 900.0,
+      "max_overdue_days": 12,
+      "requires_human_review": false,
+      "status": "run_cycle"
     }
   },
   {
     "id": "g8-dunning-agent-21",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 21 risco=low status=ready",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g8-dunning-agent",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 21,
-      "blocked": false
+    "desc": "dunning cenário 21",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-20-a",
+          "amount_brl": 5100,
+          "overdue_days": 10,
+          "status": "overdue"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g8-dunning-agent",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "overdue_count": 1,
+      "attempt_count": 1,
+      "recovery_amount_brl": 5100.0,
+      "max_overdue_days": 10,
+      "requires_human_review": true,
+      "status": "escalate"
     }
   },
   {
     "id": "g8-dunning-agent-22",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 22 risco=medium status=ready",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g8-dunning-agent",
-    "capabilities": [
-      "config_driven",
-      "policy_check"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 22,
-      "blocked": false
+    "desc": "dunning cenário 22",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-21-a",
+          "amount_brl": 700,
+          "overdue_days": 70,
+          "status": "overdue"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g8-dunning-agent",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "overdue_count": 1,
+      "attempt_count": 1,
+      "recovery_amount_brl": 700.0,
+      "max_overdue_days": 70,
+      "requires_human_review": true,
+      "status": "escalate"
     }
   },
   {
     "id": "g8-dunning-agent-23",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 23 risco=high status=ready",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-dri",
-    "capabilities": [
-      "policy_check",
-      "human_escalation"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 23,
-      "blocked": false
+    "desc": "dunning cenário 23",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-22-a",
+          "amount_brl": 100,
+          "overdue_days": 0,
+          "status": "paid"
+        },
+        {
+          "id": "inv-22-b",
+          "amount_brl": 200,
+          "overdue_days": 6,
+          "status": "overdue"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-dri",
-      "capabilities_any": [
-        "policy_check"
-      ]
+      "overdue_count": 1,
+      "attempt_count": 1,
+      "recovery_amount_brl": 200.0,
+      "max_overdue_days": 6,
+      "requires_human_review": false,
+      "status": "run_cycle"
     }
   },
   {
     "id": "g8-dunning-agent-24",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 24 risco=critical status=ready",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g8-dunning-agent",
-    "capabilities": [
-      "human_escalation",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 24,
-      "blocked": false
+    "desc": "dunning cenário 24",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-23-a",
+          "amount_brl": 6500,
+          "overdue_days": 65,
+          "status": "failed"
+        },
+        {
+          "id": "inv-23-b",
+          "amount_brl": 800,
+          "overdue_days": 4,
+          "status": "overdue"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "ready",
-      "risk": "critical",
+      "overdue_count": 2,
+      "attempt_count": 2,
+      "recovery_amount_brl": 7300.0,
+      "max_overdue_days": 65,
       "requires_human_review": true,
-      "routed_to": "g8-dunning-agent",
-      "capabilities_any": [
-        "human_escalation"
-      ]
+      "status": "escalate"
     }
   },
   {
     "id": "g8-dunning-agent-25",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 25 risco=low status=blocked",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "low",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g8-dunning-agent",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 25,
-      "blocked": true
+    "desc": "dunning cenário 25",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-24-a",
+          "amount_brl": 300,
+          "overdue_days": 2,
+          "status": "overdue"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "blocked",
-      "risk": "low",
+      "overdue_count": 1,
+      "attempt_count": 1,
+      "recovery_amount_brl": 300.0,
+      "max_overdue_days": 2,
       "requires_human_review": false,
-      "routed_to": "g8-dunning-agent",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "status": "run_cycle"
     }
   },
   {
     "id": "g8-dunning-agent-26",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 26 risco=medium status=ready",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g8-dunning-agent",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 26,
-      "blocked": false
+    "desc": "dunning cenário 26",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-25-a",
+          "amount_brl": 900,
+          "overdue_days": 12,
+          "status": "failed"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "ready",
-      "risk": "medium",
+      "overdue_count": 1,
+      "attempt_count": 1,
+      "recovery_amount_brl": 900.0,
+      "max_overdue_days": 12,
       "requires_human_review": false,
-      "routed_to": "g8-dunning-agent",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "status": "run_cycle"
     }
   },
   {
     "id": "g8-dunning-agent-27",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 27 risco=high status=ready",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-dri",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 27,
-      "blocked": false
+    "desc": "dunning cenário 27",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-26-a",
+          "amount_brl": 5100,
+          "overdue_days": 10,
+          "status": "overdue"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "ready",
-      "risk": "high",
+      "overdue_count": 1,
+      "attempt_count": 1,
+      "recovery_amount_brl": 5100.0,
+      "max_overdue_days": 10,
       "requires_human_review": true,
-      "routed_to": "human-dri",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "status": "escalate"
     }
   },
   {
     "id": "g8-dunning-agent-28",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 28 risco=critical status=ready",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g8-dunning-agent",
-    "capabilities": [
-      "config_driven",
-      "policy_check"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 28,
-      "blocked": false
+    "desc": "dunning cenário 28",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-27-a",
+          "amount_brl": 700,
+          "overdue_days": 70,
+          "status": "overdue"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "ready",
-      "risk": "critical",
+      "overdue_count": 1,
+      "attempt_count": 1,
+      "recovery_amount_brl": 700.0,
+      "max_overdue_days": 70,
       "requires_human_review": true,
-      "routed_to": "g8-dunning-agent",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "status": "escalate"
     }
   },
   {
     "id": "g8-dunning-agent-29",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 29 risco=low status=ready",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g8-dunning-agent",
-    "capabilities": [
-      "policy_check",
-      "human_escalation"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 29,
-      "blocked": false
+    "desc": "dunning cenário 29",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-28-a",
+          "amount_brl": 100,
+          "overdue_days": 0,
+          "status": "paid"
+        },
+        {
+          "id": "inv-28-b",
+          "amount_brl": 200,
+          "overdue_days": 6,
+          "status": "overdue"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "ready",
-      "risk": "low",
+      "overdue_count": 1,
+      "attempt_count": 1,
+      "recovery_amount_brl": 200.0,
+      "max_overdue_days": 6,
       "requires_human_review": false,
-      "routed_to": "g8-dunning-agent",
-      "capabilities_any": [
-        "policy_check"
-      ]
+      "status": "run_cycle"
     }
   },
   {
     "id": "g8-dunning-agent-30",
-    "desc": "Agente de Recuperação de Inadimplência: cenário 30 risco=medium status=blocked",
-    "artifact_type": "dunning-agent.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g8-dunning-agent",
-    "capabilities": [
-      "human_escalation",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 30,
-      "blocked": true
+    "desc": "dunning cenário 30",
+    "dunning": {
+      "invoices": [
+        {
+          "id": "inv-29-a",
+          "amount_brl": 6500,
+          "overdue_days": 65,
+          "status": "failed"
+        },
+        {
+          "id": "inv-29-b",
+          "amount_brl": 800,
+          "overdue_days": 4,
+          "status": "overdue"
+        }
+      ]
+    },
+    "dunning_policy": {
+      "legal_review_amount_brl": 5000
     },
     "expected": {
       "agent_id": "g8-dunning-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "dunning-agent.artifact",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g8-dunning-agent",
-      "capabilities_any": [
-        "human_escalation"
-      ]
+      "overdue_count": 2,
+      "attempt_count": 2,
+      "recovery_amount_brl": 7300.0,
+      "max_overdue_days": 65,
+      "requires_human_review": true,
+      "status": "escalate"
     }
   }
 ]

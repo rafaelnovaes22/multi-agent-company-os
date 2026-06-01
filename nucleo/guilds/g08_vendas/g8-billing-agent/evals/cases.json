@@ -1,902 +1,1322 @@
 [
   {
     "id": "g8-billing-agent-01",
-    "desc": "Agente de Cobrança e Faturamento: cenário 01 risco=low status=ready",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g8-billing-agent",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 1,
-      "blocked": false
+    "desc": "billing deterministic scenario 1",
+    "account_id": "acct-0",
+    "billing": {
+      "invoice_id": "inv-01",
+      "tax_policy": {
+        "tax_rate": 0
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1000,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 100,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 300,
+          "delivered": false,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g8-billing-agent",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "invoice_id": "inv-01",
+      "status": "blocked",
+      "billable_charge_count": 2,
+      "blocked_undelivered_count": 1,
+      "subtotal_brl": 1100.0,
+      "tax_rate": 0,
+      "tax_brl": 0.0,
+      "total_brl": 1100.0
     }
   },
   {
     "id": "g8-billing-agent-02",
-    "desc": "Agente de Cobrança e Faturamento: cenário 02 risco=medium status=ready",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g8-billing-agent",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 2,
-      "blocked": false
+    "desc": "billing deterministic scenario 2",
+    "account_id": "acct-1",
+    "billing": {
+      "invoice_id": "inv-02",
+      "tax_policy": {
+        "tax_rate": 0.06
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1010,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 120,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 330,
+          "delivered": true,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g8-billing-agent",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "invoice_id": "inv-02",
+      "status": "issued",
+      "billable_charge_count": 3,
+      "blocked_undelivered_count": 0,
+      "subtotal_brl": 1460.0,
+      "tax_rate": 0.06,
+      "tax_brl": 87.6,
+      "total_brl": 1547.6
     }
   },
   {
     "id": "g8-billing-agent-03",
-    "desc": "Agente de Cobrança e Faturamento: cenário 03 risco=high status=ready",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-dri",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 3,
-      "blocked": false
+    "desc": "billing deterministic scenario 3",
+    "account_id": "acct-2",
+    "billing": {
+      "invoice_id": "inv-03",
+      "tax_policy": {
+        "tax_rate": 0.12
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1020,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 140,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 360,
+          "delivered": true,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-dri",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "invoice_id": "inv-03",
+      "status": "issued",
+      "billable_charge_count": 3,
+      "blocked_undelivered_count": 0,
+      "subtotal_brl": 1520.0,
+      "tax_rate": 0.12,
+      "tax_brl": 182.4,
+      "total_brl": 1702.4
     }
   },
   {
     "id": "g8-billing-agent-04",
-    "desc": "Agente de Cobrança e Faturamento: cenário 04 risco=critical status=ready",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g8-billing-agent",
-    "capabilities": [
-      "config_driven",
-      "policy_check"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 4,
-      "blocked": false
+    "desc": "billing deterministic scenario 4",
+    "account_id": "acct-3",
+    "billing": {
+      "invoice_id": "inv-04",
+      "tax_policy": {
+        "tax_rate": 0.18
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1030,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 160,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 390,
+          "delivered": true,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g8-billing-agent",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "invoice_id": "inv-04",
+      "status": "issued",
+      "billable_charge_count": 3,
+      "blocked_undelivered_count": 0,
+      "subtotal_brl": 1580.0,
+      "tax_rate": 0.18,
+      "tax_brl": 284.4,
+      "total_brl": 1864.4
     }
   },
   {
     "id": "g8-billing-agent-05",
-    "desc": "Agente de Cobrança e Faturamento: cenário 05 risco=low status=blocked",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "low",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g8-billing-agent",
-    "capabilities": [
-      "policy_check",
-      "human_escalation"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 5,
-      "blocked": true
+    "desc": "billing deterministic scenario 5",
+    "account_id": "acct-4",
+    "billing": {
+      "invoice_id": "inv-05",
+      "tax_policy": {
+        "tax_rate": 0
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1040,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 180,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 420,
+          "delivered": true,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "blocked",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g8-billing-agent",
-      "capabilities_any": [
-        "policy_check"
-      ]
+      "invoice_id": "inv-05",
+      "status": "issued",
+      "billable_charge_count": 3,
+      "blocked_undelivered_count": 0,
+      "subtotal_brl": 1640.0,
+      "tax_rate": 0,
+      "tax_brl": 0.0,
+      "total_brl": 1640.0
     }
   },
   {
     "id": "g8-billing-agent-06",
-    "desc": "Agente de Cobrança e Faturamento: cenário 06 risco=medium status=ready",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g8-billing-agent",
-    "capabilities": [
-      "human_escalation",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 6,
-      "blocked": false
+    "desc": "billing deterministic scenario 6",
+    "account_id": "acct-5",
+    "billing": {
+      "invoice_id": "inv-06",
+      "tax_policy": {
+        "tax_rate": 0.06
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1050,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 100,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 450,
+          "delivered": false,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g8-billing-agent",
-      "capabilities_any": [
-        "human_escalation"
-      ]
+      "invoice_id": "inv-06",
+      "status": "blocked",
+      "billable_charge_count": 2,
+      "blocked_undelivered_count": 1,
+      "subtotal_brl": 1150.0,
+      "tax_rate": 0.06,
+      "tax_brl": 69.0,
+      "total_brl": 1219.0
     }
   },
   {
     "id": "g8-billing-agent-07",
-    "desc": "Agente de Cobrança e Faturamento: cenário 07 risco=high status=ready",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-dri",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 7,
-      "blocked": false
+    "desc": "billing deterministic scenario 7",
+    "account_id": "acct-0",
+    "billing": {
+      "invoice_id": "inv-07",
+      "tax_policy": {
+        "tax_rate": 0.12
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1060,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 120,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 480,
+          "delivered": true,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-dri",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "invoice_id": "inv-07",
+      "status": "issued",
+      "billable_charge_count": 3,
+      "blocked_undelivered_count": 0,
+      "subtotal_brl": 1660.0,
+      "tax_rate": 0.12,
+      "tax_brl": 199.2,
+      "total_brl": 1859.2
     }
   },
   {
     "id": "g8-billing-agent-08",
-    "desc": "Agente de Cobrança e Faturamento: cenário 08 risco=critical status=ready",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g8-billing-agent",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 8,
-      "blocked": false
+    "desc": "billing deterministic scenario 8",
+    "account_id": "acct-1",
+    "billing": {
+      "invoice_id": "inv-08",
+      "tax_policy": {
+        "tax_rate": 0.18
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1070,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 140,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 300,
+          "delivered": true,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g8-billing-agent",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "invoice_id": "inv-08",
+      "status": "issued",
+      "billable_charge_count": 3,
+      "blocked_undelivered_count": 0,
+      "subtotal_brl": 1510.0,
+      "tax_rate": 0.18,
+      "tax_brl": 271.8,
+      "total_brl": 1781.8
     }
   },
   {
     "id": "g8-billing-agent-09",
-    "desc": "Agente de Cobrança e Faturamento: cenário 09 risco=low status=ready",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g8-billing-agent",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 9,
-      "blocked": false
+    "desc": "billing deterministic scenario 9",
+    "account_id": "acct-2",
+    "billing": {
+      "invoice_id": "inv-09",
+      "tax_policy": {
+        "tax_rate": 0
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1080,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 160,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 330,
+          "delivered": true,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g8-billing-agent",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "invoice_id": "inv-09",
+      "status": "issued",
+      "billable_charge_count": 3,
+      "blocked_undelivered_count": 0,
+      "subtotal_brl": 1570.0,
+      "tax_rate": 0,
+      "tax_brl": 0.0,
+      "total_brl": 1570.0
     }
   },
   {
     "id": "g8-billing-agent-10",
-    "desc": "Agente de Cobrança e Faturamento: cenário 10 risco=medium status=blocked",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g8-billing-agent",
-    "capabilities": [
-      "config_driven",
-      "policy_check"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 10,
-      "blocked": true
+    "desc": "billing deterministic scenario 10",
+    "account_id": "acct-3",
+    "billing": {
+      "invoice_id": "inv-10",
+      "tax_policy": {
+        "tax_rate": 0.06
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1090,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 180,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 360,
+          "delivered": true,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g8-billing-agent",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "invoice_id": "inv-10",
+      "status": "issued",
+      "billable_charge_count": 3,
+      "blocked_undelivered_count": 0,
+      "subtotal_brl": 1630.0,
+      "tax_rate": 0.06,
+      "tax_brl": 97.8,
+      "total_brl": 1727.8
     }
   },
   {
     "id": "g8-billing-agent-11",
-    "desc": "Agente de Cobrança e Faturamento: cenário 11 risco=high status=ready",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-dri",
-    "capabilities": [
-      "policy_check",
-      "human_escalation"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 11,
-      "blocked": false
+    "desc": "billing deterministic scenario 11",
+    "account_id": "acct-4",
+    "billing": {
+      "invoice_id": "inv-11",
+      "tax_policy": {
+        "tax_rate": 0.12
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1100,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 100,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 390,
+          "delivered": false,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-dri",
-      "capabilities_any": [
-        "policy_check"
-      ]
+      "invoice_id": "inv-11",
+      "status": "blocked",
+      "billable_charge_count": 2,
+      "blocked_undelivered_count": 1,
+      "subtotal_brl": 1200.0,
+      "tax_rate": 0.12,
+      "tax_brl": 144.0,
+      "total_brl": 1344.0
     }
   },
   {
     "id": "g8-billing-agent-12",
-    "desc": "Agente de Cobrança e Faturamento: cenário 12 risco=critical status=ready",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g8-billing-agent",
-    "capabilities": [
-      "human_escalation",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 12,
-      "blocked": false
+    "desc": "billing deterministic scenario 12",
+    "account_id": "acct-5",
+    "billing": {
+      "invoice_id": "inv-12",
+      "tax_policy": {
+        "tax_rate": 0.18
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1110,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 120,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 420,
+          "delivered": true,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g8-billing-agent",
-      "capabilities_any": [
-        "human_escalation"
-      ]
+      "invoice_id": "inv-12",
+      "status": "issued",
+      "billable_charge_count": 3,
+      "blocked_undelivered_count": 0,
+      "subtotal_brl": 1650.0,
+      "tax_rate": 0.18,
+      "tax_brl": 297.0,
+      "total_brl": 1947.0
     }
   },
   {
     "id": "g8-billing-agent-13",
-    "desc": "Agente de Cobrança e Faturamento: cenário 13 risco=low status=ready",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g8-billing-agent",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 13,
-      "blocked": false
+    "desc": "billing deterministic scenario 13",
+    "account_id": "acct-0",
+    "billing": {
+      "invoice_id": "inv-13",
+      "tax_policy": {
+        "tax_rate": 0
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1120,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 140,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 450,
+          "delivered": true,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g8-billing-agent",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "invoice_id": "inv-13",
+      "status": "issued",
+      "billable_charge_count": 3,
+      "blocked_undelivered_count": 0,
+      "subtotal_brl": 1710.0,
+      "tax_rate": 0,
+      "tax_brl": 0.0,
+      "total_brl": 1710.0
     }
   },
   {
     "id": "g8-billing-agent-14",
-    "desc": "Agente de Cobrança e Faturamento: cenário 14 risco=medium status=ready",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g8-billing-agent",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 14,
-      "blocked": false
+    "desc": "billing deterministic scenario 14",
+    "account_id": "acct-1",
+    "billing": {
+      "invoice_id": "inv-14",
+      "tax_policy": {
+        "tax_rate": 0.06
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1130,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 160,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 480,
+          "delivered": true,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g8-billing-agent",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "invoice_id": "inv-14",
+      "status": "issued",
+      "billable_charge_count": 3,
+      "blocked_undelivered_count": 0,
+      "subtotal_brl": 1770.0,
+      "tax_rate": 0.06,
+      "tax_brl": 106.2,
+      "total_brl": 1876.2
     }
   },
   {
     "id": "g8-billing-agent-15",
-    "desc": "Agente de Cobrança e Faturamento: cenário 15 risco=high status=blocked",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "high",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "human-dri",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 15,
-      "blocked": true
+    "desc": "billing deterministic scenario 15",
+    "account_id": "acct-2",
+    "billing": {
+      "invoice_id": "inv-15",
+      "tax_policy": {
+        "tax_rate": 0.12
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1140,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 180,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 300,
+          "delivered": true,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "blocked",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-dri",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "invoice_id": "inv-15",
+      "status": "issued",
+      "billable_charge_count": 3,
+      "blocked_undelivered_count": 0,
+      "subtotal_brl": 1620.0,
+      "tax_rate": 0.12,
+      "tax_brl": 194.4,
+      "total_brl": 1814.4
     }
   },
   {
     "id": "g8-billing-agent-16",
-    "desc": "Agente de Cobrança e Faturamento: cenário 16 risco=critical status=ready",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g8-billing-agent",
-    "capabilities": [
-      "config_driven",
-      "policy_check"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 16,
-      "blocked": false
+    "desc": "billing deterministic scenario 16",
+    "account_id": "acct-3",
+    "billing": {
+      "invoice_id": "inv-16",
+      "tax_policy": {
+        "tax_rate": 0.18
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1150,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 100,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 330,
+          "delivered": false,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g8-billing-agent",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "invoice_id": "inv-16",
+      "status": "blocked",
+      "billable_charge_count": 2,
+      "blocked_undelivered_count": 1,
+      "subtotal_brl": 1250.0,
+      "tax_rate": 0.18,
+      "tax_brl": 225.0,
+      "total_brl": 1475.0
     }
   },
   {
     "id": "g8-billing-agent-17",
-    "desc": "Agente de Cobrança e Faturamento: cenário 17 risco=low status=ready",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g8-billing-agent",
-    "capabilities": [
-      "policy_check",
-      "human_escalation"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 17,
-      "blocked": false
+    "desc": "billing deterministic scenario 17",
+    "account_id": "acct-4",
+    "billing": {
+      "invoice_id": "inv-17",
+      "tax_policy": {
+        "tax_rate": 0
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1160,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 120,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 360,
+          "delivered": true,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g8-billing-agent",
-      "capabilities_any": [
-        "policy_check"
-      ]
+      "invoice_id": "inv-17",
+      "status": "issued",
+      "billable_charge_count": 3,
+      "blocked_undelivered_count": 0,
+      "subtotal_brl": 1640.0,
+      "tax_rate": 0,
+      "tax_brl": 0.0,
+      "total_brl": 1640.0
     }
   },
   {
     "id": "g8-billing-agent-18",
-    "desc": "Agente de Cobrança e Faturamento: cenário 18 risco=medium status=ready",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g8-billing-agent",
-    "capabilities": [
-      "human_escalation",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 18,
-      "blocked": false
+    "desc": "billing deterministic scenario 18",
+    "account_id": "acct-5",
+    "billing": {
+      "invoice_id": "inv-18",
+      "tax_policy": {
+        "tax_rate": 0.06
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1170,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 140,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 390,
+          "delivered": true,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g8-billing-agent",
-      "capabilities_any": [
-        "human_escalation"
-      ]
+      "invoice_id": "inv-18",
+      "status": "issued",
+      "billable_charge_count": 3,
+      "blocked_undelivered_count": 0,
+      "subtotal_brl": 1700.0,
+      "tax_rate": 0.06,
+      "tax_brl": 102.0,
+      "total_brl": 1802.0
     }
   },
   {
     "id": "g8-billing-agent-19",
-    "desc": "Agente de Cobrança e Faturamento: cenário 19 risco=high status=ready",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-dri",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 19,
-      "blocked": false
+    "desc": "billing deterministic scenario 19",
+    "account_id": "acct-0",
+    "billing": {
+      "invoice_id": "inv-19",
+      "tax_policy": {
+        "tax_rate": 0.12
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1180,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 160,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 420,
+          "delivered": true,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-dri",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "invoice_id": "inv-19",
+      "status": "issued",
+      "billable_charge_count": 3,
+      "blocked_undelivered_count": 0,
+      "subtotal_brl": 1760.0,
+      "tax_rate": 0.12,
+      "tax_brl": 211.2,
+      "total_brl": 1971.2
     }
   },
   {
     "id": "g8-billing-agent-20",
-    "desc": "Agente de Cobrança e Faturamento: cenário 20 risco=critical status=blocked",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "critical",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g8-billing-agent",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 20,
-      "blocked": true
+    "desc": "billing deterministic scenario 20",
+    "account_id": "acct-1",
+    "billing": {
+      "invoice_id": "inv-20",
+      "tax_policy": {
+        "tax_rate": 0.18
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1190,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 180,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 450,
+          "delivered": true,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "blocked",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g8-billing-agent",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "invoice_id": "inv-20",
+      "status": "issued",
+      "billable_charge_count": 3,
+      "blocked_undelivered_count": 0,
+      "subtotal_brl": 1820.0,
+      "tax_rate": 0.18,
+      "tax_brl": 327.6,
+      "total_brl": 2147.6
     }
   },
   {
     "id": "g8-billing-agent-21",
-    "desc": "Agente de Cobrança e Faturamento: cenário 21 risco=low status=ready",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g8-billing-agent",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 21,
-      "blocked": false
+    "desc": "billing deterministic scenario 21",
+    "account_id": "acct-2",
+    "billing": {
+      "invoice_id": "inv-21",
+      "tax_policy": {
+        "tax_rate": 0
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1200,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 100,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 480,
+          "delivered": false,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g8-billing-agent",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "invoice_id": "inv-21",
+      "status": "blocked",
+      "billable_charge_count": 2,
+      "blocked_undelivered_count": 1,
+      "subtotal_brl": 1300.0,
+      "tax_rate": 0,
+      "tax_brl": 0.0,
+      "total_brl": 1300.0
     }
   },
   {
     "id": "g8-billing-agent-22",
-    "desc": "Agente de Cobrança e Faturamento: cenário 22 risco=medium status=ready",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g8-billing-agent",
-    "capabilities": [
-      "config_driven",
-      "policy_check"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 22,
-      "blocked": false
+    "desc": "billing deterministic scenario 22",
+    "account_id": "acct-3",
+    "billing": {
+      "invoice_id": "inv-22",
+      "tax_policy": {
+        "tax_rate": 0.06
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1210,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 120,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 300,
+          "delivered": true,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g8-billing-agent",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "invoice_id": "inv-22",
+      "status": "issued",
+      "billable_charge_count": 3,
+      "blocked_undelivered_count": 0,
+      "subtotal_brl": 1630.0,
+      "tax_rate": 0.06,
+      "tax_brl": 97.8,
+      "total_brl": 1727.8
     }
   },
   {
     "id": "g8-billing-agent-23",
-    "desc": "Agente de Cobrança e Faturamento: cenário 23 risco=high status=ready",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-dri",
-    "capabilities": [
-      "policy_check",
-      "human_escalation"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 23,
-      "blocked": false
+    "desc": "billing deterministic scenario 23",
+    "account_id": "acct-4",
+    "billing": {
+      "invoice_id": "inv-23",
+      "tax_policy": {
+        "tax_rate": 0.12
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1220,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 140,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 330,
+          "delivered": true,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-dri",
-      "capabilities_any": [
-        "policy_check"
-      ]
+      "invoice_id": "inv-23",
+      "status": "issued",
+      "billable_charge_count": 3,
+      "blocked_undelivered_count": 0,
+      "subtotal_brl": 1690.0,
+      "tax_rate": 0.12,
+      "tax_brl": 202.8,
+      "total_brl": 1892.8
     }
   },
   {
     "id": "g8-billing-agent-24",
-    "desc": "Agente de Cobrança e Faturamento: cenário 24 risco=critical status=ready",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g8-billing-agent",
-    "capabilities": [
-      "human_escalation",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 24,
-      "blocked": false
+    "desc": "billing deterministic scenario 24",
+    "account_id": "acct-5",
+    "billing": {
+      "invoice_id": "inv-24",
+      "tax_policy": {
+        "tax_rate": 0.18
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1230,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 160,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 360,
+          "delivered": true,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g8-billing-agent",
-      "capabilities_any": [
-        "human_escalation"
-      ]
+      "invoice_id": "inv-24",
+      "status": "issued",
+      "billable_charge_count": 3,
+      "blocked_undelivered_count": 0,
+      "subtotal_brl": 1750.0,
+      "tax_rate": 0.18,
+      "tax_brl": 315.0,
+      "total_brl": 2065.0
     }
   },
   {
     "id": "g8-billing-agent-25",
-    "desc": "Agente de Cobrança e Faturamento: cenário 25 risco=low status=blocked",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "low",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g8-billing-agent",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 25,
-      "blocked": true
+    "desc": "billing deterministic scenario 25",
+    "account_id": "acct-0",
+    "billing": {
+      "invoice_id": "inv-25",
+      "tax_policy": {
+        "tax_rate": 0
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1240,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 180,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 390,
+          "delivered": true,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "blocked",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g8-billing-agent",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "invoice_id": "inv-25",
+      "status": "issued",
+      "billable_charge_count": 3,
+      "blocked_undelivered_count": 0,
+      "subtotal_brl": 1810.0,
+      "tax_rate": 0,
+      "tax_brl": 0.0,
+      "total_brl": 1810.0
     }
   },
   {
     "id": "g8-billing-agent-26",
-    "desc": "Agente de Cobrança e Faturamento: cenário 26 risco=medium status=ready",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g8-billing-agent",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 26,
-      "blocked": false
+    "desc": "billing deterministic scenario 26",
+    "account_id": "acct-1",
+    "billing": {
+      "invoice_id": "inv-26",
+      "tax_policy": {
+        "tax_rate": 0.06
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1250,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 100,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 420,
+          "delivered": false,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g8-billing-agent",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "invoice_id": "inv-26",
+      "status": "blocked",
+      "billable_charge_count": 2,
+      "blocked_undelivered_count": 1,
+      "subtotal_brl": 1350.0,
+      "tax_rate": 0.06,
+      "tax_brl": 81.0,
+      "total_brl": 1431.0
     }
   },
   {
     "id": "g8-billing-agent-27",
-    "desc": "Agente de Cobrança e Faturamento: cenário 27 risco=high status=ready",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-dri",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 27,
-      "blocked": false
+    "desc": "billing deterministic scenario 27",
+    "account_id": "acct-2",
+    "billing": {
+      "invoice_id": "inv-27",
+      "tax_policy": {
+        "tax_rate": 0.12
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1260,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 120,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 450,
+          "delivered": true,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-dri",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "invoice_id": "inv-27",
+      "status": "issued",
+      "billable_charge_count": 3,
+      "blocked_undelivered_count": 0,
+      "subtotal_brl": 1830.0,
+      "tax_rate": 0.12,
+      "tax_brl": 219.6,
+      "total_brl": 2049.6
     }
   },
   {
     "id": "g8-billing-agent-28",
-    "desc": "Agente de Cobrança e Faturamento: cenário 28 risco=critical status=ready",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g8-billing-agent",
-    "capabilities": [
-      "config_driven",
-      "policy_check"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 28,
-      "blocked": false
+    "desc": "billing deterministic scenario 28",
+    "account_id": "acct-3",
+    "billing": {
+      "invoice_id": "inv-28",
+      "tax_policy": {
+        "tax_rate": 0.18
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1270,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 140,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 480,
+          "delivered": true,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g8-billing-agent",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "invoice_id": "inv-28",
+      "status": "issued",
+      "billable_charge_count": 3,
+      "blocked_undelivered_count": 0,
+      "subtotal_brl": 1890.0,
+      "tax_rate": 0.18,
+      "tax_brl": 340.2,
+      "total_brl": 2230.2
     }
   },
   {
     "id": "g8-billing-agent-29",
-    "desc": "Agente de Cobrança e Faturamento: cenário 29 risco=low status=ready",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g8-billing-agent",
-    "capabilities": [
-      "policy_check",
-      "human_escalation"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 29,
-      "blocked": false
+    "desc": "billing deterministic scenario 29",
+    "account_id": "acct-4",
+    "billing": {
+      "invoice_id": "inv-29",
+      "tax_policy": {
+        "tax_rate": 0
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1280,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 160,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 300,
+          "delivered": true,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g8-billing-agent",
-      "capabilities_any": [
-        "policy_check"
-      ]
+      "invoice_id": "inv-29",
+      "status": "issued",
+      "billable_charge_count": 3,
+      "blocked_undelivered_count": 0,
+      "subtotal_brl": 1740.0,
+      "tax_rate": 0,
+      "tax_brl": 0.0,
+      "total_brl": 1740.0
     }
   },
   {
     "id": "g8-billing-agent-30",
-    "desc": "Agente de Cobrança e Faturamento: cenário 30 risco=medium status=blocked",
-    "artifact_type": "billing-agent.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g8-billing-agent",
-    "capabilities": [
-      "human_escalation",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 30,
-      "blocked": true
+    "desc": "billing deterministic scenario 30",
+    "account_id": "acct-5",
+    "billing": {
+      "invoice_id": "inv-30",
+      "tax_policy": {
+        "tax_rate": 0.06
+      },
+      "charges": [
+        {
+          "id": "sub",
+          "tier": "subscription",
+          "amount_brl": 1290,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "top",
+          "tier": "topup",
+          "amount_brl": 180,
+          "delivered": true,
+          "billable": true
+        },
+        {
+          "id": "out",
+          "tier": "outcome",
+          "amount_brl": 330,
+          "delivered": true,
+          "billable": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g8-billing-agent",
-      "handler_kind": "spec_driven",
-      "artifact_type": "billing-agent.artifact",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g8-billing-agent",
-      "capabilities_any": [
-        "human_escalation"
-      ]
+      "invoice_id": "inv-30",
+      "status": "issued",
+      "billable_charge_count": 3,
+      "blocked_undelivered_count": 0,
+      "subtotal_brl": 1800.0,
+      "tax_rate": 0.06,
+      "tax_brl": 108.0,
+      "total_brl": 1908.0
     }
   }
 ]

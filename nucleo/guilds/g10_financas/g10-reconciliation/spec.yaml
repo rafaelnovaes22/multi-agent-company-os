@@ -5,7 +5,7 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: spec_driven
+act_handler: reconciliation
 outcome_clause:
   statement: 'Conciliação Bancária e de Pagamentos entrega reconciliation.artifact
     verificável para: garantir que cada entrada e saída registrada bate com extrato

@@ -5,7 +5,7 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: guardian_check
+act_handler: margin_watch
 outcome_clause:
   statement: 'Vigilância de Compressão de Margem entrega margin-watch.verdict verificável
     para: detectar em tempo quase real qualquer erosão de margem — por alta de custo

@@ -1,902 +1,1202 @@
 [
   {
     "id": "g9-fulfillment-tracker-01",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 01 risco=low status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 1,
-      "blocked": false
+    "desc": "fulfillment scenario 1",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-0-0",
+          "delivered_event": null,
+          "evidence_ref": null,
+          "sla_met": false,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-0-1",
+          "delivered_event": "evt-0-1",
+          "evidence_ref": "evref-0-1",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-0-2",
+          "delivered_event": "evt-0-2",
+          "evidence_ref": "evref-0-2",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 2,
+      "deviation_count": 1,
+      "premature_billing_count": 0,
+      "completion_rate_pct": 66.67,
+      "status": "deviation_flagged"
     }
   },
   {
     "id": "g9-fulfillment-tracker-02",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 02 risco=medium status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g9-fulfillment-tracker",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 2,
-      "blocked": false
+    "desc": "fulfillment scenario 2",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-1-0",
+          "delivered_event": "evt-1-0",
+          "evidence_ref": "evref-1-0",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-1-1",
+          "delivered_event": "evt-1-1",
+          "evidence_ref": "evref-1-1",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-1-2",
+          "delivered_event": "evt-1-2",
+          "evidence_ref": "evref-1-2",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g9-fulfillment-tracker",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 3,
+      "deviation_count": 0,
+      "premature_billing_count": 0,
+      "completion_rate_pct": 100.0,
+      "status": "outcome_delivered"
     }
   },
   {
     "id": "g9-fulfillment-tracker-03",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 03 risco=high status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-fulfillment-tracker",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 3,
-      "blocked": false
+    "desc": "fulfillment scenario 3",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-2-0",
+          "delivered_event": "evt-2-0",
+          "evidence_ref": "evref-2-0",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-2-1",
+          "delivered_event": "evt-2-1",
+          "evidence_ref": "evref-2-1",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-2-2",
+          "delivered_event": null,
+          "evidence_ref": null,
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g9-fulfillment-tracker",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 2,
+      "deviation_count": 0,
+      "premature_billing_count": 1,
+      "completion_rate_pct": 66.67,
+      "status": "blocked"
     }
   },
   {
     "id": "g9-fulfillment-tracker-04",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 04 risco=critical status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-fulfillment-tracker",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 4,
-      "blocked": false
+    "desc": "fulfillment scenario 4",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-3-0",
+          "delivered_event": "evt-3-0",
+          "evidence_ref": "evref-3-0",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-3-1",
+          "delivered_event": null,
+          "evidence_ref": null,
+          "sla_met": true,
+          "blocked": true,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-3-2",
+          "delivered_event": "evt-3-2",
+          "evidence_ref": "evref-3-2",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g9-fulfillment-tracker",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 2,
+      "deviation_count": 1,
+      "premature_billing_count": 0,
+      "completion_rate_pct": 66.67,
+      "status": "deviation_flagged"
     }
   },
   {
     "id": "g9-fulfillment-tracker-05",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 05 risco=low status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g9-fulfillment-tracker",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 5,
-      "blocked": false
+    "desc": "fulfillment scenario 5",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-4-0",
+          "delivered_event": null,
+          "evidence_ref": null,
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-4-1",
+          "delivered_event": "evt-4-1",
+          "evidence_ref": "evref-4-1",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-4-2",
+          "delivered_event": "evt-4-2",
+          "evidence_ref": "evref-4-2",
+          "sla_met": false,
+          "blocked": false,
+          "billing_attempted": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g9-fulfillment-tracker",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 1,
+      "deviation_count": 1,
+      "premature_billing_count": 0,
+      "completion_rate_pct": 33.33,
+      "status": "deviation_flagged"
     }
   },
   {
     "id": "g9-fulfillment-tracker-06",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 06 risco=medium status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-fulfillment-tracker",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 6,
-      "blocked": false
+    "desc": "fulfillment scenario 6",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-5-0",
+          "delivered_event": "evt-5-0",
+          "evidence_ref": "evref-5-0",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-5-1",
+          "delivered_event": "evt-5-1",
+          "evidence_ref": "evref-5-1",
+          "sla_met": false,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-5-2",
+          "delivered_event": "evt-5-2",
+          "evidence_ref": "evref-5-2",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g9-fulfillment-tracker",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 2,
+      "deviation_count": 1,
+      "premature_billing_count": 0,
+      "completion_rate_pct": 66.67,
+      "status": "deviation_flagged"
     }
   },
   {
     "id": "g9-fulfillment-tracker-07",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 07 risco=high status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 7,
-      "blocked": false
+    "desc": "fulfillment scenario 7",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-6-0",
+          "delivered_event": "evt-6-0",
+          "evidence_ref": "evref-6-0",
+          "sla_met": false,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-6-1",
+          "delivered_event": "evt-6-1",
+          "evidence_ref": "evref-6-1",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-6-2",
+          "delivered_event": null,
+          "evidence_ref": null,
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 1,
+      "deviation_count": 1,
+      "premature_billing_count": 1,
+      "completion_rate_pct": 33.33,
+      "status": "blocked"
     }
   },
   {
     "id": "g9-fulfillment-tracker-08",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 08 risco=critical status=blocked",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "critical",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g9-fulfillment-tracker",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 8,
-      "blocked": true
+    "desc": "fulfillment scenario 8",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-7-0",
+          "delivered_event": "evt-7-0",
+          "evidence_ref": "evref-7-0",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-7-1",
+          "delivered_event": null,
+          "evidence_ref": null,
+          "sla_met": true,
+          "blocked": true,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-7-2",
+          "delivered_event": "evt-7-2",
+          "evidence_ref": "evref-7-2",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "blocked",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g9-fulfillment-tracker",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 2,
+      "deviation_count": 1,
+      "premature_billing_count": 0,
+      "completion_rate_pct": 66.67,
+      "status": "deviation_flagged"
     }
   },
   {
     "id": "g9-fulfillment-tracker-09",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 09 risco=low status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g9-fulfillment-tracker",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 9,
-      "blocked": false
+    "desc": "fulfillment scenario 9",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-8-0",
+          "delivered_event": null,
+          "evidence_ref": null,
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-8-1",
+          "delivered_event": "evt-8-1",
+          "evidence_ref": "evref-8-1",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-8-2",
+          "delivered_event": "evt-8-2",
+          "evidence_ref": "evref-8-2",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g9-fulfillment-tracker",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 2,
+      "deviation_count": 0,
+      "premature_billing_count": 0,
+      "completion_rate_pct": 66.67,
+      "status": "outcome_delivered"
     }
   },
   {
     "id": "g9-fulfillment-tracker-10",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 10 risco=medium status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g9-fulfillment-tracker",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 10,
-      "blocked": false
+    "desc": "fulfillment scenario 10",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-9-0",
+          "delivered_event": "evt-9-0",
+          "evidence_ref": "evref-9-0",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-9-1",
+          "delivered_event": "evt-9-1",
+          "evidence_ref": "evref-9-1",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-9-2",
+          "delivered_event": "evt-9-2",
+          "evidence_ref": "evref-9-2",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g9-fulfillment-tracker",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 3,
+      "deviation_count": 0,
+      "premature_billing_count": 0,
+      "completion_rate_pct": 100.0,
+      "status": "outcome_delivered"
     }
   },
   {
     "id": "g9-fulfillment-tracker-11",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 11 risco=high status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-fulfillment-tracker",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 11,
-      "blocked": false
+    "desc": "fulfillment scenario 11",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-10-0",
+          "delivered_event": "evt-10-0",
+          "evidence_ref": "evref-10-0",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-10-1",
+          "delivered_event": "evt-10-1",
+          "evidence_ref": "evref-10-1",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-10-2",
+          "delivered_event": null,
+          "evidence_ref": null,
+          "sla_met": false,
+          "blocked": false,
+          "billing_attempted": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g9-fulfillment-tracker",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 2,
+      "deviation_count": 1,
+      "premature_billing_count": 1,
+      "completion_rate_pct": 66.67,
+      "status": "blocked"
     }
   },
   {
     "id": "g9-fulfillment-tracker-12",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 12 risco=critical status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-fulfillment-tracker",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 12,
-      "blocked": false
+    "desc": "fulfillment scenario 12",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-11-0",
+          "delivered_event": "evt-11-0",
+          "evidence_ref": "evref-11-0",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-11-1",
+          "delivered_event": null,
+          "evidence_ref": null,
+          "sla_met": false,
+          "blocked": true,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-11-2",
+          "delivered_event": "evt-11-2",
+          "evidence_ref": "evref-11-2",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g9-fulfillment-tracker",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 2,
+      "deviation_count": 1,
+      "premature_billing_count": 0,
+      "completion_rate_pct": 66.67,
+      "status": "deviation_flagged"
     }
   },
   {
     "id": "g9-fulfillment-tracker-13",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 13 risco=low status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 13,
-      "blocked": false
+    "desc": "fulfillment scenario 13",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-12-0",
+          "delivered_event": null,
+          "evidence_ref": null,
+          "sla_met": false,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-12-1",
+          "delivered_event": "evt-12-1",
+          "evidence_ref": "evref-12-1",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-12-2",
+          "delivered_event": "evt-12-2",
+          "evidence_ref": "evref-12-2",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 2,
+      "deviation_count": 1,
+      "premature_billing_count": 0,
+      "completion_rate_pct": 66.67,
+      "status": "deviation_flagged"
     }
   },
   {
     "id": "g9-fulfillment-tracker-14",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 14 risco=medium status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g9-fulfillment-tracker",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 14,
-      "blocked": false
+    "desc": "fulfillment scenario 14",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-13-0",
+          "delivered_event": "evt-13-0",
+          "evidence_ref": "evref-13-0",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-13-1",
+          "delivered_event": "evt-13-1",
+          "evidence_ref": "evref-13-1",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-13-2",
+          "delivered_event": "evt-13-2",
+          "evidence_ref": "evref-13-2",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g9-fulfillment-tracker",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 3,
+      "deviation_count": 0,
+      "premature_billing_count": 0,
+      "completion_rate_pct": 100.0,
+      "status": "outcome_delivered"
     }
   },
   {
     "id": "g9-fulfillment-tracker-15",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 15 risco=high status=blocked",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "high",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g9-fulfillment-tracker",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 15,
-      "blocked": true
+    "desc": "fulfillment scenario 15",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-14-0",
+          "delivered_event": "evt-14-0",
+          "evidence_ref": "evref-14-0",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-14-1",
+          "delivered_event": "evt-14-1",
+          "evidence_ref": "evref-14-1",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-14-2",
+          "delivered_event": null,
+          "evidence_ref": null,
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "blocked",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g9-fulfillment-tracker",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 2,
+      "deviation_count": 0,
+      "premature_billing_count": 1,
+      "completion_rate_pct": 66.67,
+      "status": "blocked"
     }
   },
   {
     "id": "g9-fulfillment-tracker-16",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 16 risco=critical status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-fulfillment-tracker",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 16,
-      "blocked": false
+    "desc": "fulfillment scenario 16",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-15-0",
+          "delivered_event": "evt-15-0",
+          "evidence_ref": "evref-15-0",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-15-1",
+          "delivered_event": null,
+          "evidence_ref": null,
+          "sla_met": true,
+          "blocked": true,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-15-2",
+          "delivered_event": "evt-15-2",
+          "evidence_ref": "evref-15-2",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g9-fulfillment-tracker",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 2,
+      "deviation_count": 1,
+      "premature_billing_count": 0,
+      "completion_rate_pct": 66.67,
+      "status": "deviation_flagged"
     }
   },
   {
     "id": "g9-fulfillment-tracker-17",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 17 risco=low status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g9-fulfillment-tracker",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 17,
-      "blocked": false
+    "desc": "fulfillment scenario 17",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-16-0",
+          "delivered_event": null,
+          "evidence_ref": null,
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-16-1",
+          "delivered_event": "evt-16-1",
+          "evidence_ref": "evref-16-1",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-16-2",
+          "delivered_event": "evt-16-2",
+          "evidence_ref": "evref-16-2",
+          "sla_met": false,
+          "blocked": false,
+          "billing_attempted": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g9-fulfillment-tracker",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 1,
+      "deviation_count": 1,
+      "premature_billing_count": 0,
+      "completion_rate_pct": 33.33,
+      "status": "deviation_flagged"
     }
   },
   {
     "id": "g9-fulfillment-tracker-18",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 18 risco=medium status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-fulfillment-tracker",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 18,
-      "blocked": false
+    "desc": "fulfillment scenario 18",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-17-0",
+          "delivered_event": "evt-17-0",
+          "evidence_ref": "evref-17-0",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-17-1",
+          "delivered_event": "evt-17-1",
+          "evidence_ref": "evref-17-1",
+          "sla_met": false,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-17-2",
+          "delivered_event": "evt-17-2",
+          "evidence_ref": "evref-17-2",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g9-fulfillment-tracker",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 2,
+      "deviation_count": 1,
+      "premature_billing_count": 0,
+      "completion_rate_pct": 66.67,
+      "status": "deviation_flagged"
     }
   },
   {
     "id": "g9-fulfillment-tracker-19",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 19 risco=high status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 19,
-      "blocked": false
+    "desc": "fulfillment scenario 19",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-18-0",
+          "delivered_event": "evt-18-0",
+          "evidence_ref": "evref-18-0",
+          "sla_met": false,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-18-1",
+          "delivered_event": "evt-18-1",
+          "evidence_ref": "evref-18-1",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-18-2",
+          "delivered_event": null,
+          "evidence_ref": null,
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 1,
+      "deviation_count": 1,
+      "premature_billing_count": 1,
+      "completion_rate_pct": 33.33,
+      "status": "blocked"
     }
   },
   {
     "id": "g9-fulfillment-tracker-20",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 20 risco=critical status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-fulfillment-tracker",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 20,
-      "blocked": false
+    "desc": "fulfillment scenario 20",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-19-0",
+          "delivered_event": "evt-19-0",
+          "evidence_ref": "evref-19-0",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-19-1",
+          "delivered_event": null,
+          "evidence_ref": null,
+          "sla_met": true,
+          "blocked": true,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-19-2",
+          "delivered_event": "evt-19-2",
+          "evidence_ref": "evref-19-2",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g9-fulfillment-tracker",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 2,
+      "deviation_count": 1,
+      "premature_billing_count": 0,
+      "completion_rate_pct": 66.67,
+      "status": "deviation_flagged"
     }
   },
   {
     "id": "g9-fulfillment-tracker-21",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 21 risco=low status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g9-fulfillment-tracker",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 21,
-      "blocked": false
+    "desc": "fulfillment scenario 21",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-20-0",
+          "delivered_event": null,
+          "evidence_ref": null,
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-20-1",
+          "delivered_event": "evt-20-1",
+          "evidence_ref": "evref-20-1",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-20-2",
+          "delivered_event": "evt-20-2",
+          "evidence_ref": "evref-20-2",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g9-fulfillment-tracker",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 2,
+      "deviation_count": 0,
+      "premature_billing_count": 0,
+      "completion_rate_pct": 66.67,
+      "status": "outcome_delivered"
     }
   },
   {
     "id": "g9-fulfillment-tracker-22",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 22 risco=medium status=blocked",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g9-fulfillment-tracker",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 22,
-      "blocked": true
+    "desc": "fulfillment scenario 22",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-21-0",
+          "delivered_event": "evt-21-0",
+          "evidence_ref": "evref-21-0",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-21-1",
+          "delivered_event": "evt-21-1",
+          "evidence_ref": "evref-21-1",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-21-2",
+          "delivered_event": "evt-21-2",
+          "evidence_ref": "evref-21-2",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g9-fulfillment-tracker",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 3,
+      "deviation_count": 0,
+      "premature_billing_count": 0,
+      "completion_rate_pct": 100.0,
+      "status": "outcome_delivered"
     }
   },
   {
     "id": "g9-fulfillment-tracker-23",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 23 risco=high status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-fulfillment-tracker",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 23,
-      "blocked": false
+    "desc": "fulfillment scenario 23",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-22-0",
+          "delivered_event": "evt-22-0",
+          "evidence_ref": "evref-22-0",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-22-1",
+          "delivered_event": "evt-22-1",
+          "evidence_ref": "evref-22-1",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-22-2",
+          "delivered_event": null,
+          "evidence_ref": null,
+          "sla_met": false,
+          "blocked": false,
+          "billing_attempted": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g9-fulfillment-tracker",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 2,
+      "deviation_count": 1,
+      "premature_billing_count": 1,
+      "completion_rate_pct": 66.67,
+      "status": "blocked"
     }
   },
   {
     "id": "g9-fulfillment-tracker-24",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 24 risco=critical status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-fulfillment-tracker",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 24,
-      "blocked": false
+    "desc": "fulfillment scenario 24",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-23-0",
+          "delivered_event": "evt-23-0",
+          "evidence_ref": "evref-23-0",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-23-1",
+          "delivered_event": null,
+          "evidence_ref": null,
+          "sla_met": false,
+          "blocked": true,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-23-2",
+          "delivered_event": "evt-23-2",
+          "evidence_ref": "evref-23-2",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g9-fulfillment-tracker",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 2,
+      "deviation_count": 1,
+      "premature_billing_count": 0,
+      "completion_rate_pct": 66.67,
+      "status": "deviation_flagged"
     }
   },
   {
     "id": "g9-fulfillment-tracker-25",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 25 risco=low status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 25,
-      "blocked": false
+    "desc": "fulfillment scenario 25",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-24-0",
+          "delivered_event": null,
+          "evidence_ref": null,
+          "sla_met": false,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-24-1",
+          "delivered_event": "evt-24-1",
+          "evidence_ref": "evref-24-1",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-24-2",
+          "delivered_event": "evt-24-2",
+          "evidence_ref": "evref-24-2",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 2,
+      "deviation_count": 1,
+      "premature_billing_count": 0,
+      "completion_rate_pct": 66.67,
+      "status": "deviation_flagged"
     }
   },
   {
     "id": "g9-fulfillment-tracker-26",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 26 risco=medium status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g9-fulfillment-tracker",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 26,
-      "blocked": false
+    "desc": "fulfillment scenario 26",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-25-0",
+          "delivered_event": "evt-25-0",
+          "evidence_ref": "evref-25-0",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-25-1",
+          "delivered_event": "evt-25-1",
+          "evidence_ref": "evref-25-1",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-25-2",
+          "delivered_event": "evt-25-2",
+          "evidence_ref": "evref-25-2",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g9-fulfillment-tracker",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 3,
+      "deviation_count": 0,
+      "premature_billing_count": 0,
+      "completion_rate_pct": 100.0,
+      "status": "outcome_delivered"
     }
   },
   {
     "id": "g9-fulfillment-tracker-27",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 27 risco=high status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-fulfillment-tracker",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 27,
-      "blocked": false
+    "desc": "fulfillment scenario 27",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-26-0",
+          "delivered_event": "evt-26-0",
+          "evidence_ref": "evref-26-0",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-26-1",
+          "delivered_event": "evt-26-1",
+          "evidence_ref": "evref-26-1",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-26-2",
+          "delivered_event": null,
+          "evidence_ref": null,
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g9-fulfillment-tracker",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 2,
+      "deviation_count": 0,
+      "premature_billing_count": 1,
+      "completion_rate_pct": 66.67,
+      "status": "blocked"
     }
   },
   {
     "id": "g9-fulfillment-tracker-28",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 28 risco=critical status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-fulfillment-tracker",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 28,
-      "blocked": false
+    "desc": "fulfillment scenario 28",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-27-0",
+          "delivered_event": "evt-27-0",
+          "evidence_ref": "evref-27-0",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-27-1",
+          "delivered_event": null,
+          "evidence_ref": null,
+          "sla_met": true,
+          "blocked": true,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-27-2",
+          "delivered_event": "evt-27-2",
+          "evidence_ref": "evref-27-2",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g9-fulfillment-tracker",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 2,
+      "deviation_count": 1,
+      "premature_billing_count": 0,
+      "completion_rate_pct": 66.67,
+      "status": "deviation_flagged"
     }
   },
   {
     "id": "g9-fulfillment-tracker-29",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 29 risco=low status=blocked",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "low",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g9-fulfillment-tracker",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 29,
-      "blocked": true
+    "desc": "fulfillment scenario 29",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-28-0",
+          "delivered_event": null,
+          "evidence_ref": null,
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-28-1",
+          "delivered_event": "evt-28-1",
+          "evidence_ref": "evref-28-1",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-28-2",
+          "delivered_event": "evt-28-2",
+          "evidence_ref": "evref-28-2",
+          "sla_met": false,
+          "blocked": false,
+          "billing_attempted": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "blocked",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g9-fulfillment-tracker",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 1,
+      "deviation_count": 1,
+      "premature_billing_count": 0,
+      "completion_rate_pct": 33.33,
+      "status": "deviation_flagged"
     }
   },
   {
     "id": "g9-fulfillment-tracker-30",
-    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 30 risco=medium status=ready",
-    "artifact_type": "fulfillment-tracker.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g9-fulfillment-tracker",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 30,
-      "blocked": false
+    "desc": "fulfillment scenario 30",
+    "fulfillment": {
+      "outcomes": [
+        {
+          "id": "out-29-0",
+          "delivered_event": "evt-29-0",
+          "evidence_ref": "evref-29-0",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-29-1",
+          "delivered_event": "evt-29-1",
+          "evidence_ref": "evref-29-1",
+          "sla_met": false,
+          "blocked": false,
+          "billing_attempted": false
+        },
+        {
+          "id": "out-29-2",
+          "delivered_event": "evt-29-2",
+          "evidence_ref": "evref-29-2",
+          "sla_met": true,
+          "blocked": false,
+          "billing_attempted": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g9-fulfillment-tracker",
-      "handler_kind": "spec_driven",
-      "artifact_type": "fulfillment-tracker.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g9-fulfillment-tracker",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "outcome_count": 3,
+      "delivered_count": 2,
+      "deviation_count": 1,
+      "premature_billing_count": 0,
+      "completion_rate_pct": 66.67,
+      "status": "deviation_flagged"
     }
   }
 ]

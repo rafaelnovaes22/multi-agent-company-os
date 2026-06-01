@@ -5,7 +5,7 @@ tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: guardian_check
+act_handler: unit_economist_c3
 outcome_clause:
   statement: 'Guardião do C3 (Economic Firewall) entrega unit-economist.verdict verificável
     para: garantir que nenhum output billable seja entregue ou cobrado com custo de

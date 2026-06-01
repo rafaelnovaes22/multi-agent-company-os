@@ -81,6 +81,76 @@ def _g_ob(out, exp):
     return ok
 
 
+def _close_num(actual, expected, tolerance=0.01):
+    if expected is None:
+        return True
+    try:
+        a = float(actual)
+        e = float(expected)
+    except (TypeError, ValueError):
+        return actual == expected
+    if e == 0:
+        return abs(a - e) <= tolerance
+    return abs(a - e) / abs(e) <= tolerance
+
+
+def _check_expected_fields(out, exp, fields):
+    if not out:
+        return False
+    ok = True
+    for key in fields:
+        if key not in exp:
+            continue
+        expected = exp[key]
+        actual = out.get(key)
+        if isinstance(expected, (int, float)) and not isinstance(expected, bool):
+            ok = ok and _close_num(actual, expected)
+        else:
+            ok = ok and actual == expected
+    return ok
+
+
+@register("pricing_engine")
+def _g_pricing_engine(out, exp):
+    return _check_expected_fields(out, exp, (
+        "handler_kind", "published_price_brl", "delivery_cost_brl", "min_viable_price_brl",
+        "cost_ratio", "max_ratio", "c3_margin_check", "status", "requires_human_review",
+    ))
+
+
+@register("dunning_agent")
+def _g_dunning_agent(out, exp):
+    return _check_expected_fields(out, exp, (
+        "handler_kind", "invoice_count", "total_overdue_brl", "recovered_count",
+        "in_progress_count", "escalated_count", "recovery_status", "requires_human_review", "status",
+    ))
+
+
+@register("revenue_reporter")
+def _g_revenue_reporter(out, exp):
+    return _check_expected_fields(out, exp, (
+        "handler_kind", "mrr_brl", "nrr_pct", "grr_pct", "reconciliation_delta_brl",
+        "reconciliation_delta_pct", "reconciled", "status", "requires_human_review",
+    ))
+
+
+@register("reconciliation")
+def _g_reconciliation(out, exp):
+    return _check_expected_fields(out, exp, (
+        "handler_kind", "matched_count", "exception_count", "match_rate",
+        "unreconciled_balance_brl", "status", "requires_human_review",
+    ))
+
+
+@register("unit_economist_c3")
+def _g_unit_economist_c3(out, exp):
+    return _check_expected_fields(out, exp, (
+        "handler_kind", "billable", "price_brl", "inference_cost_brl", "cost_ratio",
+        "max_ratio", "min_viable_price_brl", "verdict", "blocks_delivery", "status",
+        "requires_human_review",
+    ))
+
+
 @register("fin_cashflow")
 def _g_fin(out, exp):
     if not out:
@@ -157,6 +227,31 @@ def _g_catalog_contract(out, exp):
     return ok
 
 
+def _eq_or_tol(actual, expected, tol=0.01):
+    if isinstance(expected, (int, float)) and isinstance(actual, (int, float)):
+        return abs(actual - expected) <= max(tol, abs(expected) * tol)
+    return actual == expected
+
+
+def _g_expected_fields(out, exp):
+    if not out:
+        return False
+    ok = True
+    for key, val in exp.items():
+        if isinstance(val, dict) and isinstance(out.get(key), dict):
+            ok = ok and all(_eq_or_tol(out[key].get(k), v) for k, v in val.items())
+        else:
+            ok = ok and _eq_or_tol(out.get(key), val)
+    return ok
+
+
 register("spec_driven")(_g_catalog_contract)
 register("supervisor_route")(_g_catalog_contract)
 register("guardian_check")(_g_catalog_contract)
+
+for _name in (
+    "pricing_engine", "billing_agent", "dunning_agent", "revenue_reporter", "reconciliation",
+    "csat_analyst", "fulfillment_tracker", "burn_monitor", "unit_economist_c3",
+    "token_cost_accountant", "margin_watch",
+):
+    register(_name)(_g_expected_fields)

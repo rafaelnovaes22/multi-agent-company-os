@@ -5,7 +5,7 @@ tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: spec_driven
+act_handler: pricing_engine
 outcome_clause:
   statement: "todo preço publicado mantém custo de entrega ≤ 25% do preço (C3) nas 3 camadas, com cálculo auditável."
   positive_examples:

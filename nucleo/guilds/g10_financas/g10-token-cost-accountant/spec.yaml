@@ -5,7 +5,7 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: spec_driven
+act_handler: token_cost_accountant
 outcome_clause:
   statement: 'Rateio de Custo de Tokens & Verba de Freemium entrega token-cost-accountant.artifact
     verificável para: atribuir cada token consumido pelos 150+ agentes à guilda, agente

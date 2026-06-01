@@ -1,902 +1,602 @@
 [
   {
     "id": "g10-margin-watch-01",
-    "desc": "Vigilância de Compressão de Margem: cenário 01 risco=low status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 1,
-      "blocked": false
+    "desc": "margin scenario 1",
+    "margin": {
+      "revenue_brl": 10000,
+      "cogs_brl": 2000,
+      "delivery_cost_brl": 1000,
+      "previous_margin_pct": 75,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "gross_margin_pct": 70.0,
+      "compression_pp": 5.0,
+      "target_margin_pct": 60,
+      "severity": "warning",
+      "cause": "cogs",
+      "recalc_required": true
     }
   },
   {
     "id": "g10-margin-watch-02",
-    "desc": "Vigilância de Compressão de Margem: cenário 02 risco=medium status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-margin-watch",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 2,
-      "blocked": false
+    "desc": "margin scenario 2",
+    "margin": {
+      "revenue_brl": 11200,
+      "cogs_brl": 2500,
+      "delivery_cost_brl": 1800,
+      "previous_margin_pct": 72,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g10-margin-watch",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "gross_margin_pct": 61.61,
+      "compression_pp": 10.39,
+      "target_margin_pct": 60,
+      "severity": "warning",
+      "cause": "cogs",
+      "recalc_required": true
     }
   },
   {
     "id": "g10-margin-watch-03",
-    "desc": "Vigilância de Compressão de Margem: cenário 03 risco=high status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-margin-watch",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 3,
-      "blocked": false
+    "desc": "margin scenario 3",
+    "margin": {
+      "revenue_brl": 12400,
+      "cogs_brl": 3000,
+      "delivery_cost_brl": 2600,
+      "previous_margin_pct": 69,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g10-margin-watch",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "gross_margin_pct": 54.84,
+      "compression_pp": 14.16,
+      "target_margin_pct": 60,
+      "severity": "warning",
+      "cause": "cogs",
+      "recalc_required": true
     }
   },
   {
     "id": "g10-margin-watch-04",
-    "desc": "Vigilância de Compressão de Margem: cenário 04 risco=critical status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-margin-watch",
-    "capabilities": [
-      "config_driven",
-      "financial_traceability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 4,
-      "blocked": false
+    "desc": "margin scenario 4",
+    "margin": {
+      "revenue_brl": 13600,
+      "cogs_brl": 3500,
+      "delivery_cost_brl": 3400,
+      "previous_margin_pct": 66,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-margin-watch",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "gross_margin_pct": 49.26,
+      "compression_pp": 16.74,
+      "target_margin_pct": 60,
+      "severity": "critical",
+      "cause": "cogs",
+      "recalc_required": true
     }
   },
   {
     "id": "g10-margin-watch-05",
-    "desc": "Vigilância de Compressão de Margem: cenário 05 risco=low status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-margin-watch",
-    "capabilities": [
-      "financial_traceability",
-      "unit_economics"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 5,
-      "blocked": false
+    "desc": "margin scenario 5",
+    "margin": {
+      "revenue_brl": 14800,
+      "cogs_brl": 4000,
+      "delivery_cost_brl": 4200,
+      "previous_margin_pct": 75,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g10-margin-watch",
-      "capabilities_any": [
-        "financial_traceability"
-      ]
+      "gross_margin_pct": 44.59,
+      "compression_pp": 30.41,
+      "target_margin_pct": 60,
+      "severity": "critical",
+      "cause": "token_cost",
+      "recalc_required": true
     }
   },
   {
     "id": "g10-margin-watch-06",
-    "desc": "Vigilância de Compressão de Margem: cenário 06 risco=medium status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-margin-watch",
-    "capabilities": [
-      "unit_economics",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 6,
-      "blocked": false
+    "desc": "margin scenario 6",
+    "margin": {
+      "revenue_brl": 16000,
+      "cogs_brl": 4500,
+      "delivery_cost_brl": 1000,
+      "previous_margin_pct": 72,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g10-margin-watch",
-      "capabilities_any": [
-        "unit_economics"
-      ]
+      "gross_margin_pct": 65.62,
+      "compression_pp": 6.38,
+      "target_margin_pct": 60,
+      "severity": "warning",
+      "cause": "cogs",
+      "recalc_required": true
     }
   },
   {
     "id": "g10-margin-watch-07",
-    "desc": "Vigilância de Compressão de Margem: cenário 07 risco=high status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 7,
-      "blocked": false
+    "desc": "margin scenario 7",
+    "margin": {
+      "revenue_brl": 17200,
+      "cogs_brl": 2000,
+      "delivery_cost_brl": 1800,
+      "previous_margin_pct": 69,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "gross_margin_pct": 77.91,
+      "compression_pp": -8.91,
+      "target_margin_pct": 60,
+      "severity": "ok",
+      "cause": "cogs",
+      "recalc_required": false
     }
   },
   {
     "id": "g10-margin-watch-08",
-    "desc": "Vigilância de Compressão de Margem: cenário 08 risco=critical status=blocked",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "critical",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g10-margin-watch",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 8,
-      "blocked": true
+    "desc": "margin scenario 8",
+    "margin": {
+      "revenue_brl": 18400,
+      "cogs_brl": 2500,
+      "delivery_cost_brl": 2600,
+      "previous_margin_pct": 66,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "blocked",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-margin-watch",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "gross_margin_pct": 72.28,
+      "compression_pp": -6.28,
+      "target_margin_pct": 60,
+      "severity": "ok",
+      "cause": "token_cost",
+      "recalc_required": false
     }
   },
   {
     "id": "g10-margin-watch-09",
-    "desc": "Vigilância de Compressão de Margem: cenário 09 risco=low status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-margin-watch",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 9,
-      "blocked": false
+    "desc": "margin scenario 9",
+    "margin": {
+      "revenue_brl": 10000,
+      "cogs_brl": 3000,
+      "delivery_cost_brl": 3400,
+      "previous_margin_pct": 75,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g10-margin-watch",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "gross_margin_pct": 36.0,
+      "compression_pp": 39.0,
+      "target_margin_pct": 60,
+      "severity": "critical",
+      "cause": "token_cost",
+      "recalc_required": true
     }
   },
   {
     "id": "g10-margin-watch-10",
-    "desc": "Vigilância de Compressão de Margem: cenário 10 risco=medium status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-margin-watch",
-    "capabilities": [
-      "config_driven",
-      "financial_traceability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 10,
-      "blocked": false
+    "desc": "margin scenario 10",
+    "margin": {
+      "revenue_brl": 11200,
+      "cogs_brl": 3500,
+      "delivery_cost_brl": 4200,
+      "previous_margin_pct": 72,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g10-margin-watch",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "gross_margin_pct": 31.25,
+      "compression_pp": 40.75,
+      "target_margin_pct": 60,
+      "severity": "critical",
+      "cause": "token_cost",
+      "recalc_required": true
     }
   },
   {
     "id": "g10-margin-watch-11",
-    "desc": "Vigilância de Compressão de Margem: cenário 11 risco=high status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-margin-watch",
-    "capabilities": [
-      "financial_traceability",
-      "unit_economics"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 11,
-      "blocked": false
+    "desc": "margin scenario 11",
+    "margin": {
+      "revenue_brl": 12400,
+      "cogs_brl": 4000,
+      "delivery_cost_brl": 1000,
+      "previous_margin_pct": 69,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g10-margin-watch",
-      "capabilities_any": [
-        "financial_traceability"
-      ]
+      "gross_margin_pct": 59.68,
+      "compression_pp": 9.32,
+      "target_margin_pct": 60,
+      "severity": "warning",
+      "cause": "cogs",
+      "recalc_required": true
     }
   },
   {
     "id": "g10-margin-watch-12",
-    "desc": "Vigilância de Compressão de Margem: cenário 12 risco=critical status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-margin-watch",
-    "capabilities": [
-      "unit_economics",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 12,
-      "blocked": false
+    "desc": "margin scenario 12",
+    "margin": {
+      "revenue_brl": 13600,
+      "cogs_brl": 4500,
+      "delivery_cost_brl": 1800,
+      "previous_margin_pct": 66,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-margin-watch",
-      "capabilities_any": [
-        "unit_economics"
-      ]
+      "gross_margin_pct": 53.68,
+      "compression_pp": 12.32,
+      "target_margin_pct": 60,
+      "severity": "warning",
+      "cause": "cogs",
+      "recalc_required": true
     }
   },
   {
     "id": "g10-margin-watch-13",
-    "desc": "Vigilância de Compressão de Margem: cenário 13 risco=low status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 13,
-      "blocked": false
+    "desc": "margin scenario 13",
+    "margin": {
+      "revenue_brl": 14800,
+      "cogs_brl": 2000,
+      "delivery_cost_brl": 2600,
+      "previous_margin_pct": 75,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "gross_margin_pct": 68.92,
+      "compression_pp": 6.08,
+      "target_margin_pct": 60,
+      "severity": "warning",
+      "cause": "token_cost",
+      "recalc_required": true
     }
   },
   {
     "id": "g10-margin-watch-14",
-    "desc": "Vigilância de Compressão de Margem: cenário 14 risco=medium status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-margin-watch",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 14,
-      "blocked": false
+    "desc": "margin scenario 14",
+    "margin": {
+      "revenue_brl": 16000,
+      "cogs_brl": 2500,
+      "delivery_cost_brl": 3400,
+      "previous_margin_pct": 72,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g10-margin-watch",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "gross_margin_pct": 63.12,
+      "compression_pp": 8.88,
+      "target_margin_pct": 60,
+      "severity": "warning",
+      "cause": "token_cost",
+      "recalc_required": true
     }
   },
   {
     "id": "g10-margin-watch-15",
-    "desc": "Vigilância de Compressão de Margem: cenário 15 risco=high status=blocked",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "high",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g10-margin-watch",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 15,
-      "blocked": true
+    "desc": "margin scenario 15",
+    "margin": {
+      "revenue_brl": 17200,
+      "cogs_brl": 3000,
+      "delivery_cost_brl": 4200,
+      "previous_margin_pct": 69,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "blocked",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g10-margin-watch",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "gross_margin_pct": 58.14,
+      "compression_pp": 10.86,
+      "target_margin_pct": 60,
+      "severity": "warning",
+      "cause": "token_cost",
+      "recalc_required": true
     }
   },
   {
     "id": "g10-margin-watch-16",
-    "desc": "Vigilância de Compressão de Margem: cenário 16 risco=critical status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-margin-watch",
-    "capabilities": [
-      "config_driven",
-      "financial_traceability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 16,
-      "blocked": false
+    "desc": "margin scenario 16",
+    "margin": {
+      "revenue_brl": 18400,
+      "cogs_brl": 3500,
+      "delivery_cost_brl": 1000,
+      "previous_margin_pct": 66,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-margin-watch",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "gross_margin_pct": 75.54,
+      "compression_pp": -9.54,
+      "target_margin_pct": 60,
+      "severity": "ok",
+      "cause": "cogs",
+      "recalc_required": false
     }
   },
   {
     "id": "g10-margin-watch-17",
-    "desc": "Vigilância de Compressão de Margem: cenário 17 risco=low status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-margin-watch",
-    "capabilities": [
-      "financial_traceability",
-      "unit_economics"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 17,
-      "blocked": false
+    "desc": "margin scenario 17",
+    "margin": {
+      "revenue_brl": 10000,
+      "cogs_brl": 4000,
+      "delivery_cost_brl": 1800,
+      "previous_margin_pct": 75,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g10-margin-watch",
-      "capabilities_any": [
-        "financial_traceability"
-      ]
+      "gross_margin_pct": 42.0,
+      "compression_pp": 33.0,
+      "target_margin_pct": 60,
+      "severity": "critical",
+      "cause": "cogs",
+      "recalc_required": true
     }
   },
   {
     "id": "g10-margin-watch-18",
-    "desc": "Vigilância de Compressão de Margem: cenário 18 risco=medium status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-margin-watch",
-    "capabilities": [
-      "unit_economics",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 18,
-      "blocked": false
+    "desc": "margin scenario 18",
+    "margin": {
+      "revenue_brl": 11200,
+      "cogs_brl": 4500,
+      "delivery_cost_brl": 2600,
+      "previous_margin_pct": 72,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g10-margin-watch",
-      "capabilities_any": [
-        "unit_economics"
-      ]
+      "gross_margin_pct": 36.61,
+      "compression_pp": 35.39,
+      "target_margin_pct": 60,
+      "severity": "critical",
+      "cause": "cogs",
+      "recalc_required": true
     }
   },
   {
     "id": "g10-margin-watch-19",
-    "desc": "Vigilância de Compressão de Margem: cenário 19 risco=high status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 19,
-      "blocked": false
+    "desc": "margin scenario 19",
+    "margin": {
+      "revenue_brl": 12400,
+      "cogs_brl": 2000,
+      "delivery_cost_brl": 3400,
+      "previous_margin_pct": 69,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "gross_margin_pct": 56.45,
+      "compression_pp": 12.55,
+      "target_margin_pct": 60,
+      "severity": "warning",
+      "cause": "token_cost",
+      "recalc_required": true
     }
   },
   {
     "id": "g10-margin-watch-20",
-    "desc": "Vigilância de Compressão de Margem: cenário 20 risco=critical status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-margin-watch",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 20,
-      "blocked": false
+    "desc": "margin scenario 20",
+    "margin": {
+      "revenue_brl": 13600,
+      "cogs_brl": 2500,
+      "delivery_cost_brl": 4200,
+      "previous_margin_pct": 66,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-margin-watch",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "gross_margin_pct": 50.74,
+      "compression_pp": 15.26,
+      "target_margin_pct": 60,
+      "severity": "warning",
+      "cause": "token_cost",
+      "recalc_required": true
     }
   },
   {
     "id": "g10-margin-watch-21",
-    "desc": "Vigilância de Compressão de Margem: cenário 21 risco=low status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-margin-watch",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 21,
-      "blocked": false
+    "desc": "margin scenario 21",
+    "margin": {
+      "revenue_brl": 14800,
+      "cogs_brl": 3000,
+      "delivery_cost_brl": 1000,
+      "previous_margin_pct": 75,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g10-margin-watch",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "gross_margin_pct": 72.97,
+      "compression_pp": 2.03,
+      "target_margin_pct": 60,
+      "severity": "ok",
+      "cause": "cogs",
+      "recalc_required": false
     }
   },
   {
     "id": "g10-margin-watch-22",
-    "desc": "Vigilância de Compressão de Margem: cenário 22 risco=medium status=blocked",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g10-margin-watch",
-    "capabilities": [
-      "config_driven",
-      "financial_traceability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 22,
-      "blocked": true
+    "desc": "margin scenario 22",
+    "margin": {
+      "revenue_brl": 16000,
+      "cogs_brl": 3500,
+      "delivery_cost_brl": 1800,
+      "previous_margin_pct": 72,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g10-margin-watch",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "gross_margin_pct": 66.88,
+      "compression_pp": 5.12,
+      "target_margin_pct": 60,
+      "severity": "warning",
+      "cause": "cogs",
+      "recalc_required": true
     }
   },
   {
     "id": "g10-margin-watch-23",
-    "desc": "Vigilância de Compressão de Margem: cenário 23 risco=high status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-margin-watch",
-    "capabilities": [
-      "financial_traceability",
-      "unit_economics"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 23,
-      "blocked": false
+    "desc": "margin scenario 23",
+    "margin": {
+      "revenue_brl": 17200,
+      "cogs_brl": 4000,
+      "delivery_cost_brl": 2600,
+      "previous_margin_pct": 69,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g10-margin-watch",
-      "capabilities_any": [
-        "financial_traceability"
-      ]
+      "gross_margin_pct": 61.63,
+      "compression_pp": 7.37,
+      "target_margin_pct": 60,
+      "severity": "warning",
+      "cause": "cogs",
+      "recalc_required": true
     }
   },
   {
     "id": "g10-margin-watch-24",
-    "desc": "Vigilância de Compressão de Margem: cenário 24 risco=critical status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-margin-watch",
-    "capabilities": [
-      "unit_economics",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 24,
-      "blocked": false
+    "desc": "margin scenario 24",
+    "margin": {
+      "revenue_brl": 18400,
+      "cogs_brl": 4500,
+      "delivery_cost_brl": 3400,
+      "previous_margin_pct": 66,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-margin-watch",
-      "capabilities_any": [
-        "unit_economics"
-      ]
+      "gross_margin_pct": 57.07,
+      "compression_pp": 8.93,
+      "target_margin_pct": 60,
+      "severity": "warning",
+      "cause": "cogs",
+      "recalc_required": true
     }
   },
   {
     "id": "g10-margin-watch-25",
-    "desc": "Vigilância de Compressão de Margem: cenário 25 risco=low status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 25,
-      "blocked": false
+    "desc": "margin scenario 25",
+    "margin": {
+      "revenue_brl": 10000,
+      "cogs_brl": 2000,
+      "delivery_cost_brl": 4200,
+      "previous_margin_pct": 75,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "gross_margin_pct": 38.0,
+      "compression_pp": 37.0,
+      "target_margin_pct": 60,
+      "severity": "critical",
+      "cause": "token_cost",
+      "recalc_required": true
     }
   },
   {
     "id": "g10-margin-watch-26",
-    "desc": "Vigilância de Compressão de Margem: cenário 26 risco=medium status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g10-margin-watch",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 26,
-      "blocked": false
+    "desc": "margin scenario 26",
+    "margin": {
+      "revenue_brl": 11200,
+      "cogs_brl": 2500,
+      "delivery_cost_brl": 1000,
+      "previous_margin_pct": 72,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g10-margin-watch",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "gross_margin_pct": 68.75,
+      "compression_pp": 3.25,
+      "target_margin_pct": 60,
+      "severity": "ok",
+      "cause": "cogs",
+      "recalc_required": false
     }
   },
   {
     "id": "g10-margin-watch-27",
-    "desc": "Vigilância de Compressão de Margem: cenário 27 risco=high status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-margin-watch",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 27,
-      "blocked": false
+    "desc": "margin scenario 27",
+    "margin": {
+      "revenue_brl": 12400,
+      "cogs_brl": 3000,
+      "delivery_cost_brl": 1800,
+      "previous_margin_pct": 69,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g10-margin-watch",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "gross_margin_pct": 61.29,
+      "compression_pp": 7.71,
+      "target_margin_pct": 60,
+      "severity": "warning",
+      "cause": "cogs",
+      "recalc_required": true
     }
   },
   {
     "id": "g10-margin-watch-28",
-    "desc": "Vigilância de Compressão de Margem: cenário 28 risco=critical status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-margin-watch",
-    "capabilities": [
-      "config_driven",
-      "financial_traceability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 28,
-      "blocked": false
+    "desc": "margin scenario 28",
+    "margin": {
+      "revenue_brl": 13600,
+      "cogs_brl": 3500,
+      "delivery_cost_brl": 2600,
+      "previous_margin_pct": 66,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g10-margin-watch",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "gross_margin_pct": 55.15,
+      "compression_pp": 10.85,
+      "target_margin_pct": 60,
+      "severity": "warning",
+      "cause": "cogs",
+      "recalc_required": true
     }
   },
   {
     "id": "g10-margin-watch-29",
-    "desc": "Vigilância de Compressão de Margem: cenário 29 risco=low status=blocked",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "low",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g10-margin-watch",
-    "capabilities": [
-      "financial_traceability",
-      "unit_economics"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 29,
-      "blocked": true
+    "desc": "margin scenario 29",
+    "margin": {
+      "revenue_brl": 14800,
+      "cogs_brl": 4000,
+      "delivery_cost_brl": 3400,
+      "previous_margin_pct": 75,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "blocked",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g10-margin-watch",
-      "capabilities_any": [
-        "financial_traceability"
-      ]
+      "gross_margin_pct": 50.0,
+      "compression_pp": 25.0,
+      "target_margin_pct": 60,
+      "severity": "warning",
+      "cause": "cogs",
+      "recalc_required": true
     }
   },
   {
     "id": "g10-margin-watch-30",
-    "desc": "Vigilância de Compressão de Margem: cenário 30 risco=medium status=ready",
-    "artifact_type": "margin-watch.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g10-margin-watch",
-    "capabilities": [
-      "unit_economics",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 30,
-      "blocked": false
+    "desc": "margin scenario 30",
+    "margin": {
+      "revenue_brl": 16000,
+      "cogs_brl": 4500,
+      "delivery_cost_brl": 4200,
+      "previous_margin_pct": 72,
+      "target_margin_pct": 60,
+      "compression_threshold_pp": 5
     },
     "expected": {
-      "agent_id": "g10-margin-watch",
-      "handler_kind": "guardian_check",
-      "artifact_type": "margin-watch.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g10-margin-watch",
-      "capabilities_any": [
-        "unit_economics"
-      ]
+      "gross_margin_pct": 45.62,
+      "compression_pp": 26.38,
+      "target_margin_pct": 60,
+      "severity": "critical",
+      "cause": "cogs",
+      "recalc_required": true
     }
   }
 ]

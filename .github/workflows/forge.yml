@@ -1,0 +1,38 @@
+name: forge-gate
+
+# Gate de QUALIDADE da Fábrica, não-bypassável: roda em todo PR e push para main.
+# Torna a "definition of done" (AGENTS.md) executável no CI — não depende de o agente lembrar.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  forge:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Compile
+        run: python -m compileall -q nucleo
+      - name: Forge check (definition-of-done, ratchet)
+        run: python -m nucleo.quality.forge_check
+      - name: Eval-harness da frota (C4)
+        run: |
+          rm -rf nucleo/.brain* .brain*
+          python -m nucleo.demo_eval
+      - name: AgentShield (C8 — sem HIGH)
+        run: |
+          rm -rf nucleo/.brain* .brain*
+          python -m nucleo.demo_agentshield
+      - name: Guarda de ICP
+        run: python -m unittest tests.test_icp_segments

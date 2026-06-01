@@ -5,31 +5,30 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: spec_driven
+multi_tenant: true
+act_handler: cohort_retention
+
 outcome_clause:
-  statement: 'Analista de Coortes & Retenção entrega cohort-analyst.artifact verificável
-    para: medir retenção por coorte (ex.: D1/D7/D30) e revelar como o valor se mantém
-    ao longo do tempo'
+  statement: "Cada análise de coorte produz curvas de retenção reproduzíveis e rastreáveis à definição canônica, segmentadas por dimensões que isolam o que retém."
   positive_examples:
-  - Entregou a curva D30 da última coorte segmentada por canal, reproduzível a partir
-    do semantic layer
-  - Mostrou que coortes ativadas pelo agente retêm 2x mais, informando Produto e Growth
-  - Sinalizou queda de retenção em uma coorte e acionou o churn-predictor
+    - "Entregou a curva D30 da última coorte segmentada por canal, reproduzível a partir do semantic layer."
+    - "Mostrou que coortes ativadas pelo agente retêm 2x mais, informando Produto e Growth."
+    - "Sinalizou queda de retenção em uma coorte e acionou o churn-predictor."
   negative_examples:
-  - Misturou grãos de coorte, gerando uma curva D30 não comparável com históricos
-  - Reportou retenção sem amarrar à definição canônica de "ativo"
-  - Inferiu causa de retenção sem segmentar, levando o Growth a conclusão errada
-  delivered_event: cohort.report_emitted && metric.canonical_referenced
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Misturou grãos de coorte, gerando uma curva D30 não comparável com históricos."
+    - "Reportou retenção sem amarrar à definição canônica de \"ativo\"."
+    - "Inferiu causa de retenção sem segmentar, levando o Growth a conclusão errada."
+  delivered_event: "cohort.report_emitted && metric.canonical_referenced"
+
 guardians:
-- po-guardian
-- observability-guardian
-- artifact-architect
+  - po-guardian
+  - observability-guardian
+  - artifact-architect-guardian
+
 tools:
-- brain.query
-- LLMProvider
-- DashboardProvider
+  - brain.query
+  - LLMProvider
+  - DashboardProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

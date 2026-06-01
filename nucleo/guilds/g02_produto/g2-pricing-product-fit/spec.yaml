@@ -1,38 +1,40 @@
 id: g2-pricing-product-fit
 guild: G02-produto-discovery
-ledger: operating
+ledger: billable
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
 tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: guardian_check
+multi_tenant: true
+act_handler: pricing_c3_fit
+
 outcome_clause:
-  statement: 'Testador de Willingness-to-Pay & Fit de Pricing entrega pricing-product-fit.verdict
-    verificável para: Validar disposição a pagar e o encaixe de pricing por feature/oferta,
-    sustentando o modelo de 3 camadas'
+  statement: "Toda recomendação de pricing é lastreada em teste de WTP com amostra declarada e respeita C3 (custo <= 25% do preço) em ofertas billable."
   positive_examples:
-  - Feature mapeada à camada certa (top-up vs. outcome-based) com WTP medido
-  - Recomendação billable validada contra custo de outcome (C3)
-  - Gasto freemium dimensionado como verba OP > gasto pago, com teto
+    - "Feature mapeada à camada certa (top-up vs. outcome-based) com WTP medido."
+    - "Recomendação billable validada contra custo de outcome (C3)."
+    - "Gasto freemium dimensionado como verba OP > gasto pago, com teto."
   negative_examples:
-  - Preço sugerido sem nenhum teste de WTP
-  - Oferta billable com custo > 25% do preço (viola C3)
-  - Freemium sem teto, virando custo em vez de verba de marketing
-  delivered_event: evento pricing.wtp.study.committed é gravado com amostra, recomendação
-    de camada e checagem C3
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Preço sugerido sem nenhum teste de WTP."
+    - "Oferta billable com custo > 25% do preço (viola C3)."
+    - "Freemium sem teto, virando custo em vez de verba de marketing."
+  delivered_event: "evento pricing.wtp.study.committed é gravado com amostra, recomendação de camada e checagem C3."
+
 guardians:
-- po-guardian
-- observability-guardian
-- unit-economist
-- artifact-architect
+  - unit-economist-guardian
+  - po-guardian
+  - security-privacy-guardian
+  - observability-guardian
+
 tools:
-- brain.query
-- brain.write
-- ExperimentationProvider
-- SurveyProvider
-- LLMProvider
+  - brain.query
+  - brain.write
+  - ExperimentationProvider
+  - SurveyProvider
+  - LLMProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

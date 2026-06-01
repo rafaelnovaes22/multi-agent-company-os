@@ -3,33 +3,32 @@ guild: G13-governanca
 ledger: operating
 tier: L2
 ai_enabled: true
-model_role: worker
+model_role: guardian
 mode: SHADOW
-act_handler: guardian_check
+multi_tenant: false
+act_handler: eval_coverage_score
+
 outcome_clause:
-  statement: "nenhum agente passa do gate de eval sem ≥30 casos frescos que cobrem positivos+negativos da cláusula e um grader reproduzível independente do modelo."
+  statement: "Nenhum agente passa do gate de eval sem ≥30 casos frescos que cobrem positivos+negativos da cláusula e um grader reproduzível independente do modelo."
   positive_examples:
-  - "Reprova uma eval-suite com 22 casos só de caminho feliz."
-  - "Aprova suite com 35 casos cobrindo os 3 negativos da cláusula e modos de falha de produção."
-  - "Exige novo caso quando um modo de falha inédito aparece em produção."
+    - "Reprova uma eval-suite com 22 casos só de caminho feliz"
+    - "Aprova suite com 35 casos cobrindo os 3 negativos da cláusula e modos de falha de produção"
+    - "Exige novo caso quando um modo de falha inédito aparece em produção"
   negative_examples:
-  - "Aprova suite com leakage (caso de teste idêntico ao de treino)."
-  - "Aceita grader dependente do mesmo modelo de produção."
-  - "Deixa passar suite com 6 meses sem atualização."
-  delivered_event: "`eval_suite.review_emitted` com `case_count`, cobertura por categoria e status."
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Aprova suite com leakage (caso de teste idêntico ao de treino)"
+    - "Aceita grader dependente do mesmo modelo de produção"
+    - "Deixa passar suite com 6 meses sem atualização"
+  delivered_event: "eval_suite.review_emitted com case_count, cobertura por categoria e status"
+
 guardians:
-- po-guardian
-- observability-guardian
-- artifact-architect
+  - monthly-reviewer
+
 tools:
-- "repo.read (evals)"
-- "brain.query"
-- "eval.run (harness)"
-- "constitution.read"
-- "LLMProvider (grader independente)"
-- "LLMProvider"
+  - repo.read
+  - brain.query
+  - eval.run
+  - constitution.read
+  - LLMProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

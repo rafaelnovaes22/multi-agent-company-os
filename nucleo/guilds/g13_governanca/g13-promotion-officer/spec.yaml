@@ -3,34 +3,34 @@ guild: G13-governanca
 ledger: operating
 tier: L1
 ai_enabled: true
-model_role: worker
+model_role: guardian
 mode: SHADOW
-act_handler: guardian_check
+multi_tenant: false
+act_handler: mode_gate_score
+
 outcome_clause:
-  statement: "nenhum agente muda de modo sem todos os 6 gates aplicáveis em PASS e, no caminho-crítico, sem cross-approval DRI≠founder registrada."
+  statement: "Nenhum agente muda de modo sem todos os 6 gates aplicáveis em PASS e, no caminho-crítico, sem cross-approval DRI≠founder registrada."
   positive_examples:
-  - "Promove a ASSISTED um agente com pass@k acima do limiar e 16 dias em SHADOW."
-  - "Rebaixa para ASSISTED um agente AUTONOMOUS após drift de -6pp de acurácia."
-  - "Segura promoção de caminho-crítico até DRI e founder aprovarem separadamente."
+    - "Promove a ASSISTED um agente com pass@k acima do limiar e 16 dias em SHADOW"
+    - "Rebaixa para ASSISTED um agente AUTONOMOUS após drift de -6pp de acurácia"
+    - "Segura promoção de caminho-crítico até DRI e founder aprovarem separadamente"
   negative_examples:
-  - "Promove com janela de SHADOW de só 9 dias."
-  - "Aceita a mesma pessoa como DRI e founder na cross-approval."
-  - "Promove ignorando um Guardian que ainda não respondeu."
-  delivered_event: "`mode.transitioned` com `gates_passed`, `approvers` e evidência anexada."
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Promove com janela de SHADOW de só 9 dias"
+    - "Aceita a mesma pessoa como DRI e founder na cross-approval"
+    - "Promove ignorando um Guardian que ainda não respondeu"
+  delivered_event: "mode.transitioned com gates_passed, approvers e evidência anexada"
+
 guardians:
-- po-guardian
-- observability-guardian
-- artifact-architect
+  - security-privacy-guardian
+  - monthly-reviewer
+
 tools:
-- "governance.mode_transition"
-- "brain.query"
-- "brain.emit"
-- "gate.interrupt (human-in-the-loop)"
-- "constitution.read"
-- "MessagingProvider"
-- "LLMProvider"
+  - governance.mode_transition
+  - brain.query
+  - brain.emit
+  - gate.interrupt
+  - constitution.read
+  - MessagingProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

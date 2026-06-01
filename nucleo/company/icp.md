@@ -1,10 +1,10 @@
 ---
 artifact: icp
 tier: L0
-version: "0.2.0"
-status: active
-source: "Decisão ICP Rafael/Hermes 2026-06-01: CEO bombeiro R$1-20M/ano + enterprise ~R$100M/ano"
-date: 2026-06-01
+version: "0.1.0"
+status: draft
+source: "Mensagem de voz (WhatsApp PTT) 2026-05-29 — transcrição em C:/tmp/ptt_2026-05-29_transcricao.txt"
+date: 2026-05-29
 loaded_by: nucleo.kernel.loaders.load_icp
 ---
 
@@ -15,18 +15,19 @@ loaded_by: nucleo.kernel.loaders.load_icp
 
 ## Resumo em uma frase
 
-NÚCLEO atende dois segmentos de ICP: **CEOs/fundadores “bombeiro” de empresas que faturam R$ 1–20 milhões/ano** e **empresas enterprise em torno de R$ 100 milhões/ano** que já vendem bem, mas ainda operam com caos, gargalos de processo e conhecimento espalhado — sempre com vertical/oferta configuráveis e sem hardcode nos agentes.
+São **dois** perfis de comprador: **(ICP-1) fundadores R$ 1–20 milhões/ano** que **vendem bem mas operam no caos** (perfil "bombeiro"/TDAH, sem processo) — canal de distribuição = **PCG** (Programa de Crescimento Guiado da the CEO); e **(ICP-2) organizações enterprise >R$ 100 milhões/ano** (inclui **setor público**), **desorganizadas em processos**, com **time grande e custo de pessoal alto substituível por agentes Acme**.
+
+> A faixa **R$ 20–100M (mid-market)** fica **fora dos dois alvos por enquanto** (decisão CEO 2026-05-30: atacar os dois extremos primeiro). O produto é o mesmo; o **pitch e o motion de venda mudam** (PCG = canal quente, ciclo curto; enterprise/público = procurement/licitação, ciclo longo, narrativa de substituição de custo).
 
 ---
 
-## Segmentos ICP ativos
-
-### Segmento A — CEO bombeiro R$ 1–20M/ano
+## Tier 1 (ICP-1) — Bombeiro / PCG (quem compra)
 
 **Firmográfico**
 - Faturamento: **R$ 1M a R$ 20M / ano** (já validou venda; não é ideação).
 - Estágio: pós-product-market-fit comercial, pré-maturidade operacional.
-- Decisor: o **próprio fundador/sócio/CEO** (compra é founder-led).
+- Decisor: o **próprio fundador/sócio** (compra é founder-led).
+- **Canal:** mentorados do **PCG** (audiência quente, pré-qualificada) — dispensa prospecção fria. Tese: *"PCG ensina o que fazer; Acme é o headcount que executa."*
 
 **Comportamental (o coração do ICP)**
 - Perfil **"bombeiro"**: apaga incêndios o dia todo, faz um monte de coisa ao mesmo tempo.
@@ -40,19 +41,23 @@ NÚCLEO atende dois segmentos de ICP: **CEOs/fundadores “bombeiro” de empres
 
 **Job-to-be-done (hipótese):** *"Tirar o caos da minha cabeça e transformar o que já vende em processo/infra que roda sem mim."* → encaixa na tese AI-native do NÚCLEO (a empresa que vira processos legíveis e closed-loops).
 
-### Segmento B — Enterprise ~R$ 100M/ano
+---
+
+## Tier 1-B (ICP-2) — Enterprise / Setor público (quem compra)
 
 **Firmográfico**
-- Faturamento de referência: **~R$ 100M / ano** (faixa operacional inicial para scoring: aproximadamente R$ 80M–R$ 130M).
-- Estágio: empresa já grande o suficiente para múltiplas áreas, dados e aprovações, mas ainda com processos críticos manuais/fragmentados.
-- Decisor econômico: liderança executiva/board/C-level; usuário operacional pode estar em Ops, Financeiro, CS, Vendas ou BI.
+- Faturamento: **> R$ 100M / ano** (ou **órgão público**, independente de faturamento).
+- **Time grande** (muitas pessoas) e **custo de pessoal alto**.
+- Decisor: comitê / procurement (enterprise) ou **licitação** (setor público) — ciclo longo.
 
-**Comportamental / dores**
-- Dor de processo ainda explícita: retrabalho, fila, conciliação manual, handoff quebrado, baixa visibilidade de status.
-- Busca governança, auditabilidade e redução de custo/tempo sem perder controle humano.
-- Compra pode envolver comitê/procurement; por isso o produto precisa provar valor por diagnóstico, baseline e evidência no Brain.
+**Situação / dores**
+- **Desorganizada em processos** apesar do porte.
+- Funções caras e repetitivas **substituíveis por soluções Acme** (redução de headcount/custo).
+- Setor público: desorganização estrutural = alvo de alto potencial.
 
-**Job-to-be-done (hipótese):** *"Transformar operação crítica e dispersa em workflows auditáveis com agentes em SHADOW/ASSISTED antes de ganhar autonomia."*
+**Job-to-be-done (hipótese):** *"Cortar custo de folha e organizar processos sem um projeto de transformação de anos."* → narrativa de **substituição de custo** (não "dar braços", como no ICP-1).
+
+> **Motion distinto:** compliance pesado, procurement/licitação, ciclo de meses. O time e o material de venda **não** são os mesmos do PCG. Sequência recomendada: **PCG primeiro** (valida rápido e barato), **enterprise como segunda frente**.
 
 ---
 
@@ -74,13 +79,24 @@ NÚCLEO atende dois segmentos de ICP: **CEOs/fundadores “bombeiro” de empres
 
 ## Sinais de qualificação / desqualificação
 
+**ICP-1 (bombeiro / PCG)**
+
 | ✅ Qualifica | ❌ Desqualifica |
 |---|---|
-| CEO/fundador bombeiro com fatura R$ 1–20M/ano | Pré-receita / ideação |
-| Enterprise em torno de R$100M/ano com dor operacional concreta | Enterprise madura sem dor de processo ou sem dono executivo |
-| Founder-led ou com sponsor executivo claro | Compra sem sponsor, apenas curiosidade técnica |
-| Vende bem mas não escala a operação | Problema é *vender* (não é nosso ICP primário) |
-| Quer tirar o caos da cabeça/processo e aceitar SHADOW/ASSISTED | Não sente a dor de processo/infra ou não aceita evidência/gates |
+| Fatura R$ 1–20M/ano | Pré-receita / ideação (<R$1M) |
+| Fundador "bombeiro", sem processo | Operação já madura, time de ops estruturado |
+| Vende bem mas não escala a operação | Problema é *vender* (não é nosso ICP) |
+| Decisão founder-led | Faixa R$ 20–100M (mid-market, fora do alvo) |
+| Quer tirar o caos da cabeça | Não sente a dor de processo/infra |
+
+**ICP-2 (enterprise / setor público)**
+
+| ✅ Qualifica | ❌ Desqualifica |
+|---|---|
+| Fatura > R$ 100M/ano ou órgão público | Faixa R$ 20–100M (mid-market, fora do alvo) |
+| Desorganizada em processos | Processos já maduros/automatizados |
+| Time grande, custo de pessoal alto | Custo de folha baixo (pouco a substituir) |
+| Aceita ciclo de procurement/licitação | — |
 
 ---
 
@@ -90,12 +106,12 @@ Este artefato L0 é a **fonte única** do perfil de cliente. Agentes carregam vi
 
 | Agente | Como usa o ICP |
 |---|---|
-| **g8-lead-qualifier** (G08) | Pontua/qualifica cada lead contra os segmentos CEO bombeiro R$1–20M e enterprise ~R$100M; rejeita fora-do-ICP |
-| **g8-outbound-sdr** (G08) | Constrói segmentação e mensagem de **cold B2B outreach** a partir do Tier 2, adaptando ângulo por segmento |
-| **g1-market-intel** (G01) | Dimensiona e monitora **onde cada segmento ICP se concentra**; alimenta o Tier 2 (fontes de scraping) |
-| **g2-jobs-to-be-done / g2-prd-author** (G02) | Ancoram descoberta e PRD no JTBD do segmento ICP |
-| **g7-referral-designer / g7-content-writer** (G07) | Mensagem e indicação miram o perfil "bombeiro/TDAH" e a tese enterprise de governança/evidência (doutrina de growth, [../../05-DOUTRINA-GTM-LOVABLE.md](../../05-DOUTRINA-GTM-LOVABLE.md)) |
-| **g10-unit-economist** (G10) | Usa as faixas R$1–20M e ~R$100M para sanidade de willingness-to-pay / C3 |
+| **g8-lead-qualifier** (G08) | Pontua/qualifica cada lead contra os sinais ✅/❌ deste documento; rejeita fora-do-ICP |
+| **g8-outbound-sdr** (G08) | Constrói segmentação e mensagem de **cold B2B outreach** a partir do Tier 2 e das dores |
+| **g1-market-intel** (G01) | Dimensiona e monitora **onde o ICP se concentra**; alimenta o Tier 2 (fontes de scraping) |
+| **g2-jobs-to-be-done / g2-prd-author** (G02) | Ancoram descoberta e PRD no JTBD do ICP |
+| **g7-referral-designer / g7-content-writer** (G07) | Mensagem e indicação miram o perfil "bombeiro/TDAH" (doutrina de growth, [../../05-DOUTRINA-GTM-LOVABLE.md](../../05-DOUTRINA-GTM-LOVABLE.md)) |
+| **g10-unit-economist** (G10) | Usa as faixas R$ 1–20M (ICP-1) / >R$ 100M (ICP-2) para sanidade de willingness-to-pay / C3 |
 
 ## Conformidade (C-rules)
 
@@ -106,5 +122,5 @@ Este artefato L0 é a **fonte única** do perfil de cliente. Agentes carregam vi
 ## Pendências (para fechar o ICP)
 
 - [ ] Definir o **vertical/oferta** (destrava os campos *(configurável)* do Tier 2).
-- [ ] Validar a faixa de ticket e o pricing por segmento (CEO bombeiro R$1–20M vs enterprise ~R$100M) com g2-pricing-product-fit + g10.
+- [ ] Validar a faixa de ticket e o pricing contra a faixa R$ 1–5M (g2-pricing-product-fit + g10).
 - [ ] Listar as **fontes concretas** de scraping assim que o nicho for escolhido.

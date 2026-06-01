@@ -5,31 +5,30 @@ tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: spec_driven
+multi_tenant: true
+act_handler: rice_score
+
 outcome_clause:
-  statement: 'Priorizador de Backlog (RICE) entrega prioritizer.artifact verificável
-    para: Ordenar o backlog por valor esperado usando RICE, com inputs auditáveis
-    e vieses controlados'
+  statement: "Cada item priorizado tem score RICE com os quatro fatores derivados de evidência rastreável e racional auditável."
   positive_examples:
-  - Item com Reach/Impact baseados em dados de uso reais e Effort estimado pela Engenharia
-  - Item de baixa Confidence rebaixado e enviado a experimento
-  - Re-rank disparado quando novo experimento muda o Impact
+    - "Item com Reach/Impact baseados em dados de uso reais e Effort estimado pela Engenharia."
+    - "Item de baixa Confidence rebaixado e enviado a experimento."
+    - "Re-rank disparado quando novo experimento muda o Impact."
   negative_examples:
-  - Score atribuído sem fonte para nenhum fator
-  - Item priorizado por preferência sem evidência (viés ignorado)
-  - Ranking estático que ignora sinais novos por semanas
-  delivered_event: evento backlog.ranked.committed é gravado com RICE completo e fonte
-    por fator
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Score atribuído sem fonte para nenhum fator."
+    - "Item priorizado por preferência sem evidência (viés ignorado)."
+    - "Ranking estático que ignora sinais novos por semanas."
+  delivered_event: "evento backlog.ranked.committed é gravado com RICE completo e fonte por fator."
+
 guardians:
-- po-guardian
-- observability-guardian
-- artifact-architect
+  - po-guardian
+  - unit-economist-guardian
+  - observability-guardian
+
 tools:
-- brain.query
-- brain.write
-- LLMProvider
+  - brain.query
+  - brain.write
+  - LLMProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

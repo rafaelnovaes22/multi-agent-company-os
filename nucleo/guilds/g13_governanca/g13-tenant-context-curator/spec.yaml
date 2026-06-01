@@ -3,32 +3,33 @@ guild: G13-governanca
 ledger: operating
 tier: L1
 ai_enabled: true
-model_role: worker
+model_role: guardian
 mode: SHADOW
-act_handler: guardian_check
+multi_tenant: false
+act_handler: tenant_hardcode_lint
+
 outcome_clause:
-  statement: "nenhum agente é mergeado/promovido com lógica hardcoded por tenant nem com PII/segredo de cliente em memória; variação é sempre config."
+  statement: "Nenhum agente é mergeado/promovido com lógica hardcoded por tenant nem com PII/segredo de cliente em memória; variação é sempre config."
   positive_examples:
-  - "Barra um `if tenantId === 'acme'` e exige migração para config no contexto."
-  - "Aprova um agente cujo comportamento por instância vem 100% de dados de contexto."
-  - "Detecta PII de tenant que vazou para um instinct e bloqueia o merge da memória."
+    - "Barra um if tenantId === 'acme' e exige migração para config no contexto"
+    - "Aprova um agente cujo comportamento por instância vem 100% de dados de contexto"
+    - "Detecta PII de tenant que vazou para um instinct e bloqueia o merge da memória"
   negative_examples:
-  - "Deixa passar uma pasta `clients/acme/` com override de código."
-  - "Aceita spec que assume um vertical sem o marcador de configurabilidade."
-  - "Ignora segredo de cliente colado num arquivo de SOUL."
-  delivered_event: "`c8.lint_emitted` com `hardcode_count` e status PASS/FAIL."
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Deixa passar uma pasta clients/acme/ com override de código"
+    - "Aceita spec que assume um vertical sem o marcador de configurabilidade"
+    - "Ignora segredo de cliente colado num arquivo de SOUL"
+  delivered_event: "c8.lint_emitted com hardcode_count e status PASS/FAIL"
+
 guardians:
-- po-guardian
-- observability-guardian
-- artifact-architect
+  - monthly-reviewer
+  - security-privacy-guardian
+
 tools:
-- "repo.read"
-- "brain.query"
-- "constitution.read"
-- "code.lint (regras C8)"
-- "LLMProvider"
+  - repo.read
+  - brain.query
+  - constitution.read
+  - code.lint
+  - LLMProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

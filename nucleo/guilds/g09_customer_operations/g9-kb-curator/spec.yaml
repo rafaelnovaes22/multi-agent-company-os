@@ -5,32 +5,32 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: spec_driven
+multi_tenant: true
+act_handler: kb_deflection
+
 outcome_clause:
-  statement: 'Curador da Base de Conhecimento entrega kb-curator.artifact verificável
-    para: manter a base de conhecimento correta, atualizada e cobrindo as lacunas
-    reais reveladas pelo atendimento'
+  statement: "Mantém a KB com cobertura e atualidade auditáveis, criando artigos para lacunas reais, aposentando obsoletos e elevando o deflection de autosserviço."
   positive_examples:
-  - Lacuna recorrente vira artigo que passa a deflectar tickets do mesmo tema
-  - Artigo sobre feature descontinuada aposentado antes de gerar resposta errada
-  - Variante de canal gerada para o mesmo conteúdo sem retrabalho
+    - "Lacuna recorrente vira artigo que passa a deflectar tickets do mesmo tema"
+    - "Artigo sobre feature descontinuada aposentado antes de gerar resposta errada"
+    - "Variante de canal gerada para o mesmo conteúdo sem retrabalho"
   negative_examples:
-  - Publica artigo com instrução desatualizada que gera ticket errado
-  - Deixa lacuna de alto volume sem artigo por semanas
-  - Quebra a versão anterior do índice sem trilha de auditoria
-  delivered_event: kb.article_published ou kb.article_retired versionado no Brain
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Publica artigo com instrução desatualizada que gera ticket errado"
+    - "Deixa lacuna de alto volume sem artigo por semanas"
+    - "Quebra a versão anterior do índice sem trilha de auditoria"
+  delivered_event: "kb.article_published ou kb.article_retired versionado no Brain"
+
 guardians:
-- po-guardian
-- observability-guardian
-- artifact-architect
+  - artifact-architect-guardian
+  - observability-guardian
+  - po-guardian
+
 tools:
-- brain.query
-- brain.emit
-- kb.write
-- LLMProvider
-- docs.lookup
+  - brain.query
+  - brain.emit
+  - kb.write
+  - LLMProvider
+  - docs.lookup
+
 soul_ref: soul.md
 memory_ref: memory.md

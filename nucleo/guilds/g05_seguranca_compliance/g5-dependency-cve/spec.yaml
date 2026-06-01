@@ -3,38 +3,35 @@ guild: G05-seguranca-compliance
 ledger: operating
 tier: L2
 ai_enabled: true
-model_role: guardian
+model_role: worker
 mode: SHADOW
-act_handler: guardian_check
+multi_tenant: false
+act_handler: cve_prioritization
+
 outcome_clause:
-  statement: 'Dependency CVE Monitor entrega dependency_cve.artifact verificável para:
-    monitorar CVEs em dependências de runtime e na cadeia de suprimentos de software,
-    priorizando e dirigindo a remediação.'
+  statement: "Nenhuma CVE explorável em caminho ativo permanece sem remediação ou mitigação dentro do SLA da sua severidade."
   positive_examples:
-  - Recebe input válido e publica dependency_cve.artifact com status ready e evidência
-    rastreável.
-  - Roteia ou bloqueia trabalho com critério explícito quando risco alto exige revisão
-    humana.
-  - Registra artefato, rota e rationale sem depender de tenant, segmento ou fornecedor
-    hardcoded.
+    - "Prioriza CVE com exploit público em caminho ativo e dispara patch no SLA."
+    - "Bloqueia build que reintroduz versão vulnerável já embargada."
+    - "Detecta pacote com typosquatting e barra sua entrada."
   negative_examples:
-  - Declara sucesso sem artefato verificável ou sem status explícito.
-  - Executa ação de alto risco sem sinalizar revisão humana.
-  - Codifica regra específica de cliente, segmento, alíquota ou fornecedor no código
-    do agente.
-  delivered_event: g5-dependency-cve.delivered == true and artifact_type == 'dependency_cve.artifact'
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "CVE crítica exposta fica sem remediação além do SLA."
+    - "Inunda G3 com bumps de CVEs irrelevantes (sem priorização por exposição)."
+    - "Pacote malicioso entra no lockfile sem alerta."
+  delivered_event: "cve.scan_completed emitido (sem CVE crítica aberta) ou cve.remediation_dispatched com versão-alvo."
+
 guardians:
-- po-guardian
-- security-privacy-guardian
-- observability-guardian
+  - security-privacy-guardian
+  - observability-guardian
+  - artifact-architect-guardian
+
 tools:
-- brain.query
-- brain.write
-- queue.dispatch
-- policy.check
-- LLMProvider
+  - repo.read
+  - brain.query
+  - brain.write
+  - cve.feed
+  - ci.run
+  - LLMProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

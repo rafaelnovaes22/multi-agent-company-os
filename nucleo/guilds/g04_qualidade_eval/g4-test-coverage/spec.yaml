@@ -5,36 +5,30 @@ tier: L2
 ai_enabled: true
 model_role: guardian
 mode: SHADOW
-act_handler: guardian_check
+multi_tenant: false
+act_handler: coverage_check
+
 outcome_clause:
-  statement: 'Guardião de Cobertura entrega test_coverage.artifact verificável para:
-    impor e manter cobertura de testes ≥80% para que o gate determinístico tenha base
-    confiável.'
+  statement: "Todo release-candidate tem cobertura de testes de no mínimo 80% com gaps críticos identificados antes do merge."
   positive_examples:
-  - Recebe input válido e publica test_coverage.artifact com status ready e evidência
-    rastreável.
-  - Roteia ou bloqueia trabalho com critério explícito quando risco alto exige revisão
-    humana.
-  - Registra artefato, rota e rationale sem depender de tenant, segmento ou fornecedor
-    hardcoded.
+    - "Candidate com 84% de cobertura aprovado e gaps cosméticos listados como dívida"
+    - "Caminho de tratamento de PII sem teste sinalizado como gap crítico P1"
+    - "Queda de cobertura de 88%->81% entre releases sinalizada como dívida crescente"
   negative_examples:
-  - Declara sucesso sem artefato verificável ou sem status explícito.
-  - Executa ação de alto risco sem sinalizar revisão humana.
-  - Codifica regra específica de cliente, segmento, alíquota ou fornecedor no código
-    do agente.
-  delivered_event: g4-test-coverage.delivered == true and artifact_type == 'test_coverage.artifact'
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Merge liberado com 71% de cobertura"
+    - "Cobertura verde aceita em linhas executadas sem nenhuma asserção"
+    - "Gap em caminho crítico tratado como cosmético"
+  delivered_event: "artefato coverage.report gravado no Brain com coverage_pct >= threshold ou FAIL, critical_gaps[] e candidate_id"
+
 guardians:
-- po-guardian
-- eval-engineer-guardian
-- observability-guardian
+  - artifact-architect-guardian
+  - security-privacy-guardian
+  - observability-guardian
+
 tools:
-- brain.query
-- brain.write
-- queue.dispatch
-- policy.check
-- LLMProvider
+  - ci.coverage
+  - repo.read
+  - brain.write
+
 soul_ref: soul.md
 memory_ref: memory.md

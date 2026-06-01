@@ -19,6 +19,36 @@ def get_grader(name: str):
     return _GRADERS.get(name)
 
 
+def _compatible(got, want) -> bool:
+    """Igualdade tolerante: bool exato; números dentro de 1% (ou epsilon p/ zero);
+    listas por comprimento+conteúdo; dicts por subset-match; resto por igualdade."""
+    if isinstance(want, bool):
+        return got == want
+    if isinstance(want, (int, float)) and isinstance(got, (int, float)):
+        return abs(got - want) <= max(1e-9, abs(want) * 0.01)
+    if isinstance(want, list):
+        return isinstance(got, list) and len(got) == len(want) \
+            and all(_compatible(g, w) for g, w in zip(got, want))
+    if isinstance(want, dict):
+        return isinstance(got, dict) \
+            and all(k in got and _compatible(got[k], v) for k, v in want.items())
+    return got == want
+
+
+def generic_contract_grader(out, exp):
+    """Fallback de contrato p/ qualquer agente cujo act_handler não tem grader nominal
+    (ex.: os handlers determinísticos por guilda rice_score/churn_risk_score/...). Valida:
+    output não-vazio com 'rationale' e 'by'; e — se o caso traz 'expected' — cada chave
+    presente no output e compatível (tolerância 1% p/ números). Campos calculados no
+    top-level do output são checados direto; citations ficam a cargo dos guardians."""
+    if not out or "rationale" not in out or "by" not in out:
+        return False
+    for k, want in (exp or {}).items():
+        if k not in out or not _compatible(out[k], want):
+            return False
+    return True
+
+
 @register("outcome_clause_validator")
 def _g_ocv(out, exp):
     return bool(out) and (out.get("verdict") or {}).get("valid") == exp.get("valid")

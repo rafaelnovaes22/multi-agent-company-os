@@ -5,31 +5,33 @@ tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: spec_driven
+multi_tenant: true
+act_handler: northstar_daily_value
+
 outcome_clause:
-  statement: 'Curador de OKRs & Dono da North-Star entrega okr-steward.artifact verificável
-    para: propor e acompanhar OKRs por guilda e ser o dono operacional da north-star'
+  statement: "Cada guilda tem OKRs mensuráveis amarrados ao Brain e a north-star é publicada diariamente com fórmula auditável."
   positive_examples:
-  - North-star calculada e publicada todo dia com fórmula versionada
-  - KR em risco alertado antes do fim do ciclo, com replanejamento proposto
-  - Referral Propensity Score instrumentado como KR de growth
+    - "North-star calculada e publicada todo dia com fórmula versionada"
+    - "KR em risco alertado antes do fim do ciclo, com replanejamento proposto"
+    - "Referral Propensity Score instrumentado como KR de growth"
   negative_examples:
-  - KR sem métrica observável ou sem dono
-  - North-star sem fórmula documentada ou com coleta quebrada por dias
-  - OKR redigido fixando uma métrica específica de um vertical ainda indefinido
-  delivered_event: okr.scorecard é atualizado e northstar.daily_value do dia é persistido
-    no Brain com northstar.definition vinculada
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "KR sem métrica observável ou sem dono"
+    - "North-star sem fórmula documentada ou com coleta quebrada por dias"
+    - "OKR redigido fixando uma métrica específica de um vertical ainda indefinido"
+  delivered_event: "okr.scorecard é atualizado e northstar.daily_value do dia é persistido no Brain com northstar.definition vinculada"
+
 guardians:
-- po-guardian
-- observability-guardian
-- artifact-architect
+  - po-guardian
+  - observability-guardian
+  - artifact-architect-guardian
+  - unit-economist-guardian
+
 tools:
-- brain.query/write
-- metrics.read (telemetria C6)
-- dashboard.publish
-- LLMProvider
+  - brain.query
+  - brain.write
+  - metrics.read
+  - dashboard.publish
+  - LLMProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

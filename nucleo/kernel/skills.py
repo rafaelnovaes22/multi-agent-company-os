@@ -31,6 +31,24 @@ def _tokens(text: str) -> int:
     return max(1, len(text) // 4)
 
 
+def _spec_citations(state, spec) -> list:
+    """Deriva citations da spec (C6): consumes_l0 + tools + delivered_event + tenant.
+    NUNCA retorna lista vazia — os guardians exigem citação (fallback p/ spec:id).
+    Usado pelos handlers determinísticos por guilda (skills_g00..g14)."""
+    cites = []
+    for ref in (spec.get("consumes_l0") or []):
+        cites.append("l0:" + str(ref))
+    for tool in (spec.get("tools") or []):
+        cites.append("tool:" + str(tool))
+    dev = (spec.get("outcome_clause") or {}).get("delivered_event")
+    if dev:
+        cites.append("delivered_event:" + str(dev))
+    tid = state.get("task", {}).get("tenant_id")
+    if tid:
+        cites.append("tenant:" + str(tid))
+    return cites or ["spec:" + str(spec.get("id", "?"))]
+
+
 # ---------------------------------------------------------------------------
 # G13 — po-guardian: valida a cláusula de outcome (C2) de uma spec-alvo
 # ---------------------------------------------------------------------------
@@ -745,47 +763,60 @@ def painel_dono(state, *, llm, store, spec):
 
 
 def _score_lead_against_icp(lead: dict):
-    """Pontua leads contra os segmentos ICP L0.
-
-    Segmentos configurados no company/icp.md:
-    - CEO bombeiro: R$1-20M/ano, founder-led, vende bem e opera no caos.
-    - Enterprise: ~R$100M/ano com dor operacional/processual ainda não resolvida.
-    """
-    segments: list[str] = []
-    signals: dict[str, object] = {"icp_segments": segments}
-    reasons, score = [], 0
+    """Pontua o lead contra os DOIS ICPs do NÚCLEO (ver company/icp.md):
+    - ICP-1 bombeiro/PCG: R$1-20M/ano, founder-led, vende bem mas opera no caos.
+    - ICP-2 enterprise: >R$100M/ano (ou setor público), desorganizada em processos,
+      time grande e custo de pessoal alto substituível por agentes Acme.
+    A faixa R$20-100M (mid-market) fica fora dos dois alvos por enquanto.
+    `signals['icp_tier']` indica qual perfil foi avaliado (bombeiro | enterprise | fora | mid_market)."""
+    signals, reasons, score = {}, [], 0
     rev = lead.get("revenue_brl_year", 0) or 0
 
-    if 1_000_000 <= rev <= 20_000_000:
-        score += 35
-        signals["segmento_ceo_bombeiro_1a20M"] = True
-        signals["faturamento_1a20M"] = True
-        segments.append("ceo_bombeiro")
-        reasons.append("Faturamento na faixa R$1-20M (segmento CEO bombeiro)")
-    elif 80_000_000 <= rev <= 130_000_000 or lead.get("enterprise"):
-        score += 35
-        signals["segmento_enterprise_100M"] = True
-        signals["faturamento_100M"] = True
-        segments.append("enterprise_100M")
-        reasons.append("Faturamento em torno de R$100M (segmento enterprise)")
+    # Roteia por faturamento (setor público entra como enterprise mesmo sem faturamento alto)
+    if rev > 100_000_000 or lead.get("public_sector"):
+        tier = "enterprise"
+    elif 1_000_000 <= rev <= 20_000_000:
+        tier = "bombeiro"
     elif 0 < rev < 1_000_000:
-        signals["faturamento_1a20M"] = False
-        reasons.append("Abaixo de R$1M (pre-ICP)")
-    elif rev > 20_000_000:
-        signals["faturamento_1a20M"] = False
-        signals["faturamento_100M"] = False
-        reasons.append("Fora das faixas ICP atuais (R$1-20M ou ~R$100M)")
+        tier = "fora"
+    else:
+        tier = "mid_market"
+    signals["icp_tier"] = tier
 
-    if lead.get("founder_led"):
-        score += 20; signals["founder_led"] = True; reasons.append("Decisao founder-led")
-    if lead.get("sells_well"):
-        score += 15; signals["vende_bem"] = True; reasons.append("Vende bem (gargalo nao e receita)")
-    if lead.get("lacks_process"):
-        score += 20; signals["sem_processo"] = True; reasons.append("Sem processos definidos (dor central)")
-    if lead.get("firefighter") or lead.get("adhd_traits"):
-        score += 10; signals["perfil_bombeiro"] = True; reasons.append("Perfil bombeiro/TDAH")
-    if lead.get("ops_mature"):
-        score -= 30; signals["ops_madura"] = True; reasons.append("Operacao ja madura (desqualifica)")
+    if tier == "bombeiro":
+        score += 35; signals["faturamento_1a20M"] = True
+        reasons.append("Faturamento na faixa R$1-20M (ICP-1 bombeiro/PCG)")
+        if lead.get("founder_led"):
+            score += 20; signals["founder_led"] = True; reasons.append("Decisao founder-led")
+        if lead.get("sells_well"):
+            score += 15; signals["vende_bem"] = True; reasons.append("Vende bem (gargalo nao e receita)")
+        if lead.get("lacks_process"):
+            score += 20; signals["sem_processo"] = True; reasons.append("Sem processos definidos (dor central)")
+        if lead.get("firefighter") or lead.get("adhd_traits"):
+            score += 10; signals["perfil_bombeiro"] = True; reasons.append("Perfil bombeiro/TDAH")
+        if lead.get("ops_mature"):
+            score -= 30; signals["ops_madura"] = True; reasons.append("Operacao ja madura (desqualifica)")
+
+    elif tier == "enterprise":
+        score += 30; signals["faturamento_100M+"] = True
+        reasons.append("Faturamento >R$100M ou setor publico (ICP-2 enterprise)")
+        if lead.get("public_sector"):
+            score += 15; signals["setor_publico"] = True
+            reasons.append("Setor publico (alta desorganizacao = alvo)")
+        if lead.get("lacks_process") or lead.get("process_disorganized"):
+            score += 20; signals["processos_desorganizados"] = True
+            reasons.append("Desorganizada em processos (dor central)")
+        if lead.get("large_team") or (lead.get("team_size", 0) or 0) >= 50:
+            score += 15; signals["time_grande"] = True; reasons.append("Time grande (muitas pessoas)")
+        if lead.get("high_personnel_cost"):
+            score += 20; signals["custo_pessoal_alto"] = True
+            reasons.append("Custo de pessoal alto substituivel por agentes Acme")
+
+    elif tier == "fora":
+        signals["faturamento"] = False; reasons.append("Abaixo de R$1M (pre-ICP)")
+    else:  # mid_market
+        signals["faturamento"] = False
+        reasons.append("Faixa R$20-100M (mid-market): fora dos ICPs-alvo por enquanto")
 
     return max(0, min(100, score)), signals, reasons
 
@@ -796,3 +827,17 @@ def _route(score: int) -> str:
     if score >= 60:
         return "self-serve (ativacao no produto)"
     return "descarte"
+
+
+# ---------------------------------------------------------------------------
+# Handlers determinísticos por guilda (registram-se por side-effect ao importar).
+# Mantidos no fim para evitar ciclo: importam register/_tokens/_spec_citations já
+# definidos acima. Dão lógica de domínio real aos agentes que a spec marca com um
+# act_handler nominal (rice_score, churn_risk_score, secret_scan, ...). C8: a
+# variação continua na spec; aqui mora só o cálculo, reusado por todos os tenants.
+# ---------------------------------------------------------------------------
+from . import skills_finance  # noqa: E402,F401  (G10)
+from . import skills_custops   # noqa: E402,F401  (G09)
+from . import skills_g00, skills_g01, skills_g02, skills_g03, skills_g04  # noqa: E402,F401
+from . import skills_g05, skills_g06, skills_g07, skills_g08, skills_g11  # noqa: E402,F401
+from . import skills_g12, skills_g13, skills_g14  # noqa: E402,F401

@@ -5,32 +5,32 @@ tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: spec_driven
+multi_tenant: true
+act_handler: scenario_sensitivity
+
 outcome_clause:
-  statement: 'Planejador de Cenários entrega scenario-planner.artifact verificável
-    para: construir cenários estratégicos (base/otimista/pessimista e disrupções)
-    e análise de sensibilidade sobre as variáveis-chave'
+  statement: "Entrega cenários parametrizados, drivers de sensibilidade rankeados e trip-wires acionáveis, tudo derivado do sizing vigente."
   positive_examples:
-  - Tornado chart isola os 3 drivers que explicam a maior parte da variância do SOM
-  - Trip-wire definido e entregue ao okr-steward com limiar e métrica observável
-  - Cenários re-rodados em 24h após mudança de premissa do opportunity-sizer
+    - "Tornado chart isola os 3 drivers que explicam a maior parte da variância do SOM"
+    - "Trip-wire definido e entregue ao okr-steward com limiar e métrica observável"
+    - "Cenários re-rodados em 24h após mudança de premissa do opportunity-sizer"
   negative_examples:
-  - Cenários não amarrados às variáveis do sizing.model (números soltos)
-  - Trip-wire sem métrica observável que a operação consiga medir
-  - Cenário "wildcard" inventa um evento de mercado específico antes da definição
-    do vertical
-  delivered_event: scenario.set + scenario.sensitivity + scenario.tripwires são persistidos
-    no Brain com lineage até o sizing.model de origem
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Cenários não amarrados às variáveis do sizing.model (números soltos)"
+    - "Trip-wire sem métrica observável que a operação consiga medir"
+    - "Cenário wildcard inventa um evento de mercado específico antes da definição do vertical"
+  delivered_event: "scenario.set + scenario.sensitivity + scenario.tripwires são persistidos no Brain com lineage até o sizing.model de origem"
+
 guardians:
-- po-guardian
-- observability-guardian
-- artifact-architect
+  - po-guardian
+  - unit-economist-guardian
+  - artifact-architect-guardian
+  - observability-guardian
+
 tools:
-- brain.query/write
-- calc.model (simulação/Monte-Carlo leve)
-- LLMProvider
+  - brain.query
+  - brain.write
+  - calc.model
+  - LLMProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

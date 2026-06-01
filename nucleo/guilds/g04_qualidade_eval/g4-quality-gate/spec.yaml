@@ -5,36 +5,33 @@ tier: L1
 ai_enabled: true
 model_role: guardian
 mode: SHADOW
-act_handler: guardian_check
+multi_tenant: false
+act_handler: quality_gate_decision
+
 outcome_clause:
-  statement: 'Gate de Qualidade (pré-merge + lovability) entrega quality_gate.artifact
-    verificável para: ser o gate determinístico pré-merge que bloqueia código/agente
-    abaixo do padrão, incluindo o critério de lovability ("se não é lovable, não lança").'
+  statement: "Todo merge/release-candidate recebe um gate-result determinístico que bloqueia o que está abaixo do padrão (técnico e de lovability) com motivo citável."
   positive_examples:
-  - Recebe input válido e publica quality_gate.artifact com status ready e evidência
-    rastreável.
-  - Roteia ou bloqueia trabalho com critério explícito quando risco alto exige revisão
-    humana.
-  - Registra artefato, rota e rationale sem depender de tenant, segmento ou fornecedor
-    hardcoded.
+    - "Merge bloqueado por cobertura 74% (< 80%) com arquivo e linhas faltantes listados"
+    - "Release verde nos testes porém bloqueado por gate de lovability com 3 pontos de taste"
+    - "Bypass de incidente aceito e registrado no Brain para auditoria"
   negative_examples:
-  - Declara sucesso sem artefato verificável ou sem status explícito.
-  - Executa ação de alto risco sem sinalizar revisão humana.
-  - Codifica regra específica de cliente, segmento, alíquota ou fornecedor no código
-    do agente.
-  delivered_event: g4-quality-gate.delivered == true and artifact_type == 'quality_gate.artifact'
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Merge liberado com E2E vermelho"
+    - "Gate aprovando output que passa nos testes mas é claramente não-lovable"
+    - "Bypass aplicado sem registro auditável"
+  delivered_event: "artefato gate.result gravado no Brain com decision, criteria[] (cada um PASS/FAIL), lovability e candidate_id"
+
 guardians:
-- po-guardian
-- eval-engineer-guardian
-- observability-guardian
+  - po-guardian
+  - artifact-architect-guardian
+  - unit-economist-guardian
+  - security-privacy-guardian
+
 tools:
-- brain.query
-- brain.write
-- queue.dispatch
-- policy.check
-- LLMProvider
+  - repo.read
+  - brain.query
+  - brain.write
+  - ci.gate
+  - policy.read
+
 soul_ref: soul.md
 memory_ref: memory.md

@@ -5,28 +5,30 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: spec_driven
+multi_tenant: false
+act_handler: model_routing_decision
+
 outcome_clause:
-  statement: "cada chamada usa o modelo mais barato que atende o SLA de qualidade da tarefa, com fallback transparente."
+  statement: "Cada chamada usa o modelo mais barato que atende o SLA de qualidade da tarefa, com fallback transparente entre providers e model_id + custo registrados no Brain."
   positive_examples:
-  - "Provider primário cai e o fallback responde sem o agente perceber."
-  - "Tarefa simples é roteada para modelo barato; tarefa crítica para o modelo forte."
-  - "Chamada `billable` que excederia C3 é bloqueada/rebaixada de modelo."
+    - "Provider primário cai e o fallback responde sem o agente perceber"
+    - "Tarefa simples é roteada para modelo barato; tarefa crítica para o modelo forte"
+    - "Chamada billable que excederia C3 é bloqueada/rebaixada de modelo"
   negative_examples:
-  - "Tudo roteado para o modelo mais caro por padrão."
-  - "Fallback inexistente derruba a frota quando um provider falha."
-  - "Roteador de Modelos deixa de registrar evidência requerida no cenário 3."
-  delivered_event: "resposta retornada com `model_id` + `cost` registrados."
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Tudo roteado para o modelo mais caro por padrão"
+    - "Fallback inexistente derruba a frota quando um provider falha"
+    - "Chamada registrada sem model_id nem custo no Brain"
+  delivered_event: "resposta retornada com model_id + cost registrados no Brain"
+
 guardians:
-- po-guardian
-- observability-guardian
+  - artifact-architect-guardian
+  - unit-economist-guardian
+  - observability-guardian
+
 tools:
-- "LLMProvider (interface multi-provider)"
-- "model.registry"
-- "brain.write"
-- "LLMProvider"
+  - LLMProvider
+  - model.registry
+  - brain.write
+
 soul_ref: soul.md
 memory_ref: memory.md

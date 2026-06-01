@@ -3,38 +3,35 @@ guild: G04-qualidade-eval
 ledger: operating
 tier: L2
 ai_enabled: true
-model_role: guardian
+model_role: worker
 mode: SHADOW
-act_handler: guardian_check
+multi_tenant: false
+act_handler: eval_pass_at_k
+
 outcome_clause:
-  statement: 'Executor do Eval-Harness entrega eval_harness_runner.artifact verificável
-    para: executar o eval-harness contra os agentes calculando pass@k e aplicando
-    os graders, no padrão self-harness + instincts (ECC).'
+  statement: "Todo run produz pass@k e pass-rate por categoria com graders aplicados e evidência reproduzível por case."
   positive_examples:
-  - Recebe input válido e publica eval_harness_runner.artifact com status ready e
-    evidência rastreável.
-  - Roteia ou bloqueia trabalho com critério explícito quando risco alto exige revisão
-    humana.
-  - Registra artefato, rota e rationale sem depender de tenant, segmento ou fornecedor
-    hardcoded.
+    - "Suíte de 32 cases rodada com pass@3, relatório com pass-rate 88% e custo médio por case"
+    - "Grader rubric LLM-as-judge (modelo independente do de produção) aplicado e citado"
+    - "Smoke-eval de 8 cases entregue em segundos para um micro-release diário"
   negative_examples:
-  - Declara sucesso sem artefato verificável ou sem status explícito.
-  - Executa ação de alto risco sem sinalizar revisão humana.
-  - Codifica regra específica de cliente, segmento, alíquota ou fornecedor no código
-    do agente.
-  delivered_event: g4-eval-harness-runner.delivered == true and artifact_type == 'eval_harness_runner.artifact'
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Run sem trace_id propagado (não conta como auditável, C6)"
+    - "Pass@k reportado sem aplicar o grader correto por case"
+    - "Dois runs idênticos produzindo relatórios divergentes (não-determinismo não controlado)"
+  delivered_event: "artefato eval.run gravado no Brain com pass_at_k, pass_rate_by_category, grader_results[] e trace_id"
+
 guardians:
-- po-guardian
-- eval-engineer-guardian
-- observability-guardian
+  - observability-guardian
+  - unit-economist-guardian
+  - artifact-architect-guardian
+
 tools:
-- brain.query
-- brain.write
-- queue.dispatch
-- policy.check
-- LLMProvider
+  - agent.invoke
+  - brain.query
+  - brain.write
+  - LLMProvider
+  - telemetry.trace
+  - sandbox.run
+
 soul_ref: soul.md
 memory_ref: memory.md

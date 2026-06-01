@@ -3,31 +3,31 @@ guild: G13-governanca
 ledger: operating
 tier: L1
 ai_enabled: true
-model_role: worker
+model_role: guardian
 mode: SHADOW
-act_handler: guardian_check
+multi_tenant: false
+act_handler: outcomes_traces_delta
+
 outcome_clause:
-  statement: "nenhum agente é promovido com desvio outcomes↔traces > 1% ou com ações relevantes sem artefato/evento canônico no Brain."
+  statement: "Nenhum agente é promovido com desvio outcomes↔traces > 1% ou com ações relevantes sem artefato/evento canônico no Brain."
   positive_examples:
-  - "Reprova um agente cujo desvio outcomes↔traces é 3%."
-  - "Aprova um agente `ai_enabled=false` que tem audit-log completo e métricas."
-  - "Detecta um fluxo entregando sem emitir evento e abre item de \"shadow process\"."
+    - "Reprova um agente cujo desvio outcomes↔traces é 3%"
+    - "Aprova um agente ai_enabled=false que tem audit-log completo e métricas"
+    - "Detecta um fluxo entregando sem emitir evento e abre item de shadow process"
   negative_examples:
-  - "Aprova agente AI sem trace LLM ligado."
-  - "Deixa passar eventos sem `trace_id` ou sem `inputs_hash`."
-  - "Aceita `citations` que apontam para artefatos inexistentes."
-  delivered_event: "`c6.review_emitted` com `outcomes_traces_delta` e status PASS/FAIL."
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Aprova agente AI sem trace LLM ligado"
+    - "Deixa passar eventos sem trace_id ou sem inputs_hash"
+    - "Aceita citations que apontam para artefatos inexistentes"
+  delivered_event: "c6.review_emitted com outcomes_traces_delta e status PASS/FAIL"
+
 guardians:
-- po-guardian
-- observability-guardian
-- artifact-architect
+  - monthly-reviewer
+
 tools:
-- "brain.query"
-- "TelemetryProvider (trace/audit read-only)"
-- "constitution.read"
-- "LLMProvider"
+  - brain.query
+  - TelemetryProvider
+  - constitution.read
+  - LLMProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

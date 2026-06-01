@@ -5,37 +5,33 @@ tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: spec_driven
+multi_tenant: false
+act_handler: agreement_rate
+
 outcome_clause:
-  statement: 'Comparador de SHADOW (agreement-rate) entrega shadow_comparator.artifact
-    verificável para: calcular o agreement-rate entre a saída do agente em SHADOW
-    e o gabarito (humano/baseline) para decidir se o agente está pronto para sair
-    de SHADOW (C4).'
+  statement: "Todo agente em SHADOW recebe agreement-rate por categoria sobre amostra e janela suficientes, com recomendação clara de promover ou reter."
   positive_examples:
-  - Recebe input válido e publica shadow_comparator.artifact com status ready e evidência
-    rastreável.
-  - Roteia ou bloqueia trabalho com critério explícito quando risco alto exige revisão
-    humana.
-  - Registra artefato, rota e rationale sem depender de tenant, segmento ou fornecedor
-    hardcoded.
+    - "Agente com agreement 93% sobre janela de 16 dias e amostra suficiente recomendado para PILOT"
+    - "Categoria com agreement 71% isolada e enviada como gap ao case-author antes de promover"
+    - "Viés sistemático (agente sempre conservador numa categoria) detectado e reportado"
   negative_examples:
-  - Declara sucesso sem artefato verificável ou sem status explícito.
-  - Executa ação de alto risco sem sinalizar revisão humana.
-  - Codifica regra específica de cliente, segmento, alíquota ou fornecedor no código
-    do agente.
-  delivered_event: g4-shadow-comparator.delivered == true and artifact_type == 'shadow_comparator.artifact'
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Recomendação de promoção com janela de SHADOW de apenas 5 dias"
+    - "Agreement-rate reportado só como média global, escondendo categoria ruim"
+    - "Comparação feita sobre dados de produção com PII crua (viola LGPD)"
+  delivered_event: "artefato shadow.comparison gravado no Brain com agreement_rate_by_category, sample_size, shadow_window_days >= 14, bias_flags[] e recommendation"
+
 guardians:
-- po-guardian
-- eval-engineer-guardian
-- observability-guardian
+  - po-guardian
+  - security-privacy-guardian
+  - observability-guardian
+  - unit-economist-guardian
+
 tools:
-- brain.query
-- brain.write
-- queue.dispatch
-- policy.check
-- LLMProvider
+  - brain.query
+  - telemetry.read
+  - repo.read
+  - agent.invoke
+  - data.anonymize
+
 soul_ref: soul.md
 memory_ref: memory.md

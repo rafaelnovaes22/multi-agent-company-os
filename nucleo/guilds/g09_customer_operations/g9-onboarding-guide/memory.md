@@ -1,4 +1,7 @@
-# Memória operacional — g9-onboarding-guide
+# MEMORY — g9-onboarding-guide
 
-- Fonte canônica: catalogo/G09-customer-operations.md.
-- Variação de mercado/tenant/segmento deve entrar pela spec ou pelo payload do caso, nunca por hardcode no handler.
+Formato: `§ [confidence:nivel] [YYYY-MM-DD] [run:id] fato acionável`
+
+§ [confidence:local] [2026-05-31] [run:seed] "Ativado" só vale quando o primeiro outcome de valor (Daily Active Outcome) ocorreu de fato — nunca declarar ativação sem o evento real.
+§ [confidence:local] [2026-05-31] [run:seed] Nudge tem que ser contextual ao segmento e ao progresso real; nudge genérico no momento errado queima a janela de ativação.
+§ [confidence:local] [2026-05-31] [run:seed] Ao fim do onboarding, calcular time_to_value e Referral Propensity Score; conta com alto score vira handoff a Growth/Vendas para expansão.

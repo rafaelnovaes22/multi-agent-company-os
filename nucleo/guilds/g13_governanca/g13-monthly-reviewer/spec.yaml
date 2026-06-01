@@ -3,34 +3,32 @@ guild: G13-governanca
 ledger: operating
 tier: L0
 ai_enabled: true
-model_role: worker
+model_role: guardian
 mode: SHADOW
-act_handler: guardian_check
+multi_tenant: false
+act_handler: audit_drift_score
+
 outcome_clause:
-  statement: "todo mês um relatório independente C1–C8 é gerado com amostra de 5–10% re-classificada, drift sinalizado e issues abertas — sem editar nenhum artefato de produção."
+  statement: "Todo mês um relatório independente C1–C8 é gerado com amostra de 5–10% re-classificada, drift sinalizado e issues abertas — sem editar nenhum artefato de produção."
   positive_examples:
-  - "Gera relatório que pega C3 marginal (24,8%) como WARN com evidência citada."
-  - "Re-amostra 47 outcomes e abre issue P1 onde o agente divergiu do gabarito."
-  - "Sinaliza drift de -6pp num agente e recomenda rebaixamento ao promotion-officer."
+    - "Gera relatório que pega C3 marginal (24,8%) como WARN com evidência citada"
+    - "Re-amostra 47 outcomes e abre issue P1 onde o agente divergiu do gabarito"
+    - "Sinaliza drift de -6pp num agente e recomenda rebaixamento ao promotion-officer"
   negative_examples:
-  - "Audita usando o mesmo modelo de produção (quebra a independência)."
-  - "Edita um artefato do projeto em vez de só ler e gerar o relatório."
-  - "Comita o relatório direto na main sem PR."
-  delivered_event: "`audit.report_committed` (PR aberto) com checks C1–C8, amostra e issues."
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Audita usando o mesmo modelo de produção (quebra a independência)"
+    - "Edita um artefato do projeto em vez de só ler e gerar o relatório"
+    - "Comita o relatório direto na main sem PR"
+  delivered_event: "audit.report_committed (PR aberto) com checks C1–C8, amostra e issues"
+
 guardians:
-- po-guardian
-- observability-guardian
-- artifact-architect
+  - observability-guardian
+
 tools:
-- "brain.query (read-only)"
-- "TelemetryProvider (traces read-only)"
-- "repo.read (manifest/specs/evals)"
-- "LLMProvider (modelo independente"
-- "não-Claude)"
-- "MessagingProvider (notifica founder+DRI)"
-- "LLMProvider"
+  - brain.query
+  - TelemetryProvider
+  - repo.read
+  - LLMProvider
+  - MessagingProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

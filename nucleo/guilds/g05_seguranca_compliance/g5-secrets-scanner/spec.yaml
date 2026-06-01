@@ -3,38 +3,35 @@ guild: G05-seguranca-compliance
 ledger: operating
 tier: L2
 ai_enabled: true
-model_role: guardian
+model_role: worker
 mode: SHADOW
-act_handler: guardian_check
+multi_tenant: false
+act_handler: secret_scan
+
 outcome_clause:
-  statement: 'Secrets Scanner entrega secrets_scanner.artifact verificável para: detectar
-    segredos (chaves, tokens, credenciais, conexões) expostos em código, configs,
-    specs e artefatos antes que vazem.'
+  statement: "Nenhum segredo entra no histórico de produção sem ser bloqueado ou, se já presente, sinalizado e rotacionado."
   positive_examples:
-  - Recebe input válido e publica secrets_scanner.artifact com status ready e evidência
-    rastreável.
-  - Roteia ou bloqueia trabalho com critério explícito quando risco alto exige revisão
-    humana.
-  - Registra artefato, rota e rationale sem depender de tenant, segmento ou fornecedor
-    hardcoded.
+    - "Bloqueia PR com chave de API hardcoded e sugere uso de cofre via C7."
+    - "Detecta token vazado em log e dispara rotação confirmada."
+    - "Varredura de histórico encontra credencial antiga e abre ticket de revogação."
   negative_examples:
-  - Declara sucesso sem artefato verificável ou sem status explícito.
-  - Executa ação de alto risco sem sinalizar revisão humana.
-  - Codifica regra específica de cliente, segmento, alíquota ou fornecedor no código
-    do agente.
-  delivered_event: g5-secrets-scanner.delivered == true and artifact_type == 'secrets_scanner.artifact'
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Deixa passar segredo de alta entropia em arquivo de config."
+    - "Bloqueia merge por falso-positivo sem caminho de allowlist auditável."
+    - "Marca segredo como remediado sem confirmar rotação/revogação."
+  delivered_event: "secrets.scan_completed emitido (zero segredos novos) ou secrets.finding_opened com plano de rotação."
+
 guardians:
-- po-guardian
-- security-privacy-guardian
-- observability-guardian
+  - security-privacy-guardian
+  - artifact-architect-guardian
+  - observability-guardian
+
 tools:
-- brain.query
-- brain.write
-- queue.dispatch
-- policy.check
-- LLMProvider
+  - repo.read
+  - brain.query
+  - brain.write
+  - secret.scan
+  - ci.run
+  - LLMProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

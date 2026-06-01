@@ -5,34 +5,34 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: guardian_check
+multi_tenant: true
+act_handler: fin_invoice_tax
+
 outcome_clause:
-  statement: 'Emissão Fiscal entrega invoicing.verdict verificável para: emitir os
-    documentos fiscais corretos para cada cobrança, conforme regime tributário BR
-    vigente, mantendo-os íntegros e rastreáveis no Brain'
+  statement: "Todo recebimento cobrável tem documento fiscal válido, autorizado e arquivado, sem pendência fiscal por falta de emissão, conforme o regime tributário BR vigente informado pelo tax-compliance."
   positive_examples:
-  - Documento emitido e autorizado dentro do prazo legal para 100% das cobranças aprovadas
-  - Retificação aplicada com versão anterior preservada e protocolo novo arquivado
-  - Documento ↔ cobrança ↔ recebimento conciliados sem lacuna
+    - "Documento emitido e autorizado dentro do prazo legal para 100% das cobranças aprovadas"
+    - "Retificação aplicada com versão anterior preservada e protocolo novo arquivado"
+    - "Documento <-> cobrança <-> recebimento conciliados sem lacuna"
   negative_examples:
-  - Emitiu com alíquota de regime errado por não consultar o tax-compliance
-  - Cobrança recebida sem documento fiscal correspondente
-  - Cancelou documento sem manter trilha da versão original
-  delivered_event: brain.write(invoice.issued) contém authorization_protocol válido
-    e link para XML/PDF imutável
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Emitiu com alíquota de regime errado por não consultar o tax-compliance"
+    - "Cobrança recebida sem documento fiscal correspondente"
+    - "Cancelou documento sem manter trilha da versão original"
+  delivered_event: "invoice.issued publicado no Brain com authorization_protocol válido e link para XML/PDF imutável"
+
 guardians:
-- po-guardian
-- observability-guardian
-- unit-economist
-- security-privacy-guardian
-- artifact-architect
+  - po-guardian
+  - security-privacy-guardian
+  - observability-guardian
+  - artifact-architect-guardian
+
 tools:
-- FiscalDocumentProvider (abstração de emissor NF)
-- ledger.read/write
-- brain.query/write
-- MessagingProvider (envia ao cliente via comms)
+  - FiscalDocumentProvider
+  - ledger.read
+  - ledger.write
+  - brain.query
+  - brain.write
+  - MessagingProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

@@ -1,5 +1,7 @@
-# Memória — g14-rag-knowledge-ops
+# MEMORY — g14-rag-knowledge-ops
 
-- Fonte canônica: `catalogo/G14-model-ai-ops.md`.
-- Handler compartilhado: `spec_driven`; não duplicar lógica por agente.
-- C8: variações de mercado/tenant/política devem permanecer em spec/casos/configuração.
+Formato: `§ [confidence:nivel] [YYYY-MM-DD] [run:id] fato acionável`
+
+§ [confidence:local] [2026-05-31] [run:seed] Recuperação tem de ser medida acima do limiar (precisão/recall) e artefato novo precisa ficar recuperável dentro do SLA de indexação.
+§ [confidence:local] [2026-05-31] [run:seed] Isolar índices por Tier (C5) — nunca misturar contexto de Tiers diferentes; expirar contexto obsoleto automaticamente.
+§ [confidence:local] [2026-05-31] [run:seed] DELIVERED = retrieval_index.version publicada com métricas; reindexar em consistência com o g00-brain-indexer.

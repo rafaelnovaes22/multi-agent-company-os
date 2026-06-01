@@ -5,32 +5,32 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: guardian_check
+multi_tenant: true
+act_handler: drift_check
+
 outcome_clause:
-  statement: 'Detector de Drift (Qualidade/Custo/Volume/Prompt) entrega drift-detector.verdict
-    verificável para: detectar degradação lenta de qualidade, custo, volume e prompt
-    dos agentes para acionar o rebaixamento automático de modo (C6/L6)'
+  statement: "Drift confirmado em qualquer dimensão (quality, cost, volume, prompt) gera sinal de rebaixamento de modo dentro do ciclo de auditoria, comparado contra a baseline de promoção."
   positive_examples:
-  - Detectou queda de 6pp de acurácia/mês num agente AUTONOMOUS e o rebaixou para
-    ASSISTED
-  - Flagou prompt_hash alterado sem recálculo de economia e bloqueou até reauditoria
-  - Reportou aumento de 18% de custo/mês de um agente ao margin-watch e à Governança
+    - "Detectou queda de 6pp de acurácia/mês num agente AUTONOMOUS e o rebaixou para ASSISTED."
+    - "Flagou prompt_hash alterado sem recálculo de economia e bloqueou até reauditoria."
+    - "Reportou aumento de 18% de custo/mês de um agente ao margin-watch e à Governança."
   negative_examples:
-  - Deixou um agente AUTONOMOUS degradar de qualidade sem rebaixar o modo
-  - Confundiu drift lento com anomalia pontual, duplicando o trabalho do anomaly-detector
-  - Não associou o drift à baseline de promoção, gerando sinal não acionável
-  delivered_event: drift.confirmed && mode.demotion_signaled
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Deixou um agente AUTONOMOUS degradar de qualidade sem rebaixar o modo."
+    - "Confundiu drift lento com anomalia pontual, duplicando o trabalho do anomaly-detector."
+    - "Não associou o drift à baseline de promoção, gerando sinal não acionável."
+  delivered_event: "drift.confirmed && mode.demotion_signaled"
+
 guardians:
-- po-guardian
-- observability-guardian
-- artifact-architect
+  - observability-guardian
+  - unit-economist-guardian
+  - security-privacy-guardian
+  - eval-engineer-guardian
+
 tools:
-- brain.query
-- brain.write
-- MessagingProvider
-- MLProvider
+  - brain.query
+  - brain.write
+  - MessagingProvider
+  - MLProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

@@ -1,42 +1,41 @@
 id: g5-fraud-abuse-detector
 guild: G05-seguranca-compliance
-ledger: operating
-tier: L2
-ai_enabled: true
-model_role: guardian
-mode: SHADOW
-act_handler: guardian_check
-outcome_clause:
-  statement: 'Fraud & Abuse Detector entrega fraud_abuse_detector.artifact verificável
-    para: detectar fraude e abuso transacional e account takeover em tempo quase-real,
-    protegendo a receita e a confiança na plataforma (sinais configuráveis quando
-    o mercado for definido).'
-  positive_examples:
-  - Recebe input válido e publica fraud_abuse_detector.artifact com status ready e
-    evidência rastreável.
-  - Roteia ou bloqueia trabalho com critério explícito quando risco alto exige revisão
-    humana.
-  - Registra artefato, rota e rationale sem depender de tenant, segmento ou fornecedor
-    hardcoded.
-  negative_examples:
-  - Declara sucesso sem artefato verificável ou sem status explícito.
-  - Executa ação de alto risco sem sinalizar revisão humana.
-  - Codifica regra específica de cliente, segmento, alíquota ou fornecedor no código
-    do agente.
-  delivered_event: g5-fraud-abuse-detector.delivered == true and artifact_type ==
-    'fraud_abuse_detector.artifact'
+ledger: billable          # livro Misto: proteção é OP, mas quando exposto como capacidade vendida entra como BL travado por C3
 economics:
   cost_model: cost_per_outcome
   max_ratio: 0.25
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+multi_tenant: false
+act_handler: fraud_score
+
+outcome_clause:
+  statement: "Transações e eventos de alto risco recebem decisão correta dentro do SLA, minimizando perda por fraude sem exceder o limite de fricção em usuário legítimo."
+  positive_examples:
+    - "Bloqueia tentativa de account takeover com login impossível e dispara step-up."
+    - "Contém anel de multi-conta abusando de freemium sem afetar usuários reais."
+    - "Decisão de risco entregue dentro do SLA inline e registrada com explicação."
+  negative_examples:
+    - "Permite transação claramente fraudulenta resultando em chargeback."
+    - "Bloqueia em massa usuários legítimos, derrubando a propensão a indicar."
+    - "Caso de fraude confirmado não é encaminhado a forense/regulatório."
+  delivered_event: "fraud.event_scored emitido com decisão; fraud.case_confirmed para casos escalados."
+
 guardians:
-- po-guardian
-- security-privacy-guardian
-- observability-guardian
+  - unit-economist-guardian
+  - security-privacy-guardian
+  - observability-guardian
+  - po-guardian
+
 tools:
-- brain.query
-- brain.write
-- queue.dispatch
-- policy.check
-- LLMProvider
+  - brain.query
+  - brain.write
+  - LLMProvider
+  - risk.score
+  - policy.enforce
+  - MessagingProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

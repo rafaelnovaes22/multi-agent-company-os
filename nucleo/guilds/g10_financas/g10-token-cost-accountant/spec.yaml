@@ -5,6 +5,7 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: AUTONOMOUS
 act_handler: token_cost_accountant
 outcome_clause:
   statement: 'Rateio de Custo de Tokens & Verba de Freemium entrega token-cost-accountant.artifact

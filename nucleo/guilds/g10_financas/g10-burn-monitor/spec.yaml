@@ -5,6 +5,7 @@ tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: AUTONOMOUS
 act_handler: burn_monitor
 outcome_clause:
   statement: 'Runway & Burn vs. Plano entrega burn-monitor.verdict verificável para:

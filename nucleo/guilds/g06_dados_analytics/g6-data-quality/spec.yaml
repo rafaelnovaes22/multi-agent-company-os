@@ -5,6 +5,7 @@ tier: L2
 ai_enabled: true
 model_role: guardian
 mode: SHADOW
+target_mode: AUTONOMOUS
 multi_tenant: true
 act_handler: dataquality_suite
 

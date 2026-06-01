@@ -5,6 +5,7 @@ tier: L1
 ai_enabled: true
 model_role: guardian
 mode: SHADOW
+target_mode: ASSISTED
 multi_tenant: false
 act_handler: c3_cost_ratio
 

@@ -5,6 +5,7 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: AUTONOMOUS
 act_handler: painel_dono
 outcome_clause:
   statement: 'Construtor de Dashboards do Operator Console entrega dashboard.operator_console

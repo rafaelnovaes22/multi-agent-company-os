@@ -5,6 +5,7 @@ tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: ASSISTED
 act_handler: spec_driven
 outcome_clause:
   statement: "cada proposta sai com escopo, outcome verificável e preço de 3 camadas vindos do pricing-engine, aprovada no gate de taste."

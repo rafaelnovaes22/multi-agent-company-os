@@ -5,6 +5,7 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: ASSISTED
 act_handler: spec_driven
 outcome_clause:
   statement: 'Respondedor de Incidentes entrega incident_responder.artifact verificável

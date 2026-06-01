@@ -5,6 +5,7 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: ASSISTED
 act_handler: atendimento
 outcome_clause:
   statement: 'Resolvedor de Nível 1 entrega ticket.resolution verificável para: resolver

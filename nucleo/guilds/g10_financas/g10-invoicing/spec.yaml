@@ -5,6 +5,7 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: ASSISTED
 multi_tenant: true
 act_handler: fin_invoice_tax
 

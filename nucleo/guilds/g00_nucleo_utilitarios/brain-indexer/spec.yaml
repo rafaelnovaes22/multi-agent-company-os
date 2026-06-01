@@ -5,6 +5,7 @@ tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: AUTONOMOUS
 multi_tenant: false
 act_handler: brain_reconcile_outcomes_traces
 

@@ -6,6 +6,7 @@ ai_enabled: true
 model_role: guardian       # supervisores/guardians usam modelo forte (C7)
 act_handler: outcome_clause_validator  # skill executada no no act (ver kernel/skills.py)
 mode: SHADOW               # C4 - nasce sempre aqui
+target_mode: ASSISTED
 
 # C2 - a propria cláusula de outcome DESTE agente (ele valida a cláusula dos outros)
 outcome_clause:

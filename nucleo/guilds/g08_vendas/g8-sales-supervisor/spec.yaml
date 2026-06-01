@@ -5,6 +5,7 @@ tier: L0
 ai_enabled: true
 model_role: supervisor
 mode: SHADOW
+target_mode: ASSISTED
 act_handler: supervisor_route
 outcome_clause:
   statement: "cada deal entra e avança no funil com estágio, owner e próxima ação atribuídos em até 1 ciclo de orquestração, sem deals órfãos."

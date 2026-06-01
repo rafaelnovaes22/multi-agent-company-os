@@ -5,6 +5,7 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW               # C4 - nasce aqui; so qualifica de verdade apos gate
+target_mode: AUTONOMOUS
 act_handler: lead_qualifier  # skill executada no no act (ver kernel/skills.py)
 
 # C2 - cláusula de outcome

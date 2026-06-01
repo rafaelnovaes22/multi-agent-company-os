@@ -5,6 +5,7 @@ tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: AUTONOMOUS
 act_handler: revenue_reporter
 outcome_clause:
   statement: "cada relatório de receita reconcilia com o audit-log de billing dentro de ≤ 1% de desvio e é publicado no prazo do ciclo."

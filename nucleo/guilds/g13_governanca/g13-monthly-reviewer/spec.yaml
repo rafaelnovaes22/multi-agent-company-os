@@ -5,6 +5,7 @@ tier: L0
 ai_enabled: true
 model_role: guardian
 mode: SHADOW
+target_mode: AUTONOMOUS
 multi_tenant: false
 act_handler: audit_drift_score
 

@@ -5,6 +5,7 @@ tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: ASSISTED
 act_handler: guardian_check
 outcome_clause:
   statement: "nenhuma spec passa do gate técnico com tier ausente, herança de contexto quebrada ou tool apontando para SDK de fornecedor em vez de interface C7."

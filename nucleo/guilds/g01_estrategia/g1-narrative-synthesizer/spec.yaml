@@ -5,6 +5,7 @@ tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: ASSISTED
 act_handler: spec_driven
 outcome_clause:
   statement: 'Sintetizador de Narrativa & Founder Brand entrega narrative-synthesizer.artifact

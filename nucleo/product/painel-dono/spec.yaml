@@ -6,6 +6,7 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: AUTONOMOUS
 multi_tenant: true
 reconciled_with: g6-dashboard-builder
 act_handler: painel_dono

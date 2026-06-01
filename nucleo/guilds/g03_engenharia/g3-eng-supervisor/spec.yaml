@@ -5,6 +5,7 @@ tier: L1
 ai_enabled: true
 model_role: supervisor
 mode: SHADOW
+target_mode: ASSISTED
 act_handler: supervisor_route
 outcome_clause:
   statement: 'Supervisor de Engenharia entrega eng_supervisor.artifact verificável

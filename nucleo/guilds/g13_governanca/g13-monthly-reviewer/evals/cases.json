@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g13-monthly-reviewer-01",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 01 risco=low status=ready",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g13-monthly-reviewer",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 1,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g13-monthly-reviewer",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-02",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 02 risco=medium status=ready",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g13-monthly-reviewer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 2,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g13-monthly-reviewer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-03",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 03 risco=high status=ready",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 3,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-04",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 04 risco=critical status=ready",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g13-monthly-reviewer",
+    "capabilities": [
+      "config_driven",
+      "policy_check"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 4,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g13-monthly-reviewer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-05",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 05 risco=low status=blocked",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g13-monthly-reviewer",
+    "capabilities": [
+      "policy_check",
+      "human_escalation"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 5,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g13-monthly-reviewer",
+      "capabilities_any": [
+        "policy_check"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-06",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 06 risco=medium status=blocked",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g13-monthly-reviewer",
+    "capabilities": [
+      "human_escalation",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 6,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g13-monthly-reviewer",
+      "capabilities_any": [
+        "human_escalation"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-07",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 07 risco=high status=ready",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 7,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-08",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 08 risco=critical status=ready",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g13-monthly-reviewer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 8,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g13-monthly-reviewer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-09",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 09 risco=low status=ready",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g13-monthly-reviewer",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 9,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g13-monthly-reviewer",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-10",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 10 risco=medium status=blocked",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g13-monthly-reviewer",
+    "capabilities": [
+      "config_driven",
+      "policy_check"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 10,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g13-monthly-reviewer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-11",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 11 risco=high status=ready",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "policy_check",
+      "human_escalation"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 11,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "policy_check"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-12",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 12 risco=critical status=blocked",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g13-monthly-reviewer",
+    "capabilities": [
+      "human_escalation",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 12,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g13-monthly-reviewer",
+      "capabilities_any": [
+        "human_escalation"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-13",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 13 risco=low status=ready",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g13-monthly-reviewer",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 13,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g13-monthly-reviewer",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-14",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 14 risco=medium status=ready",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g13-monthly-reviewer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 14,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g13-monthly-reviewer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-15",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 15 risco=high status=blocked",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "high",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 15,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "blocked",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-16",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 16 risco=critical status=ready",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g13-monthly-reviewer",
+    "capabilities": [
+      "config_driven",
+      "policy_check"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 16,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g13-monthly-reviewer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-17",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 17 risco=low status=ready",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g13-monthly-reviewer",
+    "capabilities": [
+      "policy_check",
+      "human_escalation"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 17,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g13-monthly-reviewer",
+      "capabilities_any": [
+        "policy_check"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-18",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 18 risco=medium status=blocked",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g13-monthly-reviewer",
+    "capabilities": [
+      "human_escalation",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 18,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g13-monthly-reviewer",
+      "capabilities_any": [
+        "human_escalation"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-19",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 19 risco=high status=ready",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 19,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-20",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 20 risco=critical status=blocked",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g13-monthly-reviewer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 20,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g13-monthly-reviewer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-21",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 21 risco=low status=ready",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 21,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-22",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 22 risco=medium status=ready",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g13-monthly-reviewer",
+    "capabilities": [
+      "config_driven",
+      "policy_check"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 22,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g13-monthly-reviewer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-23",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 23 risco=high status=ready",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "policy_check",
+      "human_escalation"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 23,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "policy_check"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-24",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 24 risco=critical status=blocked",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g13-monthly-reviewer",
+    "capabilities": [
+      "human_escalation",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 24,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g13-monthly-reviewer",
+      "capabilities_any": [
+        "human_escalation"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-25",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 25 risco=low status=blocked",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g13-monthly-reviewer",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 25,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g13-monthly-reviewer",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-26",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 26 risco=medium status=ready",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g13-monthly-reviewer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 26,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g13-monthly-reviewer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-27",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 27 risco=high status=ready",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 27,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-28",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 28 risco=critical status=ready",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g13-monthly-reviewer",
+    "capabilities": [
+      "config_driven",
+      "policy_check"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 28,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g13-monthly-reviewer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-29",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 29 risco=low status=ready",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g13-monthly-reviewer",
+    "capabilities": [
+      "policy_check",
+      "human_escalation"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 29,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g13-monthly-reviewer",
+      "capabilities_any": [
+        "policy_check"
+      ]
+    }
+  },
+  {
+    "id": "g13-monthly-reviewer-30",
+    "desc": "Reviewer Independente Mensal (DeepAgent): cenário 30 risco=medium status=blocked",
+    "artifact_type": "monthly-reviewer.verdict",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g13-monthly-reviewer",
+    "capabilities": [
+      "human_escalation",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 30,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-monthly-reviewer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "monthly-reviewer.verdict",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g13-monthly-reviewer",
+      "capabilities_any": [
+        "human_escalation"
+      ]
+    }
+  }
+]

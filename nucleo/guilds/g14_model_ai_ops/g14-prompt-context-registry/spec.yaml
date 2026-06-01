@@ -1,0 +1,31 @@
+id: g14-prompt-context-registry
+guild: G14-model-ai-ops
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: "todo prompt/contexto em produção é versionado, com hash auditável e economia recalculada a cada mudança."
+  positive_examples:
+  - "Mudança de prompt dispara recalc de C3 automaticamente."
+  - "A/B promove o prompt vencedor com evidência registrada."
+  - "Cache L0 reaproveitado entre runs (redução de tokens medida)."
+  negative_examples:
+  - "Prompt alterado direto em produção sem versão nem recalc."
+  - "Prompt L0 lendo contexto Tier 2/3 (quebra C5)."
+  - "Registry de Prompts & Contexto deixa de registrar evidência requerida no cenário 3."
+  delivered_event: "`prompt_version.registered == true` com `prompt_hash`."
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+tools:
+- "prompt.registry"
+- "brain.query/write"
+- "LLMProvider"
+soul_ref: soul.md
+memory_ref: memory.md

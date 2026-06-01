@@ -1,0 +1,31 @@
+id: g14-aiops-supervisor
+guild: G14-model-ai-ops
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: supervisor
+mode: SHADOW
+act_handler: supervisor_route
+outcome_clause:
+  statement: "o motor de inteligência opera dentro de custo/qualidade/latência alvo, com modelos e prompts versionados e auditáveis."
+  positive_examples:
+  - "Novo modelo de provider é avaliado e roteado (ou rejeitado) em ≤72h com evidência."
+  - "Regressão de qualidade pós-upgrade é detectada e revertida antes de afetar produção."
+  - "Supervisor de Model & AI-Ops emite evidência auditável para o cenário 3."
+  negative_examples:
+  - "Upgrade de modelo entra em produção sem benchmark."
+  - "Custo de inferência sobe sem dono nem alerta."
+  - "Supervisor de Model & AI-Ops deixa de registrar evidência requerida no cenário 3."
+  delivered_event: "`engine_health_report.published == true` no ciclo."
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+tools:
+- "brain.query/write"
+- "LLMProvider"
+- "model.registry"
+soul_ref: soul.md
+memory_ref: memory.md

@@ -1,0 +1,33 @@
+id: g8-revenue-reporter
+guild: G08-vendas-receita
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: "cada relatório de receita reconcilia com o audit-log de billing dentro de ≤ 1% de desvio e é publicado no prazo do ciclo."
+  positive_examples:
+  - "NRR mensal publicado reconciliado com audit-log de billing."
+  - "Drift de receita detectado e alertado com causa provável."
+  - "Narrativa de receita gerada para build-in-public sem PII."
+  negative_examples:
+  - "Relatório com desvio > 1% vs audit-log não sinalizado."
+  - "NRR reportado sem decompor expansão vs contração."
+  - "Métrica publicada com dado sensível de cliente exposto."
+  delivered_event: "evento `revenue.report_published` é emitido com `period`, `mrr`, `nrr`, `reconciliation_delta` no Brain."
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+tools:
+- "brain.query"
+- "crm.read"
+- "auditLog.read"
+- "analytics.query (provider-agnóstico)"
+- "LLMProvider"
+soul_ref: soul.md
+memory_ref: memory.md

@@ -1,0 +1,34 @@
+id: g13-governance-supervisor
+guild: G13-governanca
+ledger: operating
+tier: L0
+ai_enabled: true
+model_role: supervisor
+mode: SHADOW
+act_handler: supervisor_route
+outcome_clause:
+  statement: "todo pedido de gate recebe veredito agregado e auditável dos Guardians aplicáveis dentro do SLA, sem promover nada que tenha veto aberto."
+  positive_examples:
+  - "Aciona os 5 Guardians corretos para um agente BL→AUTONOMOUS e bloqueia por veto do security-privacy."
+  - "Deixa um agente OP rodar em SHADOW sem acionar gate algum (zero fricção onde não há risco)."
+  - "Escala ao founder uma promoção de caminho-crítico em vez de auto-aprovar."
+  negative_examples:
+  - "Promove com veto do unit-economist ainda aberto."
+  - "Aciona todos os Guardians para um experimento em SHADOW (governança vira gargalo)."
+  - "Deixa um pedido de gate na fila além do SLA sem escalar."
+  delivered_event: "`governance.verdict_emitted` com `all_required_guardians_resolved == true`."
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+tools:
+- "brain.query"
+- "brain.emit"
+- "governance.gate_orchestrate"
+- "MessagingProvider (notifica DRI/founder)"
+- "constitution.read"
+- "LLMProvider"
+soul_ref: soul.md
+memory_ref: memory.md

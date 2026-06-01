@@ -1,0 +1,36 @@
+id: g8-proposal-author
+guild: G08-vendas-receita
+ledger: billable
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: "cada proposta sai com escopo, outcome verificável e preço de 3 camadas vindos do pricing-engine, aprovada no gate de taste."
+  positive_examples:
+  - "Proposta gerada com as 3 camadas e cláusula de outcome mensurável."
+  - "Objeção de preço resolvida com nova versão rastreável da proposta."
+  - "Proposta reprovada no gate lovable é refeita antes do envio."
+  negative_examples:
+  - "Proposta com preço inventado fora do pricing-engine."
+  - "Proposta enviada sem cláusula de outcome verificável."
+  - "Termos divergentes do template jurídico aprovado."
+  delivered_event: "evento `proposal.issued` é emitido com `deal_id`, `version`, `pricing_ref`, `outcome_clause` no Brain."
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+tools:
+- "brain.query"
+- "crm.read"
+- "crm.write"
+- "docgen.render"
+- "pricing.read"
+- "MessagingProvider"
+- "LLMProvider"
+soul_ref: soul.md
+memory_ref: memory.md

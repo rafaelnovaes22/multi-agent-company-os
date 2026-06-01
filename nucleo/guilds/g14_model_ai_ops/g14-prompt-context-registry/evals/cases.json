@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g14-prompt-context-registry-01",
+    "desc": "Registry de Prompts & Contexto: cenário 01 risco=low status=ready",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g14-prompt-context-registry",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 1,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g14-prompt-context-registry",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-02",
+    "desc": "Registry de Prompts & Contexto: cenário 02 risco=medium status=ready",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g14-prompt-context-registry",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 2,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g14-prompt-context-registry",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-03",
+    "desc": "Registry de Prompts & Contexto: cenário 03 risco=high status=ready",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 3,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-04",
+    "desc": "Registry de Prompts & Contexto: cenário 04 risco=critical status=ready",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g14-prompt-context-registry",
+    "capabilities": [
+      "config_driven",
+      "policy_check"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 4,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g14-prompt-context-registry",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-05",
+    "desc": "Registry de Prompts & Contexto: cenário 05 risco=low status=blocked",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g14-prompt-context-registry",
+    "capabilities": [
+      "policy_check",
+      "human_escalation"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 5,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g14-prompt-context-registry",
+      "capabilities_any": [
+        "policy_check"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-06",
+    "desc": "Registry de Prompts & Contexto: cenário 06 risco=medium status=ready",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g14-prompt-context-registry",
+    "capabilities": [
+      "human_escalation",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 6,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g14-prompt-context-registry",
+      "capabilities_any": [
+        "human_escalation"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-07",
+    "desc": "Registry de Prompts & Contexto: cenário 07 risco=high status=ready",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 7,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-08",
+    "desc": "Registry de Prompts & Contexto: cenário 08 risco=critical status=ready",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g14-prompt-context-registry",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 8,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g14-prompt-context-registry",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-09",
+    "desc": "Registry de Prompts & Contexto: cenário 09 risco=low status=ready",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g14-prompt-context-registry",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 9,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g14-prompt-context-registry",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-10",
+    "desc": "Registry de Prompts & Contexto: cenário 10 risco=medium status=blocked",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g14-prompt-context-registry",
+    "capabilities": [
+      "config_driven",
+      "policy_check"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 10,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g14-prompt-context-registry",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-11",
+    "desc": "Registry de Prompts & Contexto: cenário 11 risco=high status=ready",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "policy_check",
+      "human_escalation"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 11,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "policy_check"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-12",
+    "desc": "Registry de Prompts & Contexto: cenário 12 risco=critical status=ready",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g14-prompt-context-registry",
+    "capabilities": [
+      "human_escalation",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 12,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g14-prompt-context-registry",
+      "capabilities_any": [
+        "human_escalation"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-13",
+    "desc": "Registry de Prompts & Contexto: cenário 13 risco=low status=ready",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g14-prompt-context-registry",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 13,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g14-prompt-context-registry",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-14",
+    "desc": "Registry de Prompts & Contexto: cenário 14 risco=medium status=ready",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g14-prompt-context-registry",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 14,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g14-prompt-context-registry",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-15",
+    "desc": "Registry de Prompts & Contexto: cenário 15 risco=high status=blocked",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "high",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 15,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "blocked",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-16",
+    "desc": "Registry de Prompts & Contexto: cenário 16 risco=critical status=ready",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g14-prompt-context-registry",
+    "capabilities": [
+      "config_driven",
+      "policy_check"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 16,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g14-prompt-context-registry",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-17",
+    "desc": "Registry de Prompts & Contexto: cenário 17 risco=low status=ready",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g14-prompt-context-registry",
+    "capabilities": [
+      "policy_check",
+      "human_escalation"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 17,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g14-prompt-context-registry",
+      "capabilities_any": [
+        "policy_check"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-18",
+    "desc": "Registry de Prompts & Contexto: cenário 18 risco=medium status=ready",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g14-prompt-context-registry",
+    "capabilities": [
+      "human_escalation",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 18,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g14-prompt-context-registry",
+      "capabilities_any": [
+        "human_escalation"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-19",
+    "desc": "Registry de Prompts & Contexto: cenário 19 risco=high status=ready",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 19,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-20",
+    "desc": "Registry de Prompts & Contexto: cenário 20 risco=critical status=blocked",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g14-prompt-context-registry",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 20,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g14-prompt-context-registry",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-21",
+    "desc": "Registry de Prompts & Contexto: cenário 21 risco=low status=ready",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g14-prompt-context-registry",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 21,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g14-prompt-context-registry",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-22",
+    "desc": "Registry de Prompts & Contexto: cenário 22 risco=medium status=ready",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g14-prompt-context-registry",
+    "capabilities": [
+      "config_driven",
+      "policy_check"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 22,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g14-prompt-context-registry",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-23",
+    "desc": "Registry de Prompts & Contexto: cenário 23 risco=high status=ready",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "policy_check",
+      "human_escalation"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 23,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "policy_check"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-24",
+    "desc": "Registry de Prompts & Contexto: cenário 24 risco=critical status=ready",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g14-prompt-context-registry",
+    "capabilities": [
+      "human_escalation",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 24,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g14-prompt-context-registry",
+      "capabilities_any": [
+        "human_escalation"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-25",
+    "desc": "Registry de Prompts & Contexto: cenário 25 risco=low status=blocked",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g14-prompt-context-registry",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 25,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g14-prompt-context-registry",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-26",
+    "desc": "Registry de Prompts & Contexto: cenário 26 risco=medium status=ready",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g14-prompt-context-registry",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 26,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g14-prompt-context-registry",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-27",
+    "desc": "Registry de Prompts & Contexto: cenário 27 risco=high status=ready",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 27,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-28",
+    "desc": "Registry de Prompts & Contexto: cenário 28 risco=critical status=ready",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g14-prompt-context-registry",
+    "capabilities": [
+      "config_driven",
+      "policy_check"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 28,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g14-prompt-context-registry",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-29",
+    "desc": "Registry de Prompts & Contexto: cenário 29 risco=low status=ready",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g14-prompt-context-registry",
+    "capabilities": [
+      "policy_check",
+      "human_escalation"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 29,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g14-prompt-context-registry",
+      "capabilities_any": [
+        "policy_check"
+      ]
+    }
+  },
+  {
+    "id": "g14-prompt-context-registry-30",
+    "desc": "Registry de Prompts & Contexto: cenário 30 risco=medium status=blocked",
+    "artifact_type": "prompt-context-registry.artifact",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g14-prompt-context-registry",
+    "capabilities": [
+      "human_escalation",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 30,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g14-prompt-context-registry",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prompt-context-registry.artifact",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g14-prompt-context-registry",
+      "capabilities_any": [
+        "human_escalation"
+      ]
+    }
+  }
+]

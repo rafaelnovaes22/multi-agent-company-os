@@ -1,0 +1,34 @@
+id: g13-security-privacy-guardian
+guild: G13-governanca
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: "nenhum agente vira AUTONOMOUS sem assinatura de segurança+LGPD com todos os P0/P1 mitigados e zero PII crua em telemetria/memória."
+  positive_examples:
+  - "Recusa assinar AUTONOMOUS para um agente com um achado P0 do AgentShield aberto."
+  - "Assina um agente com escopo de tools mínimo, sem PII crua e base legal LGPD clara."
+  - "Revoga a assinatura e força rebaixamento após um incidente de injection."
+  negative_examples:
+  - "Assina AUTONOMOUS com um P1 de secrets ainda pendente."
+  - "Aprova agente que loga CPF cru nos eventos."
+  - "Libera autonomia com escopo de tools amplo demais para a tarefa."
+  delivered_event: "`autonomous.signed` (ou `autonomous.refused`) com lista de riscos e status LGPD."
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- "repo.read"
+- "brain.query"
+- "security.scan (via AgentShield)"
+- "constitution.read"
+- "LLMProvider"
+soul_ref: soul.md
+memory_ref: memory.md

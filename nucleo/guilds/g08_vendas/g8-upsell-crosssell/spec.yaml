@@ -1,0 +1,35 @@
+id: g8-upsell-crosssell
+guild: G08-vendas-receita
+ledger: billable
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: "cada conta com gatilho de expansão recebe uma oferta no momento de valor, sustentando NDR > 100% sem violar C3."
+  positive_examples:
+  - "Conta que atinge limite recebe oferta de top-up no momento certo."
+  - "Upgrade de assinatura fechado com margem C3 mantida."
+  - "Risco de contração detectado e retenção acionada antes da renovação."
+  negative_examples:
+  - "Oferta de expansão sem sinal de uso que a justifique."
+  - "Expansão vendida com margem abaixo de C3."
+  - "Contração de conta não detectada até a renovação."
+  delivered_event: "evento `expansion.opportunity_actioned` é emitido com `account_id`, `expansion_type`, `usage_signal`, `offer_ref` no Brain."
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+tools:
+- "brain.query"
+- "crm.read"
+- "crm.write"
+- "pricing.read"
+- "MessagingProvider"
+- "LLMProvider"
+soul_ref: soul.md
+memory_ref: memory.md

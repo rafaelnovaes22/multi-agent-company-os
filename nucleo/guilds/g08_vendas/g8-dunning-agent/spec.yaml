@@ -1,0 +1,36 @@
+id: g8-dunning-agent
+guild: G08-vendas-receita
+ledger: billable
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: "cada fatura em atraso passa por uma régua de recuperação completa e auditável antes de qualquer escalonamento humano."
+  positive_examples:
+  - "Pagamento falho re-capturado automaticamente sem contato com o cliente."
+  - "Régua amigável recupera fatura preservando relacionamento."
+  - "Caso acima do limiar escalado com dossiê completo ao humano/jurídico."
+  negative_examples:
+  - "Conta enviada a cobrança jurídica sem régua prévia executada."
+  - "Mensagem de cobrança fora do tom de marca ou ferindo LGPD."
+  - "Renegociação concedida fora da política aprovada."
+  delivered_event: "evento `dunning.cycle_completed` é emitido com `invoice_id`, `attempts[]`, `recovery_status` no Brain."
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+tools:
+- "brain.query"
+- "crm.read"
+- "crm.write"
+- "PaymentProvider"
+- "MessagingProvider"
+- "policy.read"
+- "LLMProvider"
+soul_ref: soul.md
+memory_ref: memory.md

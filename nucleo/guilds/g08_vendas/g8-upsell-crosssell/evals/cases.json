@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g8-upsell-crosssell-01",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 01 risco=low status=ready",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g8-upsell-crosssell",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 1,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g8-upsell-crosssell",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-02",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 02 risco=medium status=ready",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g8-upsell-crosssell",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 2,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g8-upsell-crosssell",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-03",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 03 risco=high status=ready",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 3,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-04",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 04 risco=critical status=ready",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g8-upsell-crosssell",
+    "capabilities": [
+      "config_driven",
+      "policy_check"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 4,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g8-upsell-crosssell",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-05",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 05 risco=low status=blocked",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g8-upsell-crosssell",
+    "capabilities": [
+      "policy_check",
+      "human_escalation"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 5,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g8-upsell-crosssell",
+      "capabilities_any": [
+        "policy_check"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-06",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 06 risco=medium status=ready",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g8-upsell-crosssell",
+    "capabilities": [
+      "human_escalation",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 6,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g8-upsell-crosssell",
+      "capabilities_any": [
+        "human_escalation"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-07",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 07 risco=high status=ready",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 7,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-08",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 08 risco=critical status=ready",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g8-upsell-crosssell",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 8,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g8-upsell-crosssell",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-09",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 09 risco=low status=ready",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g8-upsell-crosssell",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 9,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g8-upsell-crosssell",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-10",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 10 risco=medium status=blocked",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g8-upsell-crosssell",
+    "capabilities": [
+      "config_driven",
+      "policy_check"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 10,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g8-upsell-crosssell",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-11",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 11 risco=high status=ready",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "policy_check",
+      "human_escalation"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 11,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "policy_check"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-12",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 12 risco=critical status=ready",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g8-upsell-crosssell",
+    "capabilities": [
+      "human_escalation",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 12,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g8-upsell-crosssell",
+      "capabilities_any": [
+        "human_escalation"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-13",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 13 risco=low status=ready",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g8-upsell-crosssell",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 13,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g8-upsell-crosssell",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-14",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 14 risco=medium status=ready",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g8-upsell-crosssell",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 14,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g8-upsell-crosssell",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-15",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 15 risco=high status=blocked",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "high",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 15,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "blocked",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-16",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 16 risco=critical status=ready",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g8-upsell-crosssell",
+    "capabilities": [
+      "config_driven",
+      "policy_check"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 16,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g8-upsell-crosssell",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-17",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 17 risco=low status=ready",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g8-upsell-crosssell",
+    "capabilities": [
+      "policy_check",
+      "human_escalation"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 17,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g8-upsell-crosssell",
+      "capabilities_any": [
+        "policy_check"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-18",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 18 risco=medium status=ready",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g8-upsell-crosssell",
+    "capabilities": [
+      "human_escalation",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 18,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g8-upsell-crosssell",
+      "capabilities_any": [
+        "human_escalation"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-19",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 19 risco=high status=ready",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 19,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-20",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 20 risco=critical status=blocked",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g8-upsell-crosssell",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 20,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g8-upsell-crosssell",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-21",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 21 risco=low status=ready",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g8-upsell-crosssell",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 21,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g8-upsell-crosssell",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-22",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 22 risco=medium status=ready",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g8-upsell-crosssell",
+    "capabilities": [
+      "config_driven",
+      "policy_check"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 22,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g8-upsell-crosssell",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-23",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 23 risco=high status=ready",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "policy_check",
+      "human_escalation"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 23,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "policy_check"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-24",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 24 risco=critical status=ready",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g8-upsell-crosssell",
+    "capabilities": [
+      "human_escalation",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 24,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g8-upsell-crosssell",
+      "capabilities_any": [
+        "human_escalation"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-25",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 25 risco=low status=blocked",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g8-upsell-crosssell",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 25,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g8-upsell-crosssell",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-26",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 26 risco=medium status=ready",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g8-upsell-crosssell",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 26,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g8-upsell-crosssell",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-27",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 27 risco=high status=ready",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 27,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-28",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 28 risco=critical status=ready",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g8-upsell-crosssell",
+    "capabilities": [
+      "config_driven",
+      "policy_check"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 28,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g8-upsell-crosssell",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-29",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 29 risco=low status=ready",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g8-upsell-crosssell",
+    "capabilities": [
+      "policy_check",
+      "human_escalation"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 29,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g8-upsell-crosssell",
+      "capabilities_any": [
+        "policy_check"
+      ]
+    }
+  },
+  {
+    "id": "g8-upsell-crosssell-30",
+    "desc": "Expansão (Upsell & Cross-sell): cenário 30 risco=medium status=blocked",
+    "artifact_type": "upsell-crosssell.artifact",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g8-upsell-crosssell",
+    "capabilities": [
+      "human_escalation",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 30,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g8-upsell-crosssell",
+      "handler_kind": "spec_driven",
+      "artifact_type": "upsell-crosssell.artifact",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g8-upsell-crosssell",
+      "capabilities_any": [
+        "human_escalation"
+      ]
+    }
+  }
+]

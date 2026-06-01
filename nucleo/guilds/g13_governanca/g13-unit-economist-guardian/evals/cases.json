@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g13-unit-economist-guardian-01",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 01 risco=low status=ready",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g13-unit-economist-guardian",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 1,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g13-unit-economist-guardian",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-02",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 02 risco=medium status=ready",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g13-unit-economist-guardian",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 2,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g13-unit-economist-guardian",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-03",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 03 risco=high status=ready",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 3,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-04",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 04 risco=critical status=ready",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g13-unit-economist-guardian",
+    "capabilities": [
+      "config_driven",
+      "policy_check"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 4,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g13-unit-economist-guardian",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-05",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 05 risco=low status=blocked",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g13-unit-economist-guardian",
+    "capabilities": [
+      "policy_check",
+      "human_escalation"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 5,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g13-unit-economist-guardian",
+      "capabilities_any": [
+        "policy_check"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-06",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 06 risco=medium status=blocked",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g13-unit-economist-guardian",
+    "capabilities": [
+      "human_escalation",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 6,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g13-unit-economist-guardian",
+      "capabilities_any": [
+        "human_escalation"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-07",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 07 risco=high status=ready",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 7,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-08",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 08 risco=critical status=ready",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g13-unit-economist-guardian",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 8,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g13-unit-economist-guardian",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-09",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 09 risco=low status=ready",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g13-unit-economist-guardian",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 9,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g13-unit-economist-guardian",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-10",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 10 risco=medium status=blocked",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g13-unit-economist-guardian",
+    "capabilities": [
+      "config_driven",
+      "policy_check"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 10,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g13-unit-economist-guardian",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-11",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 11 risco=high status=ready",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "policy_check",
+      "human_escalation"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 11,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "policy_check"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-12",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 12 risco=critical status=blocked",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g13-unit-economist-guardian",
+    "capabilities": [
+      "human_escalation",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 12,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g13-unit-economist-guardian",
+      "capabilities_any": [
+        "human_escalation"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-13",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 13 risco=low status=ready",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g13-unit-economist-guardian",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 13,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g13-unit-economist-guardian",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-14",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 14 risco=medium status=ready",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g13-unit-economist-guardian",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 14,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g13-unit-economist-guardian",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-15",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 15 risco=high status=blocked",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "high",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 15,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "blocked",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-16",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 16 risco=critical status=ready",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g13-unit-economist-guardian",
+    "capabilities": [
+      "config_driven",
+      "policy_check"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 16,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g13-unit-economist-guardian",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-17",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 17 risco=low status=ready",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g13-unit-economist-guardian",
+    "capabilities": [
+      "policy_check",
+      "human_escalation"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 17,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g13-unit-economist-guardian",
+      "capabilities_any": [
+        "policy_check"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-18",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 18 risco=medium status=blocked",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g13-unit-economist-guardian",
+    "capabilities": [
+      "human_escalation",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 18,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g13-unit-economist-guardian",
+      "capabilities_any": [
+        "human_escalation"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-19",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 19 risco=high status=ready",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 19,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-20",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 20 risco=critical status=blocked",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g13-unit-economist-guardian",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 20,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g13-unit-economist-guardian",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-21",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 21 risco=low status=ready",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 21,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-22",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 22 risco=medium status=ready",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g13-unit-economist-guardian",
+    "capabilities": [
+      "config_driven",
+      "policy_check"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 22,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g13-unit-economist-guardian",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-23",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 23 risco=high status=ready",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "policy_check",
+      "human_escalation"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 23,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "policy_check"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-24",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 24 risco=critical status=blocked",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g13-unit-economist-guardian",
+    "capabilities": [
+      "human_escalation",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 24,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g13-unit-economist-guardian",
+      "capabilities_any": [
+        "human_escalation"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-25",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 25 risco=low status=blocked",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g13-unit-economist-guardian",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 25,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g13-unit-economist-guardian",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-26",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 26 risco=medium status=ready",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g13-unit-economist-guardian",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 26,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g13-unit-economist-guardian",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-27",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 27 risco=high status=ready",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 27,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-28",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 28 risco=critical status=ready",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g13-unit-economist-guardian",
+    "capabilities": [
+      "config_driven",
+      "policy_check"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 28,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g13-unit-economist-guardian",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-29",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 29 risco=low status=ready",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g13-unit-economist-guardian",
+    "capabilities": [
+      "policy_check",
+      "human_escalation"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 29,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g13-unit-economist-guardian",
+      "capabilities_any": [
+        "policy_check"
+      ]
+    }
+  },
+  {
+    "id": "g13-unit-economist-guardian-30",
+    "desc": "Guardian de Unit Economics no Gate (C3): cenário 30 risco=medium status=blocked",
+    "artifact_type": "unit-economist-guardian.verdict",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g13-unit-economist-guardian",
+    "capabilities": [
+      "human_escalation",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 30,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-unit-economist-guardian",
+      "handler_kind": "guardian_check",
+      "artifact_type": "unit-economist-guardian.verdict",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g13-unit-economist-guardian",
+      "capabilities_any": [
+        "human_escalation"
+      ]
+    }
+  }
+]

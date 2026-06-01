@@ -1,0 +1,33 @@
+id: g13-artifact-architect
+guild: G13-governanca
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: "nenhuma spec passa do gate técnico com tier ausente, herança de contexto quebrada ou tool apontando para SDK de fornecedor em vez de interface C7."
+  positive_examples:
+  - "Reprova uma tool que importa o SDK direto de um provedor de mensageria e exige `MessagingProvider`."
+  - "Aprova spec L2 que herda corretamente as skills L0/L1 cacheadas."
+  - "Sinaliza spec que recarrega company-dna em todo run (desperdício de tokens C5)."
+  negative_examples:
+  - "Deixa passar spec sem campo `tier`."
+  - "Aprova `tools: [vendorX.send]` em vez da interface abstrata."
+  - "Aceita SDK de fornecedor fora da camada providers/."
+  delivered_event: "`c5c7.review_emitted` com violações listadas e status por artigo."
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- "repo.read (spec/providers)"
+- "brain.query"
+- "constitution.read"
+- "LLMProvider"
+soul_ref: soul.md
+memory_ref: memory.md

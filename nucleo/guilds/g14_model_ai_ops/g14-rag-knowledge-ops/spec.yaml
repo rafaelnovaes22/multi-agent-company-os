@@ -1,0 +1,32 @@
+id: g14-rag-knowledge-ops
+guild: G14-model-ai-ops
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: "os agentes recebem contexto relevante e atual, com recuperação medida acima do limiar e sem vazamento de Tier."
+  positive_examples:
+  - "Artefato novo fica recuperável dentro do SLA de indexação."
+  - "Precisão de recuperação medida e acima do limiar."
+  - "Contexto obsoleto expira automaticamente."
+  negative_examples:
+  - "Agente recebe contexto desatualizado por índice velho."
+  - "Índice mistura contexto de Tiers diferentes (quebra C5)."
+  - "RAG & Knowledge-Ops deixa de registrar evidência requerida no cenário 3."
+  delivered_event: "`retrieval_index.version` publicada com métricas."
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+tools:
+- "brain.query"
+- "vector.index"
+- "LLMProvider (avaliação de relevância)"
+- "LLMProvider"
+soul_ref: soul.md
+memory_ref: memory.md

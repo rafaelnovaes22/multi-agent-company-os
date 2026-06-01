@@ -1,0 +1,36 @@
+id: g8-billing-agent
+guild: G08-vendas-receita
+ledger: billable
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: "cada fatura é emitida com valor correto nas 3 camadas, dentro de C3, com tributos BR aplicados e entrada no audit-log."
+  positive_examples:
+  - "Fatura combinando assinatura + top-up + outcome emitida e auditada."
+  - "Cobrança outcome-based disparada apenas após outcome DELIVERED no Brain."
+  - "Estorno processado com entrada imutável no audit-log C6."
+  negative_examples:
+  - "Fatura emitida sem entrada no audit-log (viola C6)."
+  - "Cobrança outcome-based sem evento DELIVERED correspondente."
+  - "Tributo BR aplicado incorretamente ou ausente."
+  delivered_event: "evento `invoice.issued` é emitido com `invoice_id`, `tiers_billed[]`, `tax_breakdown`, `audit_log_ref` no Brain."
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+tools:
+- "brain.query"
+- "crm.read"
+- "PaymentProvider"
+- "FiscalProvider"
+- "auditLog.write"
+- "cost.read"
+- "LLMProvider"
+soul_ref: soul.md
+memory_ref: memory.md

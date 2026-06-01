@@ -1,0 +1,32 @@
+id: g14-inference-cost-optimizer
+guild: G14-model-ai-ops
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: "reduz custo de inferência por outcome sem regressão de qualidade acima da tolerância."
+  positive_examples:
+  - "Cache aplicado corta custo de uma rota repetitiva, qualidade mantida."
+  - "Tarefa simples migrada para modelo menor com economia comprovada."
+  - "Economia rateada e visível por guilda."
+  negative_examples:
+  - "Otimização que degrada qualidade além da tolerância."
+  - "Cache servindo resposta obsoleta/errada."
+  - "Otimizador de Custo de Inferência deixa de registrar evidência requerida no cenário 3."
+  delivered_event: "`cost_optimization.applied` com economia medida e qualidade ≥ baseline."
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- "brain.query"
+- "LLMProvider"
+- "model.registry"
+soul_ref: soul.md
+memory_ref: memory.md

@@ -1,0 +1,33 @@
+id: g14-eval-data-curator
+guild: G14-model-ai-ops
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: "cada agente crítico tem golden dataset versionado, sem PII e sem leakage treino/avaliação."
+  positive_examples:
+  - "Disagreements de SHADOW viram casos rotulados no golden set."
+  - "Concordância inter-anotador medida e acima do limiar."
+  - "Dados de preferência capturados sem PII."
+  negative_examples:
+  - "Caso de avaliação vaza para o conjunto de treino."
+  - "Dataset com PII real entra no pipeline."
+  - "Curador de Dados de Avaliação deixa de registrar evidência requerida no cenário 3."
+  delivered_event: "`golden_dataset.version` publicada e validada."
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- "brain.query"
+- "dataset.registry"
+- "LLMProvider (pré-rotulagem assistida)"
+- "LLMProvider"
+soul_ref: soul.md
+memory_ref: memory.md

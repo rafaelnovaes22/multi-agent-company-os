@@ -1,0 +1,35 @@
+id: g8-pricing-engine
+guild: G08-vendas-receita
+ledger: billable
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: "todo preço publicado mantém custo de entrega ≤ 25% do preço (C3) nas 3 camadas, com cálculo auditável."
+  positive_examples:
+  - "Preço de deal calculado com margem C3 verificada contra custo real."
+  - "Camada outcome-based precificada com gatilho de resultado mensurável."
+  - "Verba de freemium classificada como OP respeitando delight > pago."
+  negative_examples:
+  - "Preço publicado com custo de entrega > 25% (viola C3)."
+  - "Tabela de preços alterada sem versão nem trilha de auditoria."
+  - "Freemium lançado como custo em vez de marketing (ledger errado)."
+  delivered_event: "evento `pricing.published` é emitido com `price_book_version`, `tiers[]`, `c3_margin_check` no Brain."
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+tools:
+- "brain.query"
+- "cost.read"
+- "policy.read"
+- "policy.write"
+- "experiment.run"
+- "LLMProvider"
+soul_ref: soul.md
+memory_ref: memory.md

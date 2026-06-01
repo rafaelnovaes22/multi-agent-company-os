@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g13-promotion-officer-01",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 01 risco=low status=ready",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g13-promotion-officer",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 1,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g13-promotion-officer",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-02",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 02 risco=medium status=ready",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g13-promotion-officer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 2,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g13-promotion-officer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-03",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 03 risco=high status=ready",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 3,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-04",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 04 risco=critical status=ready",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g13-promotion-officer",
+    "capabilities": [
+      "config_driven",
+      "policy_check"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 4,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g13-promotion-officer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-05",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 05 risco=low status=blocked",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g13-promotion-officer",
+    "capabilities": [
+      "policy_check",
+      "human_escalation"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 5,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g13-promotion-officer",
+      "capabilities_any": [
+        "policy_check"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-06",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 06 risco=medium status=blocked",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g13-promotion-officer",
+    "capabilities": [
+      "human_escalation",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 6,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g13-promotion-officer",
+      "capabilities_any": [
+        "human_escalation"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-07",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 07 risco=high status=ready",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 7,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-08",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 08 risco=critical status=ready",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g13-promotion-officer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 8,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g13-promotion-officer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-09",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 09 risco=low status=ready",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g13-promotion-officer",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 9,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g13-promotion-officer",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-10",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 10 risco=medium status=blocked",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g13-promotion-officer",
+    "capabilities": [
+      "config_driven",
+      "policy_check"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 10,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g13-promotion-officer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-11",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 11 risco=high status=ready",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "policy_check",
+      "human_escalation"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 11,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "policy_check"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-12",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 12 risco=critical status=blocked",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g13-promotion-officer",
+    "capabilities": [
+      "human_escalation",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 12,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g13-promotion-officer",
+      "capabilities_any": [
+        "human_escalation"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-13",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 13 risco=low status=ready",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g13-promotion-officer",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 13,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g13-promotion-officer",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-14",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 14 risco=medium status=ready",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g13-promotion-officer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 14,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g13-promotion-officer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-15",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 15 risco=high status=blocked",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "high",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 15,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "blocked",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-16",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 16 risco=critical status=ready",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g13-promotion-officer",
+    "capabilities": [
+      "config_driven",
+      "policy_check"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 16,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g13-promotion-officer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-17",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 17 risco=low status=ready",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g13-promotion-officer",
+    "capabilities": [
+      "policy_check",
+      "human_escalation"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 17,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g13-promotion-officer",
+      "capabilities_any": [
+        "policy_check"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-18",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 18 risco=medium status=blocked",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g13-promotion-officer",
+    "capabilities": [
+      "human_escalation",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 18,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g13-promotion-officer",
+      "capabilities_any": [
+        "human_escalation"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-19",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 19 risco=high status=ready",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 19,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-20",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 20 risco=critical status=blocked",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g13-promotion-officer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 20,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g13-promotion-officer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-21",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 21 risco=low status=ready",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 21,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-22",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 22 risco=medium status=ready",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g13-promotion-officer",
+    "capabilities": [
+      "config_driven",
+      "policy_check"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 22,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g13-promotion-officer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-23",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 23 risco=high status=ready",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "policy_check",
+      "human_escalation"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 23,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "policy_check"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-24",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 24 risco=critical status=blocked",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g13-promotion-officer",
+    "capabilities": [
+      "human_escalation",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 24,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g13-promotion-officer",
+      "capabilities_any": [
+        "human_escalation"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-25",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 25 risco=low status=blocked",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g13-promotion-officer",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 25,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g13-promotion-officer",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-26",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 26 risco=medium status=ready",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g13-promotion-officer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 26,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g13-promotion-officer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-27",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 27 risco=high status=ready",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 27,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-28",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 28 risco=critical status=ready",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g13-promotion-officer",
+    "capabilities": [
+      "config_driven",
+      "policy_check"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 28,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g13-promotion-officer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-29",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 29 risco=low status=ready",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g13-promotion-officer",
+    "capabilities": [
+      "policy_check",
+      "human_escalation"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 29,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g13-promotion-officer",
+      "capabilities_any": [
+        "policy_check"
+      ]
+    }
+  },
+  {
+    "id": "g13-promotion-officer-30",
+    "desc": "Oficial de Promoção (6 gates + cross-approval C4): cenário 30 risco=medium status=blocked",
+    "artifact_type": "promotion-officer.verdict",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g13-promotion-officer",
+    "capabilities": [
+      "human_escalation",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 30,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g13-promotion-officer",
+      "handler_kind": "guardian_check",
+      "artifact_type": "promotion-officer.verdict",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g13-promotion-officer",
+      "capabilities_any": [
+        "human_escalation"
+      ]
+    }
+  }
+]

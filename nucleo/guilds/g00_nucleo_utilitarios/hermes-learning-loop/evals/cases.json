@@ -1,0 +1,902 @@
+[
+  {
+    "id": "hermes-learning-loop-01",
+    "desc": "Hermes (Loop de Aprendizado): cenário 01 risco=low status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 1,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-02",
+    "desc": "Hermes (Loop de Aprendizado): cenário 02 risco=medium status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "hermes-learning-loop",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 2,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "hermes-learning-loop",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-03",
+    "desc": "Hermes (Loop de Aprendizado): cenário 03 risco=high status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "hermes-learning-loop",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 3,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "hermes-learning-loop",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-04",
+    "desc": "Hermes (Loop de Aprendizado): cenário 04 risco=critical status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "hermes-learning-loop",
+    "capabilities": [
+      "config_driven",
+      "provider_abstraction"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 4,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "hermes-learning-loop",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-05",
+    "desc": "Hermes (Loop de Aprendizado): cenário 05 risco=low status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "hermes-learning-loop",
+    "capabilities": [
+      "provider_abstraction",
+      "company_brain"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 5,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "hermes-learning-loop",
+      "capabilities_any": [
+        "provider_abstraction"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-06",
+    "desc": "Hermes (Loop de Aprendizado): cenário 06 risco=medium status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "hermes-learning-loop",
+    "capabilities": [
+      "company_brain",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 6,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "hermes-learning-loop",
+      "capabilities_any": [
+        "company_brain"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-07",
+    "desc": "Hermes (Loop de Aprendizado): cenário 07 risco=high status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 7,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-08",
+    "desc": "Hermes (Loop de Aprendizado): cenário 08 risco=critical status=blocked",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "hermes-learning-loop",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 8,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "hermes-learning-loop",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-09",
+    "desc": "Hermes (Loop de Aprendizado): cenário 09 risco=low status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "hermes-learning-loop",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 9,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "hermes-learning-loop",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-10",
+    "desc": "Hermes (Loop de Aprendizado): cenário 10 risco=medium status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "hermes-learning-loop",
+    "capabilities": [
+      "config_driven",
+      "provider_abstraction"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 10,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "hermes-learning-loop",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-11",
+    "desc": "Hermes (Loop de Aprendizado): cenário 11 risco=high status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "hermes-learning-loop",
+    "capabilities": [
+      "provider_abstraction",
+      "company_brain"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 11,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "hermes-learning-loop",
+      "capabilities_any": [
+        "provider_abstraction"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-12",
+    "desc": "Hermes (Loop de Aprendizado): cenário 12 risco=critical status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "hermes-learning-loop",
+    "capabilities": [
+      "company_brain",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 12,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "hermes-learning-loop",
+      "capabilities_any": [
+        "company_brain"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-13",
+    "desc": "Hermes (Loop de Aprendizado): cenário 13 risco=low status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 13,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-14",
+    "desc": "Hermes (Loop de Aprendizado): cenário 14 risco=medium status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "hermes-learning-loop",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 14,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "hermes-learning-loop",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-15",
+    "desc": "Hermes (Loop de Aprendizado): cenário 15 risco=high status=blocked",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "high",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "hermes-learning-loop",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 15,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "blocked",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "hermes-learning-loop",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-16",
+    "desc": "Hermes (Loop de Aprendizado): cenário 16 risco=critical status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "hermes-learning-loop",
+    "capabilities": [
+      "config_driven",
+      "provider_abstraction"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 16,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "hermes-learning-loop",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-17",
+    "desc": "Hermes (Loop de Aprendizado): cenário 17 risco=low status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "hermes-learning-loop",
+    "capabilities": [
+      "provider_abstraction",
+      "company_brain"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 17,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "hermes-learning-loop",
+      "capabilities_any": [
+        "provider_abstraction"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-18",
+    "desc": "Hermes (Loop de Aprendizado): cenário 18 risco=medium status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "hermes-learning-loop",
+    "capabilities": [
+      "company_brain",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 18,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "hermes-learning-loop",
+      "capabilities_any": [
+        "company_brain"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-19",
+    "desc": "Hermes (Loop de Aprendizado): cenário 19 risco=high status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 19,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-20",
+    "desc": "Hermes (Loop de Aprendizado): cenário 20 risco=critical status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "hermes-learning-loop",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 20,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "hermes-learning-loop",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-21",
+    "desc": "Hermes (Loop de Aprendizado): cenário 21 risco=low status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "hermes-learning-loop",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 21,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "hermes-learning-loop",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-22",
+    "desc": "Hermes (Loop de Aprendizado): cenário 22 risco=medium status=blocked",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "hermes-learning-loop",
+    "capabilities": [
+      "config_driven",
+      "provider_abstraction"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 22,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "hermes-learning-loop",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-23",
+    "desc": "Hermes (Loop de Aprendizado): cenário 23 risco=high status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "hermes-learning-loop",
+    "capabilities": [
+      "provider_abstraction",
+      "company_brain"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 23,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "hermes-learning-loop",
+      "capabilities_any": [
+        "provider_abstraction"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-24",
+    "desc": "Hermes (Loop de Aprendizado): cenário 24 risco=critical status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "hermes-learning-loop",
+    "capabilities": [
+      "company_brain",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 24,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "hermes-learning-loop",
+      "capabilities_any": [
+        "company_brain"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-25",
+    "desc": "Hermes (Loop de Aprendizado): cenário 25 risco=low status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 25,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-26",
+    "desc": "Hermes (Loop de Aprendizado): cenário 26 risco=medium status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "hermes-learning-loop",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 26,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "hermes-learning-loop",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-27",
+    "desc": "Hermes (Loop de Aprendizado): cenário 27 risco=high status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "hermes-learning-loop",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 27,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "hermes-learning-loop",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-28",
+    "desc": "Hermes (Loop de Aprendizado): cenário 28 risco=critical status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "hermes-learning-loop",
+    "capabilities": [
+      "config_driven",
+      "provider_abstraction"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 28,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "hermes-learning-loop",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-29",
+    "desc": "Hermes (Loop de Aprendizado): cenário 29 risco=low status=blocked",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "hermes-learning-loop",
+    "capabilities": [
+      "provider_abstraction",
+      "company_brain"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 29,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "hermes-learning-loop",
+      "capabilities_any": [
+        "provider_abstraction"
+      ]
+    }
+  },
+  {
+    "id": "hermes-learning-loop-30",
+    "desc": "Hermes (Loop de Aprendizado): cenário 30 risco=medium status=ready",
+    "artifact_type": "hermes-learning-loop.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "hermes-learning-loop",
+    "capabilities": [
+      "company_brain",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 30,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "hermes-learning-loop",
+      "handler_kind": "spec_driven",
+      "artifact_type": "hermes-learning-loop.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "hermes-learning-loop",
+      "capabilities_any": [
+        "company_brain"
+      ]
+    }
+  }
+]

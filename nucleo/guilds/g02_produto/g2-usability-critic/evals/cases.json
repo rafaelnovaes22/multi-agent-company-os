@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g2-usability-critic-01",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 01 risco=low status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 1,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-02",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 02 risco=medium status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-usability-critic",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 2,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g2-usability-critic",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-03",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 03 risco=high status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-usability-critic",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 3,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g2-usability-critic",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-04",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 04 risco=critical status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-usability-critic",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 4,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-usability-critic",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-05",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 05 risco=low status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-usability-critic",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 5,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g2-usability-critic",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-06",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 06 risco=medium status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-usability-critic",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 6,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g2-usability-critic",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-07",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 07 risco=high status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 7,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-08",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 08 risco=critical status=blocked",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g2-usability-critic",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 8,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-usability-critic",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-09",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 09 risco=low status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-usability-critic",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 9,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g2-usability-critic",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-10",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 10 risco=medium status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-usability-critic",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 10,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g2-usability-critic",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-11",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 11 risco=high status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-usability-critic",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 11,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g2-usability-critic",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-12",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 12 risco=critical status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-usability-critic",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 12,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-usability-critic",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-13",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 13 risco=low status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 13,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-14",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 14 risco=medium status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-usability-critic",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 14,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g2-usability-critic",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-15",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 15 risco=high status=blocked",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "high",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g2-usability-critic",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 15,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "blocked",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g2-usability-critic",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-16",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 16 risco=critical status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-usability-critic",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 16,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-usability-critic",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-17",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 17 risco=low status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-usability-critic",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 17,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g2-usability-critic",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-18",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 18 risco=medium status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-usability-critic",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 18,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g2-usability-critic",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-19",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 19 risco=high status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 19,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-20",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 20 risco=critical status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-usability-critic",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 20,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-usability-critic",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-21",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 21 risco=low status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-usability-critic",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 21,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g2-usability-critic",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-22",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 22 risco=medium status=blocked",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g2-usability-critic",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 22,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g2-usability-critic",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-23",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 23 risco=high status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-usability-critic",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 23,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g2-usability-critic",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-24",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 24 risco=critical status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-usability-critic",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 24,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-usability-critic",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-25",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 25 risco=low status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 25,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-26",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 26 risco=medium status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-usability-critic",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 26,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g2-usability-critic",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-27",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 27 risco=high status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-usability-critic",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 27,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g2-usability-critic",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-28",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 28 risco=critical status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-usability-critic",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 28,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-usability-critic",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-29",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 29 risco=low status=blocked",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g2-usability-critic",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 29,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g2-usability-critic",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-usability-critic-30",
+    "desc": "Crítico de Usabilidade (co-dono do gate de lovability): cenário 30 risco=medium status=ready",
+    "artifact_type": "usability-critic.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-usability-critic",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 30,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-usability-critic",
+      "handler_kind": "guardian_check",
+      "artifact_type": "usability-critic.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g2-usability-critic",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  }
+]

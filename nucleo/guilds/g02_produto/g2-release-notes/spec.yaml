@@ -1,0 +1,36 @@
+id: g2-release-notes
+guild: G02-produto-discovery
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Gerador de Release Notes entrega release-notes.artifact verificável
+    para: Transformar PRs entregues em release notes claras e narrativas, sustentando
+    o ship diário'
+  positive_examples:
+  - Merge entregue → nota em linguagem de usuário ligada ao PRD de origem
+  - Ship relevante → draft de post gerado e enviado ao Growth no mesmo dia
+  - Lançamento tier-1 agrupado com narrativa coerente
+  negative_examples:
+  - Release note que só reproduz mensagem de commit técnico
+  - Ship relevante sem nenhum artefato de post (quebra beeswarming)
+  - Nota sem ligação ao PRD/JTBD de origem
+  delivered_event: evento release.notes.committed é gravado com nota voltada a valor
+    e post draft anexado
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- repo.read
+- brain.query
+- brain.write
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

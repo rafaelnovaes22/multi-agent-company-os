@@ -1,0 +1,36 @@
+id: g2-jobs-to-be-done
+guild: G02-produto-discovery
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Extrator de Jobs-To-Be-Done entrega jobs-to-be-done.artifact verificável
+    para: Destilar de sinais de usuário os Jobs-To-Be-Done — o progresso que o usuário
+    busca — em vez de soluções pedidas'
+  positive_examples:
+  - Vários pedidos de "botão de exportar" → JTBD "quando preciso prestar contas, quero
+    levar meus dados para fora, para confiar no controle"
+  - Job marcado under-served (alta importância, baixa satisfação) com 5 evidências
+  - Job sem evidência há 90 dias → marcado deprecated
+  negative_examples:
+  - JTBD descrito como feature ("ter integração com planilha")
+  - Job sem nenhuma evidência vinculada
+  - Mapa de oportunidades sem eixos de importância/satisfação
+  delivered_event: evento jtbd.catalog.updated é gravado com cada job no formato canônico
+    e ≥ 2 evidências
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query
+- brain.write
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

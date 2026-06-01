@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g1-scenario-planner-01",
+    "desc": "Planejador de Cenários: cenário 01 risco=low status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 1,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-02",
+    "desc": "Planejador de Cenários: cenário 02 risco=medium status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g1-scenario-planner",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 2,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g1-scenario-planner",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-03",
+    "desc": "Planejador de Cenários: cenário 03 risco=high status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-scenario-planner",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 3,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g1-scenario-planner",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-04",
+    "desc": "Planejador de Cenários: cenário 04 risco=critical status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-scenario-planner",
+    "capabilities": [
+      "config_driven",
+      "strategy_lineage"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 4,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g1-scenario-planner",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-05",
+    "desc": "Planejador de Cenários: cenário 05 risco=low status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g1-scenario-planner",
+    "capabilities": [
+      "strategy_lineage",
+      "market_agnostic"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 5,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g1-scenario-planner",
+      "capabilities_any": [
+        "strategy_lineage"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-06",
+    "desc": "Planejador de Cenários: cenário 06 risco=medium status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-scenario-planner",
+    "capabilities": [
+      "market_agnostic",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 6,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g1-scenario-planner",
+      "capabilities_any": [
+        "market_agnostic"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-07",
+    "desc": "Planejador de Cenários: cenário 07 risco=high status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 7,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-08",
+    "desc": "Planejador de Cenários: cenário 08 risco=critical status=blocked",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g1-scenario-planner",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 8,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g1-scenario-planner",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-09",
+    "desc": "Planejador de Cenários: cenário 09 risco=low status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g1-scenario-planner",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 9,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g1-scenario-planner",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-10",
+    "desc": "Planejador de Cenários: cenário 10 risco=medium status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g1-scenario-planner",
+    "capabilities": [
+      "config_driven",
+      "strategy_lineage"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 10,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g1-scenario-planner",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-11",
+    "desc": "Planejador de Cenários: cenário 11 risco=high status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-scenario-planner",
+    "capabilities": [
+      "strategy_lineage",
+      "market_agnostic"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 11,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g1-scenario-planner",
+      "capabilities_any": [
+        "strategy_lineage"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-12",
+    "desc": "Planejador de Cenários: cenário 12 risco=critical status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-scenario-planner",
+    "capabilities": [
+      "market_agnostic",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 12,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g1-scenario-planner",
+      "capabilities_any": [
+        "market_agnostic"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-13",
+    "desc": "Planejador de Cenários: cenário 13 risco=low status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 13,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-14",
+    "desc": "Planejador de Cenários: cenário 14 risco=medium status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g1-scenario-planner",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 14,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g1-scenario-planner",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-15",
+    "desc": "Planejador de Cenários: cenário 15 risco=high status=blocked",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "high",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g1-scenario-planner",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 15,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "blocked",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g1-scenario-planner",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-16",
+    "desc": "Planejador de Cenários: cenário 16 risco=critical status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-scenario-planner",
+    "capabilities": [
+      "config_driven",
+      "strategy_lineage"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 16,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g1-scenario-planner",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-17",
+    "desc": "Planejador de Cenários: cenário 17 risco=low status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g1-scenario-planner",
+    "capabilities": [
+      "strategy_lineage",
+      "market_agnostic"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 17,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g1-scenario-planner",
+      "capabilities_any": [
+        "strategy_lineage"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-18",
+    "desc": "Planejador de Cenários: cenário 18 risco=medium status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-scenario-planner",
+    "capabilities": [
+      "market_agnostic",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 18,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g1-scenario-planner",
+      "capabilities_any": [
+        "market_agnostic"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-19",
+    "desc": "Planejador de Cenários: cenário 19 risco=high status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 19,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-20",
+    "desc": "Planejador de Cenários: cenário 20 risco=critical status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-scenario-planner",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 20,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g1-scenario-planner",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-21",
+    "desc": "Planejador de Cenários: cenário 21 risco=low status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g1-scenario-planner",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 21,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g1-scenario-planner",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-22",
+    "desc": "Planejador de Cenários: cenário 22 risco=medium status=blocked",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g1-scenario-planner",
+    "capabilities": [
+      "config_driven",
+      "strategy_lineage"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 22,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g1-scenario-planner",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-23",
+    "desc": "Planejador de Cenários: cenário 23 risco=high status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-scenario-planner",
+    "capabilities": [
+      "strategy_lineage",
+      "market_agnostic"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 23,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g1-scenario-planner",
+      "capabilities_any": [
+        "strategy_lineage"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-24",
+    "desc": "Planejador de Cenários: cenário 24 risco=critical status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-scenario-planner",
+    "capabilities": [
+      "market_agnostic",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 24,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g1-scenario-planner",
+      "capabilities_any": [
+        "market_agnostic"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-25",
+    "desc": "Planejador de Cenários: cenário 25 risco=low status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 25,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-26",
+    "desc": "Planejador de Cenários: cenário 26 risco=medium status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g1-scenario-planner",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 26,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g1-scenario-planner",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-27",
+    "desc": "Planejador de Cenários: cenário 27 risco=high status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-scenario-planner",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 27,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g1-scenario-planner",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-28",
+    "desc": "Planejador de Cenários: cenário 28 risco=critical status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-scenario-planner",
+    "capabilities": [
+      "config_driven",
+      "strategy_lineage"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 28,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g1-scenario-planner",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-29",
+    "desc": "Planejador de Cenários: cenário 29 risco=low status=blocked",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g1-scenario-planner",
+    "capabilities": [
+      "strategy_lineage",
+      "market_agnostic"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 29,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g1-scenario-planner",
+      "capabilities_any": [
+        "strategy_lineage"
+      ]
+    }
+  },
+  {
+    "id": "g1-scenario-planner-30",
+    "desc": "Planejador de Cenários: cenário 30 risco=medium status=ready",
+    "artifact_type": "scenario-planner.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-scenario-planner",
+    "capabilities": [
+      "market_agnostic",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 30,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-scenario-planner",
+      "handler_kind": "spec_driven",
+      "artifact_type": "scenario-planner.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g1-scenario-planner",
+      "capabilities_any": [
+        "market_agnostic"
+      ]
+    }
+  }
+]

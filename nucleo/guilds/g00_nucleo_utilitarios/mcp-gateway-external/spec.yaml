@@ -1,0 +1,38 @@
+id: mcp-gateway-external
+guild: G00-nucleo-utilitarios
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Gateway de APIs Externas (Genérico, C7) entrega mcp-gateway-external.verdict
+    verificável para: prover um ponto único e governado de acesso a APIs de terceiros
+    genéricas, isolando a frota de qualquer fornecedor específico'
+  positive_examples:
+  - Lookup externo servido com cache e circuit-breaker, mantendo a frota estável durante
+    instabilidade do fornecedor
+  - Novo fornecedor plugado por configuração (novo adaptador) sem alterar nenhum dos
+    150 agentes (C7/C8)
+  - Credencial rotacionada automaticamente sem downtime nem segredo em log
+  negative_examples:
+  - Um agente chama uma API de terceiro diretamente, furando o gateway
+  - Credencial de fornecedor exposta no audit-log
+  - Falha externa propaga e derruba uma execução por falta de timeout/circuit-breaker
+  delivered_event: external.call_completed (ou external.call_failed) registrado com
+    provider, endpoint, latency, cost, trace_id e segredo redigido
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- HttpProvider/ExternalAPIProvider (interfaces abstratas)
+- brain.write (audit-log)
+- secrets.read (credenciais)
+- cache.read/write
+soul_ref: soul.md
+memory_ref: memory.md

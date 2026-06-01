@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g2-prioritizer-01",
+    "desc": "Priorizador de Backlog (RICE): cenário 01 risco=low status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 1,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-02",
+    "desc": "Priorizador de Backlog (RICE): cenário 02 risco=medium status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-prioritizer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 2,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g2-prioritizer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-03",
+    "desc": "Priorizador de Backlog (RICE): cenário 03 risco=high status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prioritizer",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 3,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g2-prioritizer",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-04",
+    "desc": "Priorizador de Backlog (RICE): cenário 04 risco=critical status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prioritizer",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 4,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-prioritizer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-05",
+    "desc": "Priorizador de Backlog (RICE): cenário 05 risco=low status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-prioritizer",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 5,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g2-prioritizer",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-06",
+    "desc": "Priorizador de Backlog (RICE): cenário 06 risco=medium status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prioritizer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 6,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g2-prioritizer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-07",
+    "desc": "Priorizador de Backlog (RICE): cenário 07 risco=high status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 7,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-08",
+    "desc": "Priorizador de Backlog (RICE): cenário 08 risco=critical status=blocked",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g2-prioritizer",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 8,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-prioritizer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-09",
+    "desc": "Priorizador de Backlog (RICE): cenário 09 risco=low status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-prioritizer",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 9,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g2-prioritizer",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-10",
+    "desc": "Priorizador de Backlog (RICE): cenário 10 risco=medium status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-prioritizer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 10,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g2-prioritizer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-11",
+    "desc": "Priorizador de Backlog (RICE): cenário 11 risco=high status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prioritizer",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 11,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g2-prioritizer",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-12",
+    "desc": "Priorizador de Backlog (RICE): cenário 12 risco=critical status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prioritizer",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 12,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-prioritizer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-13",
+    "desc": "Priorizador de Backlog (RICE): cenário 13 risco=low status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 13,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-14",
+    "desc": "Priorizador de Backlog (RICE): cenário 14 risco=medium status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-prioritizer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 14,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g2-prioritizer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-15",
+    "desc": "Priorizador de Backlog (RICE): cenário 15 risco=high status=blocked",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "high",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g2-prioritizer",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 15,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "blocked",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g2-prioritizer",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-16",
+    "desc": "Priorizador de Backlog (RICE): cenário 16 risco=critical status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prioritizer",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 16,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-prioritizer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-17",
+    "desc": "Priorizador de Backlog (RICE): cenário 17 risco=low status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-prioritizer",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 17,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g2-prioritizer",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-18",
+    "desc": "Priorizador de Backlog (RICE): cenário 18 risco=medium status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prioritizer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 18,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g2-prioritizer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-19",
+    "desc": "Priorizador de Backlog (RICE): cenário 19 risco=high status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 19,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-20",
+    "desc": "Priorizador de Backlog (RICE): cenário 20 risco=critical status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prioritizer",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 20,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-prioritizer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-21",
+    "desc": "Priorizador de Backlog (RICE): cenário 21 risco=low status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-prioritizer",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 21,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g2-prioritizer",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-22",
+    "desc": "Priorizador de Backlog (RICE): cenário 22 risco=medium status=blocked",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g2-prioritizer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 22,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g2-prioritizer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-23",
+    "desc": "Priorizador de Backlog (RICE): cenário 23 risco=high status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prioritizer",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 23,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g2-prioritizer",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-24",
+    "desc": "Priorizador de Backlog (RICE): cenário 24 risco=critical status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prioritizer",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 24,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-prioritizer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-25",
+    "desc": "Priorizador de Backlog (RICE): cenário 25 risco=low status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 25,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-26",
+    "desc": "Priorizador de Backlog (RICE): cenário 26 risco=medium status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-prioritizer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 26,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g2-prioritizer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-27",
+    "desc": "Priorizador de Backlog (RICE): cenário 27 risco=high status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prioritizer",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 27,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g2-prioritizer",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-28",
+    "desc": "Priorizador de Backlog (RICE): cenário 28 risco=critical status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prioritizer",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 28,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-prioritizer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-29",
+    "desc": "Priorizador de Backlog (RICE): cenário 29 risco=low status=blocked",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g2-prioritizer",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 29,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g2-prioritizer",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-prioritizer-30",
+    "desc": "Priorizador de Backlog (RICE): cenário 30 risco=medium status=ready",
+    "artifact_type": "prioritizer.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prioritizer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 30,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prioritizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "prioritizer.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g2-prioritizer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  }
+]

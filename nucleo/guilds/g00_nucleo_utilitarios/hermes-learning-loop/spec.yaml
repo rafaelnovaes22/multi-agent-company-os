@@ -1,0 +1,41 @@
+id: hermes-learning-loop
+guild: G00-nucleo-utilitarios
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Hermes (Loop de Aprendizado) entrega hermes-learning-loop.artifact verificável
+    para: transformar snapshots de execução em memória curada e instincts, fechando
+    o loop de evolução da frota inteira'
+  positive_examples:
+  - Instinct recorrente em 5 agentes promovido a skill de guilda via PR aprovado,
+    reduzindo retrabalho em runs futuras
+  - PR de memória aberto com fato acionável confidence:shadow que sobe para assisted
+    quando o agente promove
+  - Fato com PII detectado e descartado antes do merge, sem poluir a memória
+  negative_examples:
+  - Persiste um fato duplicado que já existia na MEMORY (novidade não avaliada)
+  - Faz merge direto na memória sem PR auditável
+  - Promove instinct sem source_run_id, quebrando a rastreabilidade C6
+  delivered_event: memory.pr_opened (ou skill.candidate_proposed) registrado no Brain
+    com assess_novelty=pass e checagem C1/C6/C8 ok
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query
+- store.read
+- store.write
+- repo.write (abre PR de memória/skill)
+- MessagingProvider (notificação)
+- LLMProvider
+- cron
+soul_ref: soul.md
+memory_ref: memory.md

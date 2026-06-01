@@ -1,0 +1,40 @@
+id: brain-indexer
+guild: G00-nucleo-utilitarios
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Brain Indexer (Empresa Queryable) entrega brain-indexer.artifact verificável
+    para: indexar todo artefato produzido por qualquer agente no Company Brain, mantendo
+    a empresa legível e consultável por IA'
+  positive_examples:
+  - PRD recém-emitido aparece em busca semântica e ligado no grafo ao seu PRD-pai
+    e ao gate que o aprovou, segundos após emissão
+  - Execução que terminou sem artefato é sinalizada como não-contável (enforce C6)
+  - Reconciliação noturna fecha com desvio 0,3% (≤1%), passando o gate de C6
+  negative_examples:
+  - Artefato gravado sem trace_id/inputs_hash, quebrando a rastreabilidade
+  - Índice vetorial defasado faz um agente responder com dado obsoleto
+  - Permite edição/sobrescrita de um evento já gravado (viola append-only)
+  delivered_event: brain.artifact_indexed registrado com entrada no event store +
+    vetor + grafo e schema_valid=true
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.write
+- brain.query
+- vector.upsert
+- graph.write
+- telemetry.read
+- LLMProvider (embeddings via interface
+- não SDK)
+soul_ref: soul.md
+memory_ref: memory.md

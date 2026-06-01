@@ -1,0 +1,38 @@
+id: g1-competitive-teardown
+guild: G01-estrategia-founder-office
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Analista de Teardown Competitivo entrega competitive-teardown.artifact
+    verificável para: produzir teardown detalhado de produtos concorrentes, expondo
+    forças, lacunas e oportunidades de wedge'
+  positive_examples:
+  - Teardown aponta 3 wedges acionáveis amarrados à tese, cada um com evidência
+  - Pricing observado coletado só de fonte pública e marcado como "observado, não
+    confirmado"
+  - Re-teardown disparado após o concorrente mudar onboarding
+  negative_examples:
+  - Achado afirmado sem evidência ("eles têm churn alto" sem fonte)
+  - Uso de dado proprietário/obtido indevidamente do concorrente
+  - Teardown que descreve o vertical do NÚCLEO antes da definição oficial
+  delivered_event: teardown.report + teardown.opportunity_map são persistidos no Brain
+    com evidência por achado e confiança rotulada
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- WebFetchProvider
+- WebSearchProvider
+- brain.query/write
+- screenshot.capture (evidência pública)
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

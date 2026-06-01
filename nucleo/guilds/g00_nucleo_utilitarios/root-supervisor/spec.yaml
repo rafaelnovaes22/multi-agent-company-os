@@ -1,0 +1,42 @@
+id: root-supervisor
+guild: G00-nucleo-utilitarios
+ledger: operating
+tier: L0
+ai_enabled: true
+model_role: supervisor
+mode: SHADOW
+act_handler: supervisor_route
+outcome_clause:
+  statement: 'Supervisor-Raiz (CEO-OS) entrega root-supervisor.routing_plan verificável
+    para: receber qualquer intenção global e roteá-la para a guilda certa com orçamento
+    e prioridade, substituindo o middleware humano'
+  positive_examples:
+  - Pedido "investigar queda de retenção" roteado para G6 (Dados) com prioridade alta
+    e orçamento OP alocado, artefato de decisão registrado
+  - Estouro de orçamento de uma guilda detectado e desacelerado automaticamente, sem
+    deixar o burn global exceder o plano
+  - Incidente de Segurança preempta um lançamento de Growth não-crítico e o reagenda,
+    com justificativa registrada
+  negative_examples:
+  - Roteia diretamente para um worker individual, furando a hierarquia de supervisores
+  - Aceita um pedido e o executa "por conta própria" sem delegar à guilda dona do
+    outcome
+  - Deixa duas guildas competirem pelo mesmo orçamento sem resolver a contenção
+  delivered_event: routing.decision emitida no Brain com target_guild, priority, budget_allocated
+    e Command(goto=...) despachado
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query
+- brain.write
+- graph.route (Command/Send da orquestração LangGraph)
+- budget.allocate
+- interrupt (human-in-the-loop)
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

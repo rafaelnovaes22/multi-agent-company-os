@@ -1,0 +1,38 @@
+id: g2-usability-critic
+guild: G02-produto-discovery
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Crítico de Usabilidade (co-dono do gate de lovability) entrega usability-critic.verdict
+    verificável para: Avaliar fluxos com heurísticas de usabilidade e co-guardar o
+    gate "se não é lovable, não lançamos"'
+  positive_examples:
+  - Fluxo revisado com heurísticas, problemas severos sinalizados e corrigidos antes
+    do ship
+  - Veto crítico segura lançamento até a correção
+  - Acessibilidade mínima verificada no protótipo
+  negative_examples:
+  - Release liberada com fluxo de ativação quebrado conhecido
+  - Crítica genérica sem severidade nem heurística citada
+  - Gate aprovado sob pressão de prazo com problema crítico aberto
+  delivered_event: evento usability.review.committed é gravado com veredito de gate
+    e zero violações críticas abertas (ou block registrado)
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query
+- brain.write
+- repo.read
+- PrototypeProvider
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

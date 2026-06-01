@@ -1,0 +1,41 @@
+id: g2-product-supervisor
+guild: G02-produto-discovery
+ledger: operating
+tier: L0
+ai_enabled: true
+model_role: supervisor
+mode: SHADOW
+act_handler: supervisor_route
+outcome_clause:
+  statement: 'Supervisor de Produto & Discovery entrega product-supervisor.routing_plan
+    verificável para: Rotear cada sinal de descoberta e cada decisão de entrega ao
+    agente certo, mantendo o loop produto fechado do insight ao ship'
+  positive_examples:
+  - Entrevista nova chega → roteada para g2-user-interview-synth com escopo claro
+    em 2h
+  - Pedido de "queremos validar feature X" → decomposto em JTBD + experimento + protótipo,
+    com donos atribuídos
+  - Backlog cresce além da capacidade → supervisor corta itens de baixo ROI e justifica
+    no Brain
+  negative_examples:
+  - Sinal fica 3 dias sem dono atribuído
+  - PRD aprovado sem diagnóstico anterior (viola C1)
+  - Supervisor executa a síntese/escrita ele mesmo em vez de rotear (acúmulo indevido
+    de papéis)
+  delivered_event: evento product.routing.plan.committed é gravado no Brain com todos
+    os itens da fila atribuídos a um agente-dono
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query
+- brain.write
+- repo.read
+- agent.dispatch
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

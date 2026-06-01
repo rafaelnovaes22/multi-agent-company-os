@@ -1,0 +1,40 @@
+id: mcp-gateway-payments
+guild: G00-nucleo-utilitarios
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Gateway de Pagamentos (PaymentGateway) entrega mcp-gateway-payments.verdict
+    verificável para: abstrair provedores de pagamento atrás de uma interface única,
+    isolando a empresa de qualquer processador específico'
+  positive_examples:
+  - Cobrança processada com chave de idempotência; retry de rede não gera segunda
+    cobrança; audit-log no Brain
+  - Reembolso acima do limite pausa em interrupt e só executa após aprovação do DRI
+    (alçada ASSISTED)
+  - Webhook de "captura confirmada" reconcilia uma transação que estava pendente,
+    sem intervenção humana
+  negative_examples:
+  - Move dinheiro de forma autônoma acima da alçada sem gate
+  - Armazena dados de cartão (viola PCI/LGPD)
+  - Vendas acopla diretamente ao SDK de um processador em vez de usar PaymentGateway
+  delivered_event: payment.transaction_settled (ou payment.refund_settled) registrado
+    com idempotency_key, provider, status e audit-log financeiro ok
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- security-privacy-guardian
+- artifact-architect
+tools:
+- PaymentGateway (interface abstrata sobre os processadores)
+- brain.write (audit-log financeiro)
+- secrets.read (credenciais)
+- interrupt (gate de alçada)
+soul_ref: soul.md
+memory_ref: memory.md

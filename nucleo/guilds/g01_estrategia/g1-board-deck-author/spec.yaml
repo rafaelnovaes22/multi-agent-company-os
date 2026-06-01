@@ -1,0 +1,36 @@
+id: g1-board-deck-author
+guild: G01-estrategia-founder-office
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Autor do Board Deck entrega board-deck-author.artifact verificável para:
+    gerar o deck de board a partir do Company Brain, fiel aos dados e à narrativa
+    vigente'
+  positive_examples:
+  - Deck montado com 100% dos números vinculados ao board.deck_lineage
+  - 1-pager executivo coerente com o deck completo, sem divergência de métrica
+  - Deck reaproveita a narrativa vigente sem reescrever fatos
+  negative_examples:
+  - Slide com número que não bate com o artefato de origem no Brain
+  - Deck liberado sem passar pelo gate de taste/qualidade
+  - Deck cita o mercado/vertical antes da definição oficial
+  delivered_event: board.deck + board.deck_lineage são persistidos no Brain com cobertura
+    de lineage=100% e gate de taste=pass
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query
+- deck.render (geração de slides/doc)
+- template.read
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

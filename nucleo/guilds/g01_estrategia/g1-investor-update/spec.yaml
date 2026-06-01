@@ -1,0 +1,38 @@
+id: g1-investor-update
+guild: G01-estrategia-founder-office
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Redator de Updates a Investidores entrega investor-update.verdict verificável
+    para: redigir updates periódicos a investidores/board, factuais, consistentes
+    e em conformidade com LGPD'
+  positive_examples:
+  - Update enviado com todas as métricas casando com o okr.scorecard
+  - Versão para lead investor e para board derivadas do mesmo factbase, sem divergência
+  - Revisão de conformidade aprova o texto sem PII indevida
+  negative_examples:
+  - Métrica no update diverge da do board deck do mesmo período
+  - Forward-looking statement sem qualificação ("garantimos X")
+  - Update revela o mercado/vertical antes da decisão oficial
+  delivered_event: investor.update é persistido no Brain com investor.update_factbase
+    vinculado e policy.check (LGPD + anti-vazamento)=pass; envio confirmado via MessagingProvider
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- security-privacy-guardian
+- artifact-architect
+tools:
+- brain.query
+- template.read
+- MessagingProvider (envio)
+- policy.check (LGPD/forward-looking)
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

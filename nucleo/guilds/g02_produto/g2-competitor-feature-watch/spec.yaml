@@ -1,0 +1,36 @@
+id: g2-competitor-feature-watch
+guild: G02-produto-discovery
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Vigia de Features de Concorrentes entrega competitor-feature-watch.artifact
+    verificável para: Rastrear features e mudanças de produto de concorrentes e traduzi-las
+    em sinais de oportunidade ou ameaça'
+  positive_examples:
+  - Changelog do concorrente → sinal com link, data e recomendação "observar"
+  - Feature que ataca um JTBD core → escalada com recomendação "responder"
+  - Anúncio sem substância → marcado baixo ruído, não roteado
+  negative_examples:
+  - Sinal sem fonte verificável
+  - Sugestão de copiar feature sem ligação a um JTBD nosso
+  - Coleta por meio não público/ilícito
+  delivered_event: evento competitor.signal.committed é gravado com fonte pública
+    e relevância classificada
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query
+- brain.write
+- WebFetchProvider
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

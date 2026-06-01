@@ -1,0 +1,36 @@
+id: g2-roadmap-keeper
+guild: G02-produto-discovery
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Guardião do Roadmap entrega roadmap-keeper.verdict verificável para:
+    Manter um roadmap vivo, coerente e queryable no Brain, refletindo prioridades
+    e realidade de entrega'
+  positive_examples:
+  - Item entregue por Engenharia → movido para "shipped" no mesmo ciclo
+  - PRD sem item no roadmap → alerta de incoerência emitido
+  - Roadmap exposto como query para outra guilda em segundos
+  negative_examples:
+  - Roadmap mostra "em andamento" item já entregue há uma semana
+  - Datas precisas inventadas sem lastro de capacidade
+  - Item no roadmap sem PRD nem evidência de prioridade
+  delivered_event: evento roadmap.state.reconciled é gravado sem incoerências abertas
+    críticas
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query
+- brain.write
+- repo.read
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g1-narrative-synthesizer-01",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 01 risco=low status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 1,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-02",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 02 risco=medium status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g1-narrative-synthesizer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 2,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g1-narrative-synthesizer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-03",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 03 risco=high status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-narrative-synthesizer",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 3,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g1-narrative-synthesizer",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-04",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 04 risco=critical status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-narrative-synthesizer",
+    "capabilities": [
+      "config_driven",
+      "strategy_lineage"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 4,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g1-narrative-synthesizer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-05",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 05 risco=low status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g1-narrative-synthesizer",
+    "capabilities": [
+      "strategy_lineage",
+      "market_agnostic"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 5,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g1-narrative-synthesizer",
+      "capabilities_any": [
+        "strategy_lineage"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-06",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 06 risco=medium status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-narrative-synthesizer",
+    "capabilities": [
+      "market_agnostic",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 6,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g1-narrative-synthesizer",
+      "capabilities_any": [
+        "market_agnostic"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-07",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 07 risco=high status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 7,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-08",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 08 risco=critical status=blocked",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g1-narrative-synthesizer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 8,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g1-narrative-synthesizer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-09",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 09 risco=low status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g1-narrative-synthesizer",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 9,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g1-narrative-synthesizer",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-10",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 10 risco=medium status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g1-narrative-synthesizer",
+    "capabilities": [
+      "config_driven",
+      "strategy_lineage"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 10,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g1-narrative-synthesizer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-11",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 11 risco=high status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-narrative-synthesizer",
+    "capabilities": [
+      "strategy_lineage",
+      "market_agnostic"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 11,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g1-narrative-synthesizer",
+      "capabilities_any": [
+        "strategy_lineage"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-12",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 12 risco=critical status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-narrative-synthesizer",
+    "capabilities": [
+      "market_agnostic",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 12,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g1-narrative-synthesizer",
+      "capabilities_any": [
+        "market_agnostic"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-13",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 13 risco=low status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 13,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-14",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 14 risco=medium status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g1-narrative-synthesizer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 14,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g1-narrative-synthesizer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-15",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 15 risco=high status=blocked",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "high",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g1-narrative-synthesizer",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 15,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "blocked",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g1-narrative-synthesizer",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-16",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 16 risco=critical status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-narrative-synthesizer",
+    "capabilities": [
+      "config_driven",
+      "strategy_lineage"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 16,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g1-narrative-synthesizer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-17",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 17 risco=low status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g1-narrative-synthesizer",
+    "capabilities": [
+      "strategy_lineage",
+      "market_agnostic"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 17,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g1-narrative-synthesizer",
+      "capabilities_any": [
+        "strategy_lineage"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-18",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 18 risco=medium status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-narrative-synthesizer",
+    "capabilities": [
+      "market_agnostic",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 18,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g1-narrative-synthesizer",
+      "capabilities_any": [
+        "market_agnostic"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-19",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 19 risco=high status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 19,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-20",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 20 risco=critical status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-narrative-synthesizer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 20,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g1-narrative-synthesizer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-21",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 21 risco=low status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g1-narrative-synthesizer",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 21,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g1-narrative-synthesizer",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-22",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 22 risco=medium status=blocked",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g1-narrative-synthesizer",
+    "capabilities": [
+      "config_driven",
+      "strategy_lineage"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 22,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g1-narrative-synthesizer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-23",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 23 risco=high status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-narrative-synthesizer",
+    "capabilities": [
+      "strategy_lineage",
+      "market_agnostic"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 23,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g1-narrative-synthesizer",
+      "capabilities_any": [
+        "strategy_lineage"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-24",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 24 risco=critical status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-narrative-synthesizer",
+    "capabilities": [
+      "market_agnostic",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 24,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g1-narrative-synthesizer",
+      "capabilities_any": [
+        "market_agnostic"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-25",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 25 risco=low status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 25,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-26",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 26 risco=medium status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g1-narrative-synthesizer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 26,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g1-narrative-synthesizer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-27",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 27 risco=high status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-narrative-synthesizer",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 27,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g1-narrative-synthesizer",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-28",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 28 risco=critical status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-narrative-synthesizer",
+    "capabilities": [
+      "config_driven",
+      "strategy_lineage"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 28,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g1-narrative-synthesizer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-29",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 29 risco=low status=blocked",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g1-narrative-synthesizer",
+    "capabilities": [
+      "strategy_lineage",
+      "market_agnostic"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 29,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g1-narrative-synthesizer",
+      "capabilities_any": [
+        "strategy_lineage"
+      ]
+    }
+  },
+  {
+    "id": "g1-narrative-synthesizer-30",
+    "desc": "Sintetizador de Narrativa & Founder Brand: cenário 30 risco=medium status=ready",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-narrative-synthesizer",
+    "capabilities": [
+      "market_agnostic",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 30,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g1-narrative-synthesizer",
+      "capabilities_any": [
+        "market_agnostic"
+      ]
+    }
+  }
+]

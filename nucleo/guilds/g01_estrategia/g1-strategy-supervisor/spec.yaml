@@ -1,0 +1,40 @@
+id: g1-strategy-supervisor
+guild: G01-estrategia-founder-office
+ledger: operating
+tier: L0
+ai_enabled: true
+model_role: supervisor
+mode: SHADOW
+act_handler: supervisor_route
+outcome_clause:
+  statement: 'Estrategista-Chefe (Roteador da Guilda) entrega strategy-supervisor.routing_plan
+    verificável para: rotear o trabalho de estratégia, aplicar orçamento/prioridade
+    da guilda e garantir coerência entre tese, cenários, OKRs e narrativa'
+  positive_examples:
+  - Pedido de "tese para mercado X" roteado a opportunity-sizer + scenario-planner
+    e devolvido como brief único coerente
+  - Job de baixo ROI despromovido com justificativa de token-max registrada no Brain
+  - Deck de board montado a partir de saídas de 3 subagentes sem contradição entre
+    números
+  negative_examples:
+  - Dois subagentes entregam premissas conflitantes e o brief sai sem reconciliação
+  - Artefato liberado contendo nome de setor/vertical antes da definição oficial
+  - Job roda estourando o token-budget sem alerta ao unit-economist
+  delivered_event: strategy.brief consolidado é persistido no Brain com routing_decision
+    e budget_allocation vinculados e selo policy.check=pass
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query
+- brain.write
+- queue.dispatch
+- budget.read/allocate
+- policy.check (constituição)
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

@@ -1,0 +1,37 @@
+id: g2-prd-author
+guild: G02-produto-discovery
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Autor de PRD entrega prd-author.verdict verificável para: Transformar
+    diagnóstico e JTBD num PRD acionável, com cláusula de outcome contratual desde
+    a origem'
+  positive_examples:
+  - PRD nasce de diagnóstico existente, com cláusula de outcome completa e aceite
+    verificável
+  - Dependências de mercado marcadas como "(configurável quando o mercado for definido)"
+  - Handoff para Engenharia com critérios de aceite que viram evals
+  negative_examples:
+  - PRD sem diagnóstico anterior (viola C1)
+  - Cláusula de outcome vaga, sem trigger event
+  - PRD inventa um setor/vertical específico
+  delivered_event: evento prd.doc.committed é gravado e aprovado pelo po-guardian
+    com cláusula de outcome válida
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query
+- brain.write
+- repo.read
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

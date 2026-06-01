@@ -1,0 +1,37 @@
+id: g2-prototype-builder
+guild: G02-produto-discovery
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Construtor de Protótipo Clicável entrega prototype-builder.verdict verificável
+    para: Gerar protótipos clicáveis a partir do PRD para que a decisão de produto
+    seja feita sobre protótipo, não slide'
+  positive_examples:
+  - PRD vira protótipo clicável com fluxo feliz + estados de erro/vazio
+  - Protótipo iterado em horas após crítica de usabilidade
+  - Protótipo instrumentado gera sinais para o experimento
+  negative_examples:
+  - Decisão de produto levada a slide estático em vez de protótipo
+  - Protótipo só com caminho feliz, sem estados de erro/vazio
+  - Protótipo fora do design system (quebra coerência de marca)
+  delivered_event: evento prototype.clickable.committed é gravado com protótipo navegável
+    versionado e instrumentação ativa
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query
+- brain.write
+- repo.read
+- PrototypeProvider
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g2-prototype-builder-01",
+    "desc": "Construtor de Protótipo Clicável: cenário 01 risco=low status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 1,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-02",
+    "desc": "Construtor de Protótipo Clicável: cenário 02 risco=medium status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-prototype-builder",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 2,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g2-prototype-builder",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-03",
+    "desc": "Construtor de Protótipo Clicável: cenário 03 risco=high status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prototype-builder",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 3,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g2-prototype-builder",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-04",
+    "desc": "Construtor de Protótipo Clicável: cenário 04 risco=critical status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prototype-builder",
+    "capabilities": [
+      "config_driven",
+      "discovery_traceability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 4,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-prototype-builder",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-05",
+    "desc": "Construtor de Protótipo Clicável: cenário 05 risco=low status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-prototype-builder",
+    "capabilities": [
+      "discovery_traceability",
+      "lovability_gate"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 5,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g2-prototype-builder",
+      "capabilities_any": [
+        "discovery_traceability"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-06",
+    "desc": "Construtor de Protótipo Clicável: cenário 06 risco=medium status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prototype-builder",
+    "capabilities": [
+      "lovability_gate",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 6,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g2-prototype-builder",
+      "capabilities_any": [
+        "lovability_gate"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-07",
+    "desc": "Construtor de Protótipo Clicável: cenário 07 risco=high status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 7,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-08",
+    "desc": "Construtor de Protótipo Clicável: cenário 08 risco=critical status=blocked",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g2-prototype-builder",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 8,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-prototype-builder",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-09",
+    "desc": "Construtor de Protótipo Clicável: cenário 09 risco=low status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-prototype-builder",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 9,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g2-prototype-builder",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-10",
+    "desc": "Construtor de Protótipo Clicável: cenário 10 risco=medium status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-prototype-builder",
+    "capabilities": [
+      "config_driven",
+      "discovery_traceability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 10,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g2-prototype-builder",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-11",
+    "desc": "Construtor de Protótipo Clicável: cenário 11 risco=high status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prototype-builder",
+    "capabilities": [
+      "discovery_traceability",
+      "lovability_gate"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 11,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g2-prototype-builder",
+      "capabilities_any": [
+        "discovery_traceability"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-12",
+    "desc": "Construtor de Protótipo Clicável: cenário 12 risco=critical status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prototype-builder",
+    "capabilities": [
+      "lovability_gate",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 12,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-prototype-builder",
+      "capabilities_any": [
+        "lovability_gate"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-13",
+    "desc": "Construtor de Protótipo Clicável: cenário 13 risco=low status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 13,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-14",
+    "desc": "Construtor de Protótipo Clicável: cenário 14 risco=medium status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-prototype-builder",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 14,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g2-prototype-builder",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-15",
+    "desc": "Construtor de Protótipo Clicável: cenário 15 risco=high status=blocked",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "high",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g2-prototype-builder",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 15,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "blocked",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g2-prototype-builder",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-16",
+    "desc": "Construtor de Protótipo Clicável: cenário 16 risco=critical status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prototype-builder",
+    "capabilities": [
+      "config_driven",
+      "discovery_traceability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 16,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-prototype-builder",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-17",
+    "desc": "Construtor de Protótipo Clicável: cenário 17 risco=low status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-prototype-builder",
+    "capabilities": [
+      "discovery_traceability",
+      "lovability_gate"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 17,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g2-prototype-builder",
+      "capabilities_any": [
+        "discovery_traceability"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-18",
+    "desc": "Construtor de Protótipo Clicável: cenário 18 risco=medium status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prototype-builder",
+    "capabilities": [
+      "lovability_gate",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 18,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g2-prototype-builder",
+      "capabilities_any": [
+        "lovability_gate"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-19",
+    "desc": "Construtor de Protótipo Clicável: cenário 19 risco=high status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 19,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-20",
+    "desc": "Construtor de Protótipo Clicável: cenário 20 risco=critical status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prototype-builder",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 20,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-prototype-builder",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-21",
+    "desc": "Construtor de Protótipo Clicável: cenário 21 risco=low status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-prototype-builder",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 21,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g2-prototype-builder",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-22",
+    "desc": "Construtor de Protótipo Clicável: cenário 22 risco=medium status=blocked",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g2-prototype-builder",
+    "capabilities": [
+      "config_driven",
+      "discovery_traceability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 22,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g2-prototype-builder",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-23",
+    "desc": "Construtor de Protótipo Clicável: cenário 23 risco=high status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prototype-builder",
+    "capabilities": [
+      "discovery_traceability",
+      "lovability_gate"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 23,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g2-prototype-builder",
+      "capabilities_any": [
+        "discovery_traceability"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-24",
+    "desc": "Construtor de Protótipo Clicável: cenário 24 risco=critical status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prototype-builder",
+    "capabilities": [
+      "lovability_gate",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 24,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-prototype-builder",
+      "capabilities_any": [
+        "lovability_gate"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-25",
+    "desc": "Construtor de Protótipo Clicável: cenário 25 risco=low status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 25,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-26",
+    "desc": "Construtor de Protótipo Clicável: cenário 26 risco=medium status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-prototype-builder",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 26,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g2-prototype-builder",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-27",
+    "desc": "Construtor de Protótipo Clicável: cenário 27 risco=high status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prototype-builder",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 27,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g2-prototype-builder",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-28",
+    "desc": "Construtor de Protótipo Clicável: cenário 28 risco=critical status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prototype-builder",
+    "capabilities": [
+      "config_driven",
+      "discovery_traceability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 28,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-prototype-builder",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-29",
+    "desc": "Construtor de Protótipo Clicável: cenário 29 risco=low status=blocked",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g2-prototype-builder",
+    "capabilities": [
+      "discovery_traceability",
+      "lovability_gate"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 29,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g2-prototype-builder",
+      "capabilities_any": [
+        "discovery_traceability"
+      ]
+    }
+  },
+  {
+    "id": "g2-prototype-builder-30",
+    "desc": "Construtor de Protótipo Clicável: cenário 30 risco=medium status=ready",
+    "artifact_type": "prototype-builder.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-prototype-builder",
+    "capabilities": [
+      "lovability_gate",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 30,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-prototype-builder",
+      "handler_kind": "guardian_check",
+      "artifact_type": "prototype-builder.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g2-prototype-builder",
+      "capabilities_any": [
+        "lovability_gate"
+      ]
+    }
+  }
+]

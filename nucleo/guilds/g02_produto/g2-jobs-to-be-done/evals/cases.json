@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g2-jobs-to-be-done-01",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 01 risco=low status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 1,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-02",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 02 risco=medium status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-jobs-to-be-done",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 2,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g2-jobs-to-be-done",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-03",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 03 risco=high status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-jobs-to-be-done",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 3,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g2-jobs-to-be-done",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-04",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 04 risco=critical status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-jobs-to-be-done",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 4,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-jobs-to-be-done",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-05",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 05 risco=low status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-jobs-to-be-done",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 5,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g2-jobs-to-be-done",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-06",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 06 risco=medium status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-jobs-to-be-done",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 6,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g2-jobs-to-be-done",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-07",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 07 risco=high status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 7,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-08",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 08 risco=critical status=blocked",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g2-jobs-to-be-done",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 8,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-jobs-to-be-done",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-09",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 09 risco=low status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-jobs-to-be-done",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 9,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g2-jobs-to-be-done",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-10",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 10 risco=medium status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-jobs-to-be-done",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 10,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g2-jobs-to-be-done",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-11",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 11 risco=high status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-jobs-to-be-done",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 11,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g2-jobs-to-be-done",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-12",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 12 risco=critical status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-jobs-to-be-done",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 12,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-jobs-to-be-done",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-13",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 13 risco=low status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 13,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-14",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 14 risco=medium status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-jobs-to-be-done",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 14,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g2-jobs-to-be-done",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-15",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 15 risco=high status=blocked",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "high",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g2-jobs-to-be-done",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 15,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "blocked",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g2-jobs-to-be-done",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-16",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 16 risco=critical status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-jobs-to-be-done",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 16,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-jobs-to-be-done",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-17",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 17 risco=low status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-jobs-to-be-done",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 17,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g2-jobs-to-be-done",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-18",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 18 risco=medium status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-jobs-to-be-done",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 18,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g2-jobs-to-be-done",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-19",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 19 risco=high status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 19,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-20",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 20 risco=critical status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-jobs-to-be-done",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 20,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-jobs-to-be-done",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-21",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 21 risco=low status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-jobs-to-be-done",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 21,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g2-jobs-to-be-done",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-22",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 22 risco=medium status=blocked",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g2-jobs-to-be-done",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 22,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g2-jobs-to-be-done",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-23",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 23 risco=high status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-jobs-to-be-done",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 23,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g2-jobs-to-be-done",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-24",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 24 risco=critical status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-jobs-to-be-done",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 24,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-jobs-to-be-done",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-25",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 25 risco=low status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 25,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-26",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 26 risco=medium status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g2-jobs-to-be-done",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 26,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g2-jobs-to-be-done",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-27",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 27 risco=high status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-jobs-to-be-done",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 27,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g2-jobs-to-be-done",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-28",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 28 risco=critical status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-jobs-to-be-done",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 28,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g2-jobs-to-be-done",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-29",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 29 risco=low status=blocked",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g2-jobs-to-be-done",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 29,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g2-jobs-to-be-done",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g2-jobs-to-be-done-30",
+    "desc": "Extrator de Jobs-To-Be-Done: cenário 30 risco=medium status=ready",
+    "artifact_type": "jobs-to-be-done.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g2-jobs-to-be-done",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 30,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g2-jobs-to-be-done",
+      "handler_kind": "spec_driven",
+      "artifact_type": "jobs-to-be-done.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g2-jobs-to-be-done",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  }
+]

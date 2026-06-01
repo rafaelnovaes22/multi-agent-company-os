@@ -1,0 +1,37 @@
+id: g1-narrative-synthesizer
+guild: G01-estrategia-founder-office
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Sintetizador de Narrativa & Founder Brand entrega narrative-synthesizer.artifact
+    verificável para: sintetizar a narrativa/posicionamento do NÚCLEO e alimentar
+    o founder brand (build-in-public) como fosso de marca/distribuição'
+  positive_examples:
+  - Ship tier-1 vira content.post_artifact pronto para amplificação no mesmo dia
+  - Narrativa canônica reusada sem divergência por board-deck e investor-update
+  - Draft de founder brand aprovado no gate de taste e publicado pelo AI Founder
+  negative_examples:
+  - Dois artefatos de marca contam histórias contraditórias sobre o mesmo fato
+  - Post revela o vertical/mercado antes da definição oficial
+  - Conteúdo liberado sem passar pelo gate "se não é lovable, não lançamos"
+  delivered_event: narrative.canonical (atualizada) ou content.post_artifact é persistido
+    no Brain com policy.check (anti-vazamento + taste)=pass e link de origem ao ship/marco
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query/write
+- content.render
+- MessagingProvider (distribuição)
+- policy.check (anti-vazamento/taste)
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

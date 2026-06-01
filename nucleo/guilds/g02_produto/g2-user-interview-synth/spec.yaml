@@ -1,0 +1,38 @@
+id: g2-user-interview-synth
+guild: G02-produto-discovery
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Sintetizador de Entrevistas de Usuário entrega user-interview-synth.artifact
+    verificável para: Converter entrevistas e transcrições brutas em insights estruturados,
+    citáveis e desduplicados'
+  positive_examples:
+  - Transcrição de 40 min → 6 insights atômicos com citação e confiança, PII removida
+  - Dor já existente na base → contador de evidência +1, sem registro duplicado
+  - Insight forte → draft de post gerado e enviado ao Growth
+  negative_examples:
+  - Insight inventado sem citação de respaldo
+  - Nome/CPF/contato do entrevistado vazado no artefato (viola LGPD)
+  - Cinco registros idênticos criados para a mesma dor recorrente
+  delivered_event: 'evento interview.synthesis.committed é gravado com ≥ 1 insight
+    citável e flag pii_redacted: true'
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- security-privacy-guardian
+- artifact-architect
+tools:
+- brain.query
+- brain.write
+- TranscriptionProvider
+- LLMProvider
+- pii.redact
+soul_ref: soul.md
+memory_ref: memory.md

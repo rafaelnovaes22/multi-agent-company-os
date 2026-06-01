@@ -1,0 +1,38 @@
+id: mcp-gateway-comms
+guild: G00-nucleo-utilitarios
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Gateway de Mensageria (MessagingProvider) entrega mcp-gateway-comms.verdict
+    verificável para: abstrair todos os canais de comunicação atrás de uma interface
+    única, para que nenhum agente conheça um provedor específico'
+  positive_examples:
+  - Notificação do Hermes entregue ao DRI no canal configurado, com confirmação e
+    audit-log no Brain
+  - Provedor primário cai e o gateway faz failover para o secundário sem que nenhum
+    agente perceba (C7/C8)
+  - Conteúdo com PII detectado e mascarado antes do envio externo
+  negative_examples:
+  - Um agente importa o SDK de um provedor específico em vez de usar MessagingProvider
+  - Mesma mensagem enviada duas vezes por falta de idempotência
+  - Credencial de canal logada no audit-log em texto claro
+  delivered_event: comms.message_delivered (ou comms.message_failed) registrado com
+    provider, trace_id, status e checagem PII ok
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- MessagingProvider (interface abstrata sobre os canais)
+- brain.write (audit-log)
+- secrets.read (credenciais via cofre)
+- LLMProvider (sanitização opcional)
+soul_ref: soul.md
+memory_ref: memory.md

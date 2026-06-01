@@ -1,0 +1,37 @@
+id: g2-feedback-router
+guild: G02-produto-discovery
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Classificador e Roteador de Feedback entrega feedback-router.artifact
+    verificável para: Classificar todo feedback de usuário e roteá-lo à guilda certa,
+    fechando o loop de quem reportou'
+  positive_examples:
+  - Bug crítico → roteado a Engenharia com severidade e SLA em minutos
+  - Request recorrente → agregado ao tema e contador +1, enviado a JTBD
+  - Pico de sinal sobre um tema → alerta de tema emergente ao supervisor
+  negative_examples:
+  - Feedback com PII persistido sem redação (viola LGPD)
+  - Item de feedback sem dono nem rota
+  - Mesmo report duplicado dez vezes em vez de agregado
+  delivered_event: 'evento feedback.routed.committed é gravado com classe, dono, SLA
+    e pii_redacted: true'
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query
+- brain.write
+- MessagingProvider
+- LLMProvider
+- pii.redact
+soul_ref: soul.md
+memory_ref: memory.md

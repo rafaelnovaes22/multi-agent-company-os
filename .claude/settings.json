@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls nucleo/demo*.py)",
+      "Bash(ls nucleo/product/)",
+      "Bash(ls nucleo/guilds/)",
+      "Bash(python -m nucleo.demo_company)",
+      "Bash(python -m nucleo.demo_root)",
+      "Bash(python -c ' *)"
+    ]
+  }
+}

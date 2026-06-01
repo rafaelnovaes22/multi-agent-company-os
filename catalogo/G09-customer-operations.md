@@ -6,7 +6,7 @@ A guilda que opera a relação pós-aquisição: triagem, resolução, onboardin
 
 ### g9-custops-supervisor — Supervisor de Customer Operations
 - **Missão:** orquestrar suporte, onboarding e CX, roteando cada interação para o worker certo e garantindo SLA e qualidade "lovable" antes de qualquer entrega.
-- **Ledger:** BL · **Tier:** L1 · **Modo-alvo:** ASSISTED
+- **Ledger:** OP · **Tier:** L1 · **Modo-alvo:** ASSISTED
 - **Responsabilidades:**
   - Recebe todo evento de interação (ticket, mensagem, disputa, marco de onboarding) e roteia para o worker correto via `Command(goto=...)`/`Send`.
   - Monitora SLA por fila e por canal (configurável quando o mercado for definido) e rebalanceia carga entre tier1-resolver, escalation-manager e messaging-concierge.

@@ -1,6 +1,6 @@
 id: g9-custops-supervisor
 guild: G09-customer-operations
-ledger: billable
+ledger: operating
 tier: L1
 ai_enabled: true
 model_role: supervisor

@@ -1,6 +1,6 @@
 id: g8-sales-supervisor
 guild: G08-vendas-receita
-ledger: billable
+ledger: operating
 tier: L0
 ai_enabled: true
 model_role: supervisor

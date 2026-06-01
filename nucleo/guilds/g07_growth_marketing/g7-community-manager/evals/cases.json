@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g7-community-manager-01",
+    "desc": "Community Manager: cenário 01 risco=low status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 1,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-02",
+    "desc": "Community Manager: cenário 02 risco=medium status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g7-community-manager",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 2,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g7-community-manager",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-03",
+    "desc": "Community Manager: cenário 03 risco=high status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-community-manager",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 3,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g7-community-manager",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-04",
+    "desc": "Community Manager: cenário 04 risco=critical status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-community-manager",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 4,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g7-community-manager",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-05",
+    "desc": "Community Manager: cenário 05 risco=low status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g7-community-manager",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 5,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g7-community-manager",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-06",
+    "desc": "Community Manager: cenário 06 risco=medium status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-community-manager",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 6,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g7-community-manager",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-07",
+    "desc": "Community Manager: cenário 07 risco=high status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 7,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-08",
+    "desc": "Community Manager: cenário 08 risco=critical status=blocked",
+    "artifact_type": "community-manager.artifact",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g7-community-manager",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 8,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g7-community-manager",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-09",
+    "desc": "Community Manager: cenário 09 risco=low status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g7-community-manager",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 9,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g7-community-manager",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-10",
+    "desc": "Community Manager: cenário 10 risco=medium status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g7-community-manager",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 10,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g7-community-manager",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-11",
+    "desc": "Community Manager: cenário 11 risco=high status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-community-manager",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 11,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g7-community-manager",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-12",
+    "desc": "Community Manager: cenário 12 risco=critical status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-community-manager",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 12,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g7-community-manager",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-13",
+    "desc": "Community Manager: cenário 13 risco=low status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 13,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-14",
+    "desc": "Community Manager: cenário 14 risco=medium status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g7-community-manager",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 14,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g7-community-manager",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-15",
+    "desc": "Community Manager: cenário 15 risco=high status=blocked",
+    "artifact_type": "community-manager.artifact",
+    "risk": "high",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g7-community-manager",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 15,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "blocked",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g7-community-manager",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-16",
+    "desc": "Community Manager: cenário 16 risco=critical status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-community-manager",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 16,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g7-community-manager",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-17",
+    "desc": "Community Manager: cenário 17 risco=low status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g7-community-manager",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 17,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g7-community-manager",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-18",
+    "desc": "Community Manager: cenário 18 risco=medium status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-community-manager",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 18,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g7-community-manager",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-19",
+    "desc": "Community Manager: cenário 19 risco=high status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 19,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-20",
+    "desc": "Community Manager: cenário 20 risco=critical status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-community-manager",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 20,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g7-community-manager",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-21",
+    "desc": "Community Manager: cenário 21 risco=low status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g7-community-manager",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 21,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g7-community-manager",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-22",
+    "desc": "Community Manager: cenário 22 risco=medium status=blocked",
+    "artifact_type": "community-manager.artifact",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g7-community-manager",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 22,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g7-community-manager",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-23",
+    "desc": "Community Manager: cenário 23 risco=high status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-community-manager",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 23,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g7-community-manager",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-24",
+    "desc": "Community Manager: cenário 24 risco=critical status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-community-manager",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 24,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g7-community-manager",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-25",
+    "desc": "Community Manager: cenário 25 risco=low status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 25,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-26",
+    "desc": "Community Manager: cenário 26 risco=medium status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g7-community-manager",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 26,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g7-community-manager",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-27",
+    "desc": "Community Manager: cenário 27 risco=high status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-community-manager",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 27,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g7-community-manager",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-28",
+    "desc": "Community Manager: cenário 28 risco=critical status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-community-manager",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 28,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g7-community-manager",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-29",
+    "desc": "Community Manager: cenário 29 risco=low status=blocked",
+    "artifact_type": "community-manager.artifact",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g7-community-manager",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 29,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g7-community-manager",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g7-community-manager-30",
+    "desc": "Community Manager: cenário 30 risco=medium status=ready",
+    "artifact_type": "community-manager.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-community-manager",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 30,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-community-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "community-manager.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g7-community-manager",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  }
+]

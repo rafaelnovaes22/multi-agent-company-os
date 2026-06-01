@@ -1,0 +1,40 @@
+id: g9-onboarding-guide
+guild: G09-customer-operations
+ledger: billable
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Guia de Onboarding (a ativação é agent-owned) entrega onboarding-guide.artifact
+    verificável para: conduzir cada novo cliente ao primeiro outcome de valor (o "aha"),
+    porque a ativação acontece na camada de produto e é propriedade do agente'
+  positive_examples:
+  - Cliente atinge o primeiro Daily Active Outcome no dia 1 com nudge no momento da
+    trava
+  - Passo abandonado detectado e retomado via mensagem proativa
+  - Conta ativada e marcada com alto Referral Propensity Score, handoff a Growth
+  negative_examples:
+  - Cliente fica preso num passo sem nenhuma intervenção
+  - Envia nudge genérico ignorando o segmento e o progresso real
+  - Declara "ativado" sem que o primeiro outcome de valor tenha ocorrido
+  delivered_event: onboarding.first_outcome_reached registrado com time_to_value no
+    Brain
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+- artifact-architect
+tools:
+- brain.query
+- brain.emit
+- MessagingProvider
+- LLMProvider
+- product.state.read
+- scheduler.cron
+soul_ref: soul.md
+memory_ref: memory.md

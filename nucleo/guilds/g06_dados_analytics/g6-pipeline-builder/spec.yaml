@@ -1,0 +1,42 @@
+id: g6-pipeline-builder
+guild: G06-dados-analytics
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Construtor de Pipelines de Dados entrega pipeline-builder.artifact verificável
+    para: construir e manter os pipelines que alimentam o Company Brain a partir do
+    event store e de fontes externas'
+  positive_examples:
+  - Carregou a janela diária com freshness < SLA e zero duplicatas verificadas pelo
+    data-quality
+  - Reprocessou uma janela com falha de forma idempotente, sem alterar contagens já
+    corretas
+  - Bloqueou o load ao detectar quebra de contrato na fonte e abriu sinal para a guilda
+    dona da fonte
+  negative_examples:
+  - Carregou dados duplicados que inflaram a contagem da north-star
+  - Pipeline silenciosamente parou e o dashboard mostrou dados velhos sem alerta
+  - Alterou o schema-alvo sem coordenar com o g6-metrics-modeler, quebrando o semantic
+    layer
+  delivered_event: pipeline.run_succeeded && dataquality.contract_passed
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query
+- brain.write
+- repo.read
+- repo.write
+- ci.run
+- DataWarehouseProvider
+- scheduler
+soul_ref: soul.md
+memory_ref: memory.md

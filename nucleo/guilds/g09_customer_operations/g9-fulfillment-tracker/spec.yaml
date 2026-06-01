@@ -1,0 +1,38 @@
+id: g9-fulfillment-tracker
+guild: G09-customer-operations
+ledger: billable
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Rastreador de Cumprimento de Outcome (genérico) entrega fulfillment-tracker.artifact
+    verificável para: acompanhar o estado de uma transação/entrega de outcome do início
+    ao fim e avisar proativamente quando algo desvia do esperado'
+  positive_examples:
+  - Atraso de etapa detectado e cliente avisado proativamente antes de reclamar
+  - Evento de "outcome entregue" emitido no momento exato da entrega de valor
+  - Entrega fora do SLA abre ticket automático e escala se crítica
+  negative_examples:
+  - Estado da transação fica dessincronizado do real
+  - Não detecta uma entrega parada e o cliente descobre primeiro
+  - Emite "outcome entregue" antes de o valor ter ocorrido (fura billing/C3)
+  delivered_event: fulfillment.outcome_delivered ou fulfillment.deviation_flagged
+    registrado no Brain
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+- artifact-architect
+tools:
+- brain.query
+- brain.emit
+- MessagingProvider
+- scheduler.cron
+- state.read
+soul_ref: soul.md
+memory_ref: memory.md

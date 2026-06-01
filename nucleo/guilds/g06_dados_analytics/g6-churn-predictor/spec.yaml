@@ -1,0 +1,36 @@
+id: g6-churn-predictor
+guild: G06-dados-analytics
+ledger: billable
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Preditor de Churn entrega churn-predictor.artifact verificável para:
+    prever quais clientes têm alto risco de churn a tempo de o Growth/CX agir'
+  positive_examples:
+  - Entregou lista D-7 de alto risco com fatores explicáveis e o lifecycle-crm disparou
+    jornada de retenção
+  - Recalibrou o modelo após drift e restaurou o recall acima da baseline
+  - Mediu que a intervenção reduziu churn na coorte de risco, fechando o loop
+  negative_examples:
+  - Emitiu scores sem explicabilidade, deixando a ação impossível de priorizar
+  - Modelo degradou silenciosamente (drift) e seguiu prevendo com baixo recall
+  - Custo de inferência por score estourou o teto C3 sem ajuste
+  delivered_event: churn.scores_emitted && model.calibration_passed
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+- artifact-architect
+tools:
+- brain.query
+- brain.write
+- MLProvider
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

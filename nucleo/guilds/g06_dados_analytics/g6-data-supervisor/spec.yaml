@@ -1,0 +1,38 @@
+id: g6-data-supervisor
+guild: G06-dados-analytics
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: supervisor
+mode: SHADOW
+act_handler: supervisor_route
+outcome_clause:
+  statement: 'Supervisor de Dados & Analytics entrega data-supervisor.routing_plan
+    verificável para: orquestrar a guilda de dados para que toda pergunta de negócio
+    tenha resposta confiável e rastreável no Company Brain'
+  positive_examples:
+  - Roteou pedido "qual a D30 da última coorte?" ao g6-cohort-analyst e devolveu resposta
+    com citação ao evento-fonte
+  - Paralelizou churn+forecast+coorte para o board e entregou pacote único dentro
+    do SLA
+  - Bloqueou publicação de uma métrica não registrada no semantic layer e devolveu
+    ao g6-metrics-modeler
+  negative_examples:
+  - Roteou para um worker errado e a resposta veio sem fonte rastreável
+  - Deixou duas definições conflitantes da mesma métrica irem a dashboards diferentes
+  - Acumulou backlog sem priorizar por ROI, queimando tokens em jobs de baixo valor
+  delivered_event: analytics.request_routed && analytics.response_artifact_emitted
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+tools:
+- brain.query
+- brain.write
+- agent.dispatch
+- scheduler
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

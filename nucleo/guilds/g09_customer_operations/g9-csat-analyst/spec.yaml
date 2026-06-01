@@ -1,0 +1,36 @@
+id: g9-csat-analyst
+guild: G09-customer-operations
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Analista de CSAT/NPS entrega csat-analyst.artifact verificável para:
+    medir e explicar a satisfação do cliente (CSAT/NPS) e converter o sinal em ações
+    priorizadas'
+  positive_examples:
+  - Queda de CSAT numa fila detectada e ligada a um defeito específico
+  - Detrator recuperado após alerta automático a escalation-manager
+  - Promotor identificado e enviado a Growth com alto Referral Propensity Score
+  negative_examples:
+  - Dispara pesquisa em excesso e derruba a taxa de resposta
+  - Reporta score agregado sem explicar o driver da variação
+  - Deixa de alertar uma onda de detratores
+  delivered_event: csat.report_published / nps.report_published com drivers no Brain
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query
+- brain.emit
+- survey.dispatch
+- LLMProvider
+- MessagingProvider
+soul_ref: soul.md
+memory_ref: memory.md

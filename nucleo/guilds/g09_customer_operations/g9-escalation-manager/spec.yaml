@@ -1,0 +1,39 @@
+id: g9-escalation-manager
+guild: G09-customer-operations
+ledger: billable
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Gerente de Escalonamento entrega escalation-manager.artifact verificável
+    para: assumir os casos complexos, sensíveis ou multi-time, coordenando a resolução
+    até o fechamento do loop'
+  positive_examples:
+  - Bug recorrente roteado a Engenharia com repro e cliente atualizado até o fix
+  - Caso de risco jurídico pausado no gate humano antes de qualquer resposta sensível
+  - Padrão de 5 tickets do mesmo defeito consolidado num único incidente
+  negative_examples:
+  - Caso escalado fica parado aguardando outra guilda sem follow-up
+  - Responde caso de alto risco sem acionar o gate humano
+  - Fecha o caso sem confirmar a resolução com o cliente
+  delivered_event: escalation.resolved ou escalation.hard_gate_approved registrado,
+    com handoffs vinculados
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+- artifact-architect
+tools:
+- brain.query
+- brain.emit
+- MessagingProvider
+- LLMProvider
+- ticket.link
+- interrupt (gate humano)
+soul_ref: soul.md
+memory_ref: memory.md

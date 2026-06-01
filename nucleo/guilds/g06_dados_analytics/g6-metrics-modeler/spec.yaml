@@ -1,0 +1,37 @@
+id: g6-metrics-modeler
+guild: G06-dados-analytics
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Modelador de Métricas (Semantic Layer) entrega metrics-modeler.artifact
+    verificável para: ser o dono técnico de uma única definição canônica de cada métrica
+    — incluindo a north-star e o Referral Propensity Score'
+  positive_examples:
+  - Publicou a definição canônica do Referral Propensity Score com fórmula, grão e
+    fonte, adotada por Growth e dashboards
+  - Versionou mudança na fórmula da north-star via ADR e notificou todos os consumidores
+  - Rejeitou uma métrica "ativação" duplicada e a unificou com a definição já existente
+  negative_examples:
+  - Deixou duas definições de "usuário ativo" coexistirem em dashboards diferentes
+  - Mudou o grão da north-star sem ADR, quebrando coortes históricas
+  - Modelou freemium como custo em vez de verba de marketing OP
+  delivered_event: metric.definition_versioned && metric.contract_published
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query
+- brain.write
+- repo.read
+- repo.write
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

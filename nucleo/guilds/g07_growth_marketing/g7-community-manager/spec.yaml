@@ -1,0 +1,36 @@
+id: g7-community-manager
+guild: G07-growth-marketing
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Community Manager entrega community-manager.artifact verificável para:
+    semear e nutrir a comunidade por builders — antes de ela virar canal de reclamação
+    — como motor de amplificação e fonte de sinal'
+  positive_examples:
+  - Ship amplificado pela comunidade com participação de membros
+  - Feedback de produto roteado a G2 e problema de suporte a G9
+  - Membro de alta inclinação identificado e encaminhado a G11
+  negative_examples:
+  - Comunidade virando fila de reclamações sem roteamento a G9
+  - Conteúdo de comunidade citando mercado/vertical não definido
+  - Moderação ausente em thread tóxica/brand-risk
+  delivered_event: community.engagement_cycle.logged && signals.routed
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- CommunityProvider
+- MessagingProvider
+- brain.query
+- brain.write
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

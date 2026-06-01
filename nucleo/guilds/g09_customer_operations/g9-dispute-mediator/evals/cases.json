@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g9-dispute-mediator-01",
+    "desc": "Mediador de Disputas (genérico): cenário 01 risco=low status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 1,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-02",
+    "desc": "Mediador de Disputas (genérico): cenário 02 risco=medium status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g9-dispute-mediator",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 2,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g9-dispute-mediator",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-03",
+    "desc": "Mediador de Disputas (genérico): cenário 03 risco=high status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-dispute-mediator",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 3,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g9-dispute-mediator",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-04",
+    "desc": "Mediador de Disputas (genérico): cenário 04 risco=critical status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-dispute-mediator",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 4,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g9-dispute-mediator",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-05",
+    "desc": "Mediador de Disputas (genérico): cenário 05 risco=low status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g9-dispute-mediator",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 5,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g9-dispute-mediator",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-06",
+    "desc": "Mediador de Disputas (genérico): cenário 06 risco=medium status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-dispute-mediator",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 6,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g9-dispute-mediator",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-07",
+    "desc": "Mediador de Disputas (genérico): cenário 07 risco=high status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 7,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-08",
+    "desc": "Mediador de Disputas (genérico): cenário 08 risco=critical status=blocked",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g9-dispute-mediator",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 8,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g9-dispute-mediator",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-09",
+    "desc": "Mediador de Disputas (genérico): cenário 09 risco=low status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g9-dispute-mediator",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 9,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g9-dispute-mediator",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-10",
+    "desc": "Mediador de Disputas (genérico): cenário 10 risco=medium status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g9-dispute-mediator",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 10,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g9-dispute-mediator",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-11",
+    "desc": "Mediador de Disputas (genérico): cenário 11 risco=high status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-dispute-mediator",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 11,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g9-dispute-mediator",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-12",
+    "desc": "Mediador de Disputas (genérico): cenário 12 risco=critical status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-dispute-mediator",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 12,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g9-dispute-mediator",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-13",
+    "desc": "Mediador de Disputas (genérico): cenário 13 risco=low status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 13,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-14",
+    "desc": "Mediador de Disputas (genérico): cenário 14 risco=medium status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g9-dispute-mediator",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 14,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g9-dispute-mediator",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-15",
+    "desc": "Mediador de Disputas (genérico): cenário 15 risco=high status=blocked",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "high",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g9-dispute-mediator",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 15,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "blocked",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g9-dispute-mediator",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-16",
+    "desc": "Mediador de Disputas (genérico): cenário 16 risco=critical status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-dispute-mediator",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 16,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g9-dispute-mediator",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-17",
+    "desc": "Mediador de Disputas (genérico): cenário 17 risco=low status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g9-dispute-mediator",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 17,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g9-dispute-mediator",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-18",
+    "desc": "Mediador de Disputas (genérico): cenário 18 risco=medium status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-dispute-mediator",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 18,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g9-dispute-mediator",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-19",
+    "desc": "Mediador de Disputas (genérico): cenário 19 risco=high status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 19,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-20",
+    "desc": "Mediador de Disputas (genérico): cenário 20 risco=critical status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-dispute-mediator",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 20,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g9-dispute-mediator",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-21",
+    "desc": "Mediador de Disputas (genérico): cenário 21 risco=low status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g9-dispute-mediator",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 21,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g9-dispute-mediator",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-22",
+    "desc": "Mediador de Disputas (genérico): cenário 22 risco=medium status=blocked",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g9-dispute-mediator",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 22,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g9-dispute-mediator",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-23",
+    "desc": "Mediador de Disputas (genérico): cenário 23 risco=high status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-dispute-mediator",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 23,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g9-dispute-mediator",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-24",
+    "desc": "Mediador de Disputas (genérico): cenário 24 risco=critical status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-dispute-mediator",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 24,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g9-dispute-mediator",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-25",
+    "desc": "Mediador de Disputas (genérico): cenário 25 risco=low status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 25,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-26",
+    "desc": "Mediador de Disputas (genérico): cenário 26 risco=medium status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g9-dispute-mediator",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 26,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g9-dispute-mediator",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-27",
+    "desc": "Mediador de Disputas (genérico): cenário 27 risco=high status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-dispute-mediator",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 27,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g9-dispute-mediator",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-28",
+    "desc": "Mediador de Disputas (genérico): cenário 28 risco=critical status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-dispute-mediator",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 28,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g9-dispute-mediator",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-29",
+    "desc": "Mediador de Disputas (genérico): cenário 29 risco=low status=blocked",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g9-dispute-mediator",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 29,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g9-dispute-mediator",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g9-dispute-mediator-30",
+    "desc": "Mediador de Disputas (genérico): cenário 30 risco=medium status=ready",
+    "artifact_type": "dispute-mediator.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-dispute-mediator",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 30,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-dispute-mediator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "dispute-mediator.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g9-dispute-mediator",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  }
+]

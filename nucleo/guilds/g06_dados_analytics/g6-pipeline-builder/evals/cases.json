@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g6-pipeline-builder-01",
+    "desc": "Construtor de Pipelines de Dados: cenário 01 risco=low status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 1,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-02",
+    "desc": "Construtor de Pipelines de Dados: cenário 02 risco=medium status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g6-pipeline-builder",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 2,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g6-pipeline-builder",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-03",
+    "desc": "Construtor de Pipelines de Dados: cenário 03 risco=high status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-pipeline-builder",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 3,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g6-pipeline-builder",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-04",
+    "desc": "Construtor de Pipelines de Dados: cenário 04 risco=critical status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-pipeline-builder",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 4,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g6-pipeline-builder",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-05",
+    "desc": "Construtor de Pipelines de Dados: cenário 05 risco=low status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g6-pipeline-builder",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 5,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g6-pipeline-builder",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-06",
+    "desc": "Construtor de Pipelines de Dados: cenário 06 risco=medium status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-pipeline-builder",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 6,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g6-pipeline-builder",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-07",
+    "desc": "Construtor de Pipelines de Dados: cenário 07 risco=high status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 7,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-08",
+    "desc": "Construtor de Pipelines de Dados: cenário 08 risco=critical status=blocked",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g6-pipeline-builder",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 8,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g6-pipeline-builder",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-09",
+    "desc": "Construtor de Pipelines de Dados: cenário 09 risco=low status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g6-pipeline-builder",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 9,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g6-pipeline-builder",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-10",
+    "desc": "Construtor de Pipelines de Dados: cenário 10 risco=medium status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g6-pipeline-builder",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 10,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g6-pipeline-builder",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-11",
+    "desc": "Construtor de Pipelines de Dados: cenário 11 risco=high status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-pipeline-builder",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 11,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g6-pipeline-builder",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-12",
+    "desc": "Construtor de Pipelines de Dados: cenário 12 risco=critical status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-pipeline-builder",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 12,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g6-pipeline-builder",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-13",
+    "desc": "Construtor de Pipelines de Dados: cenário 13 risco=low status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 13,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-14",
+    "desc": "Construtor de Pipelines de Dados: cenário 14 risco=medium status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g6-pipeline-builder",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 14,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g6-pipeline-builder",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-15",
+    "desc": "Construtor de Pipelines de Dados: cenário 15 risco=high status=blocked",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "high",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g6-pipeline-builder",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 15,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "blocked",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g6-pipeline-builder",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-16",
+    "desc": "Construtor de Pipelines de Dados: cenário 16 risco=critical status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-pipeline-builder",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 16,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g6-pipeline-builder",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-17",
+    "desc": "Construtor de Pipelines de Dados: cenário 17 risco=low status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g6-pipeline-builder",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 17,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g6-pipeline-builder",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-18",
+    "desc": "Construtor de Pipelines de Dados: cenário 18 risco=medium status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-pipeline-builder",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 18,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g6-pipeline-builder",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-19",
+    "desc": "Construtor de Pipelines de Dados: cenário 19 risco=high status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 19,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-20",
+    "desc": "Construtor de Pipelines de Dados: cenário 20 risco=critical status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-pipeline-builder",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 20,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g6-pipeline-builder",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-21",
+    "desc": "Construtor de Pipelines de Dados: cenário 21 risco=low status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g6-pipeline-builder",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 21,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g6-pipeline-builder",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-22",
+    "desc": "Construtor de Pipelines de Dados: cenário 22 risco=medium status=blocked",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g6-pipeline-builder",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 22,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g6-pipeline-builder",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-23",
+    "desc": "Construtor de Pipelines de Dados: cenário 23 risco=high status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-pipeline-builder",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 23,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g6-pipeline-builder",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-24",
+    "desc": "Construtor de Pipelines de Dados: cenário 24 risco=critical status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-pipeline-builder",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 24,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g6-pipeline-builder",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-25",
+    "desc": "Construtor de Pipelines de Dados: cenário 25 risco=low status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 25,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-26",
+    "desc": "Construtor de Pipelines de Dados: cenário 26 risco=medium status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g6-pipeline-builder",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 26,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g6-pipeline-builder",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-27",
+    "desc": "Construtor de Pipelines de Dados: cenário 27 risco=high status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-pipeline-builder",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 27,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g6-pipeline-builder",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-28",
+    "desc": "Construtor de Pipelines de Dados: cenário 28 risco=critical status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-pipeline-builder",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 28,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g6-pipeline-builder",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-29",
+    "desc": "Construtor de Pipelines de Dados: cenário 29 risco=low status=blocked",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g6-pipeline-builder",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 29,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g6-pipeline-builder",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g6-pipeline-builder-30",
+    "desc": "Construtor de Pipelines de Dados: cenário 30 risco=medium status=ready",
+    "artifact_type": "pipeline-builder.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-pipeline-builder",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 30,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-pipeline-builder",
+      "handler_kind": "spec_driven",
+      "artifact_type": "pipeline-builder.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g6-pipeline-builder",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  }
+]

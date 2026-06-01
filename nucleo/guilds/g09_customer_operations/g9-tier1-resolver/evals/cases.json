@@ -1,0 +1,842 @@
+[
+  {
+    "id": "g9-tier1-resolver-01",
+    "desc": "Resolvedor de Nível 1: fila atendimento 01",
+    "tenant_id": "tenant-0",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 2
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 1,
+      "overdue_replies": 0
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-02",
+    "desc": "Resolvedor de Nível 1: fila atendimento 02",
+    "tenant_id": "tenant-1",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 8
+        },
+        {
+          "customer": "Cliente 2",
+          "type": "comercial",
+          "waiting_hours": 25
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 2,
+      "overdue_replies": 1
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-03",
+    "desc": "Resolvedor de Nível 1: fila atendimento 03",
+    "tenant_id": "tenant-2",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 25
+        },
+        {
+          "customer": "Cliente 2",
+          "type": "comercial",
+          "waiting_hours": 36
+        },
+        {
+          "customer": "Cliente 3",
+          "type": "suporte",
+          "waiting_hours": 48
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 3,
+      "overdue_replies": 3
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-04",
+    "desc": "Resolvedor de Nível 1: fila atendimento 04",
+    "tenant_id": "tenant-3",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 36
+        },
+        {
+          "customer": "Cliente 2",
+          "type": "comercial",
+          "waiting_hours": 48
+        },
+        {
+          "customer": "Cliente 3",
+          "type": "suporte",
+          "waiting_hours": 2
+        },
+        {
+          "customer": "Cliente 4",
+          "type": "duvida",
+          "waiting_hours": 8
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 4,
+      "overdue_replies": 2
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-05",
+    "desc": "Resolvedor de Nível 1: fila atendimento 05",
+    "tenant_id": "tenant-0",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 48
+        },
+        {
+          "customer": "Cliente 2",
+          "type": "comercial",
+          "waiting_hours": 2
+        },
+        {
+          "customer": "Cliente 3",
+          "type": "suporte",
+          "waiting_hours": 8
+        },
+        {
+          "customer": "Cliente 4",
+          "type": "duvida",
+          "waiting_hours": 25
+        },
+        {
+          "customer": "Cliente 5",
+          "type": "comercial",
+          "waiting_hours": 36
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 5,
+      "overdue_replies": 3
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-06",
+    "desc": "Resolvedor de Nível 1: fila atendimento 06",
+    "tenant_id": "tenant-1",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 2
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 1,
+      "overdue_replies": 0
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-07",
+    "desc": "Resolvedor de Nível 1: fila atendimento 07",
+    "tenant_id": "tenant-2",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 8
+        },
+        {
+          "customer": "Cliente 2",
+          "type": "comercial",
+          "waiting_hours": 25
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 2,
+      "overdue_replies": 1
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-08",
+    "desc": "Resolvedor de Nível 1: fila atendimento 08",
+    "tenant_id": "tenant-3",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 25
+        },
+        {
+          "customer": "Cliente 2",
+          "type": "comercial",
+          "waiting_hours": 36
+        },
+        {
+          "customer": "Cliente 3",
+          "type": "suporte",
+          "waiting_hours": 48
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 3,
+      "overdue_replies": 3
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-09",
+    "desc": "Resolvedor de Nível 1: fila atendimento 09",
+    "tenant_id": "tenant-0",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 36
+        },
+        {
+          "customer": "Cliente 2",
+          "type": "comercial",
+          "waiting_hours": 48
+        },
+        {
+          "customer": "Cliente 3",
+          "type": "suporte",
+          "waiting_hours": 2
+        },
+        {
+          "customer": "Cliente 4",
+          "type": "duvida",
+          "waiting_hours": 8
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 4,
+      "overdue_replies": 2
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-10",
+    "desc": "Resolvedor de Nível 1: fila atendimento 10",
+    "tenant_id": "tenant-1",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 48
+        },
+        {
+          "customer": "Cliente 2",
+          "type": "comercial",
+          "waiting_hours": 2
+        },
+        {
+          "customer": "Cliente 3",
+          "type": "suporte",
+          "waiting_hours": 8
+        },
+        {
+          "customer": "Cliente 4",
+          "type": "duvida",
+          "waiting_hours": 25
+        },
+        {
+          "customer": "Cliente 5",
+          "type": "comercial",
+          "waiting_hours": 36
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 5,
+      "overdue_replies": 3
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-11",
+    "desc": "Resolvedor de Nível 1: fila atendimento 11",
+    "tenant_id": "tenant-2",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 2
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 1,
+      "overdue_replies": 0
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-12",
+    "desc": "Resolvedor de Nível 1: fila atendimento 12",
+    "tenant_id": "tenant-3",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 8
+        },
+        {
+          "customer": "Cliente 2",
+          "type": "comercial",
+          "waiting_hours": 25
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 2,
+      "overdue_replies": 1
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-13",
+    "desc": "Resolvedor de Nível 1: fila atendimento 13",
+    "tenant_id": "tenant-0",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 25
+        },
+        {
+          "customer": "Cliente 2",
+          "type": "comercial",
+          "waiting_hours": 36
+        },
+        {
+          "customer": "Cliente 3",
+          "type": "suporte",
+          "waiting_hours": 48
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 3,
+      "overdue_replies": 3
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-14",
+    "desc": "Resolvedor de Nível 1: fila atendimento 14",
+    "tenant_id": "tenant-1",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 36
+        },
+        {
+          "customer": "Cliente 2",
+          "type": "comercial",
+          "waiting_hours": 48
+        },
+        {
+          "customer": "Cliente 3",
+          "type": "suporte",
+          "waiting_hours": 2
+        },
+        {
+          "customer": "Cliente 4",
+          "type": "duvida",
+          "waiting_hours": 8
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 4,
+      "overdue_replies": 2
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-15",
+    "desc": "Resolvedor de Nível 1: fila atendimento 15",
+    "tenant_id": "tenant-2",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 48
+        },
+        {
+          "customer": "Cliente 2",
+          "type": "comercial",
+          "waiting_hours": 2
+        },
+        {
+          "customer": "Cliente 3",
+          "type": "suporte",
+          "waiting_hours": 8
+        },
+        {
+          "customer": "Cliente 4",
+          "type": "duvida",
+          "waiting_hours": 25
+        },
+        {
+          "customer": "Cliente 5",
+          "type": "comercial",
+          "waiting_hours": 36
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 5,
+      "overdue_replies": 3
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-16",
+    "desc": "Resolvedor de Nível 1: fila atendimento 16",
+    "tenant_id": "tenant-3",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 2
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 1,
+      "overdue_replies": 0
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-17",
+    "desc": "Resolvedor de Nível 1: fila atendimento 17",
+    "tenant_id": "tenant-0",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 8
+        },
+        {
+          "customer": "Cliente 2",
+          "type": "comercial",
+          "waiting_hours": 25
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 2,
+      "overdue_replies": 1
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-18",
+    "desc": "Resolvedor de Nível 1: fila atendimento 18",
+    "tenant_id": "tenant-1",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 25
+        },
+        {
+          "customer": "Cliente 2",
+          "type": "comercial",
+          "waiting_hours": 36
+        },
+        {
+          "customer": "Cliente 3",
+          "type": "suporte",
+          "waiting_hours": 48
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 3,
+      "overdue_replies": 3
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-19",
+    "desc": "Resolvedor de Nível 1: fila atendimento 19",
+    "tenant_id": "tenant-2",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 36
+        },
+        {
+          "customer": "Cliente 2",
+          "type": "comercial",
+          "waiting_hours": 48
+        },
+        {
+          "customer": "Cliente 3",
+          "type": "suporte",
+          "waiting_hours": 2
+        },
+        {
+          "customer": "Cliente 4",
+          "type": "duvida",
+          "waiting_hours": 8
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 4,
+      "overdue_replies": 2
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-20",
+    "desc": "Resolvedor de Nível 1: fila atendimento 20",
+    "tenant_id": "tenant-3",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 48
+        },
+        {
+          "customer": "Cliente 2",
+          "type": "comercial",
+          "waiting_hours": 2
+        },
+        {
+          "customer": "Cliente 3",
+          "type": "suporte",
+          "waiting_hours": 8
+        },
+        {
+          "customer": "Cliente 4",
+          "type": "duvida",
+          "waiting_hours": 25
+        },
+        {
+          "customer": "Cliente 5",
+          "type": "comercial",
+          "waiting_hours": 36
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 5,
+      "overdue_replies": 3
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-21",
+    "desc": "Resolvedor de Nível 1: fila atendimento 21",
+    "tenant_id": "tenant-0",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 2
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 1,
+      "overdue_replies": 0
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-22",
+    "desc": "Resolvedor de Nível 1: fila atendimento 22",
+    "tenant_id": "tenant-1",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 8
+        },
+        {
+          "customer": "Cliente 2",
+          "type": "comercial",
+          "waiting_hours": 25
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 2,
+      "overdue_replies": 1
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-23",
+    "desc": "Resolvedor de Nível 1: fila atendimento 23",
+    "tenant_id": "tenant-2",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 25
+        },
+        {
+          "customer": "Cliente 2",
+          "type": "comercial",
+          "waiting_hours": 36
+        },
+        {
+          "customer": "Cliente 3",
+          "type": "suporte",
+          "waiting_hours": 48
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 3,
+      "overdue_replies": 3
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-24",
+    "desc": "Resolvedor de Nível 1: fila atendimento 24",
+    "tenant_id": "tenant-3",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 36
+        },
+        {
+          "customer": "Cliente 2",
+          "type": "comercial",
+          "waiting_hours": 48
+        },
+        {
+          "customer": "Cliente 3",
+          "type": "suporte",
+          "waiting_hours": 2
+        },
+        {
+          "customer": "Cliente 4",
+          "type": "duvida",
+          "waiting_hours": 8
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 4,
+      "overdue_replies": 2
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-25",
+    "desc": "Resolvedor de Nível 1: fila atendimento 25",
+    "tenant_id": "tenant-0",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 48
+        },
+        {
+          "customer": "Cliente 2",
+          "type": "comercial",
+          "waiting_hours": 2
+        },
+        {
+          "customer": "Cliente 3",
+          "type": "suporte",
+          "waiting_hours": 8
+        },
+        {
+          "customer": "Cliente 4",
+          "type": "duvida",
+          "waiting_hours": 25
+        },
+        {
+          "customer": "Cliente 5",
+          "type": "comercial",
+          "waiting_hours": 36
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 5,
+      "overdue_replies": 3
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-26",
+    "desc": "Resolvedor de Nível 1: fila atendimento 26",
+    "tenant_id": "tenant-1",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 2
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 1,
+      "overdue_replies": 0
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-27",
+    "desc": "Resolvedor de Nível 1: fila atendimento 27",
+    "tenant_id": "tenant-2",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 8
+        },
+        {
+          "customer": "Cliente 2",
+          "type": "comercial",
+          "waiting_hours": 25
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 2,
+      "overdue_replies": 1
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-28",
+    "desc": "Resolvedor de Nível 1: fila atendimento 28",
+    "tenant_id": "tenant-3",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 25
+        },
+        {
+          "customer": "Cliente 2",
+          "type": "comercial",
+          "waiting_hours": 36
+        },
+        {
+          "customer": "Cliente 3",
+          "type": "suporte",
+          "waiting_hours": 48
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 3,
+      "overdue_replies": 3
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-29",
+    "desc": "Resolvedor de Nível 1: fila atendimento 29",
+    "tenant_id": "tenant-0",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 36
+        },
+        {
+          "customer": "Cliente 2",
+          "type": "comercial",
+          "waiting_hours": 48
+        },
+        {
+          "customer": "Cliente 3",
+          "type": "suporte",
+          "waiting_hours": 2
+        },
+        {
+          "customer": "Cliente 4",
+          "type": "duvida",
+          "waiting_hours": 8
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 4,
+      "overdue_replies": 2
+    }
+  },
+  {
+    "id": "g9-tier1-resolver-30",
+    "desc": "Resolvedor de Nível 1: fila atendimento 30",
+    "tenant_id": "tenant-1",
+    "atendimento": {
+      "requests": [
+        {
+          "customer": "Cliente 1",
+          "type": "duvida",
+          "waiting_hours": 48
+        },
+        {
+          "customer": "Cliente 2",
+          "type": "comercial",
+          "waiting_hours": 2
+        },
+        {
+          "customer": "Cliente 3",
+          "type": "suporte",
+          "waiting_hours": 8
+        },
+        {
+          "customer": "Cliente 4",
+          "type": "duvida",
+          "waiting_hours": 25
+        },
+        {
+          "customer": "Cliente 5",
+          "type": "comercial",
+          "waiting_hours": 36
+        }
+      ]
+    },
+    "expected": {
+      "reply_queue_count": 5,
+      "overdue_replies": 3
+    }
+  }
+]

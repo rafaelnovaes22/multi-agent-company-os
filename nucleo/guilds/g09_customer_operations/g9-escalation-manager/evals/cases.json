@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g9-escalation-manager-01",
+    "desc": "Gerente de Escalonamento: cenário 01 risco=low status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 1,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-02",
+    "desc": "Gerente de Escalonamento: cenário 02 risco=medium status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g9-escalation-manager",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 2,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g9-escalation-manager",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-03",
+    "desc": "Gerente de Escalonamento: cenário 03 risco=high status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-escalation-manager",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 3,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g9-escalation-manager",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-04",
+    "desc": "Gerente de Escalonamento: cenário 04 risco=critical status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-escalation-manager",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 4,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g9-escalation-manager",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-05",
+    "desc": "Gerente de Escalonamento: cenário 05 risco=low status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g9-escalation-manager",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 5,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g9-escalation-manager",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-06",
+    "desc": "Gerente de Escalonamento: cenário 06 risco=medium status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-escalation-manager",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 6,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g9-escalation-manager",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-07",
+    "desc": "Gerente de Escalonamento: cenário 07 risco=high status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 7,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-08",
+    "desc": "Gerente de Escalonamento: cenário 08 risco=critical status=blocked",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g9-escalation-manager",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 8,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g9-escalation-manager",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-09",
+    "desc": "Gerente de Escalonamento: cenário 09 risco=low status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g9-escalation-manager",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 9,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g9-escalation-manager",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-10",
+    "desc": "Gerente de Escalonamento: cenário 10 risco=medium status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g9-escalation-manager",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 10,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g9-escalation-manager",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-11",
+    "desc": "Gerente de Escalonamento: cenário 11 risco=high status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-escalation-manager",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 11,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g9-escalation-manager",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-12",
+    "desc": "Gerente de Escalonamento: cenário 12 risco=critical status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-escalation-manager",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 12,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g9-escalation-manager",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-13",
+    "desc": "Gerente de Escalonamento: cenário 13 risco=low status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 13,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-14",
+    "desc": "Gerente de Escalonamento: cenário 14 risco=medium status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g9-escalation-manager",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 14,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g9-escalation-manager",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-15",
+    "desc": "Gerente de Escalonamento: cenário 15 risco=high status=blocked",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "high",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g9-escalation-manager",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 15,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "blocked",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g9-escalation-manager",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-16",
+    "desc": "Gerente de Escalonamento: cenário 16 risco=critical status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-escalation-manager",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 16,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g9-escalation-manager",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-17",
+    "desc": "Gerente de Escalonamento: cenário 17 risco=low status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g9-escalation-manager",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 17,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g9-escalation-manager",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-18",
+    "desc": "Gerente de Escalonamento: cenário 18 risco=medium status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-escalation-manager",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 18,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g9-escalation-manager",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-19",
+    "desc": "Gerente de Escalonamento: cenário 19 risco=high status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 19,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-20",
+    "desc": "Gerente de Escalonamento: cenário 20 risco=critical status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-escalation-manager",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 20,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g9-escalation-manager",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-21",
+    "desc": "Gerente de Escalonamento: cenário 21 risco=low status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g9-escalation-manager",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 21,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g9-escalation-manager",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-22",
+    "desc": "Gerente de Escalonamento: cenário 22 risco=medium status=blocked",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g9-escalation-manager",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 22,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g9-escalation-manager",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-23",
+    "desc": "Gerente de Escalonamento: cenário 23 risco=high status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-escalation-manager",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 23,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g9-escalation-manager",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-24",
+    "desc": "Gerente de Escalonamento: cenário 24 risco=critical status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-escalation-manager",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 24,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g9-escalation-manager",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-25",
+    "desc": "Gerente de Escalonamento: cenário 25 risco=low status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 25,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-26",
+    "desc": "Gerente de Escalonamento: cenário 26 risco=medium status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g9-escalation-manager",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 26,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g9-escalation-manager",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-27",
+    "desc": "Gerente de Escalonamento: cenário 27 risco=high status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-escalation-manager",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 27,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g9-escalation-manager",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-28",
+    "desc": "Gerente de Escalonamento: cenário 28 risco=critical status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-escalation-manager",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 28,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g9-escalation-manager",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-29",
+    "desc": "Gerente de Escalonamento: cenário 29 risco=low status=blocked",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g9-escalation-manager",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 29,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g9-escalation-manager",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g9-escalation-manager-30",
+    "desc": "Gerente de Escalonamento: cenário 30 risco=medium status=ready",
+    "artifact_type": "escalation-manager.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-escalation-manager",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 30,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-escalation-manager",
+      "handler_kind": "spec_driven",
+      "artifact_type": "escalation-manager.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g9-escalation-manager",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  }
+]

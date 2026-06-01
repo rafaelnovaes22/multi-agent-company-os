@@ -1,0 +1,40 @@
+id: g7-lifecycle-crm
+guild: G07-growth-marketing
+ledger: billable
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Lifecycle & CRM entrega lifecycle-crm.artifact verificável para: desenhar
+    e operar jornadas de e-mail/push/mensageria que ativam, retêm e expandem usuários
+    ao longo do ciclo de vida'
+  positive_examples:
+  - Jornada de winback recupera X% de usuários inativos vs. controle
+  - Sequência de ativação sobe a taxa de ativação no produto
+  - Mensagens enviadas só a contatos com consentimento válido
+  negative_examples:
+  - Envio a contato sem base legal/opt-in (violação LGPD)
+  - Jornada sem métrica de sucesso definida
+  - Mensagem assumindo contexto de vertical não definido
+  delivered_event: lifecycle.journey.live && consent.check.passed
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+- security-privacy-guardian
+- artifact-architect
+tools:
+- MessagingProvider
+- email.send
+- push.send
+- brain.query
+- brain.write
+- metrics.read
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

@@ -1,0 +1,40 @@
+id: g9-messaging-concierge
+guild: G09-customer-operations
+ledger: billable
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Concierge de Mensageria (qualquer canal via C7) entrega messaging-concierge.artifact
+    verificável para: ser a interface de atendimento conversacional em qualquer canal
+    de mensageria, mantendo contexto e tom de marca ponta a ponta'
+  positive_examples:
+  - Conversa multi-mensagem respondida mantendo todo o contexto anterior
+  - Pedido fora de alçada convertido em ticket e roteado sem perder o cliente
+  - Mensagem proativa bloqueada por falta de opt-in (compliance respeitado)
+  negative_examples:
+  - Perde o contexto e pede dados que o cliente já forneceu
+  - Envia mensagem proativa sem consentimento (violação LGPD)
+  - Sai do tom de marca de forma que gera reclamação
+  delivered_event: message.replied ou ticket.created_from_message registrado com channel
+    no Brain
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+- security-privacy-guardian
+- artifact-architect
+tools:
+- MessagingProvider
+- brain.query
+- brain.emit
+- LLMProvider
+- consent.check
+- pii.detect
+soul_ref: soul.md
+memory_ref: memory.md

@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g9-fulfillment-tracker-01",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 01 risco=low status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 1,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-02",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 02 risco=medium status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g9-fulfillment-tracker",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 2,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g9-fulfillment-tracker",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-03",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 03 risco=high status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-fulfillment-tracker",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 3,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g9-fulfillment-tracker",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-04",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 04 risco=critical status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-fulfillment-tracker",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 4,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g9-fulfillment-tracker",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-05",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 05 risco=low status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g9-fulfillment-tracker",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 5,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g9-fulfillment-tracker",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-06",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 06 risco=medium status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-fulfillment-tracker",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 6,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g9-fulfillment-tracker",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-07",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 07 risco=high status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 7,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-08",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 08 risco=critical status=blocked",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g9-fulfillment-tracker",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 8,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g9-fulfillment-tracker",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-09",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 09 risco=low status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g9-fulfillment-tracker",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 9,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g9-fulfillment-tracker",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-10",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 10 risco=medium status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g9-fulfillment-tracker",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 10,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g9-fulfillment-tracker",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-11",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 11 risco=high status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-fulfillment-tracker",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 11,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g9-fulfillment-tracker",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-12",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 12 risco=critical status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-fulfillment-tracker",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 12,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g9-fulfillment-tracker",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-13",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 13 risco=low status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 13,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-14",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 14 risco=medium status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g9-fulfillment-tracker",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 14,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g9-fulfillment-tracker",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-15",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 15 risco=high status=blocked",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "high",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g9-fulfillment-tracker",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 15,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "blocked",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g9-fulfillment-tracker",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-16",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 16 risco=critical status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-fulfillment-tracker",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 16,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g9-fulfillment-tracker",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-17",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 17 risco=low status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g9-fulfillment-tracker",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 17,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g9-fulfillment-tracker",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-18",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 18 risco=medium status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-fulfillment-tracker",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 18,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g9-fulfillment-tracker",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-19",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 19 risco=high status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 19,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-20",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 20 risco=critical status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-fulfillment-tracker",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 20,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g9-fulfillment-tracker",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-21",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 21 risco=low status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g9-fulfillment-tracker",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 21,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g9-fulfillment-tracker",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-22",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 22 risco=medium status=blocked",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g9-fulfillment-tracker",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 22,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g9-fulfillment-tracker",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-23",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 23 risco=high status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-fulfillment-tracker",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 23,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g9-fulfillment-tracker",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-24",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 24 risco=critical status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-fulfillment-tracker",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 24,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g9-fulfillment-tracker",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-25",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 25 risco=low status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 25,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-26",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 26 risco=medium status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g9-fulfillment-tracker",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 26,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g9-fulfillment-tracker",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-27",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 27 risco=high status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-fulfillment-tracker",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 27,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g9-fulfillment-tracker",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-28",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 28 risco=critical status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-fulfillment-tracker",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 28,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g9-fulfillment-tracker",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-29",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 29 risco=low status=blocked",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g9-fulfillment-tracker",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 29,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g9-fulfillment-tracker",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g9-fulfillment-tracker-30",
+    "desc": "Rastreador de Cumprimento de Outcome (genérico): cenário 30 risco=medium status=ready",
+    "artifact_type": "fulfillment-tracker.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g9-fulfillment-tracker",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 30,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g9-fulfillment-tracker",
+      "handler_kind": "spec_driven",
+      "artifact_type": "fulfillment-tracker.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g9-fulfillment-tracker",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  }
+]

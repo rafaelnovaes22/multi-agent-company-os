@@ -1,0 +1,36 @@
+id: g7-referral-designer
+guild: G07-growth-marketing
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Referral Designer entrega referral-designer.artifact verificável para:
+    desenhar o programa de indicação e operar o **Referral Propensity Score** (nosso
+    equivalente ao Lovable Score), tratando freemium/delight como verba de marketing'
+  positive_examples:
+  - Programa que sobe o k-factor mantendo gasto-delight > gasto-pago
+  - Referral Propensity Score recalibrado e validado por coorte
+  - Momento-de-delight instrumentado convertendo indicações acima da meta
+  negative_examples:
+  - Incentivo que estoura o orçamento de delight (OP)
+  - Score publicado sem validação estatística com G6
+  - Programa sem mecanismo anti-fraude
+  delivered_event: referral.program.spec_approved && propensity_score.v_bumped
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query
+- brain.write
+- metrics.read
+- feature_flag.set
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

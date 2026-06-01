@@ -1,0 +1,36 @@
+id: g7-influencer-scout
+guild: G07-growth-marketing
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Influencer Scout entrega influencer-scout.artifact verificável para:
+    identificar e avaliar parcerias com criadores que amplifiquem a marca como fosso
+    de distribuição'
+  positive_examples:
+  - Shortlist com score de fit/ROI e brand-safety verificado
+  - Creator com audiência fraudulenta sinalizado e descartado
+  - Dossiê de outreach entregue para ativação
+  negative_examples:
+  - Recomendação sem checagem de brand-safety
+  - Lista sem critério de fit (apenas tamanho de audiência)
+  - Sugestão de nicho assumindo um mercado não definido
+  delivered_event: influencer.shortlist.committed && brand_safety.check.passed
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- SocialProvider
+- web.fetch
+- brain.query
+- brain.write
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

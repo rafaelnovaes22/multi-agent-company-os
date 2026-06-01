@@ -1,0 +1,38 @@
+id: g6-dashboard-builder
+guild: G06-dados-analytics
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: painel_dono
+outcome_clause:
+  statement: 'Construtor de Dashboards do Operator Console entrega dashboard.operator_console
+    verificável para: materializar dashboards do Operator Console que tornam toda
+    a empresa visível em um só lugar (YC#3)'
+  positive_examples:
+  - Publicou o painel da north-star ligado ao Referral Propensity Score com drill-down
+    até o evento-fonte
+  - Adicionou a fila de gates pendentes ao Console, reduzindo o tempo de aprovação
+    humana
+  - Gerou changelog de build-in-public ao lançar o painel de custo por guilda
+  negative_examples:
+  - Publicou um gráfico com métrica redefinida localmente, divergindo do semantic
+    layer
+  - Lançou painel ilegível/ambíguo que reprovaria no gate de taste
+  - Exibiu número sem drill-down, impedindo auditoria do valor
+  delivered_event: dashboard.published && dashboard.semantic_layer_linked
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+tools:
+- brain.query
+- repo.read
+- repo.write
+- DashboardProvider
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

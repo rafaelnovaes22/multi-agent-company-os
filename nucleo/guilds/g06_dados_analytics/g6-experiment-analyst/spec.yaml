@@ -1,0 +1,35 @@
+id: g6-experiment-analyst
+guild: G06-dados-analytics
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Analista de Experimentos A/B entrega experiment-analyst.artifact verificável
+    para: ler resultados de experimentos A/B com rigor estatístico e produzir uma
+    decisão clara (ship/kill/iterate)'
+  positive_examples:
+  - Leu A/B com poder adequado, recomendou ship com IC 95% e registrou o aprendizado
+  - Detectou peeking e barrou uma decisão prematura de ship
+  - Mostrou que a variante ganhou na vanity mas perdeu no guardrail e recomendou kill
+  negative_examples:
+  - Declarou vitória com amostra insuficiente (falso positivo)
+  - Avaliou contra métrica não-canônica, contradizendo o semantic layer
+  - Ignorou correção de múltiplas comparações e validou um resultado espúrio
+  delivered_event: experiment.readout_emitted && decision.recommended
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query
+- brain.write
+- StatsProvider
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g6-churn-predictor-01",
+    "desc": "Preditor de Churn: cenário 01 risco=low status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 1,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-02",
+    "desc": "Preditor de Churn: cenário 02 risco=medium status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g6-churn-predictor",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 2,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g6-churn-predictor",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-03",
+    "desc": "Preditor de Churn: cenário 03 risco=high status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-churn-predictor",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 3,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g6-churn-predictor",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-04",
+    "desc": "Preditor de Churn: cenário 04 risco=critical status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-churn-predictor",
+    "capabilities": [
+      "config_driven",
+      "campaign_iteration"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 4,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g6-churn-predictor",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-05",
+    "desc": "Preditor de Churn: cenário 05 risco=low status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g6-churn-predictor",
+    "capabilities": [
+      "campaign_iteration",
+      "taste_gate"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 5,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g6-churn-predictor",
+      "capabilities_any": [
+        "campaign_iteration"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-06",
+    "desc": "Preditor de Churn: cenário 06 risco=medium status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-churn-predictor",
+    "capabilities": [
+      "taste_gate",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 6,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g6-churn-predictor",
+      "capabilities_any": [
+        "taste_gate"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-07",
+    "desc": "Preditor de Churn: cenário 07 risco=high status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 7,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-08",
+    "desc": "Preditor de Churn: cenário 08 risco=critical status=blocked",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g6-churn-predictor",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 8,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g6-churn-predictor",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-09",
+    "desc": "Preditor de Churn: cenário 09 risco=low status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g6-churn-predictor",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 9,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g6-churn-predictor",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-10",
+    "desc": "Preditor de Churn: cenário 10 risco=medium status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g6-churn-predictor",
+    "capabilities": [
+      "config_driven",
+      "campaign_iteration"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 10,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g6-churn-predictor",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-11",
+    "desc": "Preditor de Churn: cenário 11 risco=high status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-churn-predictor",
+    "capabilities": [
+      "campaign_iteration",
+      "taste_gate"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 11,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g6-churn-predictor",
+      "capabilities_any": [
+        "campaign_iteration"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-12",
+    "desc": "Preditor de Churn: cenário 12 risco=critical status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-churn-predictor",
+    "capabilities": [
+      "taste_gate",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 12,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g6-churn-predictor",
+      "capabilities_any": [
+        "taste_gate"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-13",
+    "desc": "Preditor de Churn: cenário 13 risco=low status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 13,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-14",
+    "desc": "Preditor de Churn: cenário 14 risco=medium status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g6-churn-predictor",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 14,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g6-churn-predictor",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-15",
+    "desc": "Preditor de Churn: cenário 15 risco=high status=blocked",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "high",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g6-churn-predictor",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 15,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "blocked",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g6-churn-predictor",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-16",
+    "desc": "Preditor de Churn: cenário 16 risco=critical status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-churn-predictor",
+    "capabilities": [
+      "config_driven",
+      "campaign_iteration"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 16,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g6-churn-predictor",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-17",
+    "desc": "Preditor de Churn: cenário 17 risco=low status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g6-churn-predictor",
+    "capabilities": [
+      "campaign_iteration",
+      "taste_gate"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 17,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g6-churn-predictor",
+      "capabilities_any": [
+        "campaign_iteration"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-18",
+    "desc": "Preditor de Churn: cenário 18 risco=medium status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-churn-predictor",
+    "capabilities": [
+      "taste_gate",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 18,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g6-churn-predictor",
+      "capabilities_any": [
+        "taste_gate"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-19",
+    "desc": "Preditor de Churn: cenário 19 risco=high status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 19,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-20",
+    "desc": "Preditor de Churn: cenário 20 risco=critical status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-churn-predictor",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 20,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g6-churn-predictor",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-21",
+    "desc": "Preditor de Churn: cenário 21 risco=low status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g6-churn-predictor",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 21,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g6-churn-predictor",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-22",
+    "desc": "Preditor de Churn: cenário 22 risco=medium status=blocked",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g6-churn-predictor",
+    "capabilities": [
+      "config_driven",
+      "campaign_iteration"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 22,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g6-churn-predictor",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-23",
+    "desc": "Preditor de Churn: cenário 23 risco=high status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-churn-predictor",
+    "capabilities": [
+      "campaign_iteration",
+      "taste_gate"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 23,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g6-churn-predictor",
+      "capabilities_any": [
+        "campaign_iteration"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-24",
+    "desc": "Preditor de Churn: cenário 24 risco=critical status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-churn-predictor",
+    "capabilities": [
+      "taste_gate",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 24,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g6-churn-predictor",
+      "capabilities_any": [
+        "taste_gate"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-25",
+    "desc": "Preditor de Churn: cenário 25 risco=low status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 25,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-26",
+    "desc": "Preditor de Churn: cenário 26 risco=medium status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g6-churn-predictor",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 26,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g6-churn-predictor",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-27",
+    "desc": "Preditor de Churn: cenário 27 risco=high status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-churn-predictor",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 27,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g6-churn-predictor",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-28",
+    "desc": "Preditor de Churn: cenário 28 risco=critical status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-churn-predictor",
+    "capabilities": [
+      "config_driven",
+      "campaign_iteration"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 28,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g6-churn-predictor",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-29",
+    "desc": "Preditor de Churn: cenário 29 risco=low status=blocked",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g6-churn-predictor",
+    "capabilities": [
+      "campaign_iteration",
+      "taste_gate"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 29,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g6-churn-predictor",
+      "capabilities_any": [
+        "campaign_iteration"
+      ]
+    }
+  },
+  {
+    "id": "g6-churn-predictor-30",
+    "desc": "Preditor de Churn: cenário 30 risco=medium status=ready",
+    "artifact_type": "churn-predictor.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g6-churn-predictor",
+    "capabilities": [
+      "taste_gate",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 30,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g6-churn-predictor",
+      "handler_kind": "spec_driven",
+      "artifact_type": "churn-predictor.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g6-churn-predictor",
+      "capabilities_any": [
+        "taste_gate"
+      ]
+    }
+  }
+]

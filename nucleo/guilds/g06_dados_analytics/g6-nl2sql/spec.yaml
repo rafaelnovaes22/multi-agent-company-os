@@ -1,0 +1,35 @@
+id: g6-nl2sql
+guild: G06-dados-analytics
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Tradutor Linguagem Natural → Query (Empresa Queryable) entrega nl2sql.artifact
+    verificável para: permitir que qualquer humano ou agente "pergunte à empresa"
+    em linguagem natural e receba uma resposta correta e rastreável (YC#3)'
+  positive_examples:
+  - Respondeu "qual a north-star de ontem por canal?" com a query, o número e a citação
+    ao evento-fonte
+  - Bloqueou uma tentativa de injection que tentava ler PII fora de escopo
+  - Sugeriu um novo painel ao detectar a mesma pergunta repetida por vários DRIs
+  negative_examples:
+  - Gerou uma métrica ad-hoc divergente do semantic layer
+  - Retornou número sem citar a fonte, impossibilitando auditoria
+  - Expôs um campo de PII a um usuário sem permissão
+  delivered_event: nl2sql.answer_emitted && answer.source_cited
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query
+- LLMProvider
+- AccessControlProvider
+soul_ref: soul.md
+memory_ref: memory.md

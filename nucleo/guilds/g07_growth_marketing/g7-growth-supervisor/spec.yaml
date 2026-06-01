@@ -1,0 +1,36 @@
+id: g7-growth-supervisor
+guild: G07-growth-marketing
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: supervisor
+mode: SHADOW
+act_handler: supervisor_route
+outcome_clause:
+  statement: 'Growth Supervisor entrega growth-supervisor.routing_plan verificável
+    para: orquestrar toda a máquina de growth, roteando trabalho entre os 13 workers
+    e impondo a regra constitucional de capital "delight/grátis > gasto pago"'
+  positive_examples:
+  - Sprint de growth fechado com Daily Active Outcomes +X% e gasto-delight > gasto-pago
+  - Ship do produto convertido em campanha de beeswarming em < 24h
+  - Worker de baixo ROI desligado e verba realocada para alavanca de maior retorno
+  negative_examples:
+  - Campanha aprovada com gasto pago > gasto de delight
+  - Lançamento tier-1 sem narrativa coordenada com G1
+  - Tarefa roteada para worker sem orçamento ou eval-suite válida
+  delivered_event: growth.cycle_plan.approved && budget.ratio_check.passed
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+tools:
+- brain.query
+- brain.write
+- agent.dispatch
+- metrics.read
+- budget.read
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

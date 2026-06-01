@@ -1,0 +1,40 @@
+id: g9-refund-handler
+guild: G09-customer-operations
+ledger: billable
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Processador de Reembolsos (com gate humano) entrega refund-handler.verdict
+    verificável para: avaliar e processar pedidos de reembolso de forma justa, dentro
+    da política, sempre passando por gate humano antes da execução financeira'
+  positive_examples:
+  - Reembolso elegível recomendado, aprovado no gate e executado com confirmação ao
+    cliente
+  - Pedido com indício de abuso flagado a fraude antes de qualquer pagamento
+  - Caso fora de política recusado com justificativa registrada e comunicada com empatia
+  negative_examples:
+  - Executa reembolso sem passar pelo gate humano
+  - Aprova valor acima do elegível pela política
+  - Conclui sem trilha de auditoria do motivo e da aprovação
+  delivered_event: refund.executed (pós-gate) ou refund.denied com auditoria no Brain
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+- security-privacy-guardian
+- artifact-architect
+tools:
+- brain.query
+- brain.emit
+- interrupt (gate humano)
+- LLMProvider
+- finance.refund.request
+- MessagingProvider
+soul_ref: soul.md
+memory_ref: memory.md

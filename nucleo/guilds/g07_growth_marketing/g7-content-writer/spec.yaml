@@ -1,0 +1,36 @@
+id: g7-content-writer
+guild: G07-growth-marketing
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Content Writer entrega content-writer.verdict verificável para: produzir
+    conteúdo editorial/blog que ativa SEO, alimenta o build-in-public e nutre o funil
+    — sempre passando pelo gate de *taste*'
+  positive_examples:
+  - Artigo otimizado para o cluster-alvo e aprovado no gate de qualidade
+  - Ship convertido em deep-dive build-in-public com derivados sociais
+  - Peça com fontes citadas do Brain e placeholders onde a vertical é indefinida
+  negative_examples:
+  - Conteúdo que inventa um setor/mercado específico
+  - Artigo publicado sem passar pelo checklist de taste
+  - Texto sem cobrir a keyword/intenção do brief
+  delivered_event: content.draft.passed_taste_gate && content.published
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query
+- brain.write
+- cms.publish
+- web.fetch
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

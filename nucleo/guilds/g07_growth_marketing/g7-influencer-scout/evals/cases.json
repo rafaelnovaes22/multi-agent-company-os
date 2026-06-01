@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g7-influencer-scout-01",
+    "desc": "Influencer Scout: cenário 01 risco=low status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 1,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-02",
+    "desc": "Influencer Scout: cenário 02 risco=medium status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g7-influencer-scout",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 2,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g7-influencer-scout",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-03",
+    "desc": "Influencer Scout: cenário 03 risco=high status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-influencer-scout",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 3,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g7-influencer-scout",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-04",
+    "desc": "Influencer Scout: cenário 04 risco=critical status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-influencer-scout",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 4,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g7-influencer-scout",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-05",
+    "desc": "Influencer Scout: cenário 05 risco=low status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g7-influencer-scout",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 5,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g7-influencer-scout",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-06",
+    "desc": "Influencer Scout: cenário 06 risco=medium status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-influencer-scout",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 6,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g7-influencer-scout",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-07",
+    "desc": "Influencer Scout: cenário 07 risco=high status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 7,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-08",
+    "desc": "Influencer Scout: cenário 08 risco=critical status=blocked",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g7-influencer-scout",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 8,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g7-influencer-scout",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-09",
+    "desc": "Influencer Scout: cenário 09 risco=low status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g7-influencer-scout",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 9,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g7-influencer-scout",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-10",
+    "desc": "Influencer Scout: cenário 10 risco=medium status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g7-influencer-scout",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 10,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g7-influencer-scout",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-11",
+    "desc": "Influencer Scout: cenário 11 risco=high status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-influencer-scout",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 11,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g7-influencer-scout",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-12",
+    "desc": "Influencer Scout: cenário 12 risco=critical status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-influencer-scout",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 12,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g7-influencer-scout",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-13",
+    "desc": "Influencer Scout: cenário 13 risco=low status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 13,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-14",
+    "desc": "Influencer Scout: cenário 14 risco=medium status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g7-influencer-scout",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 14,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g7-influencer-scout",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-15",
+    "desc": "Influencer Scout: cenário 15 risco=high status=blocked",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "high",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g7-influencer-scout",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 15,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "blocked",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g7-influencer-scout",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-16",
+    "desc": "Influencer Scout: cenário 16 risco=critical status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-influencer-scout",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 16,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g7-influencer-scout",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-17",
+    "desc": "Influencer Scout: cenário 17 risco=low status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g7-influencer-scout",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 17,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g7-influencer-scout",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-18",
+    "desc": "Influencer Scout: cenário 18 risco=medium status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-influencer-scout",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 18,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g7-influencer-scout",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-19",
+    "desc": "Influencer Scout: cenário 19 risco=high status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 19,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-20",
+    "desc": "Influencer Scout: cenário 20 risco=critical status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-influencer-scout",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 20,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g7-influencer-scout",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-21",
+    "desc": "Influencer Scout: cenário 21 risco=low status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g7-influencer-scout",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 21,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g7-influencer-scout",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-22",
+    "desc": "Influencer Scout: cenário 22 risco=medium status=blocked",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g7-influencer-scout",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 22,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g7-influencer-scout",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-23",
+    "desc": "Influencer Scout: cenário 23 risco=high status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-influencer-scout",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 23,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g7-influencer-scout",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-24",
+    "desc": "Influencer Scout: cenário 24 risco=critical status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-influencer-scout",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 24,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g7-influencer-scout",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-25",
+    "desc": "Influencer Scout: cenário 25 risco=low status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 25,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-26",
+    "desc": "Influencer Scout: cenário 26 risco=medium status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g7-influencer-scout",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 26,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g7-influencer-scout",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-27",
+    "desc": "Influencer Scout: cenário 27 risco=high status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-influencer-scout",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 27,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g7-influencer-scout",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-28",
+    "desc": "Influencer Scout: cenário 28 risco=critical status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-influencer-scout",
+    "capabilities": [
+      "config_driven",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 28,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g7-influencer-scout",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-29",
+    "desc": "Influencer Scout: cenário 29 risco=low status=blocked",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g7-influencer-scout",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 29,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g7-influencer-scout",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g7-influencer-scout-30",
+    "desc": "Influencer Scout: cenário 30 risco=medium status=ready",
+    "artifact_type": "influencer-scout.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-influencer-scout",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 30,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-influencer-scout",
+      "handler_kind": "spec_driven",
+      "artifact_type": "influencer-scout.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g7-influencer-scout",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  }
+]

@@ -1,0 +1,811 @@
+[
+  {
+    "id": "g9-support-triage-01",
+    "desc": "Triagem de Suporte: triagem determinística 01",
+    "tenant_id": "tenant-0",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m1",
+          "text": "Preciso de orçamento para expansão"
+        }
+      ]
+    },
+    "expected": {
+      "total": 1,
+      "urgent_count": 0,
+      "counts": {
+        "comercial": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-02",
+    "desc": "Triagem de Suporte: triagem determinística 02",
+    "tenant_id": "tenant-1",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m2",
+          "text": "Boleto em atraso urgente hoje"
+        },
+        {
+          "id": "m3",
+          "text": "Quero reembolso, não funciona"
+        }
+      ]
+    },
+    "expected": {
+      "total": 2,
+      "urgent_count": 1,
+      "counts": {
+        "financeiro": 1,
+        "suporte": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-03",
+    "desc": "Triagem de Suporte: triagem determinística 03",
+    "tenant_id": "tenant-2",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m3",
+          "text": "Quero reembolso, não funciona"
+        },
+        {
+          "id": "m4",
+          "text": "Fornecedor atrasou entrega do pedido"
+        },
+        {
+          "id": "m5",
+          "text": "Oi, tenho uma dúvida geral"
+        }
+      ]
+    },
+    "expected": {
+      "total": 3,
+      "urgent_count": 0,
+      "counts": {
+        "suporte": 1,
+        "financeiro": 1,
+        "geral": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-04",
+    "desc": "Triagem de Suporte: triagem determinística 04",
+    "tenant_id": "tenant-0",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m4",
+          "text": "Fornecedor atrasou entrega do pedido"
+        },
+        {
+          "id": "m5",
+          "text": "Oi, tenho uma dúvida geral"
+        },
+        {
+          "id": "m1",
+          "text": "Preciso de orçamento para expansão"
+        },
+        {
+          "id": "m2",
+          "text": "Boleto em atraso urgente hoje"
+        }
+      ]
+    },
+    "expected": {
+      "total": 4,
+      "urgent_count": 1,
+      "counts": {
+        "financeiro": 2,
+        "geral": 1,
+        "comercial": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-05",
+    "desc": "Triagem de Suporte: triagem determinística 05",
+    "tenant_id": "tenant-1",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m5",
+          "text": "Oi, tenho uma dúvida geral"
+        }
+      ]
+    },
+    "expected": {
+      "total": 1,
+      "urgent_count": 0,
+      "counts": {
+        "geral": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-06",
+    "desc": "Triagem de Suporte: triagem determinística 06",
+    "tenant_id": "tenant-2",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m1",
+          "text": "Preciso de orçamento para expansão"
+        },
+        {
+          "id": "m2",
+          "text": "Boleto em atraso urgente hoje"
+        }
+      ]
+    },
+    "expected": {
+      "total": 2,
+      "urgent_count": 1,
+      "counts": {
+        "comercial": 1,
+        "financeiro": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-07",
+    "desc": "Triagem de Suporte: triagem determinística 07",
+    "tenant_id": "tenant-0",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m2",
+          "text": "Boleto em atraso urgente hoje"
+        },
+        {
+          "id": "m3",
+          "text": "Quero reembolso, não funciona"
+        },
+        {
+          "id": "m4",
+          "text": "Fornecedor atrasou entrega do pedido"
+        }
+      ]
+    },
+    "expected": {
+      "total": 3,
+      "urgent_count": 1,
+      "counts": {
+        "financeiro": 2,
+        "suporte": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-08",
+    "desc": "Triagem de Suporte: triagem determinística 08",
+    "tenant_id": "tenant-1",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m3",
+          "text": "Quero reembolso, não funciona"
+        },
+        {
+          "id": "m4",
+          "text": "Fornecedor atrasou entrega do pedido"
+        },
+        {
+          "id": "m5",
+          "text": "Oi, tenho uma dúvida geral"
+        },
+        {
+          "id": "m1",
+          "text": "Preciso de orçamento para expansão"
+        }
+      ]
+    },
+    "expected": {
+      "total": 4,
+      "urgent_count": 0,
+      "counts": {
+        "suporte": 1,
+        "financeiro": 1,
+        "geral": 1,
+        "comercial": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-09",
+    "desc": "Triagem de Suporte: triagem determinística 09",
+    "tenant_id": "tenant-2",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m4",
+          "text": "Fornecedor atrasou entrega do pedido"
+        }
+      ]
+    },
+    "expected": {
+      "total": 1,
+      "urgent_count": 0,
+      "counts": {
+        "financeiro": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-10",
+    "desc": "Triagem de Suporte: triagem determinística 10",
+    "tenant_id": "tenant-0",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m5",
+          "text": "Oi, tenho uma dúvida geral"
+        },
+        {
+          "id": "m1",
+          "text": "Preciso de orçamento para expansão"
+        }
+      ]
+    },
+    "expected": {
+      "total": 2,
+      "urgent_count": 0,
+      "counts": {
+        "geral": 1,
+        "comercial": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-11",
+    "desc": "Triagem de Suporte: triagem determinística 11",
+    "tenant_id": "tenant-1",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m1",
+          "text": "Preciso de orçamento para expansão"
+        },
+        {
+          "id": "m2",
+          "text": "Boleto em atraso urgente hoje"
+        },
+        {
+          "id": "m3",
+          "text": "Quero reembolso, não funciona"
+        }
+      ]
+    },
+    "expected": {
+      "total": 3,
+      "urgent_count": 1,
+      "counts": {
+        "comercial": 1,
+        "financeiro": 1,
+        "suporte": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-12",
+    "desc": "Triagem de Suporte: triagem determinística 12",
+    "tenant_id": "tenant-2",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m2",
+          "text": "Boleto em atraso urgente hoje"
+        },
+        {
+          "id": "m3",
+          "text": "Quero reembolso, não funciona"
+        },
+        {
+          "id": "m4",
+          "text": "Fornecedor atrasou entrega do pedido"
+        },
+        {
+          "id": "m5",
+          "text": "Oi, tenho uma dúvida geral"
+        }
+      ]
+    },
+    "expected": {
+      "total": 4,
+      "urgent_count": 1,
+      "counts": {
+        "financeiro": 2,
+        "suporte": 1,
+        "geral": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-13",
+    "desc": "Triagem de Suporte: triagem determinística 13",
+    "tenant_id": "tenant-0",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m3",
+          "text": "Quero reembolso, não funciona"
+        }
+      ]
+    },
+    "expected": {
+      "total": 1,
+      "urgent_count": 0,
+      "counts": {
+        "suporte": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-14",
+    "desc": "Triagem de Suporte: triagem determinística 14",
+    "tenant_id": "tenant-1",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m4",
+          "text": "Fornecedor atrasou entrega do pedido"
+        },
+        {
+          "id": "m5",
+          "text": "Oi, tenho uma dúvida geral"
+        }
+      ]
+    },
+    "expected": {
+      "total": 2,
+      "urgent_count": 0,
+      "counts": {
+        "financeiro": 1,
+        "geral": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-15",
+    "desc": "Triagem de Suporte: triagem determinística 15",
+    "tenant_id": "tenant-2",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m5",
+          "text": "Oi, tenho uma dúvida geral"
+        },
+        {
+          "id": "m1",
+          "text": "Preciso de orçamento para expansão"
+        },
+        {
+          "id": "m2",
+          "text": "Boleto em atraso urgente hoje"
+        }
+      ]
+    },
+    "expected": {
+      "total": 3,
+      "urgent_count": 1,
+      "counts": {
+        "geral": 1,
+        "comercial": 1,
+        "financeiro": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-16",
+    "desc": "Triagem de Suporte: triagem determinística 16",
+    "tenant_id": "tenant-0",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m1",
+          "text": "Preciso de orçamento para expansão"
+        },
+        {
+          "id": "m2",
+          "text": "Boleto em atraso urgente hoje"
+        },
+        {
+          "id": "m3",
+          "text": "Quero reembolso, não funciona"
+        },
+        {
+          "id": "m4",
+          "text": "Fornecedor atrasou entrega do pedido"
+        }
+      ]
+    },
+    "expected": {
+      "total": 4,
+      "urgent_count": 1,
+      "counts": {
+        "comercial": 1,
+        "financeiro": 2,
+        "suporte": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-17",
+    "desc": "Triagem de Suporte: triagem determinística 17",
+    "tenant_id": "tenant-1",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m2",
+          "text": "Boleto em atraso urgente hoje"
+        }
+      ]
+    },
+    "expected": {
+      "total": 1,
+      "urgent_count": 1,
+      "counts": {
+        "financeiro": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-18",
+    "desc": "Triagem de Suporte: triagem determinística 18",
+    "tenant_id": "tenant-2",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m3",
+          "text": "Quero reembolso, não funciona"
+        },
+        {
+          "id": "m4",
+          "text": "Fornecedor atrasou entrega do pedido"
+        }
+      ]
+    },
+    "expected": {
+      "total": 2,
+      "urgent_count": 0,
+      "counts": {
+        "suporte": 1,
+        "financeiro": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-19",
+    "desc": "Triagem de Suporte: triagem determinística 19",
+    "tenant_id": "tenant-0",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m4",
+          "text": "Fornecedor atrasou entrega do pedido"
+        },
+        {
+          "id": "m5",
+          "text": "Oi, tenho uma dúvida geral"
+        },
+        {
+          "id": "m1",
+          "text": "Preciso de orçamento para expansão"
+        }
+      ]
+    },
+    "expected": {
+      "total": 3,
+      "urgent_count": 0,
+      "counts": {
+        "financeiro": 1,
+        "geral": 1,
+        "comercial": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-20",
+    "desc": "Triagem de Suporte: triagem determinística 20",
+    "tenant_id": "tenant-1",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m5",
+          "text": "Oi, tenho uma dúvida geral"
+        },
+        {
+          "id": "m1",
+          "text": "Preciso de orçamento para expansão"
+        },
+        {
+          "id": "m2",
+          "text": "Boleto em atraso urgente hoje"
+        },
+        {
+          "id": "m3",
+          "text": "Quero reembolso, não funciona"
+        }
+      ]
+    },
+    "expected": {
+      "total": 4,
+      "urgent_count": 1,
+      "counts": {
+        "geral": 1,
+        "comercial": 1,
+        "financeiro": 1,
+        "suporte": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-21",
+    "desc": "Triagem de Suporte: triagem determinística 21",
+    "tenant_id": "tenant-2",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m1",
+          "text": "Preciso de orçamento para expansão"
+        }
+      ]
+    },
+    "expected": {
+      "total": 1,
+      "urgent_count": 0,
+      "counts": {
+        "comercial": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-22",
+    "desc": "Triagem de Suporte: triagem determinística 22",
+    "tenant_id": "tenant-0",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m2",
+          "text": "Boleto em atraso urgente hoje"
+        },
+        {
+          "id": "m3",
+          "text": "Quero reembolso, não funciona"
+        }
+      ]
+    },
+    "expected": {
+      "total": 2,
+      "urgent_count": 1,
+      "counts": {
+        "financeiro": 1,
+        "suporte": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-23",
+    "desc": "Triagem de Suporte: triagem determinística 23",
+    "tenant_id": "tenant-1",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m3",
+          "text": "Quero reembolso, não funciona"
+        },
+        {
+          "id": "m4",
+          "text": "Fornecedor atrasou entrega do pedido"
+        },
+        {
+          "id": "m5",
+          "text": "Oi, tenho uma dúvida geral"
+        }
+      ]
+    },
+    "expected": {
+      "total": 3,
+      "urgent_count": 0,
+      "counts": {
+        "suporte": 1,
+        "financeiro": 1,
+        "geral": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-24",
+    "desc": "Triagem de Suporte: triagem determinística 24",
+    "tenant_id": "tenant-2",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m4",
+          "text": "Fornecedor atrasou entrega do pedido"
+        },
+        {
+          "id": "m5",
+          "text": "Oi, tenho uma dúvida geral"
+        },
+        {
+          "id": "m1",
+          "text": "Preciso de orçamento para expansão"
+        },
+        {
+          "id": "m2",
+          "text": "Boleto em atraso urgente hoje"
+        }
+      ]
+    },
+    "expected": {
+      "total": 4,
+      "urgent_count": 1,
+      "counts": {
+        "financeiro": 2,
+        "geral": 1,
+        "comercial": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-25",
+    "desc": "Triagem de Suporte: triagem determinística 25",
+    "tenant_id": "tenant-0",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m5",
+          "text": "Oi, tenho uma dúvida geral"
+        }
+      ]
+    },
+    "expected": {
+      "total": 1,
+      "urgent_count": 0,
+      "counts": {
+        "geral": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-26",
+    "desc": "Triagem de Suporte: triagem determinística 26",
+    "tenant_id": "tenant-1",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m1",
+          "text": "Preciso de orçamento para expansão"
+        },
+        {
+          "id": "m2",
+          "text": "Boleto em atraso urgente hoje"
+        }
+      ]
+    },
+    "expected": {
+      "total": 2,
+      "urgent_count": 1,
+      "counts": {
+        "comercial": 1,
+        "financeiro": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-27",
+    "desc": "Triagem de Suporte: triagem determinística 27",
+    "tenant_id": "tenant-2",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m2",
+          "text": "Boleto em atraso urgente hoje"
+        },
+        {
+          "id": "m3",
+          "text": "Quero reembolso, não funciona"
+        },
+        {
+          "id": "m4",
+          "text": "Fornecedor atrasou entrega do pedido"
+        }
+      ]
+    },
+    "expected": {
+      "total": 3,
+      "urgent_count": 1,
+      "counts": {
+        "financeiro": 2,
+        "suporte": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-28",
+    "desc": "Triagem de Suporte: triagem determinística 28",
+    "tenant_id": "tenant-0",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m3",
+          "text": "Quero reembolso, não funciona"
+        },
+        {
+          "id": "m4",
+          "text": "Fornecedor atrasou entrega do pedido"
+        },
+        {
+          "id": "m5",
+          "text": "Oi, tenho uma dúvida geral"
+        },
+        {
+          "id": "m1",
+          "text": "Preciso de orçamento para expansão"
+        }
+      ]
+    },
+    "expected": {
+      "total": 4,
+      "urgent_count": 0,
+      "counts": {
+        "suporte": 1,
+        "financeiro": 1,
+        "geral": 1,
+        "comercial": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-29",
+    "desc": "Triagem de Suporte: triagem determinística 29",
+    "tenant_id": "tenant-1",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m4",
+          "text": "Fornecedor atrasou entrega do pedido"
+        }
+      ]
+    },
+    "expected": {
+      "total": 1,
+      "urgent_count": 0,
+      "counts": {
+        "financeiro": 1
+      }
+    }
+  },
+  {
+    "id": "g9-support-triage-30",
+    "desc": "Triagem de Suporte: triagem determinística 30",
+    "tenant_id": "tenant-2",
+    "inbox": {
+      "messages": [
+        {
+          "id": "m5",
+          "text": "Oi, tenho uma dúvida geral"
+        },
+        {
+          "id": "m1",
+          "text": "Preciso de orçamento para expansão"
+        }
+      ]
+    },
+    "expected": {
+      "total": 2,
+      "urgent_count": 0,
+      "counts": {
+        "geral": 1,
+        "comercial": 1
+      }
+    }
+  }
+]

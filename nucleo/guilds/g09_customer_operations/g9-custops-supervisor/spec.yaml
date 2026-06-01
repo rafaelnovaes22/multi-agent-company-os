@@ -1,0 +1,40 @@
+id: g9-custops-supervisor
+guild: G09-customer-operations
+ledger: billable
+tier: L1
+ai_enabled: true
+model_role: supervisor
+mode: SHADOW
+act_handler: supervisor_route
+outcome_clause:
+  statement: 'Supervisor de Customer Operations entrega custops-supervisor.routing_plan
+    verificável para: orquestrar suporte, onboarding e CX, roteando cada interação
+    para o worker certo e garantindo SLA e qualidade "lovable" antes de qualquer entrega'
+  positive_examples:
+  - Ticket de "não consigo acessar" roteado a tier1-resolver em <30s e resolvido dentro
+    do SLA
+  - Caso com risco jurídico roteado direto a escalation-manager, pulando tier1
+  - Pico de volume detectado e carga rebalanceada antes do SLA estourar
+  negative_examples:
+  - Ticket fica sem owner por horas (órfão na fila)
+  - Roteia caso complexo para tier1-resolver que não tem alçada, gerando reabertura
+  - Libera resposta abaixo do gate de taste e gera reclamação
+  delivered_event: interaction.routed && worker.assigned registrado com route_latency
+    no Brain
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+- security-privacy-guardian
+tools:
+- brain.query
+- brain.emit
+- queue.read
+- MessagingProvider
+- LLMProvider
+- scheduler.cron
+soul_ref: soul.md
+memory_ref: memory.md

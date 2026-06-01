@@ -1,0 +1,36 @@
+id: g7-copywriter
+guild: G07-growth-marketing
+ledger: billable
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Copywriter entrega copywriter.artifact verificável para: escrever copy
+    de alta conversão para anúncios e landing pages, em variantes testáveis e alinhadas
+    à narrativa'
+  positive_examples:
+  - Conjunto de 3+ variantes pronto para A/B com hipótese de mensagem clara
+  - Copy de landing aprovada que sobe a taxa de conversão vs. controle
+  - Claims revisados sem promessa enganosa (alinhado a G12)
+  negative_examples:
+  - Copy que afirma um mercado/vertical não definido
+  - Variante única (impossível testar)
+  - Headline com claim sem respaldo de outcome real
+  delivered_event: copy.variants.committed && claims.compliance_check.passed
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+- artifact-architect
+tools:
+- brain.query
+- brain.write
+- LLMProvider
+- experiment.read
+soul_ref: soul.md
+memory_ref: memory.md

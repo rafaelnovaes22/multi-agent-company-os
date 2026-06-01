@@ -1,0 +1,38 @@
+id: g7-landing-builder
+guild: G07-growth-marketing
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Landing Builder entrega landing-builder.artifact verificável para: gerar
+    e publicar landing pages performáticas a partir de copy e criativos, prontas para
+    experimentação'
+  positive_examples:
+  - Landing no ar com tracking e variante registrados, CWV no verde
+  - Captura de lead com consentimento LGPD configurado
+  - Variante B publicada e ligada ao experimento ativo
+  negative_examples:
+  - Landing sem instrumentação de conversão
+  - Formulário capturando PII sem base legal/consentimento
+  - Página que reprova em Core Web Vitals
+  delivered_event: landing.deployed && tracking.verified && cwv.passed
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- repo.read
+- repo.write
+- ci.run
+- cms.publish
+- feature_flag.set
+- brain.write
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

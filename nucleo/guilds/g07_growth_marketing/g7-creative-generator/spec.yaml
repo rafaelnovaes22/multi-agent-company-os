@@ -1,0 +1,37 @@
+id: g7-creative-generator
+guild: G07-growth-marketing
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Creative Generator entrega creative-generator.artifact verificável para:
+    gerar criativos de imagem e vídeo on-brand para anúncios, social, landings e beeswarming,
+    em variantes testáveis'
+  positive_examples:
+  - Conjunto de variantes visuais pronto para A/B, on-brand
+  - Criativo de beeswarming gerado junto ao ship
+  - Ativos com licença/direitos verificados
+  negative_examples:
+  - Criativo fora do design system/brand kit
+  - Ativo publicado sem verificação de direitos de uso
+  - Variante única não-testável
+  delivered_event: creative.assets.committed && taste_gate.passed && rights.check.passed
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- LLMProvider
+- ImageGenProvider
+- VideoGenProvider
+- media.store
+- brain.query
+- brain.write
+soul_ref: soul.md
+memory_ref: memory.md

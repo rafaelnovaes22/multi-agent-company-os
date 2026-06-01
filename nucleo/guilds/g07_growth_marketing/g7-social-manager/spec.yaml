@@ -1,0 +1,36 @@
+id: g7-social-manager
+guild: G07-growth-marketing
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Social Manager entrega social-manager.artifact verificável para: operar
+    o calendário social e **orquestrar o beeswarming amplificado por agentes** — todo
+    ship vira post, o time enxuto e a comunidade amplificam'
+  positive_examples:
+  - Ship convertido em post multi-plataforma e amplificado em < 24h
+  - Calendário social cumprido com cadência diária de build-in-public
+  - Post reativo capturando janela de trending relevante
+  negative_examples:
+  - Ship relevante sem artefato de post gerado
+  - Post que cita um mercado/vertical não definido
+  - Publicação fora do tom de marca (reprovada no taste gate)
+  delivered_event: social.post.scheduled && beeswarm.artifact.created
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- SocialProvider
+- brain.query
+- brain.write
+- media.store
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

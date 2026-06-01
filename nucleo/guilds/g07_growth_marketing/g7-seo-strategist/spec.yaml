@@ -1,0 +1,37 @@
+id: g7-seo-strategist
+guild: G07-growth-marketing
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'SEO Strategist entrega seo-strategist.artifact verificável para: mapear
+    demanda orgânica e definir a estratégia de keywords/clusters que orienta todo
+    o conteúdo programático'
+  positive_examples:
+  - Cluster novo mapeado com briefs prontos e dificuldade < alvo
+  - Auditoria técnica reduz páginas não-indexadas a zero
+  - Pauta priorizada por oportunidade orgânica entregue ao content-writer
+  negative_examples:
+  - Keyword map sem intenção/volume (lista solta de termos)
+  - Brief sem definição de cluster/pillar nem meta de ranking
+  - Recomendação de keyword presumindo vertical não definida
+  delivered_event: seo.keyword_map.v_bumped && briefs.batch.committed
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- seo.api
+- brain.query
+- brain.write
+- web.fetch
+- analytics.read
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

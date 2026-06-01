@@ -1,0 +1,38 @@
+id: g9-tier1-resolver
+guild: G09-customer-operations
+ledger: billable
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: atendimento
+outcome_clause:
+  statement: 'Resolvedor de Nível 1 entrega ticket.resolution verificável para: resolver
+    de ponta a ponta as interações de baixa complexidade, fechando o loop sem intervenção
+    humana'
+  positive_examples:
+  - Dúvida sobre uso respondida com artigo da KB e ticket fechado no primeiro contato
+  - Reset de acesso executado e confirmado ao cliente em segundos
+  - Caso percebido como fora de alçada escalado com contexto completo, sem ping-pong
+  negative_examples:
+  - Inventa uma resposta não suportada pela KB (alucinação)
+  - Executa ação fora da alçada autorizada
+  - Fecha o ticket sem resolver, forçando reabertura
+  delivered_event: ticket.resolved (FCR) ou ticket.escalated com contexto, gravado
+    no Brain
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+tools:
+- brain.query
+- brain.emit
+- MessagingProvider
+- LLMProvider
+- kb.search
+- action.execute (alçada limitada)
+soul_ref: soul.md
+memory_ref: memory.md

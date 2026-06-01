@@ -1,0 +1,37 @@
+id: g9-support-triage
+guild: G09-customer-operations
+ledger: billable
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: inbox_triage
+outcome_clause:
+  statement: 'Triagem de Suporte entrega interaction.classification verificável para:
+    classificar cada interação entrante por intenção, urgência e fila, para que o
+    roteamento seja determinístico e auditável'
+  positive_examples:
+  - Mensagem ambígua classificada na intenção correta confirmada pela resolução posterior
+  - Termo com indício de risco legal flagado e elevado de severidade automaticamente
+  - Três mensagens do mesmo cliente agrupadas num único thread
+  negative_examples:
+  - Classifica um pedido de reembolso como dúvida genérica, atrasando o caso
+  - Deixa de flagar PII exposta no texto da interação
+  - Cria tickets duplicados para a mesma conversa
+  delivered_event: interaction.classified com {intent, severity, queue, risk_flags}
+    gravado no Brain
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+- security-privacy-guardian
+tools:
+- brain.query
+- brain.emit
+- LLMProvider
+- pii.detect
+soul_ref: soul.md
+memory_ref: memory.md

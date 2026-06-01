@@ -1,0 +1,36 @@
+id: g6-drift-detector
+guild: G06-dados-analytics
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Detector de Drift (Qualidade/Custo/Volume/Prompt) entrega drift-detector.verdict
+    verificável para: detectar degradação lenta de qualidade, custo, volume e prompt
+    dos agentes para acionar o rebaixamento automático de modo (C6/L6)'
+  positive_examples:
+  - Detectou queda de 6pp de acurácia/mês num agente AUTONOMOUS e o rebaixou para
+    ASSISTED
+  - Flagou prompt_hash alterado sem recálculo de economia e bloqueou até reauditoria
+  - Reportou aumento de 18% de custo/mês de um agente ao margin-watch e à Governança
+  negative_examples:
+  - Deixou um agente AUTONOMOUS degradar de qualidade sem rebaixar o modo
+  - Confundiu drift lento com anomalia pontual, duplicando o trabalho do anomaly-detector
+  - Não associou o drift à baseline de promoção, gerando sinal não acionável
+  delivered_event: drift.confirmed && mode.demotion_signaled
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query
+- brain.write
+- MessagingProvider
+- MLProvider
+soul_ref: soul.md
+memory_ref: memory.md

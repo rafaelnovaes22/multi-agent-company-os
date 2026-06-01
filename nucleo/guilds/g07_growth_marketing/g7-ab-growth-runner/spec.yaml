@@ -1,0 +1,37 @@
+id: g7-ab-growth-runner
+guild: G07-growth-marketing
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'A/B Growth Runner entrega ab-growth-runner.artifact verificável para:
+    rodar experimentos de growth com rigor estatístico, transformando hipóteses em
+    decisões'
+  positive_examples:
+  - Experimento atinge significância e vencedor é promovido
+  - Teste encerrado por critério de parada pré-definido (sem peeking)
+  - Learning do experimento registrado para reuso (ECC)
+  negative_examples:
+  - Decisão declarada sem significância estatística
+  - Experimento sem métrica primária/critério de parada definidos
+  - Vencedor promovido sem leitura de G6
+  delivered_event: experiment.concluded && significance.reached && rollout.decided
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- experiment.run
+- feature_flag.set
+- metrics.read
+- brain.query
+- brain.write
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

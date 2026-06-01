@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g7-growth-supervisor-01",
+    "desc": "Growth Supervisor: cenário 01 risco=low status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 1,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-02",
+    "desc": "Growth Supervisor: cenário 02 risco=medium status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g7-growth-worker",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 2,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g7-growth-worker",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-03",
+    "desc": "Growth Supervisor: cenário 03 risco=high status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-growth-worker",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 3,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g7-growth-worker",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-04",
+    "desc": "Growth Supervisor: cenário 04 risco=critical status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-growth-worker",
+    "capabilities": [
+      "config_driven",
+      "campaign_iteration"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 4,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g7-growth-worker",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-05",
+    "desc": "Growth Supervisor: cenário 05 risco=low status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g7-growth-worker",
+    "capabilities": [
+      "campaign_iteration",
+      "taste_gate"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 5,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g7-growth-worker",
+      "capabilities_any": [
+        "campaign_iteration"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-06",
+    "desc": "Growth Supervisor: cenário 06 risco=medium status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "taste_gate",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 6,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "taste_gate"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-07",
+    "desc": "Growth Supervisor: cenário 07 risco=high status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-growth-worker",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 7,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g7-growth-worker",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-08",
+    "desc": "Growth Supervisor: cenário 08 risco=critical status=blocked",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g7-growth-worker",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 8,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g7-growth-worker",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-09",
+    "desc": "Growth Supervisor: cenário 09 risco=low status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g7-growth-worker",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 9,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g7-growth-worker",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-10",
+    "desc": "Growth Supervisor: cenário 10 risco=medium status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g7-growth-worker",
+    "capabilities": [
+      "config_driven",
+      "campaign_iteration"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 10,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g7-growth-worker",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-11",
+    "desc": "Growth Supervisor: cenário 11 risco=high status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "campaign_iteration",
+      "taste_gate"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 11,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "campaign_iteration"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-12",
+    "desc": "Growth Supervisor: cenário 12 risco=critical status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-growth-worker",
+    "capabilities": [
+      "taste_gate",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 12,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g7-growth-worker",
+      "capabilities_any": [
+        "taste_gate"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-13",
+    "desc": "Growth Supervisor: cenário 13 risco=low status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g7-growth-worker",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 13,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g7-growth-worker",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-14",
+    "desc": "Growth Supervisor: cenário 14 risco=medium status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g7-growth-worker",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 14,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g7-growth-worker",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-15",
+    "desc": "Growth Supervisor: cenário 15 risco=high status=blocked",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "high",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g7-growth-worker",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 15,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "blocked",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g7-growth-worker",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-16",
+    "desc": "Growth Supervisor: cenário 16 risco=critical status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "config_driven",
+      "campaign_iteration"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 16,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-17",
+    "desc": "Growth Supervisor: cenário 17 risco=low status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g7-growth-worker",
+    "capabilities": [
+      "campaign_iteration",
+      "taste_gate"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 17,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g7-growth-worker",
+      "capabilities_any": [
+        "campaign_iteration"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-18",
+    "desc": "Growth Supervisor: cenário 18 risco=medium status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-growth-worker",
+    "capabilities": [
+      "taste_gate",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 18,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g7-growth-worker",
+      "capabilities_any": [
+        "taste_gate"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-19",
+    "desc": "Growth Supervisor: cenário 19 risco=high status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-growth-worker",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 19,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g7-growth-worker",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-20",
+    "desc": "Growth Supervisor: cenário 20 risco=critical status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-growth-worker",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 20,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g7-growth-worker",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-21",
+    "desc": "Growth Supervisor: cenário 21 risco=low status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 21,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-22",
+    "desc": "Growth Supervisor: cenário 22 risco=medium status=blocked",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g7-growth-worker",
+    "capabilities": [
+      "config_driven",
+      "campaign_iteration"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 22,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g7-growth-worker",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-23",
+    "desc": "Growth Supervisor: cenário 23 risco=high status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-growth-worker",
+    "capabilities": [
+      "campaign_iteration",
+      "taste_gate"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 23,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g7-growth-worker",
+      "capabilities_any": [
+        "campaign_iteration"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-24",
+    "desc": "Growth Supervisor: cenário 24 risco=critical status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-growth-worker",
+    "capabilities": [
+      "taste_gate",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 24,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g7-growth-worker",
+      "capabilities_any": [
+        "taste_gate"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-25",
+    "desc": "Growth Supervisor: cenário 25 risco=low status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g7-growth-worker",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 25,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g7-growth-worker",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-26",
+    "desc": "Growth Supervisor: cenário 26 risco=medium status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-dri",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 26,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "human-dri",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-27",
+    "desc": "Growth Supervisor: cenário 27 risco=high status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-growth-worker",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 27,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g7-growth-worker",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-28",
+    "desc": "Growth Supervisor: cenário 28 risco=critical status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-growth-worker",
+    "capabilities": [
+      "config_driven",
+      "campaign_iteration"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 28,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g7-growth-worker",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-29",
+    "desc": "Growth Supervisor: cenário 29 risco=low status=blocked",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g7-growth-worker",
+    "capabilities": [
+      "campaign_iteration",
+      "taste_gate"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 29,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g7-growth-worker",
+      "capabilities_any": [
+        "campaign_iteration"
+      ]
+    }
+  },
+  {
+    "id": "g7-growth-supervisor-30",
+    "desc": "Growth Supervisor: cenário 30 risco=medium status=ready",
+    "artifact_type": "growth-supervisor.routing_plan",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g7-growth-worker",
+    "capabilities": [
+      "taste_gate",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 30,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g7-growth-supervisor",
+      "handler_kind": "supervisor_route",
+      "artifact_type": "growth-supervisor.routing_plan",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g7-growth-worker",
+      "capabilities_any": [
+        "taste_gate"
+      ]
+    }
+  }
+]

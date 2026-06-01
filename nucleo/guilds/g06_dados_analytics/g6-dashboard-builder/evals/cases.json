@@ -1,0 +1,512 @@
+[
+  {
+    "id": "g6-dashboard-builder-01",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 01",
+    "tenant_id": "tenant-0",
+    "metrics": {
+      "projected_cash": 5000,
+      "cash_position": 8000,
+      "total_overdue": 0,
+      "margin_pct": 30,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "verde",
+      "alert_count": 0
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-02",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 02",
+    "tenant_id": "tenant-1",
+    "metrics": {
+      "projected_cash": 1000,
+      "cash_position": 2000,
+      "total_overdue": 900,
+      "margin_pct": 30,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 1
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-03",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 03",
+    "tenant_id": "tenant-2",
+    "metrics": {
+      "projected_cash": -100,
+      "cash_position": 200,
+      "total_overdue": 0,
+      "margin_pct": 30,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "vermelho",
+      "alert_count": 1
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-04",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 04",
+    "tenant_id": "tenant-3",
+    "metrics": {
+      "projected_cash": 3000,
+      "cash_position": 4000,
+      "total_overdue": 0,
+      "margin_pct": 5,
+      "urgent_msgs": 2,
+      "stalled_tasks": 1
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 3
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-05",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 05",
+    "tenant_id": "tenant-0",
+    "metrics": {
+      "projected_cash": 5000,
+      "cash_position": 8000,
+      "total_overdue": 0,
+      "margin_pct": 30,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "verde",
+      "alert_count": 0
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-06",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 06",
+    "tenant_id": "tenant-1",
+    "metrics": {
+      "projected_cash": 1000,
+      "cash_position": 2000,
+      "total_overdue": 900,
+      "margin_pct": 30,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 1
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-07",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 07",
+    "tenant_id": "tenant-2",
+    "metrics": {
+      "projected_cash": -100,
+      "cash_position": 200,
+      "total_overdue": 0,
+      "margin_pct": 30,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "vermelho",
+      "alert_count": 1
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-08",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 08",
+    "tenant_id": "tenant-3",
+    "metrics": {
+      "projected_cash": 3000,
+      "cash_position": 4000,
+      "total_overdue": 0,
+      "margin_pct": 5,
+      "urgent_msgs": 2,
+      "stalled_tasks": 1
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 3
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-09",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 09",
+    "tenant_id": "tenant-0",
+    "metrics": {
+      "projected_cash": 5000,
+      "cash_position": 8000,
+      "total_overdue": 0,
+      "margin_pct": 30,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "verde",
+      "alert_count": 0
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-10",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 10",
+    "tenant_id": "tenant-1",
+    "metrics": {
+      "projected_cash": 1000,
+      "cash_position": 2000,
+      "total_overdue": 900,
+      "margin_pct": 30,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 1
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-11",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 11",
+    "tenant_id": "tenant-2",
+    "metrics": {
+      "projected_cash": -100,
+      "cash_position": 200,
+      "total_overdue": 0,
+      "margin_pct": 30,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "vermelho",
+      "alert_count": 1
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-12",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 12",
+    "tenant_id": "tenant-3",
+    "metrics": {
+      "projected_cash": 3000,
+      "cash_position": 4000,
+      "total_overdue": 0,
+      "margin_pct": 5,
+      "urgent_msgs": 2,
+      "stalled_tasks": 1
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 3
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-13",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 13",
+    "tenant_id": "tenant-0",
+    "metrics": {
+      "projected_cash": 5000,
+      "cash_position": 8000,
+      "total_overdue": 0,
+      "margin_pct": 30,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "verde",
+      "alert_count": 0
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-14",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 14",
+    "tenant_id": "tenant-1",
+    "metrics": {
+      "projected_cash": 1000,
+      "cash_position": 2000,
+      "total_overdue": 900,
+      "margin_pct": 30,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 1
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-15",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 15",
+    "tenant_id": "tenant-2",
+    "metrics": {
+      "projected_cash": -100,
+      "cash_position": 200,
+      "total_overdue": 0,
+      "margin_pct": 30,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "vermelho",
+      "alert_count": 1
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-16",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 16",
+    "tenant_id": "tenant-3",
+    "metrics": {
+      "projected_cash": 3000,
+      "cash_position": 4000,
+      "total_overdue": 0,
+      "margin_pct": 5,
+      "urgent_msgs": 2,
+      "stalled_tasks": 1
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 3
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-17",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 17",
+    "tenant_id": "tenant-0",
+    "metrics": {
+      "projected_cash": 5000,
+      "cash_position": 8000,
+      "total_overdue": 0,
+      "margin_pct": 30,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "verde",
+      "alert_count": 0
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-18",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 18",
+    "tenant_id": "tenant-1",
+    "metrics": {
+      "projected_cash": 1000,
+      "cash_position": 2000,
+      "total_overdue": 900,
+      "margin_pct": 30,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 1
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-19",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 19",
+    "tenant_id": "tenant-2",
+    "metrics": {
+      "projected_cash": -100,
+      "cash_position": 200,
+      "total_overdue": 0,
+      "margin_pct": 30,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "vermelho",
+      "alert_count": 1
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-20",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 20",
+    "tenant_id": "tenant-3",
+    "metrics": {
+      "projected_cash": 3000,
+      "cash_position": 4000,
+      "total_overdue": 0,
+      "margin_pct": 5,
+      "urgent_msgs": 2,
+      "stalled_tasks": 1
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 3
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-21",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 21",
+    "tenant_id": "tenant-0",
+    "metrics": {
+      "projected_cash": 5000,
+      "cash_position": 8000,
+      "total_overdue": 0,
+      "margin_pct": 30,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "verde",
+      "alert_count": 0
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-22",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 22",
+    "tenant_id": "tenant-1",
+    "metrics": {
+      "projected_cash": 1000,
+      "cash_position": 2000,
+      "total_overdue": 900,
+      "margin_pct": 30,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 1
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-23",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 23",
+    "tenant_id": "tenant-2",
+    "metrics": {
+      "projected_cash": -100,
+      "cash_position": 200,
+      "total_overdue": 0,
+      "margin_pct": 30,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "vermelho",
+      "alert_count": 1
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-24",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 24",
+    "tenant_id": "tenant-3",
+    "metrics": {
+      "projected_cash": 3000,
+      "cash_position": 4000,
+      "total_overdue": 0,
+      "margin_pct": 5,
+      "urgent_msgs": 2,
+      "stalled_tasks": 1
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 3
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-25",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 25",
+    "tenant_id": "tenant-0",
+    "metrics": {
+      "projected_cash": 5000,
+      "cash_position": 8000,
+      "total_overdue": 0,
+      "margin_pct": 30,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "verde",
+      "alert_count": 0
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-26",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 26",
+    "tenant_id": "tenant-1",
+    "metrics": {
+      "projected_cash": 1000,
+      "cash_position": 2000,
+      "total_overdue": 900,
+      "margin_pct": 30,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 1
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-27",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 27",
+    "tenant_id": "tenant-2",
+    "metrics": {
+      "projected_cash": -100,
+      "cash_position": 200,
+      "total_overdue": 0,
+      "margin_pct": 30,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "vermelho",
+      "alert_count": 1
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-28",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 28",
+    "tenant_id": "tenant-3",
+    "metrics": {
+      "projected_cash": 3000,
+      "cash_position": 4000,
+      "total_overdue": 0,
+      "margin_pct": 5,
+      "urgent_msgs": 2,
+      "stalled_tasks": 1
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 3
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-29",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 29",
+    "tenant_id": "tenant-0",
+    "metrics": {
+      "projected_cash": 5000,
+      "cash_position": 8000,
+      "total_overdue": 0,
+      "margin_pct": 30,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "verde",
+      "alert_count": 0
+    }
+  },
+  {
+    "id": "g6-dashboard-builder-30",
+    "desc": "Construtor de Dashboards do Operator Console: painel determinístico 30",
+    "tenant_id": "tenant-1",
+    "metrics": {
+      "projected_cash": 1000,
+      "cash_position": 2000,
+      "total_overdue": 900,
+      "margin_pct": 30,
+      "urgent_msgs": 0,
+      "stalled_tasks": 0
+    },
+    "expected": {
+      "semaforo": "amarelo",
+      "alert_count": 1
+    }
+  }
+]

@@ -1,0 +1,39 @@
+id: g10-fpna
+guild: G10-financas
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Planejamento & Forecast Financeiro (FP&A) entrega fpna.artifact verificável
+    para: transformar o histórico do Company Brain em plano financeiro vivo e forecast
+    rolante, modelando cenários de receita, custo e margem por guilda e por linha
+    de ledger'
+  positive_examples:
+  - Forecast trimestral com erro ≤ 10% no agregado e cenários documentados
+  - Freemium/delight isolado como verba de marketing e dentro da regra delight>pago
+  - Budget de tokens por guilda derivado e entregue ao finance-supervisor antes do
+    início do período
+  negative_examples:
+  - Forecast usando driver sem fonte no semantic layer (número "de cabeça")
+  - Misturou custo de freemium com custo operacional, distorcendo a margem OP
+  - Otimizou o plano para LTV de longo prazo contrariando a doutrina early-stage
+  delivered_event: brain.write(fpna.rolling_forecast) aprovado pelo finance-supervisor
+    e referenciado pelo budget vigente
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+- artifact-architect
+tools:
+- brain.query
+- ledger.read
+- metrics.query (semantic layer do g6)
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

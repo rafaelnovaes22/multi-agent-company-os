@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g12-ip-trademark-01",
+    "desc": "Marca e Propriedade Intelectual: cenário 01 risco=low status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 1,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-02",
+    "desc": "Marca e Propriedade Intelectual: cenário 02 risco=medium status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g12-ip-trademark",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 2,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g12-ip-trademark",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-03",
+    "desc": "Marca e Propriedade Intelectual: cenário 03 risco=high status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-ip-trademark",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 3,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g12-ip-trademark",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-04",
+    "desc": "Marca e Propriedade Intelectual: cenário 04 risco=critical status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-ip-trademark",
+    "capabilities": [
+      "config_driven",
+      "legal_review"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 4,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g12-ip-trademark",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-05",
+    "desc": "Marca e Propriedade Intelectual: cenário 05 risco=low status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g12-ip-trademark",
+    "capabilities": [
+      "legal_review",
+      "risk_register"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 5,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g12-ip-trademark",
+      "capabilities_any": [
+        "legal_review"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-06",
+    "desc": "Marca e Propriedade Intelectual: cenário 06 risco=medium status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-ip-trademark",
+    "capabilities": [
+      "risk_register",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 6,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g12-ip-trademark",
+      "capabilities_any": [
+        "risk_register"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-07",
+    "desc": "Marca e Propriedade Intelectual: cenário 07 risco=high status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 7,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-08",
+    "desc": "Marca e Propriedade Intelectual: cenário 08 risco=critical status=blocked",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g12-ip-trademark",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 8,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g12-ip-trademark",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-09",
+    "desc": "Marca e Propriedade Intelectual: cenário 09 risco=low status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g12-ip-trademark",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 9,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g12-ip-trademark",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-10",
+    "desc": "Marca e Propriedade Intelectual: cenário 10 risco=medium status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g12-ip-trademark",
+    "capabilities": [
+      "config_driven",
+      "legal_review"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 10,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g12-ip-trademark",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-11",
+    "desc": "Marca e Propriedade Intelectual: cenário 11 risco=high status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-ip-trademark",
+    "capabilities": [
+      "legal_review",
+      "risk_register"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 11,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g12-ip-trademark",
+      "capabilities_any": [
+        "legal_review"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-12",
+    "desc": "Marca e Propriedade Intelectual: cenário 12 risco=critical status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-ip-trademark",
+    "capabilities": [
+      "risk_register",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 12,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g12-ip-trademark",
+      "capabilities_any": [
+        "risk_register"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-13",
+    "desc": "Marca e Propriedade Intelectual: cenário 13 risco=low status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 13,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-14",
+    "desc": "Marca e Propriedade Intelectual: cenário 14 risco=medium status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g12-ip-trademark",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 14,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g12-ip-trademark",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-15",
+    "desc": "Marca e Propriedade Intelectual: cenário 15 risco=high status=blocked",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "high",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g12-ip-trademark",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 15,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "blocked",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g12-ip-trademark",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-16",
+    "desc": "Marca e Propriedade Intelectual: cenário 16 risco=critical status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-ip-trademark",
+    "capabilities": [
+      "config_driven",
+      "legal_review"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 16,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g12-ip-trademark",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-17",
+    "desc": "Marca e Propriedade Intelectual: cenário 17 risco=low status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g12-ip-trademark",
+    "capabilities": [
+      "legal_review",
+      "risk_register"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 17,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g12-ip-trademark",
+      "capabilities_any": [
+        "legal_review"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-18",
+    "desc": "Marca e Propriedade Intelectual: cenário 18 risco=medium status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-ip-trademark",
+    "capabilities": [
+      "risk_register",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 18,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g12-ip-trademark",
+      "capabilities_any": [
+        "risk_register"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-19",
+    "desc": "Marca e Propriedade Intelectual: cenário 19 risco=high status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 19,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-20",
+    "desc": "Marca e Propriedade Intelectual: cenário 20 risco=critical status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-ip-trademark",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 20,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g12-ip-trademark",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-21",
+    "desc": "Marca e Propriedade Intelectual: cenário 21 risco=low status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g12-ip-trademark",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 21,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g12-ip-trademark",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-22",
+    "desc": "Marca e Propriedade Intelectual: cenário 22 risco=medium status=blocked",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g12-ip-trademark",
+    "capabilities": [
+      "config_driven",
+      "legal_review"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 22,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g12-ip-trademark",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-23",
+    "desc": "Marca e Propriedade Intelectual: cenário 23 risco=high status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-ip-trademark",
+    "capabilities": [
+      "legal_review",
+      "risk_register"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 23,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g12-ip-trademark",
+      "capabilities_any": [
+        "legal_review"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-24",
+    "desc": "Marca e Propriedade Intelectual: cenário 24 risco=critical status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-ip-trademark",
+    "capabilities": [
+      "risk_register",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 24,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g12-ip-trademark",
+      "capabilities_any": [
+        "risk_register"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-25",
+    "desc": "Marca e Propriedade Intelectual: cenário 25 risco=low status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 25,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-26",
+    "desc": "Marca e Propriedade Intelectual: cenário 26 risco=medium status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g12-ip-trademark",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 26,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g12-ip-trademark",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-27",
+    "desc": "Marca e Propriedade Intelectual: cenário 27 risco=high status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-ip-trademark",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 27,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g12-ip-trademark",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-28",
+    "desc": "Marca e Propriedade Intelectual: cenário 28 risco=critical status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-ip-trademark",
+    "capabilities": [
+      "config_driven",
+      "legal_review"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 28,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g12-ip-trademark",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-29",
+    "desc": "Marca e Propriedade Intelectual: cenário 29 risco=low status=blocked",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g12-ip-trademark",
+    "capabilities": [
+      "legal_review",
+      "risk_register"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 29,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g12-ip-trademark",
+      "capabilities_any": [
+        "legal_review"
+      ]
+    }
+  },
+  {
+    "id": "g12-ip-trademark-30",
+    "desc": "Marca e Propriedade Intelectual: cenário 30 risco=medium status=ready",
+    "artifact_type": "ip-trademark.verdict",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-ip-trademark",
+    "capabilities": [
+      "risk_register",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 30,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-ip-trademark",
+      "handler_kind": "guardian_check",
+      "artifact_type": "ip-trademark.verdict",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g12-ip-trademark",
+      "capabilities_any": [
+        "risk_register"
+      ]
+    }
+  }
+]

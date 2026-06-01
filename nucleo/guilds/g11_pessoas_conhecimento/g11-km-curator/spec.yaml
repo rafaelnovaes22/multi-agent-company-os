@@ -1,0 +1,38 @@
+id: g11-km-curator
+guild: G11-pessoas-conhecimento
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Knowledge Management Curator entrega km-curator.artifact verificável
+    para: Curar o conhecimento da empresa no Company Brain — desduplicar, classificar,
+    manter fresco e governar acesso — para que humanos e agentes consultem uma fonte
+    de verdade confiável'
+  positive_examples:
+  - Pergunta interna respondida do índice canônico, citando o documento-fonte versionado
+  - Duas versões de uma política conflitantes resolvidas; canônica marcada, obsoleta
+    arquivada
+  - Política vencida sinalizada ao dono e enviada para revisão antes de virar risco
+  negative_examples:
+  - Resposta tirada de um documento obsoleto não marcado como tal
+  - Documento confidencial indexado sem controle de acesso, exposto na busca geral
+  - Gap de conhecimento recorrente ignorado, sem item de curadoria criado
+  delivered_event: artifact.classified && dedup_resolved && access_policy.applied
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query/brain.write/brain.index
+- LLMProvider (dedupe/classificação)
+- vector.search
+- access.policy (governança)
+- pii.detect
+soul_ref: soul.md
+memory_ref: memory.md

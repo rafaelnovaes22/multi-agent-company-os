@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g12-contract-reviewer-01",
+    "desc": "Revisor de Contratos: cenário 01 risco=low status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 1,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-02",
+    "desc": "Revisor de Contratos: cenário 02 risco=medium status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g12-contract-reviewer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 2,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g12-contract-reviewer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-03",
+    "desc": "Revisor de Contratos: cenário 03 risco=high status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-contract-reviewer",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 3,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g12-contract-reviewer",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-04",
+    "desc": "Revisor de Contratos: cenário 04 risco=critical status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-contract-reviewer",
+    "capabilities": [
+      "config_driven",
+      "legal_review"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 4,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g12-contract-reviewer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-05",
+    "desc": "Revisor de Contratos: cenário 05 risco=low status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g12-contract-reviewer",
+    "capabilities": [
+      "legal_review",
+      "risk_register"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 5,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g12-contract-reviewer",
+      "capabilities_any": [
+        "legal_review"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-06",
+    "desc": "Revisor de Contratos: cenário 06 risco=medium status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-contract-reviewer",
+    "capabilities": [
+      "risk_register",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 6,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g12-contract-reviewer",
+      "capabilities_any": [
+        "risk_register"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-07",
+    "desc": "Revisor de Contratos: cenário 07 risco=high status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 7,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-08",
+    "desc": "Revisor de Contratos: cenário 08 risco=critical status=blocked",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g12-contract-reviewer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 8,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g12-contract-reviewer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-09",
+    "desc": "Revisor de Contratos: cenário 09 risco=low status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g12-contract-reviewer",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 9,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g12-contract-reviewer",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-10",
+    "desc": "Revisor de Contratos: cenário 10 risco=medium status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g12-contract-reviewer",
+    "capabilities": [
+      "config_driven",
+      "legal_review"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 10,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g12-contract-reviewer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-11",
+    "desc": "Revisor de Contratos: cenário 11 risco=high status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-contract-reviewer",
+    "capabilities": [
+      "legal_review",
+      "risk_register"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 11,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g12-contract-reviewer",
+      "capabilities_any": [
+        "legal_review"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-12",
+    "desc": "Revisor de Contratos: cenário 12 risco=critical status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-contract-reviewer",
+    "capabilities": [
+      "risk_register",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 12,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g12-contract-reviewer",
+      "capabilities_any": [
+        "risk_register"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-13",
+    "desc": "Revisor de Contratos: cenário 13 risco=low status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 13,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-14",
+    "desc": "Revisor de Contratos: cenário 14 risco=medium status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g12-contract-reviewer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 14,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g12-contract-reviewer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-15",
+    "desc": "Revisor de Contratos: cenário 15 risco=high status=blocked",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "high",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g12-contract-reviewer",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 15,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "blocked",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g12-contract-reviewer",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-16",
+    "desc": "Revisor de Contratos: cenário 16 risco=critical status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-contract-reviewer",
+    "capabilities": [
+      "config_driven",
+      "legal_review"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 16,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g12-contract-reviewer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-17",
+    "desc": "Revisor de Contratos: cenário 17 risco=low status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g12-contract-reviewer",
+    "capabilities": [
+      "legal_review",
+      "risk_register"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 17,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g12-contract-reviewer",
+      "capabilities_any": [
+        "legal_review"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-18",
+    "desc": "Revisor de Contratos: cenário 18 risco=medium status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-contract-reviewer",
+    "capabilities": [
+      "risk_register",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 18,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g12-contract-reviewer",
+      "capabilities_any": [
+        "risk_register"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-19",
+    "desc": "Revisor de Contratos: cenário 19 risco=high status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 19,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-20",
+    "desc": "Revisor de Contratos: cenário 20 risco=critical status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-contract-reviewer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 20,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g12-contract-reviewer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-21",
+    "desc": "Revisor de Contratos: cenário 21 risco=low status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g12-contract-reviewer",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 21,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g12-contract-reviewer",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-22",
+    "desc": "Revisor de Contratos: cenário 22 risco=medium status=blocked",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g12-contract-reviewer",
+    "capabilities": [
+      "config_driven",
+      "legal_review"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 22,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g12-contract-reviewer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-23",
+    "desc": "Revisor de Contratos: cenário 23 risco=high status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-contract-reviewer",
+    "capabilities": [
+      "legal_review",
+      "risk_register"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 23,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g12-contract-reviewer",
+      "capabilities_any": [
+        "legal_review"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-24",
+    "desc": "Revisor de Contratos: cenário 24 risco=critical status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-contract-reviewer",
+    "capabilities": [
+      "risk_register",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 24,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g12-contract-reviewer",
+      "capabilities_any": [
+        "risk_register"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-25",
+    "desc": "Revisor de Contratos: cenário 25 risco=low status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 25,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-26",
+    "desc": "Revisor de Contratos: cenário 26 risco=medium status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g12-contract-reviewer",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 26,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g12-contract-reviewer",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-27",
+    "desc": "Revisor de Contratos: cenário 27 risco=high status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-contract-reviewer",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 27,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g12-contract-reviewer",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-28",
+    "desc": "Revisor de Contratos: cenário 28 risco=critical status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-contract-reviewer",
+    "capabilities": [
+      "config_driven",
+      "legal_review"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 28,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g12-contract-reviewer",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-29",
+    "desc": "Revisor de Contratos: cenário 29 risco=low status=blocked",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g12-contract-reviewer",
+    "capabilities": [
+      "legal_review",
+      "risk_register"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 29,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g12-contract-reviewer",
+      "capabilities_any": [
+        "legal_review"
+      ]
+    }
+  },
+  {
+    "id": "g12-contract-reviewer-30",
+    "desc": "Revisor de Contratos: cenário 30 risco=medium status=ready",
+    "artifact_type": "contract-reviewer.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g12-contract-reviewer",
+    "capabilities": [
+      "risk_register",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 30,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g12-contract-reviewer",
+      "handler_kind": "spec_driven",
+      "artifact_type": "contract-reviewer.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g12-contract-reviewer",
+      "capabilities_any": [
+        "risk_register"
+      ]
+    }
+  }
+]

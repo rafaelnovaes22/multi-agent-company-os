@@ -1,0 +1,38 @@
+id: g12-dpa-manager
+guild: G12-juridico-risco
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Gestor de DPAs e Subprocessadores entrega dpa-manager.verdict verificável
+    para: Gerenciar acordos de tratamento de dados (DPAs) e o ciclo de vida dos subprocessadores,
+    garantindo cadeia de conformidade LGPD ponta a ponta'
+  positive_examples:
+  - Novo subprocessador adotado somente após DPA assinado e due diligence ok
+  - RoPA atualizado ao adicionar nova finalidade de tratamento
+  - Transferência internacional coberta por cláusula adequada à LGPD
+  negative_examples:
+  - Ferramenta com PII em produção sem DPA assinado
+  - RoPA defasado em relação ao inventário técnico de dados
+  - Subprocessador adotado sem due diligence de privacidade
+  delivered_event: dpa.signed && subprocessor.registered
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- security-privacy-guardian
+- artifact-architect
+tools:
+- brain.query
+- brain.write
+- repo.read
+- doc.parse
+- e-signature.read
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

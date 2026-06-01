@@ -1,0 +1,39 @@
+id: g10-unit-economist
+guild: G10-financas
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Guardião do C3 (Economic Firewall) entrega unit-economist.verdict verificável
+    para: garantir que nenhum output billable seja entregue ou cobrado com custo de
+    inferência acima de 25% do preço, derivando o preço mínimo viável e bloqueando
+    o que não fecha a conta'
+  positive_examples:
+  - 'Baseline completo, c3_check: viable, signature_hash emitido e Gate 2 destravado'
+  - prompt_hash mudou → recalc forçado e economics reaprovado antes de re-entregar
+  - Override de ratio só liberado com ADR linkada e co-assinatura do po-guardian
+  negative_examples:
+  - Liberou billable com volume estimado "pelo porte" em vez de declarado
+  - Deixou recalc pendente passar como mero warning
+  - Aplicou C3 a um agente ledger:operating (operating é governado por token-max,
+    não por C3)
+  delivered_event: brain.write(economist_review) com signature_hash válido referenciado
+    pelo promotion-officer
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+- artifact-architect
+tools:
+- brain.query
+- repo.read (prompts/baselines)
+- ledger.read
+- LLMProvider. Sem escrita em produção e sem SDK de fornecedor
+soul_ref: soul.md
+memory_ref: memory.md

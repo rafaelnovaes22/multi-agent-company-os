@@ -1,0 +1,37 @@
+id: g12-ip-trademark
+guild: G12-juridico-risco
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Marca e Propriedade Intelectual entrega ip-trademark.verdict verificável
+    para: Proteger e gerir a marca e a propriedade intelectual do NÚCLEO — o único
+    fosso não-copiável é distribuição/marca, então defendê-la é estratégico'
+  positive_examples:
+  - Nome de novo produto liberado após busca de anterioridade no INPI
+  - Renovação de marca executada antes do prazo
+  - Dependência OSS com licença incompatível bloqueada antes do ship
+  negative_examples:
+  - Campanha lançada com nome que colide com marca registrada de terceiro
+  - Marca expirada por renovação perdida
+  - Código distribuído violando licença de dependência
+  delivered_event: ip.clearance.completed || trademark.action.filed
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- web.search
+- web.fetch
+- brain.query
+- brain.write
+- repo.read
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

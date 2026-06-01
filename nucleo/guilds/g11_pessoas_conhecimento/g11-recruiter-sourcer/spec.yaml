@@ -1,0 +1,40 @@
+id: g11-recruiter-sourcer
+guild: G11-pessoas-conhecimento
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Recruiter / Sourcer (camada humana fina) entrega recruiter-sourcer.artifact
+    verificável para: Encontrar e qualificar os poucos humanos certos — "hire for
+    slope" (ex-fundadores e generalistas de alta inclinação) — para os loops que só
+    um humano fecha'
+  positive_examples:
+  - Short-list de 5 ex-fundadores com Slope Score e evidências, 3 aceitam conversar
+  - Candidato sourced inbound (via founder brand) convertido em entrevista sem custo
+    pago
+  - Pipeline limpo permite ao scheduler agendar sem reclassificação
+  negative_examples:
+  - Lista de 50 perfis genéricos por palavra-chave de cargo, sem sinal de slope
+  - Abordagem a quem deu opt-out ou armazenamento de PII fora do vault (violação LGPD)
+  - Short-list entregue sem citação de fonte dos sinais
+  delivered_event: shortlist.published && candidate.count_qualified >= target
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- security-privacy-guardian
+- artifact-architect
+tools:
+- web.search
+- web.fetch
+- MessagingProvider (abordagem)
+- brain.query/brain.write
+- LLMProvider
+- pii.vault (dados de candidato sob LGPD)
+soul_ref: soul.md
+memory_ref: memory.md

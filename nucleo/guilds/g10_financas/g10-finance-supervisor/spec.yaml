@@ -1,0 +1,42 @@
+id: g10-finance-supervisor
+guild: G10-financas
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: supervisor
+mode: SHADOW
+act_handler: supervisor_route
+outcome_clause:
+  statement: 'Supervisor de Finanças entrega finance-supervisor.routing_plan verificável
+    para: orquestrar o trabalho financeiro da empresa, roteando pedidos de economics,
+    planejamento, caixa e fiscal aos workers certos e consolidando a visão financeira
+    no Operator Console'
+  positive_examples:
+  - Fechamento do mês roteado, consolidado e assinado pelo DRI em ≤ 3 dias úteis após
+    o corte, com 100% das linhas com trace_id
+  - Estouro de orçamento de tokens de uma guilda detectado e reroteado para reforço/throttle
+    no mesmo dia
+  - Conflito forecast-vs-margem arbitrado com decisão registrada e link para evidências
+  negative_examples:
+  - Pacote de fechamento entregue com números sem fonte rastreável no Brain
+  - Roteou pedido de economics billable sem acionar o unit-economist antes da entrega
+  - Estouro de orçamento consolidado só no fim do mês, depois do caixa já comprometido
+  delivered_event: brain.write(finance.monthly_close_package) confirmado e dri.signature
+    registrada no evento
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+- security-privacy-guardian
+tools:
+- brain.query
+- brain.write
+- workflow.dispatch (goto/Send)
+- ledger.read
+- MessagingProvider (notifica DRI/board)
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

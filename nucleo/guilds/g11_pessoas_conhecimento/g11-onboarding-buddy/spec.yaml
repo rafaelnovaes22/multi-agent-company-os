@@ -1,0 +1,35 @@
+id: g11-onboarding-buddy
+guild: G11-pessoas-conhecimento
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: supervisor
+mode: SHADOW
+act_handler: supervisor_route
+outcome_clause:
+  statement: 'Onboarding Buddy entrega onboarding-buddy.routing_plan verificável para:
+    Levar um humano recém-contratado de "dia 0" a produtivo no NÚCLEO, ensinando-o
+    a operar como supervisor de agentes dentro da Constituição e do company-OS'
+  positive_examples:
+  - DRI novo fecha o primeiro check-in com plano 30-60-90 e acessos mínimos concedidos
+  - IC entrega o primeiro artefato supervisionado dentro de 30 dias
+  - Dúvida sobre política respondida em minutos puxando do Brain (empresa queryable)
+  negative_examples:
+  - Pessoa sem acessos no dia 1 e parada por uma semana
+  - Acesso amplo demais concedido violando menor privilégio (risco de segurança)
+  - Onboarding "concluído" sem nenhum marco de ramp-up registrado
+  delivered_event: onboarding_checklist.completed && first_milestone.achieved
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+tools:
+- brain.query/brain.write
+- LLMProvider
+- MessagingProvider
+- calendar.write (check-ins)
+- access.request (via G5)
+soul_ref: soul.md
+memory_ref: memory.md

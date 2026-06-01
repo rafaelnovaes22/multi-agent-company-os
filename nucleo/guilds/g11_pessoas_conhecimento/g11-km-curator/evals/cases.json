@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g11-km-curator-01",
+    "desc": "Knowledge Management Curator: cenário 01 risco=low status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 1,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-02",
+    "desc": "Knowledge Management Curator: cenário 02 risco=medium status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g11-km-curator",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 2,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g11-km-curator",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-03",
+    "desc": "Knowledge Management Curator: cenário 03 risco=high status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-km-curator",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 3,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g11-km-curator",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-04",
+    "desc": "Knowledge Management Curator: cenário 04 risco=critical status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-km-curator",
+    "capabilities": [
+      "config_driven",
+      "knowledge_indexing"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 4,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g11-km-curator",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-05",
+    "desc": "Knowledge Management Curator: cenário 05 risco=low status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g11-km-curator",
+    "capabilities": [
+      "knowledge_indexing",
+      "human_loop_roi"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 5,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g11-km-curator",
+      "capabilities_any": [
+        "knowledge_indexing"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-06",
+    "desc": "Knowledge Management Curator: cenário 06 risco=medium status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-km-curator",
+    "capabilities": [
+      "human_loop_roi",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 6,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g11-km-curator",
+      "capabilities_any": [
+        "human_loop_roi"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-07",
+    "desc": "Knowledge Management Curator: cenário 07 risco=high status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 7,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-08",
+    "desc": "Knowledge Management Curator: cenário 08 risco=critical status=blocked",
+    "artifact_type": "km-curator.artifact",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g11-km-curator",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 8,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g11-km-curator",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-09",
+    "desc": "Knowledge Management Curator: cenário 09 risco=low status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g11-km-curator",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 9,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g11-km-curator",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-10",
+    "desc": "Knowledge Management Curator: cenário 10 risco=medium status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g11-km-curator",
+    "capabilities": [
+      "config_driven",
+      "knowledge_indexing"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 10,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g11-km-curator",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-11",
+    "desc": "Knowledge Management Curator: cenário 11 risco=high status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-km-curator",
+    "capabilities": [
+      "knowledge_indexing",
+      "human_loop_roi"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 11,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g11-km-curator",
+      "capabilities_any": [
+        "knowledge_indexing"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-12",
+    "desc": "Knowledge Management Curator: cenário 12 risco=critical status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-km-curator",
+    "capabilities": [
+      "human_loop_roi",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 12,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g11-km-curator",
+      "capabilities_any": [
+        "human_loop_roi"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-13",
+    "desc": "Knowledge Management Curator: cenário 13 risco=low status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 13,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-14",
+    "desc": "Knowledge Management Curator: cenário 14 risco=medium status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g11-km-curator",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 14,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g11-km-curator",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-15",
+    "desc": "Knowledge Management Curator: cenário 15 risco=high status=blocked",
+    "artifact_type": "km-curator.artifact",
+    "risk": "high",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g11-km-curator",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 15,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "blocked",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g11-km-curator",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-16",
+    "desc": "Knowledge Management Curator: cenário 16 risco=critical status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-km-curator",
+    "capabilities": [
+      "config_driven",
+      "knowledge_indexing"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 16,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g11-km-curator",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-17",
+    "desc": "Knowledge Management Curator: cenário 17 risco=low status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g11-km-curator",
+    "capabilities": [
+      "knowledge_indexing",
+      "human_loop_roi"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 17,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g11-km-curator",
+      "capabilities_any": [
+        "knowledge_indexing"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-18",
+    "desc": "Knowledge Management Curator: cenário 18 risco=medium status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-km-curator",
+    "capabilities": [
+      "human_loop_roi",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 18,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g11-km-curator",
+      "capabilities_any": [
+        "human_loop_roi"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-19",
+    "desc": "Knowledge Management Curator: cenário 19 risco=high status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 19,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-20",
+    "desc": "Knowledge Management Curator: cenário 20 risco=critical status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-km-curator",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 20,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g11-km-curator",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-21",
+    "desc": "Knowledge Management Curator: cenário 21 risco=low status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g11-km-curator",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 21,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g11-km-curator",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-22",
+    "desc": "Knowledge Management Curator: cenário 22 risco=medium status=blocked",
+    "artifact_type": "km-curator.artifact",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g11-km-curator",
+    "capabilities": [
+      "config_driven",
+      "knowledge_indexing"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 22,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g11-km-curator",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-23",
+    "desc": "Knowledge Management Curator: cenário 23 risco=high status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-km-curator",
+    "capabilities": [
+      "knowledge_indexing",
+      "human_loop_roi"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 23,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g11-km-curator",
+      "capabilities_any": [
+        "knowledge_indexing"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-24",
+    "desc": "Knowledge Management Curator: cenário 24 risco=critical status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-km-curator",
+    "capabilities": [
+      "human_loop_roi",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 24,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g11-km-curator",
+      "capabilities_any": [
+        "human_loop_roi"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-25",
+    "desc": "Knowledge Management Curator: cenário 25 risco=low status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 25,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-26",
+    "desc": "Knowledge Management Curator: cenário 26 risco=medium status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g11-km-curator",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 26,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g11-km-curator",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-27",
+    "desc": "Knowledge Management Curator: cenário 27 risco=high status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-km-curator",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 27,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g11-km-curator",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-28",
+    "desc": "Knowledge Management Curator: cenário 28 risco=critical status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-km-curator",
+    "capabilities": [
+      "config_driven",
+      "knowledge_indexing"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 28,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g11-km-curator",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-29",
+    "desc": "Knowledge Management Curator: cenário 29 risco=low status=blocked",
+    "artifact_type": "km-curator.artifact",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g11-km-curator",
+    "capabilities": [
+      "knowledge_indexing",
+      "human_loop_roi"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 29,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g11-km-curator",
+      "capabilities_any": [
+        "knowledge_indexing"
+      ]
+    }
+  },
+  {
+    "id": "g11-km-curator-30",
+    "desc": "Knowledge Management Curator: cenário 30 risco=medium status=ready",
+    "artifact_type": "km-curator.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-km-curator",
+    "capabilities": [
+      "human_loop_roi",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 30,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-km-curator",
+      "handler_kind": "spec_driven",
+      "artifact_type": "km-curator.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g11-km-curator",
+      "capabilities_any": [
+        "human_loop_roi"
+      ]
+    }
+  }
+]

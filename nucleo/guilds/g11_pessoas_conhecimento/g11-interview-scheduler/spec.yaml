@@ -1,0 +1,37 @@
+id: g11-interview-scheduler
+guild: G11-pessoas-conhecimento
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Interview Scheduler & Coordinator entrega interview-scheduler.artifact
+    verificável para: Coordenar e agendar todo o processo de entrevista entre candidatos
+    qualificados e a banca humana, sem atrito e sem perder candidato por demora'
+  positive_examples:
+  - Painel de 3 etapas agendado em <72h e realizado sem conflito de agenda
+  - Scorecards de 4 entrevistadores consolidados num único artefato de decisão
+  - No-show reagendado automaticamente e candidato mantido no funil
+  negative_examples:
+  - Candidato perdido porque o convite saiu uma semana depois
+  - Dados do candidato retidos sem base legal após processo encerrado
+  - Decisão tomada sem scorecards consolidados das etapas
+  delivered_event: interview.scheduled && decision_artifact.compiled
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- security-privacy-guardian
+- artifact-architect
+tools:
+- calendar.read/calendar.write
+- MessagingProvider (convites/lembretes)
+- brain.query/brain.write
+- LLMProvider
+- pii.vault
+soul_ref: soul.md
+memory_ref: memory.md

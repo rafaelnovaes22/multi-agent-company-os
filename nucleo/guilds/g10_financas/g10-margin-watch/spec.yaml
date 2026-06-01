@@ -1,0 +1,39 @@
+id: g10-margin-watch
+guild: G10-financas
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Vigilância de Compressão de Margem entrega margin-watch.verdict verificável
+    para: detectar em tempo quase real qualquer erosão de margem — por alta de custo
+    de tokens, queda de preço efetivo ou drift de qualidade — antes que ela vire prejuízo'
+  positive_examples:
+  - Compressão ≥ limiar detectada em ≤ 24h com causa classificada e alerta roteado
+  - Billable prestes a ficar unviable acionou recalc do unit-economist antes da cobrança
+    seguinte
+  - Compressão correlacionada a drift técnico do g6 e linkada na causa
+  negative_examples:
+  - Alerta disparado só no fechamento mensal, com prejuízo já realizado
+  - Alerta sem causa atribuída (ruído que ninguém aciona)
+  - Ignorou cruzamento do piso C3 por estar "perto da meta"
+  delivered_event: brain.write(margin.alert) com severity e cause referenciado por
+    uma ação de recalc ou decisão do supervisor
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+- artifact-architect
+tools:
+- brain.query
+- metrics.query
+- ledger.read
+- MessagingProvider
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

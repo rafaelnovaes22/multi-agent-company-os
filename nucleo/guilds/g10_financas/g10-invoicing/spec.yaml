@@ -1,0 +1,38 @@
+id: g10-invoicing
+guild: G10-financas
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Emissão Fiscal entrega invoicing.verdict verificável para: emitir os
+    documentos fiscais corretos para cada cobrança, conforme regime tributário BR
+    vigente, mantendo-os íntegros e rastreáveis no Brain'
+  positive_examples:
+  - Documento emitido e autorizado dentro do prazo legal para 100% das cobranças aprovadas
+  - Retificação aplicada com versão anterior preservada e protocolo novo arquivado
+  - Documento ↔ cobrança ↔ recebimento conciliados sem lacuna
+  negative_examples:
+  - Emitiu com alíquota de regime errado por não consultar o tax-compliance
+  - Cobrança recebida sem documento fiscal correspondente
+  - Cancelou documento sem manter trilha da versão original
+  delivered_event: brain.write(invoice.issued) contém authorization_protocol válido
+    e link para XML/PDF imutável
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+- security-privacy-guardian
+- artifact-architect
+tools:
+- FiscalDocumentProvider (abstração de emissor NF)
+- ledger.read/write
+- brain.query/write
+- MessagingProvider (envia ao cliente via comms)
+soul_ref: soul.md
+memory_ref: memory.md

@@ -1,0 +1,39 @@
+id: g11-policy-author
+guild: G11-pessoas-conhecimento
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Internal Policy Author entrega policy-author.artifact verificável para:
+    Redigir, versionar e manter as políticas internas do NÚCLEO (conduta, segurança
+    da informação, uso de IA/agentes, privacidade de colaboradores, despesas) alinhadas
+    à Constituição e à jurisdição BR'
+  positive_examples:
+  - Política de uso de agentes publicada, referenciando C4/C7 e com guardrail proposto
+    ao G5
+  - Política de privacidade de colaborador conforme LGPD, revisada pelo jurídico antes
+    de publicar
+  - Política vencida atualizada no ciclo de revisão com changelog claro
+  negative_examples:
+  - Política publicada sem dono nem data de revisão (apodrece sem governança)
+  - Política sobre dados de funcionário que ignora LGPD/legislação trabalhista BR
+  - Política que restringe comportamento de agente mas só existe como texto, sem guardrail
+  delivered_event: policy.versioned && owner_and_review_date.set && legal_gate.passed
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query/brain.write
+- LLMProvider
+- docs.lookup (legislação BR)
+- template.render
+- policy.propose (regra para G5/G13)
+soul_ref: soul.md
+memory_ref: memory.md

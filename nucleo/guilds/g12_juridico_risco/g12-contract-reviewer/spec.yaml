@@ -1,0 +1,38 @@
+id: g12-contract-reviewer
+guild: G12-juridico-risco
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Revisor de Contratos entrega contract-reviewer.artifact verificável
+    para: Revisar contratos de entrada e saída, sinalizar cláusulas de risco e propor
+    redlines alinhados à postura de risco do NÚCLEO'
+  positive_examples:
+  - MSA de fornecedor revisado com 3 redlines de indenização aceitos pela contraparte
+  - Contrato classificado "vermelho" por cláusula de IP e bloqueado para revisão humana
+  - Necessidade de DPA detectada e roteada ao dpa-manager antes da assinatura
+  negative_examples:
+  - Contrato assinado sem revisão de limitação de responsabilidade
+  - Redline genérico sem justificativa contra o playbook
+  - Cláusula de tratamento de dados pessoais ignorada
+  delivered_event: contract.review.completed && contract.risk_classified
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- security-privacy-guardian
+- artifact-architect
+tools:
+- repo.read
+- brain.query
+- brain.write
+- doc.parse
+- LLMProvider
+- e-signature.read
+soul_ref: soul.md
+memory_ref: memory.md

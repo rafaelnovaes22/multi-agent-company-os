@@ -1,0 +1,38 @@
+id: g12-legal-supervisor
+guild: G12-juridico-risco
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: supervisor
+mode: SHADOW
+act_handler: supervisor_route
+outcome_clause:
+  statement: 'Supervisor Jurídico entrega legal-supervisor.routing_plan verificável
+    para: Orquestrar a guilda Jurídico & Risco, roteando demandas legais aos workers
+    certos e garantindo que toda saída legal passe pelos gates antes de virar compromisso
+    da empresa'
+  positive_examples:
+  - Demanda de revisão contratual roteada ao reviewer e fechada dentro do SLA
+  - Conflito entre dois workers consolidado em posição única e registrada
+  - Item de alto risco escalado ao DRI Legal com contexto completo
+  negative_examples:
+  - Demanda parada na fila sem roteamento além do SLA
+  - Posição legal entregue sem passar pelo gate C1/C2
+  - Escalonamento ao DRI sem contexto/anexos suficientes para decidir
+  delivered_event: legal.request.routed && (legal.request.resolved || legal.request.escalated)
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- security-privacy-guardian
+tools:
+- brain.query
+- brain.write
+- agent.dispatch
+- workflow.interrupt
+- calendar.read
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

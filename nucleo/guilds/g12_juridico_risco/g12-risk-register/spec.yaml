@@ -1,0 +1,37 @@
+id: g12-risk-register
+guild: G12-juridico-risco
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Registro e Monitor de Riscos Corporativos entrega risk-register.verdict
+    verificável para: Manter o registro vivo de riscos corporativos do NÚCLEO e monitorar
+    mitigações, tornando o risco da empresa queryável e acionável'
+  positive_examples:
+  - Incidente de privacidade convertido em item de risco com dono e mitigação
+  - Risco que muda para "vermelho" dispara alerta ao DRI/board
+  - Heatmap de risco entregue como insumo do deck de board
+  negative_examples:
+  - Risco material conhecido por uma guilda mas ausente do register
+  - Risco vermelho sem dono atribuído
+  - Mitigação vencida sem alerta nem reavaliação
+  delivered_event: risk.registered && risk.owner_assigned && risk.scored
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- security-privacy-guardian
+- artifact-architect
+tools:
+- brain.query
+- brain.write
+- scheduler
+- notify
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

@@ -1,0 +1,39 @@
+id: g12-regulatory-monitor
+guild: G12-juridico-risco
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Monitor Regulatório entrega regulatory-monitor.verdict verificável para:
+    Monitorar continuamente a LGPD e o regulador setorial do nosso mercado (configurável
+    quando o mercado for definido), traduzindo mudanças em ações para a empresa'
+  positive_examples:
+  - Nova resolução da ANPD detectada e convertida em tarefa para o tos-privacy-author
+    com prazo
+  - Consulta pública setorial sinalizada para posicionamento da empresa
+  - Mudança sem impacto classificada como "monitorar" sem gerar ruído
+  negative_examples:
+  - Norma com prazo de conformidade descoberta após o prazo vencer
+  - Alerta emitido sem "o que muda para nós" acionável
+  - Falso positivo recorrente poluindo a fila legal
+  delivered_event: regulatory.change.detected && regulatory.impact_assessed
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- security-privacy-guardian
+- artifact-architect
+tools:
+- web.fetch
+- web.search
+- brain.query
+- brain.write
+- scheduler
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

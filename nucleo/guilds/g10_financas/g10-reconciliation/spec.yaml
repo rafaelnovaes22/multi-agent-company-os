@@ -1,0 +1,40 @@
+id: g10-reconciliation
+guild: G10-financas
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Conciliação Bancária e de Pagamentos entrega reconciliation.artifact
+    verificável para: garantir que cada entrada e saída registrada bate com extrato
+    bancário e com o provedor de pagamentos, deixando o ledger conciliado e auditável'
+  positive_examples:
+  - ≥ 98% das transações conciliadas automaticamente no ciclo, restante com exceção
+    aberta
+  - Chargeback identificado, classificado e roteado a treasury+fraude no mesmo dia
+  - Relatório de conciliação fecha com saldo bancário (diferença 0 ou explicada)
+  negative_examples:
+  - Marcou transações como conciliadas por aproximação sem match real
+  - Divergência ignorada e arrastada para o mês seguinte sem item aberto
+  - Estorno classificado como receita, inflando a margem
+  delivered_event: brain.write(recon.period_report) com unreconciled_balance declarado
+    e todos os recon.exception_item em estado tratável
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+- artifact-architect
+tools:
+- PaymentGateway (abstração)
+- BankStatementProvider
+- ledger.read
+- ledger.write (apenas marcação de conciliação)
+- brain.query
+- MessagingProvider
+soul_ref: soul.md
+memory_ref: memory.md

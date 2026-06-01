@@ -1,0 +1,41 @@
+id: g10-token-cost-accountant
+guild: G10-financas
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Rateio de Custo de Tokens & Verba de Freemium entrega token-cost-accountant.artifact
+    verificável para: atribuir cada token consumido pelos 150+ agentes à guilda, agente
+    e run que o gerou, fechando o livro OP por ROI-vs-headcount e tratando o gasto
+    grátis/delight como verba de marketing'
+  positive_examples:
+  - Rateio diário com 0% de custo "órfão" (sem guilda atribuída)
+  - Custo de inferência por outcome de um billable medido em SHADOW e entregue ao
+    unit-economist
+  - Verba de freemium isolada e regra delight>pago confirmada (ou alertada se violada)
+  negative_examples:
+  - Deixou custo de tokens em uma conta agregada sem dono (quebra token-max)
+  - Aplicou lógica de C3 ao livro OP (OP é ROI-vs-headcount, não custo≤25%)
+  - Contabilizou freemium como custo operacional, distorcendo a margem
+  delivered_event: brain.write(token_cost.allocation) cobre 100% do custo do período
+    com unattributed_cost == 0
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+- artifact-architect
+tools:
+- brain.query
+- telemetry.read (LangSmith/Langfuse via abstração)
+- ledger.write
+- LLMProvider (tabela de preço
+- não SDK direto)
+- MessagingProvider
+soul_ref: soul.md
+memory_ref: memory.md

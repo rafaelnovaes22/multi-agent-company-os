@@ -1,0 +1,776 @@
+[
+  {
+    "id": "g10-treasury-01",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 01",
+    "tenant_id": "tenant-0",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 10000,
+      "receivables": [],
+      "payables": [],
+      "revenue_month": 10000,
+      "cost_month": 6000
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": false
+    }
+  },
+  {
+    "id": "g10-treasury-02",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 02",
+    "tenant_id": "tenant-1",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 4000,
+      "receivables": [
+        {
+          "customer": "A",
+          "amount": 2000,
+          "due_date": "2026-01-01",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "vendor": "X",
+          "amount": 7000
+        }
+      ],
+      "revenue_month": 8000,
+      "cost_month": 7600
+    },
+    "expected": {
+      "total_overdue": 2000,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "g10-treasury-03",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 03",
+    "tenant_id": "tenant-2",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 12000,
+      "receivables": [
+        {
+          "customer": "B",
+          "amount": 5000,
+          "due_date": "2026-02-10",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "vendor": "Y",
+          "amount": 3000
+        }
+      ],
+      "revenue_month": 20000,
+      "cost_month": 10000
+    },
+    "expected": {
+      "total_overdue": 5000,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "g10-treasury-04",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 04",
+    "tenant_id": "tenant-0",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 1000,
+      "receivables": [
+        {
+          "customer": "C",
+          "amount": 1500,
+          "due_date": "2026-02-01",
+          "status": "paid"
+        }
+      ],
+      "payables": [
+        {
+          "vendor": "Z",
+          "amount": 2500
+        }
+      ],
+      "revenue_month": 5000,
+      "cost_month": 4800
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "g10-treasury-05",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 05",
+    "tenant_id": "tenant-1",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 10000,
+      "receivables": [],
+      "payables": [],
+      "revenue_month": 10000,
+      "cost_month": 6000
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": false
+    }
+  },
+  {
+    "id": "g10-treasury-06",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 06",
+    "tenant_id": "tenant-2",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 4000,
+      "receivables": [
+        {
+          "customer": "A",
+          "amount": 2000,
+          "due_date": "2026-01-01",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "vendor": "X",
+          "amount": 7000
+        }
+      ],
+      "revenue_month": 8000,
+      "cost_month": 7600
+    },
+    "expected": {
+      "total_overdue": 2000,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "g10-treasury-07",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 07",
+    "tenant_id": "tenant-0",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 12000,
+      "receivables": [
+        {
+          "customer": "B",
+          "amount": 5000,
+          "due_date": "2026-02-10",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "vendor": "Y",
+          "amount": 3000
+        }
+      ],
+      "revenue_month": 20000,
+      "cost_month": 10000
+    },
+    "expected": {
+      "total_overdue": 5000,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "g10-treasury-08",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 08",
+    "tenant_id": "tenant-1",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 1000,
+      "receivables": [
+        {
+          "customer": "C",
+          "amount": 1500,
+          "due_date": "2026-02-01",
+          "status": "paid"
+        }
+      ],
+      "payables": [
+        {
+          "vendor": "Z",
+          "amount": 2500
+        }
+      ],
+      "revenue_month": 5000,
+      "cost_month": 4800
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "g10-treasury-09",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 09",
+    "tenant_id": "tenant-2",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 10000,
+      "receivables": [],
+      "payables": [],
+      "revenue_month": 10000,
+      "cost_month": 6000
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": false
+    }
+  },
+  {
+    "id": "g10-treasury-10",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 10",
+    "tenant_id": "tenant-0",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 4000,
+      "receivables": [
+        {
+          "customer": "A",
+          "amount": 2000,
+          "due_date": "2026-01-01",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "vendor": "X",
+          "amount": 7000
+        }
+      ],
+      "revenue_month": 8000,
+      "cost_month": 7600
+    },
+    "expected": {
+      "total_overdue": 2000,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "g10-treasury-11",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 11",
+    "tenant_id": "tenant-1",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 12000,
+      "receivables": [
+        {
+          "customer": "B",
+          "amount": 5000,
+          "due_date": "2026-02-10",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "vendor": "Y",
+          "amount": 3000
+        }
+      ],
+      "revenue_month": 20000,
+      "cost_month": 10000
+    },
+    "expected": {
+      "total_overdue": 5000,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "g10-treasury-12",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 12",
+    "tenant_id": "tenant-2",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 1000,
+      "receivables": [
+        {
+          "customer": "C",
+          "amount": 1500,
+          "due_date": "2026-02-01",
+          "status": "paid"
+        }
+      ],
+      "payables": [
+        {
+          "vendor": "Z",
+          "amount": 2500
+        }
+      ],
+      "revenue_month": 5000,
+      "cost_month": 4800
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "g10-treasury-13",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 13",
+    "tenant_id": "tenant-0",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 10000,
+      "receivables": [],
+      "payables": [],
+      "revenue_month": 10000,
+      "cost_month": 6000
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": false
+    }
+  },
+  {
+    "id": "g10-treasury-14",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 14",
+    "tenant_id": "tenant-1",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 4000,
+      "receivables": [
+        {
+          "customer": "A",
+          "amount": 2000,
+          "due_date": "2026-01-01",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "vendor": "X",
+          "amount": 7000
+        }
+      ],
+      "revenue_month": 8000,
+      "cost_month": 7600
+    },
+    "expected": {
+      "total_overdue": 2000,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "g10-treasury-15",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 15",
+    "tenant_id": "tenant-2",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 12000,
+      "receivables": [
+        {
+          "customer": "B",
+          "amount": 5000,
+          "due_date": "2026-02-10",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "vendor": "Y",
+          "amount": 3000
+        }
+      ],
+      "revenue_month": 20000,
+      "cost_month": 10000
+    },
+    "expected": {
+      "total_overdue": 5000,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "g10-treasury-16",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 16",
+    "tenant_id": "tenant-0",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 1000,
+      "receivables": [
+        {
+          "customer": "C",
+          "amount": 1500,
+          "due_date": "2026-02-01",
+          "status": "paid"
+        }
+      ],
+      "payables": [
+        {
+          "vendor": "Z",
+          "amount": 2500
+        }
+      ],
+      "revenue_month": 5000,
+      "cost_month": 4800
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "g10-treasury-17",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 17",
+    "tenant_id": "tenant-1",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 10000,
+      "receivables": [],
+      "payables": [],
+      "revenue_month": 10000,
+      "cost_month": 6000
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": false
+    }
+  },
+  {
+    "id": "g10-treasury-18",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 18",
+    "tenant_id": "tenant-2",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 4000,
+      "receivables": [
+        {
+          "customer": "A",
+          "amount": 2000,
+          "due_date": "2026-01-01",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "vendor": "X",
+          "amount": 7000
+        }
+      ],
+      "revenue_month": 8000,
+      "cost_month": 7600
+    },
+    "expected": {
+      "total_overdue": 2000,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "g10-treasury-19",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 19",
+    "tenant_id": "tenant-0",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 12000,
+      "receivables": [
+        {
+          "customer": "B",
+          "amount": 5000,
+          "due_date": "2026-02-10",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "vendor": "Y",
+          "amount": 3000
+        }
+      ],
+      "revenue_month": 20000,
+      "cost_month": 10000
+    },
+    "expected": {
+      "total_overdue": 5000,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "g10-treasury-20",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 20",
+    "tenant_id": "tenant-1",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 1000,
+      "receivables": [
+        {
+          "customer": "C",
+          "amount": 1500,
+          "due_date": "2026-02-01",
+          "status": "paid"
+        }
+      ],
+      "payables": [
+        {
+          "vendor": "Z",
+          "amount": 2500
+        }
+      ],
+      "revenue_month": 5000,
+      "cost_month": 4800
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "g10-treasury-21",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 21",
+    "tenant_id": "tenant-2",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 10000,
+      "receivables": [],
+      "payables": [],
+      "revenue_month": 10000,
+      "cost_month": 6000
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": false
+    }
+  },
+  {
+    "id": "g10-treasury-22",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 22",
+    "tenant_id": "tenant-0",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 4000,
+      "receivables": [
+        {
+          "customer": "A",
+          "amount": 2000,
+          "due_date": "2026-01-01",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "vendor": "X",
+          "amount": 7000
+        }
+      ],
+      "revenue_month": 8000,
+      "cost_month": 7600
+    },
+    "expected": {
+      "total_overdue": 2000,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "g10-treasury-23",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 23",
+    "tenant_id": "tenant-1",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 12000,
+      "receivables": [
+        {
+          "customer": "B",
+          "amount": 5000,
+          "due_date": "2026-02-10",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "vendor": "Y",
+          "amount": 3000
+        }
+      ],
+      "revenue_month": 20000,
+      "cost_month": 10000
+    },
+    "expected": {
+      "total_overdue": 5000,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "g10-treasury-24",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 24",
+    "tenant_id": "tenant-2",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 1000,
+      "receivables": [
+        {
+          "customer": "C",
+          "amount": 1500,
+          "due_date": "2026-02-01",
+          "status": "paid"
+        }
+      ],
+      "payables": [
+        {
+          "vendor": "Z",
+          "amount": 2500
+        }
+      ],
+      "revenue_month": 5000,
+      "cost_month": 4800
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "g10-treasury-25",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 25",
+    "tenant_id": "tenant-0",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 10000,
+      "receivables": [],
+      "payables": [],
+      "revenue_month": 10000,
+      "cost_month": 6000
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": false
+    }
+  },
+  {
+    "id": "g10-treasury-26",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 26",
+    "tenant_id": "tenant-1",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 4000,
+      "receivables": [
+        {
+          "customer": "A",
+          "amount": 2000,
+          "due_date": "2026-01-01",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "vendor": "X",
+          "amount": 7000
+        }
+      ],
+      "revenue_month": 8000,
+      "cost_month": 7600
+    },
+    "expected": {
+      "total_overdue": 2000,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "g10-treasury-27",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 27",
+    "tenant_id": "tenant-2",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 12000,
+      "receivables": [
+        {
+          "customer": "B",
+          "amount": 5000,
+          "due_date": "2026-02-10",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "vendor": "Y",
+          "amount": 3000
+        }
+      ],
+      "revenue_month": 20000,
+      "cost_month": 10000
+    },
+    "expected": {
+      "total_overdue": 5000,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "g10-treasury-28",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 28",
+    "tenant_id": "tenant-0",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 1000,
+      "receivables": [
+        {
+          "customer": "C",
+          "amount": 1500,
+          "due_date": "2026-02-01",
+          "status": "paid"
+        }
+      ],
+      "payables": [
+        {
+          "vendor": "Z",
+          "amount": 2500
+        }
+      ],
+      "revenue_month": 5000,
+      "cost_month": 4800
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": true
+    }
+  },
+  {
+    "id": "g10-treasury-29",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 29",
+    "tenant_id": "tenant-1",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 10000,
+      "receivables": [],
+      "payables": [],
+      "revenue_month": 10000,
+      "cost_month": 6000
+    },
+    "expected": {
+      "total_overdue": 0,
+      "has_actions": false
+    }
+  },
+  {
+    "id": "g10-treasury-30",
+    "desc": "Gestão de Fluxo de Caixa: fluxo de caixa determinístico 30",
+    "tenant_id": "tenant-2",
+    "finance": {
+      "today": "2026-02-15",
+      "balance": 4000,
+      "receivables": [
+        {
+          "customer": "A",
+          "amount": 2000,
+          "due_date": "2026-01-01",
+          "status": "open"
+        }
+      ],
+      "payables": [
+        {
+          "vendor": "X",
+          "amount": 7000
+        }
+      ],
+      "revenue_month": 8000,
+      "cost_month": 7600
+    },
+    "expected": {
+      "total_overdue": 2000,
+      "has_actions": true
+    }
+  }
+]

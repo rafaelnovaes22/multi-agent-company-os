@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g11-interview-scheduler-01",
+    "desc": "Interview Scheduler & Coordinator: cenário 01 risco=low status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 1,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-02",
+    "desc": "Interview Scheduler & Coordinator: cenário 02 risco=medium status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g11-interview-scheduler",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 2,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g11-interview-scheduler",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-03",
+    "desc": "Interview Scheduler & Coordinator: cenário 03 risco=high status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-interview-scheduler",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 3,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g11-interview-scheduler",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-04",
+    "desc": "Interview Scheduler & Coordinator: cenário 04 risco=critical status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-interview-scheduler",
+    "capabilities": [
+      "config_driven",
+      "knowledge_indexing"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 4,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g11-interview-scheduler",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-05",
+    "desc": "Interview Scheduler & Coordinator: cenário 05 risco=low status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g11-interview-scheduler",
+    "capabilities": [
+      "knowledge_indexing",
+      "human_loop_roi"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 5,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g11-interview-scheduler",
+      "capabilities_any": [
+        "knowledge_indexing"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-06",
+    "desc": "Interview Scheduler & Coordinator: cenário 06 risco=medium status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-interview-scheduler",
+    "capabilities": [
+      "human_loop_roi",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 6,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g11-interview-scheduler",
+      "capabilities_any": [
+        "human_loop_roi"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-07",
+    "desc": "Interview Scheduler & Coordinator: cenário 07 risco=high status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 7,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-08",
+    "desc": "Interview Scheduler & Coordinator: cenário 08 risco=critical status=blocked",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g11-interview-scheduler",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 8,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g11-interview-scheduler",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-09",
+    "desc": "Interview Scheduler & Coordinator: cenário 09 risco=low status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g11-interview-scheduler",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 9,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g11-interview-scheduler",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-10",
+    "desc": "Interview Scheduler & Coordinator: cenário 10 risco=medium status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g11-interview-scheduler",
+    "capabilities": [
+      "config_driven",
+      "knowledge_indexing"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 10,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g11-interview-scheduler",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-11",
+    "desc": "Interview Scheduler & Coordinator: cenário 11 risco=high status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-interview-scheduler",
+    "capabilities": [
+      "knowledge_indexing",
+      "human_loop_roi"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 11,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g11-interview-scheduler",
+      "capabilities_any": [
+        "knowledge_indexing"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-12",
+    "desc": "Interview Scheduler & Coordinator: cenário 12 risco=critical status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-interview-scheduler",
+    "capabilities": [
+      "human_loop_roi",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 12,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g11-interview-scheduler",
+      "capabilities_any": [
+        "human_loop_roi"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-13",
+    "desc": "Interview Scheduler & Coordinator: cenário 13 risco=low status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 13,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-14",
+    "desc": "Interview Scheduler & Coordinator: cenário 14 risco=medium status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g11-interview-scheduler",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 14,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g11-interview-scheduler",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-15",
+    "desc": "Interview Scheduler & Coordinator: cenário 15 risco=high status=blocked",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "high",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g11-interview-scheduler",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 15,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "blocked",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g11-interview-scheduler",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-16",
+    "desc": "Interview Scheduler & Coordinator: cenário 16 risco=critical status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-interview-scheduler",
+    "capabilities": [
+      "config_driven",
+      "knowledge_indexing"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 16,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g11-interview-scheduler",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-17",
+    "desc": "Interview Scheduler & Coordinator: cenário 17 risco=low status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g11-interview-scheduler",
+    "capabilities": [
+      "knowledge_indexing",
+      "human_loop_roi"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 17,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g11-interview-scheduler",
+      "capabilities_any": [
+        "knowledge_indexing"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-18",
+    "desc": "Interview Scheduler & Coordinator: cenário 18 risco=medium status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-interview-scheduler",
+    "capabilities": [
+      "human_loop_roi",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 18,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g11-interview-scheduler",
+      "capabilities_any": [
+        "human_loop_roi"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-19",
+    "desc": "Interview Scheduler & Coordinator: cenário 19 risco=high status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 19,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-20",
+    "desc": "Interview Scheduler & Coordinator: cenário 20 risco=critical status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-interview-scheduler",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 20,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g11-interview-scheduler",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-21",
+    "desc": "Interview Scheduler & Coordinator: cenário 21 risco=low status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g11-interview-scheduler",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 21,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g11-interview-scheduler",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-22",
+    "desc": "Interview Scheduler & Coordinator: cenário 22 risco=medium status=blocked",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g11-interview-scheduler",
+    "capabilities": [
+      "config_driven",
+      "knowledge_indexing"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 22,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g11-interview-scheduler",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-23",
+    "desc": "Interview Scheduler & Coordinator: cenário 23 risco=high status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-interview-scheduler",
+    "capabilities": [
+      "knowledge_indexing",
+      "human_loop_roi"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 23,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g11-interview-scheduler",
+      "capabilities_any": [
+        "knowledge_indexing"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-24",
+    "desc": "Interview Scheduler & Coordinator: cenário 24 risco=critical status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-interview-scheduler",
+    "capabilities": [
+      "human_loop_roi",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 24,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g11-interview-scheduler",
+      "capabilities_any": [
+        "human_loop_roi"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-25",
+    "desc": "Interview Scheduler & Coordinator: cenário 25 risco=low status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 25,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-26",
+    "desc": "Interview Scheduler & Coordinator: cenário 26 risco=medium status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g11-interview-scheduler",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 26,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g11-interview-scheduler",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-27",
+    "desc": "Interview Scheduler & Coordinator: cenário 27 risco=high status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-interview-scheduler",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 27,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g11-interview-scheduler",
+      "capabilities_any": [
+        "sla_observability"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-28",
+    "desc": "Interview Scheduler & Coordinator: cenário 28 risco=critical status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-interview-scheduler",
+    "capabilities": [
+      "config_driven",
+      "knowledge_indexing"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 28,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g11-interview-scheduler",
+      "capabilities_any": [
+        "config_driven"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-29",
+    "desc": "Interview Scheduler & Coordinator: cenário 29 risco=low status=blocked",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g11-interview-scheduler",
+    "capabilities": [
+      "knowledge_indexing",
+      "human_loop_roi"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 29,
+      "blocked": true
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g11-interview-scheduler",
+      "capabilities_any": [
+        "knowledge_indexing"
+      ]
+    }
+  },
+  {
+    "id": "g11-interview-scheduler-30",
+    "desc": "Interview Scheduler & Coordinator: cenário 30 risco=medium status=ready",
+    "artifact_type": "interview-scheduler.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-interview-scheduler",
+    "capabilities": [
+      "human_loop_roi",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 30,
+      "blocked": false
+    },
+    "expected": {
+      "agent_id": "g11-interview-scheduler",
+      "handler_kind": "spec_driven",
+      "artifact_type": "interview-scheduler.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g11-interview-scheduler",
+      "capabilities_any": [
+        "human_loop_roi"
+      ]
+    }
+  }
+]

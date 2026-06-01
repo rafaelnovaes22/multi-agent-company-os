@@ -1,0 +1,39 @@
+id: g10-treasury
+guild: G10-financas
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: fin_cashflow
+outcome_clause:
+  statement: 'Gestão de Fluxo de Caixa entrega treasury.cashflow_report verificável
+    para: garantir liquidez suficiente para a operação a cada horizonte, projetando
+    entradas e saídas e otimizando o caixa sem comprometer obrigações'
+  positive_examples:
+  - Projeção de caixa de 13 semanas atualizada com erro de saldo dentro da banda
+  - Risco de caixa insuficiente em data futura alertado com antecedência ≥ acordada
+  - Calendário de pagamentos respeita 100% dos prazos tributários e contratuais
+  negative_examples:
+  - Pagamento priorizado que estourou o caixa de uma obrigação fiscal
+  - Projeção baseada em recebível não conciliado, superestimando liquidez
+  - Descasamento descoberto na véspera, sem janela de ação
+  delivered_event: brain.write(treasury.cashflow_projection) com min_balance_date
+    e liquidity_status declarados
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+- artifact-architect
+tools:
+- BankProvider (saldos/transferências
+- abstração)
+- ledger.read
+- brain.query/write
+- MessagingProvider
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

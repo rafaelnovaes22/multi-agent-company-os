@@ -1,0 +1,37 @@
+id: g12-litigation-tracker
+guild: G12-juridico-risco
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Acompanhamento de Disputas e Contencioso entrega litigation-tracker.verdict
+    verificável para: Acompanhar disputas, notificações e contencioso da empresa,
+    garantindo prazos cumpridos e exposição financeira estimada'
+  positive_examples:
+  - Notificação extrajudicial registrada e respondida dentro do prazo
+  - Provisão de caso estimada e repassada a Finanças
+  - Padrão de disputa recorrente vira atualização de playbook contratual
+  negative_examples:
+  - Prazo processual perdido por falta de alerta
+  - Caso ativo sem estimativa de exposição financeira
+  - Notificação recebida e não registrada no Brain
+  delivered_event: dispute.registered && dispute.deadlines_tracked
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query
+- brain.write
+- calendar.read
+- doc.parse
+- notify
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

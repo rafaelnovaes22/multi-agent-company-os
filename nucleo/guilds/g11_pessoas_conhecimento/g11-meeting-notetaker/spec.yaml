@@ -1,0 +1,37 @@
+id: g11-meeting-notetaker
+guild: G11-pessoas-conhecimento
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: spec_driven
+outcome_clause:
+  statement: 'Meeting Notetaker entrega meeting-notetaker.artifact verificável para:
+    Capturar, transcrever e resumir reuniões humanas e humano-agente, transformando-as
+    em artefatos estruturados que tornam a empresa queryable'
+  positive_examples:
+  - Reunião de roadmap vira resumo com 4 decisões e 6 action items roteados aos donos
+  - Pergunta "o que decidimos sobre pricing dia X?" respondida via Brain sem rever
+    o vídeo
+  - Trecho com PII de candidato marcado e acesso restringido automaticamente
+  negative_examples:
+  - Gravação feita sem consentimento dos participantes (violação LGPD)
+  - Resumo em texto corrido, sem action items com dono/prazo nem indexação
+  - Dados sensíveis indexados sem flag, acessíveis a quem não deveria
+  delivered_event: transcript.indexed && summary.structured && action_items.routed
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- transcription.provider (STT via abstração)
+- LLMProvider (resumo)
+- brain.write/brain.query
+- MessagingProvider (notificar donos)
+- pii.vault/pii.detect
+soul_ref: soul.md
+memory_ref: memory.md

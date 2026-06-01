@@ -1,0 +1,41 @@
+id: g11-people-supervisor
+guild: G11-pessoas-conhecimento
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: supervisor
+mode: SHADOW
+act_handler: supervisor_route
+outcome_clause:
+  statement: 'People & Knowledge Supervisor entrega people-supervisor.routing_plan
+    verificável para: Orquestrar todo o trabalho de pessoas (sourcing, entrevista,
+    onboarding) e gestão de conhecimento (notas, curadoria, políticas), roteando para
+    o worker certo e protegendo o ROI-vs-headcount da camada humana'
+  positive_examples:
+  - Pedido "abrir vaga de DRI Growth" roteado a jd-author→sourcer→scheduler e fechado
+    com shortlist entregue
+  - Pedido "documentar decisão da reunião de pricing" roteado ao notetaker→km-curator
+    e indexado
+  - Pedido de contratação reprovado com tese ROI registrada (agente cobre o loop)
+    — decisão é o outcome
+  negative_examples:
+  - Pedido fica parado >48h sem worker designado
+  - Vaga aberta sem tese de ROI-vs-headcount registrada
+  - Dois workers produzem o mesmo artefato por roteamento ambíguo
+  delivered_event: routing.decision_emitted && child_artifact.completed
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- security-privacy-guardian
+tools:
+- brain.query
+- brain.write
+- agent.route (Command/Send)
+- LLMProvider
+- calendar.read (capacidade)
+- ledger.read (custo-headcount)
+soul_ref: soul.md
+memory_ref: memory.md

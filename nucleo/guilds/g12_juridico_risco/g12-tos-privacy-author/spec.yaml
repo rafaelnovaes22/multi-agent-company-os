@@ -1,0 +1,39 @@
+id: g12-tos-privacy-author
+guild: G12-juridico-risco
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Autor de Termos de Uso e Privacidade entrega tos-privacy-author.verdict
+    verificável para: Redigir e manter Termos de Uso e Política de Privacidade do
+    produto, em conformidade com a LGPD e coerentes com o tratamento real de dados'
+  positive_examples:
+  - Política atualizada após novo fluxo de dados, com base legal mapeada e changelog
+    publicado
+  - Mudança material dispara re-consentimento dos usuários
+  - Texto revisado para clareza e aprovado no gate de taste antes de publicar
+  negative_examples:
+  - Política promete prática de privacidade que o produto não executa
+  - Finalidade de tratamento sem base legal LGPD declarada
+  - Alteração material publicada sem versionamento/changelog
+  delivered_event: legal_doc.published && legal_doc.version_bumped
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- security-privacy-guardian
+- artifact-architect
+tools:
+- repo.read
+- repo.write
+- brain.query
+- brain.write
+- doc.publish
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

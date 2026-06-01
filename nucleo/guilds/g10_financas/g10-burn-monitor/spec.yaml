@@ -1,0 +1,39 @@
+id: g10-burn-monitor
+guild: G10-financas
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Runway & Burn vs. Plano entrega burn-monitor.verdict verificável para:
+    medir continuamente o consumo de caixa e o runway da empresa contra o plano, sinalizando
+    desvios de eficiência de capital antes que o caixa aperte'
+  positive_examples:
+  - Runway recalculado a cada ciclo com erro vs. realizado dentro da banda
+  - 'Queda abaixo de limiar (ex.: 9 meses) alertada com severidade e desvio atribuído
+    por guilda'
+  - Eficiência de capital (outcomes por R$) reportada e ligada ao North Star proxy
+  negative_examples:
+  - Runway divulgado sem reconciliar com a posição de caixa do treasury
+  - Alerta de limiar disparado tarde demais para reação (sem janela)
+  - Desvio de burn reportado sem atribuir a guilda/linha responsável
+  delivered_event: brain.write(burn.runway_report) com runway_months e burn_vs_plan_variance
+    declarados e alerta emitido se limiar cruzado
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+- artifact-architect
+tools:
+- brain.query
+- ledger.read
+- metrics.query
+- MessagingProvider
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

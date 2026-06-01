@@ -1,0 +1,38 @@
+id: g11-jd-author
+guild: G11-pessoas-conhecimento
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Job Description Author (arquétipos YC) entrega jd-author.verdict verificável
+    para: Traduzir uma necessidade de loop humano em uma descrição de vaga enquadrada
+    num dos 3 arquétipos YC — AI Founder, DRI ou IC/builder-operator — com critérios
+    de slope mensuráveis'
+  positive_examples:
+  - JD de DRI Produto com escopo de ownership de outcome e rubrica de slope, aprovada
+    sem reescrita
+  - JD de IC builder-operator que pede protótipo no processo, alinhada à doutrina
+    YC
+  - Variação curta da JD reaproveitada como post de founder brand
+  negative_examples:
+  - JD genérica copiada de mercado, listando 15 tecnologias e nenhum loop/ownership
+  - Requisito que viola igualdade/anti-discriminação trabalhista BR
+  - Vaga sem arquétipo definido ou sem rubrica de avaliação
+  delivered_event: jd.versioned && archetype.assigned && rubric.attached
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- artifact-architect
+tools:
+- brain.query/brain.write
+- LLMProvider
+- docs.lookup (guidelines BR)
+- template.render
+soul_ref: soul.md
+memory_ref: memory.md

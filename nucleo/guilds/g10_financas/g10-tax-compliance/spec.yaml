@@ -1,0 +1,40 @@
+id: g10-tax-compliance
+guild: G10-financas
+ledger: operating
+tier: L1
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+act_handler: guardian_check
+outcome_clause:
+  statement: 'Obrigações Fiscais BR entrega tax-compliance.verdict verificável para:
+    manter a empresa em conformidade tributária na jurisdição BR, apurando, declarando
+    e recolhendo no prazo, com regime e alíquotas configuráveis'
+  positive_examples:
+  - Apuração e guias geradas e pagas dentro do prazo para 100% dos tributos do período
+  - Mudança de alíquota refletida por configuração com base legal linkada antes da
+    próxima apuração
+  - Tributos apurados conciliados com documentos fiscais sem divergência
+  negative_examples:
+  - Aplicou alíquota desatualizada por não captar mudança regulatória
+  - Hardcode de alíquota no fluxo em vez de parâmetro configurável (viola C8)
+  - Obrigação acessória entregue fora do prazo, gerando multa
+  delivered_event: brain.write(tax.assessment) com payment_guide emitida e due_date
+    cumprido, base legal referenciada
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
+guardians:
+- po-guardian
+- observability-guardian
+- unit-economist
+- security-privacy-guardian
+- artifact-architect
+tools:
+- TaxFilingProvider (abstração de apuração/entrega)
+- ledger.read
+- brain.query/write
+- MessagingProvider
+- LLMProvider
+soul_ref: soul.md
+memory_ref: memory.md

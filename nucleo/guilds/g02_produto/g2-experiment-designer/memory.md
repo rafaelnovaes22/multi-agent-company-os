@@ -1,4 +1,7 @@
-# Memória operacional — g2-experiment-designer
+# MEMORY — g2-experiment-designer
 
-- Fonte canônica: catalogo/G02-produto-discovery.md.
-- Variação de mercado/tenant/segmento/provedor deve entrar pela spec ou pelo payload do caso, nunca por hardcode no handler.
+Formato: `§ [confidence:nivel] [YYYY-MM-DD] [run:id] fato acionável`
+
+§ [confidence:local] [2026-05-31] [run:seed] Critério de sucesso e tamanho de amostra (n) são PRÉ-REGISTRADOS antes do start; definir sucesso depois de ver os números é p-hacking proibido.
+§ [confidence:local] [2026-05-31] [run:seed] Todo experimento tem métrica guardrail; sem guardrail há risco de otimizar localmente e piorar o todo.
+§ [confidence:local] [2026-05-31] [run:seed] Leitura final com IC 95% e decisão explícita ship/kill/iterar; "deu bom" sem significância não conta.

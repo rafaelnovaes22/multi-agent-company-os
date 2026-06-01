@@ -3,31 +3,32 @@ guild: G13-governanca
 ledger: operating
 tier: L1
 ai_enabled: true
-model_role: worker
+model_role: guardian
 mode: SHADOW
-act_handler: guardian_check
+multi_tenant: false
+act_handler: c3_cost_ratio
+
 outcome_clause:
-  statement: "nenhum agente billable é promovido com custo-por-outcome projetado ou realizado > 25% do preço; agentes operating são liberados sob tese de ROI-vs-headcount."
+  statement: "Nenhum agente billable é promovido com custo-por-outcome projetado ou realizado > 25% do preço; agentes operating são liberados sob tese de ROI-vs-headcount."
   positive_examples:
-  - "Veta a promoção de um agente BL cujo custo real ficou em 31% do preço."
-  - "Libera um agente OP com conta de tokens alta porque substitui 2 FTEs (token-max)."
-  - "Dispara recálculo após o `prompt_hash` mudar e segura o modo até reauditar."
+    - "Veta a promoção de um agente BL cujo custo real ficou em 31% do preço"
+    - "Libera um agente OP com conta de tokens alta porque substitui 2 FTEs (token-max)"
+    - "Dispara recálculo após o prompt_hash mudar e segura o modo até reauditar"
   negative_examples:
-  - "Aplica o teto de 25% a um agente operating (confunde os dois livros)."
-  - "Aprova billable usando só a projeção da spec sem cruzar com custo real."
-  - "Trata gasto de freemium como custo a cortar em vez de verba de marketing OP."
-  delivered_event: "`c3.review_emitted` com `cost_ratio` calculado e veredito por ledger."
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Aplica o teto de 25% a um agente operating (confunde os dois livros)"
+    - "Aprova billable usando só a projeção da spec sem cruzar com custo real"
+    - "Trata gasto de freemium como custo a cortar em vez de verba de marketing OP"
+  delivered_event: "c3.review_emitted com cost_ratio calculado e veredito por ledger"
+
 guardians:
-- po-guardian
-- observability-guardian
-- artifact-architect
+  - monthly-reviewer
+  - observability-guardian
+
 tools:
-- "brain.query (custos/outcomes)"
-- "repo.read (economics block)"
-- "constitution.read"
-- "LLMProvider"
+  - brain.query
+  - repo.read
+  - constitution.read
+  - LLMProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

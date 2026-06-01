@@ -3,34 +3,34 @@ guild: G06-dados-analytics
 ledger: operating
 tier: L2
 ai_enabled: true
-model_role: worker
+model_role: guardian
 mode: SHADOW
-act_handler: guardian_check
+multi_tenant: true
+act_handler: dataquality_suite
+
 outcome_clause:
-  statement: 'Qualidade & Contratos de Dados entrega data-quality.verdict verificável
-    para: garantir que os dados do Company Brain sejam corretos, completos e dentro
-    de contrato — sem dado bom, não há analytics confiável'
+  statement: "Todo dataset publicado passou nos testes de qualidade e está dentro do contrato declarado (schema, tipos, nullability, faixas, unicidade, freshness), guardando a integridade da telemetria C6."
   positive_examples:
-  - Bloqueou a publicação de uma tabela com 4% de duplicatas e abriu evento de quebra
-    de contrato
-  - Validou freshness e integridade referencial e liberou o dataset para consumo
-  - Detectou PII inesperada num campo e acionou o lgpd-privacy antes do load
+    - "Bloqueou a publicação de uma tabela com 4% de duplicatas e abriu evento de quebra de contrato."
+    - "Validou freshness e integridade referencial e liberou o dataset para consumo."
+    - "Detectou PII inesperada num campo e acionou o lgpd-privacy antes do load."
   negative_examples:
-  - Liberou dataset com chave duplicada que inflou a north-star
-  - Não detectou drift de distribuição que quebrou o churn-predictor a jusante
-  - Aprovou dados com freshness fora de SLA sem sinalizar
-  delivered_event: dataquality.suite_passed && dataset.contract_certified
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Liberou dataset com chave duplicada que inflou a north-star."
+    - "Não detectou drift de distribuição que quebrou o churn-predictor a jusante."
+    - "Aprovou dados com freshness fora de SLA sem sinalizar."
+  delivered_event: "dataquality.suite_passed && dataset.contract_certified"
+
 guardians:
-- po-guardian
-- observability-guardian
-- artifact-architect
+  - observability-guardian
+  - security-privacy-guardian
+  - artifact-architect-guardian
+  - po-guardian
+
 tools:
-- brain.query
-- brain.write
-- DataWarehouseProvider
-- LLMProvider
+  - brain.query
+  - brain.write
+  - DataWarehouseProvider
+  - LLMProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

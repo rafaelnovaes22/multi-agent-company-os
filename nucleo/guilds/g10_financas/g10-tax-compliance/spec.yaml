@@ -5,36 +5,34 @@ tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: guardian_check
+multi_tenant: true
+act_handler: fin_tax_assessment
+
 outcome_clause:
-  statement: 'Obrigações Fiscais BR entrega tax-compliance.verdict verificável para:
-    manter a empresa em conformidade tributária na jurisdição BR, apurando, declarando
-    e recolhendo no prazo, com regime e alíquotas configuráveis'
+  statement: "Todas as obrigações tributárias do período são apuradas e cumpridas no prazo legal, com a base legal de cada parâmetro registrada e auditável, mantendo regime e alíquotas configuráveis (jurisdição BR)."
   positive_examples:
-  - Apuração e guias geradas e pagas dentro do prazo para 100% dos tributos do período
-  - Mudança de alíquota refletida por configuração com base legal linkada antes da
-    próxima apuração
-  - Tributos apurados conciliados com documentos fiscais sem divergência
+    - "Apuração e guias geradas e pagas dentro do prazo para 100% dos tributos do período"
+    - "Mudança de alíquota refletida por configuração com base legal linkada antes da próxima apuração"
+    - "Tributos apurados conciliados com documentos fiscais sem divergência"
   negative_examples:
-  - Aplicou alíquota desatualizada por não captar mudança regulatória
-  - Hardcode de alíquota no fluxo em vez de parâmetro configurável (viola C8)
-  - Obrigação acessória entregue fora do prazo, gerando multa
-  delivered_event: brain.write(tax.assessment) com payment_guide emitida e due_date
-    cumprido, base legal referenciada
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Aplicou alíquota desatualizada por não captar mudança regulatória"
+    - "Hardcode de alíquota no fluxo em vez de parâmetro configurável (viola C8)"
+    - "Obrigação acessória entregue fora do prazo, gerando multa"
+  delivered_event: "tax.assessment publicado no Brain com payment_guide emitida e due_date cumprido, base legal referenciada"
+
 guardians:
-- po-guardian
-- observability-guardian
-- unit-economist
-- security-privacy-guardian
-- artifact-architect
+  - po-guardian
+  - tenant-context-curator-guardian
+  - security-privacy-guardian
+  - observability-guardian
+
 tools:
-- TaxFilingProvider (abstração de apuração/entrega)
-- ledger.read
-- brain.query/write
-- MessagingProvider
-- LLMProvider
+  - TaxFilingProvider
+  - ledger.read
+  - brain.query
+  - brain.write
+  - MessagingProvider
+  - LLMProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

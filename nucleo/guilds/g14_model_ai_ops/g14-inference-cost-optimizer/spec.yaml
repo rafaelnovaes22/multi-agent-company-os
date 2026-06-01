@@ -5,28 +5,30 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: guardian_check
+multi_tenant: false
+act_handler: inference_cost_savings
+
 outcome_clause:
-  statement: "reduz custo de inferência por outcome sem regressão de qualidade acima da tolerância."
+  statement: "Reduz o custo de inferência por outcome (cache, batching, compressão de prompt, candidatos a distilação) sem regressão de qualidade acima da tolerância, sustentando o token-max responsável."
   positive_examples:
-  - "Cache aplicado corta custo de uma rota repetitiva, qualidade mantida."
-  - "Tarefa simples migrada para modelo menor com economia comprovada."
-  - "Economia rateada e visível por guilda."
+    - "Cache aplicado corta custo de uma rota repetitiva, qualidade mantida"
+    - "Tarefa simples migrada para modelo menor com economia comprovada"
+    - "Economia rateada e visível por guilda"
   negative_examples:
-  - "Otimização que degrada qualidade além da tolerância."
-  - "Cache servindo resposta obsoleta/errada."
-  - "Otimizador de Custo de Inferência deixa de registrar evidência requerida no cenário 3."
-  delivered_event: "`cost_optimization.applied` com economia medida e qualidade ≥ baseline."
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Otimização que degrada qualidade além da tolerância"
+    - "Cache servindo resposta obsoleta/errada"
+    - "Economia aplicada sem medição nem visibilidade por guilda"
+  delivered_event: "cost_optimization.applied com economia medida e qualidade ≥ baseline"
+
 guardians:
-- po-guardian
-- observability-guardian
-- artifact-architect
+  - unit-economist-guardian
+  - eval-engineer-guardian
+  - observability-guardian
+
 tools:
-- "brain.query"
-- "LLMProvider"
-- "model.registry"
+  - brain.query
+  - LLMProvider
+  - model.registry
+
 soul_ref: soul.md
 memory_ref: memory.md

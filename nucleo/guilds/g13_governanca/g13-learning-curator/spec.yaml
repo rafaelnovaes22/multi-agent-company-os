@@ -5,30 +5,33 @@ tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: guardian_check
+multi_tenant: false
+act_handler: learning_novelty_score
+
 outcome_clause:
-  statement: "nenhum fato/instinct entra na memória sem passar por assess_novelty e pelos vetos C1/C6/C7/C8, e a confiança de um fato nunca excede o modo do agente."
+  statement: "Nenhum fato/instinct entra na memória sem passar por assess_novelty e pelos vetos C1/C6/C7/C8, e a confiança de um fato nunca excede o modo do agente."
   positive_examples:
-  - "Promove um instinct recorrente em 5 agentes a skill da guilda via gate."
-  - "Sobe a confiança de um fato de `shadow` para `assisted` quando o agente é promovido."
-  - "Rejeita um fato com CPF embutido antes de virar PR de memória."
+    - "Promove um instinct recorrente em 5 agentes a skill da guilda via gate"
+    - "Sobe a confiança de um fato de shadow para assisted quando o agente é promovido"
+    - "Rejeita um fato com CPF embutido antes de virar PR de memória"
   negative_examples:
-  - "Marca um fato como `autonomous` num agente que ainda está em SHADOW."
-  - "Persiste um instinct que codifica o nome de um tenant específico."
-  - "Mergeia memória de baixa novidade que só infla o contexto."
-  delivered_event: "`memory.pr_opened` ou `skill.candidate_emitted` com confidence e novelty registrados."
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Marca um fato como autonomous num agente que ainda está em SHADOW"
+    - "Persiste um instinct que codifica o nome de um tenant específico"
+    - "Mergeia memória de baixa novidade que só infla o contexto"
+  delivered_event: "memory.pr_opened ou skill.candidate_emitted com confidence e novelty registrados"
+
 guardians:
-- po-guardian
-- observability-guardian
-- artifact-architect
+  - tenant-context-curator-guardian
+  - security-privacy-guardian
+  - monthly-reviewer
+
 tools:
-- "brain.query"
-- "store.read/write (memória/instincts)"
-- "constitution.read"
-- "LLMProvider"
-- "MessagingProvider (notifica revisão de memória)"
+  - brain.query
+  - store.read
+  - store.write
+  - constitution.read
+  - LLMProvider
+  - MessagingProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

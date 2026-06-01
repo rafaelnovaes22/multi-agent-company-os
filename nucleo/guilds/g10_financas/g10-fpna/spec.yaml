@@ -5,35 +5,32 @@ tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: spec_driven
+multi_tenant: true
+act_handler: fin_forecast
+
 outcome_clause:
-  statement: 'Planejamento & Forecast Financeiro (FP&A) entrega fpna.artifact verificável
-    para: transformar o histórico do Company Brain em plano financeiro vivo e forecast
-    rolante, modelando cenários de receita, custo e margem por guilda e por linha
-    de ledger'
+  statement: "Entrega um forecast rolante cujo erro vs. realizado fica dentro da banda acordada e cujos drivers são todos rastreáveis a métricas canônicas do Brain, separando livro OP de BL e tratando freemium/delight como verba de marketing."
   positive_examples:
-  - Forecast trimestral com erro ≤ 10% no agregado e cenários documentados
-  - Freemium/delight isolado como verba de marketing e dentro da regra delight>pago
-  - Budget de tokens por guilda derivado e entregue ao finance-supervisor antes do
-    início do período
+    - "Forecast trimestral com erro <= 10% no agregado e cenários documentados"
+    - "Freemium/delight isolado como verba de marketing e dentro da regra delight>pago"
+    - "Budget de tokens por guilda derivado e entregue ao finance-supervisor antes do início do período"
   negative_examples:
-  - Forecast usando driver sem fonte no semantic layer (número "de cabeça")
-  - Misturou custo de freemium com custo operacional, distorcendo a margem OP
-  - Otimizou o plano para LTV de longo prazo contrariando a doutrina early-stage
-  delivered_event: brain.write(fpna.rolling_forecast) aprovado pelo finance-supervisor
-    e referenciado pelo budget vigente
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Forecast usando driver sem fonte no semantic layer (número 'de cabeça')"
+    - "Misturou custo de freemium com custo operacional, distorcendo a margem OP"
+    - "Otimizou o plano para LTV de longo prazo contrariando a doutrina early-stage"
+  delivered_event: "fpna.rolling_forecast publicado no Brain, aprovado pelo finance-supervisor e referenciado pelo budget vigente"
+
 guardians:
-- po-guardian
-- observability-guardian
-- unit-economist
-- artifact-architect
+  - po-guardian
+  - unit-economist-guardian
+  - observability-guardian
+  - artifact-architect-guardian
+
 tools:
-- brain.query
-- ledger.read
-- metrics.query (semantic layer do g6)
-- LLMProvider
+  - brain.query
+  - ledger.read
+  - metrics.query
+  - LLMProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

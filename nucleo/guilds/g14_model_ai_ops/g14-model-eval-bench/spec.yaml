@@ -5,29 +5,31 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: guardian_check
+multi_tenant: false
+act_handler: model_scorecard
+
 outcome_clause:
-  statement: "nenhum modelo entra em produção sem scorecard comparativo e estimativa econômica."
+  statement: "Nenhum modelo entra em produção sem scorecard comparativo (qualidade/custo/latência) contra golden datasets e estimativa econômica (C3), recomendando adotar ou reverter."
   positive_examples:
-  - "Modelo novo supera o atual em custo/qualidade e é adotado com evidência."
-  - "Upgrade que regride qualidade é rejeitado/revertido."
-  - "Impacto C3 estimado antes da adoção."
+    - "Modelo novo supera o atual em custo/qualidade e é adotado com evidência"
+    - "Upgrade que regride qualidade é rejeitado/revertido"
+    - "Impacto C3 estimado antes da adoção"
   negative_examples:
-  - "Troca de modelo \"no escuro\" sem benchmark."
-  - "Regressão só descoberta por usuário em produção."
-  - "Benchmark de Modelos deixa de registrar evidência requerida no cenário 3."
-  delivered_event: "`model_scorecard.published == true`."
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Troca de modelo no escuro sem benchmark"
+    - "Regressão só descoberta por usuário em produção"
+    - "Adoção sem estimativa de custo (C3)"
+  delivered_event: "model_scorecard.published == true"
+
 guardians:
-- po-guardian
-- observability-guardian
-- artifact-architect
+  - eval-engineer-guardian
+  - unit-economist-guardian
+  - observability-guardian
+
 tools:
-- "LLMProvider"
-- "eval.harness"
-- "dataset.registry"
-- "brain.write"
+  - LLMProvider
+  - eval.harness
+  - dataset.registry
+  - brain.write
+
 soul_ref: soul.md
 memory_ref: memory.md

@@ -5,34 +5,32 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: spec_driven
+multi_tenant: true
+act_handler: sentiment_score
+
 outcome_clause:
-  statement: 'Monitor de Sentimento entrega sentiment-monitor.artifact verificável
-    para: monitorar o sentimento do cliente em tempo real nos canais e disparar alerta
-    antes que a insatisfação vire churn ou crise'
+  statement: "Sinaliza deterioração de sentimento e risco de crise antes do impacto, com tendência confiável por cliente, fila, canal e segmento, sem fadiga de alerta."
   positive_examples:
-  - Queda de sentimento numa conta-chave detectada e marcada para retenção antes do
-    churn
-  - Pico negativo em canal público alertado a Growth/Comunicação em minutos
-  - Feature de sentimento entregue ao churn-predictor melhora a previsão
+    - "Queda de sentimento numa conta-chave detectada e marcada para retenção antes do churn"
+    - "Pico negativo em canal público alertado a Growth/Comunicação em minutos"
+    - "Feature de sentimento entregue ao churn-predictor melhora a previsão"
   negative_examples:
-  - Marca como negativo um texto sarcástico/positivo (falso positivo em escala)
-  - Perde uma crise emergente em canal público
-  - Gera alertas em excesso e satura o time (fadiga de alerta)
-  delivered_event: sentiment.scored no stream e sentiment.alert_raised quando threshold
-    cruzado, no Brain
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Marca como negativo um texto sarcástico/positivo (falso positivo em escala)"
+    - "Perde uma crise emergente em canal público"
+    - "Gera alertas em excesso e satura o time (fadiga de alerta)"
+  delivered_event: "sentiment.scored no stream e sentiment.alert_raised quando threshold cruzado, no Brain"
+
 guardians:
-- po-guardian
-- observability-guardian
-- artifact-architect
+  - observability-guardian
+  - security-privacy-guardian
+  - po-guardian
+
 tools:
-- brain.query
-- brain.emit
-- LLMProvider
-- stream.subscribe
-- MessagingProvider
+  - brain.query
+  - brain.emit
+  - LLMProvider
+  - stream.subscribe
+  - MessagingProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

@@ -5,32 +5,33 @@ tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: spec_driven
+multi_tenant: true
+act_handler: referral_kfactor_score
+
 outcome_clause:
-  statement: 'Referral Designer entrega referral-designer.artifact verificável para:
-    desenhar o programa de indicação e operar o **Referral Propensity Score** (nosso
-    equivalente ao Lovable Score), tratando freemium/delight como verba de marketing'
+  statement: "Entrega programa de indicação que eleva o k-factor com custo de delight dentro do orçamento OP e fraude sob controle, mantendo e versionando o Referral Propensity Score por usuário/coorte (validado com G6)."
   positive_examples:
-  - Programa que sobe o k-factor mantendo gasto-delight > gasto-pago
-  - Referral Propensity Score recalibrado e validado por coorte
-  - Momento-de-delight instrumentado convertendo indicações acima da meta
+    - "Programa que sobe o k-factor mantendo gasto-delight > gasto-pago"
+    - "Referral Propensity Score recalibrado e validado por coorte"
+    - "Momento-de-delight instrumentado convertendo indicações acima da meta"
   negative_examples:
-  - Incentivo que estoura o orçamento de delight (OP)
-  - Score publicado sem validação estatística com G6
-  - Programa sem mecanismo anti-fraude
-  delivered_event: referral.program.spec_approved && propensity_score.v_bumped
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Incentivo que estoura o orçamento de delight (OP)"
+    - "Score publicado sem validação estatística com G6"
+    - "Programa sem mecanismo anti-fraude"
+  delivered_event: "referral.program.spec_approved && propensity_score.v_bumped publicado no Brain"
+
 guardians:
-- po-guardian
-- observability-guardian
-- artifact-architect
+  - unit-economist-guardian
+  - po-guardian
+  - security-privacy-guardian
+  - observability-guardian
+
 tools:
-- brain.query
-- brain.write
-- metrics.read
-- feature_flag.set
-- LLMProvider
+  - brain.query
+  - brain.write
+  - metrics.read
+  - feature_flag.set
+  - LLMProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

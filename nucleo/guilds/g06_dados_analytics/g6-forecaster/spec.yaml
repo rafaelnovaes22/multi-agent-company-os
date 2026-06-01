@@ -5,33 +5,33 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: spec_driven
+multi_tenant: true
+act_handler: demand_revenue_forecast
+
 outcome_clause:
-  statement: 'Previsor de Demanda & Receita entrega forecaster.artifact verificável
-    para: prever demanda e receita com incerteza quantificada para guiar planejamento
-    e capacidade'
+  statement: "Cada ciclo de forecast entrega previsões com incerteza quantificada (intervalo de confiança e cenários) e acurácia rastreável por backtest, sobre as métricas canônicas do semantic layer."
   positive_examples:
-  - Entregou forecast de receita do trimestre com IC e cenários, adotado pelo FP&A
-  - Backtest mostrou MAPE dentro da meta e a previsão foi aprovada pelo DRI
-  - Ajustou a previsão para um lançamento tier-1 e acertou o pico de demanda
+    - "Entregou forecast de receita do trimestre com IC e cenários, adotado pelo FP&A."
+    - "Backtest mostrou MAPE dentro da meta e a previsão foi aprovada pelo DRI."
+    - "Ajustou a previsão para um lançamento tier-1 e acertou o pico de demanda."
   negative_examples:
-  - Publicou previsão pontual sem intervalo de confiança, induzindo overcommit de
-    capacidade
-  - Ignorou sazonalidade e errou o forecast de demanda por larga margem
-  - Não recalibrou após drift e seguiu prevendo com MAPE alto
-  delivered_event: forecast.emitted && backtest.accuracy_reported
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Publicou previsão pontual sem intervalo de confiança, induzindo overcommit de capacidade."
+    - "Ignorou sazonalidade e errou o forecast de demanda por larga margem."
+    - "Não recalibrou após drift e seguiu prevendo com MAPE alto."
+  delivered_event: "forecast.emitted && backtest.accuracy_reported"
+
 guardians:
-- po-guardian
-- observability-guardian
-- artifact-architect
+  - unit-economist-guardian
+  - observability-guardian
+  - eval-engineer-guardian
+  - po-guardian
+
 tools:
-- brain.query
-- brain.write
-- MLProvider
-- StatsProvider
-- LLMProvider
+  - brain.query
+  - brain.write
+  - MLProvider
+  - StatsProvider
+  - LLMProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

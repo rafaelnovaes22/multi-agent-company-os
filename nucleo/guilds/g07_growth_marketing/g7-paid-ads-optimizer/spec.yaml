@@ -1,39 +1,41 @@
 id: g7-paid-ads-optimizer
 guild: G07-growth-marketing
 ledger: billable
+economics:
+  cost_model: cost_per_outcome
+  max_ratio: 0.25
 tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: spec_driven
+multi_tenant: true
+act_handler: paid_roas_cac
+
 outcome_clause:
-  statement: 'Paid Ads Optimizer entrega paid-ads-optimizer.artifact verificável para:
-    otimizar campanhas pagas por ROAS com disciplina — ativado **tarde**, porque paid
-    não é o canal primário do NÚCLEO'
+  statement: "Mantém campanhas pagas dentro do ROAS-alvo e da razão delight/pago, otimizando lances/orçamento por CAC-payback e pausando criativos fatigados, sem nunca virar canal primário (paid ativado tarde, como amplificador)."
   positive_examples:
-  - Campanha otimizada batendo ROAS-alvo com gasto < gasto de delight
-  - Criativo fatigado pausado antes de queimar verba
-  - Paid ativado só após sinal de retenção saudável
+    - "Campanha otimizada batendo ROAS-alvo com gasto < gasto de delight"
+    - "Criativo fatigado pausado antes de queimar verba"
+    - "Paid ativado só após sinal de retenção saudável"
   negative_examples:
-  - Gasto pago ultrapassa gasto de delight (viola a regra de capital)
-  - Campanha escalada com CAC-payback acima do limite de C3
-  - Paid usado como motor primário antes da ativação no produto
-  delivered_event: ads.campaign.live && roas >= target && delight_ratio.passed
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Gasto pago ultrapassa gasto de delight (viola a regra de capital)"
+    - "Campanha escalada com CAC-payback acima do limite de C3"
+    - "Paid usado como motor primário antes da ativação no produto"
+  delivered_event: "ads.campaign.live && roas >= target && delight_ratio.passed publicado no Brain"
+
 guardians:
-- po-guardian
-- observability-guardian
-- unit-economist
-- security-privacy-guardian
-- artifact-architect
+  - unit-economist-guardian
+  - po-guardian
+  - observability-guardian
+  - security-privacy-guardian
+
 tools:
-- ads.api
-- brain.query
-- brain.write
-- metrics.read
-- budget.read
-- LLMProvider
+  - ads.api
+  - brain.query
+  - brain.write
+  - metrics.read
+  - budget.read
+  - LLMProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

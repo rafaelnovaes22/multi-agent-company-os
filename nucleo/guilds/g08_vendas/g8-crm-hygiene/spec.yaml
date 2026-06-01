@@ -5,30 +5,34 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: spec_driven
+multi_tenant: true
+act_handler: crm_dedupe_score
+
 outcome_clause:
-  statement: "o CRM mantém taxa de duplicatas e campos inválidos abaixo do limiar definido, com toda mutação auditável."
+  statement: "O CRM mantém taxa de duplicatas e campos inválidos abaixo do limiar definido, com toda mutação auditável."
   positive_examples:
-  - "Duplicata mesclada preservando histórico e com regra de sobrevivência registrada."
-  - "Lead expirado anonimizado conforme LGPD com motivo logado."
-  - "Campo de estágio inválido normalizado e sinalizado ao owner."
+    - "Duplicata mesclada preservando histórico e com regra de sobrevivência registrada."
+    - "Lead expirado anonimizado conforme LGPD com motivo logado."
+    - "Campo de estágio inválido normalizado e sinalizado ao owner."
   negative_examples:
-  - "Merge que apaga histórico de interações sem trilha de auditoria."
-  - "Dado retido além do prazo LGPD sem base legal."
-  - "Quebra de integridade referencial deal↔fatura não detectada."
+    - "Merge que apaga histórico de interações sem trilha de auditoria."
+    - "Dado retido além do prazo LGPD sem base legal."
+    - "Quebra de integridade referencial deal↔fatura não detectada."
   delivered_event: "evento `crm.hygiene_run` é emitido com `records_scanned`, `merges`, `normalizations`, `purges` no Brain."
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+
 guardians:
-- po-guardian
-- observability-guardian
+  - security-privacy-guardian
+  - observability-guardian
+  - artifact-architect-guardian
+  - po-guardian
+
 tools:
-- "brain.query"
-- "crm.read"
-- "crm.write"
-- "dedupe.match"
-- "policy.read"
-- "LLMProvider"
+  - brain.query
+  - crm.read
+  - crm.write
+  - dedupe.match
+  - policy.read
+  - LLMProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

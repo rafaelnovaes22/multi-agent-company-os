@@ -5,32 +5,31 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: spec_driven
+multi_tenant: true
+act_handler: voc_priority
+
 outcome_clause:
-  statement: 'Voz do Cliente entrega voice-of-customer.artifact verificável para:
-    sintetizar o que os clientes dizem em todos os canais e devolver insights priorizados
-    e acionáveis para Produto e demais guildas'
+  statement: "Entrega insights de cliente priorizados por impacto (volume x severidade x CSAT), com citações rastreáveis e roteados à guilda dona, acompanhando o loop fechado."
   positive_examples:
-  - Top-5 fricções do mês ranqueadas por impacto e roteadas a Produto com evidência
-  - Tema emergente detectado e sinalizado antes de virar onda de tickets
-  - 'Loop fechado documentado: feedback → ship → narrativa build-in-public'
+    - "Top-5 fricções do mês ranqueadas por impacto e roteadas a Produto com evidência"
+    - "Tema emergente detectado e sinalizado antes de virar onda de tickets"
+    - "Loop fechado documentado: feedback -> ship -> narrativa build-in-public"
   negative_examples:
-  - Reporta uma lista crua de comentários sem priorização nem impacto
-  - Insight sem citação rastreável (não auditável)
-  - Roteia para a guilda errada e o loop nunca fecha
-  delivered_event: voc.report_published com insights priorizados e roteados, no Brain
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Reporta uma lista crua de comentários sem priorização nem impacto"
+    - "Insight sem citação rastreável (não auditável)"
+    - "Roteia para a guilda errada e o loop nunca fecha"
+  delivered_event: "voc.report_published com insights priorizados e roteados, no Brain"
+
 guardians:
-- po-guardian
-- observability-guardian
-- security-privacy-guardian
-- artifact-architect
+  - po-guardian
+  - observability-guardian
+  - artifact-architect-guardian
+
 tools:
-- brain.query
-- brain.emit
-- LLMProvider
-- theme.cluster
+  - brain.query
+  - brain.emit
+  - LLMProvider
+  - theme.cluster
+
 soul_ref: soul.md
 memory_ref: memory.md

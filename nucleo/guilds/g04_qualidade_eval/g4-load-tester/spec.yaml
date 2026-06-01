@@ -3,38 +3,33 @@ guild: G04-qualidade-eval
 ledger: operating
 tier: L2
 ai_enabled: true
-model_role: guardian
+model_role: worker
 mode: SHADOW
-act_handler: guardian_check
+multi_tenant: false
+act_handler: load_sla
+
 outcome_clause:
-  statement: 'Testador de Carga & SLA entrega load_tester.artifact verificável para:
-    validar que agentes e UI aguentam a carga prevista dentro dos SLAs antes de liberar
-    para produção.'
+  statement: "Todo agente/UI promovido para produção tem SLA validado sob carga prevista, com ponto de saturação e custo conhecidos."
   positive_examples:
-  - Recebe input válido e publica load_tester.artifact com status ready e evidência
-    rastreável.
-  - Roteia ou bloqueia trabalho com critério explícito quando risco alto exige revisão
-    humana.
-  - Registra artefato, rota e rationale sem depender de tenant, segmento ou fornecedor
-    hardcoded.
+    - "p95 medido em 1.8s contra target 2s sob 3x o pico previsto — PASS"
+    - "Gargalo identificado na fila de outcomes com evidência antes de ir a produção"
+    - "Custo sob carga cruzado com C3 e dentro de 25% do preço para um output BL"
   negative_examples:
-  - Declara sucesso sem artefato verificável ou sem status explícito.
-  - Executa ação de alto risco sem sinalizar revisão humana.
-  - Codifica regra específica de cliente, segmento, alíquota ou fornecedor no código
-    do agente.
-  delivered_event: g4-load-tester.delivered == true and artifact_type == 'load_tester.artifact'
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Promoção a AUTONOMOUS sem teste de carga"
+    - "SLA reportado sem p95/p99, apenas média"
+    - "Custo sob carga estourando C3 e mesmo assim liberado"
+  delivered_event: "artefato load.report gravado no Brain com latency_percentiles, throughput, error_rate, saturation_point, cost_under_load e sla_verdict"
+
 guardians:
-- po-guardian
-- eval-engineer-guardian
-- observability-guardian
+  - observability-guardian
+  - unit-economist-guardian
+  - artifact-architect-guardian
+
 tools:
-- brain.query
-- brain.write
-- queue.dispatch
-- policy.check
-- LLMProvider
+  - load.runner
+  - telemetry.read
+  - brain.write
+  - ledger.read
+
 soul_ref: soul.md
 memory_ref: memory.md

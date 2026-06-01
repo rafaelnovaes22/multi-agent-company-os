@@ -1,4 +1,7 @@
-# Memória operacional — g9-kb-curator
+# MEMORY — g9-kb-curator
 
-- Fonte canônica: catalogo/G09-customer-operations.md.
-- Variação de mercado/tenant/segmento deve entrar pela spec ou pelo payload do caso, nunca por hardcode no handler.
+Formato: `§ [confidence:nivel] [YYYY-MM-DD] [run:id] fato acionável`
+
+§ [confidence:local] [2026-05-31] [run:seed] Priorizar curadoria pelo deflection rate: artigo que evita mais tickets do mesmo tema vem primeiro; lacuna de alto volume não pode ficar semanas aberta.
+§ [confidence:local] [2026-05-31] [run:seed] Artigo de feature descontinuada deve ser aposentado ANTES de gerar resposta errada — auditar obsolescência por cron e por release notes.
+§ [confidence:local] [2026-05-31] [run:seed] Todo published/retired é versionado com trilha de auditoria; nunca quebrar a versão anterior do índice sem trace.

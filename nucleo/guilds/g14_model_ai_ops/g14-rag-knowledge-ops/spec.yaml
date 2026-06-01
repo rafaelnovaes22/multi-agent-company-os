@@ -5,28 +5,30 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: spec_driven
+multi_tenant: false
+act_handler: retrieval_quality_score
+
 outcome_clause:
-  statement: "os agentes recebem contexto relevante e atual, com recuperação medida acima do limiar e sem vazamento de Tier."
+  statement: "Os agentes recebem contexto relevante e atual, com recuperação medida acima do limiar e sem vazamento de Tier (C5), reindexando quando artefatos mudam e expirando contexto obsoleto."
   positive_examples:
-  - "Artefato novo fica recuperável dentro do SLA de indexação."
-  - "Precisão de recuperação medida e acima do limiar."
-  - "Contexto obsoleto expira automaticamente."
+    - "Artefato novo fica recuperável dentro do SLA de indexação"
+    - "Precisão de recuperação medida e acima do limiar"
+    - "Contexto obsoleto expira automaticamente"
   negative_examples:
-  - "Agente recebe contexto desatualizado por índice velho."
-  - "Índice mistura contexto de Tiers diferentes (quebra C5)."
-  - "RAG & Knowledge-Ops deixa de registrar evidência requerida no cenário 3."
-  delivered_event: "`retrieval_index.version` publicada com métricas."
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Agente recebe contexto desatualizado por índice velho"
+    - "Índice mistura contexto de Tiers diferentes (quebra C5)"
+    - "Índice publicado sem métricas de qualidade"
+  delivered_event: "retrieval_index.version publicada com métricas"
+
 guardians:
-- po-guardian
-- observability-guardian
+  - artifact-architect-guardian
+  - observability-guardian
+  - security-privacy-guardian
+
 tools:
-- "brain.query"
-- "vector.index"
-- "LLMProvider (avaliação de relevância)"
-- "LLMProvider"
+  - brain.query
+  - vector.index
+  - LLMProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

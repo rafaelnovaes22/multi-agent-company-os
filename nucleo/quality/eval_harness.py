@@ -10,14 +10,19 @@ import os
 import uuid
 
 from ..factory.factory import load_spec, build_from_spec
-from .graders import get_grader
+from .graders import get_grader, generic_contract_grader
 
 
 def run_evals(spec_dir, llm, brain, store, checkpointer) -> dict:
     spec = load_spec(spec_dir)
     _, agent, _ = build_from_spec(spec_dir, llm, brain, store, checkpointer)
     handler = spec.get("act_handler", "outcome_clause_validator")
-    grader = get_grader(handler)
+    # Grader específico prevalece; senão cai no genérico de contrato (valida `expected`
+    # de domínio contra o top-level do output). Assim os handlers determinísticos por
+    # guilda (rice_score, churn_risk_score, ...) são avaliados sem precisar de 1 grader
+    # nominal cada — o genérico checa presença+compatibilidade (tolerância 1%).
+    specific = get_grader(handler)
+    grader = specific or generic_contract_grader
 
     cases_path = os.path.join(spec_dir, "evals", "cases.json")
     cases = json.load(open(cases_path, encoding="utf-8")) if os.path.exists(cases_path) else []
@@ -39,6 +44,7 @@ def run_evals(spec_dir, llm, brain, store, checkpointer) -> dict:
     return {
         "id": spec["id"], "act_handler": handler, "total": n, "passed": npass,
         "rate": (npass / n if n else 0.0),
-        "grader_found": grader is not None,
+        "grader_found": True,                       # sempre há grader (genérico de contrato)
+        "grader_specific": specific is not None,    # distingue específico vs fallback genérico
         "results": results,
     }

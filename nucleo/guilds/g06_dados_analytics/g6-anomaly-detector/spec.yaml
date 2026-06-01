@@ -5,32 +5,31 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: guardian_check
+multi_tenant: true
+act_handler: anomaly_score
+
 outcome_clause:
-  statement: 'Detector de Anomalias em Métricas entrega anomaly-detector.verdict verificável
-    para: detectar desvios anômalos em métricas de negócio e operacionais antes que
-    virem incidentes'
+  statement: "Anomalias relevantes são detectadas e roteadas com severidade e causa-raiz provável dentro do SLA de detecção, com baselines sazonais que reduzem falsos alarmes."
   positive_examples:
-  - Detectou queda abrupta da north-star pós-deploy e correlacionou ao release, acionando
-    o incident-responder
-  - Suprimiu um falso alarme sazonal usando baseline, evitando ruído
-  - Sinalizou pico anômalo de custo de tokens ao margin-watch antes do fechamento
+    - "Detectou queda abrupta da north-star pós-deploy e correlacionou ao release, acionando o incident-responder."
+    - "Suprimiu um falso alarme sazonal usando baseline, evitando ruído."
+    - "Sinalizou pico anômalo de custo de tokens ao margin-watch antes do fechamento."
   negative_examples:
-  - Alertou ruído sazonal como incidente (falso positivo) e gerou fadiga de alerta
-  - Não detectou queda de receita que só apareceu no fechamento manual
-  - Disparou alerta sem severidade nem hipótese, deixando o time sem ação
-  delivered_event: anomaly.detected && alert.routed_with_severity
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Alertou ruído sazonal como incidente (falso positivo) e gerou fadiga de alerta."
+    - "Não detectou queda de receita que só apareceu no fechamento manual."
+    - "Disparou alerta sem severidade nem hipótese, deixando o time sem ação."
+  delivered_event: "anomaly.detected && alert.routed_with_severity"
+
 guardians:
-- po-guardian
-- observability-guardian
-- artifact-architect
+  - observability-guardian
+  - po-guardian
+  - security-privacy-guardian
+
 tools:
-- brain.query
-- brain.write
-- MessagingProvider
-- MLProvider
+  - brain.query
+  - brain.write
+  - MessagingProvider
+  - MLProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

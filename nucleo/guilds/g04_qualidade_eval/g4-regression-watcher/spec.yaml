@@ -3,38 +3,35 @@ guild: G04-qualidade-eval
 ledger: operating
 tier: L1
 ai_enabled: true
-model_role: guardian
+model_role: worker
 mode: SHADOW
-act_handler: guardian_check
+multi_tenant: false
+act_handler: regression_drift
+
 outcome_clause:
-  statement: 'Vigia de Regressões entrega regression_watcher.artifact verificável
-    para: detectar qualquer degradação de comportamento, qualidade ou custo entre
-    releases antes que ela chegue ao usuário.'
+  statement: "Toda regressão de qualidade/custo entre releases é detectada, atribuída a uma causa provável e convertida em eval-case antes de afetar o usuário."
   positive_examples:
-  - Recebe input válido e publica regression_watcher.artifact com status ready e evidência
-    rastreável.
-  - Roteia ou bloqueia trabalho com critério explícito quando risco alto exige revisão
-    humana.
-  - Registra artefato, rota e rationale sem depender de tenant, segmento ou fornecedor
-    hardcoded.
+    - "Queda de 7pp no pass-rate de uma categoria detectada e atribuída a um commit específico"
+    - "Drift de custo de 1.2x sinalizado como WARN para um output BL sob C3"
+    - "Regressão confirmada vira novo eval-case adversarial"
   negative_examples:
-  - Declara sucesso sem artefato verificável ou sem status explícito.
-  - Executa ação de alto risco sem sinalizar revisão humana.
-  - Codifica regra específica de cliente, segmento, alíquota ou fornecedor no código
-    do agente.
-  delivered_event: g4-regression-watcher.delivered == true and artifact_type == 'regression_watcher.artifact'
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Regressão só descoberta por reclamação de usuário em produção"
+    - "Alarme falso disparado por variação dentro do ruído estatístico"
+    - "Regressão confirmada sem issue acionável nem novo case"
+  delivered_event: "artefato regression.report gravado no Brain com delta_vs_baseline, suspected_cause, severity e (se confirmada) linked_case_id"
+
 guardians:
-- po-guardian
-- eval-engineer-guardian
-- observability-guardian
+  - observability-guardian
+  - unit-economist-guardian
+  - po-guardian
+  - artifact-architect-guardian
+
 tools:
-- brain.query
-- brain.write
-- queue.dispatch
-- policy.check
-- LLMProvider
+  - brain.query
+  - repo.read
+  - telemetry.read
+  - issue.create
+  - agent.invoke
+
 soul_ref: soul.md
 memory_ref: memory.md

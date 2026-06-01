@@ -1,4 +1,7 @@
-# Memória operacional — g6-cohort-analyst
+# MEMORY — g6-cohort-analyst
 
-- Fonte canônica: catalogo/G06-dados-analytics.md.
-- Variação de mercado/tenant/segmento deve entrar pela spec ou pelo payload do caso, nunca por hardcode no handler.
+Formato: `§ [confidence:nivel] [YYYY-MM-DD] [run:id] fato acionável`
+
+§ [confidence:local] [2026-05-31] [run:seed] Curvas de retenção sempre sobre o grão e a definição canônica de "ativo" do semantic layer; nunca misturar grãos entre coortes.
+§ [confidence:local] [2026-05-31] [run:seed] Segmentar por dimensões agnósticas (canal, plano, data de entrada) para isolar o que retém antes de inferir causa.
+§ [confidence:local] [2026-05-31] [run:seed] Queda anômala de retenção numa coorte aciona o g6-churn-predictor e o Growth; comparar coortes ativadas vs. não ativadas para medir efeito da ativação.

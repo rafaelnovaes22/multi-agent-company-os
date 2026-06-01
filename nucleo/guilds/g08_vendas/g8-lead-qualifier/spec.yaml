@@ -11,8 +11,8 @@ act_handler: lead_qualifier  # skill executada no no act (ver kernel/skills.py)
 outcome_clause:
   statement: "Qualifica cada lead contra o ICP em <=5min, com score, trilha e sinais de fit citáveis."
   positive_examples:
-    - "Lead high-fit (CEO bombeiro R$1-20M, founder-led, vende bem sem processo) -> qualified, trilha assistida, sinais citados"
-    - "Lead enterprise ~R$100M com dor operacional concreta -> qualified com segmento enterprise citado"
+    - "Lead high-fit (R$1-5M, founder-led, vende bem sem processo) -> qualified, trilha assistida, sinais citados"
+    - "Lead fora-do-ICP -> disqualified com motivo auditável, sem consumir SDR"
     - "Lead com operação já madura -> disqualified (sinal negativo do ICP)"
   negative_examples:
     - "Lead qualificado sem citar nenhum sinal de fit do ICP"

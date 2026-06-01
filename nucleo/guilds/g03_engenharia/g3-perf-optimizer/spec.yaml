@@ -5,36 +5,33 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: spec_driven
+multi_tenant: false
+act_handler: perf_benchmark_delta
+
 outcome_clause:
-  statement: 'Otimizador de Performance entrega perf_optimizer.artifact verificável
-    para: medir e otimizar performance (latência, throughput, custo) com base em evidência
-    de profiling.'
+  statement: "A otimização melhora a métrica-alvo de forma comprovada por benchmark, sem regredir correção."
   positive_examples:
-  - Recebe input válido e publica perf_optimizer.artifact com status ready e evidência
-    rastreável.
-  - Roteia ou bloqueia trabalho com critério explícito quando risco alto exige revisão
-    humana.
-  - Registra artefato, rota e rationale sem depender de tenant, segmento ou fornecedor
-    hardcoded.
+    - "latência p95 reduzida com benchmark antes/depois e testes verdes"
+    - "N+1 eliminado, validado em teste de carga"
+    - "custo de tokens de um fluxo de agente reduzido, reportado a G10"
   negative_examples:
-  - Declara sucesso sem artefato verificável ou sem status explícito.
-  - Executa ação de alto risco sem sinalizar revisão humana.
-  - Codifica regra específica de cliente, segmento, alíquota ou fornecedor no código
-    do agente.
-  delivered_event: g3-perf-optimizer.delivered == true and artifact_type == 'perf_optimizer.artifact'
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "otimização no escuro sem profiling que a justifique"
+    - "ganho de velocidade às custas de resultado incorreto"
+    - "melhoria sem SLO registrado para travar regressão futura"
+  delivered_event: "benchmark.improved && correctness.preserved"
+
 guardians:
-- po-guardian
-- observability-guardian
-- artifact-architect
+  - artifact-architect-guardian
+  - observability-guardian
+  - unit-economist-guardian
+
 tools:
-- brain.query
-- brain.write
-- queue.dispatch
-- policy.check
-- LLMProvider
+  - repo.read
+  - repo.write
+  - ci.run
+  - observability.query
+  - brain.query
+  - LLMProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

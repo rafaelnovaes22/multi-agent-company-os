@@ -5,32 +5,31 @@ tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
-act_handler: guardian_check
+multi_tenant: true
+act_handler: experiment_sample_size
+
 outcome_clause:
-  statement: 'Desenhista de Experimentos entrega experiment-designer.verdict verificável
-    para: Desenhar experimentos A/B estatisticamente válidos com critérios de sucesso
-    definidos antes do start'
+  statement: "Todo experimento tem critério de sucesso e tamanho de amostra pré-registrados antes do start, e decisão (ship/kill/iterar) ao fim."
   positive_examples:
-  - A/B com métrica primária, guardrails e n calculado antes de ligar
-  - Resultado lido com IC 95% e decisão registrada
-  - Experimento subdimensionado → não inicia até instrumentação/amostra adequadas
+    - "A/B com métrica primária, guardrails e n calculado antes de ligar."
+    - "Resultado lido com IC 95% e decisão registrada."
+    - "Experimento subdimensionado -> não inicia até instrumentação/amostra adequadas."
   negative_examples:
-  - Decisão de sucesso definida depois de olhar os números
-  - Experimento sem métrica guardrail (risco de otimizar localmente e piorar o todo)
-  - Conclusão "deu bom" sem significância estatística
-  delivered_event: evento experiment.design.committed é gravado com critério de sucesso
-    pré-registrado e n calculado
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+    - "Decisão de sucesso definida depois de olhar os números."
+    - "Experimento sem métrica guardrail (risco de otimizar localmente e piorar o todo)."
+    - "Conclusão 'deu bom' sem significância estatística."
+  delivered_event: "evento experiment.design.committed é gravado com critério de sucesso pré-registrado e n calculado."
+
 guardians:
-- po-guardian
-- observability-guardian
-- artifact-architect
+  - po-guardian
+  - observability-guardian
+  - unit-economist-guardian
+
 tools:
-- brain.query
-- brain.write
-- ExperimentationProvider
-- LLMProvider
+  - brain.query
+  - brain.write
+  - ExperimentationProvider
+  - LLMProvider
+
 soul_ref: soul.md
 memory_ref: memory.md

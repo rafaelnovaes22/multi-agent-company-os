@@ -70,3 +70,42 @@ def perf_benchmark_delta(state, *, llm, store, spec):
         "delivered": delivered,
         "status": status,
     }, f"Voce e {spec['id']}: p95 {before}->{after} ({latency_delta_pct}%), status {status}.", llm)
+
+
+# ---------------------------------------------------------------------------
+# Burn-down R3 — g3-feature-flagger: decisão determinística de rollout/kill-switch.
+# guard-metrics vs thresholds -> rollback/kill; senão ramp progressivo; detecta flag obsoleta.
+# ---------------------------------------------------------------------------
+@register("feature_flag_rollout")
+def feature_flag_rollout(state, *, llm, store, spec):
+    t = state["task"]
+    flag = t.get("flag", {}) or {}
+    rollout = float(flag.get("rollout_pct", 0) or 0)
+    step = float(flag.get("ramp_step_pct", 25) or 25)
+    gm = flag.get("guard_metrics", {}) or {}
+    th = flag.get("thresholds", {}) or {}
+    err = float(gm.get("error_rate", 0) or 0)
+    lat = float(gm.get("latency_ms", 0) or 0)
+    max_err = float(th.get("max_error_rate", 0.02) or 0.02)
+    max_lat = float(th.get("max_latency_ms", 800) or 800)
+    err_breach = err > max_err
+    lat_breach = lat > max_lat
+    guard_breached = err_breach or lat_breach
+    severe = err > 2 * max_err
+    age = float(flag.get("age_days", 0) or 0)
+    last_used = float(flag.get("last_used_days", 0) or 0)
+    obsolete = age > 90 and last_used > 30
+    if guard_breached:
+        decision = "kill" if severe else "rollback"
+        rollback_triggered, next_pct, requires_review = True, 0.0, True
+    elif rollout >= 100:
+        decision, rollback_triggered, next_pct, requires_review = "hold", False, 100.0, False
+    else:
+        decision, rollback_triggered = "proceed_ramp", False
+        next_pct, requires_review = min(100.0, rollout + step), False
+    return _out(spec, state, {
+        "agent_id": spec["id"], "flag": flag.get("name"), "rollout_pct": rollout,
+        "guard_breached": guard_breached, "error_breach": err_breach, "latency_breach": lat_breach,
+        "decision": decision, "rollback_triggered": rollback_triggered, "next_rollout_pct": next_pct,
+        "obsolete": obsolete, "requires_human_review": requires_review,
+    }, f"Voce e {spec['id']}: flag {flag.get('name')} rollout {rollout}% -> {decision}.", llm)

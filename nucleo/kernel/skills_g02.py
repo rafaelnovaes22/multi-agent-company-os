@@ -129,3 +129,62 @@ def pricing_c3_fit(state, *, llm, store, spec):
         "c3_ratio": c3_ratio, "c3_pass": c3_pass, "min_price_c3": min_price_c3,
         "billable": billable, "tier": tier, "blocked": blocked, "status": status,
     }, f"Voce e {spec['id']}: preco {recommended_price}, C3 {c3_ratio} (pass={c3_pass}), {status}.", llm)
+
+
+# ---------------------------------------------------------------------------
+# Burn-down R3 — g2-feedback-router: classificação + roteamento determinístico de feedback.
+# Núcleo determinístico (não-LLM): keyword-classify -> guilda-rota -> severidade -> temas.
+# ---------------------------------------------------------------------------
+_FB_RULES = (
+    ("churn_risk", "g1-strategy-supervisor",
+     ["cancelar", "cancelamento", "vou sair", "reembolso", "insatisfeito", "decepcion", "piorou", "nunca mais"]),
+    ("bug", "g3-eng-supervisor",
+     ["erro", "bug", "nao funciona", "não funciona", "quebrou", "travou", "travando", "falha", "crash", "caiu"]),
+    ("request", "g2-jobs-to-be-done",
+     ["queria", "poderia", "sugest", "gostaria", "adicionar", "faltando", "falta ", "feature", "funcionalidade", "seria bom"]),
+    ("elogio", "g7-growth-supervisor",
+     ["otimo", "ótimo", "excelente", "adorei", "perfeito", "parabens", "parabéns", "melhor", "incrivel", "incrível", "amei"]),
+)
+
+
+def _classify_feedback(text):
+    tl = (text or "").lower()
+    for cat, route, kws in _FB_RULES:
+        if any(k in tl for k in kws):
+            return cat, route
+    return "outro", "g2-product-supervisor"
+
+
+def _fb_severity(cat, text):
+    tl = (text or "").lower()
+    if cat == "churn_risk":
+        return "alta"
+    if cat == "bug" and any(k in tl for k in ["critico", "crítico", "todos", "parado", "producao", "produção", "urgente"]):
+        return "alta"
+    if cat in ("bug", "request"):
+        return "media"
+    return "baixa"
+
+
+@register("feedback_route")
+def feedback_route(state, *, llm, store, spec):
+    t = state["task"]
+    fb = t.get("feedback") or {}
+    items = fb.get("items", []) or []
+    emerging_threshold = int(fb.get("emerging_threshold", 3) or 3)
+    routed, by_cat, by_route = [], {}, {}
+    for it in items:
+        cat, route = _classify_feedback(it.get("text", ""))
+        sev = _fb_severity(cat, it.get("text", ""))
+        by_cat[cat] = by_cat.get(cat, 0) + 1
+        by_route[route] = by_route.get(route, 0) + 1
+        routed.append({"id": it.get("id"), "category": cat, "route_guild": route, "severity": sev})
+    emerging = sorted([c for c, n in by_cat.items() if n >= emerging_threshold and c != "outro"])
+    churn = by_cat.get("churn_risk", 0)
+    high_sev = sum(1 for r in routed if r["severity"] == "alta")
+    return _out(spec, state, {
+        "agent_id": spec["id"], "total": len(items), "routed": routed,
+        "counts_by_category": by_cat, "counts_by_route": by_route,
+        "emerging_themes": emerging, "churn_risk_count": churn, "high_severity_count": high_sev,
+        "requires_human_review": bool(churn or emerging),
+    }, f"Voce e {spec['id']}: {len(items)} feedbacks, {churn} churn-risk, emergentes={emerging}.", llm)

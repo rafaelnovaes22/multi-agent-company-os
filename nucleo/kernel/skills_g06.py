@@ -247,3 +247,30 @@ def dataquality_suite(state, *, llm, store, spec):
         "suite_passed": suite_passed, "contract_certified": suite_passed,
         "block_load": not suite_passed, "trigger_lgpd": pii,
     }, f"Voce e {spec['id']}: {len(failed)} testes reprovados {failed}, passou={suite_passed}.", llm)
+
+
+# ---------------------------------------------------------------------------
+# Burn-down R3 — g6-metrics-modeler: validação determinística da definição de métrica.
+# ---------------------------------------------------------------------------
+_METRIC_REQUIRED = ("name", "formula", "grain", "window", "source")
+
+
+@register("metric_definition_check")
+def metric_definition_check(state, *, llm, store, spec):
+    t = state["task"]
+    m = t.get("metric", {}) or {}
+    existing = (t.get("catalog", {}) or {}).get("metrics", []) or []
+    missing = [f for f in _METRIC_REQUIRED if not m.get(f)]
+    dup = None
+    for e in existing:
+        if e.get("name") and e.get("name") == m.get("name"):
+            dup = e.get("name"); break
+        if e.get("formula") and e.get("formula") == m.get("formula") and m.get("grain") and e.get("grain") == m.get("grain"):
+            dup = e.get("name"); break
+    valid = (not missing) and dup is None
+    status = "accepted" if valid else ("duplicate" if dup else "needs_revision")
+    return _out(spec, state, {
+        "agent_id": spec["id"], "metric": m.get("name"), "valid": valid,
+        "missing_fields": missing, "duplicate_of": dup, "status": status,
+        "requires_human_review": not valid,
+    }, f"Voce e {spec['id']}: metrica {m.get('name')} valid={valid} status={status}.", llm)

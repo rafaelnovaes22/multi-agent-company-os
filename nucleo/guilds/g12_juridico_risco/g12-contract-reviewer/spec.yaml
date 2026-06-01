@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: spec_driven
+act_handler: contract_risk_review
 outcome_clause:
   statement: 'Revisor de Contratos entrega contract-reviewer.artifact verificável
     para: Revisar contratos de entrada e saída, sinalizar cláusulas de risco e propor

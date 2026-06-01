@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: spec_driven
+act_handler: api_contract_diff
 outcome_clause:
   statement: 'Guardião de Contratos de API entrega api_contract.artifact verificável
     para: definir, versionar e fazer cumprir os contratos de API como fonte de verdade

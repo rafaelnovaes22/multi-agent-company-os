@@ -1,902 +1,713 @@
 [
   {
     "id": "g6-metrics-modeler-01",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 01 risco=low status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 1,
-      "blocked": false
+    "desc": "completa única",
+    "metric": {
+      "name": "dau",
+      "formula": "count(distinct u)",
+      "grain": "day",
+      "window": "1d",
+      "source": "events"
+    },
+    "catalog": {
+      "metrics": []
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "valid": true,
+      "status": "accepted",
+      "missing_fields": [],
+      "duplicate_of": null
     }
   },
   {
     "id": "g6-metrics-modeler-02",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 02 risco=medium status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g6-metrics-modeler",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 2,
-      "blocked": false
+    "desc": "falta formula",
+    "metric": {
+      "name": "x",
+      "grain": "day",
+      "window": "1d",
+      "source": "events"
+    },
+    "catalog": {
+      "metrics": []
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g6-metrics-modeler",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "valid": false,
+      "status": "needs_revision",
+      "missing_fields": [
+        "formula"
+      ],
+      "duplicate_of": null
     }
   },
   {
     "id": "g6-metrics-modeler-03",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 03 risco=high status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-metrics-modeler",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 3,
-      "blocked": false
+    "desc": "falta grain",
+    "metric": {
+      "name": "x",
+      "formula": "f",
+      "window": "1d",
+      "source": "events"
+    },
+    "catalog": {
+      "metrics": []
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g6-metrics-modeler",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "valid": false,
+      "status": "needs_revision",
+      "missing_fields": [
+        "grain"
+      ],
+      "duplicate_of": null
     }
   },
   {
     "id": "g6-metrics-modeler-04",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 04 risco=critical status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-metrics-modeler",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 4,
-      "blocked": false
+    "desc": "falta window",
+    "metric": {
+      "name": "x",
+      "formula": "f",
+      "grain": "day",
+      "source": "events"
+    },
+    "catalog": {
+      "metrics": []
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g6-metrics-modeler",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "valid": false,
+      "status": "needs_revision",
+      "missing_fields": [
+        "window"
+      ],
+      "duplicate_of": null
     }
   },
   {
     "id": "g6-metrics-modeler-05",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 05 risco=low status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g6-metrics-modeler",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 5,
-      "blocked": false
+    "desc": "falta source",
+    "metric": {
+      "name": "x",
+      "formula": "f",
+      "grain": "day",
+      "window": "1d"
+    },
+    "catalog": {
+      "metrics": []
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g6-metrics-modeler",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "valid": false,
+      "status": "needs_revision",
+      "missing_fields": [
+        "source"
+      ],
+      "duplicate_of": null
     }
   },
   {
     "id": "g6-metrics-modeler-06",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 06 risco=medium status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-metrics-modeler",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 6,
-      "blocked": false
+    "desc": "falta name",
+    "metric": {
+      "formula": "f",
+      "grain": "day",
+      "window": "1d",
+      "source": "events"
+    },
+    "catalog": {
+      "metrics": []
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g6-metrics-modeler",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "valid": false,
+      "status": "needs_revision",
+      "missing_fields": [
+        "name"
+      ],
+      "duplicate_of": null
     }
   },
   {
     "id": "g6-metrics-modeler-07",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 07 risco=high status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 7,
-      "blocked": false
+    "desc": "faltam dois",
+    "metric": {
+      "name": "x",
+      "window": "1d",
+      "source": "events"
+    },
+    "catalog": {
+      "metrics": []
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "valid": false,
+      "status": "needs_revision",
+      "missing_fields": [
+        "formula",
+        "grain"
+      ],
+      "duplicate_of": null
     }
   },
   {
     "id": "g6-metrics-modeler-08",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 08 risco=critical status=blocked",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "critical",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g6-metrics-modeler",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 8,
-      "blocked": true
+    "desc": "tudo vazio",
+    "metric": {},
+    "catalog": {
+      "metrics": []
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "blocked",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g6-metrics-modeler",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "valid": false,
+      "status": "needs_revision",
+      "missing_fields": [
+        "name",
+        "formula",
+        "grain",
+        "window",
+        "source"
+      ],
+      "duplicate_of": null
     }
   },
   {
     "id": "g6-metrics-modeler-09",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 09 risco=low status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g6-metrics-modeler",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 9,
-      "blocked": false
+    "desc": "duplicata por nome",
+    "metric": {
+      "name": "dau",
+      "formula": "count(distinct u)",
+      "grain": "day",
+      "window": "1d",
+      "source": "events"
+    },
+    "catalog": {
+      "metrics": [
+        {
+          "name": "dau"
+        }
+      ]
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g6-metrics-modeler",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "valid": false,
+      "status": "duplicate",
+      "missing_fields": [],
+      "duplicate_of": "dau"
     }
   },
   {
     "id": "g6-metrics-modeler-10",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 10 risco=medium status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g6-metrics-modeler",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 10,
-      "blocked": false
+    "desc": "duplicata formula+grain",
+    "metric": {
+      "name": "dau",
+      "formula": "count(distinct u)",
+      "grain": "day",
+      "window": "1d",
+      "source": "events"
+    },
+    "catalog": {
+      "metrics": [
+        {
+          "name": "old_dau",
+          "formula": "count(distinct u)",
+          "grain": "day"
+        }
+      ]
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g6-metrics-modeler",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "valid": false,
+      "status": "duplicate",
+      "missing_fields": [],
+      "duplicate_of": "old_dau"
     }
   },
   {
     "id": "g6-metrics-modeler-11",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 11 risco=high status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-metrics-modeler",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 11,
-      "blocked": false
+    "desc": "nome diferente, formula diferente = ok",
+    "metric": {
+      "name": "wau",
+      "formula": "count(w)",
+      "grain": "week",
+      "window": "7d",
+      "source": "events"
+    },
+    "catalog": {
+      "metrics": [
+        {
+          "name": "dau",
+          "formula": "count(distinct u)",
+          "grain": "day"
+        }
+      ]
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g6-metrics-modeler",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "valid": true,
+      "status": "accepted",
+      "missing_fields": [],
+      "duplicate_of": null
     }
   },
   {
     "id": "g6-metrics-modeler-12",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 12 risco=critical status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-metrics-modeler",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 12,
-      "blocked": false
+    "desc": "mesma formula grain diferente = ok",
+    "metric": {
+      "name": "x",
+      "formula": "count(distinct u)",
+      "grain": "week",
+      "window": "7d",
+      "source": "events"
+    },
+    "catalog": {
+      "metrics": [
+        {
+          "name": "dau",
+          "formula": "count(distinct u)",
+          "grain": "day"
+        }
+      ]
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g6-metrics-modeler",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "valid": true,
+      "status": "accepted",
+      "missing_fields": [],
+      "duplicate_of": null
     }
   },
   {
     "id": "g6-metrics-modeler-13",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 13 risco=low status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 13,
-      "blocked": false
+    "desc": "completa + catálogo vazio",
+    "metric": {
+      "name": "rps",
+      "formula": "score(referral)",
+      "grain": "user",
+      "window": "30d",
+      "source": "warehouse"
+    },
+    "catalog": {
+      "metrics": []
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "valid": true,
+      "status": "accepted",
+      "missing_fields": [],
+      "duplicate_of": null
     }
   },
   {
     "id": "g6-metrics-modeler-14",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 14 risco=medium status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g6-metrics-modeler",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 14,
-      "blocked": false
+    "desc": "falta formula com catálogo",
+    "metric": {
+      "name": "x",
+      "grain": "day",
+      "window": "1d",
+      "source": "events"
+    },
+    "catalog": {
+      "metrics": [
+        {
+          "name": "dau"
+        }
+      ]
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g6-metrics-modeler",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "valid": false,
+      "status": "needs_revision",
+      "missing_fields": [
+        "formula"
+      ],
+      "duplicate_of": null
     }
   },
   {
     "id": "g6-metrics-modeler-15",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 15 risco=high status=blocked",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "high",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g6-metrics-modeler",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 15,
-      "blocked": true
+    "desc": "north-star completa",
+    "metric": {
+      "name": "daily_active_outcomes",
+      "formula": "count(outcomes)",
+      "grain": "day",
+      "window": "1d",
+      "source": "brain"
+    },
+    "catalog": {
+      "metrics": []
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "blocked",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g6-metrics-modeler",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "valid": true,
+      "status": "accepted",
+      "missing_fields": [],
+      "duplicate_of": null
     }
   },
   {
     "id": "g6-metrics-modeler-16",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 16 risco=critical status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-metrics-modeler",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 16,
-      "blocked": false
+    "desc": "dup nome mesmo com campos completos",
+    "metric": {
+      "name": "dau",
+      "formula": "outra",
+      "grain": "hour",
+      "window": "1h",
+      "source": "x"
+    },
+    "catalog": {
+      "metrics": [
+        {
+          "name": "dau"
+        }
+      ]
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g6-metrics-modeler",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "valid": false,
+      "status": "duplicate",
+      "missing_fields": [],
+      "duplicate_of": "dau"
     }
   },
   {
     "id": "g6-metrics-modeler-17",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 17 risco=low status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g6-metrics-modeler",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 17,
-      "blocked": false
+    "desc": "3 missing",
+    "metric": {
+      "name": "x",
+      "source": "events"
+    },
+    "catalog": {
+      "metrics": []
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g6-metrics-modeler",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "valid": false,
+      "status": "needs_revision",
+      "missing_fields": [
+        "formula",
+        "grain",
+        "window"
+      ],
+      "duplicate_of": null
     }
   },
   {
     "id": "g6-metrics-modeler-18",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 18 risco=medium status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-metrics-modeler",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 18,
-      "blocked": false
+    "desc": "source vazio string",
+    "metric": {
+      "name": "x",
+      "formula": "f",
+      "grain": "day",
+      "window": "1d",
+      "source": ""
+    },
+    "catalog": {
+      "metrics": []
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g6-metrics-modeler",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "valid": false,
+      "status": "needs_revision",
+      "missing_fields": [
+        "source"
+      ],
+      "duplicate_of": null
     }
   },
   {
     "id": "g6-metrics-modeler-19",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 19 risco=high status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 19,
-      "blocked": false
+    "desc": "ok com várias no catálogo",
+    "metric": {
+      "name": "nps",
+      "formula": "promoters-detractors",
+      "grain": "month",
+      "window": "30d",
+      "source": "survey"
+    },
+    "catalog": {
+      "metrics": [
+        {
+          "name": "dau"
+        },
+        {
+          "name": "wau"
+        }
+      ]
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "valid": true,
+      "status": "accepted",
+      "missing_fields": [],
+      "duplicate_of": null
     }
   },
   {
     "id": "g6-metrics-modeler-20",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 20 risco=critical status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-metrics-modeler",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 20,
-      "blocked": false
+    "desc": "dup formula+grain entre várias",
+    "metric": {
+      "name": "x",
+      "formula": "sum(rev)",
+      "grain": "day",
+      "window": "1d",
+      "source": "billing"
+    },
+    "catalog": {
+      "metrics": [
+        {
+          "name": "mrr",
+          "formula": "sum(rev)",
+          "grain": "day"
+        }
+      ]
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g6-metrics-modeler",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "valid": false,
+      "status": "duplicate",
+      "missing_fields": [],
+      "duplicate_of": "mrr"
     }
   },
   {
     "id": "g6-metrics-modeler-21",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 21 risco=low status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g6-metrics-modeler",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 21,
-      "blocked": false
+    "desc": "formula igual grain None nos dois",
+    "metric": {
+      "name": "x",
+      "formula": "sum(rev)",
+      "window": "1d",
+      "source": "billing"
+    },
+    "catalog": {
+      "metrics": [
+        {
+          "name": "y",
+          "formula": "sum(rev)"
+        }
+      ]
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g6-metrics-modeler",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "valid": false,
+      "status": "needs_revision",
+      "missing_fields": [
+        "grain"
+      ],
+      "duplicate_of": null
     }
   },
   {
     "id": "g6-metrics-modeler-22",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 22 risco=medium status=blocked",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g6-metrics-modeler",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 22,
-      "blocked": true
+    "desc": "completa nome longo",
+    "metric": {
+      "name": "referral_propensity_score",
+      "formula": "model(p)",
+      "grain": "user",
+      "window": "30d",
+      "source": "ml"
+    },
+    "catalog": {
+      "metrics": []
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g6-metrics-modeler",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "valid": true,
+      "status": "accepted",
+      "missing_fields": [],
+      "duplicate_of": null
     }
   },
   {
     "id": "g6-metrics-modeler-23",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 23 risco=high status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-metrics-modeler",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 23,
-      "blocked": false
+    "desc": "falta window e source",
+    "metric": {
+      "name": "x",
+      "formula": "f",
+      "grain": "day"
+    },
+    "catalog": {
+      "metrics": []
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g6-metrics-modeler",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "valid": false,
+      "status": "needs_revision",
+      "missing_fields": [
+        "window",
+        "source"
+      ],
+      "duplicate_of": null
     }
   },
   {
     "id": "g6-metrics-modeler-24",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 24 risco=critical status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-metrics-modeler",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 24,
-      "blocked": false
+    "desc": "dup por nome reporta missing tb",
+    "metric": {
+      "name": "dau"
+    },
+    "catalog": {
+      "metrics": [
+        {
+          "name": "dau"
+        }
+      ]
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g6-metrics-modeler",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "valid": false,
+      "status": "duplicate",
+      "missing_fields": [
+        "formula",
+        "grain",
+        "window",
+        "source"
+      ],
+      "duplicate_of": "dau"
     }
   },
   {
     "id": "g6-metrics-modeler-25",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 25 risco=low status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 25,
-      "blocked": false
+    "desc": "ok grão hora",
+    "metric": {
+      "name": "hourly",
+      "formula": "count(e)",
+      "grain": "hour",
+      "window": "1h",
+      "source": "events"
+    },
+    "catalog": {
+      "metrics": []
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "valid": true,
+      "status": "accepted",
+      "missing_fields": [],
+      "duplicate_of": null
     }
   },
   {
     "id": "g6-metrics-modeler-26",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 26 risco=medium status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g6-metrics-modeler",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 26,
-      "blocked": false
+    "desc": "catalogo com formula sem grain não casa",
+    "metric": {
+      "name": "x",
+      "formula": "count(e)",
+      "grain": "day",
+      "window": "1d",
+      "source": "events"
+    },
+    "catalog": {
+      "metrics": [
+        {
+          "name": "y",
+          "formula": "count(e)"
+        }
+      ]
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g6-metrics-modeler",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "valid": true,
+      "status": "accepted",
+      "missing_fields": [],
+      "duplicate_of": null
     }
   },
   {
     "id": "g6-metrics-modeler-27",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 27 risco=high status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-metrics-modeler",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 27,
-      "blocked": false
+    "desc": "falta name e formula",
+    "metric": {
+      "grain": "day",
+      "window": "1d",
+      "source": "events"
+    },
+    "catalog": {
+      "metrics": []
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g6-metrics-modeler",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "valid": false,
+      "status": "needs_revision",
+      "missing_fields": [
+        "name",
+        "formula"
+      ],
+      "duplicate_of": null
     }
   },
   {
     "id": "g6-metrics-modeler-28",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 28 risco=critical status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-metrics-modeler",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 28,
-      "blocked": false
+    "desc": "completa source warehouse",
+    "metric": {
+      "name": "churn",
+      "formula": "1-retention",
+      "grain": "month",
+      "window": "30d",
+      "source": "warehouse"
+    },
+    "catalog": {
+      "metrics": []
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g6-metrics-modeler",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "valid": true,
+      "status": "accepted",
+      "missing_fields": [],
+      "duplicate_of": null
     }
   },
   {
     "id": "g6-metrics-modeler-29",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 29 risco=low status=blocked",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "low",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g6-metrics-modeler",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 29,
-      "blocked": true
+    "desc": "dup formula+grain exata",
+    "metric": {
+      "name": "x",
+      "formula": "avg(t)",
+      "grain": "week",
+      "window": "7d",
+      "source": "src"
+    },
+    "catalog": {
+      "metrics": [
+        {
+          "name": "lat",
+          "formula": "avg(t)",
+          "grain": "week"
+        }
+      ]
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "blocked",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g6-metrics-modeler",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "valid": false,
+      "status": "duplicate",
+      "missing_fields": [],
+      "duplicate_of": "lat"
     }
   },
   {
     "id": "g6-metrics-modeler-30",
-    "desc": "Modelador de Métricas (Semantic Layer): cenário 30 risco=medium status=ready",
-    "artifact_type": "metrics-modeler.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-metrics-modeler",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 30,
-      "blocked": false
+    "desc": "ok tudo preenchido distinto",
+    "metric": {
+      "name": "activation",
+      "formula": "first_value_event",
+      "grain": "user",
+      "window": "7d",
+      "source": "events"
+    },
+    "catalog": {
+      "metrics": [
+        {
+          "name": "dau"
+        }
+      ]
     },
     "expected": {
       "agent_id": "g6-metrics-modeler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "metrics-modeler.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g6-metrics-modeler",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "valid": true,
+      "status": "accepted",
+      "missing_fields": [],
+      "duplicate_of": null
     }
   }
 ]

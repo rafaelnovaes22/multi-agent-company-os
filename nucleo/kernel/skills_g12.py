@@ -146,3 +146,38 @@ def risk_score(state, *, llm, store, spec):
         "delivered_event": "risk.registered && risk.owner_assigned && risk.scored" if delivered else None,
     }, f"Voce e {spec['id']}: risco {level} (score {score}, {heatmap_cell}), "
        f"dono={'sim' if has_owner else 'NAO'}.", llm)
+
+
+# ---------------------------------------------------------------------------
+# Burn-down R3 — g12-contract-reviewer: classificação determinística de risco contratual.
+# Postura de risco do NÚCLEO: indenização ilimitada / sem cap de responsabilidade / foro
+# estrangeiro = bloqueante (vermelho). DPA exigido quando há tratamento de dados pessoais.
+# ---------------------------------------------------------------------------
+@register("contract_risk_review")
+def contract_risk_review(state, *, llm, store, spec):
+    t = state["task"]
+    cl = (t.get("contract", {}) or {}).get("clauses", {}) or {}
+    blocking = []
+    if cl.get("indemnity") == "unlimited":
+        blocking.append("indemnity_unlimited")
+    if not cl.get("liability_cap"):
+        blocking.append("no_liability_cap")
+    gl = (cl.get("governing_law") or "BR").upper()
+    if gl not in ("BR", "BRASIL", "BRAZIL"):
+        blocking.append("foreign_governing_law")
+    yellow = []
+    notice = cl.get("termination_notice_days")
+    if notice is not None and notice < 30:
+        yellow.append("short_termination_notice")
+    if cl.get("sla_pct") is None:
+        yellow.append("no_sla")
+    requires_dpa = bool(cl.get("data_processing")) and not bool(cl.get("dpa") or cl.get("has_dpa"))
+    if requires_dpa:
+        yellow.append("dpa_required")
+    risk = "vermelho" if blocking else ("amarelo" if yellow else "verde")
+    rec = "rejeitar" if blocking else ("negociar" if yellow else "assinar")
+    return _out(spec, state, {
+        "agent_id": spec["id"], "risk_level": risk, "blocking_clauses": blocking,
+        "flagged_clauses": blocking + yellow, "requires_dpa": requires_dpa,
+        "recommendation": rec, "requires_human_review": bool(blocking or requires_dpa),
+    }, f"Voce e {spec['id']}: risco {risk}, recomendacao {rec}.", llm)

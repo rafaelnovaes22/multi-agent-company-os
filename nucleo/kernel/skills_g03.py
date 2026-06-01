@@ -109,3 +109,35 @@ def feature_flag_rollout(state, *, llm, store, spec):
         "decision": decision, "rollback_triggered": rollback_triggered, "next_rollout_pct": next_pct,
         "obsolete": obsolete, "requires_human_review": requires_review,
     }, f"Voce e {spec['id']}: flag {flag.get('name')} rollout {rollout}% -> {decision}.", llm)
+
+
+# ---------------------------------------------------------------------------
+# Burn-down R3 — g3-api-contract: detecção determinística de breaking changes (semver).
+# ---------------------------------------------------------------------------
+@register("api_contract_diff")
+def api_contract_diff(state, *, llm, store, spec):
+    t = state["task"]
+    api = t.get("api", {}) or {}
+    old = {f"{e['path']}|{e.get('method', 'GET')}": e for e in (api.get("old", {}) or {}).get("endpoints", []) or []}
+    new = {f"{e['path']}|{e.get('method', 'GET')}": e for e in (api.get("new", {}) or {}).get("endpoints", []) or []}
+    breaking, non_breaking = [], []
+    for key, oe in old.items():
+        if key not in new:
+            breaking.append({"endpoint": key, "change": "endpoint_removed"}); continue
+        ne = new[key]
+        old_req, new_req = set(oe.get("required_params", []) or []), set(ne.get("required_params", []) or [])
+        for p in sorted(new_req - old_req):
+            breaking.append({"endpoint": key, "change": "required_param_added", "param": p})
+        for p in sorted(old_req - new_req):
+            non_breaking.append({"endpoint": key, "change": "required_param_removed", "param": p})
+        if oe.get("response_type") != ne.get("response_type"):
+            breaking.append({"endpoint": key, "change": "response_type_changed"})
+    for key in sorted(new.keys() - old.keys()):
+        non_breaking.append({"endpoint": key, "change": "endpoint_added"})
+    compatible = not breaking
+    bump = "major" if breaking else ("minor" if non_breaking else "patch")
+    return _out(spec, state, {
+        "agent_id": spec["id"], "breaking_count": len(breaking), "non_breaking_count": len(non_breaking),
+        "breaking_changes": breaking, "compatible": compatible, "recommended_bump": bump,
+        "requires_human_review": not compatible,
+    }, f"Voce e {spec['id']}: {len(breaking)} breaking change(s), bump {bump}.", llm)

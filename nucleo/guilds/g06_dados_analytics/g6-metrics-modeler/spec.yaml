@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: spec_driven
+act_handler: metric_definition_check
 outcome_clause:
   statement: 'Modelador de Métricas (Semantic Layer) entrega metrics-modeler.artifact
     verificável para: ser o dono técnico de uma única definição canônica de cada métrica

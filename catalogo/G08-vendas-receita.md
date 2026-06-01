@@ -6,7 +6,7 @@ A guilda que transforma demanda qualificada em receita recorrente e expandida, f
 
 ### g8-sales-supervisor — Supervisor de Vendas & Receita
 - **Missão:** orquestrar o pipeline comercial fim-a-fim e maximizar receita líquida sob as travas de outcome (C2) e custo (C3).
-- **Ledger:** OP · **Tier:** L0 · **Modo-alvo:** ASSISTED
+- **Ledger:** Misto · **Tier:** L0 · **Modo-alvo:** ASSISTED
 - **Responsabilidades:**
   - Rotear leads, deals e tarefas de receita entre os subagentes (qualifier, SDR, proposal, pricing, billing, dunning, closer, upsell) conforme estágio do funil e prioridade ROI.
   - Manter o estado consolidado do pipeline no subgrafo LangGraph (forecast ponderado, conversão por estágio, velocity) e expor view queryable do funil ao resto da empresa.

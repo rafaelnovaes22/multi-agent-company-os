@@ -88,7 +88,10 @@
     "root-supervisor"
   ],
   "eval_theater": [],
-  "c3_nao_enforcado": [],
+  "c3_nao_enforcado": [
+    "g8-sales-supervisor",
+    "g9-custops-supervisor"
+  ],
   "sem_target_mode": [],
   "abaixo_min_casos": [
     "brain-indexer",

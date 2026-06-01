@@ -5,6 +5,7 @@ tier: L0
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: ASSISTED
 act_handler: market_intel
 
 outcome_clause:

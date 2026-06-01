@@ -5,6 +5,7 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: AUTONOMOUS
 act_handler: fulfillment_tracker
 outcome_clause:
   statement: 'Rastreador de Cumprimento de Outcome (genérico) entrega fulfillment-tracker.artifact

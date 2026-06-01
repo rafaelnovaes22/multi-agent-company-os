@@ -5,6 +5,7 @@ tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: ASSISTED
 act_handler: spec_driven
 outcome_clause:
   statement: "cada conta com gatilho de expansão recebe uma oferta no momento de valor, sustentando NDR > 100% sem violar C3."

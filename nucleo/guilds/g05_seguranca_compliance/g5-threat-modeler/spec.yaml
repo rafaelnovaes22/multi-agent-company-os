@@ -5,6 +5,7 @@ tier: L2
 ai_enabled: true
 model_role: guardian
 mode: SHADOW
+target_mode: ASSISTED
 act_handler: guardian_check
 outcome_clause:
   statement: 'Threat Modeler entrega threat_modeler.artifact verificável para: modelar

@@ -5,6 +5,7 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: ASSISTED
 act_handler: billing_agent
 outcome_clause:
   statement: "cada fatura é emitida com valor correto nas 3 camadas, dentro de C3, com tributos BR aplicados e entrada no audit-log."

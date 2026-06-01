@@ -5,6 +5,7 @@ tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: AUTONOMOUS
 act_handler: guardian_check
 outcome_clause:
   statement: 'Guardião do Roadmap entrega roadmap-keeper.verdict verificável para:

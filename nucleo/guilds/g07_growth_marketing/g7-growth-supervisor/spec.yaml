@@ -5,6 +5,7 @@ tier: L1
 ai_enabled: true
 model_role: supervisor
 mode: SHADOW
+target_mode: ASSISTED
 act_handler: supervisor_route
 outcome_clause:
   statement: 'Growth Supervisor entrega growth-supervisor.routing_plan verificável

@@ -5,6 +5,7 @@ tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: AUTONOMOUS
 act_handler: spec_driven
 outcome_clause:
   statement: 'Extrator de Jobs-To-Be-Done entrega jobs-to-be-done.artifact verificável

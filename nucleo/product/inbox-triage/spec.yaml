@@ -6,6 +6,7 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: AUTONOMOUS
 multi_tenant: true
 reconciled_with: g9-support-triage
 act_handler: inbox_triage

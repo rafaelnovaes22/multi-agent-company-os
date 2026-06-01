@@ -5,6 +5,7 @@ tier: L2
 ai_enabled: true
 model_role: guardian
 mode: SHADOW
+target_mode: AUTONOMOUS
 act_handler: guardian_check
 outcome_clause:
   statement: 'Access Auditor entrega access_auditor.artifact verificável para: revisar

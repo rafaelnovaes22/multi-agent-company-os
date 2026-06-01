@@ -5,6 +5,7 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: AUTONOMOUS
 act_handler: csat_analyst
 outcome_clause:
   statement: 'Analista de CSAT/NPS entrega csat-analyst.artifact verificável para:

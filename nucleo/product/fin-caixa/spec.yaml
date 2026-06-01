@@ -6,6 +6,7 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW               # nasce em SHADOW na conta do cliente; sobe por gates (C4)
+target_mode: ASSISTED
 multi_tenant: true         # contexto e memória por tenant (empresa-cliente)
 reconciled_with: g10-treasury
 act_handler: fin_cashflow

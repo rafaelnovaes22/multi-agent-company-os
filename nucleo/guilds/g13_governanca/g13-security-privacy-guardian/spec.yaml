@@ -5,6 +5,7 @@ tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: ASSISTED
 act_handler: guardian_check
 outcome_clause:
   statement: "nenhum agente vira AUTONOMOUS sem assinatura de segurança+LGPD com todos os P0/P1 mitigados e zero PII crua em telemetria/memória."

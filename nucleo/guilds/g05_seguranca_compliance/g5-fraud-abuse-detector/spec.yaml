@@ -8,6 +8,7 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: ASSISTED
 multi_tenant: false
 act_handler: fraud_score
 

@@ -5,6 +5,7 @@ tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: ASSISTED
 act_handler: guardian_check
 outcome_clause:
   statement: 'Autor de PRD entrega prd-author.verdict verificável para: Transformar

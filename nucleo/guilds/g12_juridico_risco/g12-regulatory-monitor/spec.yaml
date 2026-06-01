@@ -5,6 +5,7 @@ tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: AUTONOMOUS
 act_handler: guardian_check
 outcome_clause:
   statement: 'Monitor Regulatório entrega regulatory-monitor.verdict verificável para:

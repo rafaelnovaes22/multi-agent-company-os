@@ -5,6 +5,7 @@ tier: L1
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: ASSISTED
 act_handler: diagnose       # ver kernel/skills.py — implementa o princípio C1
 
 # Implementa C1 (diagnose-before-build): vende-se o diagnóstico antes de construir o produto.

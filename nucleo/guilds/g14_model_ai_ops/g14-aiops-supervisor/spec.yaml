@@ -5,6 +5,7 @@ tier: L1
 ai_enabled: true
 model_role: supervisor
 mode: SHADOW
+target_mode: ASSISTED
 act_handler: supervisor_route
 outcome_clause:
   statement: "o motor de inteligência opera dentro de custo/qualidade/latência alvo, com modelos e prompts versionados e auditáveis."

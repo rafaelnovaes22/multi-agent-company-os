@@ -5,6 +5,7 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: AUTONOMOUS
 act_handler: spec_driven
 outcome_clause:
   statement: 'Meeting Notetaker entrega meeting-notetaker.artifact verificável para:

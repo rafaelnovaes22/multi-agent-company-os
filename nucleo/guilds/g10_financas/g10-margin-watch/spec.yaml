@@ -5,6 +5,7 @@ tier: L2
 ai_enabled: true
 model_role: worker
 mode: SHADOW
+target_mode: AUTONOMOUS
 act_handler: margin_watch
 outcome_clause:
   statement: 'Vigilância de Compressão de Margem entrega margin-watch.verdict verificável

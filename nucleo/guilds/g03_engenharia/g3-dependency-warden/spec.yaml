@@ -5,6 +5,7 @@ tier: L2
 ai_enabled: true
 model_role: guardian
 mode: SHADOW
+target_mode: ASSISTED
 act_handler: guardian_check
 outcome_clause:
   statement: 'Guardião de Dependências entrega dependency_warden.artifact verificável

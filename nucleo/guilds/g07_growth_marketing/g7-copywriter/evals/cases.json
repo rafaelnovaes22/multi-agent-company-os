@@ -1,902 +1,692 @@
 [
   {
-    "id": "g7-copywriter-01",
-    "desc": "Copywriter: cenário 01 risco=low status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 1,
-      "blocked": false
+    "id": "g7-copywriter-c3-01",
+    "desc": "g7-copywriter enforces C3 zero_price_block",
+    "unit_economics": {
+      "price_brl": 0,
+      "unit_cost_brl": 10,
+      "max_ratio": 0.25,
+      "requires_human_review": false
     },
     "expected": {
       "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
-    }
-  },
-  {
-    "id": "g7-copywriter-02",
-    "desc": "Copywriter: cenário 02 risco=medium status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g7-copywriter",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 2,
-      "blocked": false
-    },
-    "expected": {
-      "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g7-copywriter",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
-    }
-  },
-  {
-    "id": "g7-copywriter-03",
-    "desc": "Copywriter: cenário 03 risco=high status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-copywriter",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 3,
-      "blocked": false
-    },
-    "expected": {
-      "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g7-copywriter",
-      "capabilities_any": [
-        "sla_observability"
-      ]
-    }
-  },
-  {
-    "id": "g7-copywriter-04",
-    "desc": "Copywriter: cenário 04 risco=critical status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-copywriter",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 4,
-      "blocked": false
-    },
-    "expected": {
-      "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g7-copywriter",
-      "capabilities_any": [
-        "config_driven"
-      ]
-    }
-  },
-  {
-    "id": "g7-copywriter-05",
-    "desc": "Copywriter: cenário 05 risco=low status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g7-copywriter",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 5,
-      "blocked": false
-    },
-    "expected": {
-      "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g7-copywriter",
-      "capabilities_any": [
-        "brain_trace"
-      ]
-    }
-  },
-  {
-    "id": "g7-copywriter-06",
-    "desc": "Copywriter: cenário 06 risco=medium status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-copywriter",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 6,
-      "blocked": false
-    },
-    "expected": {
-      "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g7-copywriter",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
-    }
-  },
-  {
-    "id": "g7-copywriter-07",
-    "desc": "Copywriter: cenário 07 risco=high status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 7,
-      "blocked": false
-    },
-    "expected": {
-      "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "sla_observability"
-      ]
-    }
-  },
-  {
-    "id": "g7-copywriter-08",
-    "desc": "Copywriter: cenário 08 risco=critical status=blocked",
-    "artifact_type": "copywriter.artifact",
-    "risk": "critical",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g7-copywriter",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 8,
-      "blocked": true
-    },
-    "expected": {
-      "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 0.0,
+      "unit_cost_brl": 10.0,
+      "cost_ratio": 1.0,
+      "max_ratio": 0.25,
+      "c3_ok": false,
+      "min_viable_price_brl": 40.0,
       "status": "blocked",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g7-copywriter",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "requires_human_review": true
     }
   },
   {
-    "id": "g7-copywriter-09",
-    "desc": "Copywriter: cenário 09 risco=low status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g7-copywriter",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 9,
-      "blocked": false
+    "id": "g7-copywriter-c3-02",
+    "desc": "g7-copywriter enforces C3 below_cap",
+    "unit_economics": {
+      "price_brl": 210,
+      "unit_cost_brl": 23.1,
+      "max_ratio": 0.25,
+      "requires_human_review": false
     },
     "expected": {
       "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 210.0,
+      "unit_cost_brl": 23.1,
+      "cost_ratio": 0.11,
+      "max_ratio": 0.25,
+      "c3_ok": true,
+      "min_viable_price_brl": 92.4,
       "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g7-copywriter",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "requires_human_review": false
     }
   },
   {
-    "id": "g7-copywriter-10",
-    "desc": "Copywriter: cenário 10 risco=medium status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g7-copywriter",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 10,
-      "blocked": false
+    "id": "g7-copywriter-c3-03",
+    "desc": "g7-copywriter enforces C3 below_cap",
+    "unit_economics": {
+      "price_brl": 220,
+      "unit_cost_brl": 30.8,
+      "max_ratio": 0.25,
+      "requires_human_review": false
     },
     "expected": {
       "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 220.0,
+      "unit_cost_brl": 30.8,
+      "cost_ratio": 0.14,
+      "max_ratio": 0.25,
+      "c3_ok": true,
+      "min_viable_price_brl": 123.2,
       "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g7-copywriter",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "requires_human_review": false
     }
   },
   {
-    "id": "g7-copywriter-11",
-    "desc": "Copywriter: cenário 11 risco=high status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-copywriter",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 11,
-      "blocked": false
+    "id": "g7-copywriter-c3-04",
+    "desc": "g7-copywriter enforces C3 above_cap",
+    "unit_economics": {
+      "price_brl": 230,
+      "unit_cost_brl": 69.0,
+      "max_ratio": 0.25,
+      "requires_human_review": false
     },
     "expected": {
       "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g7-copywriter",
-      "capabilities_any": [
-        "sla_observability"
-      ]
-    }
-  },
-  {
-    "id": "g7-copywriter-12",
-    "desc": "Copywriter: cenário 12 risco=critical status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-copywriter",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 12,
-      "blocked": false
-    },
-    "expected": {
-      "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g7-copywriter",
-      "capabilities_any": [
-        "config_driven"
-      ]
-    }
-  },
-  {
-    "id": "g7-copywriter-13",
-    "desc": "Copywriter: cenário 13 risco=low status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 13,
-      "blocked": false
-    },
-    "expected": {
-      "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
-    }
-  },
-  {
-    "id": "g7-copywriter-14",
-    "desc": "Copywriter: cenário 14 risco=medium status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g7-copywriter",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 14,
-      "blocked": false
-    },
-    "expected": {
-      "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g7-copywriter",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
-    }
-  },
-  {
-    "id": "g7-copywriter-15",
-    "desc": "Copywriter: cenário 15 risco=high status=blocked",
-    "artifact_type": "copywriter.artifact",
-    "risk": "high",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g7-copywriter",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 15,
-      "blocked": true
-    },
-    "expected": {
-      "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 230.0,
+      "unit_cost_brl": 69.0,
+      "cost_ratio": 0.3,
+      "max_ratio": 0.25,
+      "c3_ok": false,
+      "min_viable_price_brl": 276.0,
       "status": "blocked",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g7-copywriter",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "requires_human_review": true
     }
   },
   {
-    "id": "g7-copywriter-16",
-    "desc": "Copywriter: cenário 16 risco=critical status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-copywriter",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 16,
-      "blocked": false
+    "id": "g7-copywriter-c3-05",
+    "desc": "g7-copywriter enforces C3 boundary",
+    "unit_economics": {
+      "price_brl": 440,
+      "unit_cost_brl": 110.0,
+      "max_ratio": 0.25,
+      "requires_human_review": false
     },
     "expected": {
       "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 440.0,
+      "unit_cost_brl": 110.0,
+      "cost_ratio": 0.25,
+      "max_ratio": 0.25,
+      "c3_ok": true,
+      "min_viable_price_brl": 440.0,
       "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g7-copywriter",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "requires_human_review": false
     }
   },
   {
-    "id": "g7-copywriter-17",
-    "desc": "Copywriter: cenário 17 risco=low status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g7-copywriter",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 17,
-      "blocked": false
+    "id": "g7-copywriter-c3-06",
+    "desc": "g7-copywriter enforces C3 below_cap",
+    "unit_economics": {
+      "price_brl": 250,
+      "unit_cost_brl": 20.0,
+      "max_ratio": 0.25,
+      "requires_human_review": false
     },
     "expected": {
       "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 250.0,
+      "unit_cost_brl": 20.0,
+      "cost_ratio": 0.08,
+      "max_ratio": 0.25,
+      "c3_ok": true,
+      "min_viable_price_brl": 80.0,
       "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g7-copywriter",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "requires_human_review": false
     }
   },
   {
-    "id": "g7-copywriter-18",
-    "desc": "Copywriter: cenário 18 risco=medium status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-copywriter",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 18,
-      "blocked": false
+    "id": "g7-copywriter-c3-07",
+    "desc": "g7-copywriter enforces C3 above_cap",
+    "unit_economics": {
+      "price_brl": 260,
+      "unit_cost_brl": 78.0,
+      "max_ratio": 0.25,
+      "requires_human_review": false
     },
     "expected": {
       "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g7-copywriter",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
-    }
-  },
-  {
-    "id": "g7-copywriter-19",
-    "desc": "Copywriter: cenário 19 risco=high status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 19,
-      "blocked": false
-    },
-    "expected": {
-      "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "sla_observability"
-      ]
-    }
-  },
-  {
-    "id": "g7-copywriter-20",
-    "desc": "Copywriter: cenário 20 risco=critical status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-copywriter",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 20,
-      "blocked": false
-    },
-    "expected": {
-      "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g7-copywriter",
-      "capabilities_any": [
-        "config_driven"
-      ]
-    }
-  },
-  {
-    "id": "g7-copywriter-21",
-    "desc": "Copywriter: cenário 21 risco=low status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g7-copywriter",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 21,
-      "blocked": false
-    },
-    "expected": {
-      "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g7-copywriter",
-      "capabilities_any": [
-        "brain_trace"
-      ]
-    }
-  },
-  {
-    "id": "g7-copywriter-22",
-    "desc": "Copywriter: cenário 22 risco=medium status=blocked",
-    "artifact_type": "copywriter.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g7-copywriter",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 22,
-      "blocked": true
-    },
-    "expected": {
-      "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 260.0,
+      "unit_cost_brl": 78.0,
+      "cost_ratio": 0.3,
+      "max_ratio": 0.25,
+      "c3_ok": false,
+      "min_viable_price_brl": 312.0,
       "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g7-copywriter",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "requires_human_review": true
     }
   },
   {
-    "id": "g7-copywriter-23",
-    "desc": "Copywriter: cenário 23 risco=high status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-copywriter",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 23,
-      "blocked": false
+    "id": "g7-copywriter-c3-08",
+    "desc": "g7-copywriter enforces C3 below_cap",
+    "unit_economics": {
+      "price_brl": 270,
+      "unit_cost_brl": 37.8,
+      "max_ratio": 0.25,
+      "requires_human_review": false
     },
     "expected": {
       "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 270.0,
+      "unit_cost_brl": 37.8,
+      "cost_ratio": 0.14,
+      "max_ratio": 0.25,
+      "c3_ok": true,
+      "min_viable_price_brl": 151.2,
       "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g7-copywriter",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "requires_human_review": false
     }
   },
   {
-    "id": "g7-copywriter-24",
-    "desc": "Copywriter: cenário 24 risco=critical status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-copywriter",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 24,
-      "blocked": false
+    "id": "g7-copywriter-c3-09",
+    "desc": "g7-copywriter enforces C3 boundary",
+    "unit_economics": {
+      "price_brl": 480,
+      "unit_cost_brl": 120.0,
+      "max_ratio": 0.25,
+      "requires_human_review": false
     },
     "expected": {
       "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 480.0,
+      "unit_cost_brl": 120.0,
+      "cost_ratio": 0.25,
+      "max_ratio": 0.25,
+      "c3_ok": true,
+      "min_viable_price_brl": 480.0,
       "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g7-copywriter",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "requires_human_review": false
     }
   },
   {
-    "id": "g7-copywriter-25",
-    "desc": "Copywriter: cenário 25 risco=low status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 25,
-      "blocked": false
+    "id": "g7-copywriter-c3-10",
+    "desc": "g7-copywriter enforces C3 above_cap",
+    "unit_economics": {
+      "price_brl": 290,
+      "unit_cost_brl": 87.0,
+      "max_ratio": 0.25,
+      "requires_human_review": false
     },
     "expected": {
       "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
-    }
-  },
-  {
-    "id": "g7-copywriter-26",
-    "desc": "Copywriter: cenário 26 risco=medium status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g7-copywriter",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 26,
-      "blocked": false
-    },
-    "expected": {
-      "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g7-copywriter",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
-    }
-  },
-  {
-    "id": "g7-copywriter-27",
-    "desc": "Copywriter: cenário 27 risco=high status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-copywriter",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 27,
-      "blocked": false
-    },
-    "expected": {
-      "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g7-copywriter",
-      "capabilities_any": [
-        "sla_observability"
-      ]
-    }
-  },
-  {
-    "id": "g7-copywriter-28",
-    "desc": "Copywriter: cenário 28 risco=critical status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-copywriter",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 28,
-      "blocked": false
-    },
-    "expected": {
-      "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g7-copywriter",
-      "capabilities_any": [
-        "config_driven"
-      ]
-    }
-  },
-  {
-    "id": "g7-copywriter-29",
-    "desc": "Copywriter: cenário 29 risco=low status=blocked",
-    "artifact_type": "copywriter.artifact",
-    "risk": "low",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g7-copywriter",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 29,
-      "blocked": true
-    },
-    "expected": {
-      "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 290.0,
+      "unit_cost_brl": 87.0,
+      "cost_ratio": 0.3,
+      "max_ratio": 0.25,
+      "c3_ok": false,
+      "min_viable_price_brl": 348.0,
       "status": "blocked",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g7-copywriter",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "requires_human_review": true
     }
   },
   {
-    "id": "g7-copywriter-30",
-    "desc": "Copywriter: cenário 30 risco=medium status=ready",
-    "artifact_type": "copywriter.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-copywriter",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 30,
-      "blocked": false
+    "id": "g7-copywriter-c3-11",
+    "desc": "g7-copywriter enforces C3 zero_price_block",
+    "unit_economics": {
+      "price_brl": 0,
+      "unit_cost_brl": 20,
+      "max_ratio": 0.25,
+      "requires_human_review": false
     },
     "expected": {
       "agent_id": "g7-copywriter",
-      "handler_kind": "spec_driven",
-      "artifact_type": "copywriter.artifact",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 0.0,
+      "unit_cost_brl": 20.0,
+      "cost_ratio": 1.0,
+      "max_ratio": 0.25,
+      "c3_ok": false,
+      "min_viable_price_brl": 80.0,
+      "status": "blocked",
+      "requires_human_review": true
+    }
+  },
+  {
+    "id": "g7-copywriter-c3-12",
+    "desc": "g7-copywriter enforces C3 below_cap",
+    "unit_economics": {
+      "price_brl": 310,
+      "unit_cost_brl": 34.1,
+      "max_ratio": 0.25,
+      "requires_human_review": false
+    },
+    "expected": {
+      "agent_id": "g7-copywriter",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 310.0,
+      "unit_cost_brl": 34.1,
+      "cost_ratio": 0.11,
+      "max_ratio": 0.25,
+      "c3_ok": true,
+      "min_viable_price_brl": 136.4,
       "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g7-copywriter",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "requires_human_review": false
+    }
+  },
+  {
+    "id": "g7-copywriter-c3-13",
+    "desc": "g7-copywriter enforces C3 boundary",
+    "unit_economics": {
+      "price_brl": 520,
+      "unit_cost_brl": 130.0,
+      "max_ratio": 0.25,
+      "requires_human_review": false
+    },
+    "expected": {
+      "agent_id": "g7-copywriter",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 520.0,
+      "unit_cost_brl": 130.0,
+      "cost_ratio": 0.25,
+      "max_ratio": 0.25,
+      "c3_ok": true,
+      "min_viable_price_brl": 520.0,
+      "status": "ready",
+      "requires_human_review": false
+    }
+  },
+  {
+    "id": "g7-copywriter-c3-14",
+    "desc": "g7-copywriter enforces C3 below_cap",
+    "unit_economics": {
+      "price_brl": 330,
+      "unit_cost_brl": 56.1,
+      "max_ratio": 0.25,
+      "requires_human_review": false
+    },
+    "expected": {
+      "agent_id": "g7-copywriter",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 330.0,
+      "unit_cost_brl": 56.1,
+      "cost_ratio": 0.17,
+      "max_ratio": 0.25,
+      "c3_ok": true,
+      "min_viable_price_brl": 224.4,
+      "status": "ready",
+      "requires_human_review": false
+    }
+  },
+  {
+    "id": "g7-copywriter-c3-15",
+    "desc": "g7-copywriter enforces C3 below_cap",
+    "unit_economics": {
+      "price_brl": 340,
+      "unit_cost_brl": 68.0,
+      "max_ratio": 0.25,
+      "requires_human_review": false
+    },
+    "expected": {
+      "agent_id": "g7-copywriter",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 340.0,
+      "unit_cost_brl": 68.0,
+      "cost_ratio": 0.2,
+      "max_ratio": 0.25,
+      "c3_ok": true,
+      "min_viable_price_brl": 272.0,
+      "status": "ready",
+      "requires_human_review": false
+    }
+  },
+  {
+    "id": "g7-copywriter-c3-16",
+    "desc": "g7-copywriter enforces C3 above_cap",
+    "unit_economics": {
+      "price_brl": 350,
+      "unit_cost_brl": 105.0,
+      "max_ratio": 0.25,
+      "requires_human_review": false
+    },
+    "expected": {
+      "agent_id": "g7-copywriter",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 350.0,
+      "unit_cost_brl": 105.0,
+      "cost_ratio": 0.3,
+      "max_ratio": 0.25,
+      "c3_ok": false,
+      "min_viable_price_brl": 420.0,
+      "status": "blocked",
+      "requires_human_review": true
+    }
+  },
+  {
+    "id": "g7-copywriter-c3-17",
+    "desc": "g7-copywriter enforces C3 boundary",
+    "unit_economics": {
+      "price_brl": 560,
+      "unit_cost_brl": 140.0,
+      "max_ratio": 0.25,
+      "requires_human_review": false
+    },
+    "expected": {
+      "agent_id": "g7-copywriter",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 560.0,
+      "unit_cost_brl": 140.0,
+      "cost_ratio": 0.25,
+      "max_ratio": 0.25,
+      "c3_ok": true,
+      "min_viable_price_brl": 560.0,
+      "status": "ready",
+      "requires_human_review": false
+    }
+  },
+  {
+    "id": "g7-copywriter-c3-18",
+    "desc": "g7-copywriter enforces C3 below_cap",
+    "unit_economics": {
+      "price_brl": 370,
+      "unit_cost_brl": 51.8,
+      "max_ratio": 0.25,
+      "requires_human_review": false
+    },
+    "expected": {
+      "agent_id": "g7-copywriter",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 370.0,
+      "unit_cost_brl": 51.8,
+      "cost_ratio": 0.14,
+      "max_ratio": 0.25,
+      "c3_ok": true,
+      "min_viable_price_brl": 207.2,
+      "status": "ready",
+      "requires_human_review": false
+    }
+  },
+  {
+    "id": "g7-copywriter-c3-19",
+    "desc": "g7-copywriter enforces C3 above_cap",
+    "unit_economics": {
+      "price_brl": 380,
+      "unit_cost_brl": 114.0,
+      "max_ratio": 0.25,
+      "requires_human_review": false
+    },
+    "expected": {
+      "agent_id": "g7-copywriter",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 380.0,
+      "unit_cost_brl": 114.0,
+      "cost_ratio": 0.3,
+      "max_ratio": 0.25,
+      "c3_ok": false,
+      "min_viable_price_brl": 456.0,
+      "status": "blocked",
+      "requires_human_review": true
+    }
+  },
+  {
+    "id": "g7-copywriter-c3-20",
+    "desc": "g7-copywriter enforces C3 below_cap",
+    "unit_economics": {
+      "price_brl": 390,
+      "unit_cost_brl": 78.0,
+      "max_ratio": 0.25,
+      "requires_human_review": false
+    },
+    "expected": {
+      "agent_id": "g7-copywriter",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 390.0,
+      "unit_cost_brl": 78.0,
+      "cost_ratio": 0.2,
+      "max_ratio": 0.25,
+      "c3_ok": true,
+      "min_viable_price_brl": 312.0,
+      "status": "ready",
+      "requires_human_review": false
+    }
+  },
+  {
+    "id": "g7-copywriter-c3-21",
+    "desc": "g7-copywriter enforces C3 zero_price_block",
+    "unit_economics": {
+      "price_brl": 0,
+      "unit_cost_brl": 30,
+      "max_ratio": 0.25,
+      "requires_human_review": false
+    },
+    "expected": {
+      "agent_id": "g7-copywriter",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 0.0,
+      "unit_cost_brl": 30.0,
+      "cost_ratio": 1.0,
+      "max_ratio": 0.25,
+      "c3_ok": false,
+      "min_viable_price_brl": 120.0,
+      "status": "blocked",
+      "requires_human_review": true
+    }
+  },
+  {
+    "id": "g7-copywriter-c3-22",
+    "desc": "g7-copywriter enforces C3 above_cap",
+    "unit_economics": {
+      "price_brl": 410,
+      "unit_cost_brl": 123.0,
+      "max_ratio": 0.25,
+      "requires_human_review": false
+    },
+    "expected": {
+      "agent_id": "g7-copywriter",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 410.0,
+      "unit_cost_brl": 123.0,
+      "cost_ratio": 0.3,
+      "max_ratio": 0.25,
+      "c3_ok": false,
+      "min_viable_price_brl": 492.0,
+      "status": "blocked",
+      "requires_human_review": true
+    }
+  },
+  {
+    "id": "g7-copywriter-c3-23",
+    "desc": "g7-copywriter enforces C3 below_cap",
+    "unit_economics": {
+      "price_brl": 420,
+      "unit_cost_brl": 58.8,
+      "max_ratio": 0.25,
+      "requires_human_review": false
+    },
+    "expected": {
+      "agent_id": "g7-copywriter",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 420.0,
+      "unit_cost_brl": 58.8,
+      "cost_ratio": 0.14,
+      "max_ratio": 0.25,
+      "c3_ok": true,
+      "min_viable_price_brl": 235.2,
+      "status": "ready",
+      "requires_human_review": false
+    }
+  },
+  {
+    "id": "g7-copywriter-c3-24",
+    "desc": "g7-copywriter enforces C3 below_cap",
+    "unit_economics": {
+      "price_brl": 430,
+      "unit_cost_brl": 73.1,
+      "max_ratio": 0.25,
+      "requires_human_review": false
+    },
+    "expected": {
+      "agent_id": "g7-copywriter",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 430.0,
+      "unit_cost_brl": 73.1,
+      "cost_ratio": 0.17,
+      "max_ratio": 0.25,
+      "c3_ok": true,
+      "min_viable_price_brl": 292.4,
+      "status": "ready",
+      "requires_human_review": false
+    }
+  },
+  {
+    "id": "g7-copywriter-c3-25",
+    "desc": "g7-copywriter enforces C3 boundary",
+    "unit_economics": {
+      "price_brl": 640,
+      "unit_cost_brl": 160.0,
+      "max_ratio": 0.25,
+      "requires_human_review": false
+    },
+    "expected": {
+      "agent_id": "g7-copywriter",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 640.0,
+      "unit_cost_brl": 160.0,
+      "cost_ratio": 0.25,
+      "max_ratio": 0.25,
+      "c3_ok": true,
+      "min_viable_price_brl": 640.0,
+      "status": "ready",
+      "requires_human_review": false
+    }
+  },
+  {
+    "id": "g7-copywriter-c3-26",
+    "desc": "g7-copywriter enforces C3 below_cap",
+    "unit_economics": {
+      "price_brl": 450,
+      "unit_cost_brl": 36.0,
+      "max_ratio": 0.25,
+      "requires_human_review": false
+    },
+    "expected": {
+      "agent_id": "g7-copywriter",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 450.0,
+      "unit_cost_brl": 36.0,
+      "cost_ratio": 0.08,
+      "max_ratio": 0.25,
+      "c3_ok": true,
+      "min_viable_price_brl": 144.0,
+      "status": "ready",
+      "requires_human_review": false
+    }
+  },
+  {
+    "id": "g7-copywriter-c3-27",
+    "desc": "g7-copywriter enforces C3 below_cap",
+    "unit_economics": {
+      "price_brl": 460,
+      "unit_cost_brl": 50.6,
+      "max_ratio": 0.25,
+      "requires_human_review": false
+    },
+    "expected": {
+      "agent_id": "g7-copywriter",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 460.0,
+      "unit_cost_brl": 50.6,
+      "cost_ratio": 0.11,
+      "max_ratio": 0.25,
+      "c3_ok": true,
+      "min_viable_price_brl": 202.4,
+      "status": "ready",
+      "requires_human_review": false
+    }
+  },
+  {
+    "id": "g7-copywriter-c3-28",
+    "desc": "g7-copywriter enforces C3 above_cap",
+    "unit_economics": {
+      "price_brl": 470,
+      "unit_cost_brl": 141.0,
+      "max_ratio": 0.25,
+      "requires_human_review": false
+    },
+    "expected": {
+      "agent_id": "g7-copywriter",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 470.0,
+      "unit_cost_brl": 141.0,
+      "cost_ratio": 0.3,
+      "max_ratio": 0.25,
+      "c3_ok": false,
+      "min_viable_price_brl": 564.0,
+      "status": "blocked",
+      "requires_human_review": true
+    }
+  },
+  {
+    "id": "g7-copywriter-c3-29",
+    "desc": "g7-copywriter enforces C3 boundary",
+    "unit_economics": {
+      "price_brl": 680,
+      "unit_cost_brl": 170.0,
+      "max_ratio": 0.25,
+      "requires_human_review": false
+    },
+    "expected": {
+      "agent_id": "g7-copywriter",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 680.0,
+      "unit_cost_brl": 170.0,
+      "cost_ratio": 0.25,
+      "max_ratio": 0.25,
+      "c3_ok": true,
+      "min_viable_price_brl": 680.0,
+      "status": "ready",
+      "requires_human_review": false
+    }
+  },
+  {
+    "id": "g7-copywriter-c3-30",
+    "desc": "g7-copywriter enforces C3 below_cap",
+    "unit_economics": {
+      "price_brl": 490,
+      "unit_cost_brl": 98.0,
+      "max_ratio": 0.25,
+      "requires_human_review": false
+    },
+    "expected": {
+      "agent_id": "g7-copywriter",
+      "handler_kind": "copywriter_c3",
+      "artifact_type": "copywriter.copy_asset",
+      "price_brl": 490.0,
+      "unit_cost_brl": 98.0,
+      "cost_ratio": 0.2,
+      "max_ratio": 0.25,
+      "c3_ok": true,
+      "min_viable_price_brl": 392.0,
+      "status": "ready",
+      "requires_human_review": false
     }
   }
 ]

@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: spec_driven
+act_handler: dispute_mediator_c3
 outcome_clause:
   statement: 'Mediador de Disputas (genérico) entrega dispute-mediator.artifact verificável
     para: mediar disputas entre partes de uma transação de forma justa, documentada

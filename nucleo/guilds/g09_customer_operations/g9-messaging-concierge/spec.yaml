@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: spec_driven
+act_handler: messaging_concierge_c3
 outcome_clause:
   statement: 'Concierge de Mensageria (qualquer canal via C7) entrega messaging-concierge.artifact
     verificável para: ser a interface de atendimento conversacional em qualquer canal

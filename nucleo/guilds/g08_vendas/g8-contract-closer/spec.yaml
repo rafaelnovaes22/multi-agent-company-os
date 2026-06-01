@@ -6,18 +6,20 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: spec_driven
+act_handler: contract_closer_c3
 outcome_clause:
-  statement: "cada proposta aceita vira contrato assinado com termos canônicos e ativação disparada, dentro do SLA de fechamento."
+  statement: cada proposta aceita vira contrato assinado com termos canônicos e ativação
+    disparada, dentro do SLA de fechamento.
   positive_examples:
-  - "Contrato gerado de template aprovado e assinado eletronicamente."
-  - "Assinatura dispara ativação no billing e no produto sem intervenção humana."
-  - "Cláusula não-padrão escalada e resolvida com jurídico sem travar o ciclo."
+  - Contrato gerado de template aprovado e assinado eletronicamente.
+  - Assinatura dispara ativação no billing e no produto sem intervenção humana.
+  - Cláusula não-padrão escalada e resolvida com jurídico sem travar o ciclo.
   negative_examples:
-  - "Contrato assinado sem disparar ativação (loop aberto)."
-  - "Desconto concedido fora da política sem aprovação."
-  - "Termos finais não registrados como artefato canônico."
-  delivered_event: "evento `contract.signed` é emitido com `deal_id`, `final_terms`, `signature_ref`, `activation_triggered` no Brain."
+  - Contrato assinado sem disparar ativação (loop aberto).
+  - Desconto concedido fora da política sem aprovação.
+  - Termos finais não registrados como artefato canônico.
+  delivered_event: evento `contract.signed` é emitido com `deal_id`, `final_terms`,
+    `signature_ref`, `activation_triggered` no Brain.
 economics:
   cost_model: cost_per_outcome
   max_ratio: 0.25
@@ -26,12 +28,12 @@ guardians:
 - observability-guardian
 - unit-economist
 tools:
-- "brain.query"
-- "crm.read"
-- "crm.write"
-- "docgen.render"
-- "SignatureProvider"
-- "policy.read"
-- "LLMProvider"
+- brain.query
+- crm.read
+- crm.write
+- docgen.render
+- SignatureProvider
+- policy.read
+- LLMProvider
 soul_ref: soul.md
 memory_ref: memory.md

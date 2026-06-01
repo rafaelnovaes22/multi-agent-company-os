@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: spec_driven
+act_handler: lifecycle_crm_c3
 outcome_clause:
   statement: 'Lifecycle & CRM entrega lifecycle-crm.artifact verificável para: desenhar
     e operar jornadas de e-mail/push/mensageria que ativam, retêm e expandem usuários

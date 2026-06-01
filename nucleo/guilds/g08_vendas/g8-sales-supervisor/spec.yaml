@@ -1,6 +1,6 @@
 id: g8-sales-supervisor
 guild: G08-vendas-receita
-ledger: billable
+ledger: operating
 tier: L0
 ai_enabled: true
 model_role: supervisor
@@ -8,30 +8,28 @@ mode: SHADOW
 target_mode: ASSISTED
 act_handler: supervisor_route
 outcome_clause:
-  statement: "cada deal entra e avança no funil com estágio, owner e próxima ação atribuídos em até 1 ciclo de orquestração, sem deals órfãos."
+  statement: cada deal entra e avança no funil com estágio, owner e próxima ação atribuídos
+    em até 1 ciclo de orquestração, sem deals órfãos.
   positive_examples:
-  - "Lead novo roteado ao qualifier com SLA atribuído em < 5 min."
-  - "Deal estagnado > SLA reescalado automaticamente com causa registrada."
-  - "Exceção de desconto fora de política escalada ao humano com contexto completo."
+  - Lead novo roteado ao qualifier com SLA atribuído em < 5 min.
+  - Deal estagnado > SLA reescalado automaticamente com causa registrada.
+  - Exceção de desconto fora de política escalada ao humano com contexto completo.
   negative_examples:
-  - "Deal sem owner por mais de um ciclo de orquestração."
-  - "Forecast publicado sem reconciliação com o estado do CRM."
-  - "Decisão de pricing tomada pelo supervisor ignorando o g8-pricing-engine."
-  delivered_event: "evento `pipeline.routed` é emitido com `deal_id`, `stage`, `owner_agent` e `next_action` persistidos no Brain."
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
+  - Deal sem owner por mais de um ciclo de orquestração.
+  - Forecast publicado sem reconciliação com o estado do CRM.
+  - Decisão de pricing tomada pelo supervisor ignorando o g8-pricing-engine.
+  delivered_event: evento `pipeline.routed` é emitido com `deal_id`, `stage`, `owner_agent`
+    e `next_action` persistidos no Brain.
 guardians:
 - po-guardian
 - observability-guardian
-- unit-economist
 tools:
-- "brain.query"
-- "crm.read"
-- "crm.write"
-- "queue.dispatch"
-- "policy.read"
-- "MessagingProvider"
-- "LLMProvider"
+- brain.query
+- crm.read
+- crm.write
+- queue.dispatch
+- policy.read
+- MessagingProvider
+- LLMProvider
 soul_ref: soul.md
 memory_ref: memory.md

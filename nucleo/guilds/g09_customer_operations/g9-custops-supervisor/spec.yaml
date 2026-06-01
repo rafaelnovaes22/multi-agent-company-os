@@ -1,6 +1,6 @@
 id: g9-custops-supervisor
 guild: G09-customer-operations
-ledger: billable
+ledger: operating
 tier: L1
 ai_enabled: true
 model_role: supervisor
@@ -22,13 +22,9 @@ outcome_clause:
   - Libera resposta abaixo do gate de taste e gera reclamação
   delivered_event: interaction.routed && worker.assigned registrado com route_latency
     no Brain
-economics:
-  cost_model: cost_per_outcome
-  max_ratio: 0.25
 guardians:
 - po-guardian
 - observability-guardian
-- unit-economist
 - security-privacy-guardian
 tools:
 - brain.query

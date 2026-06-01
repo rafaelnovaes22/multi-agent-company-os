@@ -28,3 +28,6 @@ Thumbs.db
 .env.*
 *.key
 secrets.*
+
+# Config local do Claude Code (settings.json + settings.local.json)
+.claude/

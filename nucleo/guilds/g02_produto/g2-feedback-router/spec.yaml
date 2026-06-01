@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: AUTONOMOUS
-act_handler: spec_driven
+act_handler: feedback_route
 outcome_clause:
   statement: 'Classificador e Roteador de Feedback entrega feedback-router.artifact
     verificável para: Classificar todo feedback de usuário e roteá-lo à guilda certa,

@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: spec_driven
+act_handler: feature_flag_rollout
 outcome_clause:
   statement: 'Gestor de Feature Flags e Rollout entrega feature_flagger.artifact verificável
     para: habilitar ship diário com rollout progressivo seguro e kill-switch instantâneo

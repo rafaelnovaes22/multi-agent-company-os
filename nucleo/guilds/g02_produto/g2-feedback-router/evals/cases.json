@@ -1,902 +1,848 @@
 [
   {
     "id": "g2-feedback-router-01",
-    "desc": "Classificador e Roteador de Feedback: cenário 01 risco=low status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 1,
-      "blocked": false
+    "desc": "feedback_route cenário 01: 1 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "o aplicativo travou e deu erro ao salvar"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "total": 1,
+      "counts_by_category": {
+        "bug": 1
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 0,
+      "high_severity_count": 0
     }
   },
   {
     "id": "g2-feedback-router-02",
-    "desc": "Classificador e Roteador de Feedback: cenário 02 risco=medium status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g2-feedback-router",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 2,
-      "blocked": false
+    "desc": "feedback_route cenário 02: 1 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "deu crash em producao, esta tudo parado e urgente"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g2-feedback-router",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "total": 1,
+      "counts_by_category": {
+        "bug": 1
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 0,
+      "high_severity_count": 1
     }
   },
   {
     "id": "g2-feedback-router-03",
-    "desc": "Classificador e Roteador de Feedback: cenário 03 risco=high status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-feedback-router",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 3,
-      "blocked": false
+    "desc": "feedback_route cenário 03: 1 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "falha critica: nao funciona para todos os usuarios"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g2-feedback-router",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "total": 1,
+      "counts_by_category": {
+        "bug": 1
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 0,
+      "high_severity_count": 1
     }
   },
   {
     "id": "g2-feedback-router-04",
-    "desc": "Classificador e Roteador de Feedback: cenário 04 risco=critical status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-feedback-router",
-    "capabilities": [
-      "config_driven",
-      "discovery_traceability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 4,
-      "blocked": false
+    "desc": "feedback_route cenário 04: 1 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "queria poder exportar em PDF, falta essa funcionalidade"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g2-feedback-router",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "total": 1,
+      "counts_by_category": {
+        "request": 1
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 0,
+      "high_severity_count": 0
     }
   },
   {
     "id": "g2-feedback-router-05",
-    "desc": "Classificador e Roteador de Feedback: cenário 05 risco=low status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g2-feedback-router",
-    "capabilities": [
-      "discovery_traceability",
-      "lovability_gate"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 5,
-      "blocked": false
+    "desc": "feedback_route cenário 05: 1 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "seria bom adicionar modo escuro"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g2-feedback-router",
-      "capabilities_any": [
-        "discovery_traceability"
-      ]
+      "total": 1,
+      "counts_by_category": {
+        "request": 1
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 0,
+      "high_severity_count": 0
     }
   },
   {
     "id": "g2-feedback-router-06",
-    "desc": "Classificador e Roteador de Feedback: cenário 06 risco=medium status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-feedback-router",
-    "capabilities": [
-      "lovability_gate",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 6,
-      "blocked": false
+    "desc": "feedback_route cenário 06: 1 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "poderia ter integracao com planilha"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g2-feedback-router",
-      "capabilities_any": [
-        "lovability_gate"
-      ]
+      "total": 1,
+      "counts_by_category": {
+        "request": 1
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 0,
+      "high_severity_count": 0
     }
   },
   {
     "id": "g2-feedback-router-07",
-    "desc": "Classificador e Roteador de Feedback: cenário 07 risco=high status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 7,
-      "blocked": false
+    "desc": "feedback_route cenário 07: 1 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "excelente app, adorei a ultima atualizacao"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "total": 1,
+      "counts_by_category": {
+        "elogio": 1
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 0,
+      "high_severity_count": 0
     }
   },
   {
     "id": "g2-feedback-router-08",
-    "desc": "Classificador e Roteador de Feedback: cenário 08 risco=critical status=blocked",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "critical",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g2-feedback-router",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 8,
-      "blocked": true
+    "desc": "feedback_route cenário 08: 1 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "perfeito, melhor ferramenta que ja usei"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "blocked",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g2-feedback-router",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "total": 1,
+      "counts_by_category": {
+        "elogio": 1
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 0,
+      "high_severity_count": 0
     }
   },
   {
     "id": "g2-feedback-router-09",
-    "desc": "Classificador e Roteador de Feedback: cenário 09 risco=low status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g2-feedback-router",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 9,
-      "blocked": false
+    "desc": "feedback_route cenário 09: 1 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "parabens, ficou incrivel"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g2-feedback-router",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "total": 1,
+      "counts_by_category": {
+        "elogio": 1
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 0,
+      "high_severity_count": 0
     }
   },
   {
     "id": "g2-feedback-router-10",
-    "desc": "Classificador e Roteador de Feedback: cenário 10 risco=medium status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g2-feedback-router",
-    "capabilities": [
-      "config_driven",
-      "discovery_traceability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 10,
-      "blocked": false
+    "desc": "feedback_route cenário 10: 1 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "vou cancelar, estou muito insatisfeito"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g2-feedback-router",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "total": 1,
+      "counts_by_category": {
+        "churn_risk": 1
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 1,
+      "high_severity_count": 1
     }
   },
   {
     "id": "g2-feedback-router-11",
-    "desc": "Classificador e Roteador de Feedback: cenário 11 risco=high status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-feedback-router",
-    "capabilities": [
-      "discovery_traceability",
-      "lovability_gate"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 11,
-      "blocked": false
+    "desc": "feedback_route cenário 11: 1 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "quero reembolso, piorou demais"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g2-feedback-router",
-      "capabilities_any": [
-        "discovery_traceability"
-      ]
+      "total": 1,
+      "counts_by_category": {
+        "churn_risk": 1
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 1,
+      "high_severity_count": 1
     }
   },
   {
     "id": "g2-feedback-router-12",
-    "desc": "Classificador e Roteador de Feedback: cenário 12 risco=critical status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-feedback-router",
-    "capabilities": [
-      "lovability_gate",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 12,
-      "blocked": false
+    "desc": "feedback_route cenário 12: 1 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "nunca mais uso, vou sair"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g2-feedback-router",
-      "capabilities_any": [
-        "lovability_gate"
-      ]
+      "total": 1,
+      "counts_by_category": {
+        "churn_risk": 1
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 1,
+      "high_severity_count": 1
     }
   },
   {
     "id": "g2-feedback-router-13",
-    "desc": "Classificador e Roteador de Feedback: cenário 13 risco=low status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 13,
-      "blocked": false
+    "desc": "feedback_route cenário 13: 1 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "tudo ok por aqui"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "total": 1,
+      "counts_by_category": {
+        "outro": 1
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 0,
+      "high_severity_count": 0
     }
   },
   {
     "id": "g2-feedback-router-14",
-    "desc": "Classificador e Roteador de Feedback: cenário 14 risco=medium status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g2-feedback-router",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 14,
-      "blocked": false
+    "desc": "feedback_route cenário 14: 1 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "bom dia, so passando para falar oi"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g2-feedback-router",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "total": 1,
+      "counts_by_category": {
+        "outro": 1
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 0,
+      "high_severity_count": 0
     }
   },
   {
     "id": "g2-feedback-router-15",
-    "desc": "Classificador e Roteador de Feedback: cenário 15 risco=high status=blocked",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "high",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g2-feedback-router",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 15,
-      "blocked": true
+    "desc": "feedback_route cenário 15: 1 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": ""
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "blocked",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g2-feedback-router",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "total": 1,
+      "counts_by_category": {
+        "outro": 1
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 0,
+      "high_severity_count": 0
     }
   },
   {
     "id": "g2-feedback-router-16",
-    "desc": "Classificador e Roteador de Feedback: cenário 16 risco=critical status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-feedback-router",
-    "capabilities": [
-      "config_driven",
-      "discovery_traceability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 16,
-      "blocked": false
+    "desc": "feedback_route cenário 16: 2 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "deu erro"
+        },
+        {
+          "id": "f2",
+          "text": "outro bug aqui travou"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g2-feedback-router",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "total": 2,
+      "counts_by_category": {
+        "bug": 2
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 0,
+      "high_severity_count": 0
     }
   },
   {
     "id": "g2-feedback-router-17",
-    "desc": "Classificador e Roteador de Feedback: cenário 17 risco=low status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g2-feedback-router",
-    "capabilities": [
-      "discovery_traceability",
-      "lovability_gate"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 17,
-      "blocked": false
+    "desc": "feedback_route cenário 17: 3 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "travou"
+        },
+        {
+          "id": "f2",
+          "text": "queria um relatorio"
+        },
+        {
+          "id": "f3",
+          "text": "adorei"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g2-feedback-router",
-      "capabilities_any": [
-        "discovery_traceability"
-      ]
+      "total": 3,
+      "counts_by_category": {
+        "bug": 1,
+        "request": 1,
+        "elogio": 1
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 0,
+      "high_severity_count": 0
     }
   },
   {
     "id": "g2-feedback-router-18",
-    "desc": "Classificador e Roteador de Feedback: cenário 18 risco=medium status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-feedback-router",
-    "capabilities": [
-      "lovability_gate",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 18,
-      "blocked": false
+    "desc": "feedback_route cenário 18: 3 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "erro no login"
+        },
+        {
+          "id": "f2",
+          "text": "bug na exportacao"
+        },
+        {
+          "id": "f3",
+          "text": "falha ao abrir"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g2-feedback-router",
-      "capabilities_any": [
-        "lovability_gate"
-      ]
+      "total": 3,
+      "counts_by_category": {
+        "bug": 3
+      },
+      "emerging_themes": [
+        "bug"
+      ],
+      "churn_risk_count": 0,
+      "high_severity_count": 0
     }
   },
   {
     "id": "g2-feedback-router-19",
-    "desc": "Classificador e Roteador de Feedback: cenário 19 risco=high status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 19,
-      "blocked": false
+    "desc": "feedback_route cenário 19: 3 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "vou cancelar"
+        },
+        {
+          "id": "f2",
+          "text": "quero reembolso"
+        },
+        {
+          "id": "f3",
+          "text": "estou insatisfeito"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "total": 3,
+      "counts_by_category": {
+        "churn_risk": 3
+      },
+      "emerging_themes": [
+        "churn_risk"
+      ],
+      "churn_risk_count": 3,
+      "high_severity_count": 3
     }
   },
   {
     "id": "g2-feedback-router-20",
-    "desc": "Classificador e Roteador de Feedback: cenário 20 risco=critical status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-feedback-router",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 20,
-      "blocked": false
+    "desc": "feedback_route cenário 20: 2 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "cancelar agora"
+        },
+        {
+          "id": "f2",
+          "text": "deu erro"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g2-feedback-router",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "total": 2,
+      "counts_by_category": {
+        "churn_risk": 1,
+        "bug": 1
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 1,
+      "high_severity_count": 1
     }
   },
   {
     "id": "g2-feedback-router-21",
-    "desc": "Classificador e Roteador de Feedback: cenário 21 risco=low status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g2-feedback-router",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 21,
-      "blocked": false
+    "desc": "feedback_route cenário 21: 4 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "queria X"
+        },
+        {
+          "id": "f2",
+          "text": "poderia Y"
+        },
+        {
+          "id": "f3",
+          "text": "seria bom Z"
+        },
+        {
+          "id": "f4",
+          "text": "gostaria de W"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g2-feedback-router",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "total": 4,
+      "counts_by_category": {
+        "request": 4
+      },
+      "emerging_themes": [
+        "request"
+      ],
+      "churn_risk_count": 0,
+      "high_severity_count": 0
     }
   },
   {
     "id": "g2-feedback-router-22",
-    "desc": "Classificador e Roteador de Feedback: cenário 22 risco=medium status=blocked",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g2-feedback-router",
-    "capabilities": [
-      "config_driven",
-      "discovery_traceability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 22,
-      "blocked": true
+    "desc": "feedback_route cenário 22: 3 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "adorei"
+        },
+        {
+          "id": "f2",
+          "text": "excelente"
+        },
+        {
+          "id": "f3",
+          "text": "perfeito"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g2-feedback-router",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "total": 3,
+      "counts_by_category": {
+        "elogio": 3
+      },
+      "emerging_themes": [
+        "elogio"
+      ],
+      "churn_risk_count": 0,
+      "high_severity_count": 0
     }
   },
   {
     "id": "g2-feedback-router-23",
-    "desc": "Classificador e Roteador de Feedback: cenário 23 risco=high status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-feedback-router",
-    "capabilities": [
-      "discovery_traceability",
-      "lovability_gate"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 23,
-      "blocked": false
+    "desc": "feedback_route cenário 23: 5 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "erro"
+        },
+        {
+          "id": "f2",
+          "text": "queria algo"
+        },
+        {
+          "id": "f3",
+          "text": "adorei"
+        },
+        {
+          "id": "f4",
+          "text": "vou cancelar"
+        },
+        {
+          "id": "f5",
+          "text": "oi"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g2-feedback-router",
-      "capabilities_any": [
-        "discovery_traceability"
-      ]
+      "total": 5,
+      "counts_by_category": {
+        "bug": 1,
+        "request": 1,
+        "elogio": 1,
+        "churn_risk": 1,
+        "outro": 1
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 1,
+      "high_severity_count": 1
     }
   },
   {
     "id": "g2-feedback-router-24",
-    "desc": "Classificador e Roteador de Feedback: cenário 24 risco=critical status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-feedback-router",
-    "capabilities": [
-      "lovability_gate",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 24,
-      "blocked": false
+    "desc": "feedback_route cenário 24: 2 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "travou em producao"
+        },
+        {
+          "id": "f2",
+          "text": "crash critico"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g2-feedback-router",
-      "capabilities_any": [
-        "lovability_gate"
-      ]
+      "total": 2,
+      "counts_by_category": {
+        "bug": 2
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 0,
+      "high_severity_count": 2
     }
   },
   {
     "id": "g2-feedback-router-25",
-    "desc": "Classificador e Roteador de Feedback: cenário 25 risco=low status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 25,
-      "blocked": false
+    "desc": "feedback_route cenário 25: 2 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "deu erro"
+        },
+        {
+          "id": "f2",
+          "text": "deu erro de novo"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "total": 2,
+      "counts_by_category": {
+        "bug": 2
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 0,
+      "high_severity_count": 0
     }
   },
   {
     "id": "g2-feedback-router-26",
-    "desc": "Classificador e Roteador de Feedback: cenário 26 risco=medium status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g2-feedback-router",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 26,
-      "blocked": false
+    "desc": "feedback_route cenário 26: 1 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "sugestao: dark mode"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g2-feedback-router",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "total": 1,
+      "counts_by_category": {
+        "request": 1
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 0,
+      "high_severity_count": 0
     }
   },
   {
     "id": "g2-feedback-router-27",
-    "desc": "Classificador e Roteador de Feedback: cenário 27 risco=high status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-feedback-router",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 27,
-      "blocked": false
+    "desc": "feedback_route cenário 27: 1 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "o sistema caiu"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g2-feedback-router",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "total": 1,
+      "counts_by_category": {
+        "bug": 1
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 0,
+      "high_severity_count": 0
     }
   },
   {
     "id": "g2-feedback-router-28",
-    "desc": "Classificador e Roteador de Feedback: cenário 28 risco=critical status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-feedback-router",
-    "capabilities": [
-      "config_driven",
-      "discovery_traceability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 28,
-      "blocked": false
+    "desc": "feedback_route cenário 28: 1 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "decepcionado, vou sair"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g2-feedback-router",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "total": 1,
+      "counts_by_category": {
+        "churn_risk": 1
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 1,
+      "high_severity_count": 1
     }
   },
   {
     "id": "g2-feedback-router-29",
-    "desc": "Classificador e Roteador de Feedback: cenário 29 risco=low status=blocked",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "low",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g2-feedback-router",
-    "capabilities": [
-      "discovery_traceability",
-      "lovability_gate"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 29,
-      "blocked": true
+    "desc": "feedback_route cenário 29: 1 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "incrivel, amei"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "blocked",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g2-feedback-router",
-      "capabilities_any": [
-        "discovery_traceability"
-      ]
+      "total": 1,
+      "counts_by_category": {
+        "elogio": 1
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 0,
+      "high_severity_count": 0
     }
   },
   {
     "id": "g2-feedback-router-30",
-    "desc": "Classificador e Roteador de Feedback: cenário 30 risco=medium status=ready",
-    "artifact_type": "feedback-router.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-feedback-router",
-    "capabilities": [
-      "lovability_gate",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 30,
-      "blocked": false
+    "desc": "feedback_route cenário 30: 1 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "nada a declarar"
+        }
+      ],
+      "emerging_threshold": 3
     },
     "expected": {
       "agent_id": "g2-feedback-router",
-      "handler_kind": "spec_driven",
-      "artifact_type": "feedback-router.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g2-feedback-router",
-      "capabilities_any": [
-        "lovability_gate"
-      ]
+      "total": 1,
+      "counts_by_category": {
+        "outro": 1
+      },
+      "emerging_themes": [],
+      "churn_risk_count": 0,
+      "high_severity_count": 0
+    }
+  },
+  {
+    "id": "g2-feedback-router-31",
+    "desc": "feedback_route cenário 31: 4 item(ns)",
+    "feedback": {
+      "items": [
+        {
+          "id": "f1",
+          "text": "erro"
+        },
+        {
+          "id": "f2",
+          "text": "erro"
+        },
+        {
+          "id": "f3",
+          "text": "erro"
+        },
+        {
+          "id": "f4",
+          "text": "erro"
+        }
+      ],
+      "emerging_threshold": 3
+    },
+    "expected": {
+      "agent_id": "g2-feedback-router",
+      "total": 4,
+      "counts_by_category": {
+        "bug": 4
+      },
+      "emerging_themes": [
+        "bug"
+      ],
+      "churn_risk_count": 0,
+      "high_severity_count": 0
+    }
+  },
+  {
+    "id": "g2-feedback-router-32",
+    "desc": "emerging_threshold=2 com 2 bugs",
+    "feedback": {
+      "items": [
+        {
+          "id": "a",
+          "text": "deu erro"
+        },
+        {
+          "id": "b",
+          "text": "travou"
+        }
+      ],
+      "emerging_threshold": 2
+    },
+    "expected": {
+      "agent_id": "g2-feedback-router",
+      "total": 2,
+      "counts_by_category": {
+        "bug": 2
+      },
+      "emerging_themes": [
+        "bug"
+      ],
+      "churn_risk_count": 0
     }
   }
 ]

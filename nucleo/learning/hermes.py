@@ -35,9 +35,9 @@ def extract_instincts(snap: dict) -> list:
     if "decision" in out:
         sig = out.get("icp_fit_signals") or {}
         if out.get("decision") == "disqualified" and sig.get("ops_madura"):
-            facts.append("Operação já madura desqualifica o lead mesmo com faturamento na faixa R$1-5M.")
+            facts.append("Operação já madura desqualifica o lead mesmo com faturamento na faixa R$1-20M.")
         if out.get("decision") == "disqualified" and not sig.get("faturamento_1a5M"):
-            facts.append("Fora da faixa de faturamento R$1-5M é um motivo frequente de descarte.")
+            facts.append("Fora da faixa de faturamento R$1-20M é um motivo frequente de descarte.")
         if out.get("decision") == "qualified" and (out.get("score") or 0) >= 75:
             true_sig = [k for k, val in sig.items() if val]
             facts.append(f"Sinais {true_sig} produzem lead high-fit (score>=75 -> trilha assistida).")

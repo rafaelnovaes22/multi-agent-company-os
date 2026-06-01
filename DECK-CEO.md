@@ -23,8 +23,8 @@ Dois livros-razão: **OPERATING** (trabalho interno, medido por ROI-vs-headcount
 Nasce em **SHADOW** (não entrega/cobra) → prova concordância em gates → **PILOT → ASSISTED → AUTONOMOUS**. Aprender = subir na escada de confiança.
 
 ## 6. O cliente (ICP, definido hoje)
-- **Tier 1:** fundador faturando **R$ 1–5M**, perfil "bombeiro"/TDAH, **vende bem mas opera no caos**.
-- **Tier 2:** achá-los via scraping + cold B2B outreach.
+- **Segmento A:** CEO/fundador faturando **R$ 1–20M**, perfil "bombeiro"/TDAH, **vende bem mas opera no caos**.
+- **Segmento B:** enterprise faturando **~R$100M**, com dor operacional concreta e necessidade de governança/evidência.
 - *(vertical/oferta a definir — tudo agnóstico até lá.)*
 
 ## 7. Growth (doutrina Lovable adaptada)

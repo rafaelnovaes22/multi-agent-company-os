@@ -3,7 +3,7 @@
 > **Data:** 2026-05-29 · **Status:** protótipo funcional rodando (prova de conceito), pré-piloto.
 
 ## O que é (em uma linha)
-Um **sistema multi-agente de gestão** que vendemos ao **fundador-bombeiro** (PME faturando R$ 1–5M, que vende bem mas opera no caos) e que **toca a operação da empresa dele — independentemente do segmento**.
+Um **sistema multi-agente de gestão** que vendemos ao **fundador-bombeiro** (PME faturando R$ 1–20M ou enterprise ~R$100M, que vende bem mas opera no caos) e que **toca a operação da empresa dele — independentemente do segmento**.
 
 ## O que já está de pé (provado em código, hoje)
 - **A plataforma**: fábrica que cria agentes a partir de uma “receita”, governança com regras auditáveis, segurança automática e aprendizado contínuo. Multi-cliente (cada cliente é isolado).
@@ -19,7 +19,7 @@ Um **sistema multi-agente de gestão** que vendemos ao **fundador-bombeiro** (PM
 Todo agente **nasce “observando”** (modo sombra): ele sugere, **mas não age** — o dono compara. Só ganha autonomia **passando por aprovações**, no ritmo do cliente. É o antídoto para a desconfiança do bombeiro com automação.
 
 ## Onde vamos vender (go-to-market)
-- **Cliente-alvo:** o fundador-bombeiro R$ 1–5M (definido por você).
+- **Cliente-alvo:** o fundador-bombeiro R$ 1–20M e enterprise ~R$100M (definidos por você).
 - **Praça inicial:** **Estado de SP**. Pesquisa de mercado (dados oficiais IBGE/SEBRAE) feita: há **milhares** desses fundadores em SP, concentrados em serviços e comércio.
 - **Atenção legal:** evitar **advocacia** (a OAB proíbe abordagem ativa) e tratar **saúde** com cautela; os demais setores são livres para prospecção.
 - O **produto é horizontal** — quem tem “segmento” é o cliente; nós atendemos qualquer um.

@@ -17,7 +17,7 @@ _TOPICS = {
 }
 
 _TITLES = {
-    "criterio-icp-faturamento": "Faixa de faturamento R$1-5M é critério decisivo de fit de ICP",
+    "criterio-icp-faturamento": "Faixa de faturamento R$1-20M é critério decisivo de fit de ICP",
     "validacao-outcome-c2": "Validação da cláusula de outcome (C2): o que reprova uma spec",
     "sinais-desqualificacao-lead": "Sinais que desqualificam um lead",
     "sinais-highfit-lead": "Sinais que produzem lead high-fit",

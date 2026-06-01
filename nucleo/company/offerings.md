@@ -16,7 +16,7 @@ note: "Preencher após o workshop de mercado (06-WORKSHOP-MERCADO.md) — o vert
 | Campo | Valor (preencher pós-workshop) |
 |---|---|
 | nome | _(ex.: "Diagnóstico de Operação")_ |
-| ICP-alvo | herda de [icp.md](icp.md) — fundador R$ 1–5M, perfil bombeiro |
+| ICP-alvo | herda de [icp.md](icp.md) — CEO/fundador bombeiro R$ 1–20M e enterprise ~R$100M |
 | outcome cobrável | _(relatório com baseline + 3 candidatos a SKU automatizável)_ |
 | preço (one-time) | _R$ ___ |
 | time-to-value | _N dias úteis_ |

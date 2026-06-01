@@ -1,7 +1,7 @@
 # 06 — Workshop de Definição de Mercado (Vertical)
 
 > **Objetivo único:** sair com **1 vertical escolhido** + **a tese em 1 frase** + **o que isso desbloqueia** (com dono e prazo).
-> **O que NÃO está em jogo:** o **ICP já está definido** ([nucleo/company/icp.md](nucleo/company/icp.md)) — fundador faturando R$ 1–5M, perfil "bombeiro"/TDAH, vende bem mas opera no caos. **O comprador é fixo; escolhemos ONDE ele dói mais e onde a gente ganha.**
+> **O que NÃO está em jogo:** o **ICP já está definido** ([nucleo/company/icp.md](nucleo/company/icp.md)) — CEO/fundador bombeiro faturando R$ 1–20M e enterprise ~R$100M com dor operacional concreta. **O comprador é fixo; escolhemos ONDE ele dói mais e onde a gente ganha.**
 
 ---
 
@@ -19,7 +19,7 @@ Na **semana anterior**, rode os próprios agentes em **SHADOW** para gerar os in
 
 | Agente | Insumo que entrega ao workshop |
 |---|---|
-| `g1-market-intel` | Mapa de **verticais onde o ICP se concentra** (onde existem muitos founders R$ 1–5M "bombeiro") + fontes candidatas de scraping (Tier 2) |
+| `g1-market-intel` | Mapa de **verticais onde o ICP se concentra** (onde existem muitos CEOs bombeiro R$ 1–20M e enterprises ~R$100M com dor operacional) + fontes candidatas de scraping (Tier 2) |
 | `g1-opportunity-sizer` | TAM/SAM/SOM preliminar por vertical candidato |
 | `g2-jobs-to-be-done` / `g2-user-interview-synth` | Dores de processo/caos por vertical (intensidade da dor) |
 | `g6-forecaster` | Estimativa grosseira de willingness-to-pay / dinheiro na mesa |
@@ -48,7 +48,7 @@ Tamanho ideal: **5–8 pessoas**. Mais que isso, dilui a decisão.
 ### 4.1 Filtros eliminatórios (hard filters) — aplicar ANTES de pontuar
 Um candidato que falhe **qualquer** um destes sai da lista (não vai a scoring):
 
-- **F1 — ICP presente:** o vertical concentra founders R$ 1–5M no perfil bombeiro? (sem isso, não é nosso comprador)
+- **F1 — ICP presente:** o vertical concentra CEOs bombeiro R$ 1–20M ou enterprises ~R$100M com dor operacional? (sem isso, não é nosso comprador)
 - **F2 — Dor de processo/caos:** a dor central é operação/processo (não "vender")?
 - **F3 — Outcome verificável por agente:** dá para definir um outcome cobrável que um agente entrega e que se mede (C2)?
 - **F4 — Acessível pelo Tier 2:** existem fontes para achar e fazer cold B2B outreach? (nosso GTM depende disso)
@@ -58,7 +58,7 @@ Some `Σ(nota × peso)`. Pontue a short list (5–7 candidatos que passaram nos 
 
 | Critério | Peso | O que avaliar |
 |---|---|---|
-| Densidade do ICP | 3 | quantos founders R$1-5M "bombeiro" há ali |
+| Densidade do ICP | 3 | quantos CEOs bombeiro R$1-20M e enterprises ~R$100M há ali |
 | Intensidade da dor | 3 | quão aguda é a dor de caos/processo |
 | Willingness-to-pay | 3 | dinheiro real na mesa por resolver |
 | Fit com stack agêntica | 3 | o problema é "domável" por agentes, com outcome verificável |

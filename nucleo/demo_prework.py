@@ -7,7 +7,7 @@ se passar, g1-opportunity-sizer estima o tamanho. Ranqueia por ICP-pool (densida
 
 DADOS:
 - ICP-pool = nº de empresas em SP na faixa 5–49 empregados (proxy de porte do ICP
-  R$1–5M "vende bem, tem equipe"). FONTE REAL: IBGE/CEMPRE tabela 7528, UF=SP, 2023.
+  R$1–20M "vende bem, tem equipe"). FONTE REAL: IBGE/CEMPRE tabela 7528, UF=SP, 2023.
 - pain = 4/5 (dor de processo confirmada e TRANSVERSAL — pesquisa SP rodada 1).
 - regulatory_risk e tier2 vêm da pesquisa (advocacia: cold outreach vedado pela OAB
   -> tier2 vazio -> reprovado em F4; saúde: CFM -> risco 4).

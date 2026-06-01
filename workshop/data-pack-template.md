@@ -5,7 +5,7 @@
 ## Vertical: ____________________
 
 ### Hard-filters (eliminatórios — todos precisam de SIM)
-- [ ] **F1 — ICP presente:** há fundadores R$ 1–5M perfil bombeiro aqui? evidência: ______
+- [ ] **F1 — ICP presente:** há fundadores R$ 1–20M perfil bombeiro aqui? evidência: ______
 - [ ] **F2 — Dor de processo:** a dor central é operação/processo (não "vender")? evidência: ______
 - [ ] **F3 — Outcome verificável por agente:** dá para escrever uma cláusula C2 (outcome mensurável)? exemplo: ______
 - [ ] **F4 — Acessível (Tier 2):** existem fontes para achar e abordar? quais: ______

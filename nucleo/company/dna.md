@@ -18,7 +18,7 @@ note: "Preencher após o workshop — o vertical e a north-star concretizam o DN
 | north-star | indicador-líder dos dois lados do valor — placeholder **"Daily Active Outcomes"** até o vertical (GR6) |
 | valores | _(a definir; herdam de "se não é lovable, não lança" — GR8)_ |
 | vertical escolhido | _(a definir — ver MDR-001)_ |
-| ICP | **definido** → [icp.md](icp.md) (fundador R$ 1–5M, bombeiro/TDAH) |
+| ICP | **definido** → [icp.md](icp.md) (CEO/fundador bombeiro R$ 1–20M; enterprise ~R$100M com dor operacional) |
 
 ## Princípios herdados (não mudam com o vertical)
 - **Constituição C1–C8** (governança) · **Doutrina YC Y1–Y8** (operar AI-native) · **Growth GR1–GR10** ([../../05-DOUTRINA-GTM-LOVABLE.md](../../05-DOUTRINA-GTM-LOVABLE.md))

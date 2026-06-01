@@ -60,16 +60,17 @@
   },
   {
     "id": "lq-05",
-    "desc": "grande demais (>R$5M)",
+    "desc": "enterprise ~R$100M com dor operacional -> qualified",
     "lead": {
       "id": "L-b1",
-      "revenue_brl_year": 9000000,
-      "founder_led": false,
-      "sells_well": true
+      "revenue_brl_year": 100000000,
+      "enterprise": true,
+      "sells_well": true,
+      "lacks_process": true
     },
     "expected": {
-      "decision": "disqualified",
-      "track": "descarte"
+      "decision": "qualified",
+      "track": "self-serve (ativacao no produto)"
     }
   },
   {
@@ -204,30 +205,30 @@
   },
   {
     "id": "lq-14",
-    "desc": "variação lead qualifier 14",
+    "desc": "CEO bombeiro acima de R$5M ainda dentro da faixa R$1-20M",
     "lead": {
       "id": "L-14",
-      "revenue_brl_year": 5000001,
+      "revenue_brl_year": 18000000,
       "founder_led": true,
       "sells_well": true,
       "lacks_process": true,
       "firefighter": false
     },
     "expected": {
-      "decision": "disqualified",
-      "track": "descarte"
+      "decision": "qualified",
+      "track": "assistido (SDR/closer)"
     }
   },
   {
     "id": "lq-15",
-    "desc": "variação lead qualifier 15",
+    "desc": "enterprise maduro sem dor de processo -> descarte",
     "lead": {
       "id": "L-15",
-      "revenue_brl_year": 7500000,
-      "founder_led": false,
+      "revenue_brl_year": 100000000,
+      "enterprise": true,
       "sells_well": true,
       "lacks_process": false,
-      "firefighter": true
+      "ops_mature": true
     },
     "expected": {
       "decision": "disqualified",
@@ -301,10 +302,10 @@
   },
   {
     "id": "lq-20",
-    "desc": "variação lead qualifier 20",
+    "desc": "limite superior CEO bombeiro R$20M -> qualified assistido",
     "lead": {
       "id": "L-20",
-      "revenue_brl_year": 5100000,
+      "revenue_brl_year": 20000000,
       "founder_led": true,
       "sells_well": true,
       "lacks_process": true,
@@ -313,7 +314,7 @@
     },
     "expected": {
       "decision": "qualified",
-      "track": "self-serve (ativacao no produto)"
+      "track": "assistido (SDR/closer)"
     }
   },
   {
@@ -447,10 +448,10 @@
   },
   {
     "id": "lq-29",
-    "desc": "variação lead qualifier 29",
+    "desc": "acima de R$20M fora das faixas e maduro -> descarte",
     "lead": {
       "id": "L-29",
-      "revenue_brl_year": 5200000,
+      "revenue_brl_year": 21000000,
       "founder_led": false,
       "sells_well": true,
       "lacks_process": true,

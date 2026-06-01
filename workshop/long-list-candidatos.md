@@ -1,6 +1,6 @@
 # Workshop — Long-list de verticais candidatos (SEED)
 
-> ⚠️ **Isto NÃO é uma recomendação de mercado.** São **candidatos-semente** para a banca **expandir, cortar e pontuar** no workshop ([../06-WORKSHOP-MERCADO.md](../06-WORKSHOP-MERCADO.md)). A âncora é o **ICP já definido** ([../nucleo/company/icp.md](../nucleo/company/icp.md)): fundador R$ 1–5M, perfil "bombeiro"/TDAH, vende bem mas opera no caos, **founder-led**, **achável via scraping + cold outreach (Tier 2)**.
+> ⚠️ **Isto NÃO é uma recomendação de mercado.** São **candidatos-semente** para a banca **expandir, cortar e pontuar** no workshop ([../06-WORKSHOP-MERCADO.md](../06-WORKSHOP-MERCADO.md)). A âncora é o **ICP já definido** ([../nucleo/company/icp.md](../nucleo/company/icp.md)): fundador R$ 1–20M, perfil "bombeiro"/TDAH, vende bem mas opera no caos, **founder-led**, **achável via scraping + cold outreach (Tier 2)**.
 > O critério de seleção desta seed foi **apenas**: "onde costumam se concentrar fundadores nesse perfil e que sejam acessíveis pelo Tier 2?". **Cada linha precisa de pesquisa (data-pack) antes de pontuar.**
 
 ## Candidatos-semente (preencher o data-pack de cada um)

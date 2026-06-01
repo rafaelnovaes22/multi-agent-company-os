@@ -5,7 +5,7 @@
 - **Data:** 2026-05-29
 - **Decisor (AI Founder):** CEO
 - **Vertical escolhido:** **Prestadores de serviço B2B** — CNAE **81** (serviços para edifícios / limpeza / facilities) **+ 82** (apoio administrativo, call center, cobrança, BPO). Beachhead: **estado de São Paulo**.
-- **Tese em 1 frase:** *"Ajudamos donos de empresas de serviços B2B (limpeza/facilities e apoio administrativo) faturando R$ 1–5M em SP, que vendem bem mas operam no caos, a transformar a operação (ordens de serviço, escala de equipes, cobrança recorrente) em processo legível — medido por outcomes operacionais entregues/dia."*
+- **Tese em 1 frase:** *"Ajudamos donos de empresas de serviços B2B (limpeza/facilities e apoio administrativo) faturando R$ 1–20M em SP, que vendem bem mas operam no caos, a transformar a operação (ordens de serviço, escala de equipes, cobrança recorrente) em processo legível — medido por outcomes operacionais entregues/dia."*
 
 ## Por que este (e não o topo da matriz)
 - A matriz ([../../workshop/matriz-scoring.md](../../workshop/matriz-scoring.md)) deu **Contabilidade (91)** no topo; B2B ficou em **83**.

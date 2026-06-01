@@ -41,7 +41,7 @@ A guilda é o córtex estratégico do NÚCLEO: transforma sinais brutos do mundo
   - Detecta anomalias e inflexões (entrada de novo player, mudança de pricing de terceiro, sinal regulatório) e emite alertas priorizados ao supervisor.
   - Faz adversarial verification de cada claim (corroboração por múltiplas fontes) antes de promovê-lo a "fato" no Brain, marcando o nível de confiança.
   - Alimenta opportunity-sizer e competitive-teardown com a base factual; mantém um "intel digest" rolante; e **abastece o Tier 2 do ICP** ([nucleo/company/icp.md](../nucleo/company/icp.md)) com as fontes onde o ICP se concentra — insumo direto do scraping/cold outreach do g8-outbound-sdr.
-- **Entradas:** fontes web e feeds públicos; pesquisas dirigidas pelo supervisor; histórico de sinais no Brain; **o ICP L0 ([nucleo/company/icp.md](../nucleo/company/icp.md))** — Tier 1: fundador R$ 1–5M, perfil "bombeiro"; perfil do vertical (placeholder até definição).
+- **Entradas:** fontes web e feeds públicos; pesquisas dirigidas pelo supervisor; histórico de sinais no Brain; **o ICP L0 ([nucleo/company/icp.md](../nucleo/company/icp.md))** — Tier 1: fundador R$ 1–20M, perfil "bombeiro"; perfil do vertical (placeholder até definição).
 - **Saídas (artefatos):** `intel.signal` (item classificado), `intel.player_profile`, `intel.digest` periódico, `intel.alert` — registrados no Brain com fontes e score de confiança.
 - **Ferramentas (C7):** WebSearchProvider, WebFetchProvider, brain.query/write, dedup.index, LLMProvider.
 - **Gatilhos:** cron diário de varredura; pedido do supervisor; webhook de evento externo relevante; solicitação de opportunity-sizer/teardown.

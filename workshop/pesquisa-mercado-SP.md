@@ -34,7 +34,7 @@
 - **Conselhos (CRC-SP, CREA-SP)** — páginas de consulta existem, mas **scrapeabilidade não confirmada** nesta rodada (fontes não extraíram).
 
 ## 4. Firmographics REAIS por vertical (IBGE/CEMPRE, extração 2026-05-29)
-Fonte: API SIDRA, **tabela 7528**, UF=SP (35), ano **2023**, var. 2585 (nº de empresas). **Proxy de porte do ICP = faixa 5–49 empregados** ("vende bem, tem equipe"). ⚠️ Faturamento R$1–5M **não é filtrável direto** — CEMPRE usa pessoal ocupado.
+Fonte: API SIDRA, **tabela 7528**, UF=SP (35), ano **2023**, var. 2585 (nº de empresas). **Proxy de porte do ICP = faixa 5–49 empregados** ("vende bem, tem equipe"). ⚠️ Faturamento R$1–20M **não é filtrável direto** — CEMPRE usa pessoal ocupado.
 
 | Vertical (CNAE) | **ICP-proxy (5–49)** | Total (todas faixas) | Regulatório (cold outreach) |
 |---|---|---|---|

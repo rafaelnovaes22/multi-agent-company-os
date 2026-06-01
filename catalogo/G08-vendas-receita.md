@@ -35,7 +35,7 @@ A guilda que transforma demanda qualificada em receita recorrente e expandida, f
 - **Missão:** classificar e priorizar leads contra o ICP para concentrar esforço comercial onde há maior propensão a outcome cobrável.
 - **Ledger:** OP · **Tier:** L2 · **Modo-alvo:** AUTONOMOUS
 - **Responsabilidades:**
-  - Carregar o perfil de ICP via `load_icp()` (fonte L0: [nucleo/company/icp.md](../nucleo/company/icp.md); vertical configurável quando o mercado for definido) e aplicar os sinais de fit ✅/❌ a cada lead — Tier 1: fundador faturando R$ 1–5M, perfil "bombeiro"/TDAH, vende bem sem processo.
+  - Carregar o perfil de ICP via `load_icp()` (fonte L0: [nucleo/company/icp.md](../nucleo/company/icp.md); vertical configurável quando o mercado for definido) e aplicar os sinais de fit ✅/❌ a cada lead — Tier 1: fundador faturando R$ 1–20M, perfil "bombeiro", e enterprise ~R$100M/TDAH, vende bem sem processo.
   - Enriquecer o lead com sinais permissionados (uso de produto, origem do canal, Referral Propensity Score) e calcular um score de qualificação MQL→SQL.
   - Segmentar leads em trilhas: self-serve (ativação no produto), assistido (SDR/closer) ou descarte com motivo registrado.
   - Detectar e mesclar duplicatas no momento da entrada, evitando poluição do funil.

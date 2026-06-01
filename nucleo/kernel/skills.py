@@ -86,7 +86,7 @@ def outbound_sdr(state, *, llm, store, spec):
         {"step": 1, "channel": "email", "angle": "dor: vende bem mas opera no caos / sem processo",
          "subject": f"{lead.get('company', '')}: tirar o caos da operação"},
         {"step": 2, "channel": "email", "angle": "prova social + build-in-public (founder brand)",
-         "subject": "como founders R$1-5M escalam sem virar bombeiro"},
+         "subject": "como CEOs R$1-20M e enterprises ~R$100M tiram caos da operação"},
         {"step": 3, "channel": "messaging", "angle": "follow-up curto, CTA 15min",
          "subject": "vale 15 min?"},
     ]
@@ -745,17 +745,36 @@ def painel_dono(state, *, llm, store, spec):
 
 
 def _score_lead_against_icp(lead: dict):
-    """Pontua o lead contra o ICP Tier 1: R$1-5M, founder-led, vende bem sem processo, perfil bombeiro."""
-    signals, reasons, score = {}, [], 0
+    """Pontua leads contra os segmentos ICP L0.
+
+    Segmentos configurados no company/icp.md:
+    - CEO bombeiro: R$1-20M/ano, founder-led, vende bem e opera no caos.
+    - Enterprise: ~R$100M/ano com dor operacional/processual ainda não resolvida.
+    """
+    segments: list[str] = []
+    signals: dict[str, object] = {"icp_segments": segments}
+    reasons, score = [], 0
     rev = lead.get("revenue_brl_year", 0) or 0
 
-    if 1_000_000 <= rev <= 5_000_000:
-        score += 35; signals["faturamento_1a5M"] = True
-        reasons.append("Faturamento na faixa R$1-5M (Tier 1)")
+    if 1_000_000 <= rev <= 20_000_000:
+        score += 35
+        signals["segmento_ceo_bombeiro_1a20M"] = True
+        signals["faturamento_1a20M"] = True
+        segments.append("ceo_bombeiro")
+        reasons.append("Faturamento na faixa R$1-20M (segmento CEO bombeiro)")
+    elif 80_000_000 <= rev <= 130_000_000 or lead.get("enterprise"):
+        score += 35
+        signals["segmento_enterprise_100M"] = True
+        signals["faturamento_100M"] = True
+        segments.append("enterprise_100M")
+        reasons.append("Faturamento em torno de R$100M (segmento enterprise)")
     elif 0 < rev < 1_000_000:
-        signals["faturamento_1a5M"] = False; reasons.append("Abaixo de R$1M (pre-ICP)")
-    elif rev > 5_000_000:
-        signals["faturamento_1a5M"] = False; reasons.append("Acima de R$5M (pode ser maduro demais)")
+        signals["faturamento_1a20M"] = False
+        reasons.append("Abaixo de R$1M (pre-ICP)")
+    elif rev > 20_000_000:
+        signals["faturamento_1a20M"] = False
+        signals["faturamento_100M"] = False
+        reasons.append("Fora das faixas ICP atuais (R$1-20M ou ~R$100M)")
 
     if lead.get("founder_led"):
         score += 20; signals["founder_led"] = True; reasons.append("Decisao founder-led")

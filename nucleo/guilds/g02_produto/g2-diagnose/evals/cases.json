@@ -194,7 +194,7 @@
   },
   {
     "id": "dg-11",
-    "desc": "variação diagnóstico 11",
+    "desc": "CEO bombeiro acima de R$5M ainda dentro da faixa R$1-20M com baseline -> go",
     "client": {
       "id": "C-11",
       "revenue_brl_year": 5000001,
@@ -209,7 +209,7 @@
       "pain": "dor operacional 11"
     },
     "expected": {
-      "recommendation": "no-go"
+      "recommendation": "go"
     }
   },
   {

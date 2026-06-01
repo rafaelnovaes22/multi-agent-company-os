@@ -4,7 +4,7 @@ Mesmo padrão de skills_finance: campos no top-level do output, grader genérico
 """
 from __future__ import annotations
 
-from .skills import register
+from .skills import register, _spec_citations
 from .skills_finance import _out   # helper comum (rationale + by + tenant + citations)
 
 
@@ -118,3 +118,46 @@ def voc_priority(state, *, llm, store, spec):
         "item_count": len(items), "top_theme": ranked[0]["theme"] if ranked else None,
         "ranked": ranked,
     }, f"Voce e {spec['id']}: {len(items)} temas, top '{ranked[0]['theme'] if ranked else '-'}'.", llm)
+
+
+# ---------------------------------------------------------------------------
+# Burn-down R2 — C3 runtime enforcement for billable G09 workers
+# ---------------------------------------------------------------------------
+def _c3_payload(state):
+    t = state["task"]
+    return t.get("unit_economics") or t.get("economics_check") or t.get("c3") or t
+
+
+def _c3_billable_out(spec, state, llm, handler_kind, artifact_type, domain_status="ready"):
+    econ = _c3_payload(state)
+    price = round(float(econ.get("price_brl", econ.get("published_price_brl", 0)) or 0), 2)
+    cost = round(float(econ.get("unit_cost_brl", econ.get("delivery_cost_brl", econ.get("inference_cost_brl", 0))) or 0), 2)
+    max_ratio = float(econ.get("max_ratio", (spec.get("economics") or {}).get("max_ratio", 0.25)) or 0.25)
+    cost_ratio = round(cost / price, 4) if price else 1.0
+    c3_ok = cost_ratio <= max_ratio
+    min_price = round(cost / max_ratio, 2) if max_ratio else 0.0
+    status = "blocked" if not c3_ok else domain_status
+    requires_review = bool((not c3_ok) or econ.get("requires_human_review", False))
+    return _out(spec, state, {
+        "agent_id": spec["id"], "handler_kind": handler_kind, "artifact_type": artifact_type,
+        "price_brl": price, "unit_cost_brl": cost, "cost_ratio": cost_ratio,
+        "max_ratio": max_ratio, "c3_ok": c3_ok, "min_viable_price_brl": min_price,
+        "status": status, "requires_human_review": requires_review,
+        "recommended_action": "deliver" if c3_ok else "raise_price_or_reduce_cost",
+        "_spec_citations": _spec_citations(state, spec),
+    }, f"Voce e {spec['id']}: C3 price={price}, cost={cost}, ratio={cost_ratio}, status={status}.", llm)
+
+
+@register("dispute_mediator_c3")
+def dispute_mediator_c3(state, *, llm, store, spec):
+    return _c3_billable_out(spec, state, llm, "dispute_mediator_c3", "dispute-mediator.resolution_plan")
+
+
+@register("escalation_manager_c3")
+def escalation_manager_c3(state, *, llm, store, spec):
+    return _c3_billable_out(spec, state, llm, "escalation_manager_c3", "escalation-manager.case_plan")
+
+
+@register("messaging_concierge_c3")
+def messaging_concierge_c3(state, *, llm, store, spec):
+    return _c3_billable_out(spec, state, llm, "messaging_concierge_c3", "messaging-concierge.response")

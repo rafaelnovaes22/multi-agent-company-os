@@ -20,7 +20,16 @@ def gate(state: dict, *, spec: dict) -> dict:
             print("  -> gate[SHADOW]: output NAO entregue, billing=0 (mede concordancia)")
         return {"output": out, "_gate": "proceed"}
 
+    # C3 runtime enforcement: deterministic billable handlers expose c3_ok/status.
+    # Never mark delivered=True when unit economics breach max_ratio.
+    c3_blocked = out.get("c3_ok") is False or out.get("status") == "blocked"
+
     if mode in ("PILOT", "AUTONOMOUS"):
+        if c3_blocked:
+            out.update(delivered=False, billing_amount=0)
+            if state.get("verbose"):
+                print(f"  -> gate[{mode}]: bloqueado por C3 (sem entrega/cobranca)")
+            return {"output": out, "_gate": "proceed"}
         out.update(delivered=True)
         if state.get("verbose"):
             print(f"  -> gate[{mode}]: entrega direta")
@@ -35,6 +44,9 @@ def gate(state: dict, *, spec: dict) -> dict:
         })
         if not decision or not decision.get("approved"):
             return {"output": None, "_gate": "halt"}
+        if c3_blocked:
+            out.update(delivered=False, billing_amount=0)
+            return {"output": out, "_gate": "proceed"}
         out.update(delivered=True)
         return {"output": out, "_gate": "proceed"}
 

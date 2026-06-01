@@ -191,3 +191,46 @@ def revenue_metrics_calc(state, *, llm, store, spec):
         "reconciliation_delta_pct": delta_pct, "reconciled": reconciled,
         "drift": drift, "status": status,
     }, f"Voce e {spec['id']}: MRR {mrr}, NRR {nrr}%, delta reconciliacao {delta_pct}% ({status}).", llm)
+
+
+# ---------------------------------------------------------------------------
+# Burn-down R2 — C3 runtime enforcement for billable G08 workers
+# ---------------------------------------------------------------------------
+def _c3_payload(state):
+    t = state["task"]
+    return t.get("unit_economics") or t.get("economics_check") or t.get("c3") or t
+
+
+def _c3_out(spec, state, llm, handler_kind, artifact_type, domain_status="ready"):
+    econ = _c3_payload(state)
+    price = round(float(econ.get("price_brl", econ.get("published_price_brl", 0)) or 0), 2)
+    cost = round(float(econ.get("unit_cost_brl", econ.get("delivery_cost_brl", econ.get("inference_cost_brl", 0))) or 0), 2)
+    max_ratio = float(econ.get("max_ratio", (spec.get("economics") or {}).get("max_ratio", _C3_MAX_RATIO)) or _C3_MAX_RATIO)
+    cost_ratio = round(cost / price, 4) if price else 1.0
+    c3_ok = cost_ratio <= max_ratio
+    min_price = round(cost / max_ratio, 2) if max_ratio else 0.0
+    status = "blocked" if not c3_ok else domain_status
+    requires_review = bool((not c3_ok) or econ.get("requires_human_review", False))
+    return _out(spec, state, {
+        "agent_id": spec["id"], "handler_kind": handler_kind, "artifact_type": artifact_type,
+        "price_brl": price, "unit_cost_brl": cost, "cost_ratio": cost_ratio,
+        "max_ratio": max_ratio, "c3_ok": c3_ok, "min_viable_price_brl": min_price,
+        "status": status, "requires_human_review": requires_review,
+        "recommended_action": "deliver" if c3_ok else "raise_price_or_reduce_cost",
+        "_spec_citations": _spec_citations(state, spec),
+    }, f"Voce e {spec['id']}: C3 price={price}, cost={cost}, ratio={cost_ratio}, status={status}.", llm)
+
+
+@register("contract_closer_c3")
+def contract_closer_c3(state, *, llm, store, spec):
+    return _c3_out(spec, state, llm, "contract_closer_c3", "contract-closer.close_plan")
+
+
+@register("proposal_author_c3")
+def proposal_author_c3(state, *, llm, store, spec):
+    return _c3_out(spec, state, llm, "proposal_author_c3", "proposal-author.proposal")
+
+
+@register("upsell_crosssell_c3")
+def upsell_crosssell_c3(state, *, llm, store, spec):
+    return _c3_out(spec, state, llm, "upsell_crosssell_c3", "upsell-crosssell.playbook")

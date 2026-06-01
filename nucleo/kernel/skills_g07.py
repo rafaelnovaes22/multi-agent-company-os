@@ -235,3 +235,41 @@ def attribution_cac_payback(state, *, llm, store, spec):
         "double_counting": double_counting, "best_channel": best_channel,
         "worst_channel": worst_channel, "channel_count": len(channels),
     }, f"Voce e {spec['id']}: {attributed_total} conversoes atribuidas, reconciliado={reconciled}.", llm)
+
+
+# ---------------------------------------------------------------------------
+# Burn-down R2 — C3 runtime enforcement for billable G07 workers
+# ---------------------------------------------------------------------------
+def _c3_payload(state):
+    t = state["task"]
+    return t.get("unit_economics") or t.get("economics_check") or t.get("c3") or t
+
+
+def _c3_out(spec, state, llm, handler_kind, artifact_type, domain_status="ready"):
+    econ = _c3_payload(state)
+    price = round(float(econ.get("price_brl", econ.get("published_price_brl", 0)) or 0), 2)
+    cost = round(float(econ.get("unit_cost_brl", econ.get("delivery_cost_brl", econ.get("inference_cost_brl", 0))) or 0), 2)
+    max_ratio = float(econ.get("max_ratio", (spec.get("economics") or {}).get("max_ratio", 0.25)) or 0.25)
+    cost_ratio = round(cost / price, 4) if price else 1.0
+    c3_ok = cost_ratio <= max_ratio
+    min_price = round(cost / max_ratio, 2) if max_ratio else 0.0
+    status = "blocked" if not c3_ok else domain_status
+    requires_review = bool((not c3_ok) or econ.get("requires_human_review", False))
+    return _out(spec, state, {
+        "agent_id": spec["id"], "handler_kind": handler_kind, "artifact_type": artifact_type,
+        "price_brl": price, "unit_cost_brl": cost, "cost_ratio": cost_ratio,
+        "max_ratio": max_ratio, "c3_ok": c3_ok, "min_viable_price_brl": min_price,
+        "status": status, "requires_human_review": requires_review,
+        "recommended_action": "deliver" if c3_ok else "raise_price_or_reduce_cost",
+        "_spec_citations": _spec_citations(state, spec),
+    }, f"Voce e {spec['id']}: C3 price={price}, cost={cost}, ratio={cost_ratio}, status={status}.", llm)
+
+
+@register("copywriter_c3")
+def copywriter_c3(state, *, llm, store, spec):
+    return _c3_out(spec, state, llm, "copywriter_c3", "copywriter.copy_asset")
+
+
+@register("lifecycle_crm_c3")
+def lifecycle_crm_c3(state, *, llm, store, spec):
+    return _c3_out(spec, state, llm, "lifecycle_crm_c3", "lifecycle-crm.campaign")

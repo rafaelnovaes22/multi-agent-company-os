@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: spec_driven
+act_handler: escalation_manager_c3
 outcome_clause:
   statement: 'Gerente de Escalonamento entrega escalation-manager.artifact verificável
     para: assumir os casos complexos, sensíveis ou multi-time, coordenando a resolução

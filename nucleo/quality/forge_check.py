@@ -23,6 +23,14 @@ import sys
 
 import yaml
 
+# Portabilidade: no Windows o stdout default é cp1252 e quebra ao imprimir os
+# emojis/acentos do relatório (UnicodeEncodeError). Força UTF-8 com fallback.
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+    except (AttributeError, ValueError):
+        pass
+
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 GUILDS = os.path.join(ROOT, "nucleo", "guilds")
 PRODUCT = os.path.join(ROOT, "nucleo", "product")

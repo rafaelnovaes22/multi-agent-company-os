@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: AUTONOMOUS
-act_handler: spec_driven
+act_handler: seo_keyword_map
 outcome_clause:
   statement: 'SEO Strategist entrega seo-strategist.artifact verificável para: mapear
     demanda orgânica e definir a estratégia de keywords/clusters que orienta todo

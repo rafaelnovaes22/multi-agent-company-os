@@ -171,3 +171,35 @@ def inference_cost_savings(state, *, llm, store, spec):
         "quality_regression": quality_regression, "quality_ok": quality_ok,
         "applied": applied, "status": status,
     }, f"Voce e {spec['id']}: economia {savings_pct}% (de {base_cost} p/ {optimized_cost}), status {status}.", llm)
+
+# ---------------------------------------------------------------------------
+# Burn-down Track A — g14-prompt-context-registry: registry determinístico.
+# ---------------------------------------------------------------------------
+@register("prompt_context_registry")
+def prompt_context_registry(state, *, llm, store, spec):
+    """g14-prompt-context-registry — versiona prompt/contexto, hash, A/B e recalc C3."""
+    import hashlib
+    p = state["task"].get("prompt_registry", {}) or {}
+    prompt_id = p.get("prompt_id")
+    content = p.get("content", "") or ""
+    previous_hash = p.get("previous_hash")
+    prompt_hash = hashlib.sha256(content.encode("utf-8")).hexdigest()[:16] if content else None
+    hash_changed = bool(prompt_hash and prompt_hash != previous_hash)
+    ab = p.get("ab", {}) or {}
+    variants = ab.get("variants", []) or []
+    winner = None
+    if variants:
+        winner = sorted(variants, key=lambda v: (v.get("quality", 0) or 0, -(v.get("cost", 0) or 0)), reverse=True)[0].get("id")
+    context_tiers = p.get("context_tiers", []) or []
+    max_allowed_tier = p.get("max_allowed_tier", 1) if p.get("max_allowed_tier") is not None else 1
+    tier_leak = any((t or 0) > max_allowed_tier for t in context_tiers)
+    cacheable = bool(p.get("cacheable", False)) and not tier_leak
+    version_registered = bool(prompt_id and prompt_hash and not tier_leak)
+    recalc_unit_economics = hash_changed
+    status = "blocked_tier_leak" if tier_leak else ("versioned" if version_registered else "invalid")
+    return _out(spec, state, {
+        "prompt_id": prompt_id, "prompt_hash": prompt_hash, "hash_changed": hash_changed,
+        "version_registered": version_registered, "recalc_unit_economics": recalc_unit_economics,
+        "variant_count": len(variants), "winner_variant": winner, "tier_leak": tier_leak,
+        "cacheable": cacheable, "status": status,
+    }, f"Voce e {spec['id']}: prompt {prompt_id}, status {status}, hash_changed={hash_changed}.", llm)

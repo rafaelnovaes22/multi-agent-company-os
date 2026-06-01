@@ -274,3 +274,57 @@ def metric_definition_check(state, *, llm, store, spec):
         "missing_fields": missing, "duplicate_of": dup, "status": status,
         "requires_human_review": not valid,
     }, f"Voce e {spec['id']}: metrica {m.get('name')} valid={valid} status={status}.", llm)
+
+# ---------------------------------------------------------------------------
+# Burn-down Track A — g6-experiment-analyst: leitura determinística de A/B.
+# ---------------------------------------------------------------------------
+@register("experiment_readout")
+def experiment_readout(state, *, llm, store, spec):
+    """g6-experiment-analyst — recomenda ship/kill/iterate com rigor estatístico.
+
+    Input: state['task']['experiment_readout'] = {
+      pre_registered, primary_metric_canonical, peeking_detected, comparisons,
+      control_n, control_conversions, treatment_n, treatment_conversions,
+      alpha, power_ok, guardrail_delta_pct, guardrail_min_delta_pct
+    }
+    Usa z-test aproximado de duas proporções; aplica Bonferroni por comparisons.
+    """
+    import math
+    e = state["task"].get("experiment_readout", {}) or {}
+    cn = e.get("control_n", 0) or 0
+    tn = e.get("treatment_n", 0) or 0
+    cc = e.get("control_conversions", 0) or 0
+    tc = e.get("treatment_conversions", 0) or 0
+    alpha = e.get("alpha", 0.05) or 0.05
+    comparisons = max(1, e.get("comparisons", 1) or 1)
+    adjusted_alpha = round(alpha / comparisons, 5)
+    z_threshold = 2.576 if adjusted_alpha <= 0.01 else (1.96 if adjusted_alpha <= 0.05 else 1.645)
+    cr = cc / cn if cn else 0.0
+    tr = tc / tn if tn else 0.0
+    uplift_pp = round((tr - cr) * 100, 2)
+    pooled = (cc + tc) / (cn + tn) if (cn + tn) else 0.0
+    se = math.sqrt(pooled * (1 - pooled) * (1 / cn + 1 / tn)) if cn and tn and 0 < pooled < 1 else 0.0
+    z_stat = round((tr - cr) / se, 3) if se else 0.0
+    significant = abs(z_stat) >= z_threshold
+    guardrail_delta = e.get("guardrail_delta_pct", 0) or 0
+    guardrail_min = e.get("guardrail_min_delta_pct", -5) if e.get("guardrail_min_delta_pct") is not None else -5
+    guardrail_ok = guardrail_delta >= guardrail_min
+    pre_registered = bool(e.get("pre_registered"))
+    canonical = bool(e.get("primary_metric_canonical", True))
+    peeking = bool(e.get("peeking_detected"))
+    power_ok = bool(e.get("power_ok", True))
+    valid = pre_registered and canonical and not peeking and power_ok and guardrail_ok
+    if not valid:
+        decision = "iterate"
+    elif significant and uplift_pp > 0:
+        decision = "ship"
+    elif significant and uplift_pp < 0:
+        decision = "kill"
+    else:
+        decision = "iterate"
+    return _out(spec, state, {
+        "control_rate_pct": round(cr * 100, 2), "treatment_rate_pct": round(tr * 100, 2),
+        "uplift_pp": uplift_pp, "z_stat": z_stat, "adjusted_alpha": adjusted_alpha,
+        "significant": significant, "guardrail_ok": guardrail_ok, "valid_readout": valid,
+        "decision": decision, "learning_registered": valid,
+    }, f"Voce e {spec['id']}: uplift {uplift_pp}pp, z={z_stat}, decisao {decision}.", llm)

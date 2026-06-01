@@ -1,902 +1,902 @@
 [
   {
-    "id": "g6-experiment-analyst-01",
-    "desc": "Analista de Experimentos A/B: cenário 01 risco=low status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 1,
-      "blocked": false
+    "id": "g6-exp-01",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": false,
+      "comparisons": 1,
+      "control_n": 1000,
+      "control_conversions": 100,
+      "treatment_n": 1000,
+      "treatment_conversions": 180,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": 0,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": 8.0,
+      "z_stat": 5.155,
+      "adjusted_alpha": 0.05,
+      "significant": true,
+      "guardrail_ok": true,
+      "valid_readout": true,
+      "decision": "ship",
+      "learning_registered": true
     }
   },
   {
-    "id": "g6-experiment-analyst-02",
-    "desc": "Analista de Experimentos A/B: cenário 02 risco=medium status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g6-experiment-analyst",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 2,
-      "blocked": false
+    "id": "g6-exp-02",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": false,
+      "comparisons": 2,
+      "control_n": 1050,
+      "control_conversions": 103,
+      "treatment_n": 1050,
+      "treatment_conversions": 48,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": 0,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g6-experiment-analyst",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": -5.24,
+      "z_stat": -4.646,
+      "adjusted_alpha": 0.025,
+      "significant": true,
+      "guardrail_ok": true,
+      "valid_readout": true,
+      "decision": "kill",
+      "learning_registered": true
     }
   },
   {
-    "id": "g6-experiment-analyst-03",
-    "desc": "Analista de Experimentos A/B: cenário 03 risco=high status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-experiment-analyst",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 3,
-      "blocked": false
+    "id": "g6-exp-03",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": false,
+      "comparisons": 3,
+      "control_n": 1100,
+      "control_conversions": 106,
+      "treatment_n": 1100,
+      "treatment_conversions": 116,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": 0,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g6-experiment-analyst",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": 0.91,
+      "z_stat": 0.708,
+      "adjusted_alpha": 0.01667,
+      "significant": false,
+      "guardrail_ok": true,
+      "valid_readout": true,
+      "decision": "iterate",
+      "learning_registered": true
     }
   },
   {
-    "id": "g6-experiment-analyst-04",
-    "desc": "Analista de Experimentos A/B: cenário 04 risco=critical status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-experiment-analyst",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 4,
-      "blocked": false
+    "id": "g6-exp-04",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": true,
+      "comparisons": 1,
+      "control_n": 1150,
+      "control_conversions": 109,
+      "treatment_n": 1150,
+      "treatment_conversions": 199,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": 0,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g6-experiment-analyst",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": 7.83,
+      "z_stat": 5.51,
+      "adjusted_alpha": 0.05,
+      "significant": true,
+      "guardrail_ok": true,
+      "valid_readout": false,
+      "decision": "iterate",
+      "learning_registered": false
     }
   },
   {
-    "id": "g6-experiment-analyst-05",
-    "desc": "Analista de Experimentos A/B: cenário 05 risco=low status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g6-experiment-analyst",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 5,
-      "blocked": false
+    "id": "g6-exp-05",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": false,
+      "comparisons": 2,
+      "control_n": 1200,
+      "control_conversions": 112,
+      "treatment_n": 1200,
+      "treatment_conversions": 202,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": -8,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g6-experiment-analyst",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": 7.5,
+      "z_stat": 5.448,
+      "adjusted_alpha": 0.025,
+      "significant": true,
+      "guardrail_ok": false,
+      "valid_readout": false,
+      "decision": "iterate",
+      "learning_registered": false
     }
   },
   {
-    "id": "g6-experiment-analyst-06",
-    "desc": "Analista de Experimentos A/B: cenário 06 risco=medium status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-experiment-analyst",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 6,
-      "blocked": false
+    "id": "g6-exp-06",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": false,
+      "comparisons": 3,
+      "control_n": 1250,
+      "control_conversions": 115,
+      "treatment_n": 1250,
+      "treatment_conversions": 195,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": 0,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g6-experiment-analyst",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": 6.4,
+      "z_stat": 4.855,
+      "adjusted_alpha": 0.01667,
+      "significant": true,
+      "guardrail_ok": true,
+      "valid_readout": true,
+      "decision": "ship",
+      "learning_registered": true
     }
   },
   {
-    "id": "g6-experiment-analyst-07",
-    "desc": "Analista de Experimentos A/B: cenário 07 risco=high status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 7,
-      "blocked": false
+    "id": "g6-exp-07",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": false,
+      "comparisons": 1,
+      "control_n": 1300,
+      "control_conversions": 118,
+      "treatment_n": 1300,
+      "treatment_conversions": 63,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": 0,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": -4.23,
+      "z_stat": -4.238,
+      "adjusted_alpha": 0.05,
+      "significant": true,
+      "guardrail_ok": true,
+      "valid_readout": true,
+      "decision": "kill",
+      "learning_registered": true
     }
   },
   {
-    "id": "g6-experiment-analyst-08",
-    "desc": "Analista de Experimentos A/B: cenário 08 risco=critical status=blocked",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "critical",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g6-experiment-analyst",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 8,
-      "blocked": true
+    "id": "g6-exp-08",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": false,
+      "comparisons": 2,
+      "control_n": 1350,
+      "control_conversions": 121,
+      "treatment_n": 1350,
+      "treatment_conversions": 131,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": 0,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "blocked",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g6-experiment-analyst",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": 0.74,
+      "z_stat": 0.662,
+      "adjusted_alpha": 0.025,
+      "significant": false,
+      "guardrail_ok": true,
+      "valid_readout": true,
+      "decision": "iterate",
+      "learning_registered": true
     }
   },
   {
-    "id": "g6-experiment-analyst-09",
-    "desc": "Analista de Experimentos A/B: cenário 09 risco=low status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g6-experiment-analyst",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 9,
-      "blocked": false
+    "id": "g6-exp-09",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": true,
+      "comparisons": 3,
+      "control_n": 1400,
+      "control_conversions": 124,
+      "treatment_n": 1400,
+      "treatment_conversions": 214,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": 0,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g6-experiment-analyst",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": 6.43,
+      "z_stat": 5.221,
+      "adjusted_alpha": 0.01667,
+      "significant": true,
+      "guardrail_ok": true,
+      "valid_readout": false,
+      "decision": "iterate",
+      "learning_registered": false
     }
   },
   {
-    "id": "g6-experiment-analyst-10",
-    "desc": "Analista de Experimentos A/B: cenário 10 risco=medium status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g6-experiment-analyst",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 10,
-      "blocked": false
+    "id": "g6-exp-10",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": false,
+      "comparisons": 1,
+      "control_n": 1450,
+      "control_conversions": 127,
+      "treatment_n": 1450,
+      "treatment_conversions": 217,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": -8,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g6-experiment-analyst",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": 6.21,
+      "z_stat": 5.169,
+      "adjusted_alpha": 0.05,
+      "significant": true,
+      "guardrail_ok": false,
+      "valid_readout": false,
+      "decision": "iterate",
+      "learning_registered": false
     }
   },
   {
-    "id": "g6-experiment-analyst-11",
-    "desc": "Analista de Experimentos A/B: cenário 11 risco=high status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-experiment-analyst",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 11,
-      "blocked": false
+    "id": "g6-exp-11",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": false,
+      "comparisons": 2,
+      "control_n": 1500,
+      "control_conversions": 130,
+      "treatment_n": 1500,
+      "treatment_conversions": 210,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": 0,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g6-experiment-analyst",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": 5.33,
+      "z_stat": 4.608,
+      "adjusted_alpha": 0.025,
+      "significant": true,
+      "guardrail_ok": true,
+      "valid_readout": true,
+      "decision": "ship",
+      "learning_registered": true
     }
   },
   {
-    "id": "g6-experiment-analyst-12",
-    "desc": "Analista de Experimentos A/B: cenário 12 risco=critical status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-experiment-analyst",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 12,
-      "blocked": false
+    "id": "g6-exp-12",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": false,
+      "comparisons": 3,
+      "control_n": 1550,
+      "control_conversions": 133,
+      "treatment_n": 1550,
+      "treatment_conversions": 78,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": 0,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g6-experiment-analyst",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": -3.55,
+      "z_stat": -3.922,
+      "adjusted_alpha": 0.01667,
+      "significant": true,
+      "guardrail_ok": true,
+      "valid_readout": true,
+      "decision": "kill",
+      "learning_registered": true
     }
   },
   {
-    "id": "g6-experiment-analyst-13",
-    "desc": "Analista de Experimentos A/B: cenário 13 risco=low status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 13,
-      "blocked": false
+    "id": "g6-exp-13",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": false,
+      "comparisons": 1,
+      "control_n": 1600,
+      "control_conversions": 136,
+      "treatment_n": 1600,
+      "treatment_conversions": 146,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": 0,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": 0.62,
+      "z_stat": 0.624,
+      "adjusted_alpha": 0.05,
+      "significant": false,
+      "guardrail_ok": true,
+      "valid_readout": true,
+      "decision": "iterate",
+      "learning_registered": true
     }
   },
   {
-    "id": "g6-experiment-analyst-14",
-    "desc": "Analista de Experimentos A/B: cenário 14 risco=medium status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g6-experiment-analyst",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 14,
-      "blocked": false
+    "id": "g6-exp-14",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": true,
+      "comparisons": 2,
+      "control_n": 1650,
+      "control_conversions": 139,
+      "treatment_n": 1650,
+      "treatment_conversions": 229,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": 0,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g6-experiment-analyst",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": 5.45,
+      "z_stat": 4.977,
+      "adjusted_alpha": 0.025,
+      "significant": true,
+      "guardrail_ok": true,
+      "valid_readout": false,
+      "decision": "iterate",
+      "learning_registered": false
     }
   },
   {
-    "id": "g6-experiment-analyst-15",
-    "desc": "Analista de Experimentos A/B: cenário 15 risco=high status=blocked",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "high",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g6-experiment-analyst",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 15,
-      "blocked": true
+    "id": "g6-exp-15",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": false,
+      "comparisons": 3,
+      "control_n": 1700,
+      "control_conversions": 142,
+      "treatment_n": 1700,
+      "treatment_conversions": 232,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": -8,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "blocked",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g6-experiment-analyst",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": 5.29,
+      "z_stat": 4.933,
+      "adjusted_alpha": 0.01667,
+      "significant": true,
+      "guardrail_ok": false,
+      "valid_readout": false,
+      "decision": "iterate",
+      "learning_registered": false
     }
   },
   {
-    "id": "g6-experiment-analyst-16",
-    "desc": "Analista de Experimentos A/B: cenário 16 risco=critical status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-experiment-analyst",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 16,
-      "blocked": false
+    "id": "g6-exp-16",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": false,
+      "comparisons": 1,
+      "control_n": 1750,
+      "control_conversions": 145,
+      "treatment_n": 1750,
+      "treatment_conversions": 225,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": 0,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g6-experiment-analyst",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": 4.57,
+      "z_stat": 4.398,
+      "adjusted_alpha": 0.05,
+      "significant": true,
+      "guardrail_ok": true,
+      "valid_readout": true,
+      "decision": "ship",
+      "learning_registered": true
     }
   },
   {
-    "id": "g6-experiment-analyst-17",
-    "desc": "Analista de Experimentos A/B: cenário 17 risco=low status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g6-experiment-analyst",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 17,
-      "blocked": false
+    "id": "g6-exp-17",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": false,
+      "comparisons": 2,
+      "control_n": 1800,
+      "control_conversions": 148,
+      "treatment_n": 1800,
+      "treatment_conversions": 93,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": 0,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g6-experiment-analyst",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": -3.06,
+      "z_stat": -3.668,
+      "adjusted_alpha": 0.025,
+      "significant": true,
+      "guardrail_ok": true,
+      "valid_readout": true,
+      "decision": "kill",
+      "learning_registered": true
     }
   },
   {
-    "id": "g6-experiment-analyst-18",
-    "desc": "Analista de Experimentos A/B: cenário 18 risco=medium status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-experiment-analyst",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 18,
-      "blocked": false
+    "id": "g6-exp-18",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": false,
+      "comparisons": 3,
+      "control_n": 1850,
+      "control_conversions": 151,
+      "treatment_n": 1850,
+      "treatment_conversions": 161,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": 0,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g6-experiment-analyst",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": 0.54,
+      "z_stat": 0.592,
+      "adjusted_alpha": 0.01667,
+      "significant": false,
+      "guardrail_ok": true,
+      "valid_readout": true,
+      "decision": "iterate",
+      "learning_registered": true
     }
   },
   {
-    "id": "g6-experiment-analyst-19",
-    "desc": "Analista de Experimentos A/B: cenário 19 risco=high status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 19,
-      "blocked": false
+    "id": "g6-exp-19",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": true,
+      "comparisons": 1,
+      "control_n": 1900,
+      "control_conversions": 154,
+      "treatment_n": 1900,
+      "treatment_conversions": 244,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": 0,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": 4.74,
+      "z_stat": 4.768,
+      "adjusted_alpha": 0.05,
+      "significant": true,
+      "guardrail_ok": true,
+      "valid_readout": false,
+      "decision": "iterate",
+      "learning_registered": false
     }
   },
   {
-    "id": "g6-experiment-analyst-20",
-    "desc": "Analista de Experimentos A/B: cenário 20 risco=critical status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-experiment-analyst",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 20,
-      "blocked": false
+    "id": "g6-exp-20",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": false,
+      "comparisons": 2,
+      "control_n": 1950,
+      "control_conversions": 157,
+      "treatment_n": 1950,
+      "treatment_conversions": 247,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": -8,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g6-experiment-analyst",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": 4.62,
+      "z_stat": 4.729,
+      "adjusted_alpha": 0.025,
+      "significant": true,
+      "guardrail_ok": false,
+      "valid_readout": false,
+      "decision": "iterate",
+      "learning_registered": false
     }
   },
   {
-    "id": "g6-experiment-analyst-21",
-    "desc": "Analista de Experimentos A/B: cenário 21 risco=low status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g6-experiment-analyst",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 21,
-      "blocked": false
+    "id": "g6-exp-21",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": false,
+      "comparisons": 3,
+      "control_n": 2000,
+      "control_conversions": 160,
+      "treatment_n": 2000,
+      "treatment_conversions": 240,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": 0,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g6-experiment-analyst",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": 4.0,
+      "z_stat": 4.216,
+      "adjusted_alpha": 0.01667,
+      "significant": true,
+      "guardrail_ok": true,
+      "valid_readout": true,
+      "decision": "ship",
+      "learning_registered": true
     }
   },
   {
-    "id": "g6-experiment-analyst-22",
-    "desc": "Analista de Experimentos A/B: cenário 22 risco=medium status=blocked",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g6-experiment-analyst",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 22,
-      "blocked": true
+    "id": "g6-exp-22",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": false,
+      "comparisons": 1,
+      "control_n": 2050,
+      "control_conversions": 163,
+      "treatment_n": 2050,
+      "treatment_conversions": 108,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": 0,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g6-experiment-analyst",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": -2.68,
+      "z_stat": -3.457,
+      "adjusted_alpha": 0.05,
+      "significant": true,
+      "guardrail_ok": true,
+      "valid_readout": true,
+      "decision": "kill",
+      "learning_registered": true
     }
   },
   {
-    "id": "g6-experiment-analyst-23",
-    "desc": "Analista de Experimentos A/B: cenário 23 risco=high status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-experiment-analyst",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 23,
-      "blocked": false
+    "id": "g6-exp-23",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": false,
+      "comparisons": 2,
+      "control_n": 2100,
+      "control_conversions": 166,
+      "treatment_n": 2100,
+      "treatment_conversions": 176,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": 0,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g6-experiment-analyst",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": 0.48,
+      "z_stat": 0.564,
+      "adjusted_alpha": 0.025,
+      "significant": false,
+      "guardrail_ok": true,
+      "valid_readout": true,
+      "decision": "iterate",
+      "learning_registered": true
     }
   },
   {
-    "id": "g6-experiment-analyst-24",
-    "desc": "Analista de Experimentos A/B: cenário 24 risco=critical status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-experiment-analyst",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 24,
-      "blocked": false
+    "id": "g6-exp-24",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": true,
+      "comparisons": 3,
+      "control_n": 2150,
+      "control_conversions": 169,
+      "treatment_n": 2150,
+      "treatment_conversions": 259,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": 0,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g6-experiment-analyst",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": 4.19,
+      "z_stat": 4.584,
+      "adjusted_alpha": 0.01667,
+      "significant": true,
+      "guardrail_ok": true,
+      "valid_readout": false,
+      "decision": "iterate",
+      "learning_registered": false
     }
   },
   {
-    "id": "g6-experiment-analyst-25",
-    "desc": "Analista de Experimentos A/B: cenário 25 risco=low status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 25,
-      "blocked": false
+    "id": "g6-exp-25",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": false,
+      "comparisons": 1,
+      "control_n": 2200,
+      "control_conversions": 172,
+      "treatment_n": 2200,
+      "treatment_conversions": 262,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": -8,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": 4.09,
+      "z_stat": 4.55,
+      "adjusted_alpha": 0.05,
+      "significant": true,
+      "guardrail_ok": false,
+      "valid_readout": false,
+      "decision": "iterate",
+      "learning_registered": false
     }
   },
   {
-    "id": "g6-experiment-analyst-26",
-    "desc": "Analista de Experimentos A/B: cenário 26 risco=medium status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g6-experiment-analyst",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 26,
-      "blocked": false
+    "id": "g6-exp-26",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": false,
+      "comparisons": 2,
+      "control_n": 2250,
+      "control_conversions": 175,
+      "treatment_n": 2250,
+      "treatment_conversions": 255,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": 0,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g6-experiment-analyst",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": 3.56,
+      "z_stat": 4.057,
+      "adjusted_alpha": 0.025,
+      "significant": true,
+      "guardrail_ok": true,
+      "valid_readout": true,
+      "decision": "ship",
+      "learning_registered": true
     }
   },
   {
-    "id": "g6-experiment-analyst-27",
-    "desc": "Analista de Experimentos A/B: cenário 27 risco=high status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-experiment-analyst",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 27,
-      "blocked": false
+    "id": "g6-exp-27",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": false,
+      "comparisons": 3,
+      "control_n": 2300,
+      "control_conversions": 178,
+      "treatment_n": 2300,
+      "treatment_conversions": 123,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": 0,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g6-experiment-analyst",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": -2.39,
+      "z_stat": -3.279,
+      "adjusted_alpha": 0.01667,
+      "significant": true,
+      "guardrail_ok": true,
+      "valid_readout": true,
+      "decision": "kill",
+      "learning_registered": true
     }
   },
   {
-    "id": "g6-experiment-analyst-28",
-    "desc": "Analista de Experimentos A/B: cenário 28 risco=critical status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-experiment-analyst",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 28,
-      "blocked": false
+    "id": "g6-exp-28",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": false,
+      "comparisons": 1,
+      "control_n": 2350,
+      "control_conversions": 181,
+      "treatment_n": 2350,
+      "treatment_conversions": 191,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": 0,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g6-experiment-analyst",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": 0.43,
+      "z_stat": 0.54,
+      "adjusted_alpha": 0.05,
+      "significant": false,
+      "guardrail_ok": true,
+      "valid_readout": true,
+      "decision": "iterate",
+      "learning_registered": true
     }
   },
   {
-    "id": "g6-experiment-analyst-29",
-    "desc": "Analista de Experimentos A/B: cenário 29 risco=low status=blocked",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "low",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g6-experiment-analyst",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 29,
-      "blocked": true
+    "id": "g6-exp-29",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": true,
+      "comparisons": 2,
+      "control_n": 2400,
+      "control_conversions": 184,
+      "treatment_n": 2400,
+      "treatment_conversions": 274,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": 0,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "blocked",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g6-experiment-analyst",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": 3.75,
+      "z_stat": 4.422,
+      "adjusted_alpha": 0.025,
+      "significant": true,
+      "guardrail_ok": true,
+      "valid_readout": false,
+      "decision": "iterate",
+      "learning_registered": false
     }
   },
   {
-    "id": "g6-experiment-analyst-30",
-    "desc": "Analista de Experimentos A/B: cenário 30 risco=medium status=ready",
-    "artifact_type": "experiment-analyst.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g6-experiment-analyst",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 30,
-      "blocked": false
+    "id": "g6-exp-30",
+    "desc": "leitura A/B determinística com significância, peeking, poder e guardrail",
+    "tenant_id": "t-eval-g06",
+    "experiment_readout": {
+      "pre_registered": true,
+      "primary_metric_canonical": true,
+      "peeking_detected": false,
+      "comparisons": 3,
+      "control_n": 2450,
+      "control_conversions": 187,
+      "treatment_n": 2450,
+      "treatment_conversions": 277,
+      "alpha": 0.05,
+      "power_ok": true,
+      "guardrail_delta_pct": -8,
+      "guardrail_min_delta_pct": -5
     },
     "expected": {
-      "agent_id": "g6-experiment-analyst",
-      "handler_kind": "spec_driven",
-      "artifact_type": "experiment-analyst.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g6-experiment-analyst",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "by": "g6-experiment-analyst",
+      "uplift_pp": 3.67,
+      "z_stat": 4.391,
+      "adjusted_alpha": 0.01667,
+      "significant": true,
+      "guardrail_ok": false,
+      "valid_readout": false,
+      "decision": "iterate",
+      "learning_registered": false
     }
   }
 ]

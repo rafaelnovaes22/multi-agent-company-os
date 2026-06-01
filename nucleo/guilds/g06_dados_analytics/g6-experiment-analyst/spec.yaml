@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: AUTONOMOUS
-act_handler: spec_driven
+act_handler: experiment_readout
 outcome_clause:
   statement: 'Analista de Experimentos A/B entrega experiment-analyst.artifact verificável
     para: ler resultados de experimentos A/B com rigor estatístico e produzir uma

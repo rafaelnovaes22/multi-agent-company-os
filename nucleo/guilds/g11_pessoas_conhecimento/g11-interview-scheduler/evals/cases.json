@@ -1,902 +1,3044 @@
 [
   {
-    "id": "g11-interview-scheduler-01",
-    "desc": "Interview Scheduler & Coordinator: cenário 01 risco=low status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 1,
-      "blocked": false
+    "id": "g11-sched-01",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-0-0",
+          "slots": [
+            "sex-18"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-0-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": true,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-0-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 3,
+      "scheduled_count": 2,
+      "stalled_count": 1,
+      "scheduled_pct": 66.7,
+      "no_show_recovered_count": 1,
+      "decision_artifact_count": 2,
+      "scorecards_complete_pct": 66.7,
+      "status": "stalled"
     }
   },
   {
-    "id": "g11-interview-scheduler-02",
-    "desc": "Interview Scheduler & Coordinator: cenário 02 risco=medium status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g11-interview-scheduler",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 2,
-      "blocked": false
+    "id": "g11-sched-02",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-1-0",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-1-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-1-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        },
+        {
+          "id": "cand-1-3",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g11-interview-scheduler",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 4,
+      "scheduled_count": 4,
+      "stalled_count": 0,
+      "scheduled_pct": 100.0,
+      "no_show_recovered_count": 0,
+      "decision_artifact_count": 2,
+      "scorecards_complete_pct": 50.0,
+      "status": "ok"
     }
   },
   {
-    "id": "g11-interview-scheduler-03",
-    "desc": "Interview Scheduler & Coordinator: cenário 03 risco=high status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-interview-scheduler",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 3,
-      "blocked": false
+    "id": "g11-sched-03",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-2-0",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-2-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-2-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        },
+        {
+          "id": "cand-2-3",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-2-4",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 84,
+            "technical": 84,
+            "founder": 84
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g11-interview-scheduler",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 5,
+      "scheduled_count": 5,
+      "stalled_count": 0,
+      "scheduled_pct": 100.0,
+      "no_show_recovered_count": 0,
+      "decision_artifact_count": 3,
+      "scorecards_complete_pct": 60.0,
+      "status": "ok"
     }
   },
   {
-    "id": "g11-interview-scheduler-04",
-    "desc": "Interview Scheduler & Coordinator: cenário 04 risco=critical status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-interview-scheduler",
-    "capabilities": [
-      "config_driven",
-      "knowledge_indexing"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 4,
-      "blocked": false
+    "id": "g11-sched-04",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-3-0",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-3-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-3-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g11-interview-scheduler",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 3,
+      "scheduled_count": 3,
+      "stalled_count": 0,
+      "scheduled_pct": 100.0,
+      "no_show_recovered_count": 0,
+      "decision_artifact_count": 2,
+      "scorecards_complete_pct": 66.7,
+      "status": "ok"
     }
   },
   {
-    "id": "g11-interview-scheduler-05",
-    "desc": "Interview Scheduler & Coordinator: cenário 05 risco=low status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g11-interview-scheduler",
-    "capabilities": [
-      "knowledge_indexing",
-      "human_loop_roi"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 5,
-      "blocked": false
+    "id": "g11-sched-05",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-4-0",
+          "slots": [
+            "sex-18"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-4-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-4-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        },
+        {
+          "id": "cand-4-3",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g11-interview-scheduler",
-      "capabilities_any": [
-        "knowledge_indexing"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 4,
+      "scheduled_count": 3,
+      "stalled_count": 1,
+      "scheduled_pct": 75.0,
+      "no_show_recovered_count": 0,
+      "decision_artifact_count": 2,
+      "scorecards_complete_pct": 50.0,
+      "status": "stalled"
     }
   },
   {
-    "id": "g11-interview-scheduler-06",
-    "desc": "Interview Scheduler & Coordinator: cenário 06 risco=medium status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-interview-scheduler",
-    "capabilities": [
-      "human_loop_roi",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 6,
-      "blocked": false
+    "id": "g11-sched-06",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-5-0",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-5-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": true,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-5-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        },
+        {
+          "id": "cand-5-3",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-5-4",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 84,
+            "technical": 84,
+            "founder": 84
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g11-interview-scheduler",
-      "capabilities_any": [
-        "human_loop_roi"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 5,
+      "scheduled_count": 5,
+      "stalled_count": 0,
+      "scheduled_pct": 100.0,
+      "no_show_recovered_count": 1,
+      "decision_artifact_count": 3,
+      "scorecards_complete_pct": 60.0,
+      "status": "ok"
     }
   },
   {
-    "id": "g11-interview-scheduler-07",
-    "desc": "Interview Scheduler & Coordinator: cenário 07 risco=high status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 7,
-      "blocked": false
+    "id": "g11-sched-07",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-6-0",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-6-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-6-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 3,
+      "scheduled_count": 3,
+      "stalled_count": 0,
+      "scheduled_pct": 100.0,
+      "no_show_recovered_count": 0,
+      "decision_artifact_count": 2,
+      "scorecards_complete_pct": 66.7,
+      "status": "ok"
     }
   },
   {
-    "id": "g11-interview-scheduler-08",
-    "desc": "Interview Scheduler & Coordinator: cenário 08 risco=critical status=blocked",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "critical",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g11-interview-scheduler",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 8,
-      "blocked": true
+    "id": "g11-sched-08",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-7-0",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-7-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-7-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        },
+        {
+          "id": "cand-7-3",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "blocked",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g11-interview-scheduler",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 4,
+      "scheduled_count": 4,
+      "stalled_count": 0,
+      "scheduled_pct": 100.0,
+      "no_show_recovered_count": 0,
+      "decision_artifact_count": 2,
+      "scorecards_complete_pct": 50.0,
+      "status": "ok"
     }
   },
   {
-    "id": "g11-interview-scheduler-09",
-    "desc": "Interview Scheduler & Coordinator: cenário 09 risco=low status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g11-interview-scheduler",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 9,
-      "blocked": false
+    "id": "g11-sched-09",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-8-0",
+          "slots": [
+            "sex-18"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-8-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-8-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        },
+        {
+          "id": "cand-8-3",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-8-4",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 84,
+            "technical": 84,
+            "founder": 84
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g11-interview-scheduler",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 5,
+      "scheduled_count": 4,
+      "stalled_count": 1,
+      "scheduled_pct": 80.0,
+      "no_show_recovered_count": 0,
+      "decision_artifact_count": 3,
+      "scorecards_complete_pct": 60.0,
+      "status": "stalled"
     }
   },
   {
-    "id": "g11-interview-scheduler-10",
-    "desc": "Interview Scheduler & Coordinator: cenário 10 risco=medium status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g11-interview-scheduler",
-    "capabilities": [
-      "config_driven",
-      "knowledge_indexing"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 10,
-      "blocked": false
+    "id": "g11-sched-10",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-9-0",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-9-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-9-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g11-interview-scheduler",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 3,
+      "scheduled_count": 3,
+      "stalled_count": 0,
+      "scheduled_pct": 100.0,
+      "no_show_recovered_count": 0,
+      "decision_artifact_count": 2,
+      "scorecards_complete_pct": 66.7,
+      "status": "ok"
     }
   },
   {
-    "id": "g11-interview-scheduler-11",
-    "desc": "Interview Scheduler & Coordinator: cenário 11 risco=high status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-interview-scheduler",
-    "capabilities": [
-      "knowledge_indexing",
-      "human_loop_roi"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 11,
-      "blocked": false
+    "id": "g11-sched-11",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-10-0",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-10-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": true,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-10-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        },
+        {
+          "id": "cand-10-3",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g11-interview-scheduler",
-      "capabilities_any": [
-        "knowledge_indexing"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 4,
+      "scheduled_count": 4,
+      "stalled_count": 0,
+      "scheduled_pct": 100.0,
+      "no_show_recovered_count": 1,
+      "decision_artifact_count": 2,
+      "scorecards_complete_pct": 50.0,
+      "status": "ok"
     }
   },
   {
-    "id": "g11-interview-scheduler-12",
-    "desc": "Interview Scheduler & Coordinator: cenário 12 risco=critical status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-interview-scheduler",
-    "capabilities": [
-      "human_loop_roi",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 12,
-      "blocked": false
+    "id": "g11-sched-12",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-11-0",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-11-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-11-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        },
+        {
+          "id": "cand-11-3",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-11-4",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 84,
+            "technical": 84,
+            "founder": 84
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g11-interview-scheduler",
-      "capabilities_any": [
-        "human_loop_roi"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 5,
+      "scheduled_count": 5,
+      "stalled_count": 0,
+      "scheduled_pct": 100.0,
+      "no_show_recovered_count": 0,
+      "decision_artifact_count": 3,
+      "scorecards_complete_pct": 60.0,
+      "status": "ok"
     }
   },
   {
-    "id": "g11-interview-scheduler-13",
-    "desc": "Interview Scheduler & Coordinator: cenário 13 risco=low status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 13,
-      "blocked": false
+    "id": "g11-sched-13",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-12-0",
+          "slots": [
+            "sex-18"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-12-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-12-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 3,
+      "scheduled_count": 2,
+      "stalled_count": 1,
+      "scheduled_pct": 66.7,
+      "no_show_recovered_count": 0,
+      "decision_artifact_count": 2,
+      "scorecards_complete_pct": 66.7,
+      "status": "stalled"
     }
   },
   {
-    "id": "g11-interview-scheduler-14",
-    "desc": "Interview Scheduler & Coordinator: cenário 14 risco=medium status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g11-interview-scheduler",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 14,
-      "blocked": false
+    "id": "g11-sched-14",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-13-0",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-13-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-13-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        },
+        {
+          "id": "cand-13-3",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g11-interview-scheduler",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 4,
+      "scheduled_count": 4,
+      "stalled_count": 0,
+      "scheduled_pct": 100.0,
+      "no_show_recovered_count": 0,
+      "decision_artifact_count": 2,
+      "scorecards_complete_pct": 50.0,
+      "status": "ok"
     }
   },
   {
-    "id": "g11-interview-scheduler-15",
-    "desc": "Interview Scheduler & Coordinator: cenário 15 risco=high status=blocked",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "high",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g11-interview-scheduler",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 15,
-      "blocked": true
+    "id": "g11-sched-15",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-14-0",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-14-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-14-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        },
+        {
+          "id": "cand-14-3",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-14-4",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 84,
+            "technical": 84,
+            "founder": 84
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "blocked",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g11-interview-scheduler",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 5,
+      "scheduled_count": 5,
+      "stalled_count": 0,
+      "scheduled_pct": 100.0,
+      "no_show_recovered_count": 0,
+      "decision_artifact_count": 3,
+      "scorecards_complete_pct": 60.0,
+      "status": "ok"
     }
   },
   {
-    "id": "g11-interview-scheduler-16",
-    "desc": "Interview Scheduler & Coordinator: cenário 16 risco=critical status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-interview-scheduler",
-    "capabilities": [
-      "config_driven",
-      "knowledge_indexing"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 16,
-      "blocked": false
+    "id": "g11-sched-16",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-15-0",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-15-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": true,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-15-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g11-interview-scheduler",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 3,
+      "scheduled_count": 3,
+      "stalled_count": 0,
+      "scheduled_pct": 100.0,
+      "no_show_recovered_count": 1,
+      "decision_artifact_count": 2,
+      "scorecards_complete_pct": 66.7,
+      "status": "ok"
     }
   },
   {
-    "id": "g11-interview-scheduler-17",
-    "desc": "Interview Scheduler & Coordinator: cenário 17 risco=low status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g11-interview-scheduler",
-    "capabilities": [
-      "knowledge_indexing",
-      "human_loop_roi"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 17,
-      "blocked": false
+    "id": "g11-sched-17",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-16-0",
+          "slots": [
+            "sex-18"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-16-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-16-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        },
+        {
+          "id": "cand-16-3",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g11-interview-scheduler",
-      "capabilities_any": [
-        "knowledge_indexing"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 4,
+      "scheduled_count": 3,
+      "stalled_count": 1,
+      "scheduled_pct": 75.0,
+      "no_show_recovered_count": 0,
+      "decision_artifact_count": 2,
+      "scorecards_complete_pct": 50.0,
+      "status": "stalled"
     }
   },
   {
-    "id": "g11-interview-scheduler-18",
-    "desc": "Interview Scheduler & Coordinator: cenário 18 risco=medium status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-interview-scheduler",
-    "capabilities": [
-      "human_loop_roi",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 18,
-      "blocked": false
+    "id": "g11-sched-18",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-17-0",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-17-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-17-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        },
+        {
+          "id": "cand-17-3",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-17-4",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 84,
+            "technical": 84,
+            "founder": 84
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g11-interview-scheduler",
-      "capabilities_any": [
-        "human_loop_roi"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 5,
+      "scheduled_count": 5,
+      "stalled_count": 0,
+      "scheduled_pct": 100.0,
+      "no_show_recovered_count": 0,
+      "decision_artifact_count": 3,
+      "scorecards_complete_pct": 60.0,
+      "status": "ok"
     }
   },
   {
-    "id": "g11-interview-scheduler-19",
-    "desc": "Interview Scheduler & Coordinator: cenário 19 risco=high status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 19,
-      "blocked": false
+    "id": "g11-sched-19",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-18-0",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-18-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-18-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 3,
+      "scheduled_count": 3,
+      "stalled_count": 0,
+      "scheduled_pct": 100.0,
+      "no_show_recovered_count": 0,
+      "decision_artifact_count": 2,
+      "scorecards_complete_pct": 66.7,
+      "status": "ok"
     }
   },
   {
-    "id": "g11-interview-scheduler-20",
-    "desc": "Interview Scheduler & Coordinator: cenário 20 risco=critical status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-interview-scheduler",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 20,
-      "blocked": false
+    "id": "g11-sched-20",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-19-0",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-19-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-19-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        },
+        {
+          "id": "cand-19-3",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g11-interview-scheduler",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 4,
+      "scheduled_count": 4,
+      "stalled_count": 0,
+      "scheduled_pct": 100.0,
+      "no_show_recovered_count": 0,
+      "decision_artifact_count": 2,
+      "scorecards_complete_pct": 50.0,
+      "status": "ok"
     }
   },
   {
-    "id": "g11-interview-scheduler-21",
-    "desc": "Interview Scheduler & Coordinator: cenário 21 risco=low status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g11-interview-scheduler",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 21,
-      "blocked": false
+    "id": "g11-sched-21",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-20-0",
+          "slots": [
+            "sex-18"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-20-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": true,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-20-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        },
+        {
+          "id": "cand-20-3",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-20-4",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 84,
+            "technical": 84,
+            "founder": 84
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g11-interview-scheduler",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 5,
+      "scheduled_count": 4,
+      "stalled_count": 1,
+      "scheduled_pct": 80.0,
+      "no_show_recovered_count": 1,
+      "decision_artifact_count": 3,
+      "scorecards_complete_pct": 60.0,
+      "status": "stalled"
     }
   },
   {
-    "id": "g11-interview-scheduler-22",
-    "desc": "Interview Scheduler & Coordinator: cenário 22 risco=medium status=blocked",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g11-interview-scheduler",
-    "capabilities": [
-      "config_driven",
-      "knowledge_indexing"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 22,
-      "blocked": true
+    "id": "g11-sched-22",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-21-0",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-21-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-21-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g11-interview-scheduler",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 3,
+      "scheduled_count": 3,
+      "stalled_count": 0,
+      "scheduled_pct": 100.0,
+      "no_show_recovered_count": 0,
+      "decision_artifact_count": 2,
+      "scorecards_complete_pct": 66.7,
+      "status": "ok"
     }
   },
   {
-    "id": "g11-interview-scheduler-23",
-    "desc": "Interview Scheduler & Coordinator: cenário 23 risco=high status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-interview-scheduler",
-    "capabilities": [
-      "knowledge_indexing",
-      "human_loop_roi"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 23,
-      "blocked": false
+    "id": "g11-sched-23",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-22-0",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-22-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-22-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        },
+        {
+          "id": "cand-22-3",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g11-interview-scheduler",
-      "capabilities_any": [
-        "knowledge_indexing"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 4,
+      "scheduled_count": 4,
+      "stalled_count": 0,
+      "scheduled_pct": 100.0,
+      "no_show_recovered_count": 0,
+      "decision_artifact_count": 2,
+      "scorecards_complete_pct": 50.0,
+      "status": "ok"
     }
   },
   {
-    "id": "g11-interview-scheduler-24",
-    "desc": "Interview Scheduler & Coordinator: cenário 24 risco=critical status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-interview-scheduler",
-    "capabilities": [
-      "human_loop_roi",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 24,
-      "blocked": false
+    "id": "g11-sched-24",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-23-0",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-23-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-23-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        },
+        {
+          "id": "cand-23-3",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-23-4",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 84,
+            "technical": 84,
+            "founder": 84
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g11-interview-scheduler",
-      "capabilities_any": [
-        "human_loop_roi"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 5,
+      "scheduled_count": 5,
+      "stalled_count": 0,
+      "scheduled_pct": 100.0,
+      "no_show_recovered_count": 0,
+      "decision_artifact_count": 3,
+      "scorecards_complete_pct": 60.0,
+      "status": "ok"
     }
   },
   {
-    "id": "g11-interview-scheduler-25",
-    "desc": "Interview Scheduler & Coordinator: cenário 25 risco=low status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 25,
-      "blocked": false
+    "id": "g11-sched-25",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-24-0",
+          "slots": [
+            "sex-18"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-24-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-24-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 3,
+      "scheduled_count": 2,
+      "stalled_count": 1,
+      "scheduled_pct": 66.7,
+      "no_show_recovered_count": 0,
+      "decision_artifact_count": 2,
+      "scorecards_complete_pct": 66.7,
+      "status": "stalled"
     }
   },
   {
-    "id": "g11-interview-scheduler-26",
-    "desc": "Interview Scheduler & Coordinator: cenário 26 risco=medium status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g11-interview-scheduler",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 26,
-      "blocked": false
+    "id": "g11-sched-26",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-25-0",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-25-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": true,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-25-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        },
+        {
+          "id": "cand-25-3",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g11-interview-scheduler",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 4,
+      "scheduled_count": 4,
+      "stalled_count": 0,
+      "scheduled_pct": 100.0,
+      "no_show_recovered_count": 1,
+      "decision_artifact_count": 2,
+      "scorecards_complete_pct": 50.0,
+      "status": "ok"
     }
   },
   {
-    "id": "g11-interview-scheduler-27",
-    "desc": "Interview Scheduler & Coordinator: cenário 27 risco=high status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-interview-scheduler",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 27,
-      "blocked": false
+    "id": "g11-sched-27",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-26-0",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-26-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-26-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        },
+        {
+          "id": "cand-26-3",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-26-4",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 84,
+            "technical": 84,
+            "founder": 84
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g11-interview-scheduler",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 5,
+      "scheduled_count": 5,
+      "stalled_count": 0,
+      "scheduled_pct": 100.0,
+      "no_show_recovered_count": 0,
+      "decision_artifact_count": 3,
+      "scorecards_complete_pct": 60.0,
+      "status": "ok"
     }
   },
   {
-    "id": "g11-interview-scheduler-28",
-    "desc": "Interview Scheduler & Coordinator: cenário 28 risco=critical status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-interview-scheduler",
-    "capabilities": [
-      "config_driven",
-      "knowledge_indexing"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 28,
-      "blocked": false
+    "id": "g11-sched-28",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-27-0",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-27-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-27-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g11-interview-scheduler",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 3,
+      "scheduled_count": 3,
+      "stalled_count": 0,
+      "scheduled_pct": 100.0,
+      "no_show_recovered_count": 0,
+      "decision_artifact_count": 2,
+      "scorecards_complete_pct": 66.7,
+      "status": "ok"
     }
   },
   {
-    "id": "g11-interview-scheduler-29",
-    "desc": "Interview Scheduler & Coordinator: cenário 29 risco=low status=blocked",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "low",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g11-interview-scheduler",
-    "capabilities": [
-      "knowledge_indexing",
-      "human_loop_roi"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 29,
-      "blocked": true
+    "id": "g11-sched-29",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-28-0",
+          "slots": [
+            "sex-18"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-28-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-28-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        },
+        {
+          "id": "cand-28-3",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "blocked",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g11-interview-scheduler",
-      "capabilities_any": [
-        "knowledge_indexing"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 4,
+      "scheduled_count": 3,
+      "stalled_count": 1,
+      "scheduled_pct": 75.0,
+      "no_show_recovered_count": 0,
+      "decision_artifact_count": 2,
+      "scorecards_complete_pct": 50.0,
+      "status": "stalled"
     }
   },
   {
-    "id": "g11-interview-scheduler-30",
-    "desc": "Interview Scheduler & Coordinator: cenário 30 risco=medium status=ready",
-    "artifact_type": "interview-scheduler.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-interview-scheduler",
-    "capabilities": [
-      "human_loop_roi",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 30,
-      "blocked": false
+    "id": "g11-sched-30",
+    "desc": "agenda entrevistas por overlap de slots e consolida scorecards",
+    "tenant_id": "t-eval-g11",
+    "interview_schedule": {
+      "required_stages": [
+        "screen",
+        "technical",
+        "founder"
+      ],
+      "interviewers": [
+        {
+          "id": "iv1",
+          "stages": [
+            "screen",
+            "technical"
+          ],
+          "slots": [
+            "seg-09",
+            "ter-10",
+            "qua-14"
+          ]
+        },
+        {
+          "id": "iv2",
+          "stages": [
+            "founder"
+          ],
+          "slots": [
+            "qua-14",
+            "qui-16"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand-29-0",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 80,
+            "technical": 80,
+            "founder": 80
+          }
+        },
+        {
+          "id": "cand-29-1",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-29-2",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 82,
+            "technical": 82,
+            "founder": 82
+          }
+        },
+        {
+          "id": "cand-29-3",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 70
+          }
+        },
+        {
+          "id": "cand-29-4",
+          "slots": [
+            "seg-09",
+            "qua-14"
+          ],
+          "no_show": false,
+          "reschedule_slot": "qua-14",
+          "scorecards": {
+            "screen": 84,
+            "technical": 84,
+            "founder": 84
+          }
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g11-interview-scheduler",
-      "handler_kind": "spec_driven",
-      "artifact_type": "interview-scheduler.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g11-interview-scheduler",
-      "capabilities_any": [
-        "human_loop_roi"
-      ]
+      "by": "g11-interview-scheduler",
+      "candidate_count": 5,
+      "scheduled_count": 5,
+      "stalled_count": 0,
+      "scheduled_pct": 100.0,
+      "no_show_recovered_count": 0,
+      "decision_artifact_count": 3,
+      "scorecards_complete_pct": 60.0,
+      "status": "ok"
     }
   }
 ]

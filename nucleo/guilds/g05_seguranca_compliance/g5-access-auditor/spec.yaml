@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: guardian
 mode: SHADOW
 target_mode: AUTONOMOUS
-act_handler: guardian_check
+act_handler: access_review
 outcome_clause:
   statement: 'Access Auditor entrega access_auditor.artifact verificável para: revisar
     permissões e IAM de humanos e agentes, garantindo least-privilege e ausência de

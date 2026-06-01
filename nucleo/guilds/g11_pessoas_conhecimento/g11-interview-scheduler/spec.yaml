@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: AUTONOMOUS
-act_handler: spec_driven
+act_handler: interview_schedule
 outcome_clause:
   statement: 'Interview Scheduler & Coordinator entrega interview-scheduler.artifact
     verificável para: Coordenar e agendar todo o processo de entrevista entre candidatos

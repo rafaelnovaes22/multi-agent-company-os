@@ -1,902 +1,2432 @@
 [
   {
-    "id": "g7-seo-strategist-01",
-    "desc": "SEO Strategist: cenário 01 risco=low status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 1,
-      "blocked": false
+    "id": "g7-seo-01",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-0-0",
+          "cluster": "cluster-a",
+          "volume": 80,
+          "difficulty": 30,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-0-1",
+          "cluster": "cluster-a",
+          "volume": 130,
+          "difficulty": 38,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-0-2",
+          "cluster": "cluster-a",
+          "volume": 180,
+          "difficulty": 46,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-0-3",
+          "cluster": "cluster-b",
+          "volume": 230,
+          "difficulty": 54,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-0-4",
+          "cluster": "cluster-b",
+          "volume": 280,
+          "difficulty": 62,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-0-5",
+          "cluster": "cluster-b",
+          "volume": 330,
+          "difficulty": 70,
+          "intent": "navigational",
+          "vertical_assumed": true
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 2,
+        "core_web_vitals_fail": 1
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 2,
+      "briefs_count": 2,
+      "top_keyword": "termo-0-3",
+      "audit_passed": false,
+      "non_indexed_pages": 2,
+      "core_web_vitals_fail": 1,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-02",
-    "desc": "SEO Strategist: cenário 02 risco=medium status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g7-seo-strategist",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 2,
-      "blocked": false
+    "id": "g7-seo-02",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-1-0",
+          "cluster": "cluster-a",
+          "volume": 90,
+          "difficulty": 31,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-1-1",
+          "cluster": "cluster-a",
+          "volume": 140,
+          "difficulty": 39,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-1-2",
+          "cluster": "cluster-a",
+          "volume": 190,
+          "difficulty": 47,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-1-3",
+          "cluster": "cluster-b",
+          "volume": 240,
+          "difficulty": 55,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-1-4",
+          "cluster": "cluster-b",
+          "volume": 290,
+          "difficulty": 63,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-1-5",
+          "cluster": "cluster-b",
+          "volume": 340,
+          "difficulty": 71,
+          "intent": "navigational",
+          "vertical_assumed": false
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 0,
+        "core_web_vitals_fail": 0
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g7-seo-strategist",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 2,
+      "briefs_count": 2,
+      "top_keyword": "termo-1-3",
+      "audit_passed": true,
+      "non_indexed_pages": 0,
+      "core_web_vitals_fail": 0,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-03",
-    "desc": "SEO Strategist: cenário 03 risco=high status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-seo-strategist",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 3,
-      "blocked": false
+    "id": "g7-seo-03",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-2-0",
+          "cluster": "cluster-a",
+          "volume": 100,
+          "difficulty": 32,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-2-1",
+          "cluster": "cluster-a",
+          "volume": 150,
+          "difficulty": 40,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-2-2",
+          "cluster": "cluster-a",
+          "volume": 200,
+          "difficulty": 48,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-2-3",
+          "cluster": "cluster-b",
+          "volume": 250,
+          "difficulty": 56,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-2-4",
+          "cluster": "cluster-b",
+          "volume": 300,
+          "difficulty": 64,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-2-5",
+          "cluster": "cluster-b",
+          "volume": 350,
+          "difficulty": 72,
+          "intent": "navigational",
+          "vertical_assumed": true
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 0,
+        "core_web_vitals_fail": 0
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g7-seo-strategist",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-2-3",
+      "audit_passed": true,
+      "non_indexed_pages": 0,
+      "core_web_vitals_fail": 0,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-04",
-    "desc": "SEO Strategist: cenário 04 risco=critical status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-seo-strategist",
-    "capabilities": [
-      "config_driven",
-      "campaign_iteration"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 4,
-      "blocked": false
+    "id": "g7-seo-04",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-3-0",
+          "cluster": "cluster-a",
+          "volume": 110,
+          "difficulty": 33,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-3-1",
+          "cluster": "cluster-a",
+          "volume": 160,
+          "difficulty": 41,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-3-2",
+          "cluster": "cluster-a",
+          "volume": 210,
+          "difficulty": 49,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-3-3",
+          "cluster": "cluster-b",
+          "volume": 260,
+          "difficulty": 57,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-3-4",
+          "cluster": "cluster-b",
+          "volume": 310,
+          "difficulty": 65,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-3-5",
+          "cluster": "cluster-b",
+          "volume": 360,
+          "difficulty": 73,
+          "intent": "navigational",
+          "vertical_assumed": false
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 0,
+        "core_web_vitals_fail": 0
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g7-seo-strategist",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-3-3",
+      "audit_passed": true,
+      "non_indexed_pages": 0,
+      "core_web_vitals_fail": 0,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-05",
-    "desc": "SEO Strategist: cenário 05 risco=low status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g7-seo-strategist",
-    "capabilities": [
-      "campaign_iteration",
-      "taste_gate"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 5,
-      "blocked": false
+    "id": "g7-seo-05",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-4-0",
+          "cluster": "cluster-a",
+          "volume": 120,
+          "difficulty": 34,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-4-1",
+          "cluster": "cluster-a",
+          "volume": 170,
+          "difficulty": 42,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-4-2",
+          "cluster": "cluster-a",
+          "volume": 220,
+          "difficulty": 50,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-4-3",
+          "cluster": "cluster-b",
+          "volume": 270,
+          "difficulty": 58,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-4-4",
+          "cluster": "cluster-b",
+          "volume": 320,
+          "difficulty": 66,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-4-5",
+          "cluster": "cluster-b",
+          "volume": 370,
+          "difficulty": 74,
+          "intent": "navigational",
+          "vertical_assumed": true
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 2,
+        "core_web_vitals_fail": 0
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g7-seo-strategist",
-      "capabilities_any": [
-        "campaign_iteration"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-4-3",
+      "audit_passed": false,
+      "non_indexed_pages": 2,
+      "core_web_vitals_fail": 0,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-06",
-    "desc": "SEO Strategist: cenário 06 risco=medium status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-seo-strategist",
-    "capabilities": [
-      "taste_gate",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 6,
-      "blocked": false
+    "id": "g7-seo-06",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-5-0",
+          "cluster": "cluster-a",
+          "volume": 130,
+          "difficulty": 30,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-5-1",
+          "cluster": "cluster-a",
+          "volume": 180,
+          "difficulty": 38,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-5-2",
+          "cluster": "cluster-a",
+          "volume": 230,
+          "difficulty": 46,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-5-3",
+          "cluster": "cluster-b",
+          "volume": 280,
+          "difficulty": 54,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-5-4",
+          "cluster": "cluster-b",
+          "volume": 330,
+          "difficulty": 62,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-5-5",
+          "cluster": "cluster-b",
+          "volume": 380,
+          "difficulty": 70,
+          "intent": "navigational",
+          "vertical_assumed": false
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 0,
+        "core_web_vitals_fail": 1
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g7-seo-strategist",
-      "capabilities_any": [
-        "taste_gate"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-5-3",
+      "audit_passed": false,
+      "non_indexed_pages": 0,
+      "core_web_vitals_fail": 1,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-07",
-    "desc": "SEO Strategist: cenário 07 risco=high status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 7,
-      "blocked": false
+    "id": "g7-seo-07",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-6-0",
+          "cluster": "cluster-a",
+          "volume": 140,
+          "difficulty": 31,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-6-1",
+          "cluster": "cluster-a",
+          "volume": 190,
+          "difficulty": 39,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-6-2",
+          "cluster": "cluster-a",
+          "volume": 240,
+          "difficulty": 47,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-6-3",
+          "cluster": "cluster-b",
+          "volume": 290,
+          "difficulty": 55,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-6-4",
+          "cluster": "cluster-b",
+          "volume": 340,
+          "difficulty": 63,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-6-5",
+          "cluster": "cluster-b",
+          "volume": 390,
+          "difficulty": 71,
+          "intent": "navigational",
+          "vertical_assumed": true
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 0,
+        "core_web_vitals_fail": 0
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-6-3",
+      "audit_passed": true,
+      "non_indexed_pages": 0,
+      "core_web_vitals_fail": 0,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-08",
-    "desc": "SEO Strategist: cenário 08 risco=critical status=blocked",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "critical",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g7-seo-strategist",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 8,
-      "blocked": true
+    "id": "g7-seo-08",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-7-0",
+          "cluster": "cluster-a",
+          "volume": 150,
+          "difficulty": 32,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-7-1",
+          "cluster": "cluster-a",
+          "volume": 200,
+          "difficulty": 40,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-7-2",
+          "cluster": "cluster-a",
+          "volume": 250,
+          "difficulty": 48,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-7-3",
+          "cluster": "cluster-b",
+          "volume": 300,
+          "difficulty": 56,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-7-4",
+          "cluster": "cluster-b",
+          "volume": 350,
+          "difficulty": 64,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-7-5",
+          "cluster": "cluster-b",
+          "volume": 400,
+          "difficulty": 72,
+          "intent": "navigational",
+          "vertical_assumed": false
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 0,
+        "core_web_vitals_fail": 0
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "blocked",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g7-seo-strategist",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-7-3",
+      "audit_passed": true,
+      "non_indexed_pages": 0,
+      "core_web_vitals_fail": 0,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-09",
-    "desc": "SEO Strategist: cenário 09 risco=low status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g7-seo-strategist",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 9,
-      "blocked": false
+    "id": "g7-seo-09",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-8-0",
+          "cluster": "cluster-a",
+          "volume": 160,
+          "difficulty": 33,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-8-1",
+          "cluster": "cluster-a",
+          "volume": 210,
+          "difficulty": 41,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-8-2",
+          "cluster": "cluster-a",
+          "volume": 260,
+          "difficulty": 49,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-8-3",
+          "cluster": "cluster-b",
+          "volume": 310,
+          "difficulty": 57,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-8-4",
+          "cluster": "cluster-b",
+          "volume": 360,
+          "difficulty": 65,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-8-5",
+          "cluster": "cluster-b",
+          "volume": 410,
+          "difficulty": 73,
+          "intent": "navigational",
+          "vertical_assumed": true
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 2,
+        "core_web_vitals_fail": 0
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g7-seo-strategist",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-8-3",
+      "audit_passed": false,
+      "non_indexed_pages": 2,
+      "core_web_vitals_fail": 0,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-10",
-    "desc": "SEO Strategist: cenário 10 risco=medium status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g7-seo-strategist",
-    "capabilities": [
-      "config_driven",
-      "campaign_iteration"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 10,
-      "blocked": false
+    "id": "g7-seo-10",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-9-0",
+          "cluster": "cluster-a",
+          "volume": 170,
+          "difficulty": 34,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-9-1",
+          "cluster": "cluster-a",
+          "volume": 220,
+          "difficulty": 42,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-9-2",
+          "cluster": "cluster-a",
+          "volume": 270,
+          "difficulty": 50,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-9-3",
+          "cluster": "cluster-b",
+          "volume": 320,
+          "difficulty": 58,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-9-4",
+          "cluster": "cluster-b",
+          "volume": 370,
+          "difficulty": 66,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-9-5",
+          "cluster": "cluster-b",
+          "volume": 420,
+          "difficulty": 74,
+          "intent": "navigational",
+          "vertical_assumed": false
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 0,
+        "core_web_vitals_fail": 0
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g7-seo-strategist",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-9-3",
+      "audit_passed": true,
+      "non_indexed_pages": 0,
+      "core_web_vitals_fail": 0,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-11",
-    "desc": "SEO Strategist: cenário 11 risco=high status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-seo-strategist",
-    "capabilities": [
-      "campaign_iteration",
-      "taste_gate"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 11,
-      "blocked": false
+    "id": "g7-seo-11",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-10-0",
+          "cluster": "cluster-a",
+          "volume": 180,
+          "difficulty": 30,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-10-1",
+          "cluster": "cluster-a",
+          "volume": 230,
+          "difficulty": 38,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-10-2",
+          "cluster": "cluster-a",
+          "volume": 280,
+          "difficulty": 46,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-10-3",
+          "cluster": "cluster-b",
+          "volume": 330,
+          "difficulty": 54,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-10-4",
+          "cluster": "cluster-b",
+          "volume": 380,
+          "difficulty": 62,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-10-5",
+          "cluster": "cluster-b",
+          "volume": 430,
+          "difficulty": 70,
+          "intent": "navigational",
+          "vertical_assumed": true
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 0,
+        "core_web_vitals_fail": 1
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g7-seo-strategist",
-      "capabilities_any": [
-        "campaign_iteration"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-10-3",
+      "audit_passed": false,
+      "non_indexed_pages": 0,
+      "core_web_vitals_fail": 1,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-12",
-    "desc": "SEO Strategist: cenário 12 risco=critical status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-seo-strategist",
-    "capabilities": [
-      "taste_gate",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 12,
-      "blocked": false
+    "id": "g7-seo-12",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-11-0",
+          "cluster": "cluster-a",
+          "volume": 190,
+          "difficulty": 31,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-11-1",
+          "cluster": "cluster-a",
+          "volume": 240,
+          "difficulty": 39,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-11-2",
+          "cluster": "cluster-a",
+          "volume": 290,
+          "difficulty": 47,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-11-3",
+          "cluster": "cluster-b",
+          "volume": 340,
+          "difficulty": 55,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-11-4",
+          "cluster": "cluster-b",
+          "volume": 390,
+          "difficulty": 63,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-11-5",
+          "cluster": "cluster-b",
+          "volume": 440,
+          "difficulty": 71,
+          "intent": "navigational",
+          "vertical_assumed": false
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 0,
+        "core_web_vitals_fail": 0
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g7-seo-strategist",
-      "capabilities_any": [
-        "taste_gate"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-11-3",
+      "audit_passed": true,
+      "non_indexed_pages": 0,
+      "core_web_vitals_fail": 0,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-13",
-    "desc": "SEO Strategist: cenário 13 risco=low status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 13,
-      "blocked": false
+    "id": "g7-seo-13",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-12-0",
+          "cluster": "cluster-a",
+          "volume": 200,
+          "difficulty": 32,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-12-1",
+          "cluster": "cluster-a",
+          "volume": 250,
+          "difficulty": 40,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-12-2",
+          "cluster": "cluster-a",
+          "volume": 300,
+          "difficulty": 48,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-12-3",
+          "cluster": "cluster-b",
+          "volume": 350,
+          "difficulty": 56,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-12-4",
+          "cluster": "cluster-b",
+          "volume": 400,
+          "difficulty": 64,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-12-5",
+          "cluster": "cluster-b",
+          "volume": 450,
+          "difficulty": 72,
+          "intent": "navigational",
+          "vertical_assumed": true
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 2,
+        "core_web_vitals_fail": 0
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-12-3",
+      "audit_passed": false,
+      "non_indexed_pages": 2,
+      "core_web_vitals_fail": 0,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-14",
-    "desc": "SEO Strategist: cenário 14 risco=medium status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g7-seo-strategist",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 14,
-      "blocked": false
+    "id": "g7-seo-14",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-13-0",
+          "cluster": "cluster-a",
+          "volume": 210,
+          "difficulty": 33,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-13-1",
+          "cluster": "cluster-a",
+          "volume": 260,
+          "difficulty": 41,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-13-2",
+          "cluster": "cluster-a",
+          "volume": 310,
+          "difficulty": 49,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-13-3",
+          "cluster": "cluster-b",
+          "volume": 360,
+          "difficulty": 57,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-13-4",
+          "cluster": "cluster-b",
+          "volume": 410,
+          "difficulty": 65,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-13-5",
+          "cluster": "cluster-b",
+          "volume": 460,
+          "difficulty": 73,
+          "intent": "navigational",
+          "vertical_assumed": false
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 0,
+        "core_web_vitals_fail": 0
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g7-seo-strategist",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-13-3",
+      "audit_passed": true,
+      "non_indexed_pages": 0,
+      "core_web_vitals_fail": 0,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-15",
-    "desc": "SEO Strategist: cenário 15 risco=high status=blocked",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "high",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g7-seo-strategist",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 15,
-      "blocked": true
+    "id": "g7-seo-15",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-14-0",
+          "cluster": "cluster-a",
+          "volume": 220,
+          "difficulty": 34,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-14-1",
+          "cluster": "cluster-a",
+          "volume": 270,
+          "difficulty": 42,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-14-2",
+          "cluster": "cluster-a",
+          "volume": 320,
+          "difficulty": 50,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-14-3",
+          "cluster": "cluster-b",
+          "volume": 370,
+          "difficulty": 58,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-14-4",
+          "cluster": "cluster-b",
+          "volume": 420,
+          "difficulty": 66,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-14-5",
+          "cluster": "cluster-b",
+          "volume": 470,
+          "difficulty": 74,
+          "intent": "navigational",
+          "vertical_assumed": true
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 0,
+        "core_web_vitals_fail": 0
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "blocked",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g7-seo-strategist",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-14-1",
+      "audit_passed": true,
+      "non_indexed_pages": 0,
+      "core_web_vitals_fail": 0,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-16",
-    "desc": "SEO Strategist: cenário 16 risco=critical status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-seo-strategist",
-    "capabilities": [
-      "config_driven",
-      "campaign_iteration"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 16,
-      "blocked": false
+    "id": "g7-seo-16",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-15-0",
+          "cluster": "cluster-a",
+          "volume": 230,
+          "difficulty": 30,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-15-1",
+          "cluster": "cluster-a",
+          "volume": 280,
+          "difficulty": 38,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-15-2",
+          "cluster": "cluster-a",
+          "volume": 330,
+          "difficulty": 46,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-15-3",
+          "cluster": "cluster-b",
+          "volume": 380,
+          "difficulty": 54,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-15-4",
+          "cluster": "cluster-b",
+          "volume": 430,
+          "difficulty": 62,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-15-5",
+          "cluster": "cluster-b",
+          "volume": 480,
+          "difficulty": 70,
+          "intent": "navigational",
+          "vertical_assumed": false
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 0,
+        "core_web_vitals_fail": 1
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g7-seo-strategist",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-15-3",
+      "audit_passed": false,
+      "non_indexed_pages": 0,
+      "core_web_vitals_fail": 1,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-17",
-    "desc": "SEO Strategist: cenário 17 risco=low status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g7-seo-strategist",
-    "capabilities": [
-      "campaign_iteration",
-      "taste_gate"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 17,
-      "blocked": false
+    "id": "g7-seo-17",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-16-0",
+          "cluster": "cluster-a",
+          "volume": 240,
+          "difficulty": 31,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-16-1",
+          "cluster": "cluster-a",
+          "volume": 290,
+          "difficulty": 39,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-16-2",
+          "cluster": "cluster-a",
+          "volume": 340,
+          "difficulty": 47,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-16-3",
+          "cluster": "cluster-b",
+          "volume": 390,
+          "difficulty": 55,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-16-4",
+          "cluster": "cluster-b",
+          "volume": 440,
+          "difficulty": 63,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-16-5",
+          "cluster": "cluster-b",
+          "volume": 490,
+          "difficulty": 71,
+          "intent": "navigational",
+          "vertical_assumed": true
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 2,
+        "core_web_vitals_fail": 0
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g7-seo-strategist",
-      "capabilities_any": [
-        "campaign_iteration"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-16-1",
+      "audit_passed": false,
+      "non_indexed_pages": 2,
+      "core_web_vitals_fail": 0,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-18",
-    "desc": "SEO Strategist: cenário 18 risco=medium status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-seo-strategist",
-    "capabilities": [
-      "taste_gate",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 18,
-      "blocked": false
+    "id": "g7-seo-18",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-17-0",
+          "cluster": "cluster-a",
+          "volume": 250,
+          "difficulty": 32,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-17-1",
+          "cluster": "cluster-a",
+          "volume": 300,
+          "difficulty": 40,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-17-2",
+          "cluster": "cluster-a",
+          "volume": 350,
+          "difficulty": 48,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-17-3",
+          "cluster": "cluster-b",
+          "volume": 400,
+          "difficulty": 56,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-17-4",
+          "cluster": "cluster-b",
+          "volume": 450,
+          "difficulty": 64,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-17-5",
+          "cluster": "cluster-b",
+          "volume": 500,
+          "difficulty": 72,
+          "intent": "navigational",
+          "vertical_assumed": false
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 0,
+        "core_web_vitals_fail": 0
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g7-seo-strategist",
-      "capabilities_any": [
-        "taste_gate"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-17-1",
+      "audit_passed": true,
+      "non_indexed_pages": 0,
+      "core_web_vitals_fail": 0,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-19",
-    "desc": "SEO Strategist: cenário 19 risco=high status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 19,
-      "blocked": false
+    "id": "g7-seo-19",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-18-0",
+          "cluster": "cluster-a",
+          "volume": 260,
+          "difficulty": 33,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-18-1",
+          "cluster": "cluster-a",
+          "volume": 310,
+          "difficulty": 41,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-18-2",
+          "cluster": "cluster-a",
+          "volume": 360,
+          "difficulty": 49,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-18-3",
+          "cluster": "cluster-b",
+          "volume": 410,
+          "difficulty": 57,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-18-4",
+          "cluster": "cluster-b",
+          "volume": 460,
+          "difficulty": 65,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-18-5",
+          "cluster": "cluster-b",
+          "volume": 510,
+          "difficulty": 73,
+          "intent": "navigational",
+          "vertical_assumed": true
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 0,
+        "core_web_vitals_fail": 0
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-18-1",
+      "audit_passed": true,
+      "non_indexed_pages": 0,
+      "core_web_vitals_fail": 0,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-20",
-    "desc": "SEO Strategist: cenário 20 risco=critical status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-seo-strategist",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 20,
-      "blocked": false
+    "id": "g7-seo-20",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-19-0",
+          "cluster": "cluster-a",
+          "volume": 270,
+          "difficulty": 34,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-19-1",
+          "cluster": "cluster-a",
+          "volume": 320,
+          "difficulty": 42,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-19-2",
+          "cluster": "cluster-a",
+          "volume": 370,
+          "difficulty": 50,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-19-3",
+          "cluster": "cluster-b",
+          "volume": 420,
+          "difficulty": 58,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-19-4",
+          "cluster": "cluster-b",
+          "volume": 470,
+          "difficulty": 66,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-19-5",
+          "cluster": "cluster-b",
+          "volume": 520,
+          "difficulty": 74,
+          "intent": "navigational",
+          "vertical_assumed": false
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 0,
+        "core_web_vitals_fail": 0
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g7-seo-strategist",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-19-1",
+      "audit_passed": true,
+      "non_indexed_pages": 0,
+      "core_web_vitals_fail": 0,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-21",
-    "desc": "SEO Strategist: cenário 21 risco=low status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g7-seo-strategist",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 21,
-      "blocked": false
+    "id": "g7-seo-21",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-20-0",
+          "cluster": "cluster-a",
+          "volume": 280,
+          "difficulty": 30,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-20-1",
+          "cluster": "cluster-a",
+          "volume": 330,
+          "difficulty": 38,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-20-2",
+          "cluster": "cluster-a",
+          "volume": 380,
+          "difficulty": 46,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-20-3",
+          "cluster": "cluster-b",
+          "volume": 430,
+          "difficulty": 54,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-20-4",
+          "cluster": "cluster-b",
+          "volume": 480,
+          "difficulty": 62,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-20-5",
+          "cluster": "cluster-b",
+          "volume": 530,
+          "difficulty": 70,
+          "intent": "navigational",
+          "vertical_assumed": true
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 2,
+        "core_web_vitals_fail": 1
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g7-seo-strategist",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-20-1",
+      "audit_passed": false,
+      "non_indexed_pages": 2,
+      "core_web_vitals_fail": 1,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-22",
-    "desc": "SEO Strategist: cenário 22 risco=medium status=blocked",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g7-seo-strategist",
-    "capabilities": [
-      "config_driven",
-      "campaign_iteration"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 22,
-      "blocked": true
+    "id": "g7-seo-22",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-21-0",
+          "cluster": "cluster-a",
+          "volume": 290,
+          "difficulty": 31,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-21-1",
+          "cluster": "cluster-a",
+          "volume": 340,
+          "difficulty": 39,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-21-2",
+          "cluster": "cluster-a",
+          "volume": 390,
+          "difficulty": 47,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-21-3",
+          "cluster": "cluster-b",
+          "volume": 440,
+          "difficulty": 55,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-21-4",
+          "cluster": "cluster-b",
+          "volume": 490,
+          "difficulty": 63,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-21-5",
+          "cluster": "cluster-b",
+          "volume": 540,
+          "difficulty": 71,
+          "intent": "navigational",
+          "vertical_assumed": false
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 0,
+        "core_web_vitals_fail": 0
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g7-seo-strategist",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-21-1",
+      "audit_passed": true,
+      "non_indexed_pages": 0,
+      "core_web_vitals_fail": 0,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-23",
-    "desc": "SEO Strategist: cenário 23 risco=high status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-seo-strategist",
-    "capabilities": [
-      "campaign_iteration",
-      "taste_gate"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 23,
-      "blocked": false
+    "id": "g7-seo-23",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-22-0",
+          "cluster": "cluster-a",
+          "volume": 300,
+          "difficulty": 32,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-22-1",
+          "cluster": "cluster-a",
+          "volume": 350,
+          "difficulty": 40,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-22-2",
+          "cluster": "cluster-a",
+          "volume": 400,
+          "difficulty": 48,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-22-3",
+          "cluster": "cluster-b",
+          "volume": 450,
+          "difficulty": 56,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-22-4",
+          "cluster": "cluster-b",
+          "volume": 500,
+          "difficulty": 64,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-22-5",
+          "cluster": "cluster-b",
+          "volume": 550,
+          "difficulty": 72,
+          "intent": "navigational",
+          "vertical_assumed": true
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 0,
+        "core_web_vitals_fail": 0
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g7-seo-strategist",
-      "capabilities_any": [
-        "campaign_iteration"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-22-1",
+      "audit_passed": true,
+      "non_indexed_pages": 0,
+      "core_web_vitals_fail": 0,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-24",
-    "desc": "SEO Strategist: cenário 24 risco=critical status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-seo-strategist",
-    "capabilities": [
-      "taste_gate",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 24,
-      "blocked": false
+    "id": "g7-seo-24",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-23-0",
+          "cluster": "cluster-a",
+          "volume": 310,
+          "difficulty": 33,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-23-1",
+          "cluster": "cluster-a",
+          "volume": 360,
+          "difficulty": 41,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-23-2",
+          "cluster": "cluster-a",
+          "volume": 410,
+          "difficulty": 49,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-23-3",
+          "cluster": "cluster-b",
+          "volume": 460,
+          "difficulty": 57,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-23-4",
+          "cluster": "cluster-b",
+          "volume": 510,
+          "difficulty": 65,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-23-5",
+          "cluster": "cluster-b",
+          "volume": 560,
+          "difficulty": 73,
+          "intent": "navigational",
+          "vertical_assumed": false
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 0,
+        "core_web_vitals_fail": 0
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g7-seo-strategist",
-      "capabilities_any": [
-        "taste_gate"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-23-1",
+      "audit_passed": true,
+      "non_indexed_pages": 0,
+      "core_web_vitals_fail": 0,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-25",
-    "desc": "SEO Strategist: cenário 25 risco=low status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 25,
-      "blocked": false
+    "id": "g7-seo-25",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-24-0",
+          "cluster": "cluster-a",
+          "volume": 320,
+          "difficulty": 34,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-24-1",
+          "cluster": "cluster-a",
+          "volume": 370,
+          "difficulty": 42,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-24-2",
+          "cluster": "cluster-a",
+          "volume": 420,
+          "difficulty": 50,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-24-3",
+          "cluster": "cluster-b",
+          "volume": 470,
+          "difficulty": 58,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-24-4",
+          "cluster": "cluster-b",
+          "volume": 520,
+          "difficulty": 66,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-24-5",
+          "cluster": "cluster-b",
+          "volume": 570,
+          "difficulty": 74,
+          "intent": "navigational",
+          "vertical_assumed": true
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 2,
+        "core_web_vitals_fail": 0
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-24-1",
+      "audit_passed": false,
+      "non_indexed_pages": 2,
+      "core_web_vitals_fail": 0,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-26",
-    "desc": "SEO Strategist: cenário 26 risco=medium status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g7-seo-strategist",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 26,
-      "blocked": false
+    "id": "g7-seo-26",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-25-0",
+          "cluster": "cluster-a",
+          "volume": 330,
+          "difficulty": 30,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-25-1",
+          "cluster": "cluster-a",
+          "volume": 380,
+          "difficulty": 38,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-25-2",
+          "cluster": "cluster-a",
+          "volume": 430,
+          "difficulty": 46,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-25-3",
+          "cluster": "cluster-b",
+          "volume": 480,
+          "difficulty": 54,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-25-4",
+          "cluster": "cluster-b",
+          "volume": 530,
+          "difficulty": 62,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-25-5",
+          "cluster": "cluster-b",
+          "volume": 580,
+          "difficulty": 70,
+          "intent": "navigational",
+          "vertical_assumed": false
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 0,
+        "core_web_vitals_fail": 1
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g7-seo-strategist",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-25-1",
+      "audit_passed": false,
+      "non_indexed_pages": 0,
+      "core_web_vitals_fail": 1,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-27",
-    "desc": "SEO Strategist: cenário 27 risco=high status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-seo-strategist",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 27,
-      "blocked": false
+    "id": "g7-seo-27",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-26-0",
+          "cluster": "cluster-a",
+          "volume": 340,
+          "difficulty": 31,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-26-1",
+          "cluster": "cluster-a",
+          "volume": 390,
+          "difficulty": 39,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-26-2",
+          "cluster": "cluster-a",
+          "volume": 440,
+          "difficulty": 47,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-26-3",
+          "cluster": "cluster-b",
+          "volume": 490,
+          "difficulty": 55,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-26-4",
+          "cluster": "cluster-b",
+          "volume": 540,
+          "difficulty": 63,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-26-5",
+          "cluster": "cluster-b",
+          "volume": 590,
+          "difficulty": 71,
+          "intent": "navigational",
+          "vertical_assumed": true
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 0,
+        "core_web_vitals_fail": 0
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g7-seo-strategist",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-26-1",
+      "audit_passed": true,
+      "non_indexed_pages": 0,
+      "core_web_vitals_fail": 0,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-28",
-    "desc": "SEO Strategist: cenário 28 risco=critical status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-seo-strategist",
-    "capabilities": [
-      "config_driven",
-      "campaign_iteration"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 28,
-      "blocked": false
+    "id": "g7-seo-28",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-27-0",
+          "cluster": "cluster-a",
+          "volume": 350,
+          "difficulty": 32,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-27-1",
+          "cluster": "cluster-a",
+          "volume": 400,
+          "difficulty": 40,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-27-2",
+          "cluster": "cluster-a",
+          "volume": 450,
+          "difficulty": 48,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-27-3",
+          "cluster": "cluster-b",
+          "volume": 500,
+          "difficulty": 56,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-27-4",
+          "cluster": "cluster-b",
+          "volume": 550,
+          "difficulty": 64,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-27-5",
+          "cluster": "cluster-b",
+          "volume": 600,
+          "difficulty": 72,
+          "intent": "navigational",
+          "vertical_assumed": false
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 0,
+        "core_web_vitals_fail": 0
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g7-seo-strategist",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-27-1",
+      "audit_passed": true,
+      "non_indexed_pages": 0,
+      "core_web_vitals_fail": 0,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-29",
-    "desc": "SEO Strategist: cenário 29 risco=low status=blocked",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "low",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g7-seo-strategist",
-    "capabilities": [
-      "campaign_iteration",
-      "taste_gate"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 29,
-      "blocked": true
+    "id": "g7-seo-29",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-28-0",
+          "cluster": "cluster-a",
+          "volume": 360,
+          "difficulty": 33,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-28-1",
+          "cluster": "cluster-a",
+          "volume": 410,
+          "difficulty": 41,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-28-2",
+          "cluster": "cluster-a",
+          "volume": 460,
+          "difficulty": 49,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-28-3",
+          "cluster": "cluster-b",
+          "volume": 510,
+          "difficulty": 57,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-28-4",
+          "cluster": "cluster-b",
+          "volume": 560,
+          "difficulty": 65,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-28-5",
+          "cluster": "cluster-b",
+          "volume": 610,
+          "difficulty": 73,
+          "intent": "navigational",
+          "vertical_assumed": true
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 2,
+        "core_web_vitals_fail": 0
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "blocked",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g7-seo-strategist",
-      "capabilities_any": [
-        "campaign_iteration"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-28-1",
+      "audit_passed": false,
+      "non_indexed_pages": 2,
+      "core_web_vitals_fail": 0,
+      "status": "briefs_ready"
     }
   },
   {
-    "id": "g7-seo-strategist-30",
-    "desc": "SEO Strategist: cenário 30 risco=medium status=ready",
-    "artifact_type": "seo-strategist.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g7-seo-strategist",
-    "capabilities": [
-      "taste_gate",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 30,
-      "blocked": false
+    "id": "g7-seo-30",
+    "desc": "prioriza keyword map por volume, dificuldade, intenção e auditoria técnica",
+    "tenant_id": "t-eval-g07",
+    "seo": {
+      "keywords": [
+        {
+          "term": "termo-29-0",
+          "cluster": "cluster-a",
+          "volume": 370,
+          "difficulty": 34,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-29-1",
+          "cluster": "cluster-a",
+          "volume": 420,
+          "difficulty": 42,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-29-2",
+          "cluster": "cluster-a",
+          "volume": 470,
+          "difficulty": 50,
+          "intent": "navigational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-29-3",
+          "cluster": "cluster-b",
+          "volume": 520,
+          "difficulty": 58,
+          "intent": "informational",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-29-4",
+          "cluster": "cluster-b",
+          "volume": 570,
+          "difficulty": 66,
+          "intent": "commercial",
+          "vertical_assumed": false
+        },
+        {
+          "term": "termo-29-5",
+          "cluster": "cluster-b",
+          "volume": 620,
+          "difficulty": 74,
+          "intent": "navigational",
+          "vertical_assumed": false
+        }
+      ],
+      "max_difficulty": 60,
+      "min_volume": 100,
+      "allowed_intents": [
+        "commercial",
+        "informational",
+        "transactional"
+      ],
+      "brief_limit": 4,
+      "technical": {
+        "non_indexed_pages": 0,
+        "core_web_vitals_fail": 0
+      }
     },
     "expected": {
-      "agent_id": "g7-seo-strategist",
-      "handler_kind": "spec_driven",
-      "artifact_type": "seo-strategist.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g7-seo-strategist",
-      "capabilities_any": [
-        "taste_gate"
-      ]
+      "by": "g7-seo-strategist",
+      "keyword_count": 6,
+      "cluster_count": 2,
+      "opportunity_count": 3,
+      "briefs_count": 3,
+      "top_keyword": "termo-29-0",
+      "audit_passed": true,
+      "non_indexed_pages": 0,
+      "core_web_vitals_fail": 0,
+      "status": "briefs_ready"
     }
   }
 ]

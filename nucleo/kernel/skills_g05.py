@@ -183,3 +183,47 @@ def secret_scan(state, *, llm, store, spec):
         "delivered_event": delivered_event,
     }, f"Voce e {spec['id']}: {len(candidates)} candidatos, {finding_count} segredos "
        f"({high_confidence} alta confianca); blocked={blocked}.", llm)
+
+# ---------------------------------------------------------------------------
+# Burn-down Track A — g5-access-auditor: auditoria determinística de IAM.
+# ---------------------------------------------------------------------------
+@register("access_review")
+def access_review(state, *, llm, store, spec):
+    """g5-access-auditor — detecta órfãos, over-privilege, credenciais ociosas e SoD."""
+    a = state["task"].get("access_review", {}) or {}
+    identities = a.get("identities", []) or []
+    idle_days = a.get("idle_days", 90) or 90
+    findings = []
+    revoke_actions = 0
+    recertify_actions = 0
+    for ident in identities:
+        iid = ident.get("id")
+        perms = set(ident.get("permissions", []) or [])
+        required = set(ident.get("required_permissions", []) or [])
+        extra = sorted(perms - required)
+        owner_active = bool(ident.get("owner_active", True))
+        last_used = ident.get("last_used_days", 0) or 0
+        recertified = bool(ident.get("recertified", False))
+        sod = ident.get("sod_conflicts", []) or []
+        if not owner_active:
+            findings.append({"id": iid, "type": "orphan", "severity": "alta"}); revoke_actions += 1
+        if extra:
+            findings.append({"id": iid, "type": "over_privilege", "severity": "media", "extra_count": len(extra)}); revoke_actions += 1
+        if last_used >= idle_days:
+            findings.append({"id": iid, "type": "stale_credential", "severity": "media"}); revoke_actions += 1
+        if sod:
+            findings.append({"id": iid, "type": "sod_violation", "severity": "alta", "conflict_count": len(sod)}); recertify_actions += 1
+        if not recertified:
+            recertify_actions += 1
+    orphan_count = sum(1 for f in findings if f["type"] == "orphan")
+    over_privilege_count = sum(1 for f in findings if f["type"] == "over_privilege")
+    sod_violation_count = sum(1 for f in findings if f["type"] == "sod_violation")
+    least_privilege_pct = round((len(identities) - over_privilege_count) / len(identities) * 100, 1) if identities else 100.0
+    status = "remediar" if findings else "ok"
+    return _out(spec, state, {
+        "identity_count": len(identities), "finding_count": len(findings),
+        "orphan_count": orphan_count, "over_privilege_count": over_privilege_count,
+        "sod_violation_count": sod_violation_count, "least_privilege_pct": least_privilege_pct,
+        "revoke_actions": revoke_actions, "recertify_actions": recertify_actions,
+        "status": status,
+    }, f"Voce e {spec['id']}: {len(findings)} achados IAM, status {status}.", llm)

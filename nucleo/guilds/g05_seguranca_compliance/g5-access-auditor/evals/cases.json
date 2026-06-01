@@ -1,902 +1,2475 @@
 [
   {
-    "id": "g5-access-auditor-01",
-    "desc": "Access Auditor caso 1: risco low, ready",
-    "request": "Executar Access Auditor para cenário sintético 1",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "build",
-      "review"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 1
+    "id": "g5-access-01",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-0-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": false,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-0-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 120,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-0-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": false,
+          "sod_conflicts": [
+            "deploy+approve"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "build"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 3,
+      "finding_count": 5,
+      "orphan_count": 1,
+      "over_privilege_count": 2,
+      "sod_violation_count": 1,
+      "least_privilege_pct": 33.3,
+      "revoke_actions": 4,
+      "recertify_actions": 2,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-02",
-    "desc": "Access Auditor caso 2: risco medium, ready",
-    "request": "Executar Access Auditor para cenário sintético 2",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "review",
-      "route"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 2
+    "id": "g5-access-02",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-1-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-1-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 11,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-1-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-1-3",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 13,
+          "recertified": true,
+          "sod_conflicts": []
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "review"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 4,
+      "finding_count": 2,
+      "orphan_count": 0,
+      "over_privilege_count": 2,
+      "sod_violation_count": 0,
+      "least_privilege_pct": 50.0,
+      "revoke_actions": 2,
+      "recertify_actions": 0,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-03",
-    "desc": "Access Auditor caso 3: risco high, ready",
-    "request": "Executar Access Auditor para cenário sintético 3",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "route",
-      "verify"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 3
+    "id": "g5-access-03",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-2-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-2-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 11,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-2-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-2-3",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 13,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-2-4",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 14,
+          "recertified": true,
+          "sod_conflicts": []
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "route"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 5,
+      "finding_count": 3,
+      "orphan_count": 0,
+      "over_privilege_count": 3,
+      "sod_violation_count": 0,
+      "least_privilege_pct": 40.0,
+      "revoke_actions": 3,
+      "recertify_actions": 0,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-04",
-    "desc": "Access Auditor caso 4: risco critical, ready",
-    "request": "Executar Access Auditor para cenário sintético 4",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "verify",
-      "remediate"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 4
+    "id": "g5-access-04",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-3-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": false,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-3-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 11,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-3-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-3-3",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 13,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-3-4",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 14,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-3-5",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 15,
+          "recertified": true,
+          "sod_conflicts": []
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "verify"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 6,
+      "finding_count": 4,
+      "orphan_count": 1,
+      "over_privilege_count": 3,
+      "sod_violation_count": 0,
+      "least_privilege_pct": 50.0,
+      "revoke_actions": 4,
+      "recertify_actions": 0,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-05",
-    "desc": "Access Auditor caso 5: risco low, ready",
-    "request": "Executar Access Auditor para cenário sintético 5",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "remediate",
-      "plan"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 5
+    "id": "g5-access-05",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-4-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-4-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 120,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-4-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": true,
+          "sod_conflicts": []
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "remediate"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 3,
+      "finding_count": 3,
+      "orphan_count": 0,
+      "over_privilege_count": 2,
+      "sod_violation_count": 0,
+      "least_privilege_pct": 33.3,
+      "revoke_actions": 3,
+      "recertify_actions": 0,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-06",
-    "desc": "Access Auditor caso 6: risco medium, ready",
-    "request": "Executar Access Auditor para cenário sintético 6",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "plan",
-      "build"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 6
+    "id": "g5-access-06",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-5-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-5-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 11,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-5-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": false,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-5-3",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 13,
+          "recertified": true,
+          "sod_conflicts": []
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "plan"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 4,
+      "finding_count": 2,
+      "orphan_count": 0,
+      "over_privilege_count": 2,
+      "sod_violation_count": 0,
+      "least_privilege_pct": 50.0,
+      "revoke_actions": 2,
+      "recertify_actions": 1,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-07",
-    "desc": "Access Auditor caso 7: risco high, ready",
-    "request": "Executar Access Auditor para cenário sintético 7",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "build",
-      "review"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 7
+    "id": "g5-access-07",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-6-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": false,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-6-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 11,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-6-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-6-3",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 13,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-6-4",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 14,
+          "recertified": true,
+          "sod_conflicts": [
+            "deploy+approve"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "build"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 5,
+      "finding_count": 5,
+      "orphan_count": 1,
+      "over_privilege_count": 3,
+      "sod_violation_count": 1,
+      "least_privilege_pct": 40.0,
+      "revoke_actions": 4,
+      "recertify_actions": 1,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-08",
-    "desc": "Access Auditor caso 8: risco critical, ready",
-    "request": "Executar Access Auditor para cenário sintético 8",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "review",
-      "route"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 8
+    "id": "g5-access-08",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-7-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-7-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 11,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-7-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-7-3",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 13,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-7-4",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 14,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-7-5",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 15,
+          "recertified": true,
+          "sod_conflicts": []
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "review"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 6,
+      "finding_count": 3,
+      "orphan_count": 0,
+      "over_privilege_count": 3,
+      "sod_violation_count": 0,
+      "least_privilege_pct": 50.0,
+      "revoke_actions": 3,
+      "recertify_actions": 0,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-09",
-    "desc": "Access Auditor caso 9: risco low, ready",
-    "request": "Executar Access Auditor para cenário sintético 9",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "route",
-      "verify"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 9
+    "id": "g5-access-09",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-8-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-8-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 120,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-8-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": true,
+          "sod_conflicts": []
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "route"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 3,
+      "finding_count": 3,
+      "orphan_count": 0,
+      "over_privilege_count": 2,
+      "sod_violation_count": 0,
+      "least_privilege_pct": 33.3,
+      "revoke_actions": 3,
+      "recertify_actions": 0,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-10",
-    "desc": "Access Auditor caso 10: risco medium, bloqueio",
-    "request": "Executar Access Auditor para cenário sintético 10",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "verify",
-      "remediate"
-    ],
-    "signals": {
-      "blocked": true,
-      "case_index": 10
+    "id": "g5-access-10",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-9-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": false,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-9-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 11,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-9-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-9-3",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 13,
+          "recertified": true,
+          "sod_conflicts": []
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "verify"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 4,
+      "finding_count": 3,
+      "orphan_count": 1,
+      "over_privilege_count": 2,
+      "sod_violation_count": 0,
+      "least_privilege_pct": 50.0,
+      "revoke_actions": 3,
+      "recertify_actions": 0,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-11",
-    "desc": "Access Auditor caso 11: risco high, ready",
-    "request": "Executar Access Auditor para cenário sintético 11",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "remediate",
-      "plan"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 11
+    "id": "g5-access-11",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-10-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-10-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 11,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-10-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": false,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-10-3",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 13,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-10-4",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 14,
+          "recertified": true,
+          "sod_conflicts": []
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "remediate"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 5,
+      "finding_count": 3,
+      "orphan_count": 0,
+      "over_privilege_count": 3,
+      "sod_violation_count": 0,
+      "least_privilege_pct": 40.0,
+      "revoke_actions": 3,
+      "recertify_actions": 1,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-12",
-    "desc": "Access Auditor caso 12: risco critical, ready",
-    "request": "Executar Access Auditor para cenário sintético 12",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "plan",
-      "build"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 12
+    "id": "g5-access-12",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-11-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-11-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 11,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-11-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-11-3",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 13,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-11-4",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 14,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-11-5",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 15,
+          "recertified": true,
+          "sod_conflicts": []
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "plan"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 6,
+      "finding_count": 3,
+      "orphan_count": 0,
+      "over_privilege_count": 3,
+      "sod_violation_count": 0,
+      "least_privilege_pct": 50.0,
+      "revoke_actions": 3,
+      "recertify_actions": 0,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-13",
-    "desc": "Access Auditor caso 13: risco low, ready",
-    "request": "Executar Access Auditor para cenário sintético 13",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "build",
-      "review"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 13
+    "id": "g5-access-13",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-12-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": false,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-12-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 120,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-12-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": true,
+          "sod_conflicts": [
+            "deploy+approve"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "build"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 3,
+      "finding_count": 5,
+      "orphan_count": 1,
+      "over_privilege_count": 2,
+      "sod_violation_count": 1,
+      "least_privilege_pct": 33.3,
+      "revoke_actions": 4,
+      "recertify_actions": 1,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-14",
-    "desc": "Access Auditor caso 14: risco medium, ready",
-    "request": "Executar Access Auditor para cenário sintético 14",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "review",
-      "route"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 14
+    "id": "g5-access-14",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-13-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-13-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 11,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-13-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-13-3",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 13,
+          "recertified": true,
+          "sod_conflicts": []
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "review"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 4,
+      "finding_count": 2,
+      "orphan_count": 0,
+      "over_privilege_count": 2,
+      "sod_violation_count": 0,
+      "least_privilege_pct": 50.0,
+      "revoke_actions": 2,
+      "recertify_actions": 0,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-15",
-    "desc": "Access Auditor caso 15: risco high, ready",
-    "request": "Executar Access Auditor para cenário sintético 15",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "route",
-      "verify"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 15
+    "id": "g5-access-15",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-14-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-14-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 11,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-14-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-14-3",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 13,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-14-4",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 14,
+          "recertified": true,
+          "sod_conflicts": []
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "route"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 5,
+      "finding_count": 3,
+      "orphan_count": 0,
+      "over_privilege_count": 3,
+      "sod_violation_count": 0,
+      "least_privilege_pct": 40.0,
+      "revoke_actions": 3,
+      "recertify_actions": 0,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-16",
-    "desc": "Access Auditor caso 16: risco critical, ready",
-    "request": "Executar Access Auditor para cenário sintético 16",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "verify",
-      "remediate"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 16
+    "id": "g5-access-16",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-15-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": false,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-15-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 11,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-15-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": false,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-15-3",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 13,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-15-4",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 14,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-15-5",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 15,
+          "recertified": true,
+          "sod_conflicts": []
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "verify"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 6,
+      "finding_count": 4,
+      "orphan_count": 1,
+      "over_privilege_count": 3,
+      "sod_violation_count": 0,
+      "least_privilege_pct": 50.0,
+      "revoke_actions": 4,
+      "recertify_actions": 1,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-17",
-    "desc": "Access Auditor caso 17: risco low, ready",
-    "request": "Executar Access Auditor para cenário sintético 17",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "remediate",
-      "plan"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 17
+    "id": "g5-access-17",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-16-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-16-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 120,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-16-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": true,
+          "sod_conflicts": []
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "remediate"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 3,
+      "finding_count": 3,
+      "orphan_count": 0,
+      "over_privilege_count": 2,
+      "sod_violation_count": 0,
+      "least_privilege_pct": 33.3,
+      "revoke_actions": 3,
+      "recertify_actions": 0,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-18",
-    "desc": "Access Auditor caso 18: risco medium, ready",
-    "request": "Executar Access Auditor para cenário sintético 18",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "plan",
-      "build"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 18
+    "id": "g5-access-18",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-17-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-17-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 11,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-17-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-17-3",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 13,
+          "recertified": true,
+          "sod_conflicts": []
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "plan"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 4,
+      "finding_count": 2,
+      "orphan_count": 0,
+      "over_privilege_count": 2,
+      "sod_violation_count": 0,
+      "least_privilege_pct": 50.0,
+      "revoke_actions": 2,
+      "recertify_actions": 0,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-19",
-    "desc": "Access Auditor caso 19: risco high, ready",
-    "request": "Executar Access Auditor para cenário sintético 19",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "build",
-      "review"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 19
+    "id": "g5-access-19",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-18-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": false,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-18-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 11,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-18-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-18-3",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 13,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-18-4",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 14,
+          "recertified": true,
+          "sod_conflicts": [
+            "deploy+approve"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "build"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 5,
+      "finding_count": 5,
+      "orphan_count": 1,
+      "over_privilege_count": 3,
+      "sod_violation_count": 1,
+      "least_privilege_pct": 40.0,
+      "revoke_actions": 4,
+      "recertify_actions": 1,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-20",
-    "desc": "Access Auditor caso 20: risco critical, bloqueio",
-    "request": "Executar Access Auditor para cenário sintético 20",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "critical",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "review",
-      "route"
-    ],
-    "signals": {
-      "blocked": true,
-      "case_index": 20
+    "id": "g5-access-20",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-19-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-19-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 11,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-19-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-19-3",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 13,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-19-4",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 14,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-19-5",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 15,
+          "recertified": true,
+          "sod_conflicts": []
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "blocked",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "review"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 6,
+      "finding_count": 3,
+      "orphan_count": 0,
+      "over_privilege_count": 3,
+      "sod_violation_count": 0,
+      "least_privilege_pct": 50.0,
+      "revoke_actions": 3,
+      "recertify_actions": 0,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-21",
-    "desc": "Access Auditor caso 21: risco low, ready",
-    "request": "Executar Access Auditor para cenário sintético 21",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "route",
-      "verify"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 21
+    "id": "g5-access-21",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-20-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-20-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 120,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-20-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": false,
+          "sod_conflicts": []
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "route"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 3,
+      "finding_count": 3,
+      "orphan_count": 0,
+      "over_privilege_count": 2,
+      "sod_violation_count": 0,
+      "least_privilege_pct": 33.3,
+      "revoke_actions": 3,
+      "recertify_actions": 1,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-22",
-    "desc": "Access Auditor caso 22: risco medium, ready",
-    "request": "Executar Access Auditor para cenário sintético 22",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "verify",
-      "remediate"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 22
+    "id": "g5-access-22",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-21-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": false,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-21-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 11,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-21-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-21-3",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 13,
+          "recertified": true,
+          "sod_conflicts": []
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "verify"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 4,
+      "finding_count": 3,
+      "orphan_count": 1,
+      "over_privilege_count": 2,
+      "sod_violation_count": 0,
+      "least_privilege_pct": 50.0,
+      "revoke_actions": 3,
+      "recertify_actions": 0,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-23",
-    "desc": "Access Auditor caso 23: risco high, ready",
-    "request": "Executar Access Auditor para cenário sintético 23",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "remediate",
-      "plan"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 23
+    "id": "g5-access-23",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-22-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-22-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 11,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-22-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-22-3",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 13,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-22-4",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 14,
+          "recertified": true,
+          "sod_conflicts": []
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "remediate"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 5,
+      "finding_count": 3,
+      "orphan_count": 0,
+      "over_privilege_count": 3,
+      "sod_violation_count": 0,
+      "least_privilege_pct": 40.0,
+      "revoke_actions": 3,
+      "recertify_actions": 0,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-24",
-    "desc": "Access Auditor caso 24: risco critical, ready",
-    "request": "Executar Access Auditor para cenário sintético 24",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "plan",
-      "build"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 24
+    "id": "g5-access-24",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-23-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-23-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 11,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-23-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-23-3",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 13,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-23-4",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 14,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-23-5",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 15,
+          "recertified": true,
+          "sod_conflicts": []
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "plan"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 6,
+      "finding_count": 3,
+      "orphan_count": 0,
+      "over_privilege_count": 3,
+      "sod_violation_count": 0,
+      "least_privilege_pct": 50.0,
+      "revoke_actions": 3,
+      "recertify_actions": 0,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-25",
-    "desc": "Access Auditor caso 25: risco low, ready",
-    "request": "Executar Access Auditor para cenário sintético 25",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "build",
-      "review"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 25
+    "id": "g5-access-25",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-24-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": false,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-24-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 120,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-24-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": true,
+          "sod_conflicts": [
+            "deploy+approve"
+          ]
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "build"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 3,
+      "finding_count": 5,
+      "orphan_count": 1,
+      "over_privilege_count": 2,
+      "sod_violation_count": 1,
+      "least_privilege_pct": 33.3,
+      "revoke_actions": 4,
+      "recertify_actions": 1,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-26",
-    "desc": "Access Auditor caso 26: risco medium, ready",
-    "request": "Executar Access Auditor para cenário sintético 26",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "review",
-      "route"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 26
+    "id": "g5-access-26",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-25-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-25-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 11,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-25-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": false,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-25-3",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 13,
+          "recertified": true,
+          "sod_conflicts": []
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "review"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 4,
+      "finding_count": 2,
+      "orphan_count": 0,
+      "over_privilege_count": 2,
+      "sod_violation_count": 0,
+      "least_privilege_pct": 50.0,
+      "revoke_actions": 2,
+      "recertify_actions": 1,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-27",
-    "desc": "Access Auditor caso 27: risco high, ready",
-    "request": "Executar Access Auditor para cenário sintético 27",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "route",
-      "verify"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 27
+    "id": "g5-access-27",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-26-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-26-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 11,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-26-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-26-3",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 13,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-26-4",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 14,
+          "recertified": true,
+          "sod_conflicts": []
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "route"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 5,
+      "finding_count": 3,
+      "orphan_count": 0,
+      "over_privilege_count": 3,
+      "sod_violation_count": 0,
+      "least_privilege_pct": 40.0,
+      "revoke_actions": 3,
+      "recertify_actions": 0,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-28",
-    "desc": "Access Auditor caso 28: risco critical, ready",
-    "request": "Executar Access Auditor para cenário sintético 28",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "verify",
-      "remediate"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 28
+    "id": "g5-access-28",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-27-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": false,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-27-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 11,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-27-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-27-3",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 13,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-27-4",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 14,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-27-5",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 15,
+          "recertified": true,
+          "sod_conflicts": []
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "verify"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 6,
+      "finding_count": 4,
+      "orphan_count": 1,
+      "over_privilege_count": 3,
+      "sod_violation_count": 0,
+      "least_privilege_pct": 50.0,
+      "revoke_actions": 4,
+      "recertify_actions": 0,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-29",
-    "desc": "Access Auditor caso 29: risco low, ready",
-    "request": "Executar Access Auditor para cenário sintético 29",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "remediate",
-      "plan"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 29
+    "id": "g5-access-29",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-28-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-28-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 120,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-28-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": true,
+          "sod_conflicts": []
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "remediate"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 3,
+      "finding_count": 3,
+      "orphan_count": 0,
+      "over_privilege_count": 2,
+      "sod_violation_count": 0,
+      "least_privilege_pct": 33.3,
+      "revoke_actions": 3,
+      "recertify_actions": 0,
+      "status": "remediar"
     }
   },
   {
-    "id": "g5-access-auditor-30",
-    "desc": "Access Auditor caso 30: risco medium, bloqueio",
-    "request": "Executar Access Auditor para cenário sintético 30",
-    "artifact_type": "access_auditor.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g5-access-auditor",
-    "capabilities": [
-      "plan",
-      "build"
-    ],
-    "signals": {
-      "blocked": true,
-      "case_index": 30
+    "id": "g5-access-30",
+    "desc": "revisão IAM detecta órfãos, excesso, ociosidade e SoD",
+    "tenant_id": "t-eval-g05",
+    "access_review": {
+      "idle_days": 90,
+      "identities": [
+        {
+          "id": "id-29-0",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 10,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-29-1",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 11,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-29-2",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 12,
+          "recertified": true,
+          "sod_conflicts": []
+        },
+        {
+          "id": "id-29-3",
+          "permissions": [
+            "read"
+          ],
+          "required_permissions": [
+            "read"
+          ],
+          "owner_active": true,
+          "last_used_days": 13,
+          "recertified": true,
+          "sod_conflicts": []
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g5-access-auditor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "access_auditor.artifact",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g5-access-auditor",
-      "capabilities_any": [
-        "plan"
-      ]
+      "by": "g5-access-auditor",
+      "identity_count": 4,
+      "finding_count": 2,
+      "orphan_count": 0,
+      "over_privilege_count": 2,
+      "sod_violation_count": 0,
+      "least_privilege_pct": 50.0,
+      "revoke_actions": 2,
+      "recertify_actions": 0,
+      "status": "remediar"
     }
   }
 ]

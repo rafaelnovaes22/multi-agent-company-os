@@ -273,3 +273,42 @@ def copywriter_c3(state, *, llm, store, spec):
 @register("lifecycle_crm_c3")
 def lifecycle_crm_c3(state, *, llm, store, spec):
     return _c3_out(spec, state, llm, "lifecycle_crm_c3", "lifecycle-crm.campaign")
+
+# ---------------------------------------------------------------------------
+# Burn-down Track A — g7-seo-strategist: mapa determinístico de oportunidades SEO.
+# ---------------------------------------------------------------------------
+@register("seo_keyword_map")
+def seo_keyword_map(state, *, llm, store, spec):
+    """g7-seo-strategist — prioriza keywords/clusters por volume, intenção e dificuldade."""
+    s = state["task"].get("seo", {}) or {}
+    keywords = s.get("keywords", []) or []
+    max_difficulty = s.get("max_difficulty", 60) or 60
+    min_volume = s.get("min_volume", 100) or 100
+    allowed_intents = set(s.get("allowed_intents", ["informational", "commercial", "transactional"]) or [])
+    opportunities = []
+    cluster_counts = {}
+    technical = s.get("technical", {}) or {}
+    non_indexed = technical.get("non_indexed_pages", 0) or 0
+    cwv_fail = technical.get("core_web_vitals_fail", 0) or 0
+    for kw in keywords:
+        cluster = kw.get("cluster") or "unclustered"
+        cluster_counts[cluster] = cluster_counts.get(cluster, 0) + 1
+        volume = kw.get("volume", 0) or 0
+        difficulty = kw.get("difficulty", 100) or 100
+        intent = kw.get("intent")
+        vertical_assumed = bool(kw.get("vertical_assumed"))
+        score = round(volume * (100 - difficulty) / 100, 1)
+        eligible = volume >= min_volume and difficulty <= max_difficulty and intent in allowed_intents and not vertical_assumed
+        if eligible:
+            opportunities.append({"keyword": kw.get("term"), "cluster": cluster, "opportunity_score": score, "intent": intent})
+    opportunities.sort(key=lambda x: -x["opportunity_score"])
+    briefs_count = min(len(opportunities), s.get("brief_limit", 10) or 10)
+    audit_passed = non_indexed == 0 and cwv_fail == 0
+    status = "briefs_ready" if briefs_count else "sem_oportunidade"
+    return _out(spec, state, {
+        "keyword_count": len(keywords), "cluster_count": len(cluster_counts),
+        "opportunity_count": len(opportunities), "briefs_count": briefs_count,
+        "top_keyword": opportunities[0]["keyword"] if opportunities else None,
+        "audit_passed": audit_passed, "non_indexed_pages": non_indexed,
+        "core_web_vitals_fail": cwv_fail, "status": status,
+    }, f"Voce e {spec['id']}: {len(opportunities)} oportunidades SEO, {briefs_count} briefs.", llm)

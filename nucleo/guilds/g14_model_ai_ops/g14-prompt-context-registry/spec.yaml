@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: spec_driven
+act_handler: prompt_context_registry
 outcome_clause:
   statement: "todo prompt/contexto em produção é versionado, com hash auditável e economia recalculada a cada mudança."
   positive_examples:

@@ -2,7 +2,7 @@
   {
     "id": "fr-01",
     "desc": "login impossivel -> account takeover, bloqueia (score forcado a 80)",
-    "statement": "Pontue o risco deste login impossivel e decida step-up ou bloqueio",
+    "statement": "login impossivel -> account takeover, bloqueia (score forcado a 80)",
     "fraud": {
       "velocity": 0.0,
       "device_risk": 0.0,
@@ -11,19 +11,19 @@
       "impossible_travel": true
     },
     "expected": {
-      "by": "g5-fraud-abuse-detector",
       "risk_score": 80.0,
       "decision": "bloquear",
       "risk_level": "alto",
       "account_takeover": true,
       "case_confirmed": true,
-      "delivered_event": "fraud.case_confirmed"
+      "delivered_event": "fraud.case_confirmed",
+      "by": "g5-fraud-abuse-detector"
     }
   },
   {
     "id": "fr-02",
-    "desc": "anel de multi-conta (coordenacao + velocity altos) -> step-up",
-    "statement": "Anel de multi-conta abusando de freemium -- contenha sem afetar usuarios reais",
+    "desc": "anel de multi-conta (coordenacao+velocity altos) -> step-up",
+    "statement": "anel de multi-conta (coordenacao+velocity altos) -> step-up",
     "fraud": {
       "velocity": 0.8,
       "device_risk": 0.3,
@@ -31,19 +31,19 @@
       "coordination": 0.9
     },
     "expected": {
-      "by": "g5-fraud-abuse-detector",
       "risk_score": 55.0,
       "decision": "step-up",
       "risk_level": "medio",
       "account_takeover": false,
       "case_confirmed": false,
-      "delivered_event": "fraud.event_scored"
+      "delivered_event": "fraud.event_scored",
+      "by": "g5-fraud-abuse-detector"
     }
   },
   {
     "id": "fr-03",
     "desc": "transacao legitima de baixo risco -> permitir",
-    "statement": "Decida o risco desta transacao dentro do SLA e registre a explicacao",
+    "statement": "transacao legitima de baixo risco -> permitir",
     "fraud": {
       "velocity": 0.1,
       "device_risk": 0.1,
@@ -51,13 +51,567 @@
       "coordination": 0.1
     },
     "expected": {
-      "by": "g5-fraud-abuse-detector",
       "risk_score": 10.0,
       "decision": "permitir",
       "risk_level": "baixo",
       "account_takeover": false,
       "case_confirmed": false,
-      "delivered_event": "fraud.event_scored"
+      "delivered_event": "fraud.event_scored",
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-04",
+    "desc": "score exatamente 70 -> bloquear (limiar inferior de alto)",
+    "statement": "score exatamente 70 -> bloquear (limiar inferior de alto)",
+    "fraud": {
+      "velocity": 0.7,
+      "device_risk": 0.7,
+      "behavior_anomaly": 0.7,
+      "coordination": 0.7
+    },
+    "expected": {
+      "risk_score": 70.0,
+      "decision": "bloquear",
+      "risk_level": "alto",
+      "case_confirmed": true,
+      "delivered_event": "fraud.case_confirmed",
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-05",
+    "desc": "score 69 logo abaixo de 70 -> step-up, nao bloqueia",
+    "statement": "score 69 logo abaixo de 70 -> step-up, nao bloqueia",
+    "fraud": {
+      "velocity": 0.69,
+      "device_risk": 0.69,
+      "behavior_anomaly": 0.69,
+      "coordination": 0.69
+    },
+    "expected": {
+      "risk_score": 69.0,
+      "decision": "step-up",
+      "risk_level": "medio",
+      "case_confirmed": false,
+      "delivered_event": "fraud.event_scored",
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-06",
+    "desc": "score exatamente 40 -> step-up (limiar inferior de medio)",
+    "statement": "score exatamente 40 -> step-up (limiar inferior de medio)",
+    "fraud": {
+      "velocity": 0.4,
+      "device_risk": 0.4,
+      "behavior_anomaly": 0.4,
+      "coordination": 0.4
+    },
+    "expected": {
+      "risk_score": 40.0,
+      "decision": "step-up",
+      "risk_level": "medio",
+      "account_takeover": false,
+      "case_confirmed": false,
+      "delivered_event": "fraud.event_scored",
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-07",
+    "desc": "score 39 logo abaixo de 40 -> permitir",
+    "statement": "score 39 logo abaixo de 40 -> permitir",
+    "fraud": {
+      "velocity": 0.39,
+      "device_risk": 0.39,
+      "behavior_anomaly": 0.39,
+      "coordination": 0.39
+    },
+    "expected": {
+      "risk_score": 39.0,
+      "decision": "permitir",
+      "risk_level": "baixo",
+      "case_confirmed": false,
+      "delivered_event": "fraud.event_scored",
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-08",
+    "desc": "todos sinais zero -> permitir, score 0",
+    "statement": "todos sinais zero -> permitir, score 0",
+    "fraud": {
+      "velocity": 0.0,
+      "device_risk": 0.0,
+      "behavior_anomaly": 0.0,
+      "coordination": 0.0
+    },
+    "expected": {
+      "risk_score": 0.0,
+      "decision": "permitir",
+      "risk_level": "baixo",
+      "account_takeover": false,
+      "case_confirmed": false,
+      "delivered_event": "fraud.event_scored",
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-09",
+    "desc": "todos sinais no maximo (sem ATO) -> score 100, bloqueia",
+    "statement": "todos sinais no maximo (sem ATO) -> score 100, bloqueia",
+    "fraud": {
+      "velocity": 1.0,
+      "device_risk": 1.0,
+      "behavior_anomaly": 1.0,
+      "coordination": 1.0
+    },
+    "expected": {
+      "risk_score": 100.0,
+      "decision": "bloquear",
+      "risk_level": "alto",
+      "account_takeover": false,
+      "case_confirmed": true,
+      "delivered_event": "fraud.case_confirmed",
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-10",
+    "desc": "so velocity=1 -> 25 -> permitir (isola peso velocity)",
+    "statement": "so velocity=1 -> 25 -> permitir (isola peso velocity)",
+    "fraud": {
+      "velocity": 1.0,
+      "device_risk": 0.0,
+      "behavior_anomaly": 0.0,
+      "coordination": 0.0
+    },
+    "expected": {
+      "risk_score": 25.0,
+      "decision": "permitir",
+      "risk_level": "baixo",
+      "case_confirmed": false,
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-11",
+    "desc": "so device_risk=1 -> 25 -> permitir (isola peso device)",
+    "statement": "so device_risk=1 -> 25 -> permitir (isola peso device)",
+    "fraud": {
+      "velocity": 0.0,
+      "device_risk": 1.0,
+      "behavior_anomaly": 0.0,
+      "coordination": 0.0
+    },
+    "expected": {
+      "risk_score": 25.0,
+      "decision": "permitir",
+      "risk_level": "baixo",
+      "case_confirmed": false,
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-12",
+    "desc": "so behavior=1 -> 25 -> permitir (isola peso behavior)",
+    "statement": "so behavior=1 -> 25 -> permitir (isola peso behavior)",
+    "fraud": {
+      "velocity": 0.0,
+      "device_risk": 0.0,
+      "behavior_anomaly": 1.0,
+      "coordination": 0.0
+    },
+    "expected": {
+      "risk_score": 25.0,
+      "decision": "permitir",
+      "risk_level": "baixo",
+      "case_confirmed": false,
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-13",
+    "desc": "so coordination=1 -> 25 -> permitir (isola peso coordination)",
+    "statement": "so coordination=1 -> 25 -> permitir (isola peso coordination)",
+    "fraud": {
+      "velocity": 0.0,
+      "device_risk": 0.0,
+      "behavior_anomaly": 0.0,
+      "coordination": 1.0
+    },
+    "expected": {
+      "risk_score": 25.0,
+      "decision": "permitir",
+      "risk_level": "baixo",
+      "case_confirmed": false,
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-14",
+    "desc": "dois sinais a 1.0 -> 50 -> step-up",
+    "statement": "dois sinais a 1.0 -> 50 -> step-up",
+    "fraud": {
+      "velocity": 1.0,
+      "device_risk": 1.0,
+      "behavior_anomaly": 0.0,
+      "coordination": 0.0
+    },
+    "expected": {
+      "risk_score": 50.0,
+      "decision": "step-up",
+      "risk_level": "medio",
+      "case_confirmed": false,
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-15",
+    "desc": "tres sinais a 1.0 -> 75 -> bloquear",
+    "statement": "tres sinais a 1.0 -> 75 -> bloquear",
+    "fraud": {
+      "velocity": 1.0,
+      "device_risk": 1.0,
+      "behavior_anomaly": 1.0,
+      "coordination": 0.0
+    },
+    "expected": {
+      "risk_score": 75.0,
+      "decision": "bloquear",
+      "risk_level": "alto",
+      "case_confirmed": true,
+      "delivered_event": "fraud.case_confirmed",
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-16",
+    "desc": "ATO com sinais baixos -> score elevado a 80, bloqueia",
+    "statement": "ATO com sinais baixos -> score elevado a 80, bloqueia",
+    "fraud": {
+      "velocity": 0.2,
+      "device_risk": 0.0,
+      "behavior_anomaly": 0.0,
+      "coordination": 0.0,
+      "impossible_travel": true
+    },
+    "expected": {
+      "risk_score": 80.0,
+      "decision": "bloquear",
+      "account_takeover": true,
+      "case_confirmed": true,
+      "delivered_event": "fraud.case_confirmed",
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-17",
+    "desc": "ATO com score base ja alto (90) -> mantem 90 (max), bloqueia",
+    "statement": "ATO com score base ja alto (90) -> mantem 90 (max), bloqueia",
+    "fraud": {
+      "velocity": 0.9,
+      "device_risk": 0.9,
+      "behavior_anomaly": 0.9,
+      "coordination": 0.9,
+      "impossible_travel": true
+    },
+    "expected": {
+      "risk_score": 90.0,
+      "decision": "bloquear",
+      "account_takeover": true,
+      "case_confirmed": true,
+      "delivered_event": "fraud.case_confirmed",
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-18",
+    "desc": "ATO com score base medio (60) -> elevado a 80 pelo ATO",
+    "statement": "ATO com score base medio (60) -> elevado a 80 pelo ATO",
+    "fraud": {
+      "velocity": 0.6,
+      "device_risk": 0.6,
+      "behavior_anomaly": 0.0,
+      "coordination": 0.0,
+      "impossible_travel": true
+    },
+    "expected": {
+      "risk_score": 80.0,
+      "decision": "bloquear",
+      "account_takeover": true,
+      "case_confirmed": true,
+      "delivered_event": "fraud.case_confirmed",
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-19",
+    "desc": "sem ATO, score 80 por sinais -> bloqueia mas account_takeover False",
+    "statement": "sem ATO, score 80 por sinais -> bloqueia mas account_takeover False",
+    "fraud": {
+      "velocity": 0.8,
+      "device_risk": 0.8,
+      "behavior_anomaly": 0.8,
+      "coordination": 0.8
+    },
+    "expected": {
+      "risk_score": 80.0,
+      "decision": "bloquear",
+      "risk_level": "alto",
+      "account_takeover": false,
+      "case_confirmed": true,
+      "delivered_event": "fraud.case_confirmed",
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-20",
+    "desc": "coordenacao alta isolada (0.9*25=22.5) -> permitir",
+    "statement": "coordenacao alta isolada (0.9*25=22.5) -> permitir",
+    "fraud": {
+      "velocity": 0.0,
+      "device_risk": 0.0,
+      "behavior_anomaly": 0.0,
+      "coordination": 0.9
+    },
+    "expected": {
+      "risk_score": 22.5,
+      "decision": "permitir",
+      "risk_level": "baixo",
+      "case_confirmed": false,
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-21",
+    "desc": "velocity+coordenacao moderadas -> step-up (anel emergente)",
+    "statement": "velocity+coordenacao moderadas -> step-up (anel emergente)",
+    "fraud": {
+      "velocity": 0.6,
+      "device_risk": 0.0,
+      "behavior_anomaly": 0.4,
+      "coordination": 0.6
+    },
+    "expected": {
+      "risk_score": 40.0,
+      "decision": "step-up",
+      "risk_level": "medio",
+      "case_confirmed": false,
+      "delivered_event": "fraud.event_scored",
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-22",
+    "desc": "anel coordenado forte sem ATO -> bloqueia",
+    "statement": "anel coordenado forte sem ATO -> bloqueia",
+    "fraud": {
+      "velocity": 0.9,
+      "device_risk": 0.5,
+      "behavior_anomaly": 0.6,
+      "coordination": 0.9
+    },
+    "expected": {
+      "risk_score": 72.5,
+      "decision": "bloquear",
+      "risk_level": "alto",
+      "account_takeover": false,
+      "case_confirmed": true,
+      "delivered_event": "fraud.case_confirmed",
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-23",
+    "desc": "score 69.9 -> step-up (logo abaixo do bloqueio)",
+    "statement": "score 69.9 -> step-up (logo abaixo do bloqueio)",
+    "fraud": {
+      "velocity": 0.699,
+      "device_risk": 0.699,
+      "behavior_anomaly": 0.699,
+      "coordination": 0.699
+    },
+    "expected": {
+      "risk_score": 69.9,
+      "decision": "step-up",
+      "risk_level": "medio",
+      "case_confirmed": false,
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-24",
+    "desc": "score 70.1 -> bloquear (logo acima)",
+    "statement": "score 70.1 -> bloquear (logo acima)",
+    "fraud": {
+      "velocity": 0.701,
+      "device_risk": 0.701,
+      "behavior_anomaly": 0.701,
+      "coordination": 0.701
+    },
+    "expected": {
+      "risk_score": 70.1,
+      "decision": "bloquear",
+      "risk_level": "alto",
+      "case_confirmed": true,
+      "delivered_event": "fraud.case_confirmed",
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-25",
+    "desc": "score 40.1 -> step-up",
+    "statement": "score 40.1 -> step-up",
+    "fraud": {
+      "velocity": 0.401,
+      "device_risk": 0.401,
+      "behavior_anomaly": 0.401,
+      "coordination": 0.401
+    },
+    "expected": {
+      "risk_score": 40.1,
+      "decision": "step-up",
+      "risk_level": "medio",
+      "case_confirmed": false,
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-26",
+    "desc": "score 39.9 -> permitir",
+    "statement": "score 39.9 -> permitir",
+    "fraud": {
+      "velocity": 0.399,
+      "device_risk": 0.399,
+      "behavior_anomaly": 0.399,
+      "coordination": 0.399
+    },
+    "expected": {
+      "risk_score": 39.9,
+      "decision": "permitir",
+      "risk_level": "baixo",
+      "case_confirmed": false,
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-27",
+    "desc": "device+behavior altos (dispositivo novo suspeito) -> step-up",
+    "statement": "device+behavior altos (dispositivo novo suspeito) -> step-up",
+    "fraud": {
+      "velocity": 0.0,
+      "device_risk": 0.9,
+      "behavior_anomaly": 0.7,
+      "coordination": 0.0
+    },
+    "expected": {
+      "risk_score": 40.0,
+      "decision": "step-up",
+      "risk_level": "medio",
+      "account_takeover": false,
+      "case_confirmed": false,
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-28",
+    "desc": "behavior anomalo alto + velocity -> bloqueia",
+    "statement": "behavior anomalo alto + velocity -> bloqueia",
+    "fraud": {
+      "velocity": 0.8,
+      "device_risk": 0.5,
+      "behavior_anomaly": 0.9,
+      "coordination": 0.6
+    },
+    "expected": {
+      "risk_score": 70.0,
+      "decision": "bloquear",
+      "risk_level": "alto",
+      "case_confirmed": true,
+      "delivered_event": "fraud.case_confirmed",
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-29",
+    "desc": "ATO com TODOS sinais zero -> score 0 elevado a 80",
+    "statement": "ATO com TODOS sinais zero -> score 0 elevado a 80",
+    "fraud": {
+      "velocity": 0.0,
+      "device_risk": 0.0,
+      "behavior_anomaly": 0.0,
+      "coordination": 0.0,
+      "impossible_travel": true
+    },
+    "expected": {
+      "risk_score": 80.0,
+      "decision": "bloquear",
+      "risk_level": "alto",
+      "account_takeover": true,
+      "case_confirmed": true,
+      "delivered_event": "fraud.case_confirmed",
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-30",
+    "desc": "ATO com base 79 -> elevado a 80 (prova precedencia no limiar)",
+    "statement": "ATO com base 79 -> elevado a 80 (prova precedencia no limiar)",
+    "fraud": {
+      "velocity": 0.79,
+      "device_risk": 0.79,
+      "behavior_anomaly": 0.79,
+      "coordination": 0.79,
+      "impossible_travel": true
+    },
+    "expected": {
+      "risk_score": 80.0,
+      "decision": "bloquear",
+      "account_takeover": true,
+      "case_confirmed": true,
+      "delivered_event": "fraud.case_confirmed",
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-31",
+    "desc": "transacao de risco moderado decidida no SLA -> step-up registrado",
+    "statement": "transacao de risco moderado decidida no SLA -> step-up registrado",
+    "fraud": {
+      "velocity": 0.5,
+      "device_risk": 0.5,
+      "behavior_anomaly": 0.3,
+      "coordination": 0.3
+    },
+    "expected": {
+      "risk_score": 40.0,
+      "decision": "step-up",
+      "risk_level": "medio",
+      "case_confirmed": false,
+      "delivered_event": "fraud.event_scored",
+      "by": "g5-fraud-abuse-detector"
+    }
+  },
+  {
+    "id": "fr-32",
+    "desc": "baixissimo risco (sinais residuais) -> permitir limpo",
+    "statement": "baixissimo risco (sinais residuais) -> permitir limpo",
+    "fraud": {
+      "velocity": 0.05,
+      "device_risk": 0.05,
+      "behavior_anomaly": 0.05,
+      "coordination": 0.05
+    },
+    "expected": {
+      "risk_score": 5.0,
+      "decision": "permitir",
+      "risk_level": "baixo",
+      "account_takeover": false,
+      "case_confirmed": false,
+      "delivered_event": "fraud.event_scored",
+      "by": "g5-fraud-abuse-detector"
     }
   }
 ]

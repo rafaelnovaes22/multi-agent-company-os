@@ -1,24 +1,843 @@
 [
-  {"id": "cov-01", "desc": "84% sem gap critico -> PASS, divida estavel",
-   "coverage": {"threshold": 80.0, "baseline_pct": 84.0,
-     "modules": [
-       {"name": "core", "lines": 600, "covered": 510, "critical": false},
-       {"name": "io", "lines": 400, "covered": 330, "critical": false}]},
-   "expected": {"coverage_pct": 84.0, "decision": "PASS", "passed": true,
-     "critical_gap_count": 0, "coverage_delta": 0.0, "rising_debt": false}},
-
-  {"id": "cov-02", "desc": "71% abaixo do minimo -> FAIL com divida crescente",
-   "coverage": {"threshold": 80.0, "baseline_pct": 88.0,
-     "modules": [
-       {"name": "core", "lines": 1000, "covered": 710, "critical": false}]},
-   "expected": {"coverage_pct": 71.0, "decision": "FAIL", "passed": false,
-     "critical_gap_count": 0, "coverage_delta": -17.0, "rising_debt": true}},
-
-  {"id": "cov-03", "desc": "92% mas caminho PII descoberto -> FAIL por gap critico",
-   "coverage": {"threshold": 80.0,
-     "modules": [
-       {"name": "core", "lines": 900, "covered": 850, "critical": false},
-       {"name": "pii_handler", "lines": 100, "covered": 70, "critical": true}]},
-   "expected": {"coverage_pct": 92.0, "decision": "FAIL", "passed": false,
-     "critical_gap_count": 1, "critical_gaps": ["pii_handler"]}}
+  {
+    "id": "cov-01",
+    "desc": "84% sem gap critico -> PASS, divida estavel",
+    "coverage": {
+      "threshold": 80.0,
+      "baseline_pct": 84.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 600,
+          "covered": 510,
+          "critical": false
+        },
+        {
+          "name": "io",
+          "lines": 400,
+          "covered": 330,
+          "critical": false
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 84.0,
+      "decision": "PASS",
+      "passed": true,
+      "critical_gap_count": 0,
+      "coverage_delta": 0.0,
+      "rising_debt": false
+    }
+  },
+  {
+    "id": "cov-02",
+    "desc": "71% abaixo do minimo -> FAIL com divida crescente",
+    "coverage": {
+      "threshold": 80.0,
+      "baseline_pct": 88.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 1000,
+          "covered": 710,
+          "critical": false
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 71.0,
+      "decision": "FAIL",
+      "passed": false,
+      "critical_gap_count": 0,
+      "coverage_delta": -17.0,
+      "rising_debt": true
+    }
+  },
+  {
+    "id": "cov-03",
+    "desc": "92% mas caminho PII descoberto -> FAIL por gap critico",
+    "coverage": {
+      "threshold": 80.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 900,
+          "covered": 850,
+          "critical": false
+        },
+        {
+          "name": "pii_handler",
+          "lines": 100,
+          "covered": 70,
+          "critical": true
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 92.0,
+      "decision": "FAIL",
+      "passed": false,
+      "critical_gap_count": 1,
+      "critical_gaps": [
+        "pii_handler"
+      ]
+    }
+  },
+  {
+    "id": "cov-04",
+    "desc": "exatamente 80% no limiar -> PASS",
+    "coverage": {
+      "threshold": 80.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 1000,
+          "covered": 800,
+          "critical": false
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 80.0,
+      "decision": "PASS",
+      "passed": true,
+      "critical_gap_count": 0
+    }
+  },
+  {
+    "id": "cov-05",
+    "desc": "79.9% logo abaixo do limiar -> FAIL",
+    "coverage": {
+      "threshold": 80.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 1000,
+          "covered": 799,
+          "critical": false
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 79.9,
+      "decision": "FAIL",
+      "passed": false,
+      "critical_gap_count": 0
+    }
+  },
+  {
+    "id": "cov-06",
+    "desc": "80.1% logo acima do limiar -> PASS",
+    "coverage": {
+      "threshold": 80.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 1000,
+          "covered": 801,
+          "critical": false
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 80.1,
+      "decision": "PASS",
+      "passed": true,
+      "critical_gap_count": 0
+    }
+  },
+  {
+    "id": "cov-07",
+    "desc": "queda 88->81 entre releases -> PASS porem divida crescente",
+    "coverage": {
+      "threshold": 80.0,
+      "baseline_pct": 88.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 1000,
+          "covered": 810,
+          "critical": false
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 81.0,
+      "decision": "PASS",
+      "passed": true,
+      "coverage_delta": -7.0,
+      "rising_debt": true
+    }
+  },
+  {
+    "id": "cov-08",
+    "desc": "melhora 80->85 vs baseline -> sem divida crescente",
+    "coverage": {
+      "threshold": 80.0,
+      "baseline_pct": 80.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 1000,
+          "covered": 850,
+          "critical": false
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 85.0,
+      "coverage_delta": 5.0,
+      "rising_debt": false,
+      "decision": "PASS"
+    }
+  },
+  {
+    "id": "cov-09",
+    "desc": "sem baseline -> delta None e sem divida",
+    "coverage": {
+      "threshold": 80.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 1000,
+          "covered": 900,
+          "critical": false
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 90.0,
+      "coverage_delta": null,
+      "rising_debt": false,
+      "decision": "PASS"
+    }
+  },
+  {
+    "id": "cov-10",
+    "desc": "99% mas gap critico em error-path -> FAIL (gap critico tem precedencia)",
+    "coverage": {
+      "threshold": 80.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 900,
+          "covered": 900,
+          "critical": false
+        },
+        {
+          "name": "error_path",
+          "lines": 100,
+          "covered": 90,
+          "critical": true
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 99.0,
+      "decision": "FAIL",
+      "passed": false,
+      "critical_gap_count": 1,
+      "critical_gaps": [
+        "error_path"
+      ]
+    }
+  },
+  {
+    "id": "cov-11",
+    "desc": "modulo critico 100% coberto -> nao conta como gap, PASS",
+    "coverage": {
+      "threshold": 80.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 900,
+          "covered": 800,
+          "critical": false
+        },
+        {
+          "name": "pii",
+          "lines": 100,
+          "covered": 100,
+          "critical": true
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 90.0,
+      "decision": "PASS",
+      "passed": true,
+      "critical_gap_count": 0,
+      "critical_gaps": []
+    }
+  },
+  {
+    "id": "cov-12",
+    "desc": "dois caminhos criticos descobertos -> 2 gaps, FAIL",
+    "coverage": {
+      "threshold": 80.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 800,
+          "covered": 760,
+          "critical": false
+        },
+        {
+          "name": "pii",
+          "lines": 100,
+          "covered": 50,
+          "critical": true
+        },
+        {
+          "name": "auth",
+          "lines": 100,
+          "covered": 80,
+          "critical": true
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 89.0,
+      "decision": "FAIL",
+      "passed": false,
+      "critical_gap_count": 2,
+      "critical_gaps": [
+        "pii",
+        "auth"
+      ]
+    }
+  },
+  {
+    "id": "cov-13",
+    "desc": "cobertura 70% E gap critico (ambos falham) -> FAIL",
+    "coverage": {
+      "threshold": 80.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 900,
+          "covered": 620,
+          "critical": false
+        },
+        {
+          "name": "pii",
+          "lines": 100,
+          "covered": 80,
+          "critical": true
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 70.0,
+      "decision": "FAIL",
+      "passed": false,
+      "critical_gap_count": 1,
+      "critical_gaps": [
+        "pii"
+      ]
+    }
+  },
+  {
+    "id": "cov-14",
+    "desc": "threshold custom 90%: 85% reprova",
+    "coverage": {
+      "threshold": 90.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 1000,
+          "covered": 850,
+          "critical": false
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 85.0,
+      "threshold": 90.0,
+      "decision": "FAIL",
+      "passed": false
+    }
+  },
+  {
+    "id": "cov-15",
+    "desc": "threshold custom 90%: 91% aprova",
+    "coverage": {
+      "threshold": 90.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 1000,
+          "covered": 910,
+          "critical": false
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 91.0,
+      "threshold": 90.0,
+      "decision": "PASS",
+      "passed": true
+    }
+  },
+  {
+    "id": "cov-16",
+    "desc": "cobertura total 100% -> PASS",
+    "coverage": {
+      "threshold": 80.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 500,
+          "covered": 500,
+          "critical": false
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 100.0,
+      "decision": "PASS",
+      "passed": true,
+      "critical_gap_count": 0
+    }
+  },
+  {
+    "id": "cov-17",
+    "desc": "agregacao multi-modulo: 1700/2000 = 85%",
+    "coverage": {
+      "threshold": 80.0,
+      "modules": [
+        {
+          "name": "a",
+          "lines": 1000,
+          "covered": 900,
+          "critical": false
+        },
+        {
+          "name": "b",
+          "lines": 500,
+          "covered": 400,
+          "critical": false
+        },
+        {
+          "name": "c",
+          "lines": 500,
+          "covered": 400,
+          "critical": false
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 85.0,
+      "decision": "PASS",
+      "passed": true
+    }
+  },
+  {
+    "id": "cov-18",
+    "desc": "queda 95->82 -> PASS porem divida crescente -13pp",
+    "coverage": {
+      "threshold": 80.0,
+      "baseline_pct": 95.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 1000,
+          "covered": 820,
+          "critical": false
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 82.0,
+      "coverage_delta": -13.0,
+      "rising_debt": true,
+      "decision": "PASS"
+    }
+  },
+  {
+    "id": "cov-19",
+    "desc": "cobertura igual ao baseline -> delta 0, sem divida",
+    "coverage": {
+      "threshold": 80.0,
+      "baseline_pct": 83.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 1000,
+          "covered": 830,
+          "critical": false
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 83.0,
+      "coverage_delta": 0.0,
+      "rising_debt": false,
+      "decision": "PASS"
+    }
+  },
+  {
+    "id": "cov-20",
+    "desc": "73% + gap critico + queda vs baseline -> FAIL multifator",
+    "coverage": {
+      "threshold": 80.0,
+      "baseline_pct": 85.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 900,
+          "covered": 650,
+          "critical": false
+        },
+        {
+          "name": "crypto",
+          "lines": 100,
+          "covered": 80,
+          "critical": true
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 73.0,
+      "decision": "FAIL",
+      "passed": false,
+      "critical_gap_count": 1,
+      "coverage_delta": -12.0,
+      "rising_debt": true
+    }
+  },
+  {
+    "id": "cov-21",
+    "desc": "gaps cosmeticos (nao-criticos) descobertos mas 84% -> PASS",
+    "coverage": {
+      "threshold": 80.0,
+      "modules": [
+        {
+          "name": "ui",
+          "lines": 500,
+          "covered": 400,
+          "critical": false
+        },
+        {
+          "name": "logs",
+          "lines": 500,
+          "covered": 440,
+          "critical": false
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 84.0,
+      "decision": "PASS",
+      "passed": true,
+      "critical_gap_count": 0
+    }
+  },
+  {
+    "id": "cov-22",
+    "desc": "exatamente 80% mas com gap critico -> FAIL",
+    "coverage": {
+      "threshold": 80.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 900,
+          "covered": 740,
+          "critical": false
+        },
+        {
+          "name": "pii",
+          "lines": 100,
+          "covered": 60,
+          "critical": true
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 80.0,
+      "decision": "FAIL",
+      "passed": false,
+      "critical_gap_count": 1
+    }
+  },
+  {
+    "id": "cov-23",
+    "desc": "40% muito abaixo -> FAIL",
+    "coverage": {
+      "threshold": 80.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 1000,
+          "covered": 400,
+          "critical": false
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 40.0,
+      "decision": "FAIL",
+      "passed": false
+    }
+  },
+  {
+    "id": "cov-24",
+    "desc": "5 modulos, 1 critico descoberto -> FAIL apesar de 86%",
+    "coverage": {
+      "threshold": 80.0,
+      "modules": [
+        {
+          "name": "a",
+          "lines": 400,
+          "covered": 380,
+          "critical": false
+        },
+        {
+          "name": "b",
+          "lines": 400,
+          "covered": 360,
+          "critical": false
+        },
+        {
+          "name": "c",
+          "lines": 400,
+          "covered": 340,
+          "critical": false
+        },
+        {
+          "name": "d",
+          "lines": 400,
+          "covered": 340,
+          "critical": false
+        },
+        {
+          "name": "sec",
+          "lines": 400,
+          "covered": 300,
+          "critical": true
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 86.0,
+      "decision": "FAIL",
+      "passed": false,
+      "critical_gap_count": 1,
+      "critical_gaps": [
+        "sec"
+      ]
+    }
+  },
+  {
+    "id": "cov-25",
+    "desc": "83.5% arredondamento -> PASS",
+    "coverage": {
+      "threshold": 80.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 2000,
+          "covered": 1670,
+          "critical": false
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 83.5,
+      "decision": "PASS",
+      "passed": true
+    }
+  },
+  {
+    "id": "cov-26",
+    "desc": "baseline igual mas gap critico -> FAIL apesar delta 0",
+    "coverage": {
+      "threshold": 80.0,
+      "baseline_pct": 90.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 900,
+          "covered": 840,
+          "critical": false
+        },
+        {
+          "name": "pii",
+          "lines": 100,
+          "covered": 60,
+          "critical": true
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 90.0,
+      "coverage_delta": 0.0,
+      "rising_debt": false,
+      "decision": "FAIL",
+      "critical_gap_count": 1
+    }
+  },
+  {
+    "id": "cov-27",
+    "desc": "melhora vs baseline E gap critico -> FAIL (gap vence melhora)",
+    "coverage": {
+      "threshold": 80.0,
+      "baseline_pct": 80.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 900,
+          "covered": 850,
+          "critical": false
+        },
+        {
+          "name": "auth",
+          "lines": 100,
+          "covered": 50,
+          "critical": true
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 90.0,
+      "coverage_delta": 10.0,
+      "rising_debt": false,
+      "decision": "FAIL",
+      "critical_gap_count": 1
+    }
+  },
+  {
+    "id": "cov-28",
+    "desc": "82% com leve queda -1pp -> PASS divida crescente leve",
+    "coverage": {
+      "threshold": 80.0,
+      "baseline_pct": 83.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 1000,
+          "covered": 820,
+          "critical": false
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 82.0,
+      "coverage_delta": -1.0,
+      "rising_debt": true,
+      "decision": "PASS",
+      "passed": true
+    }
+  },
+  {
+    "id": "cov-29",
+    "desc": "tres modulos criticos todos cobertos -> PASS",
+    "coverage": {
+      "threshold": 80.0,
+      "modules": [
+        {
+          "name": "a",
+          "lines": 300,
+          "covered": 300,
+          "critical": true
+        },
+        {
+          "name": "b",
+          "lines": 300,
+          "covered": 300,
+          "critical": true
+        },
+        {
+          "name": "c",
+          "lines": 400,
+          "covered": 250,
+          "critical": false
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 85.0,
+      "decision": "PASS",
+      "passed": true,
+      "critical_gap_count": 0
+    }
+  },
+  {
+    "id": "cov-30",
+    "desc": "cobertura altissima 95% sem baseline -> PASS",
+    "coverage": {
+      "threshold": 80.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 2000,
+          "covered": 1900,
+          "critical": false
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 95.0,
+      "decision": "PASS",
+      "passed": true,
+      "coverage_delta": null
+    }
+  },
+  {
+    "id": "cov-31",
+    "desc": "79% + gap critico (ambos falham) -> FAIL",
+    "coverage": {
+      "threshold": 80.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 900,
+          "covered": 700,
+          "critical": false
+        },
+        {
+          "name": "pii",
+          "lines": 100,
+          "covered": 90,
+          "critical": true
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 79.0,
+      "decision": "FAIL",
+      "passed": false,
+      "critical_gap_count": 1
+    }
+  },
+  {
+    "id": "cov-32",
+    "desc": "96% com 1 gap critico minusculo -> FAIL (intencao: nao tratar critico como cosmetico)",
+    "coverage": {
+      "threshold": 80.0,
+      "modules": [
+        {
+          "name": "core",
+          "lines": 990,
+          "covered": 960,
+          "critical": false
+        },
+        {
+          "name": "pii",
+          "lines": 10,
+          "covered": 9,
+          "critical": true
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 96.9,
+      "decision": "FAIL",
+      "passed": false,
+      "critical_gap_count": 1,
+      "critical_gaps": [
+        "pii"
+      ]
+    }
+  }
 ]

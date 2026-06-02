@@ -2,25 +2,632 @@
   {
     "id": "c8-01",
     "desc": "comportamento 100% por config, sem achados -> PASS",
-    "lint": {"findings": []},
-    "expected": {"hardcode_count": 0, "pii_in_memory": false, "clean": true, "status": "PASS", "block_merge": false}
+    "lint": {
+      "findings": []
+    },
+    "expected": {
+      "hardcode_count": 0,
+      "pii_in_memory": false,
+      "clean": true,
+      "status": "PASS",
+      "block_merge": false
+    }
   },
   {
     "id": "c8-02",
-    "desc": "if tenantId === acme + pasta clients/acme -> 2 hardcodes, bloqueia",
-    "lint": {"findings": [{"kind": "tenant_conditional"}, {"kind": "client_folder"}]},
-    "expected": {"hardcode_count": 2, "clean": false, "status": "FAIL", "block_merge": true}
+    "desc": "if tenantId + pasta clients/acme -> 2 hardcodes, bloqueia",
+    "lint": {
+      "findings": [
+        {
+          "kind": "tenant_conditional"
+        },
+        {
+          "kind": "client_folder"
+        }
+      ]
+    },
+    "expected": {
+      "hardcode_count": 2,
+      "clean": false,
+      "status": "FAIL",
+      "block_merge": true
+    }
   },
   {
     "id": "c8-03",
-    "desc": "PII de tenant vazou para instinct -> bloqueia merge da memoria",
-    "lint": {"findings": [{"kind": "tenant_pii_in_memory"}]},
-    "expected": {"hardcode_count": 0, "pii_in_memory": true, "pii_count": 1, "clean": false, "status": "FAIL", "block_merge": true}
+    "desc": "PII de tenant vazada num instinct -> bloqueia merge",
+    "lint": {
+      "findings": [
+        {
+          "kind": "tenant_pii_in_memory"
+        }
+      ]
+    },
+    "expected": {
+      "pii_in_memory": true,
+      "pii_count": 1,
+      "hardcode_count": 0,
+      "clean": false,
+      "status": "FAIL",
+      "block_merge": true
+    }
   },
   {
     "id": "c8-04",
-    "desc": "vertical sem marcador de configurabilidade -> hardcode",
-    "lint": {"findings": [{"kind": "vertical_assumption"}]},
-    "expected": {"hardcode_count": 1, "clean": false, "status": "FAIL"}
+    "desc": "pasta clients/acme com override de código -> hardcode",
+    "lint": {
+      "findings": [
+        {
+          "kind": "client_folder"
+        }
+      ]
+    },
+    "expected": {
+      "hardcode_count": 1,
+      "clean": false,
+      "status": "FAIL",
+      "block_merge": true
+    }
+  },
+  {
+    "id": "c8-05",
+    "desc": "spec assume vertical sem marcador -> vertical_assumption hardcode",
+    "lint": {
+      "findings": [
+        {
+          "kind": "vertical_assumption"
+        }
+      ]
+    },
+    "expected": {
+      "hardcode_count": 1,
+      "clean": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c8-06",
+    "desc": "único if tenantId === -> 1 hardcode bloqueia",
+    "lint": {
+      "findings": [
+        {
+          "kind": "tenant_conditional"
+        }
+      ]
+    },
+    "expected": {
+      "hardcode_count": 1,
+      "clean": false,
+      "status": "FAIL",
+      "block_merge": true
+    }
+  },
+  {
+    "id": "c8-07",
+    "desc": "PII + hardcode juntos -> conta os dois eixos",
+    "lint": {
+      "findings": [
+        {
+          "kind": "tenant_conditional"
+        },
+        {
+          "kind": "tenant_pii_in_memory"
+        }
+      ]
+    },
+    "expected": {
+      "hardcode_count": 1,
+      "pii_in_memory": true,
+      "pii_count": 1,
+      "clean": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c8-08",
+    "desc": "3 tipos de hardcode -> contagem 3",
+    "lint": {
+      "findings": [
+        {
+          "kind": "tenant_conditional"
+        },
+        {
+          "kind": "client_folder"
+        },
+        {
+          "kind": "vertical_assumption"
+        }
+      ]
+    },
+    "expected": {
+      "hardcode_count": 3,
+      "clean": false,
+      "status": "FAIL",
+      "block_merge": true
+    }
+  },
+  {
+    "id": "c8-09",
+    "desc": "achado de tipo desconhecido não conta como hardcode nem PII",
+    "lint": {
+      "findings": [
+        {
+          "kind": "style_nit"
+        }
+      ]
+    },
+    "expected": {
+      "hardcode_count": 0,
+      "pii_in_memory": false,
+      "clean": true,
+      "status": "PASS",
+      "block_merge": false
+    }
+  },
+  {
+    "id": "c8-10",
+    "desc": "2 PII em memória -> pii_count 2, clean false",
+    "lint": {
+      "findings": [
+        {
+          "kind": "tenant_pii_in_memory"
+        },
+        {
+          "kind": "tenant_pii_in_memory"
+        }
+      ]
+    },
+    "expected": {
+      "pii_count": 2,
+      "pii_in_memory": true,
+      "hardcode_count": 0,
+      "clean": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c8-11",
+    "desc": "hardcode repetido (2 tenant_conditional) -> contagem 2",
+    "lint": {
+      "findings": [
+        {
+          "kind": "tenant_conditional"
+        },
+        {
+          "kind": "tenant_conditional"
+        }
+      ]
+    },
+    "expected": {
+      "hardcode_count": 2,
+      "clean": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c8-12",
+    "desc": "segredo de cliente colado em SOUL (modelado como PII) -> bloqueia",
+    "lint": {
+      "findings": [
+        {
+          "kind": "tenant_pii_in_memory"
+        }
+      ]
+    },
+    "expected": {
+      "pii_in_memory": true,
+      "clean": false,
+      "block_merge": true,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c8-13",
+    "desc": "misto: hardcode + PII + ruído -> só conta os relevantes",
+    "lint": {
+      "findings": [
+        {
+          "kind": "client_folder"
+        },
+        {
+          "kind": "tenant_pii_in_memory"
+        },
+        {
+          "kind": "info_log"
+        }
+      ]
+    },
+    "expected": {
+      "hardcode_count": 1,
+      "pii_count": 1,
+      "pii_in_memory": true,
+      "clean": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c8-14",
+    "desc": "vertical_assumption + client_folder -> 2 hardcodes",
+    "lint": {
+      "findings": [
+        {
+          "kind": "vertical_assumption"
+        },
+        {
+          "kind": "client_folder"
+        }
+      ]
+    },
+    "expected": {
+      "hardcode_count": 2,
+      "clean": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c8-15",
+    "desc": "só achados de ruído (vários) -> limpo, PASS",
+    "lint": {
+      "findings": [
+        {
+          "kind": "todo"
+        },
+        {
+          "kind": "style_nit"
+        },
+        {
+          "kind": "info_log"
+        }
+      ]
+    },
+    "expected": {
+      "hardcode_count": 0,
+      "pii_in_memory": false,
+      "clean": true,
+      "status": "PASS",
+      "block_merge": false
+    }
+  },
+  {
+    "id": "c8-16",
+    "desc": "fronteira: exatamente 1 hardcode já reprova (não há tolerância)",
+    "lint": {
+      "findings": [
+        {
+          "kind": "vertical_assumption"
+        }
+      ]
+    },
+    "expected": {
+      "hardcode_count": 1,
+      "clean": false,
+      "block_merge": true
+    }
+  },
+  {
+    "id": "c8-17",
+    "desc": "PII sozinha sem hardcode ainda bloqueia (eixos independentes)",
+    "lint": {
+      "findings": [
+        {
+          "kind": "tenant_pii_in_memory"
+        }
+      ]
+    },
+    "expected": {
+      "hardcode_count": 0,
+      "pii_in_memory": true,
+      "clean": false,
+      "block_merge": true
+    }
+  },
+  {
+    "id": "c8-18",
+    "desc": "5 hardcodes variados -> contagem 5",
+    "lint": {
+      "findings": [
+        {
+          "kind": "tenant_conditional"
+        },
+        {
+          "kind": "tenant_conditional"
+        },
+        {
+          "kind": "client_folder"
+        },
+        {
+          "kind": "vertical_assumption"
+        },
+        {
+          "kind": "vertical_assumption"
+        }
+      ]
+    },
+    "expected": {
+      "hardcode_count": 5,
+      "clean": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c8-19",
+    "desc": "achado sem campo kind é ignorado",
+    "lint": {
+      "findings": [
+        {
+          "note": "sem kind"
+        }
+      ]
+    },
+    "expected": {
+      "hardcode_count": 0,
+      "pii_in_memory": false,
+      "clean": true,
+      "status": "PASS"
+    }
+  },
+  {
+    "id": "c8-20",
+    "desc": "hardcode + 3 PII -> contagens separadas",
+    "lint": {
+      "findings": [
+        {
+          "kind": "client_folder"
+        },
+        {
+          "kind": "tenant_pii_in_memory"
+        },
+        {
+          "kind": "tenant_pii_in_memory"
+        },
+        {
+          "kind": "tenant_pii_in_memory"
+        }
+      ]
+    },
+    "expected": {
+      "hardcode_count": 1,
+      "pii_count": 3,
+      "pii_in_memory": true,
+      "clean": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c8-21",
+    "desc": "clean exige zero hardcode E zero PII -> PASS quando ambos zero",
+    "lint": {
+      "findings": []
+    },
+    "expected": {
+      "clean": true,
+      "hardcode_count": 0,
+      "pii_count": 0,
+      "pii_in_memory": false,
+      "status": "PASS",
+      "block_merge": false
+    }
+  },
+  {
+    "id": "c8-22",
+    "desc": "2 client_folder (multi-cliente) -> 2 hardcodes",
+    "lint": {
+      "findings": [
+        {
+          "kind": "client_folder"
+        },
+        {
+          "kind": "client_folder"
+        }
+      ]
+    },
+    "expected": {
+      "hardcode_count": 2,
+      "clean": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c8-23",
+    "desc": "só vertical_assumption x2 -> 2 hardcodes",
+    "lint": {
+      "findings": [
+        {
+          "kind": "vertical_assumption"
+        },
+        {
+          "kind": "vertical_assumption"
+        }
+      ]
+    },
+    "expected": {
+      "hardcode_count": 2,
+      "clean": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c8-24",
+    "desc": "PII em memória sozinha pii_count 1 e hardcode 0",
+    "lint": {
+      "findings": [
+        {
+          "kind": "tenant_pii_in_memory"
+        }
+      ]
+    },
+    "expected": {
+      "pii_count": 1,
+      "hardcode_count": 0,
+      "pii_in_memory": true
+    }
+  },
+  {
+    "id": "c8-25",
+    "desc": "block_merge espelha clean=false",
+    "lint": {
+      "findings": [
+        {
+          "kind": "tenant_conditional"
+        }
+      ]
+    },
+    "expected": {
+      "block_merge": true,
+      "clean": false
+    }
+  },
+  {
+    "id": "c8-26",
+    "desc": "block_merge false quando limpo",
+    "lint": {
+      "findings": []
+    },
+    "expected": {
+      "block_merge": false,
+      "clean": true
+    }
+  },
+  {
+    "id": "c8-27",
+    "desc": "4 tipos misturados (3 hardcode + 1 PII)",
+    "lint": {
+      "findings": [
+        {
+          "kind": "tenant_conditional"
+        },
+        {
+          "kind": "client_folder"
+        },
+        {
+          "kind": "vertical_assumption"
+        },
+        {
+          "kind": "tenant_pii_in_memory"
+        }
+      ]
+    },
+    "expected": {
+      "hardcode_count": 3,
+      "pii_count": 1,
+      "pii_in_memory": true,
+      "clean": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c8-28",
+    "desc": "muitos achados de ruído + 1 hardcode -> reprova só pelo hardcode",
+    "lint": {
+      "findings": [
+        {
+          "kind": "todo"
+        },
+        {
+          "kind": "info_log"
+        },
+        {
+          "kind": "client_folder"
+        },
+        {
+          "kind": "style_nit"
+        }
+      ]
+    },
+    "expected": {
+      "hardcode_count": 1,
+      "pii_in_memory": false,
+      "clean": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c8-29",
+    "desc": "só PII repetida não conta como hardcode",
+    "lint": {
+      "findings": [
+        {
+          "kind": "tenant_pii_in_memory"
+        },
+        {
+          "kind": "tenant_pii_in_memory"
+        }
+      ]
+    },
+    "expected": {
+      "hardcode_count": 0,
+      "pii_count": 2,
+      "clean": false
+    }
+  },
+  {
+    "id": "c8-30",
+    "desc": "caso ideal config-over-code -> PASS, não bloqueia",
+    "lint": {
+      "findings": []
+    },
+    "expected": {
+      "hardcode_count": 0,
+      "pii_count": 0,
+      "clean": true,
+      "status": "PASS",
+      "block_merge": false
+    }
+  },
+  {
+    "id": "c8-31",
+    "desc": "6 hardcodes -> contagem 6",
+    "lint": {
+      "findings": [
+        {
+          "kind": "tenant_conditional"
+        },
+        {
+          "kind": "tenant_conditional"
+        },
+        {
+          "kind": "tenant_conditional"
+        },
+        {
+          "kind": "client_folder"
+        },
+        {
+          "kind": "client_folder"
+        },
+        {
+          "kind": "client_folder"
+        }
+      ]
+    },
+    "expected": {
+      "hardcode_count": 6,
+      "clean": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c8-32",
+    "desc": "hardcode + ruído + PII -> status FAIL e bloqueio",
+    "lint": {
+      "findings": [
+        {
+          "kind": "vertical_assumption"
+        },
+        {
+          "kind": "info_log"
+        },
+        {
+          "kind": "tenant_pii_in_memory"
+        }
+      ]
+    },
+    "expected": {
+      "hardcode_count": 1,
+      "pii_count": 1,
+      "pii_in_memory": true,
+      "clean": false,
+      "status": "FAIL",
+      "block_merge": true
+    }
   }
 ]

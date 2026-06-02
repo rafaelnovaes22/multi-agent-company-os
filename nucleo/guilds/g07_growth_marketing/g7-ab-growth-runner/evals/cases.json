@@ -1,31 +1,676 @@
 [
-  {"id": "ab-01", "desc": "desenho: baseline 10%, MDE 5pp, alpha 0.05, power 0.8 -> 686/braço, desenho pronto",
-   "tenant_id": "t-eval-g07",
-   "experiment": {"baseline_rate": 0.10, "mde": 0.05, "alpha": 0.05, "power": 0.8},
-   "expected": {"by": "g7-ab-growth-runner", "sample_per_arm": 686, "z_alpha": 1.96,
-                "z_beta": 0.842, "significant": false, "sample_reached": false,
-                "decision": "desenho_pronto"}},
-
-  {"id": "ab-02", "desc": "leitura: amostra atingida (1000/braço) e z=3.99 > 1.96 -> promover vencedor",
-   "tenant_id": "t-eval-g07",
-   "experiment": {"baseline_rate": 0.10, "mde": 0.05, "alpha": 0.05, "power": 0.8,
-                  "observed": {"control_n": 1000, "control_conv": 100,
-                               "treat_n": 1000, "treat_conv": 160}},
-   "expected": {"by": "g7-ab-growth-runner", "sample_per_arm": 686, "z_stat": 3.989,
-                "observed_uplift": 0.06, "significant": true, "sample_reached": true,
-                "decision": "promover_vencedor"}},
-
-  {"id": "ab-03", "desc": "leitura: amostra insuficiente (300/braço < 686) -> continuar coleta sem peeking",
-   "tenant_id": "t-eval-g07",
-   "experiment": {"baseline_rate": 0.10, "mde": 0.05, "alpha": 0.05, "power": 0.8,
-                  "observed": {"control_n": 300, "control_conv": 30,
-                               "treat_n": 300, "treat_conv": 39}},
-   "expected": {"by": "g7-ab-growth-runner", "sample_per_arm": 686, "sample_reached": false,
-                "decision": "continuar_coleta"}},
-
-  {"id": "ab-04", "desc": "desenho com alpha 0.01 e power 0.9 troca os z-críticos",
-   "tenant_id": "t-eval-g07",
-   "experiment": {"baseline_rate": 0.20, "mde": 0.05, "alpha": 0.01, "power": 0.9},
-   "expected": {"by": "g7-ab-growth-runner", "z_alpha": 2.576, "z_beta": 1.282,
-                "decision": "desenho_pronto"}}
+  {
+    "id": "ab-01",
+    "desc": "desenho: baseline 10%, MDE 5pp, alpha 0.05, power 0.8 -> 686/braco, desenho pronto",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.1,
+      "mde": 0.05,
+      "alpha": 0.05,
+      "power": 0.8
+    },
+    "expected": {
+      "sample_per_arm": 686,
+      "z_alpha": 1.96,
+      "z_beta": 0.842,
+      "significant": false,
+      "sample_reached": false,
+      "decision": "desenho_pronto",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-02",
+    "desc": "leitura: amostra atingida (1000/braco) e z=3.99 > 1.96 -> promover vencedor",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.1,
+      "mde": 0.05,
+      "alpha": 0.05,
+      "power": 0.8,
+      "observed": {
+        "control_n": 1000,
+        "control_conv": 100,
+        "treat_n": 1000,
+        "treat_conv": 160
+      }
+    },
+    "expected": {
+      "sample_per_arm": 686,
+      "z_stat": 3.989,
+      "observed_uplift": 0.06,
+      "significant": true,
+      "sample_reached": true,
+      "decision": "promover_vencedor",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-03",
+    "desc": "leitura: amostra insuficiente (300/braco < 686) -> continuar coleta sem peeking",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.1,
+      "mde": 0.05,
+      "alpha": 0.05,
+      "power": 0.8,
+      "observed": {
+        "control_n": 300,
+        "control_conv": 30,
+        "treat_n": 300,
+        "treat_conv": 39
+      }
+    },
+    "expected": {
+      "sample_per_arm": 686,
+      "sample_reached": false,
+      "decision": "continuar_coleta",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-04",
+    "desc": "desenho com alpha 0.01 e power 0.9 troca os z-criticos",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.2,
+      "mde": 0.05,
+      "alpha": 0.01,
+      "power": 0.9
+    },
+    "expected": {
+      "z_alpha": 2.576,
+      "z_beta": 1.282,
+      "decision": "desenho_pronto",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-05",
+    "desc": "alpha 0.10 -> z_alpha 1.645",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.15,
+      "mde": 0.05,
+      "alpha": 0.1,
+      "power": 0.8
+    },
+    "expected": {
+      "z_alpha": 1.645,
+      "z_beta": 0.842,
+      "decision": "desenho_pronto",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-06",
+    "desc": "power 0.95 -> z_beta 1.645",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.15,
+      "mde": 0.05,
+      "alpha": 0.05,
+      "power": 0.95
+    },
+    "expected": {
+      "z_alpha": 1.96,
+      "z_beta": 1.645,
+      "decision": "desenho_pronto",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-07",
+    "desc": "alpha/power desconhecidos caem no default (1.96/0.842)",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.1,
+      "mde": 0.05,
+      "alpha": 0.07,
+      "power": 0.85
+    },
+    "expected": {
+      "z_alpha": 1.96,
+      "z_beta": 0.842,
+      "decision": "desenho_pronto",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-08",
+    "desc": "amostra atingida mas z<1.96 (nao significante) -> continuar coleta (sem declarar)",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.1,
+      "mde": 0.05,
+      "alpha": 0.05,
+      "power": 0.8,
+      "observed": {
+        "control_n": 1000,
+        "control_conv": 100,
+        "treat_n": 1000,
+        "treat_conv": 110
+      }
+    },
+    "expected": {
+      "sample_reached": true,
+      "significant": false,
+      "decision": "continuar_coleta",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-09",
+    "desc": "peeking: z alto mas amostra insuficiente -> continuar coleta",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.1,
+      "mde": 0.05,
+      "alpha": 0.05,
+      "power": 0.8,
+      "observed": {
+        "control_n": 100,
+        "control_conv": 5,
+        "treat_n": 100,
+        "treat_conv": 30
+      }
+    },
+    "expected": {
+      "sample_reached": false,
+      "decision": "continuar_coleta",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-10",
+    "desc": "tratamento pior e significante (uplift<0) -> manter controle",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.2,
+      "mde": 0.05,
+      "alpha": 0.05,
+      "power": 0.8,
+      "observed": {
+        "control_n": 2000,
+        "control_conv": 400,
+        "treat_n": 2000,
+        "treat_conv": 300
+      }
+    },
+    "expected": {
+      "sample_reached": true,
+      "significant": true,
+      "decision": "manter_controle",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-11",
+    "desc": "amostra exatamente no n minimo e significante -> promover",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.1,
+      "mde": 0.05,
+      "alpha": 0.05,
+      "power": 0.8,
+      "observed": {
+        "control_n": 686,
+        "control_conv": 69,
+        "treat_n": 686,
+        "treat_conv": 120
+      }
+    },
+    "expected": {
+      "sample_per_arm": 686,
+      "sample_reached": true,
+      "significant": true,
+      "decision": "promover_vencedor",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-12",
+    "desc": "amostra n-1 (685<686): nao atingiu -> continuar coleta",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.1,
+      "mde": 0.05,
+      "alpha": 0.05,
+      "power": 0.8,
+      "observed": {
+        "control_n": 685,
+        "control_conv": 69,
+        "treat_n": 685,
+        "treat_conv": 120
+      }
+    },
+    "expected": {
+      "sample_per_arm": 686,
+      "sample_reached": false,
+      "decision": "continuar_coleta",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-13",
+    "desc": "controle atinge mas tratamento nao: amostra nao atingida",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.1,
+      "mde": 0.05,
+      "alpha": 0.05,
+      "power": 0.8,
+      "observed": {
+        "control_n": 1000,
+        "control_conv": 100,
+        "treat_n": 500,
+        "treat_conv": 80
+      }
+    },
+    "expected": {
+      "sample_reached": false,
+      "decision": "continuar_coleta",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-14",
+    "desc": "baseline 50% MDE 10pp: tamanho calculado",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.5,
+      "mde": 0.1,
+      "alpha": 0.05,
+      "power": 0.8
+    },
+    "expected": {
+      "z_alpha": 1.96,
+      "z_beta": 0.842,
+      "decision": "desenho_pronto",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-15",
+    "desc": "baseline 5% MDE 2pp: amostra grande exige mais",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.05,
+      "mde": 0.02,
+      "alpha": 0.05,
+      "power": 0.8
+    },
+    "expected": {
+      "decision": "desenho_pronto",
+      "significant": false,
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-16",
+    "desc": "MDE 0: amostra 0 (desenho invalido sem efeito detectavel)",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.1,
+      "mde": 0,
+      "alpha": 0.05,
+      "power": 0.8
+    },
+    "expected": {
+      "sample_per_arm": 0,
+      "decision": "desenho_pronto",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-17",
+    "desc": "obs com sample_per_arm 0: amostra trivialmente atingida; z governa",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.1,
+      "mde": 0,
+      "alpha": 0.05,
+      "power": 0.8,
+      "observed": {
+        "control_n": 500,
+        "control_conv": 50,
+        "treat_n": 500,
+        "treat_conv": 90
+      }
+    },
+    "expected": {
+      "sample_per_arm": 0,
+      "sample_reached": true,
+      "significant": true,
+      "decision": "promover_vencedor",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-18",
+    "desc": "uplift observado positivo e significante com amostra: promover",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.1,
+      "mde": 0.05,
+      "alpha": 0.05,
+      "power": 0.8,
+      "observed": {
+        "control_n": 2000,
+        "control_conv": 200,
+        "treat_n": 2000,
+        "treat_conv": 320
+      }
+    },
+    "expected": {
+      "observed_uplift": 0.06,
+      "significant": true,
+      "sample_reached": true,
+      "decision": "promover_vencedor",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-19",
+    "desc": "sem observed (so desenho): decisao desenho_pronto e nao significante",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.3,
+      "mde": 0.05,
+      "alpha": 0.05,
+      "power": 0.9
+    },
+    "expected": {
+      "z_beta": 1.282,
+      "significant": false,
+      "sample_reached": false,
+      "decision": "desenho_pronto",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-20",
+    "desc": "empate exato (uplift 0) com amostra: nao significante -> continuar",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.1,
+      "mde": 0.05,
+      "alpha": 0.05,
+      "power": 0.8,
+      "observed": {
+        "control_n": 1000,
+        "control_conv": 100,
+        "treat_n": 1000,
+        "treat_conv": 100
+      }
+    },
+    "expected": {
+      "observed_uplift": 0.0,
+      "significant": false,
+      "sample_reached": true,
+      "decision": "continuar_coleta",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-21",
+    "desc": "alpha 0.01 exige z>=2.576; z 2.0 nao significa",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.1,
+      "mde": 0.05,
+      "alpha": 0.01,
+      "power": 0.8,
+      "observed": {
+        "control_n": 5000,
+        "control_conv": 500,
+        "treat_n": 5000,
+        "treat_conv": 560
+      }
+    },
+    "expected": {
+      "z_alpha": 2.576,
+      "sample_reached": true,
+      "significant": false,
+      "decision": "continuar_coleta",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-22",
+    "desc": "alpha 0.10 mais permissivo: amostra cheia (3500>=3027) e z>1.645 promove",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.1,
+      "mde": 0.02,
+      "alpha": 0.1,
+      "power": 0.8,
+      "observed": {
+        "control_n": 3500,
+        "control_conv": 350,
+        "treat_n": 3500,
+        "treat_conv": 420
+      }
+    },
+    "expected": {
+      "z_alpha": 1.645,
+      "sample_reached": true,
+      "significant": true,
+      "decision": "promover_vencedor",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-23",
+    "desc": "grande uplift e amostra robusta: promover com folga",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.05,
+      "mde": 0.02,
+      "alpha": 0.05,
+      "power": 0.8,
+      "observed": {
+        "control_n": 10000,
+        "control_conv": 500,
+        "treat_n": 10000,
+        "treat_conv": 900
+      }
+    },
+    "expected": {
+      "significant": true,
+      "sample_reached": true,
+      "decision": "promover_vencedor",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-24",
+    "desc": "amostra atingida (1200>=1095), tratamento levemente pior nao significante -> continuar",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.2,
+      "mde": 0.05,
+      "alpha": 0.05,
+      "power": 0.8,
+      "observed": {
+        "control_n": 1200,
+        "control_conv": 240,
+        "treat_n": 1200,
+        "treat_conv": 228
+      }
+    },
+    "expected": {
+      "observed_uplift": -0.01,
+      "significant": false,
+      "sample_reached": true,
+      "decision": "continuar_coleta",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-25",
+    "desc": "power 0.9 desenho: z_beta 1.282 e amostra maior",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.1,
+      "mde": 0.05,
+      "alpha": 0.05,
+      "power": 0.9
+    },
+    "expected": {
+      "z_beta": 1.282,
+      "decision": "desenho_pronto",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-26",
+    "desc": "obs pequeno em ambos com z alto (peeking duplo): continuar",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.1,
+      "mde": 0.05,
+      "alpha": 0.05,
+      "power": 0.8,
+      "observed": {
+        "control_n": 50,
+        "control_conv": 2,
+        "treat_n": 50,
+        "treat_conv": 15
+      }
+    },
+    "expected": {
+      "sample_reached": false,
+      "decision": "continuar_coleta",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-27",
+    "desc": "tratamento muito melhor e significante com amostra cheia: promover",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.1,
+      "mde": 0.05,
+      "alpha": 0.05,
+      "power": 0.8,
+      "observed": {
+        "control_n": 1000,
+        "control_conv": 100,
+        "treat_n": 1000,
+        "treat_conv": 200
+      }
+    },
+    "expected": {
+      "observed_uplift": 0.1,
+      "significant": true,
+      "sample_reached": true,
+      "decision": "promover_vencedor",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-28",
+    "desc": "baseline alto 80% MDE 5pp: desenho pronto",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.8,
+      "mde": 0.05,
+      "alpha": 0.05,
+      "power": 0.8
+    },
+    "expected": {
+      "z_alpha": 1.96,
+      "decision": "desenho_pronto",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-29",
+    "desc": "controle melhor significante com amostra: manter controle (nao promove pior)",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.3,
+      "mde": 0.05,
+      "alpha": 0.05,
+      "power": 0.8,
+      "observed": {
+        "control_n": 3000,
+        "control_conv": 900,
+        "treat_n": 3000,
+        "treat_conv": 750
+      }
+    },
+    "expected": {
+      "significant": true,
+      "sample_reached": true,
+      "observed_uplift": -0.05,
+      "decision": "manter_controle",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-30",
+    "desc": "amostra n+1 acima do minimo e significante: promover",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.1,
+      "mde": 0.05,
+      "alpha": 0.05,
+      "power": 0.8,
+      "observed": {
+        "control_n": 687,
+        "control_conv": 69,
+        "treat_n": 687,
+        "treat_conv": 120
+      }
+    },
+    "expected": {
+      "sample_per_arm": 686,
+      "sample_reached": true,
+      "significant": true,
+      "decision": "promover_vencedor",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-31",
+    "desc": "defaults alpha/power ausentes: 1.96/0.842",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.1,
+      "mde": 0.05
+    },
+    "expected": {
+      "z_alpha": 1.96,
+      "z_beta": 0.842,
+      "sample_per_arm": 686,
+      "decision": "desenho_pronto",
+      "by": "g7-ab-growth-runner"
+    }
+  },
+  {
+    "id": "ab-32",
+    "desc": "amostra atingida marginal e z exatamente no limiar: significante e promove",
+    "tenant_id": "t-eval-g07",
+    "experiment": {
+      "baseline_rate": 0.1,
+      "mde": 0.05,
+      "alpha": 0.05,
+      "power": 0.8,
+      "observed": {
+        "control_n": 1500,
+        "control_conv": 150,
+        "treat_n": 1500,
+        "treat_conv": 210
+      }
+    },
+    "expected": {
+      "significant": true,
+      "sample_reached": true,
+      "observed_uplift": 0.04,
+      "decision": "promover_vencedor",
+      "by": "g7-ab-growth-runner"
+    }
+  }
 ]

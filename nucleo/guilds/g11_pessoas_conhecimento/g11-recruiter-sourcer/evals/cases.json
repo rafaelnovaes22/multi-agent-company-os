@@ -7,9 +7,31 @@
     "sourcing": {
       "target": 3,
       "candidates": [
-        {"name": "Ana", "autonomy": 90, "learning_rate": 85, "breadth": 80, "shipping": 95, "source": "github", "inbound": true},
-        {"name": "Bruno", "autonomy": 80, "learning_rate": 75, "breadth": 70, "shipping": 80, "source": "linkedin", "inbound": false},
-        {"name": "Caio", "autonomy": 60, "learning_rate": 55, "breadth": 50, "shipping": 60, "source": "indicacao", "inbound": false}
+        {
+          "name": "Ana",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github",
+          "inbound": true
+        },
+        {
+          "name": "Bruno",
+          "autonomy": 80,
+          "learning_rate": 75,
+          "breadth": 70,
+          "shipping": 80,
+          "source": "linkedin"
+        },
+        {
+          "name": "Caio",
+          "autonomy": 60,
+          "learning_rate": 55,
+          "breadth": 50,
+          "shipping": 60,
+          "source": "indicacao"
+        }
       ]
     },
     "expected": {
@@ -26,15 +48,36 @@
   },
   {
     "id": "rs-02",
-    "desc": "publicavel: atinge alvo (2); candidato sem fonte e excluido apesar de score alto",
+    "desc": "publicavel: atinge alvo (2); candidato sem fonte excluido apesar de score alto",
     "tenant_id": "t-eval-g11",
     "statement": "Publique a short-list de candidatos qualificados",
     "sourcing": {
       "target": 2,
       "candidates": [
-        {"name": "Duda", "autonomy": 95, "learning_rate": 90, "breadth": 85, "shipping": 90, "source": "github", "inbound": true},
-        {"name": "Eva", "autonomy": 85, "learning_rate": 80, "breadth": 75, "shipping": 85, "source": "linkedin", "inbound": false},
-        {"name": "Fred", "autonomy": 92, "learning_rate": 88, "breadth": 90, "shipping": 95, "inbound": false}
+        {
+          "name": "Duda",
+          "autonomy": 95,
+          "learning_rate": 90,
+          "breadth": 85,
+          "shipping": 90,
+          "source": "github",
+          "inbound": true
+        },
+        {
+          "name": "Eva",
+          "autonomy": 85,
+          "learning_rate": 80,
+          "breadth": 75,
+          "shipping": 85,
+          "source": "linkedin"
+        },
+        {
+          "name": "Fred",
+          "autonomy": 92,
+          "learning_rate": 88,
+          "breadth": 90,
+          "shipping": 95
+        }
       ]
     },
     "expected": {
@@ -57,8 +100,23 @@
     "sourcing": {
       "threshold": 80,
       "candidates": [
-        {"name": "Gil", "autonomy": 50, "learning_rate": 40, "breadth": 30, "shipping": 45, "source": "linkedin", "inbound": false},
-        {"name": "Hugo", "autonomy": 60, "learning_rate": 50, "breadth": 40, "shipping": 55, "source": "github", "inbound": true}
+        {
+          "name": "Gil",
+          "autonomy": 50,
+          "learning_rate": 40,
+          "breadth": 30,
+          "shipping": 45,
+          "source": "linkedin"
+        },
+        {
+          "name": "Hugo",
+          "autonomy": 60,
+          "learning_rate": 50,
+          "breadth": 40,
+          "shipping": 55,
+          "source": "github",
+          "inbound": true
+        }
       ]
     },
     "expected": {
@@ -70,6 +128,1201 @@
       "inbound_ratio": 0.0,
       "top_candidate": null,
       "status": "vazia"
+    }
+  },
+  {
+    "id": "rs-04",
+    "desc": "caminho feliz: 5 ex-fundadores qualificados, atinge alvo 5",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "A",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github",
+          "inbound": true
+        },
+        {
+          "name": "B",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "linkedin"
+        },
+        {
+          "name": "C",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "blog"
+        },
+        {
+          "name": "D",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "talk"
+        },
+        {
+          "name": "E",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "repo",
+          "inbound": true
+        }
+      ]
+    },
+    "expected": {
+      "candidate_count": 5,
+      "qualified_count": 5,
+      "target": 5,
+      "meets_target": true,
+      "avg_slope_score": 88.0,
+      "inbound_ratio": 0.4,
+      "top_candidate": "A",
+      "status": "publicavel",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-05",
+    "desc": "todos inbound (founder brand): inbound_ratio 1.0",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "A",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "brand",
+          "inbound": true
+        },
+        {
+          "name": "B",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "brand",
+          "inbound": true
+        },
+        {
+          "name": "C",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "brand",
+          "inbound": true
+        }
+      ],
+      "target": 3
+    },
+    "expected": {
+      "candidate_count": 3,
+      "qualified_count": 3,
+      "target": 3,
+      "meets_target": true,
+      "avg_slope_score": 88.0,
+      "inbound_ratio": 1.0,
+      "top_candidate": "A",
+      "status": "publicavel",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-06",
+    "desc": "fronteira: slope exatamente 70 com fonte QUALIFICA (>=)",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "Borda",
+          "autonomy": 70,
+          "learning_rate": 70,
+          "breadth": 70,
+          "shipping": 70,
+          "source": "github"
+        }
+      ],
+      "target": 1
+    },
+    "expected": {
+      "candidate_count": 1,
+      "qualified_count": 1,
+      "target": 1,
+      "meets_target": true,
+      "avg_slope_score": 70.0,
+      "inbound_ratio": 0.0,
+      "top_candidate": "Borda",
+      "status": "publicavel",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-07",
+    "desc": "fronteira: slope 69.7 (abaixo de 70) NAO qualifica -> vazia",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "Quase",
+          "autonomy": 69,
+          "learning_rate": 70,
+          "breadth": 70,
+          "shipping": 70,
+          "source": "github"
+        }
+      ],
+      "target": 1
+    },
+    "expected": {
+      "candidate_count": 1,
+      "qualified_count": 0,
+      "target": 1,
+      "meets_target": false,
+      "avg_slope_score": 0.0,
+      "inbound_ratio": 0.0,
+      "top_candidate": null,
+      "status": "vazia",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-08",
+    "desc": "gate de fonte isolado: candidato 95 sem fonte NAO entra -> vazia",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "SemFonte",
+          "autonomy": 95,
+          "learning_rate": 95,
+          "breadth": 95,
+          "shipping": 95
+        }
+      ],
+      "target": 1
+    },
+    "expected": {
+      "candidate_count": 1,
+      "qualified_count": 0,
+      "target": 1,
+      "meets_target": false,
+      "avg_slope_score": 0.0,
+      "inbound_ratio": 0.0,
+      "top_candidate": null,
+      "status": "vazia",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-09",
+    "desc": "lista crua de genericos (slope baixo) com fonte -> nenhum qualifica",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "g1",
+          "autonomy": 60,
+          "learning_rate": 55,
+          "breadth": 50,
+          "shipping": 60,
+          "source": "indicacao"
+        },
+        {
+          "name": "g2",
+          "autonomy": 60,
+          "learning_rate": 55,
+          "breadth": 50,
+          "shipping": 60,
+          "source": "indicacao"
+        },
+        {
+          "name": "g3",
+          "autonomy": 60,
+          "learning_rate": 55,
+          "breadth": 50,
+          "shipping": 60,
+          "source": "indicacao"
+        },
+        {
+          "name": "g4",
+          "autonomy": 60,
+          "learning_rate": 55,
+          "breadth": 50,
+          "shipping": 60,
+          "source": "indicacao"
+        },
+        {
+          "name": "g5",
+          "autonomy": 60,
+          "learning_rate": 55,
+          "breadth": 50,
+          "shipping": 60,
+          "source": "indicacao"
+        }
+      ]
+    },
+    "expected": {
+      "candidate_count": 5,
+      "qualified_count": 0,
+      "target": 5,
+      "meets_target": false,
+      "avg_slope_score": 0.0,
+      "inbound_ratio": 0.0,
+      "top_candidate": null,
+      "status": "vazia",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-10",
+    "desc": "limiar custom 75 (abaixo default): MID 76.8 passa, LO nao",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "M",
+          "autonomy": 80,
+          "learning_rate": 75,
+          "breadth": 70,
+          "shipping": 80,
+          "source": "linkedin"
+        },
+        {
+          "name": "L",
+          "autonomy": 60,
+          "learning_rate": 55,
+          "breadth": 50,
+          "shipping": 60,
+          "source": "indicacao"
+        }
+      ],
+      "target": 1,
+      "threshold": 75
+    },
+    "expected": {
+      "candidate_count": 2,
+      "qualified_count": 1,
+      "target": 1,
+      "meets_target": true,
+      "avg_slope_score": 76.8,
+      "inbound_ratio": 0.0,
+      "top_candidate": "M",
+      "status": "publicavel",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-11",
+    "desc": "limiar custom 80 (acima default): MID 76.8 NAO passa, HI sim",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "H",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github"
+        },
+        {
+          "name": "M",
+          "autonomy": 80,
+          "learning_rate": 75,
+          "breadth": 70,
+          "shipping": 80,
+          "source": "linkedin"
+        }
+      ],
+      "target": 1,
+      "threshold": 80
+    },
+    "expected": {
+      "candidate_count": 2,
+      "qualified_count": 1,
+      "target": 1,
+      "meets_target": true,
+      "avg_slope_score": 88.0,
+      "inbound_ratio": 0.0,
+      "top_candidate": "H",
+      "status": "publicavel",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-12",
+    "desc": "fronteira alvo: qualificados == alvo (2) -> publicavel",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "A",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github"
+        },
+        {
+          "name": "B",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github"
+        }
+      ],
+      "target": 2
+    },
+    "expected": {
+      "candidate_count": 2,
+      "qualified_count": 2,
+      "target": 2,
+      "meets_target": true,
+      "avg_slope_score": 88.0,
+      "inbound_ratio": 0.0,
+      "top_candidate": "A",
+      "status": "publicavel",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-13",
+    "desc": "fronteira alvo: qualificados (2) < alvo (3) -> parcial",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "A",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github"
+        },
+        {
+          "name": "B",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github"
+        },
+        {
+          "name": "C",
+          "autonomy": 60,
+          "learning_rate": 55,
+          "breadth": 50,
+          "shipping": 60,
+          "source": "indicacao"
+        }
+      ],
+      "target": 3
+    },
+    "expected": {
+      "candidate_count": 3,
+      "qualified_count": 2,
+      "target": 3,
+      "meets_target": false,
+      "avg_slope_score": 88.0,
+      "inbound_ratio": 0.0,
+      "top_candidate": "A",
+      "status": "parcial",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-14",
+    "desc": "inbound_ratio fracionario: 1 de 3 qualificados e inbound",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "A",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "x",
+          "inbound": true
+        },
+        {
+          "name": "B",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "y"
+        },
+        {
+          "name": "C",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "z"
+        }
+      ],
+      "target": 3
+    },
+    "expected": {
+      "candidate_count": 3,
+      "qualified_count": 3,
+      "target": 3,
+      "meets_target": true,
+      "avg_slope_score": 88.0,
+      "inbound_ratio": 0.333,
+      "top_candidate": "A",
+      "status": "publicavel",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-15",
+    "desc": "top_candidate e o maior slope independente da ordem de entrada",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "Meio",
+          "autonomy": 80,
+          "learning_rate": 75,
+          "breadth": 70,
+          "shipping": 80,
+          "source": "linkedin"
+        },
+        {
+          "name": "Topo",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github"
+        },
+        {
+          "name": "Baixo",
+          "autonomy": 60,
+          "learning_rate": 55,
+          "breadth": 50,
+          "shipping": 60,
+          "source": "indicacao"
+        }
+      ],
+      "target": 1
+    },
+    "expected": {
+      "candidate_count": 3,
+      "qualified_count": 2,
+      "target": 1,
+      "meets_target": true,
+      "avg_slope_score": 82.4,
+      "inbound_ratio": 0.0,
+      "top_candidate": "Topo",
+      "status": "publicavel",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-16",
+    "desc": "sinais parciais: campos ausentes contam 0 no slope",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "Parcial",
+          "autonomy": 100,
+          "learning_rate": 0,
+          "breadth": 0,
+          "shipping": 0,
+          "source": "github"
+        }
+      ],
+      "target": 1,
+      "threshold": 25
+    },
+    "expected": {
+      "candidate_count": 1,
+      "qualified_count": 1,
+      "target": 1,
+      "meets_target": true,
+      "avg_slope_score": 30.0,
+      "inbound_ratio": 0.0,
+      "top_candidate": "Parcial",
+      "status": "publicavel",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-17",
+    "desc": "1 qualificado de muitos, alvo 5 -> parcial",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "Unico",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github"
+        },
+        {
+          "name": "a",
+          "autonomy": 60,
+          "learning_rate": 55,
+          "breadth": 50,
+          "shipping": 60,
+          "source": "indicacao"
+        },
+        {
+          "name": "b",
+          "autonomy": 60,
+          "learning_rate": 55,
+          "breadth": 50,
+          "shipping": 60,
+          "source": "indicacao"
+        },
+        {
+          "name": "c",
+          "autonomy": 60,
+          "learning_rate": 55,
+          "breadth": 50,
+          "shipping": 60,
+          "source": "indicacao"
+        },
+        {
+          "name": "d",
+          "autonomy": 60,
+          "learning_rate": 55,
+          "breadth": 50,
+          "shipping": 60,
+          "source": "indicacao"
+        }
+      ]
+    },
+    "expected": {
+      "candidate_count": 5,
+      "qualified_count": 1,
+      "target": 5,
+      "meets_target": false,
+      "avg_slope_score": 88.0,
+      "inbound_ratio": 0.0,
+      "top_candidate": "Unico",
+      "status": "parcial",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-18",
+    "desc": "alvo default 5 quando omitido: 3 qualificados -> parcial",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "A",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github"
+        },
+        {
+          "name": "B",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github"
+        },
+        {
+          "name": "C",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github"
+        }
+      ]
+    },
+    "expected": {
+      "candidate_count": 3,
+      "qualified_count": 3,
+      "target": 5,
+      "meets_target": false,
+      "avg_slope_score": 88.0,
+      "inbound_ratio": 0.0,
+      "top_candidate": "A",
+      "status": "parcial",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-19",
+    "desc": "limiar custom 50: LO 56.5 passa",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "L",
+          "autonomy": 60,
+          "learning_rate": 55,
+          "breadth": 50,
+          "shipping": 60,
+          "source": "github"
+        }
+      ],
+      "target": 1,
+      "threshold": 50
+    },
+    "expected": {
+      "candidate_count": 1,
+      "qualified_count": 1,
+      "target": 1,
+      "meets_target": true,
+      "avg_slope_score": 56.8,
+      "inbound_ratio": 0.0,
+      "top_candidate": "L",
+      "status": "publicavel",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-20",
+    "desc": "limiar custom 50 mas candidato sem fonte -> vazia (gate fonte)",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "SemFonteBaixoLimiar",
+          "autonomy": 60,
+          "learning_rate": 55,
+          "breadth": 50,
+          "shipping": 60
+        }
+      ],
+      "target": 1,
+      "threshold": 50
+    },
+    "expected": {
+      "candidate_count": 1,
+      "qualified_count": 0,
+      "target": 1,
+      "meets_target": false,
+      "avg_slope_score": 0.0,
+      "inbound_ratio": 0.0,
+      "top_candidate": null,
+      "status": "vazia",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-21",
+    "desc": "avg_slope_score considera SO os qualificados",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "Q1",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github"
+        },
+        {
+          "name": "Q2",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github"
+        },
+        {
+          "name": "R1",
+          "autonomy": 60,
+          "learning_rate": 55,
+          "breadth": 50,
+          "shipping": 60,
+          "source": "indicacao"
+        },
+        {
+          "name": "R2",
+          "autonomy": 60,
+          "learning_rate": 55,
+          "breadth": 50,
+          "shipping": 60,
+          "source": "indicacao"
+        }
+      ],
+      "target": 2
+    },
+    "expected": {
+      "candidate_count": 4,
+      "qualified_count": 2,
+      "target": 2,
+      "meets_target": true,
+      "avg_slope_score": 88.0,
+      "inbound_ratio": 0.0,
+      "top_candidate": "Q1",
+      "status": "publicavel",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-22",
+    "desc": "candidate_count total vs qualified subset",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "A",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github"
+        },
+        {
+          "name": "B",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github"
+        },
+        {
+          "name": "SemFonte",
+          "autonomy": 99,
+          "learning_rate": 99,
+          "breadth": 99,
+          "shipping": 99,
+          "inbound": true
+        },
+        {
+          "name": "C",
+          "autonomy": 60,
+          "learning_rate": 55,
+          "breadth": 50,
+          "shipping": 60,
+          "source": "indicacao"
+        }
+      ],
+      "target": 2
+    },
+    "expected": {
+      "candidate_count": 4,
+      "qualified_count": 2,
+      "target": 2,
+      "meets_target": true,
+      "avg_slope_score": 88.0,
+      "inbound_ratio": 0.0,
+      "top_candidate": "A",
+      "status": "publicavel",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-23",
+    "desc": "dois HI empatados: ambos qualificam, atinge alvo 2",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "A",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github"
+        },
+        {
+          "name": "B",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github"
+        }
+      ],
+      "target": 2
+    },
+    "expected": {
+      "candidate_count": 2,
+      "qualified_count": 2,
+      "target": 2,
+      "meets_target": true,
+      "avg_slope_score": 88.0,
+      "inbound_ratio": 0.0,
+      "top_candidate": "A",
+      "status": "publicavel",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-24",
+    "desc": "precedencia combinada: so o forte-com-fonte qualifica",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "ForteSemFonte",
+          "autonomy": 95,
+          "learning_rate": 95,
+          "breadth": 95,
+          "shipping": 95
+        },
+        {
+          "name": "FracoComFonte",
+          "autonomy": 40,
+          "learning_rate": 40,
+          "breadth": 40,
+          "shipping": 40,
+          "source": "github"
+        },
+        {
+          "name": "ForteComFonte",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "x"
+        }
+      ],
+      "target": 1
+    },
+    "expected": {
+      "candidate_count": 3,
+      "qualified_count": 1,
+      "target": 1,
+      "meets_target": true,
+      "avg_slope_score": 88.0,
+      "inbound_ratio": 0.0,
+      "top_candidate": "ForteComFonte",
+      "status": "publicavel",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-25",
+    "desc": "sem candidatos: status vazia",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [],
+      "target": 3
+    },
+    "expected": {
+      "candidate_count": 0,
+      "qualified_count": 0,
+      "target": 3,
+      "meets_target": false,
+      "avg_slope_score": 0.0,
+      "inbound_ratio": 0.0,
+      "top_candidate": null,
+      "status": "vazia",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-26",
+    "desc": "inbound nao qualifica sozinho: precisa slope+fonte",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "InboundFraco",
+          "autonomy": 30,
+          "learning_rate": 30,
+          "breadth": 30,
+          "shipping": 30,
+          "source": "brand",
+          "inbound": true
+        }
+      ],
+      "target": 1
+    },
+    "expected": {
+      "candidate_count": 1,
+      "qualified_count": 0,
+      "target": 1,
+      "meets_target": false,
+      "avg_slope_score": 0.0,
+      "inbound_ratio": 0.0,
+      "top_candidate": null,
+      "status": "vazia",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-27",
+    "desc": "fronteira custom: slope exatamente == limiar custom 88 qualifica",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "Exato88",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github"
+        }
+      ],
+      "target": 1,
+      "threshold": 88
+    },
+    "expected": {
+      "candidate_count": 1,
+      "qualified_count": 1,
+      "target": 1,
+      "meets_target": true,
+      "avg_slope_score": 88.0,
+      "inbound_ratio": 0.0,
+      "top_candidate": "Exato88",
+      "status": "publicavel",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-28",
+    "desc": "fronteira custom: slope 88 < limiar 88.1 NAO qualifica",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "Quase88",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github"
+        }
+      ],
+      "target": 1,
+      "threshold": 88.1
+    },
+    "expected": {
+      "candidate_count": 1,
+      "qualified_count": 0,
+      "target": 1,
+      "meets_target": false,
+      "avg_slope_score": 0.0,
+      "inbound_ratio": 0.0,
+      "top_candidate": null,
+      "status": "vazia",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-29",
+    "desc": "6 qualificados, alvo 5 -> publicavel (sobra)",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "A",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github"
+        },
+        {
+          "name": "B",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github"
+        },
+        {
+          "name": "C",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github"
+        },
+        {
+          "name": "D",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github"
+        },
+        {
+          "name": "E",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github"
+        },
+        {
+          "name": "F",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "github"
+        }
+      ]
+    },
+    "expected": {
+      "candidate_count": 6,
+      "qualified_count": 6,
+      "target": 5,
+      "meets_target": true,
+      "avg_slope_score": 88.0,
+      "inbound_ratio": 0.0,
+      "top_candidate": "A",
+      "status": "publicavel",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-30",
+    "desc": "inbound_ratio 0 quando qualificados nao sao inbound",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "A",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "x"
+        },
+        {
+          "name": "B",
+          "autonomy": 90,
+          "learning_rate": 85,
+          "breadth": 80,
+          "shipping": 95,
+          "source": "y"
+        }
+      ],
+      "target": 2
+    },
+    "expected": {
+      "candidate_count": 2,
+      "qualified_count": 2,
+      "target": 2,
+      "meets_target": true,
+      "avg_slope_score": 88.0,
+      "inbound_ratio": 0.0,
+      "top_candidate": "A",
+      "status": "publicavel",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-31",
+    "desc": "exato 70 inbound qualifica e conta no ratio",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "BordaInbound",
+          "autonomy": 70,
+          "learning_rate": 70,
+          "breadth": 70,
+          "shipping": 70,
+          "source": "github",
+          "inbound": true
+        }
+      ],
+      "target": 1
+    },
+    "expected": {
+      "candidate_count": 1,
+      "qualified_count": 1,
+      "target": 1,
+      "meets_target": true,
+      "avg_slope_score": 70.0,
+      "inbound_ratio": 1.0,
+      "top_candidate": "BordaInbound",
+      "status": "publicavel",
+      "by": "g11-recruiter-sourcer"
+    }
+  },
+  {
+    "id": "rs-32",
+    "desc": "todos sem citacao de fonte: vazia (nao auditavel)",
+    "tenant_id": "t-eval-g11",
+    "statement": "Monte uma short-list ranqueada por Slope Score",
+    "sourcing": {
+      "candidates": [
+        {
+          "name": "A",
+          "autonomy": 90,
+          "learning_rate": 90,
+          "breadth": 90,
+          "shipping": 90
+        },
+        {
+          "name": "B",
+          "autonomy": 85,
+          "learning_rate": 85,
+          "breadth": 85,
+          "shipping": 85,
+          "inbound": true
+        }
+      ],
+      "target": 2
+    },
+    "expected": {
+      "candidate_count": 2,
+      "qualified_count": 0,
+      "target": 2,
+      "meets_target": false,
+      "avg_slope_score": 0.0,
+      "inbound_ratio": 0.0,
+      "top_candidate": null,
+      "status": "vazia",
+      "by": "g11-recruiter-sourcer"
     }
   }
 ]

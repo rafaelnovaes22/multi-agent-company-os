@@ -13,10 +13,12 @@
     "expected": {
       "sample_size_per_variant": 3528,
       "total_sample_size": 7056,
-      "duration_days": 4,
+      "variants": 2,
       "has_guardrail": true,
+      "fits_window": true,
       "can_start": true,
-      "decision": "pre_registrado"
+      "decision": "pre_registrado",
+      "duration_days": 4
     }
   },
   {
@@ -31,7 +33,10 @@
     },
     "expected": {
       "sample_size_per_variant": 1004,
+      "total_sample_size": 2008,
+      "variants": 2,
       "has_guardrail": false,
+      "fits_window": true,
       "can_start": false,
       "decision": "bloqueado_sem_guardrail"
     }
@@ -50,10 +55,665 @@
     },
     "expected": {
       "sample_size_per_variant": 392,
-      "duration_days": 8,
+      "total_sample_size": 784,
+      "variants": 2,
+      "has_guardrail": true,
       "fits_window": false,
       "can_start": false,
-      "decision": "bloqueado_subdimensionado"
+      "decision": "bloqueado_subdimensionado",
+      "duration_days": 8
+    }
+  },
+  {
+    "id": "exp-04",
+    "desc": "caminho feliz: metrica primaria + guardrail + n antes de ligar",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.15,
+      "mde": 0.03,
+      "variants": 2,
+      "daily_traffic": 3000,
+      "window_days": 30,
+      "guardrail_metric": "latencia"
+    },
+    "expected": {
+      "sample_size_per_variant": 2222,
+      "total_sample_size": 4444,
+      "variants": 2,
+      "has_guardrail": true,
+      "fits_window": true,
+      "can_start": true,
+      "decision": "pre_registrado",
+      "duration_days": 2
+    }
+  },
+  {
+    "id": "exp-05",
+    "desc": "3 variantes (controle + 2 tratamentos) com guardrail",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.1,
+      "mde": 0.02,
+      "variants": 3,
+      "daily_traffic": 6000,
+      "window_days": 21,
+      "guardrail_metric": "erro"
+    },
+    "expected": {
+      "sample_size_per_variant": 3528,
+      "total_sample_size": 10584,
+      "variants": 3,
+      "has_guardrail": true,
+      "fits_window": true,
+      "can_start": true,
+      "decision": "pre_registrado",
+      "duration_days": 2
+    }
+  },
+  {
+    "id": "exp-06",
+    "desc": "sem guardrail (otimiza local, piora o todo) -> bloqueado_sem_guardrail",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.3,
+      "mde": 0.05,
+      "variants": 2,
+      "daily_traffic": 4000
+    },
+    "expected": {
+      "sample_size_per_variant": 1318,
+      "total_sample_size": 2636,
+      "variants": 2,
+      "has_guardrail": false,
+      "fits_window": true,
+      "can_start": false,
+      "decision": "bloqueado_sem_guardrail"
+    }
+  },
+  {
+    "id": "exp-07",
+    "desc": "subdimensionado: trafego baixo estoura janela de 7d",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.2,
+      "mde": 0.02,
+      "variants": 2,
+      "daily_traffic": 50,
+      "window_days": 7,
+      "guardrail_metric": "churn"
+    },
+    "expected": {
+      "sample_size_per_variant": 6272,
+      "total_sample_size": 12544,
+      "variants": 2,
+      "has_guardrail": true,
+      "fits_window": false,
+      "can_start": false,
+      "decision": "bloqueado_subdimensionado",
+      "duration_days": 251
+    }
+  },
+  {
+    "id": "exp-08",
+    "desc": "fronteira janela: duracao == window exata -> cabe (pre_registrado)",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.5,
+      "mde": 0.1,
+      "variants": 2,
+      "daily_traffic": 100,
+      "window_days": 8,
+      "guardrail_metric": "g"
+    },
+    "expected": {
+      "sample_size_per_variant": 392,
+      "total_sample_size": 784,
+      "variants": 2,
+      "has_guardrail": true,
+      "fits_window": true,
+      "can_start": true,
+      "decision": "pre_registrado",
+      "duration_days": 8
+    }
+  },
+  {
+    "id": "exp-09",
+    "desc": "fronteira janela: duracao == window+1 -> nao cabe",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.5,
+      "mde": 0.1,
+      "variants": 2,
+      "daily_traffic": 100,
+      "window_days": 7,
+      "guardrail_metric": "g"
+    },
+    "expected": {
+      "sample_size_per_variant": 392,
+      "total_sample_size": 784,
+      "variants": 2,
+      "has_guardrail": true,
+      "fits_window": false,
+      "can_start": false,
+      "decision": "bloqueado_subdimensionado",
+      "duration_days": 8
+    }
+  },
+  {
+    "id": "exp-10",
+    "desc": "sem window: sempre cabe se tem guardrail",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.4,
+      "mde": 0.05,
+      "variants": 2,
+      "daily_traffic": 200,
+      "guardrail_metric": "g"
+    },
+    "expected": {
+      "sample_size_per_variant": 1506,
+      "total_sample_size": 3012,
+      "variants": 2,
+      "has_guardrail": true,
+      "fits_window": true,
+      "can_start": true,
+      "decision": "pre_registrado",
+      "duration_days": 16
+    }
+  },
+  {
+    "id": "exp-11",
+    "desc": "mde grande -> n pequeno, rapido",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.5,
+      "mde": 0.2,
+      "variants": 2,
+      "daily_traffic": 1000,
+      "guardrail_metric": "g"
+    },
+    "expected": {
+      "sample_size_per_variant": 98,
+      "total_sample_size": 196,
+      "variants": 2,
+      "has_guardrail": true,
+      "fits_window": true,
+      "can_start": true,
+      "decision": "pre_registrado",
+      "duration_days": 1
+    }
+  },
+  {
+    "id": "exp-12",
+    "desc": "mde minusculo -> n enorme",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.5,
+      "mde": 0.005,
+      "variants": 2,
+      "daily_traffic": 100000,
+      "window_days": 60,
+      "guardrail_metric": "g"
+    },
+    "expected": {
+      "sample_size_per_variant": 156800,
+      "total_sample_size": 313600,
+      "variants": 2,
+      "has_guardrail": true,
+      "fits_window": true,
+      "can_start": true,
+      "decision": "pre_registrado",
+      "duration_days": 4
+    }
+  },
+  {
+    "id": "exp-13",
+    "desc": "baseline extremo 0.01 -> n pequeno (variancia baixa)",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.01,
+      "mde": 0.02,
+      "variants": 2,
+      "daily_traffic": 5000,
+      "guardrail_metric": "g"
+    },
+    "expected": {
+      "sample_size_per_variant": 389,
+      "total_sample_size": 778,
+      "variants": 2,
+      "has_guardrail": true,
+      "fits_window": true,
+      "can_start": true,
+      "decision": "pre_registrado",
+      "duration_days": 1
+    }
+  },
+  {
+    "id": "exp-14",
+    "desc": "baseline 0.5 maximiza variancia -> maior n",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.5,
+      "mde": 0.05,
+      "variants": 2,
+      "daily_traffic": 8000,
+      "window_days": 30,
+      "guardrail_metric": "g"
+    },
+    "expected": {
+      "sample_size_per_variant": 1568,
+      "total_sample_size": 3136,
+      "variants": 2,
+      "has_guardrail": true,
+      "fits_window": true,
+      "can_start": true,
+      "decision": "pre_registrado",
+      "duration_days": 1
+    }
+  },
+  {
+    "id": "exp-15",
+    "desc": "precedencia: subdimensionado MAS sem guardrail -> guardrail vence",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.5,
+      "mde": 0.02,
+      "variants": 2,
+      "daily_traffic": 10,
+      "window_days": 1
+    },
+    "expected": {
+      "sample_size_per_variant": 9800,
+      "total_sample_size": 19600,
+      "variants": 2,
+      "has_guardrail": false,
+      "fits_window": false,
+      "can_start": false,
+      "decision": "bloqueado_sem_guardrail"
+    }
+  },
+  {
+    "id": "exp-16",
+    "desc": "precedencia: tem guardrail e cabe -> pre_registrado",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.25,
+      "mde": 0.04,
+      "variants": 2,
+      "daily_traffic": 4000,
+      "window_days": 45,
+      "guardrail_metric": "nps"
+    },
+    "expected": {
+      "sample_size_per_variant": 1838,
+      "total_sample_size": 3676,
+      "variants": 2,
+      "has_guardrail": true,
+      "fits_window": true,
+      "can_start": true,
+      "decision": "pre_registrado",
+      "duration_days": 1
+    }
+  },
+  {
+    "id": "exp-17",
+    "desc": "mde zero -> n=0, decisao bloqueado (final else)",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.3,
+      "mde": 0,
+      "variants": 2,
+      "daily_traffic": 5000,
+      "guardrail_metric": "g"
+    },
+    "expected": {
+      "sample_size_per_variant": 0,
+      "total_sample_size": 0,
+      "variants": 2,
+      "has_guardrail": true,
+      "fits_window": true,
+      "can_start": false,
+      "decision": "bloqueado",
+      "duration_days": 0
+    }
+  },
+  {
+    "id": "exp-18",
+    "desc": "4 variantes multivariado",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.2,
+      "mde": 0.03,
+      "variants": 4,
+      "daily_traffic": 12000,
+      "window_days": 40,
+      "guardrail_metric": "g"
+    },
+    "expected": {
+      "sample_size_per_variant": 2788,
+      "total_sample_size": 11152,
+      "variants": 4,
+      "has_guardrail": true,
+      "fits_window": true,
+      "can_start": true,
+      "decision": "pre_registrado",
+      "duration_days": 1
+    }
+  },
+  {
+    "id": "exp-19",
+    "desc": "trafego alto cabe rapido em 1d",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.1,
+      "mde": 0.05,
+      "variants": 2,
+      "daily_traffic": 50000,
+      "window_days": 3,
+      "guardrail_metric": "g"
+    },
+    "expected": {
+      "sample_size_per_variant": 565,
+      "total_sample_size": 1130,
+      "variants": 2,
+      "has_guardrail": true,
+      "fits_window": true,
+      "can_start": true,
+      "decision": "pre_registrado",
+      "duration_days": 1
+    }
+  },
+  {
+    "id": "exp-20",
+    "desc": "janela apertada mas cabe",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.3,
+      "mde": 0.05,
+      "variants": 2,
+      "daily_traffic": 2000,
+      "window_days": 2,
+      "guardrail_metric": "g"
+    },
+    "expected": {
+      "sample_size_per_variant": 1318,
+      "total_sample_size": 2636,
+      "variants": 2,
+      "has_guardrail": true,
+      "fits_window": true,
+      "can_start": true,
+      "decision": "pre_registrado",
+      "duration_days": 2
+    }
+  },
+  {
+    "id": "exp-21",
+    "desc": "sem guardrail mesmo com tudo certo -> bloqueado",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.2,
+      "mde": 0.03,
+      "variants": 2,
+      "daily_traffic": 10000,
+      "window_days": 30
+    },
+    "expected": {
+      "sample_size_per_variant": 2788,
+      "total_sample_size": 5576,
+      "variants": 2,
+      "has_guardrail": false,
+      "fits_window": true,
+      "can_start": false,
+      "decision": "bloqueado_sem_guardrail"
+    }
+  },
+  {
+    "id": "exp-22",
+    "desc": "baseline 0.05, mde 0.01",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.05,
+      "mde": 0.01,
+      "variants": 2,
+      "daily_traffic": 20000,
+      "window_days": 30,
+      "guardrail_metric": "g"
+    },
+    "expected": {
+      "sample_size_per_variant": 7448,
+      "total_sample_size": 14896,
+      "variants": 2,
+      "has_guardrail": true,
+      "fits_window": true,
+      "can_start": true,
+      "decision": "pre_registrado",
+      "duration_days": 1
+    }
+  },
+  {
+    "id": "exp-23",
+    "desc": "duracao exatamente cabe na janela grande",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.4,
+      "mde": 0.06,
+      "variants": 2,
+      "daily_traffic": 1500,
+      "window_days": 14,
+      "guardrail_metric": "g"
+    },
+    "expected": {
+      "sample_size_per_variant": 1046,
+      "total_sample_size": 2092,
+      "variants": 2,
+      "has_guardrail": true,
+      "fits_window": true,
+      "can_start": true,
+      "decision": "pre_registrado",
+      "duration_days": 2
+    }
+  },
+  {
+    "id": "exp-24",
+    "desc": "3 variantes subdimensionado pela divisao de trafego",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.3,
+      "mde": 0.03,
+      "variants": 3,
+      "daily_traffic": 300,
+      "window_days": 10,
+      "guardrail_metric": "g"
+    },
+    "expected": {
+      "sample_size_per_variant": 3659,
+      "total_sample_size": 10977,
+      "variants": 3,
+      "has_guardrail": true,
+      "fits_window": false,
+      "can_start": false,
+      "decision": "bloqueado_subdimensionado",
+      "duration_days": 37
+    }
+  },
+  {
+    "id": "exp-25",
+    "desc": "baseline 0.9 (simetrico a 0.1)",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.9,
+      "mde": 0.05,
+      "variants": 2,
+      "daily_traffic": 5000,
+      "window_days": 30,
+      "guardrail_metric": "g"
+    },
+    "expected": {
+      "sample_size_per_variant": 565,
+      "total_sample_size": 1130,
+      "variants": 2,
+      "has_guardrail": true,
+      "fits_window": true,
+      "can_start": true,
+      "decision": "pre_registrado",
+      "duration_days": 1
+    }
+  },
+  {
+    "id": "exp-26",
+    "desc": "sem guardrail e mde zero -> guardrail vence na precedencia",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.3,
+      "mde": 0,
+      "variants": 2,
+      "daily_traffic": 1000
+    },
+    "expected": {
+      "sample_size_per_variant": 0,
+      "total_sample_size": 0,
+      "variants": 2,
+      "has_guardrail": false,
+      "fits_window": true,
+      "can_start": false,
+      "decision": "bloqueado_sem_guardrail"
+    }
+  },
+  {
+    "id": "exp-27",
+    "desc": "window None com mde grande -> pre_registrado rapido",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.2,
+      "mde": 0.15,
+      "variants": 2,
+      "daily_traffic": 500,
+      "guardrail_metric": "g"
+    },
+    "expected": {
+      "sample_size_per_variant": 112,
+      "total_sample_size": 224,
+      "variants": 2,
+      "has_guardrail": true,
+      "fits_window": true,
+      "can_start": true,
+      "decision": "pre_registrado",
+      "duration_days": 1
+    }
+  },
+  {
+    "id": "exp-28",
+    "desc": "experimento longo mas dentro de 90d",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.1,
+      "mde": 0.01,
+      "variants": 2,
+      "daily_traffic": 1000,
+      "window_days": 90,
+      "guardrail_metric": "g"
+    },
+    "expected": {
+      "sample_size_per_variant": 14112,
+      "total_sample_size": 28224,
+      "variants": 2,
+      "has_guardrail": true,
+      "fits_window": true,
+      "can_start": true,
+      "decision": "pre_registrado",
+      "duration_days": 29
+    }
+  },
+  {
+    "id": "exp-29",
+    "desc": "trafego diario igual ao n diario necessario",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.5,
+      "mde": 0.1,
+      "variants": 2,
+      "daily_traffic": 784,
+      "window_days": 1,
+      "guardrail_metric": "g"
+    },
+    "expected": {
+      "sample_size_per_variant": 392,
+      "total_sample_size": 784,
+      "variants": 2,
+      "has_guardrail": true,
+      "fits_window": true,
+      "can_start": true,
+      "decision": "pre_registrado",
+      "duration_days": 1
+    }
+  },
+  {
+    "id": "exp-30",
+    "desc": "subdimensionado severo: 1 unico usuario/dia",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.5,
+      "mde": 0.05,
+      "variants": 2,
+      "daily_traffic": 2,
+      "window_days": 5,
+      "guardrail_metric": "g"
+    },
+    "expected": {
+      "sample_size_per_variant": 1568,
+      "total_sample_size": 3136,
+      "variants": 2,
+      "has_guardrail": true,
+      "fits_window": false,
+      "can_start": false,
+      "decision": "bloqueado_subdimensionado",
+      "duration_days": 1568
+    }
+  },
+  {
+    "id": "exp-31",
+    "desc": "baseline 0.7 mde 0.07",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.7,
+      "mde": 0.07,
+      "variants": 2,
+      "daily_traffic": 3000,
+      "window_days": 30,
+      "guardrail_metric": "g"
+    },
+    "expected": {
+      "sample_size_per_variant": 672,
+      "total_sample_size": 1344,
+      "variants": 2,
+      "has_guardrail": true,
+      "fits_window": true,
+      "can_start": true,
+      "decision": "pre_registrado",
+      "duration_days": 1
+    }
+  },
+  {
+    "id": "exp-32",
+    "desc": "2 variantes, janela folgada, pre_registrado",
+    "tenant_id": "t-eval-g02",
+    "experiment": {
+      "baseline_rate": 0.12,
+      "mde": 0.025,
+      "variants": 2,
+      "daily_traffic": 4000,
+      "window_days": 50,
+      "guardrail_metric": "g"
+    },
+    "expected": {
+      "sample_size_per_variant": 2650,
+      "total_sample_size": 5300,
+      "variants": 2,
+      "has_guardrail": true,
+      "fits_window": true,
+      "can_start": true,
+      "decision": "pre_registrado",
+      "duration_days": 2
     }
   }
 ]

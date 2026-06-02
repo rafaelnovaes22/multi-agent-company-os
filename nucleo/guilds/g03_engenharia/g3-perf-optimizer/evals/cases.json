@@ -1,7 +1,7 @@
 [
   {
     "id": "po-01",
-    "desc": "p95 cai 50% com profiling, testes verdes e SLO -> DELIVERED",
+    "desc": "p95 cai 50% com profiling, testes verdes e SLO -> melhorou",
     "benchmark": {
       "before": 200,
       "after": 100,
@@ -19,7 +19,7 @@
   },
   {
     "id": "po-02",
-    "desc": "ganho de p95 e custo mas sem SLO registrado -> nao entrega",
+    "desc": "ganho de p95 e custo mas sem SLO -> melhorou_sem_slo",
     "benchmark": {
       "before": 300,
       "after": 240,
@@ -31,15 +31,16 @@
     },
     "expected": {
       "latency_delta_pct": 20.0,
-      "cost_delta_pct": 20.0,
       "improved": true,
+      "correctness_preserved": true,
       "status": "melhorou_sem_slo",
-      "by": "g3-perf-optimizer"
+      "by": "g3-perf-optimizer",
+      "cost_delta_pct": 20.0
     }
   },
   {
     "id": "po-03",
-    "desc": "p95 regrediu (160 > 150) -> sem ganho, nao melhora",
+    "desc": "p95 regrediu (160>150) -> sem_ganho",
     "benchmark": {
       "before": 150,
       "after": 160,
@@ -50,6 +51,7 @@
     "expected": {
       "latency_delta_pct": -6.7,
       "improved": false,
+      "correctness_preserved": true,
       "status": "sem_ganho",
       "by": "g3-perf-optimizer"
     }
@@ -66,6 +68,7 @@
     "expected": {
       "latency_delta_pct": 40.0,
       "improved": false,
+      "correctness_preserved": true,
       "status": "no_escuro",
       "by": "g3-perf-optimizer"
     }
@@ -85,6 +88,505 @@
       "improved": false,
       "correctness_preserved": false,
       "status": "regressao",
+      "by": "g3-perf-optimizer"
+    }
+  },
+  {
+    "id": "po-06",
+    "desc": "N+1 eliminado, validado em carga, SLO -> melhorou",
+    "benchmark": {
+      "before": 500,
+      "after": 120,
+      "profiled": true,
+      "tests_passed": true,
+      "slo_registered": true
+    },
+    "expected": {
+      "latency_delta_pct": 76.0,
+      "improved": true,
+      "correctness_preserved": true,
+      "status": "melhorou",
+      "by": "g3-perf-optimizer"
+    }
+  },
+  {
+    "id": "po-07",
+    "desc": "custo de tokens reduzido reportado a G10, com SLO -> melhorou",
+    "benchmark": {
+      "before": 80,
+      "after": 60,
+      "cost_before": 0.05,
+      "cost_after": 0.02,
+      "profiled": true,
+      "tests_passed": true,
+      "slo_registered": true
+    },
+    "expected": {
+      "latency_delta_pct": 25.0,
+      "improved": true,
+      "correctness_preserved": true,
+      "status": "melhorou",
+      "by": "g3-perf-optimizer",
+      "cost_delta_pct": 60.0
+    }
+  },
+  {
+    "id": "po-08",
+    "desc": "fronteira: ganho minimo de latencia 0.1% com tudo ok -> melhorou",
+    "benchmark": {
+      "before": 1000,
+      "after": 999,
+      "profiled": true,
+      "tests_passed": true,
+      "slo_registered": true
+    },
+    "expected": {
+      "latency_delta_pct": 0.1,
+      "improved": true,
+      "correctness_preserved": true,
+      "status": "melhorou",
+      "by": "g3-perf-optimizer"
+    }
+  },
+  {
+    "id": "po-09",
+    "desc": "fronteira: latencia identica (delta 0) -> sem_ganho",
+    "benchmark": {
+      "before": 200,
+      "after": 200,
+      "profiled": true,
+      "tests_passed": true,
+      "slo_registered": true
+    },
+    "expected": {
+      "latency_delta_pct": 0.0,
+      "improved": false,
+      "correctness_preserved": true,
+      "status": "sem_ganho",
+      "by": "g3-perf-optimizer"
+    }
+  },
+  {
+    "id": "po-10",
+    "desc": "precedencia: sem profiling vence tudo (mesmo ganho+testes+slo)",
+    "benchmark": {
+      "before": 300,
+      "after": 100,
+      "profiled": false,
+      "tests_passed": true,
+      "slo_registered": true
+    },
+    "expected": {
+      "latency_delta_pct": 66.7,
+      "improved": false,
+      "correctness_preserved": true,
+      "status": "no_escuro",
+      "by": "g3-perf-optimizer"
+    }
+  },
+  {
+    "id": "po-11",
+    "desc": "precedencia: profiling ok mas testes vermelhos -> regressao (antes de sem_ganho/slo)",
+    "benchmark": {
+      "before": 300,
+      "after": 300,
+      "profiled": true,
+      "tests_passed": false,
+      "slo_registered": true
+    },
+    "expected": {
+      "latency_delta_pct": 0.0,
+      "improved": false,
+      "correctness_preserved": false,
+      "status": "regressao",
+      "by": "g3-perf-optimizer"
+    }
+  },
+  {
+    "id": "po-12",
+    "desc": "precedencia: profiling+testes ok mas sem ganho -> sem_ganho (antes de slo)",
+    "benchmark": {
+      "before": 300,
+      "after": 350,
+      "profiled": true,
+      "tests_passed": true,
+      "slo_registered": false
+    },
+    "expected": {
+      "latency_delta_pct": -16.7,
+      "improved": false,
+      "correctness_preserved": true,
+      "status": "sem_ganho",
+      "by": "g3-perf-optimizer"
+    }
+  },
+  {
+    "id": "po-13",
+    "desc": "precedencia: tudo ok menos SLO -> melhorou_sem_slo",
+    "benchmark": {
+      "before": 400,
+      "after": 200,
+      "profiled": true,
+      "tests_passed": true,
+      "slo_registered": false
+    },
+    "expected": {
+      "latency_delta_pct": 50.0,
+      "improved": true,
+      "correctness_preserved": true,
+      "status": "melhorou_sem_slo",
+      "by": "g3-perf-optimizer"
+    }
+  },
+  {
+    "id": "po-14",
+    "desc": "no_escuro vence mesmo com testes vermelhos",
+    "benchmark": {
+      "before": 200,
+      "after": 100,
+      "profiled": false,
+      "tests_passed": false,
+      "slo_registered": false
+    },
+    "expected": {
+      "latency_delta_pct": 50.0,
+      "improved": false,
+      "correctness_preserved": false,
+      "status": "no_escuro",
+      "by": "g3-perf-optimizer"
+    }
+  },
+  {
+    "id": "po-15",
+    "desc": "regressao vence sem_ganho quando ambos aplicariam",
+    "benchmark": {
+      "before": 200,
+      "after": 250,
+      "profiled": true,
+      "tests_passed": false
+    },
+    "expected": {
+      "latency_delta_pct": -25.0,
+      "improved": false,
+      "correctness_preserved": false,
+      "status": "regressao",
+      "by": "g3-perf-optimizer"
+    }
+  },
+  {
+    "id": "po-16",
+    "desc": "custo piorou (negativo) mas latencia melhorou -> melhorou",
+    "benchmark": {
+      "before": 200,
+      "after": 150,
+      "cost_before": 5,
+      "cost_after": 7,
+      "profiled": true,
+      "tests_passed": true,
+      "slo_registered": true
+    },
+    "expected": {
+      "latency_delta_pct": 25.0,
+      "improved": true,
+      "correctness_preserved": true,
+      "status": "melhorou",
+      "by": "g3-perf-optimizer",
+      "cost_delta_pct": -40.0
+    }
+  },
+  {
+    "id": "po-17",
+    "desc": "ganho grande 90%",
+    "benchmark": {
+      "before": 1000,
+      "after": 100,
+      "profiled": true,
+      "tests_passed": true,
+      "slo_registered": true
+    },
+    "expected": {
+      "latency_delta_pct": 90.0,
+      "improved": true,
+      "correctness_preserved": true,
+      "status": "melhorou",
+      "by": "g3-perf-optimizer"
+    }
+  },
+  {
+    "id": "po-18",
+    "desc": "before=0 -> delta 0 -> sem_ganho",
+    "benchmark": {
+      "before": 0,
+      "after": 0,
+      "profiled": true,
+      "tests_passed": true,
+      "slo_registered": true
+    },
+    "expected": {
+      "latency_delta_pct": 0.0,
+      "improved": false,
+      "correctness_preserved": true,
+      "status": "sem_ganho",
+      "by": "g3-perf-optimizer"
+    }
+  },
+  {
+    "id": "po-19",
+    "desc": "sem cost_before -> cost_delta None, latencia ok melhorou",
+    "benchmark": {
+      "before": 250,
+      "after": 200,
+      "profiled": true,
+      "tests_passed": true,
+      "slo_registered": true
+    },
+    "expected": {
+      "latency_delta_pct": 20.0,
+      "improved": true,
+      "correctness_preserved": true,
+      "status": "melhorou",
+      "by": "g3-perf-optimizer"
+    }
+  },
+  {
+    "id": "po-20",
+    "desc": "melhorou sem slo com custo tambem reduzido",
+    "benchmark": {
+      "before": 600,
+      "after": 300,
+      "cost_before": 20,
+      "cost_after": 12,
+      "profiled": true,
+      "tests_passed": true,
+      "slo_registered": false
+    },
+    "expected": {
+      "latency_delta_pct": 50.0,
+      "improved": true,
+      "correctness_preserved": true,
+      "status": "melhorou_sem_slo",
+      "by": "g3-perf-optimizer",
+      "cost_delta_pct": 40.0
+    }
+  },
+  {
+    "id": "po-21",
+    "desc": "ganho 25% redondo",
+    "benchmark": {
+      "before": 400,
+      "after": 300,
+      "profiled": true,
+      "tests_passed": true,
+      "slo_registered": true
+    },
+    "expected": {
+      "latency_delta_pct": 25.0,
+      "improved": true,
+      "correctness_preserved": true,
+      "status": "melhorou",
+      "by": "g3-perf-optimizer"
+    }
+  },
+  {
+    "id": "po-22",
+    "desc": "profiling ausente mas ganho enorme -> no_escuro",
+    "benchmark": {
+      "before": 900,
+      "after": 90,
+      "profiled": false,
+      "tests_passed": true,
+      "slo_registered": true
+    },
+    "expected": {
+      "latency_delta_pct": 90.0,
+      "improved": false,
+      "correctness_preserved": true,
+      "status": "no_escuro",
+      "by": "g3-perf-optimizer"
+    }
+  },
+  {
+    "id": "po-23",
+    "desc": "regressao de correcao com ganho de latencia",
+    "benchmark": {
+      "before": 150,
+      "after": 75,
+      "profiled": true,
+      "tests_passed": false,
+      "slo_registered": true
+    },
+    "expected": {
+      "latency_delta_pct": 50.0,
+      "improved": false,
+      "correctness_preserved": false,
+      "status": "regressao",
+      "by": "g3-perf-optimizer"
+    }
+  },
+  {
+    "id": "po-24",
+    "desc": "latencia piora forte (after dobra) -> sem_ganho",
+    "benchmark": {
+      "before": 100,
+      "after": 200,
+      "profiled": true,
+      "tests_passed": true,
+      "slo_registered": true
+    },
+    "expected": {
+      "latency_delta_pct": -100.0,
+      "improved": false,
+      "correctness_preserved": true,
+      "status": "sem_ganho",
+      "by": "g3-perf-optimizer"
+    }
+  },
+  {
+    "id": "po-25",
+    "desc": "ganho 33.3% fracionario",
+    "benchmark": {
+      "before": 300,
+      "after": 200,
+      "profiled": true,
+      "tests_passed": true,
+      "slo_registered": true
+    },
+    "expected": {
+      "latency_delta_pct": 33.3,
+      "improved": true,
+      "correctness_preserved": true,
+      "status": "melhorou",
+      "by": "g3-perf-optimizer"
+    }
+  },
+  {
+    "id": "po-26",
+    "desc": "cost_before sem cost_after (0) -> custo cai 100%",
+    "benchmark": {
+      "before": 200,
+      "after": 160,
+      "cost_before": 4,
+      "cost_after": 0,
+      "profiled": true,
+      "tests_passed": true,
+      "slo_registered": true
+    },
+    "expected": {
+      "latency_delta_pct": 20.0,
+      "improved": true,
+      "correctness_preserved": true,
+      "status": "melhorou",
+      "by": "g3-perf-optimizer",
+      "cost_delta_pct": 100.0
+    }
+  },
+  {
+    "id": "po-27",
+    "desc": "melhorou_sem_slo: ganho pequeno 2%",
+    "benchmark": {
+      "before": 1000,
+      "after": 980,
+      "profiled": true,
+      "tests_passed": true,
+      "slo_registered": false
+    },
+    "expected": {
+      "latency_delta_pct": 2.0,
+      "improved": true,
+      "correctness_preserved": true,
+      "status": "melhorou_sem_slo",
+      "by": "g3-perf-optimizer"
+    }
+  },
+  {
+    "id": "po-28",
+    "desc": "no_escuro com sem_ganho tambem -> no_escuro vence",
+    "benchmark": {
+      "before": 100,
+      "after": 100,
+      "profiled": false,
+      "tests_passed": true,
+      "slo_registered": true
+    },
+    "expected": {
+      "latency_delta_pct": 0.0,
+      "improved": false,
+      "correctness_preserved": true,
+      "status": "no_escuro",
+      "by": "g3-perf-optimizer"
+    }
+  },
+  {
+    "id": "po-29",
+    "desc": "ganho 75%, SLO travado",
+    "benchmark": {
+      "before": 400,
+      "after": 100,
+      "profiled": true,
+      "tests_passed": true,
+      "slo_registered": true
+    },
+    "expected": {
+      "latency_delta_pct": 75.0,
+      "improved": true,
+      "correctness_preserved": true,
+      "status": "melhorou",
+      "by": "g3-perf-optimizer"
+    }
+  },
+  {
+    "id": "po-30",
+    "desc": "custo reduzido 60% latencia 50% slo ok -> melhorou",
+    "benchmark": {
+      "before": 200,
+      "after": 100,
+      "cost_before": 10,
+      "cost_after": 4,
+      "profiled": true,
+      "tests_passed": true,
+      "slo_registered": true
+    },
+    "expected": {
+      "latency_delta_pct": 50.0,
+      "improved": true,
+      "correctness_preserved": true,
+      "status": "melhorou",
+      "by": "g3-perf-optimizer",
+      "cost_delta_pct": 60.0
+    }
+  },
+  {
+    "id": "po-31",
+    "desc": "ganho 10% sem slo",
+    "benchmark": {
+      "before": 500,
+      "after": 450,
+      "profiled": true,
+      "tests_passed": true,
+      "slo_registered": false
+    },
+    "expected": {
+      "latency_delta_pct": 10.0,
+      "improved": true,
+      "correctness_preserved": true,
+      "status": "melhorou_sem_slo",
+      "by": "g3-perf-optimizer"
+    }
+  },
+  {
+    "id": "po-32",
+    "desc": "testes vermelhos sem profiling -> no_escuro (precedencia maxima)",
+    "benchmark": {
+      "before": 300,
+      "after": 150,
+      "profiled": false,
+      "tests_passed": false
+    },
+    "expected": {
+      "latency_delta_pct": 50.0,
+      "improved": false,
+      "correctness_preserved": false,
+      "status": "no_escuro",
       "by": "g3-perf-optimizer"
     }
   }

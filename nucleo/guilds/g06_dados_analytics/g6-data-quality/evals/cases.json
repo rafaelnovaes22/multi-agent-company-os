@@ -1,14 +1,769 @@
 [
-  {"id": "dq-01", "desc": "dataset dentro de contrato: suite passa e certifica",
-   "tenant_id": "t-eval-g06",
-   "dataset": {"row_count": 1000, "null_count": 5, "duplicate_count": 0, "freshness_minutes": 30, "sla_minutes": 60, "orphan_fk_count": 0, "pii_unexpected": false},
-   "expected": {"by": "g6-data-quality", "null_pct": 0.5, "duplicate_pct": 0.0, "failed_count": 0, "failed_checks": [], "suite_passed": true, "contract_certified": true, "block_load": false, "trigger_lgpd": false}},
-  {"id": "dq-02", "desc": "4% de duplicatas: reprova unicidade e bloqueia o load",
-   "tenant_id": "t-eval-g06",
-   "dataset": {"row_count": 1000, "null_count": 0, "duplicate_count": 40, "freshness_minutes": 30, "sla_minutes": 60, "orphan_fk_count": 0, "pii_unexpected": false},
-   "expected": {"by": "g6-data-quality", "duplicate_pct": 4.0, "failed_checks": ["uniqueness"], "failed_count": 1, "suite_passed": false, "block_load": true}},
-  {"id": "dq-03", "desc": "freshness fora de SLA + PII inesperada: reprova e aciona LGPD",
-   "tenant_id": "t-eval-g06",
-   "dataset": {"row_count": 500, "null_count": 0, "duplicate_count": 0, "freshness_minutes": 120, "sla_minutes": 60, "orphan_fk_count": 0, "pii_unexpected": true},
-   "expected": {"by": "g6-data-quality", "failed_checks": ["freshness", "privacy_lgpd"], "failed_count": 2, "suite_passed": false, "trigger_lgpd": true, "block_load": true}}
+  {
+    "id": "dq-01",
+    "desc": "dataset dentro de contrato: suite passa e certifica",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 1000,
+      "null_count": 5,
+      "duplicate_count": 0,
+      "freshness_minutes": 30,
+      "sla_minutes": 60,
+      "orphan_fk_count": 0,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "null_pct": 0.5,
+      "duplicate_pct": 0.0,
+      "failed_count": 0,
+      "failed_checks": [],
+      "suite_passed": true,
+      "contract_certified": true,
+      "block_load": false,
+      "trigger_lgpd": false,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-02",
+    "desc": "4% de duplicatas: reprova unicidade e bloqueia o load",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 1000,
+      "null_count": 0,
+      "duplicate_count": 40,
+      "freshness_minutes": 30,
+      "sla_minutes": 60,
+      "orphan_fk_count": 0,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "duplicate_pct": 4.0,
+      "failed_checks": [
+        "uniqueness"
+      ],
+      "failed_count": 1,
+      "suite_passed": false,
+      "block_load": true,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-03",
+    "desc": "freshness fora de SLA + PII inesperada: reprova e aciona LGPD",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 500,
+      "null_count": 0,
+      "duplicate_count": 0,
+      "freshness_minutes": 120,
+      "sla_minutes": 60,
+      "orphan_fk_count": 0,
+      "pii_unexpected": true
+    },
+    "expected": {
+      "failed_checks": [
+        "freshness",
+        "privacy_lgpd"
+      ],
+      "failed_count": 2,
+      "suite_passed": false,
+      "trigger_lgpd": true,
+      "block_load": true,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-04",
+    "desc": "chave duplicada (1 linha) infla north-star: reprova unicidade",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 10000,
+      "null_count": 0,
+      "duplicate_count": 1,
+      "freshness_minutes": 10,
+      "sla_minutes": 60,
+      "orphan_fk_count": 0,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "duplicate_pct": 0.01,
+      "failed_checks": [
+        "uniqueness"
+      ],
+      "failed_count": 1,
+      "suite_passed": false,
+      "block_load": true,
+      "contract_certified": false,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-05",
+    "desc": "freshness fora de SLA sozinho: reprova sem LGPD",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 2000,
+      "null_count": 0,
+      "duplicate_count": 0,
+      "freshness_minutes": 90,
+      "sla_minutes": 60,
+      "orphan_fk_count": 0,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "failed_checks": [
+        "freshness"
+      ],
+      "failed_count": 1,
+      "suite_passed": false,
+      "block_load": true,
+      "trigger_lgpd": false,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-06",
+    "desc": "FK orfa quebra integridade referencial: reprova",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 3000,
+      "null_count": 0,
+      "duplicate_count": 0,
+      "freshness_minutes": 20,
+      "sla_minutes": 60,
+      "orphan_fk_count": 12,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "failed_checks": [
+        "referential_integrity"
+      ],
+      "failed_count": 1,
+      "suite_passed": false,
+      "block_load": true,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-07",
+    "desc": "PII inesperada aciona LGPD mesmo com tudo ok",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 5000,
+      "null_count": 0,
+      "duplicate_count": 0,
+      "freshness_minutes": 5,
+      "sla_minutes": 60,
+      "orphan_fk_count": 0,
+      "pii_unexpected": true
+    },
+    "expected": {
+      "failed_checks": [
+        "privacy_lgpd"
+      ],
+      "failed_count": 1,
+      "suite_passed": false,
+      "trigger_lgpd": true,
+      "block_load": true,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-08",
+    "desc": "2% de nulos reprova completude",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 1000,
+      "null_count": 20,
+      "duplicate_count": 0,
+      "freshness_minutes": 10,
+      "sla_minutes": 60,
+      "orphan_fk_count": 0,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "null_pct": 2.0,
+      "failed_checks": [
+        "completeness"
+      ],
+      "failed_count": 1,
+      "suite_passed": false,
+      "block_load": true,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-09",
+    "desc": "nulos exatamente 1% (10/1000): completude passa no limiar",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 1000,
+      "null_count": 10,
+      "duplicate_count": 0,
+      "freshness_minutes": 10,
+      "sla_minutes": 60,
+      "orphan_fk_count": 0,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "null_pct": 1.0,
+      "checks": {
+        "completeness": true
+      },
+      "failed_count": 0,
+      "suite_passed": true,
+      "contract_certified": true,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-10",
+    "desc": "nulos 1.1% (11/1000): completude reprova logo acima do limiar",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 1000,
+      "null_count": 11,
+      "duplicate_count": 0,
+      "freshness_minutes": 10,
+      "sla_minutes": 60,
+      "orphan_fk_count": 0,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "null_pct": 1.1,
+      "checks": {
+        "completeness": false
+      },
+      "failed_checks": [
+        "completeness"
+      ],
+      "failed_count": 1,
+      "suite_passed": false,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-11",
+    "desc": "freshness == SLA (60==60): passa no limiar exato",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 1000,
+      "null_count": 0,
+      "duplicate_count": 0,
+      "freshness_minutes": 60,
+      "sla_minutes": 60,
+      "orphan_fk_count": 0,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "checks": {
+        "freshness": true
+      },
+      "failed_count": 0,
+      "suite_passed": true,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-12",
+    "desc": "freshness SLA+1 (61>60): reprova logo acima",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 1000,
+      "null_count": 0,
+      "duplicate_count": 0,
+      "freshness_minutes": 61,
+      "sla_minutes": 60,
+      "orphan_fk_count": 0,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "checks": {
+        "freshness": false
+      },
+      "failed_checks": [
+        "freshness"
+      ],
+      "failed_count": 1,
+      "suite_passed": false,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-13",
+    "desc": "zero duplicatas: unicidade passa no limiar",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 1000,
+      "null_count": 0,
+      "duplicate_count": 0,
+      "freshness_minutes": 10,
+      "sla_minutes": 60,
+      "orphan_fk_count": 0,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "duplicate_pct": 0.0,
+      "checks": {
+        "uniqueness": true
+      },
+      "suite_passed": true,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-14",
+    "desc": "1 FK orfa (limiar>0): reprova integridade",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 1000,
+      "null_count": 0,
+      "duplicate_count": 0,
+      "freshness_minutes": 10,
+      "sla_minutes": 60,
+      "orphan_fk_count": 1,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "checks": {
+        "referential_integrity": false
+      },
+      "failed_checks": [
+        "referential_integrity"
+      ],
+      "failed_count": 1,
+      "suite_passed": false,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-15",
+    "desc": "SLA custom 15min, freshness 20: reprova com sla apertado",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 1000,
+      "null_count": 0,
+      "duplicate_count": 0,
+      "freshness_minutes": 20,
+      "sla_minutes": 15,
+      "orphan_fk_count": 0,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "checks": {
+        "freshness": false
+      },
+      "failed_checks": [
+        "freshness"
+      ],
+      "failed_count": 1,
+      "suite_passed": false,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-16",
+    "desc": "SLA default (sem campo) = 60; freshness 50 passa",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 1000,
+      "null_count": 0,
+      "duplicate_count": 0,
+      "freshness_minutes": 50,
+      "orphan_fk_count": 0,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "checks": {
+        "freshness": true
+      },
+      "suite_passed": true,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-17",
+    "desc": "nulos+dups+orfas: 3 falhas, bloqueia",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 1000,
+      "null_count": 30,
+      "duplicate_count": 5,
+      "freshness_minutes": 10,
+      "sla_minutes": 60,
+      "orphan_fk_count": 3,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "null_pct": 3.0,
+      "duplicate_pct": 0.5,
+      "failed_checks": [
+        "completeness",
+        "uniqueness",
+        "referential_integrity"
+      ],
+      "failed_count": 3,
+      "suite_passed": false,
+      "block_load": true,
+      "trigger_lgpd": false,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-18",
+    "desc": "todas as 5 dimensoes falham: suite totalmente reprovada",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 1000,
+      "null_count": 50,
+      "duplicate_count": 10,
+      "freshness_minutes": 200,
+      "sla_minutes": 60,
+      "orphan_fk_count": 7,
+      "pii_unexpected": true
+    },
+    "expected": {
+      "failed_count": 5,
+      "failed_checks": [
+        "completeness",
+        "uniqueness",
+        "freshness",
+        "referential_integrity",
+        "privacy_lgpd"
+      ],
+      "suite_passed": false,
+      "block_load": true,
+      "trigger_lgpd": true,
+      "contract_certified": false,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-19",
+    "desc": "tudo ok exceto PII: trigger_lgpd e block ainda que demais checks passem",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 800,
+      "null_count": 4,
+      "duplicate_count": 0,
+      "freshness_minutes": 30,
+      "sla_minutes": 60,
+      "orphan_fk_count": 0,
+      "pii_unexpected": true
+    },
+    "expected": {
+      "null_pct": 0.5,
+      "failed_checks": [
+        "privacy_lgpd"
+      ],
+      "failed_count": 1,
+      "trigger_lgpd": true,
+      "suite_passed": false,
+      "block_load": true,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-20",
+    "desc": "dataset vazio limpo: pcts 0 e suite passa",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 0,
+      "null_count": 0,
+      "duplicate_count": 0,
+      "freshness_minutes": 10,
+      "sla_minutes": 60,
+      "orphan_fk_count": 0,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "null_pct": 0.0,
+      "duplicate_pct": 0.0,
+      "failed_count": 0,
+      "suite_passed": true,
+      "contract_certified": true,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-21",
+    "desc": "row_count 0 mas duplicatas reportadas: unicidade reprova mesmo com pct 0",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 0,
+      "null_count": 0,
+      "duplicate_count": 3,
+      "freshness_minutes": 10,
+      "sla_minutes": 60,
+      "orphan_fk_count": 0,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "duplicate_pct": 0.0,
+      "failed_checks": [
+        "uniqueness"
+      ],
+      "failed_count": 1,
+      "suite_passed": false,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-22",
+    "desc": "completude e freshness ok no melhor caso grande volume",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 1000000,
+      "null_count": 100,
+      "duplicate_count": 0,
+      "freshness_minutes": 1,
+      "sla_minutes": 60,
+      "orphan_fk_count": 0,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "null_pct": 0.01,
+      "failed_count": 0,
+      "suite_passed": true,
+      "contract_certified": true,
+      "block_load": false,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-23",
+    "desc": "null_pct 0.99% logo abaixo do limiar: passa",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 10000,
+      "null_count": 99,
+      "duplicate_count": 0,
+      "freshness_minutes": 10,
+      "sla_minutes": 60,
+      "orphan_fk_count": 0,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "null_pct": 0.99,
+      "checks": {
+        "completeness": true
+      },
+      "suite_passed": true,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-24",
+    "desc": "null_pct 1.0 exato em base grande (100/10000): passa",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 10000,
+      "null_count": 100,
+      "duplicate_count": 0,
+      "freshness_minutes": 10,
+      "sla_minutes": 60,
+      "orphan_fk_count": 0,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "null_pct": 1.0,
+      "checks": {
+        "completeness": true
+      },
+      "suite_passed": true,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-25",
+    "desc": "dups + PII: dois caminhos de bloqueio acionam LGPD",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 2000,
+      "null_count": 0,
+      "duplicate_count": 4,
+      "freshness_minutes": 10,
+      "sla_minutes": 60,
+      "orphan_fk_count": 0,
+      "pii_unexpected": true
+    },
+    "expected": {
+      "duplicate_pct": 0.2,
+      "failed_checks": [
+        "uniqueness",
+        "privacy_lgpd"
+      ],
+      "failed_count": 2,
+      "suite_passed": false,
+      "trigger_lgpd": true,
+      "block_load": true,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-26",
+    "desc": "freshness no limiar com SLA custom alto: passa",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 1000,
+      "null_count": 0,
+      "duplicate_count": 0,
+      "freshness_minutes": 1440,
+      "sla_minutes": 1440,
+      "orphan_fk_count": 0,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "checks": {
+        "freshness": true
+      },
+      "suite_passed": true,
+      "contract_certified": true,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-27",
+    "desc": "nulos altos 10%: completude reprova forte",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 1000,
+      "null_count": 100,
+      "duplicate_count": 0,
+      "freshness_minutes": 10,
+      "sla_minutes": 60,
+      "orphan_fk_count": 0,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "null_pct": 10.0,
+      "failed_checks": [
+        "completeness"
+      ],
+      "failed_count": 1,
+      "suite_passed": false,
+      "block_load": true,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-28",
+    "desc": "freshness+FK falham juntos sem LGPD",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 1500,
+      "null_count": 0,
+      "duplicate_count": 0,
+      "freshness_minutes": 120,
+      "sla_minutes": 60,
+      "orphan_fk_count": 2,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "failed_checks": [
+        "freshness",
+        "referential_integrity"
+      ],
+      "failed_count": 2,
+      "suite_passed": false,
+      "trigger_lgpd": false,
+      "block_load": true,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-29",
+    "desc": "completude reprova mas PII False: nao aciona LGPD",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 1000,
+      "null_count": 15,
+      "duplicate_count": 0,
+      "freshness_minutes": 10,
+      "sla_minutes": 60,
+      "orphan_fk_count": 0,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "null_pct": 1.5,
+      "failed_checks": [
+        "completeness"
+      ],
+      "failed_count": 1,
+      "suite_passed": false,
+      "trigger_lgpd": false,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-30",
+    "desc": "dataset perfeito grande: certifica contrato sem bloqueio",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 50000,
+      "null_count": 0,
+      "duplicate_count": 0,
+      "freshness_minutes": 2,
+      "sla_minutes": 30,
+      "orphan_fk_count": 0,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "null_pct": 0.0,
+      "duplicate_pct": 0.0,
+      "failed_count": 0,
+      "suite_passed": true,
+      "contract_certified": true,
+      "block_load": false,
+      "trigger_lgpd": false,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-31",
+    "desc": "SLA pequeno 5min com freshness 5 exato: passa no limiar",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 1000,
+      "null_count": 0,
+      "duplicate_count": 0,
+      "freshness_minutes": 5,
+      "sla_minutes": 5,
+      "orphan_fk_count": 0,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "checks": {
+        "freshness": true
+      },
+      "suite_passed": true,
+      "by": "g6-data-quality"
+    }
+  },
+  {
+    "id": "dq-32",
+    "desc": "SLA pequeno 5min com freshness 6: reprova logo acima",
+    "tenant_id": "t-eval-g06",
+    "dataset": {
+      "row_count": 1000,
+      "null_count": 0,
+      "duplicate_count": 0,
+      "freshness_minutes": 6,
+      "sla_minutes": 5,
+      "orphan_fk_count": 0,
+      "pii_unexpected": false
+    },
+    "expected": {
+      "checks": {
+        "freshness": false
+      },
+      "failed_checks": [
+        "freshness"
+      ],
+      "failed_count": 1,
+      "suite_passed": false,
+      "by": "g6-data-quality"
+    }
+  }
 ]

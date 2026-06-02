@@ -1,22 +1,501 @@
 [
-  {"id": "lt-01", "desc": "perda provável + prazo na janela de alerta",
-   "tenant_id": "t-eval-g12",
-   "statement": "Estime a provisão desta disputa e monitore o prazo de resposta",
-   "dispute": {"claim_amount": 100000, "loss_probability": 0.8, "days_to_deadline": 3, "alert_window_days": 5, "registered": true},
-   "expected": {"by": "g12-litigation-tracker", "provision": 80000.0, "exposure_level": "provavel",
-                "deadline_status": "alerta", "deadline_alert": true, "deadlines_tracked": true,
-                "delivered_event": "dispute.registered && dispute.deadlines_tracked"}},
-  {"id": "lt-02", "desc": "perda possível, prazo confortável (sem alerta)",
-   "tenant_id": "t-eval-g12",
-   "statement": "Avalie a exposição financeira deste caso cível e repasse a Finanças",
-   "dispute": {"claim_amount": 50000, "loss_probability": 0.4, "days_to_deadline": 10, "registered": true},
-   "expected": {"by": "g12-litigation-tracker", "provision": 20000.0, "exposure_level": "possivel",
-                "deadline_status": "no_prazo", "deadline_alert": false}},
-  {"id": "lt-03", "desc": "perda remota, prazo já vencido dispara alerta",
-   "tenant_id": "t-eval-g12-2",
-   "statement": "Acompanhe os prazos processuais desta notificação extrajudicial",
-   "dispute": {"claim_amount": 200000, "loss_probability": 0.1, "days_to_deadline": -2, "registered": true},
-   "expected": {"by": "g12-litigation-tracker", "provision": 20000.0, "exposure_level": "remota",
-                "deadline_status": "vencido", "deadline_alert": true,
-                "delivered_event": "dispute.registered && dispute.deadlines_tracked"}}
+  {
+    "id": "lt-01",
+    "desc": "perda provavel + prazo na janela de alerta",
+    "tenant_id": "t-eval-g12",
+    "statement": "Estime a provisao desta disputa e monitore o prazo de resposta",
+    "dispute": {
+      "claim_amount": 100000,
+      "loss_probability": 0.8,
+      "days_to_deadline": 3,
+      "alert_window_days": 5,
+      "registered": true
+    },
+    "expected": {
+      "by": "g12-litigation-tracker",
+      "provision": 80000.0,
+      "exposure_level": "provavel",
+      "deadline_status": "alerta",
+      "deadline_alert": true,
+      "deadlines_tracked": true,
+      "delivered_event": "dispute.registered && dispute.deadlines_tracked"
+    }
+  },
+  {
+    "id": "lt-02",
+    "desc": "perda possivel, prazo confortavel (sem alerta)",
+    "tenant_id": "t-eval-g12",
+    "statement": "Avalie a exposicao financeira deste caso civel e repasse a Financas",
+    "dispute": {
+      "claim_amount": 50000,
+      "loss_probability": 0.4,
+      "days_to_deadline": 10,
+      "registered": true
+    },
+    "expected": {
+      "by": "g12-litigation-tracker",
+      "provision": 20000.0,
+      "exposure_level": "possivel",
+      "deadline_status": "no_prazo",
+      "deadline_alert": false
+    }
+  },
+  {
+    "id": "lt-03",
+    "desc": "perda remota, prazo ja vencido dispara alerta",
+    "tenant_id": "t-eval-g12-2",
+    "statement": "Acompanhe os prazos processuais desta notificacao extrajudicial",
+    "dispute": {
+      "claim_amount": 200000,
+      "loss_probability": 0.1,
+      "days_to_deadline": -2,
+      "registered": true
+    },
+    "expected": {
+      "by": "g12-litigation-tracker",
+      "provision": 20000.0,
+      "exposure_level": "remota",
+      "deadline_status": "vencido",
+      "deadline_alert": true,
+      "delivered_event": "dispute.registered && dispute.deadlines_tracked"
+    }
+  },
+  {
+    "id": "lt-04",
+    "desc": "limiar exato provavel: loss_probability=0.7 -> provavel",
+    "dispute": {
+      "claim_amount": 100000,
+      "loss_probability": 0.7,
+      "days_to_deadline": 20,
+      "registered": true
+    },
+    "expected": {
+      "exposure_level": "provavel",
+      "provision": 70000.0,
+      "deadline_status": "no_prazo"
+    }
+  },
+  {
+    "id": "lt-05",
+    "desc": "fronteira -0.01: loss_probability=0.69 -> possivel",
+    "dispute": {
+      "claim_amount": 100000,
+      "loss_probability": 0.69,
+      "days_to_deadline": 20,
+      "registered": true
+    },
+    "expected": {
+      "exposure_level": "possivel",
+      "provision": 69000.0,
+      "deadline_status": "no_prazo"
+    }
+  },
+  {
+    "id": "lt-06",
+    "desc": "limiar exato possivel: loss_probability=0.3 -> possivel",
+    "dispute": {
+      "claim_amount": 100000,
+      "loss_probability": 0.3,
+      "days_to_deadline": 20,
+      "registered": true
+    },
+    "expected": {
+      "exposure_level": "possivel",
+      "provision": 30000.0
+    }
+  },
+  {
+    "id": "lt-07",
+    "desc": "fronteira -0.01: loss_probability=0.29 -> remota",
+    "dispute": {
+      "claim_amount": 100000,
+      "loss_probability": 0.29,
+      "days_to_deadline": 20,
+      "registered": true
+    },
+    "expected": {
+      "exposure_level": "remota",
+      "provision": 29000.0
+    }
+  },
+  {
+    "id": "lt-08",
+    "desc": "probabilidade=1.0 (quase certa) -> provavel, provisao integral",
+    "dispute": {
+      "claim_amount": 80000,
+      "loss_probability": 1.0,
+      "days_to_deadline": 15,
+      "registered": true
+    },
+    "expected": {
+      "exposure_level": "provavel",
+      "provision": 80000.0,
+      "deadline_status": "no_prazo"
+    }
+  },
+  {
+    "id": "lt-09",
+    "desc": "probabilidade=0.0 -> remota, provisao zero",
+    "dispute": {
+      "claim_amount": 80000,
+      "loss_probability": 0.0,
+      "days_to_deadline": 15,
+      "registered": true
+    },
+    "expected": {
+      "exposure_level": "remota",
+      "provision": 0.0
+    }
+  },
+  {
+    "id": "lt-10",
+    "desc": "limiar exato da janela: days=5 = window -> alerta",
+    "dispute": {
+      "claim_amount": 40000,
+      "loss_probability": 0.5,
+      "days_to_deadline": 5,
+      "registered": true
+    },
+    "expected": {
+      "deadline_status": "alerta",
+      "deadline_alert": true,
+      "exposure_level": "possivel"
+    }
+  },
+  {
+    "id": "lt-11",
+    "desc": "fronteira +1 da janela: days=6 -> no_prazo, sem alerta",
+    "dispute": {
+      "claim_amount": 40000,
+      "loss_probability": 0.5,
+      "days_to_deadline": 6,
+      "registered": true
+    },
+    "expected": {
+      "deadline_status": "no_prazo",
+      "deadline_alert": false
+    }
+  },
+  {
+    "id": "lt-12",
+    "desc": "prazo expira hoje: days=0 -> alerta (ainda nao vencido)",
+    "dispute": {
+      "claim_amount": 40000,
+      "loss_probability": 0.5,
+      "days_to_deadline": 0,
+      "registered": true
+    },
+    "expected": {
+      "deadline_status": "alerta",
+      "deadline_alert": true
+    }
+  },
+  {
+    "id": "lt-13",
+    "desc": "fronteira do vencido: days=-1 -> vencido",
+    "dispute": {
+      "claim_amount": 40000,
+      "loss_probability": 0.5,
+      "days_to_deadline": -1,
+      "registered": true
+    },
+    "expected": {
+      "deadline_status": "vencido",
+      "deadline_alert": true
+    }
+  },
+  {
+    "id": "lt-14",
+    "desc": "janela customizada larga: window=10, days=8 -> alerta",
+    "dispute": {
+      "claim_amount": 40000,
+      "loss_probability": 0.5,
+      "days_to_deadline": 8,
+      "alert_window_days": 10,
+      "registered": true
+    },
+    "expected": {
+      "deadline_status": "alerta",
+      "deadline_alert": true
+    }
+  },
+  {
+    "id": "lt-15",
+    "desc": "janela customizada estreita: window=2, days=3 -> no_prazo",
+    "dispute": {
+      "claim_amount": 40000,
+      "loss_probability": 0.5,
+      "days_to_deadline": 3,
+      "alert_window_days": 2,
+      "registered": true
+    },
+    "expected": {
+      "deadline_status": "no_prazo",
+      "deadline_alert": false
+    }
+  },
+  {
+    "id": "lt-16",
+    "desc": "C2 negativo: notificacao recebida e NAO registrada -> sem delivered_event",
+    "dispute": {
+      "claim_amount": 100000,
+      "loss_probability": 0.8,
+      "days_to_deadline": 3,
+      "registered": false
+    },
+    "expected": {
+      "registered": false,
+      "deadlines_tracked": true,
+      "delivered_event": null,
+      "exposure_level": "provavel"
+    }
+  },
+  {
+    "id": "lt-17",
+    "desc": "C2 negativo: caso ativo SEM prazo (days ausente) -> sem deadlines_tracked nem delivered",
+    "dispute": {
+      "claim_amount": 100000,
+      "loss_probability": 0.8,
+      "registered": true
+    },
+    "expected": {
+      "deadlines_tracked": false,
+      "deadline_alert": false,
+      "deadline_status": "no_prazo",
+      "delivered_event": null
+    }
+  },
+  {
+    "id": "lt-18",
+    "desc": "isola: registrado + prazo presente (no prazo) -> delivered satisfeito",
+    "dispute": {
+      "claim_amount": 100000,
+      "loss_probability": 0.8,
+      "days_to_deadline": 30,
+      "registered": true
+    },
+    "expected": {
+      "registered": true,
+      "deadlines_tracked": true,
+      "delivered_event": "dispute.registered && dispute.deadlines_tracked"
+    }
+  },
+  {
+    "id": "lt-19",
+    "desc": "nem registrado nem com prazo -> nenhum criterio -> sem delivered",
+    "dispute": {
+      "claim_amount": 100000,
+      "loss_probability": 0.8,
+      "registered": false
+    },
+    "expected": {
+      "registered": false,
+      "deadlines_tracked": false,
+      "delivered_event": null
+    }
+  },
+  {
+    "id": "lt-20",
+    "desc": "default registered=True quando omitido + prazo -> delivered",
+    "dispute": {
+      "claim_amount": 60000,
+      "loss_probability": 0.5,
+      "days_to_deadline": 12
+    },
+    "expected": {
+      "registered": true,
+      "deadlines_tracked": true,
+      "delivered_event": "dispute.registered && dispute.deadlines_tracked"
+    }
+  },
+  {
+    "id": "lt-21",
+    "desc": "arredondamento de centavos: 12345 x 0.333",
+    "dispute": {
+      "claim_amount": 12345,
+      "loss_probability": 0.333,
+      "days_to_deadline": 20,
+      "registered": true
+    },
+    "expected": {
+      "provision": 4110.89,
+      "exposure_level": "possivel"
+    }
+  },
+  {
+    "id": "lt-22",
+    "desc": "causa milionaria com perda provavel",
+    "dispute": {
+      "claim_amount": 2500000,
+      "loss_probability": 0.9,
+      "days_to_deadline": 40,
+      "registered": true
+    },
+    "expected": {
+      "provision": 2250000.0,
+      "exposure_level": "provavel",
+      "deadline_status": "no_prazo"
+    }
+  },
+  {
+    "id": "lt-23",
+    "desc": "valor da causa ausente -> provisao zero (prob alta nao muda)",
+    "dispute": {
+      "loss_probability": 0.8,
+      "days_to_deadline": 10,
+      "registered": true
+    },
+    "expected": {
+      "provision": 0.0,
+      "exposure_level": "provavel",
+      "claim_amount": 0
+    }
+  },
+  {
+    "id": "lt-24",
+    "desc": "notificacao extrajudicial vencida, perda possivel",
+    "dispute": {
+      "claim_amount": 150000,
+      "loss_probability": 0.5,
+      "days_to_deadline": -10,
+      "registered": true
+    },
+    "expected": {
+      "exposure_level": "possivel",
+      "provision": 75000.0,
+      "deadline_status": "vencido",
+      "deadline_alert": true,
+      "delivered_event": "dispute.registered && dispute.deadlines_tracked"
+    }
+  },
+  {
+    "id": "lt-25",
+    "desc": "perda possivel logo acima do piso (0.31)",
+    "dispute": {
+      "claim_amount": 100000,
+      "loss_probability": 0.31,
+      "days_to_deadline": 50,
+      "registered": true
+    },
+    "expected": {
+      "exposure_level": "possivel",
+      "provision": 31000.0
+    }
+  },
+  {
+    "id": "lt-26",
+    "desc": "trabalhista com prazo na janela default e perda provavel",
+    "dispute": {
+      "claim_amount": 90000,
+      "loss_probability": 0.75,
+      "days_to_deadline": 4,
+      "registered": true
+    },
+    "expected": {
+      "exposure_level": "provavel",
+      "provision": 67500.0,
+      "deadline_status": "alerta",
+      "deadline_alert": true
+    }
+  },
+  {
+    "id": "lt-27",
+    "desc": "consumerista perda remota, prazo confortavel",
+    "dispute": {
+      "claim_amount": 15000,
+      "loss_probability": 0.15,
+      "days_to_deadline": 25,
+      "registered": true
+    },
+    "expected": {
+      "exposure_level": "remota",
+      "provision": 2250.0,
+      "deadline_status": "no_prazo",
+      "deadline_alert": false
+    }
+  },
+  {
+    "id": "lt-28",
+    "desc": "prazo 1 dia alem da janela larga (window=7, days=8)",
+    "dispute": {
+      "claim_amount": 30000,
+      "loss_probability": 0.4,
+      "days_to_deadline": 8,
+      "alert_window_days": 7,
+      "registered": true
+    },
+    "expected": {
+      "deadline_status": "no_prazo",
+      "deadline_alert": false,
+      "exposure_level": "possivel"
+    }
+  },
+  {
+    "id": "lt-29",
+    "desc": "regulatorio perda provavel, prazo na janela estreita (window=3,days=2)",
+    "dispute": {
+      "claim_amount": 500000,
+      "loss_probability": 0.85,
+      "days_to_deadline": 2,
+      "alert_window_days": 3,
+      "registered": true
+    },
+    "expected": {
+      "exposure_level": "provavel",
+      "provision": 425000.0,
+      "deadline_status": "alerta",
+      "deadline_alert": true,
+      "delivered_event": "dispute.registered && dispute.deadlines_tracked"
+    }
+  },
+  {
+    "id": "lt-30",
+    "desc": "nao registrado + sem prazo + remota -> so provisao, nada entregue",
+    "dispute": {
+      "claim_amount": 10000,
+      "loss_probability": 0.2,
+      "registered": false
+    },
+    "expected": {
+      "exposure_level": "remota",
+      "provision": 2000.0,
+      "registered": false,
+      "deadlines_tracked": false,
+      "delivered_event": null
+    }
+  },
+  {
+    "id": "lt-31",
+    "desc": "perda possivel no piso 0.3 com prazo vencido (vencido domina alerta)",
+    "dispute": {
+      "claim_amount": 120000,
+      "loss_probability": 0.3,
+      "days_to_deadline": -3,
+      "registered": true
+    },
+    "expected": {
+      "exposure_level": "possivel",
+      "provision": 36000.0,
+      "deadline_status": "vencido",
+      "deadline_alert": true
+    }
+  },
+  {
+    "id": "lt-32",
+    "desc": "perda provavel topo 0.95, registrado, prazo no limiar exato da janela",
+    "dispute": {
+      "claim_amount": 300000,
+      "loss_probability": 0.95,
+      "days_to_deadline": 5,
+      "alert_window_days": 5,
+      "registered": true
+    },
+    "expected": {
+      "exposure_level": "provavel",
+      "provision": 285000.0,
+      "deadline_status": "alerta",
+      "deadline_alert": true,
+      "delivered_event": "dispute.registered && dispute.deadlines_tracked"
+    }
+  }
 ]

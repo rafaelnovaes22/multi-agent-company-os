@@ -1,14 +1,877 @@
 [
-  {"id": "cp-01", "desc": "cliente de alto risco com explicabilidade; C3 dentro do teto",
-   "tenant_id": "t-eval-g06",
-   "churn": {"customers": [{"id": "c1", "days_inactive": 20, "engagement": 0.2, "activated": false, "support_tickets": 4}], "inference_cost": 2, "value_per_retained": 100},
-   "expected": {"by": "g6-churn-predictor", "scored_count": 1, "high_risk_count": 1, "avg_risk_score": 94.0, "explainable": true, "c3_ratio": 0.02, "c3_ok": true}},
-  {"id": "cp-02", "desc": "carteira mista: um baixo e um alto risco",
-   "tenant_id": "t-eval-g06",
-   "churn": {"customers": [{"id": "c1", "days_inactive": 5, "engagement": 0.8, "activated": true, "support_tickets": 0}, {"id": "c2", "days_inactive": 30, "engagement": 0.1, "activated": false, "support_tickets": 2}], "inference_cost": 5, "value_per_retained": 100},
-   "expected": {"by": "g6-churn-predictor", "scored_count": 2, "high_risk_count": 1, "avg_risk_score": 51.5, "c3_ok": true}},
-  {"id": "cp-03", "desc": "C3 estourado: custo de inferência acima de 25% do valor retido",
-   "tenant_id": "t-eval-g06",
-   "churn": {"customers": [{"id": "c1", "days_inactive": 0, "engagement": 0.9, "activated": true, "support_tickets": 0}], "inference_cost": 50, "value_per_retained": 100},
-   "expected": {"by": "g6-churn-predictor", "scored_count": 1, "high_risk_count": 0, "avg_risk_score": 3.0, "c3_ratio": 0.5, "c3_ok": false}}
+  {
+    "id": "cp-01",
+    "desc": "cliente de alto risco com explicabilidade; C3 dentro do teto",
+    "statement": "cliente de alto risco com explicabilidade; C3 dentro do teto",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 20,
+          "engagement": 0.2,
+          "activated": false,
+          "support_tickets": 4
+        }
+      ],
+      "inference_cost": 2,
+      "value_per_retained": 100
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 1,
+      "avg_risk_score": 94.0,
+      "explainable": true,
+      "c3_ratio": 0.02,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-02",
+    "desc": "carteira mista: um baixo e um alto risco",
+    "statement": "carteira mista: um baixo e um alto risco",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 5,
+          "engagement": 0.8,
+          "activated": true,
+          "support_tickets": 0
+        },
+        {
+          "id": "c2",
+          "days_inactive": 30,
+          "engagement": 0.1,
+          "activated": false,
+          "support_tickets": 2
+        }
+      ],
+      "inference_cost": 5,
+      "value_per_retained": 100
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 2,
+      "high_risk_count": 1,
+      "avg_risk_score": 51.5,
+      "explainable": true,
+      "c3_ratio": 0.05,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-03",
+    "desc": "C3 estourado: custo de inferencia acima de 25% do valor retido",
+    "statement": "C3 estourado: custo de inferencia acima de 25% do valor retido",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 0,
+          "engagement": 0.9,
+          "activated": true,
+          "support_tickets": 0
+        }
+      ],
+      "inference_cost": 50,
+      "value_per_retained": 100
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 0,
+      "avg_risk_score": 3.0,
+      "explainable": true,
+      "c3_ratio": 0.5,
+      "c3_ok": false
+    }
+  },
+  {
+    "id": "cp-04",
+    "desc": "cliente engajado, ativo, sem inatividade -> baixo risco",
+    "statement": "cliente engajado, ativo, sem inatividade -> baixo risco",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 0,
+          "engagement": 1.0,
+          "activated": true,
+          "support_tickets": 0
+        }
+      ],
+      "inference_cost": 1,
+      "value_per_retained": 100
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 0,
+      "avg_risk_score": 0.0,
+      "explainable": true,
+      "c3_ratio": 0.01,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-05",
+    "desc": "engajamento total (eng_pts=0), ativo -> score 0",
+    "statement": "engajamento total (eng_pts=0), ativo -> score 0",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 0,
+          "engagement": 1.0,
+          "activated": true,
+          "support_tickets": 0
+        }
+      ]
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 0,
+      "avg_risk_score": 0.0,
+      "explainable": true,
+      "c3_ratio": 0.0,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-06",
+    "desc": "inatividade 25d (50pts->teto 40) + nao ativado -> alto risco",
+    "statement": "inatividade 25d (50pts->teto 40) + nao ativado -> alto risco",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 25,
+          "engagement": 1.0,
+          "activated": false,
+          "support_tickets": 0
+        }
+      ]
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 1,
+      "avg_risk_score": 60.0,
+      "explainable": true,
+      "c3_ratio": 0.0,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-07",
+    "desc": "inatividade 20d (40pts exato no teto) sozinha -> medio",
+    "statement": "inatividade 20d (40pts exato no teto) sozinha -> medio",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 20,
+          "engagement": 1.0,
+          "activated": true,
+          "support_tickets": 0
+        }
+      ]
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 0,
+      "avg_risk_score": 40.0,
+      "explainable": true,
+      "c3_ratio": 0.0,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-08",
+    "desc": "inatividade 21d ainda 40pts (teto) -> medio (prova clamp do teto)",
+    "statement": "inatividade 21d ainda 40pts (teto) -> medio (prova clamp do teto)",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 21,
+          "engagement": 1.0,
+          "activated": true,
+          "support_tickets": 0
+        }
+      ]
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 0,
+      "avg_risk_score": 40.0,
+      "explainable": true,
+      "c3_ratio": 0.0,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-09",
+    "desc": "inatividade 4d (8pts <10) -> fator inatividade NAO registrado, baixo",
+    "statement": "inatividade 4d (8pts <10) -> fator inatividade NAO registrado, baixo",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 4,
+          "engagement": 1.0,
+          "activated": true,
+          "support_tickets": 0
+        }
+      ]
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 0,
+      "avg_risk_score": 8.0,
+      "explainable": true,
+      "c3_ratio": 0.0,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-10",
+    "desc": "inatividade 5d (10pts exato) -> fator registrado",
+    "statement": "inatividade 5d (10pts exato) -> fator registrado",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 5,
+          "engagement": 0.2,
+          "activated": true,
+          "support_tickets": 0
+        }
+      ]
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 0,
+      "avg_risk_score": 34.0,
+      "explainable": true,
+      "c3_ratio": 0.0,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-11",
+    "desc": "engajamento 0.39 (<0.4) -> fator baixo engajamento",
+    "statement": "engajamento 0.39 (<0.4) -> fator baixo engajamento",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 0,
+          "engagement": 0.39,
+          "activated": true,
+          "support_tickets": 0
+        }
+      ]
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 0,
+      "avg_risk_score": 18.0,
+      "explainable": true,
+      "c3_ratio": 0.0,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-12",
+    "desc": "engajamento 0.4 exato (NAO <0.4) -> sem fator de engajamento",
+    "statement": "engajamento 0.4 exato (NAO <0.4) -> sem fator de engajamento",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 0,
+          "engagement": 0.4,
+          "activated": true,
+          "support_tickets": 0
+        }
+      ]
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 0,
+      "avg_risk_score": 18.0,
+      "explainable": true,
+      "c3_ratio": 0.0,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-13",
+    "desc": "nao ativado isolado (eng alto) -> +20 -> baixo",
+    "statement": "nao ativado isolado (eng alto) -> +20 -> baixo",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 0,
+          "engagement": 1.0,
+          "activated": false,
+          "support_tickets": 0
+        }
+      ]
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 0,
+      "avg_risk_score": 20.0,
+      "explainable": true,
+      "c3_ratio": 0.0,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-14",
+    "desc": "3 tickets exato -> +10 + fator tickets",
+    "statement": "3 tickets exato -> +10 + fator tickets",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 0,
+          "engagement": 1.0,
+          "activated": true,
+          "support_tickets": 3
+        }
+      ]
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 0,
+      "avg_risk_score": 10.0,
+      "explainable": true,
+      "c3_ratio": 0.0,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-15",
+    "desc": "2 tickets (<3) -> sem pontos de suporte",
+    "statement": "2 tickets (<3) -> sem pontos de suporte",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 0,
+          "engagement": 1.0,
+          "activated": true,
+          "support_tickets": 2
+        }
+      ]
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 0,
+      "avg_risk_score": 0.0,
+      "explainable": true,
+      "c3_ratio": 0.0,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-16",
+    "desc": "score exatamente 60 (40 inativ + 20 nao-ativado) -> banda alto",
+    "statement": "score exatamente 60 (40 inativ + 20 nao-ativado) -> banda alto",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 20,
+          "engagement": 1.0,
+          "activated": false,
+          "support_tickets": 0
+        }
+      ]
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 1,
+      "avg_risk_score": 60.0,
+      "explainable": true,
+      "c3_ratio": 0.0,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-17",
+    "desc": "score exatamente 30 -> banda medio",
+    "statement": "score exatamente 30 -> banda medio",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 0,
+          "engagement": 0.0,
+          "activated": true,
+          "support_tickets": 0
+        }
+      ]
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 0,
+      "avg_risk_score": 30.0,
+      "explainable": true,
+      "c3_ratio": 0.0,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-18",
+    "desc": "score 29 -> banda baixo (logo abaixo de 30)",
+    "statement": "score 29 -> banda baixo (logo abaixo de 30)",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 0,
+          "engagement": 0.0333333,
+          "activated": true,
+          "support_tickets": 0
+        }
+      ]
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 0,
+      "avg_risk_score": 29.0,
+      "explainable": true,
+      "c3_ratio": 0.0,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-19",
+    "desc": "todos sinais no maximo (40+30+20+10=100) -> score 100",
+    "statement": "todos sinais no maximo (40+30+20+10=100) -> score 100",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 30,
+          "engagement": 0.0,
+          "activated": false,
+          "support_tickets": 5
+        }
+      ]
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 1,
+      "avg_risk_score": 100.0,
+      "explainable": true,
+      "c3_ratio": 0.0,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-20",
+    "desc": "inatividade gigante + tudo -> clamp em 100",
+    "statement": "inatividade gigante + tudo -> clamp em 100",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 100,
+          "engagement": 0.0,
+          "activated": false,
+          "support_tickets": 10
+        }
+      ]
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 1,
+      "avg_risk_score": 100.0,
+      "explainable": true,
+      "c3_ratio": 0.0,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-21",
+    "desc": "alto risco por multiplos fatores -> explicavel True",
+    "statement": "alto risco por multiplos fatores -> explicavel True",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 20,
+          "engagement": 0.1,
+          "activated": false,
+          "support_tickets": 4
+        }
+      ]
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 1,
+      "avg_risk_score": 97.0,
+      "explainable": true,
+      "c3_ratio": 0.0,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-22",
+    "desc": "C3 exatamente 0.25 (25/100) -> c3_ok True (limiar inclusivo)",
+    "statement": "C3 exatamente 0.25 (25/100) -> c3_ok True (limiar inclusivo)",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 0,
+          "engagement": 1.0,
+          "activated": true,
+          "support_tickets": 0
+        }
+      ],
+      "inference_cost": 25,
+      "value_per_retained": 100
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 0,
+      "avg_risk_score": 0.0,
+      "explainable": true,
+      "c3_ratio": 0.25,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-23",
+    "desc": "C3 0.26 logo acima de 0.25 -> c3_ok False",
+    "statement": "C3 0.26 logo acima de 0.25 -> c3_ok False",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 0,
+          "engagement": 1.0,
+          "activated": true,
+          "support_tickets": 0
+        }
+      ],
+      "inference_cost": 26,
+      "value_per_retained": 100
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 0,
+      "avg_risk_score": 0.0,
+      "explainable": true,
+      "c3_ratio": 0.26,
+      "c3_ok": false
+    }
+  },
+  {
+    "id": "cp-24",
+    "desc": "sem value_per_retained -> c3_ratio 0, c3_ok True",
+    "statement": "sem value_per_retained -> c3_ratio 0, c3_ok True",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 10,
+          "engagement": 0.5,
+          "activated": true,
+          "support_tickets": 0
+        }
+      ]
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 0,
+      "avg_risk_score": 35.0,
+      "explainable": true,
+      "c3_ratio": 0.0,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-25",
+    "desc": "carteira vazia -> scored 0, sem alto risco, explicavel True (vacuo)",
+    "statement": "carteira vazia -> scored 0, sem alto risco, explicavel True (vacuo)",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": []
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 0,
+      "high_risk_count": 0,
+      "avg_risk_score": 0.0,
+      "explainable": true,
+      "c3_ratio": 0.0,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-26",
+    "desc": "tres clientes: 1 alto, 1 medio, 1 baixo -> contagem e media",
+    "statement": "tres clientes: 1 alto, 1 medio, 1 baixo -> contagem e media",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 30,
+          "engagement": 0.1,
+          "activated": false,
+          "support_tickets": 4
+        },
+        {
+          "id": "c2",
+          "days_inactive": 8,
+          "engagement": 0.5,
+          "activated": true,
+          "support_tickets": 0
+        },
+        {
+          "id": "c3",
+          "days_inactive": 0,
+          "engagement": 0.9,
+          "activated": true,
+          "support_tickets": 0
+        }
+      ],
+      "inference_cost": 3,
+      "value_per_retained": 100
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 3,
+      "high_risk_count": 1,
+      "avg_risk_score": 43.7,
+      "explainable": true,
+      "c3_ratio": 0.03,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-27",
+    "desc": "dois altos risco -> high_risk_count=2",
+    "statement": "dois altos risco -> high_risk_count=2",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 25,
+          "engagement": 0.1,
+          "activated": false,
+          "support_tickets": 4
+        },
+        {
+          "id": "c2",
+          "days_inactive": 30,
+          "engagement": 0.05,
+          "activated": false,
+          "support_tickets": 5
+        }
+      ]
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 2,
+      "high_risk_count": 2,
+      "avg_risk_score": 97.5,
+      "explainable": true,
+      "c3_ratio": 0.0,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-28",
+    "desc": "engajamento zero isolado -> 30pts -> medio, fator presente",
+    "statement": "engajamento zero isolado -> 30pts -> medio, fator presente",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 0,
+          "engagement": 0.0,
+          "activated": true,
+          "support_tickets": 0
+        }
+      ]
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 0,
+      "avg_risk_score": 30.0,
+      "explainable": true,
+      "c3_ratio": 0.0,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-29",
+    "desc": "engajamento medio 0.5 (>=0.4) -> eng_pts=15, sem fator, baixo",
+    "statement": "engajamento medio 0.5 (>=0.4) -> eng_pts=15, sem fator, baixo",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 0,
+          "engagement": 0.5,
+          "activated": true,
+          "support_tickets": 0
+        }
+      ]
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 0,
+      "avg_risk_score": 15.0,
+      "explainable": true,
+      "c3_ratio": 0.0,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-30",
+    "desc": "inatividade 22d (teto40) + 3 tickets (10) + baixo eng (eng_pts) -> alto",
+    "statement": "inatividade 22d (teto40) + 3 tickets (10) + baixo eng (eng_pts) -> alto",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 22,
+          "engagement": 0.2,
+          "activated": true,
+          "support_tickets": 3
+        }
+      ]
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 1,
+      "avg_risk_score": 74.0,
+      "explainable": true,
+      "c3_ratio": 0.0,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-31",
+    "desc": "inatividade 15d + nao ativado (30+20=50) -> medio",
+    "statement": "inatividade 15d + nao ativado (30+20=50) -> medio",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 15,
+          "engagement": 1.0,
+          "activated": false,
+          "support_tickets": 0
+        }
+      ]
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 1,
+      "high_risk_count": 0,
+      "avg_risk_score": 50.0,
+      "explainable": true,
+      "c3_ratio": 0.0,
+      "c3_ok": true
+    }
+  },
+  {
+    "id": "cp-32",
+    "desc": "lista D-7 de alto risco, C3 folgado -> explicavel e dentro do teto",
+    "statement": "lista D-7 de alto risco, C3 folgado -> explicavel e dentro do teto",
+    "tenant_id": "t-eval-g06",
+    "churn": {
+      "customers": [
+        {
+          "id": "c1",
+          "days_inactive": 22,
+          "engagement": 0.15,
+          "activated": false,
+          "support_tickets": 3
+        },
+        {
+          "id": "c2",
+          "days_inactive": 18,
+          "engagement": 0.2,
+          "activated": false,
+          "support_tickets": 4
+        }
+      ],
+      "inference_cost": 4,
+      "value_per_retained": 200
+    },
+    "expected": {
+      "by": "g6-churn-predictor",
+      "scored_count": 2,
+      "high_risk_count": 2,
+      "avg_risk_score": 93.0,
+      "explainable": true,
+      "c3_ratio": 0.02,
+      "c3_ok": true
+    }
+  }
 ]

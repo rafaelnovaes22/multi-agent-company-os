@@ -1,28 +1,947 @@
 [
-  {"id": "sp-01", "desc": "dominio: 2 variaveis, tornado e cenarios base/upside/downside",
-   "tenant_id": "t-eval-g01", "statement": "Construa os cenários base/upside/downside a partir do sizing vigente",
-   "sizing": {"variables": [
-     {"name": "empresas", "value": 1000, "delta_pct": 0.2},
-     {"name": "ticket", "value": 500, "delta_pct": 0.1}
-   ]},
-   "expected": {"by": "g1-scenario-planner", "base_value": 500000.0, "driver_count": 2,
-     "top_driver": "empresas", "spread_pct": 60.0, "tripwire_count": 2}},
-
-  {"id": "sp-02", "desc": "dominio: conversao com maior swing domina o tornado",
-   "tenant_id": "t-eval-g01", "statement": "Quais drivers movem mais o SOM? Rode o tornado",
-   "sizing": {"variables": [
-     {"name": "conversao", "value": 0.05, "delta_pct": 0.5},
-     {"name": "empresas", "value": 2000, "delta_pct": 0.1},
-     {"name": "ticket", "value": 300, "delta_pct": 0.2}
-   ]},
-   "expected": {"by": "g1-scenario-planner", "base_value": 30000.0, "driver_count": 3,
-     "top_driver": "conversao", "tripwire_count": 3}},
-
-  {"id": "sp-03", "desc": "dominio: 1 variavel, trip-wire e spread",
-   "tenant_id": "t-eval-g01", "statement": "Defina os trip-wires acionáveis dos cenários",
-   "sizing": {"variables": [
-     {"name": "alcance", "value": 0.3, "delta_pct": 0.25}
-   ]},
-   "expected": {"by": "g1-scenario-planner", "base_value": 0.3, "driver_count": 1,
-     "top_driver": "alcance", "spread_pct": 53.3, "tripwire_count": 1}}
+  {
+    "id": "sp-01",
+    "desc": "dominio: 2 variaveis, tornado e cenarios base/upside/downside",
+    "tenant_id": "t-eval-g01",
+    "statement": "Construa os cenários base/upside/downside a partir do sizing vigente",
+    "sizing": {
+      "variables": [
+        {
+          "name": "empresas",
+          "value": 1000,
+          "delta_pct": 0.2
+        },
+        {
+          "name": "ticket",
+          "value": 500,
+          "delta_pct": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 500000.0,
+      "driver_count": 2,
+      "top_driver": "empresas",
+      "spread_pct": 60.0,
+      "tripwire_count": 2
+    }
+  },
+  {
+    "id": "sp-02",
+    "desc": "dominio: conversao com maior swing domina o tornado",
+    "tenant_id": "t-eval-g01",
+    "statement": "Quais drivers movem mais o SOM? Rode o tornado",
+    "sizing": {
+      "variables": [
+        {
+          "name": "conversao",
+          "value": 0.05,
+          "delta_pct": 0.5
+        },
+        {
+          "name": "empresas",
+          "value": 2000,
+          "delta_pct": 0.1
+        },
+        {
+          "name": "ticket",
+          "value": 300,
+          "delta_pct": 0.2
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 30000.0,
+      "driver_count": 3,
+      "top_driver": "conversao",
+      "tripwire_count": 3
+    }
+  },
+  {
+    "id": "sp-03",
+    "desc": "dominio: 1 variavel, trip-wire e spread",
+    "tenant_id": "t-eval-g01",
+    "statement": "Defina os trip-wires acionáveis dos cenários",
+    "sizing": {
+      "variables": [
+        {
+          "name": "alcance",
+          "value": 0.3,
+          "delta_pct": 0.25
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 0.3,
+      "driver_count": 1,
+      "top_driver": "alcance",
+      "spread_pct": 53.3,
+      "tripwire_count": 1
+    }
+  },
+  {
+    "id": "sp-04",
+    "desc": "caminho feliz: 3 drivers, maior swing isolado no topo do tornado",
+    "tenant_id": "t-eval-g01",
+    "statement": "caminho feliz: 3 drivers, maior swing isolado no topo do tornado",
+    "sizing": {
+      "variables": [
+        {
+          "name": "tam_empresas",
+          "value": 5000,
+          "delta_pct": 0.3
+        },
+        {
+          "name": "conversao",
+          "value": 0.04,
+          "delta_pct": 0.15
+        },
+        {
+          "name": "ticket_anual",
+          "value": 1200,
+          "delta_pct": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 240000.0,
+      "driver_count": 3,
+      "top_driver": "tam_empresas",
+      "spread_pct": 110.9,
+      "tripwire_count": 3
+    }
+  },
+  {
+    "id": "sp-05",
+    "desc": "trip-wire por variavel com limiar e metrica observavel",
+    "tenant_id": "t-eval-g01",
+    "statement": "trip-wire por variavel com limiar e metrica observavel",
+    "sizing": {
+      "variables": [
+        {
+          "name": "usuarios",
+          "value": 10000,
+          "delta_pct": 0.2
+        },
+        {
+          "name": "arpu",
+          "value": 50,
+          "delta_pct": 0.25
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 500000.0,
+      "driver_count": 2,
+      "top_driver": "arpu",
+      "spread_pct": 90.0,
+      "tripwire_count": 2
+    }
+  },
+  {
+    "id": "sp-06",
+    "desc": "empate de swing: ordem estavel mantem o primeiro declarado",
+    "tenant_id": "t-eval-g01",
+    "statement": "empate de swing: ordem estavel mantem o primeiro declarado",
+    "sizing": {
+      "variables": [
+        {
+          "name": "a",
+          "value": 100,
+          "delta_pct": 0.2
+        },
+        {
+          "name": "b",
+          "value": 200,
+          "delta_pct": 0.2
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 20000.0,
+      "driver_count": 2,
+      "top_driver": "a",
+      "spread_pct": 80.0,
+      "tripwire_count": 2
+    }
+  },
+  {
+    "id": "sp-07",
+    "desc": "swing maior vence mesmo com valor menor",
+    "tenant_id": "t-eval-g01",
+    "statement": "swing maior vence mesmo com valor menor",
+    "sizing": {
+      "variables": [
+        {
+          "name": "pequena_alta_var",
+          "value": 2,
+          "delta_pct": 0.6
+        },
+        {
+          "name": "grande_baixa_var",
+          "value": 1000,
+          "delta_pct": 0.05
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 2000.0,
+      "driver_count": 2,
+      "top_driver": "pequena_alta_var",
+      "spread_pct": 130.0,
+      "tripwire_count": 2
+    }
+  },
+  {
+    "id": "sp-08",
+    "desc": "4 variaveis sizing completo",
+    "tenant_id": "t-eval-g01",
+    "statement": "4 variaveis sizing completo",
+    "sizing": {
+      "variables": [
+        {
+          "name": "empresas",
+          "value": 8000,
+          "delta_pct": 0.25
+        },
+        {
+          "name": "ativacao",
+          "value": 0.6,
+          "delta_pct": 0.1
+        },
+        {
+          "name": "conversao",
+          "value": 0.08,
+          "delta_pct": 0.3
+        },
+        {
+          "name": "ticket",
+          "value": 2400,
+          "delta_pct": 0.15
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 921600.0,
+      "driver_count": 4,
+      "top_driver": "conversao",
+      "spread_pct": 165.4,
+      "tripwire_count": 4
+    }
+  },
+  {
+    "id": "sp-09",
+    "desc": "spread simetrico com 1 var delta 0.5",
+    "tenant_id": "t-eval-g01",
+    "statement": "spread simetrico com 1 var delta 0.5",
+    "sizing": {
+      "variables": [
+        {
+          "name": "x",
+          "value": 10,
+          "delta_pct": 0.5
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 10.0,
+      "driver_count": 1,
+      "top_driver": "x",
+      "spread_pct": 100.0,
+      "tripwire_count": 1
+    }
+  },
+  {
+    "id": "sp-10",
+    "desc": "delta zero: impacto zero, sem swing, spread 0",
+    "tenant_id": "t-eval-g01",
+    "statement": "delta zero: impacto zero, sem swing, spread 0",
+    "sizing": {
+      "variables": [
+        {
+          "name": "fixo",
+          "value": 100,
+          "delta_pct": 0.0
+        },
+        {
+          "name": "movel",
+          "value": 10,
+          "delta_pct": 0.0
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 1000.0,
+      "driver_count": 2,
+      "top_driver": "fixo",
+      "spread_pct": 0.0,
+      "tripwire_count": 2
+    }
+  },
+  {
+    "id": "sp-11",
+    "desc": "1 var delta 0.1 -> spread 20%",
+    "tenant_id": "t-eval-g01",
+    "statement": "1 var delta 0.1 -> spread 20%",
+    "sizing": {
+      "variables": [
+        {
+          "name": "som_base",
+          "value": 250000,
+          "delta_pct": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 250000.0,
+      "driver_count": 1,
+      "top_driver": "som_base",
+      "spread_pct": 20.0,
+      "tripwire_count": 1
+    }
+  },
+  {
+    "id": "sp-12",
+    "desc": "valor fracionario (conversao) domina por swing alto",
+    "tenant_id": "t-eval-g01",
+    "statement": "valor fracionario (conversao) domina por swing alto",
+    "sizing": {
+      "variables": [
+        {
+          "name": "conv",
+          "value": 0.025,
+          "delta_pct": 0.4
+        },
+        {
+          "name": "base",
+          "value": 4000,
+          "delta_pct": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 100.0,
+      "driver_count": 2,
+      "top_driver": "conv",
+      "spread_pct": 100.0,
+      "tripwire_count": 2
+    }
+  },
+  {
+    "id": "sp-13",
+    "desc": "2 vars mesmo swing -> primeiro no topo (estavel)",
+    "tenant_id": "t-eval-g01",
+    "statement": "2 vars mesmo swing -> primeiro no topo (estavel)",
+    "sizing": {
+      "variables": [
+        {
+          "name": "driver_um",
+          "value": 300,
+          "delta_pct": 0.3
+        },
+        {
+          "name": "driver_dois",
+          "value": 300,
+          "delta_pct": 0.3
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 90000.0,
+      "driver_count": 2,
+      "top_driver": "driver_um",
+      "spread_pct": 120.0,
+      "tripwire_count": 2
+    }
+  },
+  {
+    "id": "sp-14",
+    "desc": "tornado 5 drivers, identifica top",
+    "tenant_id": "t-eval-g01",
+    "statement": "tornado 5 drivers, identifica top",
+    "sizing": {
+      "variables": [
+        {
+          "name": "v1",
+          "value": 10,
+          "delta_pct": 0.05
+        },
+        {
+          "name": "v2",
+          "value": 20,
+          "delta_pct": 0.1
+        },
+        {
+          "name": "v3",
+          "value": 30,
+          "delta_pct": 0.4
+        },
+        {
+          "name": "v4",
+          "value": 40,
+          "delta_pct": 0.2
+        },
+        {
+          "name": "v5",
+          "value": 50,
+          "delta_pct": 0.15
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 12000000.0,
+      "driver_count": 5,
+      "top_driver": "v3",
+      "spread_pct": 188.3,
+      "tripwire_count": 5
+    }
+  },
+  {
+    "id": "sp-15",
+    "desc": "downside profundo: delta 0.5 em 2 vars",
+    "tenant_id": "t-eval-g01",
+    "statement": "downside profundo: delta 0.5 em 2 vars",
+    "sizing": {
+      "variables": [
+        {
+          "name": "a",
+          "value": 100,
+          "delta_pct": 0.5
+        },
+        {
+          "name": "b",
+          "value": 100,
+          "delta_pct": 0.5
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 10000.0,
+      "driver_count": 2,
+      "top_driver": "a",
+      "spread_pct": 200.0,
+      "tripwire_count": 2
+    }
+  },
+  {
+    "id": "sp-16",
+    "desc": "ticket alto, swing baixo vs conversao swing alto",
+    "tenant_id": "t-eval-g01",
+    "statement": "ticket alto, swing baixo vs conversao swing alto",
+    "sizing": {
+      "variables": [
+        {
+          "name": "ticket",
+          "value": 10000,
+          "delta_pct": 0.05
+        },
+        {
+          "name": "conversao",
+          "value": 0.03,
+          "delta_pct": 0.35
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 300.0,
+      "driver_count": 2,
+      "top_driver": "conversao",
+      "spread_pct": 80.0,
+      "tripwire_count": 2
+    }
+  },
+  {
+    "id": "sp-17",
+    "desc": "3 vars deltas crescentes -> ultima e top",
+    "tenant_id": "t-eval-g01",
+    "statement": "3 vars deltas crescentes -> ultima e top",
+    "sizing": {
+      "variables": [
+        {
+          "name": "a",
+          "value": 100,
+          "delta_pct": 0.1
+        },
+        {
+          "name": "b",
+          "value": 100,
+          "delta_pct": 0.2
+        },
+        {
+          "name": "c",
+          "value": 100,
+          "delta_pct": 0.3
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 1000000.0,
+      "driver_count": 3,
+      "top_driver": "c",
+      "spread_pct": 121.2,
+      "tripwire_count": 3
+    }
+  },
+  {
+    "id": "sp-18",
+    "desc": "valor unitario com delta",
+    "tenant_id": "t-eval-g01",
+    "statement": "valor unitario com delta",
+    "sizing": {
+      "variables": [
+        {
+          "name": "unico",
+          "value": 1,
+          "delta_pct": 0.25
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 1.0,
+      "driver_count": 1,
+      "top_driver": "unico",
+      "spread_pct": 50.0,
+      "tripwire_count": 1
+    }
+  },
+  {
+    "id": "sp-19",
+    "desc": "sizing realista B2B SaaS",
+    "tenant_id": "t-eval-g01",
+    "statement": "sizing realista B2B SaaS",
+    "sizing": {
+      "variables": [
+        {
+          "name": "contas_alvo",
+          "value": 1500,
+          "delta_pct": 0.2
+        },
+        {
+          "name": "win_rate",
+          "value": 0.12,
+          "delta_pct": 0.3
+        },
+        {
+          "name": "acv",
+          "value": 18000,
+          "delta_pct": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 3240000.0,
+      "driver_count": 3,
+      "top_driver": "win_rate",
+      "spread_pct": 121.2,
+      "tripwire_count": 3
+    }
+  },
+  {
+    "id": "sp-20",
+    "desc": "empate triplo de swing -> primeiro declarado vence",
+    "tenant_id": "t-eval-g01",
+    "statement": "empate triplo de swing -> primeiro declarado vence",
+    "sizing": {
+      "variables": [
+        {
+          "name": "x",
+          "value": 10,
+          "delta_pct": 0.15
+        },
+        {
+          "name": "y",
+          "value": 20,
+          "delta_pct": 0.15
+        },
+        {
+          "name": "z",
+          "value": 30,
+          "delta_pct": 0.15
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 6000.0,
+      "driver_count": 3,
+      "top_driver": "x",
+      "spread_pct": 90.7,
+      "tripwire_count": 3
+    }
+  },
+  {
+    "id": "sp-21",
+    "desc": "spread amplo: deltas altos",
+    "tenant_id": "t-eval-g01",
+    "statement": "spread amplo: deltas altos",
+    "sizing": {
+      "variables": [
+        {
+          "name": "a",
+          "value": 50,
+          "delta_pct": 0.4
+        },
+        {
+          "name": "b",
+          "value": 40,
+          "delta_pct": 0.4
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 2000.0,
+      "driver_count": 2,
+      "top_driver": "a",
+      "spread_pct": 160.0,
+      "tripwire_count": 2
+    }
+  },
+  {
+    "id": "sp-22",
+    "desc": "delta minusculo 0.01",
+    "tenant_id": "t-eval-g01",
+    "statement": "delta minusculo 0.01",
+    "sizing": {
+      "variables": [
+        {
+          "name": "base",
+          "value": 100000,
+          "delta_pct": 0.01
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 100000.0,
+      "driver_count": 1,
+      "top_driver": "base",
+      "spread_pct": 2.0,
+      "tripwire_count": 1
+    }
+  },
+  {
+    "id": "sp-23",
+    "desc": "2 vars: segundo tem swing maior -> top driver e o segundo",
+    "tenant_id": "t-eval-g01",
+    "statement": "2 vars: segundo tem swing maior -> top driver e o segundo",
+    "sizing": {
+      "variables": [
+        {
+          "name": "primeiro",
+          "value": 500,
+          "delta_pct": 0.1
+        },
+        {
+          "name": "segundo",
+          "value": 500,
+          "delta_pct": 0.45
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 250000.0,
+      "driver_count": 2,
+      "top_driver": "segundo",
+      "spread_pct": 110.0,
+      "tripwire_count": 2
+    }
+  },
+  {
+    "id": "sp-24",
+    "desc": "mix grande, validacao de base",
+    "tenant_id": "t-eval-g01",
+    "statement": "mix grande, validacao de base",
+    "sizing": {
+      "variables": [
+        {
+          "name": "a",
+          "value": 2,
+          "delta_pct": 0.2
+        },
+        {
+          "name": "b",
+          "value": 3,
+          "delta_pct": 0.2
+        },
+        {
+          "name": "c",
+          "value": 4,
+          "delta_pct": 0.2
+        },
+        {
+          "name": "d",
+          "value": 5,
+          "delta_pct": 0.2
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 120.0,
+      "driver_count": 4,
+      "top_driver": "a",
+      "spread_pct": 166.4,
+      "tripwire_count": 4
+    }
+  },
+  {
+    "id": "sp-25",
+    "desc": "tripwire threshold 75% (delta 0.25)",
+    "tenant_id": "t-eval-g01",
+    "statement": "tripwire threshold 75% (delta 0.25)",
+    "sizing": {
+      "variables": [
+        {
+          "name": "metr",
+          "value": 400,
+          "delta_pct": 0.25
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 400.0,
+      "driver_count": 1,
+      "top_driver": "metr",
+      "spread_pct": 50.0,
+      "tripwire_count": 1
+    }
+  },
+  {
+    "id": "sp-26",
+    "desc": "conversao baixissima domina por swing",
+    "tenant_id": "t-eval-g01",
+    "statement": "conversao baixissima domina por swing",
+    "sizing": {
+      "variables": [
+        {
+          "name": "conv",
+          "value": 0.001,
+          "delta_pct": 0.5
+        },
+        {
+          "name": "vol",
+          "value": 1000000,
+          "delta_pct": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 1000.0,
+      "driver_count": 2,
+      "top_driver": "conv",
+      "spread_pct": 120.0,
+      "tripwire_count": 2
+    }
+  },
+  {
+    "id": "sp-27",
+    "desc": "3 vars iguais valor, deltas diferentes",
+    "tenant_id": "t-eval-g01",
+    "statement": "3 vars iguais valor, deltas diferentes",
+    "sizing": {
+      "variables": [
+        {
+          "name": "a",
+          "value": 100,
+          "delta_pct": 0.05
+        },
+        {
+          "name": "b",
+          "value": 100,
+          "delta_pct": 0.5
+        },
+        {
+          "name": "c",
+          "value": 100,
+          "delta_pct": 0.25
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 1000000.0,
+      "driver_count": 3,
+      "top_driver": "b",
+      "spread_pct": 161.2,
+      "tripwire_count": 3
+    }
+  },
+  {
+    "id": "sp-28",
+    "desc": "downside quase zero por deltas altos",
+    "tenant_id": "t-eval-g01",
+    "statement": "downside quase zero por deltas altos",
+    "sizing": {
+      "variables": [
+        {
+          "name": "a",
+          "value": 10,
+          "delta_pct": 0.9
+        },
+        {
+          "name": "b",
+          "value": 10,
+          "delta_pct": 0.9
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 100.0,
+      "driver_count": 2,
+      "top_driver": "a",
+      "spread_pct": 360.0,
+      "tripwire_count": 2
+    }
+  },
+  {
+    "id": "sp-29",
+    "desc": "sizing com 4 drivers acionaveis",
+    "tenant_id": "t-eval-g01",
+    "statement": "sizing com 4 drivers acionaveis",
+    "sizing": {
+      "variables": [
+        {
+          "name": "leads",
+          "value": 20000,
+          "delta_pct": 0.3
+        },
+        {
+          "name": "mql_rate",
+          "value": 0.25,
+          "delta_pct": 0.2
+        },
+        {
+          "name": "close_rate",
+          "value": 0.1,
+          "delta_pct": 0.35
+        },
+        {
+          "name": "ticket",
+          "value": 3600,
+          "delta_pct": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 1800000.0,
+      "driver_count": 4,
+      "top_driver": "close_rate",
+      "spread_pct": 198.9,
+      "tripwire_count": 4
+    }
+  },
+  {
+    "id": "sp-30",
+    "desc": "base grande, spread 40% (delta 0.2 em 1 var)",
+    "tenant_id": "t-eval-g01",
+    "statement": "base grande, spread 40% (delta 0.2 em 1 var)",
+    "sizing": {
+      "variables": [
+        {
+          "name": "som",
+          "value": 1000000,
+          "delta_pct": 0.2
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 1000000.0,
+      "driver_count": 1,
+      "top_driver": "som",
+      "spread_pct": 40.0,
+      "tripwire_count": 1
+    }
+  },
+  {
+    "id": "sp-31",
+    "desc": "empate entre 2 maiores, terceiro menor",
+    "tenant_id": "t-eval-g01",
+    "statement": "empate entre 2 maiores, terceiro menor",
+    "sizing": {
+      "variables": [
+        {
+          "name": "a",
+          "value": 100,
+          "delta_pct": 0.3
+        },
+        {
+          "name": "b",
+          "value": 100,
+          "delta_pct": 0.3
+        },
+        {
+          "name": "c",
+          "value": 100,
+          "delta_pct": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 1000000.0,
+      "driver_count": 3,
+      "top_driver": "a",
+      "spread_pct": 141.8,
+      "tripwire_count": 3
+    }
+  },
+  {
+    "id": "sp-32",
+    "desc": "driver dominante claro entre 3",
+    "tenant_id": "t-eval-g01",
+    "statement": "driver dominante claro entre 3",
+    "sizing": {
+      "variables": [
+        {
+          "name": "a",
+          "value": 100,
+          "delta_pct": 0.1
+        },
+        {
+          "name": "b",
+          "value": 100,
+          "delta_pct": 0.6
+        },
+        {
+          "name": "c",
+          "value": 100,
+          "delta_pct": 0.2
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-scenario-planner",
+      "base_value": 1000000.0,
+      "driver_count": 3,
+      "top_driver": "b",
+      "spread_pct": 182.4,
+      "tripwire_count": 3
+    }
+  }
 ]

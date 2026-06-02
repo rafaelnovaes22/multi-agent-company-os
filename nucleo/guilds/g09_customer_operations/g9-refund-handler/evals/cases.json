@@ -44,5 +44,407 @@
       "eligible": false,
       "decision": "negar_fora_politica"
     }
+  },
+  {
+    "id": "rf-04",
+    "desc": "gate humano obrigatorio mesmo elegivel",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 1,
+      "policy_window_days": 30,
+      "fraud_flag": false
+    },
+    "expected": {
+      "eligible": true,
+      "decision": "aprovar_com_gate",
+      "requires_human_gate": true
+    }
+  },
+  {
+    "id": "rf-05",
+    "desc": "gate humano obrigatorio tambem ao negar fora de politica",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 90,
+      "policy_window_days": 30,
+      "fraud_flag": false
+    },
+    "expected": {
+      "eligible": false,
+      "decision": "negar_fora_politica",
+      "requires_human_gate": true
+    }
+  },
+  {
+    "id": "rf-06",
+    "desc": "gate humano obrigatorio tambem em fraude",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 5,
+      "policy_window_days": 30,
+      "fraud_flag": true
+    },
+    "expected": {
+      "eligible": false,
+      "decision": "flag_fraude",
+      "requires_human_gate": true
+    }
+  },
+  {
+    "id": "rf-07",
+    "desc": "fronteira: dias=janela exato (<= aprova) -> aprovar_com_gate",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 30,
+      "policy_window_days": 30,
+      "fraud_flag": false
+    },
+    "expected": {
+      "eligible": true,
+      "decision": "aprovar_com_gate"
+    }
+  },
+  {
+    "id": "rf-08",
+    "desc": "fronteira: dias=janela+1 -> negar_fora_politica",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 31,
+      "policy_window_days": 30,
+      "fraud_flag": false
+    },
+    "expected": {
+      "eligible": false,
+      "decision": "negar_fora_politica"
+    }
+  },
+  {
+    "id": "rf-09",
+    "desc": "dia 0 (compra de hoje) -> dentro da janela, aprovar",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 0,
+      "policy_window_days": 30,
+      "fraud_flag": false
+    },
+    "expected": {
+      "eligible": true,
+      "decision": "aprovar_com_gate"
+    }
+  },
+  {
+    "id": "rf-10",
+    "desc": "default policy_window=30 quando ausente; dias=29 -> aprovar",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 29,
+      "fraud_flag": false
+    },
+    "expected": {
+      "eligible": true,
+      "decision": "aprovar_com_gate"
+    }
+  },
+  {
+    "id": "rf-11",
+    "desc": "default janela 30; dias=30 -> aprovar (limiar exato)",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 30,
+      "fraud_flag": false
+    },
+    "expected": {
+      "eligible": true,
+      "decision": "aprovar_com_gate"
+    }
+  },
+  {
+    "id": "rf-12",
+    "desc": "default janela 30; dias=31 -> negar fora politica",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 31,
+      "fraud_flag": false
+    },
+    "expected": {
+      "eligible": false,
+      "decision": "negar_fora_politica"
+    }
+  },
+  {
+    "id": "rf-13",
+    "desc": "janela custom 7 dias; dias=7 -> aprovar",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 7,
+      "policy_window_days": 7,
+      "fraud_flag": false
+    },
+    "expected": {
+      "eligible": true,
+      "decision": "aprovar_com_gate"
+    }
+  },
+  {
+    "id": "rf-14",
+    "desc": "janela custom 7 dias; dias=8 -> negar",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 8,
+      "policy_window_days": 7,
+      "fraud_flag": false
+    },
+    "expected": {
+      "eligible": false,
+      "decision": "negar_fora_politica"
+    }
+  },
+  {
+    "id": "rf-15",
+    "desc": "janela longa 365 dias; dias=200 -> aprovar",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 200,
+      "policy_window_days": 365,
+      "fraud_flag": false
+    },
+    "expected": {
+      "eligible": true,
+      "decision": "aprovar_com_gate"
+    }
+  },
+  {
+    "id": "rf-16",
+    "desc": "janela 90 dias; dias=89 -> aprovar",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 89,
+      "policy_window_days": 90,
+      "fraud_flag": false
+    },
+    "expected": {
+      "eligible": true,
+      "decision": "aprovar_com_gate"
+    }
+  },
+  {
+    "id": "rf-17",
+    "desc": "janela 90 dias; dias=91 -> negar",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 91,
+      "policy_window_days": 90,
+      "fraud_flag": false
+    },
+    "expected": {
+      "eligible": false,
+      "decision": "negar_fora_politica"
+    }
+  },
+  {
+    "id": "rf-18",
+    "desc": "precedencia: fraude domina mesmo dentro da janela -> flag_fraude",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 1,
+      "policy_window_days": 30,
+      "fraud_flag": true
+    },
+    "expected": {
+      "eligible": false,
+      "decision": "flag_fraude"
+    }
+  },
+  {
+    "id": "rf-19",
+    "desc": "precedencia: fraude domina mesmo fora da janela -> flag_fraude (nao negar_fora)",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 200,
+      "policy_window_days": 30,
+      "fraud_flag": true
+    },
+    "expected": {
+      "eligible": false,
+      "decision": "flag_fraude"
+    }
+  },
+  {
+    "id": "rf-20",
+    "desc": "precedencia: fraude domina no limiar exato da janela -> flag_fraude",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 30,
+      "policy_window_days": 30,
+      "fraud_flag": true
+    },
+    "expected": {
+      "eligible": false,
+      "decision": "flag_fraude"
+    }
+  },
+  {
+    "id": "rf-21",
+    "desc": "fraude no dia 0 -> flag_fraude (nao aprovar)",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 0,
+      "policy_window_days": 30,
+      "fraud_flag": true
+    },
+    "expected": {
+      "eligible": false,
+      "decision": "flag_fraude"
+    }
+  },
+  {
+    "id": "rf-22",
+    "desc": "fraud_flag ausente -> nao fraude; dentro janela -> aprovar",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 10,
+      "policy_window_days": 30
+    },
+    "expected": {
+      "eligible": true,
+      "decision": "aprovar_com_gate"
+    }
+  },
+  {
+    "id": "rf-23",
+    "desc": "fraud_flag False explicito, fora janela -> negar_fora_politica",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 45,
+      "policy_window_days": 30,
+      "fraud_flag": false
+    },
+    "expected": {
+      "eligible": false,
+      "decision": "negar_fora_politica"
+    }
+  },
+  {
+    "id": "rf-24",
+    "desc": "reembolso recente sem fraude -> elegivel aprovar_com_gate",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 2,
+      "policy_window_days": 14,
+      "fraud_flag": false
+    },
+    "expected": {
+      "eligible": true,
+      "decision": "aprovar_com_gate"
+    }
+  },
+  {
+    "id": "rf-25",
+    "desc": "compra antiga muito alem da janela -> negar",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 400,
+      "policy_window_days": 30,
+      "fraud_flag": false
+    },
+    "expected": {
+      "eligible": false,
+      "decision": "negar_fora_politica"
+    }
+  },
+  {
+    "id": "rf-26",
+    "desc": "fraude com janela custom curta -> flag_fraude domina",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 3,
+      "policy_window_days": 7,
+      "fraud_flag": true
+    },
+    "expected": {
+      "eligible": false,
+      "decision": "flag_fraude"
+    }
+  },
+  {
+    "id": "rf-27",
+    "desc": "refund vazio -> dias 0 dentro default 30 -> aprovar_com_gate, gate True",
+    "tenant_id": "t-eval-g09",
+    "refund": {},
+    "expected": {
+      "eligible": true,
+      "decision": "aprovar_com_gate",
+      "requires_human_gate": true
+    }
+  },
+  {
+    "id": "rf-28",
+    "desc": "so fraud_flag True, sem dias -> flag_fraude",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "fraud_flag": true
+    },
+    "expected": {
+      "eligible": false,
+      "decision": "flag_fraude"
+    }
+  },
+  {
+    "id": "rf-29",
+    "desc": "janela informada 0 cai no default 30 (or 30); dias=0 -> aprovar",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 0,
+      "policy_window_days": 0,
+      "fraud_flag": false
+    },
+    "expected": {
+      "eligible": true,
+      "decision": "aprovar_com_gate"
+    }
+  },
+  {
+    "id": "rf-30",
+    "desc": "janela informada 0 cai no default 30 (or 30); dias=10 -> aprovar",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 10,
+      "policy_window_days": 0,
+      "fraud_flag": false
+    },
+    "expected": {
+      "eligible": true,
+      "decision": "aprovar_com_gate"
+    }
+  },
+  {
+    "id": "rf-31",
+    "desc": "janela 30; dia exatamente no limite com fraude False -> aprovar",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 30,
+      "policy_window_days": 30,
+      "fraud_flag": false
+    },
+    "expected": {
+      "eligible": true,
+      "decision": "aprovar_com_gate",
+      "requires_human_gate": true
+    }
+  },
+  {
+    "id": "rf-32",
+    "desc": "fora da janela por 1 dia, sem fraude -> negar com gate",
+    "tenant_id": "t-eval-g09",
+    "refund": {
+      "days_since_purchase": 16,
+      "policy_window_days": 15,
+      "fraud_flag": false
+    },
+    "expected": {
+      "eligible": false,
+      "decision": "negar_fora_politica",
+      "requires_human_gate": true
+    }
   }
 ]

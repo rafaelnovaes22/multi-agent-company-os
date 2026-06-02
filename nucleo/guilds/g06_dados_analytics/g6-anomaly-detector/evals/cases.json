@@ -1,14 +1,641 @@
 [
-  {"id": "an-01", "desc": "queda abrupta da north-star pós-deploy: z=-4, severidade crítica",
-   "tenant_id": "t-eval-g06",
-   "series": {"baseline_mean": 1000, "baseline_std": 50, "value": 800, "seasonal_factor": 1.0},
-   "expected": {"by": "g6-anomaly-detector", "z_score": -4.0, "expected_value": 1000.0, "anomaly_detected": true, "severity": "critico", "direction": "queda", "alert_routed": true}},
-  {"id": "an-02", "desc": "pico esperado pela sazonalidade: baseline corrige, sem alarme",
-   "tenant_id": "t-eval-g06",
-   "series": {"baseline_mean": 1000, "baseline_std": 50, "value": 1500, "seasonal_factor": 1.5},
-   "expected": {"by": "g6-anomaly-detector", "z_score": 0.0, "expected_value": 1500.0, "anomaly_detected": false, "severity": "normal", "direction": "estavel"}},
-  {"id": "an-03", "desc": "pico anômalo de custo de tokens: z=2.5, severidade alta",
-   "tenant_id": "t-eval-g06",
-   "series": {"baseline_mean": 200, "baseline_std": 20, "value": 250},
-   "expected": {"by": "g6-anomaly-detector", "z_score": 2.5, "expected_value": 200.0, "anomaly_detected": true, "severity": "alto", "direction": "pico", "alert_routed": true}}
+  {
+    "id": "an-01",
+    "desc": "queda abrupta da north-star pos-deploy: z=-4 critico",
+    "statement": "queda abrupta da north-star pos-deploy: z=-4 critico",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 1000,
+      "baseline_std": 50,
+      "value": 800,
+      "seasonal_factor": 1.0
+    },
+    "expected": {
+      "z_score": -4.0,
+      "expected_value": 1000.0,
+      "anomaly_detected": true,
+      "severity": "critico",
+      "direction": "queda",
+      "alert_routed": true,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-02",
+    "desc": "pico esperado pela sazonalidade: baseline corrige, sem alarme",
+    "statement": "pico esperado pela sazonalidade: baseline corrige, sem alarme",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 1000,
+      "baseline_std": 50,
+      "value": 1500,
+      "seasonal_factor": 1.5
+    },
+    "expected": {
+      "z_score": 0.0,
+      "expected_value": 1500.0,
+      "anomaly_detected": false,
+      "severity": "normal",
+      "direction": "estavel",
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-03",
+    "desc": "pico anomalo de custo de tokens: z=2.5 alto",
+    "statement": "pico anomalo de custo de tokens: z=2.5 alto",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 200,
+      "baseline_std": 20,
+      "value": 250
+    },
+    "expected": {
+      "z_score": 2.5,
+      "expected_value": 200.0,
+      "anomaly_detected": true,
+      "severity": "alto",
+      "direction": "pico",
+      "alert_routed": true,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-04",
+    "desc": "z exatamente +2 -> alto, detectado (limiar inclusivo)",
+    "statement": "z exatamente +2 -> alto, detectado (limiar inclusivo)",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 100,
+      "baseline_std": 10,
+      "value": 120
+    },
+    "expected": {
+      "z_score": 2.0,
+      "expected_value": 100.0,
+      "anomaly_detected": true,
+      "severity": "alto",
+      "direction": "pico",
+      "alert_routed": true,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-05",
+    "desc": "z exatamente -2 -> alto, queda detectada",
+    "statement": "z exatamente -2 -> alto, queda detectada",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 100,
+      "baseline_std": 10,
+      "value": 80
+    },
+    "expected": {
+      "z_score": -2.0,
+      "expected_value": 100.0,
+      "anomaly_detected": true,
+      "severity": "alto",
+      "direction": "queda",
+      "alert_routed": true,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-06",
+    "desc": "z=1.9 logo abaixo de 2 -> medio, NAO detectado (sem alerta)",
+    "statement": "z=1.9 logo abaixo de 2 -> medio, NAO detectado (sem alerta)",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 100,
+      "baseline_std": 10,
+      "value": 119
+    },
+    "expected": {
+      "z_score": 1.9,
+      "expected_value": 100.0,
+      "anomaly_detected": false,
+      "severity": "medio",
+      "direction": "pico",
+      "alert_routed": false,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-07",
+    "desc": "z exatamente +3 -> critico",
+    "statement": "z exatamente +3 -> critico",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 100,
+      "baseline_std": 10,
+      "value": 130
+    },
+    "expected": {
+      "z_score": 3.0,
+      "expected_value": 100.0,
+      "anomaly_detected": true,
+      "severity": "critico",
+      "direction": "pico",
+      "alert_routed": true,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-08",
+    "desc": "z=2.9 logo abaixo de 3 -> alto (nao critico)",
+    "statement": "z=2.9 logo abaixo de 3 -> alto (nao critico)",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 100,
+      "baseline_std": 10,
+      "value": 129
+    },
+    "expected": {
+      "z_score": 2.9,
+      "expected_value": 100.0,
+      "anomaly_detected": true,
+      "severity": "alto",
+      "direction": "pico",
+      "alert_routed": true,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-09",
+    "desc": "z=-3 -> critico, queda",
+    "statement": "z=-3 -> critico, queda",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 100,
+      "baseline_std": 10,
+      "value": 70
+    },
+    "expected": {
+      "z_score": -3.0,
+      "expected_value": 100.0,
+      "anomaly_detected": true,
+      "severity": "critico",
+      "direction": "queda",
+      "alert_routed": true,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-10",
+    "desc": "z exatamente +1 -> medio, mas NAO detectado (<2)",
+    "statement": "z exatamente +1 -> medio, mas NAO detectado (<2)",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 100,
+      "baseline_std": 10,
+      "value": 110
+    },
+    "expected": {
+      "z_score": 1.0,
+      "expected_value": 100.0,
+      "anomaly_detected": false,
+      "severity": "medio",
+      "direction": "pico",
+      "alert_routed": false,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-11",
+    "desc": "z=0.9 logo abaixo de 1 -> normal",
+    "statement": "z=0.9 logo abaixo de 1 -> normal",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 100,
+      "baseline_std": 10,
+      "value": 109
+    },
+    "expected": {
+      "z_score": 0.9,
+      "expected_value": 100.0,
+      "anomaly_detected": false,
+      "severity": "normal",
+      "direction": "pico",
+      "alert_routed": false,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-12",
+    "desc": "z=-1 -> medio, queda, sem deteccao",
+    "statement": "z=-1 -> medio, queda, sem deteccao",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 100,
+      "baseline_std": 10,
+      "value": 90
+    },
+    "expected": {
+      "z_score": -1.0,
+      "expected_value": 100.0,
+      "anomaly_detected": false,
+      "severity": "medio",
+      "direction": "queda",
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-13",
+    "desc": "valor igual ao baseline (z=0) -> normal, estavel",
+    "statement": "valor igual ao baseline (z=0) -> normal, estavel",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 500,
+      "baseline_std": 25,
+      "value": 500
+    },
+    "expected": {
+      "z_score": 0.0,
+      "expected_value": 500.0,
+      "anomaly_detected": false,
+      "severity": "normal",
+      "direction": "estavel",
+      "alert_routed": false,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-14",
+    "desc": "sazonalidade 2x: valor 200 sob baseline 100 -> esperado 200, sem alarme",
+    "statement": "sazonalidade 2x: valor 200 sob baseline 100 -> esperado 200, sem alarme",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 100,
+      "baseline_std": 10,
+      "value": 200,
+      "seasonal_factor": 2.0
+    },
+    "expected": {
+      "z_score": 0.0,
+      "expected_value": 200.0,
+      "anomaly_detected": false,
+      "severity": "normal",
+      "direction": "estavel",
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-15",
+    "desc": "sazonalidade 1.5x esperava 150 mas veio 100 -> z=-5 critico (queda real)",
+    "statement": "sazonalidade 1.5x esperava 150 mas veio 100 -> z=-5 critico (queda real)",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 100,
+      "baseline_std": 10,
+      "value": 100,
+      "seasonal_factor": 1.5
+    },
+    "expected": {
+      "z_score": -5.0,
+      "expected_value": 150.0,
+      "anomaly_detected": true,
+      "severity": "critico",
+      "direction": "queda",
+      "alert_routed": true,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-16",
+    "desc": "sazonalidade 0.5x (baixa temporada) esperava 50, veio 50 -> normal",
+    "statement": "sazonalidade 0.5x (baixa temporada) esperava 50, veio 50 -> normal",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 100,
+      "baseline_std": 10,
+      "value": 50,
+      "seasonal_factor": 0.5
+    },
+    "expected": {
+      "z_score": 0.0,
+      "expected_value": 50.0,
+      "anomaly_detected": false,
+      "severity": "normal",
+      "direction": "estavel",
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-17",
+    "desc": "sazonalidade 0.5x esperava 50 mas veio 90 -> z=+4 critico (pico real)",
+    "statement": "sazonalidade 0.5x esperava 50 mas veio 90 -> z=+4 critico (pico real)",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 100,
+      "baseline_std": 10,
+      "value": 90,
+      "seasonal_factor": 0.5
+    },
+    "expected": {
+      "z_score": 4.0,
+      "expected_value": 50.0,
+      "anomaly_detected": true,
+      "severity": "critico",
+      "direction": "pico",
+      "alert_routed": true,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-18",
+    "desc": "sem seasonal_factor (default 1.0) -> usa baseline puro",
+    "statement": "sem seasonal_factor (default 1.0) -> usa baseline puro",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 300,
+      "baseline_std": 30,
+      "value": 360
+    },
+    "expected": {
+      "z_score": 2.0,
+      "expected_value": 300.0,
+      "anomaly_detected": true,
+      "severity": "alto",
+      "direction": "pico",
+      "alert_routed": true,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-19",
+    "desc": "baseline_std=0 -> z=0 protegido, normal mesmo com valor diferente",
+    "statement": "baseline_std=0 -> z=0 protegido, normal mesmo com valor diferente",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 100,
+      "baseline_std": 0,
+      "value": 500
+    },
+    "expected": {
+      "z_score": 0.0,
+      "expected_value": 100.0,
+      "anomaly_detected": false,
+      "severity": "normal",
+      "alert_routed": false,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-20",
+    "desc": "z=2.33 (35/15) -> alto",
+    "statement": "z=2.33 (35/15) -> alto",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 100,
+      "baseline_std": 15,
+      "value": 135
+    },
+    "expected": {
+      "z_score": 2.33,
+      "expected_value": 100.0,
+      "anomaly_detected": true,
+      "severity": "alto",
+      "direction": "pico",
+      "alert_routed": true,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-21",
+    "desc": "queda severa de receita z=-6 -> critico",
+    "statement": "queda severa de receita z=-6 -> critico",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 10000,
+      "baseline_std": 500,
+      "value": 7000
+    },
+    "expected": {
+      "z_score": -6.0,
+      "expected_value": 10000.0,
+      "anomaly_detected": true,
+      "severity": "critico",
+      "direction": "queda",
+      "alert_routed": true,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-22",
+    "desc": "leve acima do esperado (z=0.5) -> normal, pico mas sem alarme",
+    "statement": "leve acima do esperado (z=0.5) -> normal, pico mas sem alarme",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 100,
+      "baseline_std": 10,
+      "value": 105
+    },
+    "expected": {
+      "z_score": 0.5,
+      "expected_value": 100.0,
+      "anomaly_detected": false,
+      "severity": "normal",
+      "direction": "pico",
+      "alert_routed": false,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-23",
+    "desc": "leve abaixo do esperado (z=-0.5) -> normal, queda sem alarme",
+    "statement": "leve abaixo do esperado (z=-0.5) -> normal, queda sem alarme",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 100,
+      "baseline_std": 10,
+      "value": 95
+    },
+    "expected": {
+      "z_score": -0.5,
+      "expected_value": 100.0,
+      "anomaly_detected": false,
+      "severity": "normal",
+      "direction": "queda",
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-24",
+    "desc": "ativacao despenca z=-2.5 -> alto, alerta roteado",
+    "statement": "ativacao despenca z=-2.5 -> alto, alerta roteado",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 80,
+      "baseline_std": 8,
+      "value": 60
+    },
+    "expected": {
+      "z_score": -2.5,
+      "expected_value": 80.0,
+      "anomaly_detected": true,
+      "severity": "alto",
+      "direction": "queda",
+      "alert_routed": true,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-25",
+    "desc": "north-star sobe organicamente z=1.5 -> medio, sem alarme (ruido)",
+    "statement": "north-star sobe organicamente z=1.5 -> medio, sem alarme (ruido)",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 1000,
+      "baseline_std": 100,
+      "value": 1150
+    },
+    "expected": {
+      "z_score": 1.5,
+      "expected_value": 1000.0,
+      "anomaly_detected": false,
+      "severity": "medio",
+      "direction": "pico",
+      "alert_routed": false,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-26",
+    "desc": "z=1.99 -> medio mas NAO detectado (fronteira de deteccao)",
+    "statement": "z=1.99 -> medio mas NAO detectado (fronteira de deteccao)",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 100,
+      "baseline_std": 100,
+      "value": 299
+    },
+    "expected": {
+      "z_score": 1.99,
+      "expected_value": 100.0,
+      "anomaly_detected": false,
+      "severity": "medio",
+      "alert_routed": false,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-27",
+    "desc": "z=2.01 -> alto e detectado (logo acima do limiar)",
+    "statement": "z=2.01 -> alto e detectado (logo acima do limiar)",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 100,
+      "baseline_std": 100,
+      "value": 301
+    },
+    "expected": {
+      "z_score": 2.01,
+      "expected_value": 100.0,
+      "anomaly_detected": true,
+      "severity": "alto",
+      "alert_routed": true,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-28",
+    "desc": "pico de custo de tokens z=3.2 -> critico, alerta ao margin-watch",
+    "statement": "pico de custo de tokens z=3.2 -> critico, alerta ao margin-watch",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 5000,
+      "baseline_std": 250,
+      "value": 5800
+    },
+    "expected": {
+      "z_score": 3.2,
+      "expected_value": 5000.0,
+      "anomaly_detected": true,
+      "severity": "critico",
+      "direction": "pico",
+      "alert_routed": true,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-29",
+    "desc": "seasonal 1.2 esperava 120, veio 100 -> z=-4 critico",
+    "statement": "seasonal 1.2 esperava 120, veio 100 -> z=-4 critico",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 100,
+      "baseline_std": 5,
+      "value": 100,
+      "seasonal_factor": 1.2
+    },
+    "expected": {
+      "z_score": -4.0,
+      "expected_value": 120.0,
+      "anomaly_detected": true,
+      "severity": "critico",
+      "direction": "queda",
+      "alert_routed": true,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-30",
+    "desc": "metrica estavel dentro da banda z=0.3 -> sem alerta (evita fadiga)",
+    "statement": "metrica estavel dentro da banda z=0.3 -> sem alerta (evita fadiga)",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 2000,
+      "baseline_std": 100,
+      "value": 2030
+    },
+    "expected": {
+      "z_score": 0.3,
+      "expected_value": 2000.0,
+      "anomaly_detected": false,
+      "severity": "normal",
+      "direction": "pico",
+      "alert_routed": false,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-31",
+    "desc": "pico z=2.2 -> alto detectado",
+    "statement": "pico z=2.2 -> alto detectado",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 400,
+      "baseline_std": 50,
+      "value": 510
+    },
+    "expected": {
+      "z_score": 2.2,
+      "expected_value": 400.0,
+      "anomaly_detected": true,
+      "severity": "alto",
+      "direction": "pico",
+      "alert_routed": true,
+      "by": "g6-anomaly-detector"
+    }
+  },
+  {
+    "id": "an-32",
+    "desc": "queda z=-3.5 -> critico",
+    "statement": "queda z=-3.5 -> critico",
+    "tenant_id": "t-eval-g06",
+    "series": {
+      "baseline_mean": 400,
+      "baseline_std": 40,
+      "value": 260
+    },
+    "expected": {
+      "z_score": -3.5,
+      "expected_value": 400.0,
+      "anomaly_detected": true,
+      "severity": "critico",
+      "direction": "queda",
+      "alert_routed": true,
+      "by": "g6-anomaly-detector"
+    }
+  }
 ]

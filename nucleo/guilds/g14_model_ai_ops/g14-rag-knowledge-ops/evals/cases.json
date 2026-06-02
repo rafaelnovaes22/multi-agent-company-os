@@ -1,20 +1,826 @@
 [
   {
     "id": "rk-01",
-    "desc": "F1 0.75 acima do limiar 0.7, fresco e sem leak -> ok",
-    "retrieval": {"retrieved": ["a", "b", "c", "d"], "relevant": ["a", "b", "c", "e"], "threshold": 0.7, "stale_days": 5, "max_stale_days": 30},
-    "expected": {"precision": 0.75, "recall": 0.75, "f1": 0.75, "tier_leak": false, "stale": false, "passed": true, "status": "ok"}
+    "desc": "F1 0.75 acima do limiar, fresco, sem leak -> ok",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "relevant": [
+        "a",
+        "b",
+        "c",
+        "e"
+      ],
+      "threshold": 0.7,
+      "stale_days": 5,
+      "max_stale_days": 30
+    },
+    "expected": {
+      "precision": 0.75,
+      "recall": 0.75,
+      "f1": 0.75,
+      "tier_leak": false,
+      "stale": false,
+      "passed": true,
+      "status": "ok"
+    }
   },
   {
     "id": "rk-02",
-    "desc": "F1 0.25 abaixo do limiar -> reprova",
-    "retrieval": {"retrieved": ["a", "b", "c", "d"], "relevant": ["a", "e", "f", "g"], "threshold": 0.7, "stale_days": 1, "max_stale_days": 30},
-    "expected": {"precision": 0.25, "recall": 0.25, "f1": 0.25, "tier_leak": false, "stale": false, "passed": false, "status": "abaixo_limiar"}
+    "desc": "F1 baixo abaixo do limiar -> reprova",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "x",
+        "y",
+        "z"
+      ],
+      "relevant": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "threshold": 0.7,
+      "stale_days": 5,
+      "max_stale_days": 30
+    },
+    "expected": {
+      "precision": 0.25,
+      "recall": 0.25,
+      "f1": 0.25,
+      "passed": false,
+      "status": "abaixo_limiar"
+    }
   },
   {
     "id": "rk-03",
-    "desc": "F1 perfeito mas vazamento de Tier (C5) -> bloqueia",
-    "retrieval": {"retrieved": ["a", "b"], "relevant": ["a", "b"], "threshold": 0.7, "stale_days": 2, "max_stale_days": 30, "tier_leak": true},
-    "expected": {"precision": 1.0, "recall": 1.0, "f1": 1.0, "tier_leak": true, "passed": false, "status": "tier_leak"}
+    "desc": "índice velho (stale) reprova mesmo com F1 bom",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "b"
+      ],
+      "relevant": [
+        "a",
+        "b"
+      ],
+      "threshold": 0.7,
+      "stale_days": 45,
+      "max_stale_days": 30
+    },
+    "expected": {
+      "f1": 1.0,
+      "stale": true,
+      "passed": false,
+      "status": "stale"
+    }
+  },
+  {
+    "id": "rk-04",
+    "desc": "mistura de Tiers (C5) -> bloqueia por tier_leak",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "b"
+      ],
+      "relevant": [
+        "a",
+        "b"
+      ],
+      "threshold": 0.7,
+      "stale_days": 1,
+      "max_stale_days": 30,
+      "tier_leak": true
+    },
+    "expected": {
+      "f1": 1.0,
+      "tier_leak": true,
+      "passed": false,
+      "status": "tier_leak"
+    }
+  },
+  {
+    "id": "rk-05",
+    "desc": "precedência: tier_leak E stale juntos -> status tier_leak",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "b"
+      ],
+      "relevant": [
+        "a",
+        "b"
+      ],
+      "threshold": 0.7,
+      "stale_days": 99,
+      "max_stale_days": 30,
+      "tier_leak": true
+    },
+    "expected": {
+      "tier_leak": true,
+      "stale": true,
+      "passed": false,
+      "status": "tier_leak"
+    }
+  },
+  {
+    "id": "rk-06",
+    "desc": "precedência: stale E F1 baixo -> status stale (antes de abaixo_limiar)",
+    "retrieval": {
+      "retrieved": [
+        "x",
+        "y"
+      ],
+      "relevant": [
+        "a",
+        "b"
+      ],
+      "threshold": 0.7,
+      "stale_days": 99,
+      "max_stale_days": 30
+    },
+    "expected": {
+      "f1": 0.0,
+      "stale": true,
+      "passed": false,
+      "status": "stale"
+    }
+  },
+  {
+    "id": "rk-07",
+    "desc": "recuperação perfeita F1 1.0 -> ok",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "b",
+        "c"
+      ],
+      "relevant": [
+        "a",
+        "b",
+        "c"
+      ],
+      "threshold": 0.7,
+      "stale_days": 0,
+      "max_stale_days": 30
+    },
+    "expected": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "passed": true,
+      "status": "ok"
+    }
+  },
+  {
+    "id": "rk-08",
+    "desc": "fronteira: stale_days exatamente no máximo (30) -> não stale",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "b"
+      ],
+      "relevant": [
+        "a",
+        "b"
+      ],
+      "threshold": 0.7,
+      "stale_days": 30,
+      "max_stale_days": 30
+    },
+    "expected": {
+      "stale": false,
+      "passed": true,
+      "status": "ok"
+    }
+  },
+  {
+    "id": "rk-09",
+    "desc": "fronteira+1: stale_days 31 > 30 -> stale",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "b"
+      ],
+      "relevant": [
+        "a",
+        "b"
+      ],
+      "threshold": 0.7,
+      "stale_days": 31,
+      "max_stale_days": 30
+    },
+    "expected": {
+      "stale": true,
+      "passed": false,
+      "status": "stale"
+    }
+  },
+  {
+    "id": "rk-10",
+    "desc": "fronteira: F1 exatamente no limiar 0.75 -> passa",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "relevant": [
+        "a",
+        "b",
+        "c",
+        "e"
+      ],
+      "threshold": 0.75,
+      "stale_days": 1,
+      "max_stale_days": 30
+    },
+    "expected": {
+      "f1": 0.75,
+      "passed": true,
+      "status": "ok"
+    }
+  },
+  {
+    "id": "rk-11",
+    "desc": "fronteira-: F1 0.75 logo abaixo do limiar 0.76 -> abaixo_limiar",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "relevant": [
+        "a",
+        "b",
+        "c",
+        "e"
+      ],
+      "threshold": 0.76,
+      "stale_days": 1,
+      "max_stale_days": 30
+    },
+    "expected": {
+      "f1": 0.75,
+      "passed": false,
+      "status": "abaixo_limiar"
+    }
+  },
+  {
+    "id": "rk-12",
+    "desc": "precisão alta, recall baixo -> F1 médio",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "b"
+      ],
+      "relevant": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h"
+      ],
+      "threshold": 0.7,
+      "stale_days": 1,
+      "max_stale_days": 30
+    },
+    "expected": {
+      "precision": 1.0,
+      "recall": 0.25,
+      "f1": 0.4,
+      "passed": false,
+      "status": "abaixo_limiar"
+    }
+  },
+  {
+    "id": "rk-13",
+    "desc": "precisão baixa, recall alto -> F1 médio, reprova",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h"
+      ],
+      "relevant": [
+        "a",
+        "b"
+      ],
+      "threshold": 0.7,
+      "stale_days": 1,
+      "max_stale_days": 30
+    },
+    "expected": {
+      "precision": 0.25,
+      "recall": 1.0,
+      "f1": 0.4,
+      "passed": false,
+      "status": "abaixo_limiar"
+    }
+  },
+  {
+    "id": "rk-14",
+    "desc": "nada recuperado -> precisão/recall/F1 0 -> reprova",
+    "retrieval": {
+      "retrieved": [],
+      "relevant": [
+        "a",
+        "b"
+      ],
+      "threshold": 0.7,
+      "stale_days": 1,
+      "max_stale_days": 30
+    },
+    "expected": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "passed": false,
+      "status": "abaixo_limiar"
+    }
+  },
+  {
+    "id": "rk-15",
+    "desc": "sem relevantes definidos -> recall 0, F1 0",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "b"
+      ],
+      "relevant": [],
+      "threshold": 0.7,
+      "stale_days": 1,
+      "max_stale_days": 30
+    },
+    "expected": {
+      "recall": 0.0,
+      "f1": 0.0,
+      "passed": false,
+      "status": "abaixo_limiar"
+    }
+  },
+  {
+    "id": "rk-16",
+    "desc": "tier_leak isolado domina mesmo com F1 1.0 e fresco",
+    "retrieval": {
+      "retrieved": [
+        "a"
+      ],
+      "relevant": [
+        "a"
+      ],
+      "threshold": 0.7,
+      "stale_days": 0,
+      "max_stale_days": 30,
+      "tier_leak": true
+    },
+    "expected": {
+      "f1": 1.0,
+      "stale": false,
+      "tier_leak": true,
+      "passed": false,
+      "status": "tier_leak"
+    }
+  },
+  {
+    "id": "rk-17",
+    "desc": "limiar default 0.7: F1 0.667 abaixo -> reprova",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "b",
+        "c"
+      ],
+      "relevant": [
+        "a",
+        "b",
+        "x",
+        "y"
+      ],
+      "stale_days": 1,
+      "max_stale_days": 30
+    },
+    "expected": {
+      "f1": 0.571,
+      "passed": false,
+      "status": "abaixo_limiar"
+    }
+  },
+  {
+    "id": "rk-18",
+    "desc": "max_stale default 30: 40 dias -> stale",
+    "retrieval": {
+      "retrieved": [
+        "a"
+      ],
+      "relevant": [
+        "a"
+      ],
+      "threshold": 0.7,
+      "stale_days": 40
+    },
+    "expected": {
+      "stale": true,
+      "passed": false,
+      "status": "stale"
+    }
+  },
+  {
+    "id": "rk-19",
+    "desc": "F1 0.8 acima do limiar mas tier_leak -> bloqueia",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "relevant": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "x"
+      ],
+      "threshold": 0.7,
+      "stale_days": 1,
+      "max_stale_days": 30,
+      "tier_leak": true
+    },
+    "expected": {
+      "f1": 0.8,
+      "tier_leak": true,
+      "passed": false,
+      "status": "tier_leak"
+    }
+  },
+  {
+    "id": "rk-20",
+    "desc": "limiar customizado 0.9: F1 0.8 -> reprova",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "relevant": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "x"
+      ],
+      "threshold": 0.9,
+      "stale_days": 1,
+      "max_stale_days": 30
+    },
+    "expected": {
+      "f1": 0.8,
+      "passed": false,
+      "status": "abaixo_limiar"
+    }
+  },
+  {
+    "id": "rk-21",
+    "desc": "limiar baixo 0.3: precisão 0.4 recall 1.0 F1 0.571 passa",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "relevant": [
+        "a",
+        "b"
+      ],
+      "threshold": 0.3,
+      "stale_days": 1,
+      "max_stale_days": 30
+    },
+    "expected": {
+      "precision": 0.4,
+      "recall": 1.0,
+      "f1": 0.571,
+      "passed": true,
+      "status": "ok"
+    }
+  },
+  {
+    "id": "rk-22",
+    "desc": "precisão 1.0 recall 0.5 -> F1 0.667 reprova no limiar 0.7",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "b"
+      ],
+      "relevant": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "threshold": 0.7,
+      "stale_days": 1,
+      "max_stale_days": 30
+    },
+    "expected": {
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.667,
+      "passed": false,
+      "status": "abaixo_limiar"
+    }
+  },
+  {
+    "id": "rk-23",
+    "desc": "F1 0.667 logo abaixo de 0.7 -> abaixo_limiar",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "b",
+        "c"
+      ],
+      "relevant": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f"
+      ],
+      "threshold": 0.7,
+      "stale_days": 1,
+      "max_stale_days": 30
+    },
+    "expected": {
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.667,
+      "passed": false,
+      "status": "abaixo_limiar"
+    }
+  },
+  {
+    "id": "rk-24",
+    "desc": "índice recém-reindexado (0 dias) fresco -> ok",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "b"
+      ],
+      "relevant": [
+        "a",
+        "b"
+      ],
+      "threshold": 0.7,
+      "stale_days": 0,
+      "max_stale_days": 30
+    },
+    "expected": {
+      "stale": false,
+      "passed": true,
+      "status": "ok",
+      "f1": 1.0
+    }
+  },
+  {
+    "id": "rk-25",
+    "desc": "max_stale apertado 7: 10 dias -> stale",
+    "retrieval": {
+      "retrieved": [
+        "a"
+      ],
+      "relevant": [
+        "a"
+      ],
+      "threshold": 0.7,
+      "stale_days": 10,
+      "max_stale_days": 7
+    },
+    "expected": {
+      "stale": true,
+      "passed": false,
+      "status": "stale"
+    }
+  },
+  {
+    "id": "rk-26",
+    "desc": "tier_leak com F1 baixo -> status tier_leak (precede abaixo_limiar)",
+    "retrieval": {
+      "retrieved": [
+        "x"
+      ],
+      "relevant": [
+        "a"
+      ],
+      "threshold": 0.7,
+      "stale_days": 1,
+      "max_stale_days": 30,
+      "tier_leak": true
+    },
+    "expected": {
+      "f1": 0.0,
+      "tier_leak": true,
+      "passed": false,
+      "status": "tier_leak"
+    }
+  },
+  {
+    "id": "rk-27",
+    "desc": "3 de 4 recuperados relevantes, 3 de 3 relevantes -> F1 0.857 ok",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "b",
+        "c",
+        "x"
+      ],
+      "relevant": [
+        "a",
+        "b",
+        "c"
+      ],
+      "threshold": 0.7,
+      "stale_days": 1,
+      "max_stale_days": 30
+    },
+    "expected": {
+      "precision": 0.75,
+      "recall": 1.0,
+      "f1": 0.857,
+      "passed": true,
+      "status": "ok"
+    }
+  },
+  {
+    "id": "rk-28",
+    "desc": "F1 0.5 abaixo -> reprova",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "x"
+      ],
+      "relevant": [
+        "a",
+        "b"
+      ],
+      "threshold": 0.7,
+      "stale_days": 1,
+      "max_stale_days": 30
+    },
+    "expected": {
+      "precision": 0.5,
+      "recall": 0.5,
+      "f1": 0.5,
+      "passed": false,
+      "status": "abaixo_limiar"
+    }
+  },
+  {
+    "id": "rk-29",
+    "desc": "F1 perfeito e fresco e sem leak -> passed true",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "relevant": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "threshold": 0.7,
+      "stale_days": 2,
+      "max_stale_days": 30
+    },
+    "expected": {
+      "f1": 1.0,
+      "stale": false,
+      "tier_leak": false,
+      "passed": true,
+      "status": "ok"
+    }
+  },
+  {
+    "id": "rk-30",
+    "desc": "F1 ótimo mas stale -> status stale, passed false",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "relevant": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "threshold": 0.7,
+      "stale_days": 60,
+      "max_stale_days": 30
+    },
+    "expected": {
+      "f1": 1.0,
+      "stale": true,
+      "passed": false,
+      "status": "stale"
+    }
+  },
+  {
+    "id": "rk-31",
+    "desc": "conjuntos grandes F1 0.8 -> ok",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h",
+        "i",
+        "x"
+      ],
+      "relevant": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h",
+        "i",
+        "y"
+      ],
+      "threshold": 0.7,
+      "stale_days": 3,
+      "max_stale_days": 30
+    },
+    "expected": {
+      "precision": 0.9,
+      "recall": 0.9,
+      "f1": 0.9,
+      "passed": true,
+      "status": "ok"
+    }
+  },
+  {
+    "id": "rk-32",
+    "desc": "caso ideal RAG: F1 alto, fresco, sem leak -> ok completo",
+    "retrieval": {
+      "retrieved": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "relevant": [
+        "a",
+        "b",
+        "c",
+        "e"
+      ],
+      "threshold": 0.7,
+      "stale_days": 5,
+      "max_stale_days": 30
+    },
+    "expected": {
+      "precision": 0.75,
+      "recall": 0.75,
+      "f1": 0.75,
+      "tier_leak": false,
+      "stale": false,
+      "passed": true,
+      "status": "ok"
+    }
   }
 ]

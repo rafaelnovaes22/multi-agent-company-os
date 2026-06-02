@@ -2,25 +2,551 @@
   {
     "id": "audit-01",
     "desc": "amostra de 7% sem drift -> OK",
-    "audit": {"total_outcomes": 1000, "sample_size": 70, "divergences": 0, "accuracy_delta_pp": 0, "cost_delta_pct": 2, "volume_delta_pct": 5},
-    "expected": {"sample_rate": 7.0, "sample_ok": true, "drift_detected": false, "severity": "OK", "recommend_demotion": false}
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 70,
+      "divergences": 0,
+      "accuracy_delta_pp": 0,
+      "cost_delta_pct": 2,
+      "volume_delta_pct": 5
+    },
+    "expected": {
+      "sample_rate": 7.0,
+      "sample_ok": true,
+      "drift_detected": false,
+      "severity": "OK",
+      "recommend_demotion": false
+    }
   },
   {
     "id": "audit-02",
     "desc": "drift de -6pp de acuracia -> P1, recomenda rebaixamento",
-    "audit": {"total_outcomes": 1000, "sample_size": 80, "divergences": 8, "accuracy_delta_pp": -6, "cost_delta_pct": 3, "volume_delta_pct": 10},
-    "expected": {"sample_rate": 8.0, "divergence_rate": 10.0, "drift_detected": true, "severity": "P1", "recommend_demotion": true}
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 80,
+      "divergences": 8,
+      "accuracy_delta_pp": -6,
+      "cost_delta_pct": 3,
+      "volume_delta_pct": 10
+    },
+    "expected": {
+      "sample_rate": 8.0,
+      "divergence_rate": 10.0,
+      "drift_detected": true,
+      "severity": "P1",
+      "recommend_demotion": true
+    }
   },
   {
     "id": "audit-03",
     "desc": "custo +20%/mes -> drift de custo P2",
-    "audit": {"total_outcomes": 500, "sample_size": 30, "divergences": 0, "accuracy_delta_pp": -1, "cost_delta_pct": 20, "volume_delta_pct": 0},
-    "expected": {"sample_rate": 6.0, "drift_detected": true, "severity": "P2", "recommend_demotion": false}
+    "audit": {
+      "total_outcomes": 500,
+      "sample_size": 30,
+      "divergences": 0,
+      "accuracy_delta_pp": -1,
+      "cost_delta_pct": 20,
+      "volume_delta_pct": 0
+    },
+    "expected": {
+      "sample_rate": 6.0,
+      "drift_detected": true,
+      "severity": "P2",
+      "recommend_demotion": false
+    }
   },
   {
     "id": "audit-04",
     "desc": "volume +40%/mes -> drift de volume P2",
-    "audit": {"total_outcomes": 1000, "sample_size": 50, "divergences": 2, "accuracy_delta_pp": 0, "cost_delta_pct": 5, "volume_delta_pct": 40},
-    "expected": {"sample_rate": 5.0, "sample_ok": true, "drift_detected": true, "severity": "P2", "flag_count": 1}
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 50,
+      "divergences": 2,
+      "accuracy_delta_pp": 0,
+      "cost_delta_pct": 5,
+      "volume_delta_pct": 40
+    },
+    "expected": {
+      "sample_rate": 5.0,
+      "sample_ok": true,
+      "drift_detected": true,
+      "severity": "P2",
+      "flag_count": 1
+    }
+  },
+  {
+    "id": "audit-05",
+    "desc": "limiar exato acuracia: -5pp -> P1, demotion",
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 70,
+      "divergences": 0,
+      "accuracy_delta_pp": -5,
+      "cost_delta_pct": 0,
+      "volume_delta_pct": 0
+    },
+    "expected": {
+      "drift_detected": true,
+      "severity": "P1",
+      "recommend_demotion": true,
+      "flag_count": 1
+    }
+  },
+  {
+    "id": "audit-06",
+    "desc": "fronteira +1: -4pp -> sem drift de acuracia",
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 70,
+      "divergences": 0,
+      "accuracy_delta_pp": -4,
+      "cost_delta_pct": 0,
+      "volume_delta_pct": 0
+    },
+    "expected": {
+      "drift_detected": false,
+      "severity": "OK",
+      "recommend_demotion": false
+    }
+  },
+  {
+    "id": "audit-07",
+    "desc": "acuracia melhorou (+6pp) -> sem flag",
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 70,
+      "divergences": 0,
+      "accuracy_delta_pp": 6,
+      "cost_delta_pct": 0,
+      "volume_delta_pct": 0
+    },
+    "expected": {
+      "drift_detected": false,
+      "severity": "OK"
+    }
+  },
+  {
+    "id": "audit-08",
+    "desc": "queda severa -20pp -> P1",
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 80,
+      "divergences": 20,
+      "accuracy_delta_pp": -20,
+      "cost_delta_pct": 0,
+      "volume_delta_pct": 0
+    },
+    "expected": {
+      "drift_detected": true,
+      "severity": "P1",
+      "recommend_demotion": true,
+      "divergence_rate": 25.0
+    }
+  },
+  {
+    "id": "audit-09",
+    "desc": "limiar exato custo: +15% -> drift de custo P2",
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 70,
+      "divergences": 0,
+      "accuracy_delta_pp": 0,
+      "cost_delta_pct": 15,
+      "volume_delta_pct": 0
+    },
+    "expected": {
+      "drift_detected": true,
+      "severity": "P2",
+      "flag_count": 1,
+      "recommend_demotion": false
+    }
+  },
+  {
+    "id": "audit-10",
+    "desc": "fronteira -1: +14% -> sem drift de custo",
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 70,
+      "divergences": 0,
+      "accuracy_delta_pp": 0,
+      "cost_delta_pct": 14,
+      "volume_delta_pct": 0
+    },
+    "expected": {
+      "drift_detected": false,
+      "severity": "OK",
+      "flag_count": 0
+    }
+  },
+  {
+    "id": "audit-11",
+    "desc": "custo caiu (-10%) -> sem flag (so alta de custo conta)",
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 70,
+      "divergences": 0,
+      "accuracy_delta_pp": 0,
+      "cost_delta_pct": -10,
+      "volume_delta_pct": 0
+    },
+    "expected": {
+      "drift_detected": false,
+      "severity": "OK"
+    }
+  },
+  {
+    "id": "audit-12",
+    "desc": "limiar exato volume +30% -> drift volume P2",
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 70,
+      "divergences": 0,
+      "accuracy_delta_pp": 0,
+      "cost_delta_pct": 0,
+      "volume_delta_pct": 30
+    },
+    "expected": {
+      "drift_detected": true,
+      "severity": "P2",
+      "flag_count": 1
+    }
+  },
+  {
+    "id": "audit-13",
+    "desc": "limiar exato volume -30% -> drift volume P2 (queda tambem conta)",
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 70,
+      "divergences": 0,
+      "accuracy_delta_pp": 0,
+      "cost_delta_pct": 0,
+      "volume_delta_pct": -30
+    },
+    "expected": {
+      "drift_detected": true,
+      "severity": "P2",
+      "flag_count": 1
+    }
+  },
+  {
+    "id": "audit-14",
+    "desc": "fronteira -1: +29% -> sem drift de volume",
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 70,
+      "divergences": 0,
+      "accuracy_delta_pp": 0,
+      "cost_delta_pct": 0,
+      "volume_delta_pct": 29
+    },
+    "expected": {
+      "drift_detected": false,
+      "severity": "OK"
+    }
+  },
+  {
+    "id": "audit-15",
+    "desc": "queda de volume -29% -> sem flag",
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 70,
+      "divergences": 0,
+      "accuracy_delta_pp": 0,
+      "cost_delta_pct": 0,
+      "volume_delta_pct": -29
+    },
+    "expected": {
+      "drift_detected": false,
+      "severity": "OK"
+    }
+  },
+  {
+    "id": "audit-16",
+    "desc": "acuracia E custo em drift -> P1 domina (acuracia presente)",
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 70,
+      "divergences": 7,
+      "accuracy_delta_pp": -8,
+      "cost_delta_pct": 20,
+      "volume_delta_pct": 0
+    },
+    "expected": {
+      "severity": "P1",
+      "drift_detected": true,
+      "flag_count": 2,
+      "recommend_demotion": true
+    }
+  },
+  {
+    "id": "audit-17",
+    "desc": "acuracia E volume em drift -> P1 domina",
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 70,
+      "divergences": 7,
+      "accuracy_delta_pp": -7,
+      "cost_delta_pct": 0,
+      "volume_delta_pct": 35
+    },
+    "expected": {
+      "severity": "P1",
+      "flag_count": 2,
+      "recommend_demotion": true
+    }
+  },
+  {
+    "id": "audit-18",
+    "desc": "custo E volume em drift (sem acuracia) -> P2, sem demotion",
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 70,
+      "divergences": 0,
+      "accuracy_delta_pp": 0,
+      "cost_delta_pct": 18,
+      "volume_delta_pct": 40
+    },
+    "expected": {
+      "severity": "P2",
+      "flag_count": 2,
+      "drift_detected": true,
+      "recommend_demotion": false
+    }
+  },
+  {
+    "id": "audit-19",
+    "desc": "tres flags simultaneas -> P1 (acuracia presente)",
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 70,
+      "divergences": 10,
+      "accuracy_delta_pp": -10,
+      "cost_delta_pct": 25,
+      "volume_delta_pct": 50
+    },
+    "expected": {
+      "severity": "P1",
+      "flag_count": 3,
+      "recommend_demotion": true
+    }
+  },
+  {
+    "id": "audit-20",
+    "desc": "limiar inferior da amostra: 5% -> ok",
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 50,
+      "divergences": 0,
+      "accuracy_delta_pp": 0,
+      "cost_delta_pct": 0,
+      "volume_delta_pct": 0
+    },
+    "expected": {
+      "sample_rate": 5.0,
+      "sample_ok": true
+    }
+  },
+  {
+    "id": "audit-21",
+    "desc": "limiar superior da amostra: 10% -> ok",
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 100,
+      "divergences": 0,
+      "accuracy_delta_pp": 0,
+      "cost_delta_pct": 0,
+      "volume_delta_pct": 0
+    },
+    "expected": {
+      "sample_rate": 10.0,
+      "sample_ok": true
+    }
+  },
+  {
+    "id": "audit-22",
+    "desc": "amostra abaixo do minimo: 4% -> sample_ok False",
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 40,
+      "divergences": 0,
+      "accuracy_delta_pp": 0,
+      "cost_delta_pct": 0,
+      "volume_delta_pct": 0
+    },
+    "expected": {
+      "sample_rate": 4.0,
+      "sample_ok": false,
+      "drift_detected": false
+    }
+  },
+  {
+    "id": "audit-23",
+    "desc": "amostra acima do maximo: 12% -> sample_ok False",
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 120,
+      "divergences": 0,
+      "accuracy_delta_pp": 0,
+      "cost_delta_pct": 0,
+      "volume_delta_pct": 0
+    },
+    "expected": {
+      "sample_rate": 12.0,
+      "sample_ok": false
+    }
+  },
+  {
+    "id": "audit-24",
+    "desc": "fronteira -0.1: 4.9% -> sample_ok False",
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 49,
+      "divergences": 0,
+      "accuracy_delta_pp": 0,
+      "cost_delta_pct": 0,
+      "volume_delta_pct": 0
+    },
+    "expected": {
+      "sample_rate": 4.9,
+      "sample_ok": false
+    }
+  },
+  {
+    "id": "audit-25",
+    "desc": "C2: re-amostra 47 outcomes com divergencia -> P1 + demotion",
+    "audit": {
+      "total_outcomes": 600,
+      "sample_size": 47,
+      "divergences": 9,
+      "accuracy_delta_pp": -6,
+      "cost_delta_pct": 0,
+      "volume_delta_pct": 0
+    },
+    "expected": {
+      "sample_rate": 7.8,
+      "divergence_rate": 19.1,
+      "severity": "P1",
+      "recommend_demotion": true
+    }
+  },
+  {
+    "id": "audit-26",
+    "desc": "alta divergencia mas sem drift de metricas -> OK (divergencia nao vira flag)",
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 70,
+      "divergences": 35,
+      "accuracy_delta_pp": 0,
+      "cost_delta_pct": 0,
+      "volume_delta_pct": 0
+    },
+    "expected": {
+      "divergence_rate": 50.0,
+      "drift_detected": false,
+      "severity": "OK"
+    }
+  },
+  {
+    "id": "audit-27",
+    "desc": "zero divergencias -> taxa 0%",
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 80,
+      "divergences": 0,
+      "accuracy_delta_pp": 0,
+      "cost_delta_pct": 0,
+      "volume_delta_pct": 0
+    },
+    "expected": {
+      "divergence_rate": 0.0,
+      "drift_detected": false
+    }
+  },
+  {
+    "id": "audit-28",
+    "desc": "sem outcomes -> sample_rate 0, sample_ok False",
+    "audit": {
+      "total_outcomes": 0,
+      "sample_size": 0,
+      "divergences": 0,
+      "accuracy_delta_pp": 0,
+      "cost_delta_pct": 0,
+      "volume_delta_pct": 0
+    },
+    "expected": {
+      "sample_rate": 0.0,
+      "sample_ok": false,
+      "divergence_rate": 0.0,
+      "drift_detected": false,
+      "severity": "OK"
+    }
+  },
+  {
+    "id": "audit-29",
+    "desc": "defaults ausentes -> tudo zero, OK",
+    "audit": {},
+    "expected": {
+      "sample_rate": 0.0,
+      "sample_ok": false,
+      "drift_detected": false,
+      "severity": "OK",
+      "flag_count": 0
+    }
+  },
+  {
+    "id": "audit-30",
+    "desc": "auditoria limpa: amostra 6%, sem drift, OK",
+    "audit": {
+      "total_outcomes": 2000,
+      "sample_size": 120,
+      "divergences": 3,
+      "accuracy_delta_pp": 1,
+      "cost_delta_pct": 5,
+      "volume_delta_pct": -10
+    },
+    "expected": {
+      "sample_rate": 6.0,
+      "sample_ok": true,
+      "drift_detected": false,
+      "severity": "OK",
+      "divergence_rate": 2.5
+    }
+  },
+  {
+    "id": "audit-31",
+    "desc": "so volume em drift (queda -45%) -> P2",
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 70,
+      "divergences": 0,
+      "accuracy_delta_pp": -2,
+      "cost_delta_pct": 10,
+      "volume_delta_pct": -45
+    },
+    "expected": {
+      "drift_detected": true,
+      "severity": "P2",
+      "flag_count": 1,
+      "recommend_demotion": false
+    }
+  },
+  {
+    "id": "audit-32",
+    "desc": "acuracia no limiar com amostra fora da faixa -> P1 + sample_ok False",
+    "audit": {
+      "total_outcomes": 1000,
+      "sample_size": 35,
+      "divergences": 4,
+      "accuracy_delta_pp": -5,
+      "cost_delta_pct": 0,
+      "volume_delta_pct": 0
+    },
+    "expected": {
+      "sample_rate": 3.5,
+      "sample_ok": false,
+      "severity": "P1",
+      "recommend_demotion": true,
+      "flag_count": 1
+    }
   }
 ]

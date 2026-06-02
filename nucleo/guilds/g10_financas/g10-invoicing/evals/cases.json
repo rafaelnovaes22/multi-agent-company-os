@@ -8,6 +8,8 @@
       "regime": "simples"
     },
     "expected": {
+      "gross_amount": 10000,
+      "tax_rate": 0.06,
       "tax_amount": 600.0,
       "net_amount": 9400.0,
       "regime": "simples"
@@ -22,21 +24,489 @@
       "regime": "presumido"
     },
     "expected": {
+      "gross_amount": 10000,
+      "tax_rate": 0.1133,
       "tax_amount": 1133.0,
+      "net_amount": 8867.0,
       "regime": "presumido"
     }
   },
   {
     "id": "in-03",
-    "desc": "aliquota explicita",
+    "desc": "aliquota explicita 10% sobrepoe regime default",
     "tenant_id": "t-eval-g10",
     "invoice": {
       "amount": 5000,
       "tax_rate": 0.1
     },
     "expected": {
+      "gross_amount": 5000,
+      "tax_rate": 0.1,
       "tax_amount": 500.0,
       "net_amount": 4500.0
+    }
+  },
+  {
+    "id": "in-04",
+    "desc": "real 15%",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 10000,
+      "regime": "real"
+    },
+    "expected": {
+      "gross_amount": 10000,
+      "tax_rate": 0.15,
+      "tax_amount": 1500.0,
+      "net_amount": 8500.0,
+      "regime": "real"
+    }
+  },
+  {
+    "id": "in-05",
+    "desc": "caminho feliz simples valor cheio",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 25000,
+      "regime": "simples"
+    },
+    "expected": {
+      "gross_amount": 25000,
+      "tax_rate": 0.06,
+      "tax_amount": 1500.0,
+      "net_amount": 23500.0,
+      "regime": "simples"
+    }
+  },
+  {
+    "id": "in-06",
+    "desc": "precedencia: tax_rate explicito vence regime presumido",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 10000,
+      "regime": "presumido",
+      "tax_rate": 0.06
+    },
+    "expected": {
+      "gross_amount": 10000,
+      "tax_rate": 0.06,
+      "tax_amount": 600.0,
+      "net_amount": 9400.0,
+      "regime": "presumido"
+    }
+  },
+  {
+    "id": "in-07",
+    "desc": "precedencia: tax_rate 0.20 vence regime real",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 10000,
+      "regime": "real",
+      "tax_rate": 0.2
+    },
+    "expected": {
+      "gross_amount": 10000,
+      "tax_rate": 0.2,
+      "tax_amount": 2000.0,
+      "net_amount": 8000.0,
+      "regime": "real"
+    }
+  },
+  {
+    "id": "in-08",
+    "desc": "isola regime simples sobre 100k",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 100000,
+      "regime": "simples"
+    },
+    "expected": {
+      "gross_amount": 100000,
+      "tax_rate": 0.06,
+      "tax_amount": 6000.0,
+      "net_amount": 94000.0,
+      "regime": "simples"
+    }
+  },
+  {
+    "id": "in-09",
+    "desc": "isola regime presumido sobre 100k",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 100000,
+      "regime": "presumido"
+    },
+    "expected": {
+      "gross_amount": 100000,
+      "tax_rate": 0.1133,
+      "tax_amount": 11330.0,
+      "net_amount": 88670.0,
+      "regime": "presumido"
+    }
+  },
+  {
+    "id": "in-10",
+    "desc": "isola regime real sobre 100k",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 100000,
+      "regime": "real"
+    },
+    "expected": {
+      "gross_amount": 100000,
+      "tax_rate": 0.15,
+      "tax_amount": 15000.0,
+      "net_amount": 85000.0,
+      "regime": "real"
+    }
+  },
+  {
+    "id": "in-11",
+    "desc": "valor zero -> imposto zero",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 0,
+      "regime": "simples"
+    },
+    "expected": {
+      "gross_amount": 0,
+      "tax_rate": 0.06,
+      "tax_amount": 0.0,
+      "net_amount": 0.0,
+      "regime": "simples"
+    }
+  },
+  {
+    "id": "in-12",
+    "desc": "valor 1 centavo arredondamento",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 0.01,
+      "regime": "simples"
+    },
+    "expected": {
+      "gross_amount": 0.01,
+      "tax_rate": 0.06,
+      "tax_amount": 0.0,
+      "net_amount": 0.01,
+      "regime": "simples"
+    }
+  },
+  {
+    "id": "in-13",
+    "desc": "valor pequeno presumido arredondamento",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 1.0,
+      "regime": "presumido"
+    },
+    "expected": {
+      "gross_amount": 1.0,
+      "tax_rate": 0.1133,
+      "tax_amount": 0.11,
+      "net_amount": 0.89,
+      "regime": "presumido"
+    }
+  },
+  {
+    "id": "in-14",
+    "desc": "valor alto real",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 1000000,
+      "regime": "real"
+    },
+    "expected": {
+      "gross_amount": 1000000,
+      "tax_rate": 0.15,
+      "tax_amount": 150000.0,
+      "net_amount": 850000.0,
+      "regime": "real"
+    }
+  },
+  {
+    "id": "in-15",
+    "desc": "aliquota explicita zero (isencao)",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 50000,
+      "tax_rate": 0.0
+    },
+    "expected": {
+      "gross_amount": 50000,
+      "tax_rate": 0.0,
+      "tax_amount": 0.0,
+      "net_amount": 50000.0
+    }
+  },
+  {
+    "id": "in-16",
+    "desc": "aliquota explicita alta 25%",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 8000,
+      "tax_rate": 0.25
+    },
+    "expected": {
+      "gross_amount": 8000,
+      "tax_rate": 0.25,
+      "tax_amount": 2000.0,
+      "net_amount": 6000.0
+    }
+  },
+  {
+    "id": "in-17",
+    "desc": "simples valor quebrado",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 3333.33,
+      "regime": "simples"
+    },
+    "expected": {
+      "gross_amount": 3333.33,
+      "tax_rate": 0.06,
+      "tax_amount": 200.0,
+      "net_amount": 3133.33,
+      "regime": "simples"
+    }
+  },
+  {
+    "id": "in-18",
+    "desc": "presumido valor medio",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 47500,
+      "regime": "presumido"
+    },
+    "expected": {
+      "gross_amount": 47500,
+      "tax_rate": 0.1133,
+      "tax_amount": 5381.75,
+      "net_amount": 42118.25,
+      "regime": "presumido"
+    }
+  },
+  {
+    "id": "in-19",
+    "desc": "real valor medio",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 62000,
+      "regime": "real"
+    },
+    "expected": {
+      "gross_amount": 62000,
+      "tax_rate": 0.15,
+      "tax_amount": 9300.0,
+      "net_amount": 52700.0,
+      "regime": "real"
+    }
+  },
+  {
+    "id": "in-20",
+    "desc": "aliquota explicita com regime simples (explicito vence)",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 10000,
+      "regime": "simples",
+      "tax_rate": 0.0125
+    },
+    "expected": {
+      "gross_amount": 10000,
+      "tax_rate": 0.0125,
+      "tax_amount": 125.0,
+      "net_amount": 9875.0,
+      "regime": "simples"
+    }
+  },
+  {
+    "id": "in-21",
+    "desc": "retificacao: novo valor recalcula imposto",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 12500,
+      "regime": "presumido"
+    },
+    "expected": {
+      "gross_amount": 12500,
+      "tax_rate": 0.1133,
+      "tax_amount": 1416.25,
+      "net_amount": 11083.75,
+      "regime": "presumido"
+    }
+  },
+  {
+    "id": "in-22",
+    "desc": "cobranca grande simples",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 250000,
+      "regime": "simples"
+    },
+    "expected": {
+      "gross_amount": 250000,
+      "tax_rate": 0.06,
+      "tax_amount": 15000.0,
+      "net_amount": 235000.0,
+      "regime": "simples"
+    }
+  },
+  {
+    "id": "in-23",
+    "desc": "cobranca pequena real",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 150,
+      "regime": "real"
+    },
+    "expected": {
+      "gross_amount": 150,
+      "tax_rate": 0.15,
+      "tax_amount": 22.5,
+      "net_amount": 127.5,
+      "regime": "real"
+    }
+  },
+  {
+    "id": "in-24",
+    "desc": "presumido valor redondo",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 60000,
+      "regime": "presumido"
+    },
+    "expected": {
+      "gross_amount": 60000,
+      "tax_rate": 0.1133,
+      "tax_amount": 6798.0,
+      "net_amount": 53202.0,
+      "regime": "presumido"
+    }
+  },
+  {
+    "id": "in-25",
+    "desc": "aliquota 3% explicita (ISS municipal hipotetico)",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 20000,
+      "tax_rate": 0.03
+    },
+    "expected": {
+      "gross_amount": 20000,
+      "tax_rate": 0.03,
+      "tax_amount": 600.0,
+      "net_amount": 19400.0
+    }
+  },
+  {
+    "id": "in-26",
+    "desc": "aliquota 5% explicita",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 20000,
+      "tax_rate": 0.05
+    },
+    "expected": {
+      "gross_amount": 20000,
+      "tax_rate": 0.05,
+      "tax_amount": 1000.0,
+      "net_amount": 19000.0
+    }
+  },
+  {
+    "id": "in-27",
+    "desc": "simples teto faixa hipotetico",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 30000,
+      "regime": "simples"
+    },
+    "expected": {
+      "gross_amount": 30000,
+      "tax_rate": 0.06,
+      "tax_amount": 1800.0,
+      "net_amount": 28200.0,
+      "regime": "simples"
+    }
+  },
+  {
+    "id": "in-28",
+    "desc": "real valor com centavos",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 9999.99,
+      "regime": "real"
+    },
+    "expected": {
+      "gross_amount": 9999.99,
+      "tax_rate": 0.15,
+      "tax_amount": 1500.0,
+      "net_amount": 8499.99,
+      "regime": "real"
+    }
+  },
+  {
+    "id": "in-29",
+    "desc": "presumido grande",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 500000,
+      "regime": "presumido"
+    },
+    "expected": {
+      "gross_amount": 500000,
+      "tax_rate": 0.1133,
+      "tax_amount": 56650.0,
+      "net_amount": 443350.0,
+      "regime": "presumido"
+    }
+  },
+  {
+    "id": "in-30",
+    "desc": "aliquota explicita 11.33 igual presumido mas explicita",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 10000,
+      "tax_rate": 0.1133
+    },
+    "expected": {
+      "gross_amount": 10000,
+      "tax_rate": 0.1133,
+      "tax_amount": 1133.0,
+      "net_amount": 8867.0
+    }
+  },
+  {
+    "id": "in-31",
+    "desc": "simples valor minimo",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 10,
+      "regime": "simples"
+    },
+    "expected": {
+      "gross_amount": 10,
+      "tax_rate": 0.06,
+      "tax_amount": 0.6,
+      "net_amount": 9.4,
+      "regime": "simples"
+    }
+  },
+  {
+    "id": "in-32",
+    "desc": "aliquota explicita 0.06 sobre regime real (explicito vence)",
+    "tenant_id": "t-eval-g10",
+    "invoice": {
+      "amount": 10000,
+      "regime": "real",
+      "tax_rate": 0.06
+    },
+    "expected": {
+      "gross_amount": 10000,
+      "tax_rate": 0.06,
+      "tax_amount": 600.0,
+      "net_amount": 9400.0,
+      "regime": "real"
     }
   }
 ]

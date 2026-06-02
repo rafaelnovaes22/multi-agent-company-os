@@ -1,11 +1,16 @@
 [
   {
     "id": "bi-01",
-    "desc": "reconciliação noturna fecha com desvio 0,3% (≤1%) e tudo indexado/válido — DELIVERED",
+    "desc": "reconciliação noturna desvio 0,3% (<=1%) e tudo indexado/válido",
     "reconcile": {
       "outcomes": 997,
       "traces": 1000,
       "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": true
+        },
         {
           "trace_id": "t1",
           "artifact": true,
@@ -13,11 +18,6 @@
         },
         {
           "trace_id": "t2",
-          "artifact": true,
-          "schema_valid": true
-        },
-        {
-          "trace_id": "t3",
           "artifact": true,
           "schema_valid": true
         }
@@ -31,24 +31,23 @@
       "uncountable_runs": 0,
       "coverage_pct": 100.0,
       "schema_invalid_count": 0,
-      "schema_valid": true,
-      "by": "brain-indexer"
+      "schema_valid": true
     }
   },
   {
     "id": "bi-02",
-    "desc": "desvio outcomes↔traces de 5% (>1%) — FAIL no gate C6",
+    "desc": "desvio outcomes<->traces de 5% (>1%) -> FAIL no gate C6",
     "reconcile": {
       "outcomes": 950,
       "traces": 1000,
       "runs": [
         {
-          "trace_id": "t1",
+          "trace_id": "t0",
           "artifact": true,
           "schema_valid": true
         },
         {
-          "trace_id": "t2",
+          "trace_id": "t1",
           "artifact": true,
           "schema_valid": true
         }
@@ -59,17 +58,240 @@
       "reconciled": false,
       "status": "fail",
       "coverage_pct": 100.0,
-      "uncountable_runs": 0,
-      "by": "brain-indexer"
+      "uncountable_runs": 0
     }
   },
   {
     "id": "bi-03",
-    "desc": "enforce C6: run que terminou sem artefato é não-contável (cobertura 66,7%)",
+    "desc": "run sem artefato é não-contável (cobertura 66,7%)",
     "reconcile": {
       "outcomes": 10,
       "traces": 10,
       "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": true
+        },
+        {
+          "trace_id": "t1",
+          "artifact": true,
+          "schema_valid": true
+        },
+        {
+          "trace_id": "t2",
+          "artifact": false,
+          "schema_valid": true
+        }
+      ]
+    },
+    "expected": {
+      "deviation_pct": 0.0,
+      "reconciled": true,
+      "status": "pass",
+      "total_runs": 3,
+      "uncountable_runs": 1,
+      "coverage_pct": 66.7
+    }
+  },
+  {
+    "id": "bi-04",
+    "desc": "artefato sem schema válido -> schema enforce reprova",
+    "reconcile": {
+      "outcomes": 5,
+      "traces": 5,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": true
+        },
+        {
+          "trace_id": "t1",
+          "artifact": true,
+          "schema_valid": false
+        }
+      ]
+    },
+    "expected": {
+      "deviation_pct": 0.0,
+      "reconciled": true,
+      "status": "pass",
+      "total_runs": 2,
+      "uncountable_runs": 0,
+      "coverage_pct": 100.0,
+      "schema_invalid_count": 1,
+      "schema_valid": false
+    }
+  },
+  {
+    "id": "bi-05",
+    "desc": "fronteira: desvio exatamente 1,0% -> pass (<=)",
+    "reconcile": {
+      "outcomes": 990,
+      "traces": 1000,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": true
+        }
+      ]
+    },
+    "expected": {
+      "deviation_pct": 1.0,
+      "reconciled": true,
+      "status": "pass"
+    }
+  },
+  {
+    "id": "bi-06",
+    "desc": "fronteira+1: desvio 1,01% -> fail",
+    "reconcile": {
+      "outcomes": 10101,
+      "traces": 10000,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": true
+        }
+      ]
+    },
+    "expected": {
+      "deviation_pct": 1.01,
+      "reconciled": false,
+      "status": "fail"
+    }
+  },
+  {
+    "id": "bi-07",
+    "desc": "outcomes acima dos traces: desvio absoluto 2% -> fail",
+    "reconcile": {
+      "outcomes": 1020,
+      "traces": 1000,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": true
+        }
+      ]
+    },
+    "expected": {
+      "deviation_pct": 2.0,
+      "reconciled": false,
+      "status": "fail"
+    }
+  },
+  {
+    "id": "bi-08",
+    "desc": "sem traces no período -> desvio 0 por convenção, pass",
+    "reconcile": {
+      "outcomes": 0,
+      "traces": 0,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": true
+        }
+      ]
+    },
+    "expected": {
+      "deviation_pct": 0.0,
+      "reconciled": true,
+      "status": "pass"
+    }
+  },
+  {
+    "id": "bi-09",
+    "desc": "sem runs no período -> cobertura 100% por convenção",
+    "reconcile": {
+      "outcomes": 100,
+      "traces": 100,
+      "runs": []
+    },
+    "expected": {
+      "total_runs": 0,
+      "uncountable_runs": 0,
+      "coverage_pct": 100.0,
+      "status": "pass",
+      "reconciled": true
+    }
+  },
+  {
+    "id": "bi-10",
+    "desc": "todas as runs sem artefato -> cobertura 0%",
+    "reconcile": {
+      "outcomes": 3,
+      "traces": 3,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": false,
+          "schema_valid": true
+        },
+        {
+          "trace_id": "t1",
+          "artifact": false,
+          "schema_valid": true
+        },
+        {
+          "trace_id": "t2",
+          "artifact": false,
+          "schema_valid": true
+        }
+      ]
+    },
+    "expected": {
+      "total_runs": 3,
+      "uncountable_runs": 3,
+      "coverage_pct": 0.0
+    }
+  },
+  {
+    "id": "bi-11",
+    "desc": "schema inválido só conta em run com artefato (sem artefato não conta)",
+    "reconcile": {
+      "outcomes": 3,
+      "traces": 3,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": true
+        },
+        {
+          "trace_id": "t1",
+          "artifact": false,
+          "schema_valid": false
+        },
+        {
+          "trace_id": "t2",
+          "artifact": true,
+          "schema_valid": false
+        }
+      ]
+    },
+    "expected": {
+      "schema_invalid_count": 1,
+      "schema_valid": false,
+      "uncountable_runs": 1
+    }
+  },
+  {
+    "id": "bi-12",
+    "desc": "3 de 4 runs com artefato -> cobertura 75%",
+    "reconcile": {
+      "outcomes": 4,
+      "traces": 4,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": true
+        },
         {
           "trace_id": "t1",
           "artifact": true,
@@ -88,26 +310,483 @@
       ]
     },
     "expected": {
-      "deviation_pct": 0.0,
-      "reconciled": true,
-      "status": "pass",
-      "total_runs": 3,
+      "total_runs": 4,
       "uncountable_runs": 1,
-      "coverage_pct": 66.7,
-      "by": "brain-indexer"
+      "coverage_pct": 75.0
     }
   },
   {
-    "id": "bi-04",
-    "desc": "artefato gravado sem schema válido — schema enforce reprova o delivered",
+    "id": "bi-13",
+    "desc": "desvio 0,5% confortável -> pass",
+    "reconcile": {
+      "outcomes": 995,
+      "traces": 1000,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": true
+        }
+      ]
+    },
+    "expected": {
+      "deviation_pct": 0.5,
+      "reconciled": true,
+      "status": "pass"
+    }
+  },
+  {
+    "id": "bi-14",
+    "desc": "todos artefatos com schema válido -> schema_valid true",
+    "reconcile": {
+      "outcomes": 2,
+      "traces": 2,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": true
+        },
+        {
+          "trace_id": "t1",
+          "artifact": true,
+          "schema_valid": true
+        }
+      ]
+    },
+    "expected": {
+      "schema_invalid_count": 0,
+      "schema_valid": true,
+      "coverage_pct": 100.0
+    }
+  },
+  {
+    "id": "bi-15",
+    "desc": "reconciliado mas com run não-contável: status=pass (status reflete só desvio)",
+    "reconcile": {
+      "outcomes": 10,
+      "traces": 10,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": true
+        },
+        {
+          "trace_id": "t1",
+          "artifact": false,
+          "schema_valid": true
+        }
+      ]
+    },
+    "expected": {
+      "status": "pass",
+      "reconciled": true,
+      "uncountable_runs": 1,
+      "coverage_pct": 50.0
+    }
+  },
+  {
+    "id": "bi-16",
+    "desc": "desvio enorme 10% -> fail claro",
+    "reconcile": {
+      "outcomes": 900,
+      "traces": 1000,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": true
+        }
+      ]
+    },
+    "expected": {
+      "deviation_pct": 10.0,
+      "reconciled": false,
+      "status": "fail"
+    }
+  },
+  {
+    "id": "bi-17",
+    "desc": "dois artefatos, um inválido -> schema_valid false",
     "reconcile": {
       "outcomes": 5,
       "traces": 5,
       "runs": [
         {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": false
+        },
+        {
           "trace_id": "t1",
           "artifact": true,
           "schema_valid": true
+        }
+      ]
+    },
+    "expected": {
+      "schema_invalid_count": 1,
+      "schema_valid": false
+    }
+  },
+  {
+    "id": "bi-18",
+    "desc": "run com artefato sem campo schema_valid -> default válido",
+    "reconcile": {
+      "outcomes": 2,
+      "traces": 2,
+      "runs": [
+        {
+          "trace_id": "t1",
+          "artifact": true
+        }
+      ]
+    },
+    "expected": {
+      "schema_invalid_count": 0,
+      "schema_valid": true,
+      "coverage_pct": 100.0
+    }
+  },
+  {
+    "id": "bi-19",
+    "desc": "arredondamento: 3 em 900 -> 0,33%",
+    "reconcile": {
+      "outcomes": 897,
+      "traces": 900,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": true
+        }
+      ]
+    },
+    "expected": {
+      "deviation_pct": 0.33,
+      "reconciled": true,
+      "status": "pass"
+    }
+  },
+  {
+    "id": "bi-20",
+    "desc": "5 runs, 2 sem artefato -> cobertura 60%",
+    "reconcile": {
+      "outcomes": 5,
+      "traces": 5,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": true
+        },
+        {
+          "trace_id": "t1",
+          "artifact": true,
+          "schema_valid": true
+        },
+        {
+          "trace_id": "t2",
+          "artifact": true,
+          "schema_valid": true
+        },
+        {
+          "trace_id": "t3",
+          "artifact": false,
+          "schema_valid": true
+        },
+        {
+          "trace_id": "t4",
+          "artifact": false,
+          "schema_valid": true
+        }
+      ]
+    },
+    "expected": {
+      "total_runs": 5,
+      "uncountable_runs": 2,
+      "coverage_pct": 60.0
+    }
+  },
+  {
+    "id": "bi-21",
+    "desc": "campo threshold_pct ecoa o teto de 1%",
+    "reconcile": {
+      "outcomes": 1000,
+      "traces": 1000,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": true
+        }
+      ]
+    },
+    "expected": {
+      "threshold_pct": 1.0,
+      "deviation_pct": 0.0,
+      "status": "pass"
+    }
+  },
+  {
+    "id": "bi-22",
+    "desc": "desvio 3% reprova mesmo com cobertura 100%",
+    "reconcile": {
+      "outcomes": 970,
+      "traces": 1000,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": true
+        },
+        {
+          "trace_id": "t1",
+          "artifact": true,
+          "schema_valid": true
+        }
+      ]
+    },
+    "expected": {
+      "deviation_pct": 3.0,
+      "reconciled": false,
+      "status": "fail",
+      "coverage_pct": 100.0
+    }
+  },
+  {
+    "id": "bi-23",
+    "desc": "cobertura 100% porém schema inválido em 2 -> schema_valid false",
+    "reconcile": {
+      "outcomes": 4,
+      "traces": 4,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": false
+        },
+        {
+          "trace_id": "t1",
+          "artifact": true,
+          "schema_valid": false
+        },
+        {
+          "trace_id": "t2",
+          "artifact": true,
+          "schema_valid": true
+        },
+        {
+          "trace_id": "t3",
+          "artifact": true,
+          "schema_valid": true
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 100.0,
+      "schema_invalid_count": 2,
+      "schema_valid": false
+    }
+  },
+  {
+    "id": "bi-24",
+    "desc": "desvio 0,1% bem abaixo -> pass",
+    "reconcile": {
+      "outcomes": 9990,
+      "traces": 10000,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": true
+        }
+      ]
+    },
+    "expected": {
+      "deviation_pct": 0.1,
+      "reconciled": true,
+      "status": "pass"
+    }
+  },
+  {
+    "id": "bi-25",
+    "desc": "única run sem artefato -> cobertura 0%, não-contável",
+    "reconcile": {
+      "outcomes": 1,
+      "traces": 1,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": false,
+          "schema_valid": true
+        }
+      ]
+    },
+    "expected": {
+      "total_runs": 1,
+      "uncountable_runs": 1,
+      "coverage_pct": 0.0
+    }
+  },
+  {
+    "id": "bi-26",
+    "desc": "misto: 1 não-contável + 1 schema inválido, desvio ok",
+    "reconcile": {
+      "outcomes": 4,
+      "traces": 4,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": true
+        },
+        {
+          "trace_id": "t1",
+          "artifact": true,
+          "schema_valid": false
+        },
+        {
+          "trace_id": "t2",
+          "artifact": false,
+          "schema_valid": true
+        },
+        {
+          "trace_id": "t3",
+          "artifact": true,
+          "schema_valid": true
+        }
+      ]
+    },
+    "expected": {
+      "uncountable_runs": 1,
+      "schema_invalid_count": 1,
+      "schema_valid": false,
+      "coverage_pct": 75.0,
+      "status": "pass"
+    }
+  },
+  {
+    "id": "bi-27",
+    "desc": "desvio 0,99% logo abaixo do teto -> pass",
+    "reconcile": {
+      "outcomes": 9901,
+      "traces": 10000,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": true
+        }
+      ]
+    },
+    "expected": {
+      "deviation_pct": 0.99,
+      "reconciled": true,
+      "status": "pass"
+    }
+  },
+  {
+    "id": "bi-28",
+    "desc": "desvio 0,2% -> pass",
+    "reconcile": {
+      "outcomes": 998,
+      "traces": 1000,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": true
+        }
+      ]
+    },
+    "expected": {
+      "deviation_pct": 0.2,
+      "reconciled": true,
+      "status": "pass"
+    }
+  },
+  {
+    "id": "bi-29",
+    "desc": "desvio 4% reprova e cobertura 50%",
+    "reconcile": {
+      "outcomes": 960,
+      "traces": 1000,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": true
+        },
+        {
+          "trace_id": "t1",
+          "artifact": false,
+          "schema_valid": true
+        }
+      ]
+    },
+    "expected": {
+      "deviation_pct": 4.0,
+      "status": "fail",
+      "coverage_pct": 50.0,
+      "uncountable_runs": 1
+    }
+  },
+  {
+    "id": "bi-30",
+    "desc": "caso ideal: desvio 0, cobertura 100, schema válido",
+    "reconcile": {
+      "outcomes": 50,
+      "traces": 50,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": true
+        },
+        {
+          "trace_id": "t1",
+          "artifact": true,
+          "schema_valid": true
+        },
+        {
+          "trace_id": "t2",
+          "artifact": true,
+          "schema_valid": true
+        },
+        {
+          "trace_id": "t3",
+          "artifact": true,
+          "schema_valid": true
+        }
+      ]
+    },
+    "expected": {
+      "deviation_pct": 0.0,
+      "reconciled": true,
+      "status": "pass",
+      "coverage_pct": 100.0,
+      "uncountable_runs": 0,
+      "schema_valid": true
+    }
+  },
+  {
+    "id": "bi-31",
+    "desc": "3 artefatos inválidos -> schema_invalid_count 3",
+    "reconcile": {
+      "outcomes": 3,
+      "traces": 3,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": false
+        },
+        {
+          "trace_id": "t1",
+          "artifact": true,
+          "schema_valid": false
         },
         {
           "trace_id": "t2",
@@ -117,15 +796,29 @@
       ]
     },
     "expected": {
-      "deviation_pct": 0.0,
-      "reconciled": true,
-      "status": "pass",
-      "total_runs": 2,
-      "uncountable_runs": 0,
-      "coverage_pct": 100.0,
-      "schema_invalid_count": 1,
+      "schema_invalid_count": 3,
       "schema_valid": false,
-      "by": "brain-indexer"
+      "coverage_pct": 100.0
+    }
+  },
+  {
+    "id": "bi-32",
+    "desc": "desvio 1,5% claramente acima -> fail",
+    "reconcile": {
+      "outcomes": 985,
+      "traces": 1000,
+      "runs": [
+        {
+          "trace_id": "t0",
+          "artifact": true,
+          "schema_valid": true
+        }
+      ]
+    },
+    "expected": {
+      "deviation_pct": 1.5,
+      "reconciled": false,
+      "status": "fail"
     }
   }
 ]

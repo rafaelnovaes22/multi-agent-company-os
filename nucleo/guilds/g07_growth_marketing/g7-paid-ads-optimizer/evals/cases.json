@@ -1,36 +1,727 @@
 [
-  {"id": "pa-01", "desc": "campanha saudavel: ROAS acima do alvo, payback ok, delight > pago -> escalar",
-   "tenant_id": "t-eval-g07",
-   "paid": {"spend": 1000, "revenue": 4000, "conversions": 50, "target_roas": 3.0,
-            "delight_spend": 2000, "monthly_margin_per_customer": 40, "payback_limit_months": 12,
-            "fatigue_ctr_drop_pct": 5},
-   "expected": {"by": "g7-paid-ads-optimizer", "roas": 4.0, "cac": 20.0,
-                "cac_payback_months": 0.5, "delight_ratio": 0.5, "roas_ok": true,
-                "payback_ok": true, "delight_ok": true, "pause_creative": false,
-                "decision": "escalar", "status": "escala"}},
-
-  {"id": "pa-02", "desc": "gasto pago ultrapassa delight -> bloquear por viola capital",
-   "tenant_id": "t-eval-g07",
-   "paid": {"spend": 3000, "revenue": 12000, "conversions": 60, "target_roas": 3.0,
-            "delight_spend": 2000, "monthly_margin_per_customer": 50, "payback_limit_months": 12,
-            "fatigue_ctr_drop_pct": 0},
-   "expected": {"by": "g7-paid-ads-optimizer", "roas": 4.0, "delight_ratio": 1.5,
-                "delight_ok": false, "decision": "bloquear_viola_capital", "status": "ajuste"}},
-
-  {"id": "pa-03", "desc": "criativo fatigado (queda de CTR >= 30%) com economics ok -> pausar criativo",
-   "tenant_id": "t-eval-g07",
-   "paid": {"spend": 500, "revenue": 2000, "conversions": 25, "target_roas": 3.0,
-            "delight_spend": 1500, "monthly_margin_per_customer": 30, "payback_limit_months": 12,
-            "fatigue_ctr_drop_pct": 35},
-   "expected": {"by": "g7-paid-ads-optimizer", "roas": 4.0, "cac": 20.0,
-                "pause_creative": true, "delight_ok": true, "roas_ok": true,
-                "decision": "pausar_criativo_fatigado"}},
-
-  {"id": "pa-04", "desc": "ROAS abaixo do alvo -> pausar por economics negativa",
-   "tenant_id": "t-eval-g07",
-   "paid": {"spend": 1000, "revenue": 2000, "conversions": 40, "target_roas": 3.0,
-            "delight_spend": 3000, "monthly_margin_per_customer": 50, "payback_limit_months": 12,
-            "fatigue_ctr_drop_pct": 0},
-   "expected": {"by": "g7-paid-ads-optimizer", "roas": 2.0, "roas_ok": false,
-                "delight_ok": true, "decision": "pausar_economics_negativa", "status": "ajuste"}}
+  {
+    "id": "pa-01",
+    "desc": "campanha saudavel: ROAS acima do alvo, payback ok, delight > pago -> escalar",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 1000,
+      "revenue": 4000,
+      "conversions": 50,
+      "target_roas": 3.0,
+      "delight_spend": 2000,
+      "monthly_margin_per_customer": 40,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 5
+    },
+    "expected": {
+      "roas": 4.0,
+      "cac": 20.0,
+      "cac_payback_months": 0.5,
+      "delight_ratio": 0.5,
+      "roas_ok": true,
+      "payback_ok": true,
+      "delight_ok": true,
+      "pause_creative": false,
+      "decision": "escalar",
+      "status": "escala",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-02",
+    "desc": "gasto pago ultrapassa delight -> bloquear por viola capital",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 3000,
+      "revenue": 12000,
+      "conversions": 60,
+      "target_roas": 3.0,
+      "delight_spend": 2000,
+      "monthly_margin_per_customer": 50,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 0
+    },
+    "expected": {
+      "roas": 4.0,
+      "delight_ratio": 1.5,
+      "delight_ok": false,
+      "decision": "bloquear_viola_capital",
+      "status": "ajuste",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-03",
+    "desc": "criativo fatigado (queda CTR >=30%) com economics ok -> pausar criativo",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 500,
+      "revenue": 2000,
+      "conversions": 25,
+      "target_roas": 3.0,
+      "delight_spend": 1500,
+      "monthly_margin_per_customer": 30,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 35
+    },
+    "expected": {
+      "roas": 4.0,
+      "cac": 20.0,
+      "pause_creative": true,
+      "delight_ok": true,
+      "roas_ok": true,
+      "decision": "pausar_criativo_fatigado",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-04",
+    "desc": "ROAS abaixo do alvo -> pausar por economics negativa",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 1000,
+      "revenue": 2000,
+      "conversions": 40,
+      "target_roas": 3.0,
+      "delight_spend": 3000,
+      "monthly_margin_per_customer": 50,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 0
+    },
+    "expected": {
+      "roas": 2.0,
+      "roas_ok": false,
+      "delight_ok": true,
+      "decision": "pausar_economics_negativa",
+      "status": "ajuste",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-05",
+    "desc": "precedencia: viola capital tem prioridade sobre ROAS baixo",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 3000,
+      "revenue": 3000,
+      "conversions": 30,
+      "target_roas": 3.0,
+      "delight_spend": 1000,
+      "monthly_margin_per_customer": 50,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 0
+    },
+    "expected": {
+      "roas": 1.0,
+      "roas_ok": false,
+      "delight_ok": false,
+      "decision": "bloquear_viola_capital",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-06",
+    "desc": "precedencia: viola capital tem prioridade sobre criativo fatigado",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 2000,
+      "revenue": 8000,
+      "conversions": 50,
+      "target_roas": 3.0,
+      "delight_spend": 1000,
+      "monthly_margin_per_customer": 80,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 60
+    },
+    "expected": {
+      "roas": 4.0,
+      "roas_ok": true,
+      "delight_ok": false,
+      "pause_creative": true,
+      "decision": "bloquear_viola_capital",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-07",
+    "desc": "precedencia: economics negativa antes de criativo fatigado",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 1000,
+      "revenue": 2000,
+      "conversions": 40,
+      "target_roas": 3.0,
+      "delight_spend": 5000,
+      "monthly_margin_per_customer": 50,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 40
+    },
+    "expected": {
+      "roas": 2.0,
+      "roas_ok": false,
+      "delight_ok": true,
+      "pause_creative": true,
+      "decision": "pausar_economics_negativa",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-08",
+    "desc": "CAC-payback acima do limite de C3 -> pausar economics",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 1000,
+      "revenue": 4000,
+      "conversions": 10,
+      "target_roas": 3.0,
+      "delight_spend": 5000,
+      "monthly_margin_per_customer": 5,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 0
+    },
+    "expected": {
+      "roas": 4.0,
+      "cac": 100.0,
+      "cac_payback_months": 20.0,
+      "roas_ok": true,
+      "payback_ok": false,
+      "delight_ok": true,
+      "decision": "pausar_economics_negativa",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-09",
+    "desc": "delight_ratio exatamente 1.0 VIOLA (regra e estritamente < 1)",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 2000,
+      "revenue": 8000,
+      "conversions": 50,
+      "target_roas": 3.0,
+      "delight_spend": 2000,
+      "monthly_margin_per_customer": 80,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 0
+    },
+    "expected": {
+      "delight_ratio": 1.0,
+      "delight_ok": false,
+      "decision": "bloquear_viola_capital",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-10",
+    "desc": "delight_ratio 0.99 (logo abaixo de 1): passa o gate de capital",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 1980,
+      "revenue": 8000,
+      "conversions": 50,
+      "target_roas": 3.0,
+      "delight_spend": 2000,
+      "monthly_margin_per_customer": 80,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 0
+    },
+    "expected": {
+      "delight_ratio": 0.99,
+      "delight_ok": true,
+      "roas_ok": true,
+      "decision": "escalar",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-11",
+    "desc": "ROAS exatamente no alvo (3.0==3.0): roas_ok e escala",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 1000,
+      "revenue": 3000,
+      "conversions": 50,
+      "target_roas": 3.0,
+      "delight_spend": 2000,
+      "monthly_margin_per_customer": 40,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 0
+    },
+    "expected": {
+      "roas": 3.0,
+      "roas_ok": true,
+      "delight_ok": true,
+      "decision": "escalar",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-12",
+    "desc": "ROAS logo abaixo do alvo (2.99<3.0): economics negativa",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 1000,
+      "revenue": 2990,
+      "conversions": 50,
+      "target_roas": 3.0,
+      "delight_spend": 2000,
+      "monthly_margin_per_customer": 40,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 0
+    },
+    "expected": {
+      "roas": 2.99,
+      "roas_ok": false,
+      "decision": "pausar_economics_negativa",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-13",
+    "desc": "fadiga exatamente 30%: pausa criativo (limiar)",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 500,
+      "revenue": 2000,
+      "conversions": 25,
+      "target_roas": 3.0,
+      "delight_spend": 1500,
+      "monthly_margin_per_customer": 30,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 30
+    },
+    "expected": {
+      "pause_creative": true,
+      "delight_ok": true,
+      "roas_ok": true,
+      "decision": "pausar_criativo_fatigado",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-14",
+    "desc": "fadiga 29% logo abaixo: nao pausa, escala",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 500,
+      "revenue": 2000,
+      "conversions": 25,
+      "target_roas": 3.0,
+      "delight_spend": 1500,
+      "monthly_margin_per_customer": 30,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 29
+    },
+    "expected": {
+      "pause_creative": false,
+      "decision": "escalar",
+      "status": "escala",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-15",
+    "desc": "payback exatamente no limite (12==12): payback_ok e escala",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 1200,
+      "revenue": 4800,
+      "conversions": 12,
+      "target_roas": 3.0,
+      "delight_spend": 3000,
+      "monthly_margin_per_customer": 8.333333,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 0
+    },
+    "expected": {
+      "payback_ok": true,
+      "delight_ok": true,
+      "decision": "escalar",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-16",
+    "desc": "payback acima do limite custom 6m: economics negativa",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 600,
+      "revenue": 2400,
+      "conversions": 6,
+      "target_roas": 3.0,
+      "delight_spend": 2000,
+      "monthly_margin_per_customer": 10,
+      "payback_limit_months": 6,
+      "fatigue_ctr_drop_pct": 0
+    },
+    "expected": {
+      "cac": 100.0,
+      "cac_payback_months": 10.0,
+      "payback_ok": false,
+      "decision": "pausar_economics_negativa",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-17",
+    "desc": "alvo ROAS custom 5.0; ROAS 4 reprova",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 1000,
+      "revenue": 4000,
+      "conversions": 50,
+      "target_roas": 5.0,
+      "delight_spend": 3000,
+      "monthly_margin_per_customer": 40,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 0
+    },
+    "expected": {
+      "roas": 4.0,
+      "roas_ok": false,
+      "delight_ok": true,
+      "decision": "pausar_economics_negativa",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-18",
+    "desc": "alvo ROAS custom 2.0; ROAS 2.5 passa",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 1000,
+      "revenue": 2500,
+      "conversions": 50,
+      "target_roas": 2.0,
+      "delight_spend": 3000,
+      "monthly_margin_per_customer": 40,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 0
+    },
+    "expected": {
+      "roas": 2.5,
+      "roas_ok": true,
+      "delight_ok": true,
+      "decision": "escalar",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-19",
+    "desc": "sem delight_spend (0): ratio 999 viola capital",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 1000,
+      "revenue": 4000,
+      "conversions": 50,
+      "target_roas": 3.0,
+      "monthly_margin_per_customer": 40,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 0
+    },
+    "expected": {
+      "delight_ratio": 999.0,
+      "delight_ok": false,
+      "decision": "bloquear_viola_capital",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-20",
+    "desc": "sem monthly_margin (0): payback 999 -> economics negativa",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 1000,
+      "revenue": 4000,
+      "conversions": 50,
+      "target_roas": 3.0,
+      "delight_spend": 3000,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 0
+    },
+    "expected": {
+      "cac_payback_months": 999.0,
+      "payback_ok": false,
+      "delight_ok": true,
+      "decision": "pausar_economics_negativa",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-21",
+    "desc": "conversions 0: cac 0 e payback 0 (ok) mas ROAS governa",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 1000,
+      "revenue": 4000,
+      "conversions": 0,
+      "target_roas": 3.0,
+      "delight_spend": 3000,
+      "monthly_margin_per_customer": 40,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 0
+    },
+    "expected": {
+      "cac": 0.0,
+      "cac_payback_months": 0.0,
+      "roas": 4.0,
+      "roas_ok": true,
+      "delight_ok": true,
+      "decision": "escalar",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-22",
+    "desc": "fadiga 100% extrema com economics ok: pausa criativo",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 500,
+      "revenue": 2500,
+      "conversions": 25,
+      "target_roas": 3.0,
+      "delight_spend": 2000,
+      "monthly_margin_per_customer": 40,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 100
+    },
+    "expected": {
+      "pause_creative": true,
+      "delight_ok": true,
+      "roas_ok": true,
+      "decision": "pausar_criativo_fatigado",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-23",
+    "desc": "ROAS otimo, delight ok, payback ok, sem fadiga: escala plena",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 800,
+      "revenue": 5600,
+      "conversions": 40,
+      "target_roas": 3.0,
+      "delight_spend": 2000,
+      "monthly_margin_per_customer": 50,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 10
+    },
+    "expected": {
+      "roas": 7.0,
+      "cac": 20.0,
+      "delight_ratio": 0.4,
+      "roas_ok": true,
+      "payback_ok": true,
+      "delight_ok": true,
+      "pause_creative": false,
+      "decision": "escalar",
+      "status": "escala",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-24",
+    "desc": "viola capital com fadiga e ROAS baixo (todos os flags ruins): capital vence",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 5000,
+      "revenue": 2000,
+      "conversions": 10,
+      "target_roas": 3.0,
+      "delight_spend": 1000,
+      "monthly_margin_per_customer": 5,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 50
+    },
+    "expected": {
+      "roas": 0.4,
+      "roas_ok": false,
+      "delight_ok": false,
+      "pause_creative": true,
+      "decision": "bloquear_viola_capital",
+      "status": "ajuste",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-25",
+    "desc": "economics negativa por payback alto + fadiga: economics vence fadiga",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 1000,
+      "revenue": 4000,
+      "conversions": 5,
+      "target_roas": 3.0,
+      "delight_spend": 3000,
+      "monthly_margin_per_customer": 10,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 50
+    },
+    "expected": {
+      "cac": 200.0,
+      "cac_payback_months": 20.0,
+      "payback_ok": false,
+      "roas_ok": true,
+      "delight_ok": true,
+      "pause_creative": true,
+      "decision": "pausar_economics_negativa",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-26",
+    "desc": "payback 12.1 logo acima do limite default: economics negativa",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 1210,
+      "revenue": 4840,
+      "conversions": 10,
+      "target_roas": 3.0,
+      "delight_spend": 3000,
+      "monthly_margin_per_customer": 10,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 0
+    },
+    "expected": {
+      "cac": 121.0,
+      "cac_payback_months": 12.1,
+      "payback_ok": false,
+      "decision": "pausar_economics_negativa",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-27",
+    "desc": "delight ratio 0.5 saudavel e ROAS no alvo exato: escala",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 1000,
+      "revenue": 3000,
+      "conversions": 50,
+      "target_roas": 3.0,
+      "delight_spend": 2000,
+      "monthly_margin_per_customer": 40,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 0
+    },
+    "expected": {
+      "delight_ratio": 0.5,
+      "roas": 3.0,
+      "roas_ok": true,
+      "delight_ok": true,
+      "decision": "escalar",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-28",
+    "desc": "ROAS zero (sem receita): economics negativa",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 1000,
+      "revenue": 0,
+      "conversions": 50,
+      "target_roas": 3.0,
+      "delight_spend": 3000,
+      "monthly_margin_per_customer": 40,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 0
+    },
+    "expected": {
+      "roas": 0.0,
+      "roas_ok": false,
+      "delight_ok": true,
+      "decision": "pausar_economics_negativa",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-29",
+    "desc": "delight ratio bem abaixo de 1 com fadiga 30: pausa criativo (capital ok)",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 300,
+      "revenue": 1500,
+      "conversions": 15,
+      "target_roas": 3.0,
+      "delight_spend": 3000,
+      "monthly_margin_per_customer": 40,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 30
+    },
+    "expected": {
+      "delight_ratio": 0.1,
+      "delight_ok": true,
+      "roas_ok": true,
+      "pause_creative": true,
+      "decision": "pausar_criativo_fatigado",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-30",
+    "desc": "target default 3.0 (sem campo); ROAS 3.5 passa",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 1000,
+      "revenue": 3500,
+      "conversions": 50,
+      "delight_spend": 3000,
+      "monthly_margin_per_customer": 40,
+      "payback_limit_months": 12,
+      "fatigue_ctr_drop_pct": 0
+    },
+    "expected": {
+      "roas": 3.5,
+      "roas_ok": true,
+      "delight_ok": true,
+      "decision": "escalar",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-31",
+    "desc": "payback limit default 12 (sem campo); payback 11 ok",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 1100,
+      "revenue": 4400,
+      "conversions": 10,
+      "target_roas": 3.0,
+      "delight_spend": 3000,
+      "monthly_margin_per_customer": 10,
+      "fatigue_ctr_drop_pct": 0
+    },
+    "expected": {
+      "cac": 110.0,
+      "cac_payback_months": 11.0,
+      "payback_ok": true,
+      "delight_ok": true,
+      "decision": "escalar",
+      "by": "g7-paid-ads-optimizer"
+    }
+  },
+  {
+    "id": "pa-32",
+    "desc": "fadiga ausente (0) com tudo ok: escala sem pausa",
+    "tenant_id": "t-eval-g07",
+    "paid": {
+      "spend": 1000,
+      "revenue": 4000,
+      "conversions": 50,
+      "target_roas": 3.0,
+      "delight_spend": 3000,
+      "monthly_margin_per_customer": 40,
+      "payback_limit_months": 12
+    },
+    "expected": {
+      "pause_creative": false,
+      "roas_ok": true,
+      "delight_ok": true,
+      "decision": "escalar",
+      "status": "escala",
+      "by": "g7-paid-ads-optimizer"
+    }
+  }
 ]

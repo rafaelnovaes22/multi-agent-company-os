@@ -1,49 +1,4538 @@
 [
-  {"id": "aa-01", "desc": "atribuição linear: 4 conversões, créditos paid 1 / social 2 / organic 1; reconcilia com G6=4",
-   "tenant_id": "t-eval-g07",
-   "attribution": {"journeys": [
-       {"touches": ["paid", "social"], "converted": true},
-       {"touches": ["paid", "social"], "converted": true},
-       {"touches": ["social"], "converted": true},
-       {"touches": ["organic"], "converted": true},
-       {"touches": ["paid"], "converted": false}],
-     "spend": {"paid": 200, "social": 100, "organic": 0},
-     "g6_total_conversions": 4},
-   "expected": {"by": "g7-attribution-analyst", "attributed_conversions": 4.0,
-                "total_converted": 4.0, "reconciled": true, "recon_diff_pct": 0.0,
-                "double_counting": false, "best_channel": "organic", "worst_channel": "paid",
-                "channel_count": 3}},
-
-  {"id": "aa-02", "desc": "CAC por canal: paid 200/credito1=200, social 100/credito2=50",
-   "tenant_id": "t-eval-g07",
-   "attribution": {"journeys": [
-       {"touches": ["paid", "social"], "converted": true},
-       {"touches": ["paid", "social"], "converted": true},
-       {"touches": ["social"], "converted": true},
-       {"touches": ["organic"], "converted": true}],
-     "spend": {"paid": 200, "social": 100, "organic": 0},
-     "g6_total_conversions": 4},
-   "expected": {"by": "g7-attribution-analyst", "attributed_conversions": 4.0,
-                "reconciled": true, "channel_count": 3}},
-
-  {"id": "aa-03", "desc": "reconciliação falha: atribuído 3 mas G6=10 (diferença > 1%) -> reconciled false",
-   "tenant_id": "t-eval-g07",
-   "attribution": {"journeys": [
-       {"touches": ["paid"], "converted": true},
-       {"touches": ["social"], "converted": true},
-       {"touches": ["organic"], "converted": true}],
-     "spend": {"paid": 150, "social": 50, "organic": 0},
-     "g6_total_conversions": 10},
-   "expected": {"by": "g7-attribution-analyst", "attributed_conversions": 3.0,
-                "total_converted": 3.0, "reconciled": false, "recon_diff_pct": 70.0,
-                "channel_count": 3}},
-
-  {"id": "aa-04", "desc": "sem G6 informado: reconciliação trivialmente passa",
-   "tenant_id": "t-eval-g07",
-   "attribution": {"journeys": [
-       {"touches": ["referral"], "converted": true},
-       {"touches": ["referral", "lifecycle"], "converted": true}],
-     "spend": {"referral": 30, "lifecycle": 20}},
-   "expected": {"by": "g7-attribution-analyst", "attributed_conversions": 2.0,
-                "reconciled": true, "double_counting": false, "channel_count": 2}}
+  {
+    "id": "aa-01",
+    "desc": "atribuicao linear: 4 conversoes, paid 1/social 2/organic 1; reconcilia com G6=4",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "paid",
+            "social"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid",
+            "social"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "social"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "organic"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": false
+        }
+      ],
+      "spend": {
+        "paid": 200,
+        "social": 100,
+        "organic": 0
+      },
+      "g6_total_conversions": 4
+    },
+    "expected": {
+      "attributed_conversions": 4.0,
+      "total_converted": 4.0,
+      "reconciled": true,
+      "recon_diff_pct": 0.0,
+      "double_counting": false,
+      "best_channel": "organic",
+      "worst_channel": "paid",
+      "channel_count": 3,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-02",
+    "desc": "CAC por canal: paid 200/credito1=200, social 100/credito2=50",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "paid",
+            "social"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid",
+            "social"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "social"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "organic"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "paid": 200,
+        "social": 100,
+        "organic": 0
+      },
+      "g6_total_conversions": 4
+    },
+    "expected": {
+      "attributed_conversions": 4.0,
+      "reconciled": true,
+      "channel_count": 3,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-03",
+    "desc": "reconciliacao falha: atribuido 3 mas G6=10 (diferenca > 1%) -> reconciled false",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "social"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "organic"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "paid": 150,
+        "social": 50,
+        "organic": 0
+      },
+      "g6_total_conversions": 10
+    },
+    "expected": {
+      "attributed_conversions": 3.0,
+      "total_converted": 3.0,
+      "reconciled": false,
+      "recon_diff_pct": 70.0,
+      "channel_count": 3,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-04",
+    "desc": "sem G6 informado: reconciliacao trivialmente passa",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "referral"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "referral",
+            "lifecycle"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "referral": 30,
+        "lifecycle": 20
+      }
+    },
+    "expected": {
+      "attributed_conversions": 2.0,
+      "reconciled": true,
+      "double_counting": false,
+      "channel_count": 2,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-05",
+    "desc": "recon exatamente 1% de diferenca: passa no limiar",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "paid": 100
+      },
+      "g6_total_conversions": 100
+    },
+    "expected": {
+      "attributed_conversions": 99.0,
+      "recon_diff_pct": 1.0,
+      "reconciled": true,
+      "channel_count": 1,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-06",
+    "desc": "recon 2% de diferenca: reprova logo acima",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "paid": 100
+      },
+      "g6_total_conversions": 100
+    },
+    "expected": {
+      "attributed_conversions": 98.0,
+      "recon_diff_pct": 2.0,
+      "reconciled": false,
+      "channel_count": 1,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-07",
+    "desc": "atribuicao linear nunca infla: double_counting False (creditos somam = conversoes)",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "a",
+            "b",
+            "c"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "a",
+            "b"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "c"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "a": 10,
+        "b": 10,
+        "c": 10
+      },
+      "g6_total_conversions": 3
+    },
+    "expected": {
+      "attributed_conversions": 3.0,
+      "total_converted": 3.0,
+      "double_counting": false,
+      "reconciled": true,
+      "channel_count": 3,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-08",
+    "desc": "conversao sem touches: total_converted conta, atribuido nao (lacuna de tracking)",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "paid": 50
+      },
+      "g6_total_conversions": 2
+    },
+    "expected": {
+      "attributed_conversions": 1.0,
+      "total_converted": 2.0,
+      "reconciled": false,
+      "recon_diff_pct": 50.0,
+      "channel_count": 1,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-09",
+    "desc": "ranking de CAC: menor CAC = best, maior = worst",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "cheap"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "expensive"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "cheap": 10,
+        "expensive": 1000
+      }
+    },
+    "expected": {
+      "best_channel": "cheap",
+      "worst_channel": "expensive",
+      "channel_count": 2,
+      "reconciled": true,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-10",
+    "desc": "canal organico (spend 0) tem CAC 0 e vence o ranking",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "organic"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "paid": 300
+      }
+    },
+    "expected": {
+      "best_channel": "organic",
+      "worst_channel": "paid",
+      "channel_count": 2,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-11",
+    "desc": "nenhuma conversao: zero atribuido, reconcilia trivial sem G6",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": false
+        },
+        {
+          "touches": [
+            "social"
+          ],
+          "converted": false
+        }
+      ],
+      "spend": {
+        "paid": 100
+      }
+    },
+    "expected": {
+      "attributed_conversions": 0.0,
+      "total_converted": 0.0,
+      "channel_count": 0,
+      "reconciled": true,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-12",
+    "desc": "G6=0: reconciliacao trivialmente passa (sem divisao)",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "paid": 50
+      },
+      "g6_total_conversions": 0
+    },
+    "expected": {
+      "attributed_conversions": 1.0,
+      "reconciled": true,
+      "recon_diff_pct": 0.0,
+      "channel_count": 1,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-13",
+    "desc": "jornada de 5 touches: credito 0.2 cada",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "a",
+            "b",
+            "c",
+            "d",
+            "e"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "a": 10,
+        "b": 10,
+        "c": 10,
+        "d": 10,
+        "e": 10
+      },
+      "g6_total_conversions": 1
+    },
+    "expected": {
+      "attributed_conversions": 1.0,
+      "total_converted": 1.0,
+      "channel_count": 5,
+      "reconciled": true,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-14",
+    "desc": "1 canal puro reconcilia exato com G6",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "paid": 1000
+      },
+      "g6_total_conversions": 10
+    },
+    "expected": {
+      "attributed_conversions": 10.0,
+      "reconciled": true,
+      "recon_diff_pct": 0.0,
+      "channel_count": 1,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-15",
+    "desc": "atribuido maior que G6 (diferenca relativa) reprova",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "paid": 2000
+      },
+      "g6_total_conversions": 10
+    },
+    "expected": {
+      "attributed_conversions": 20.0,
+      "recon_diff_pct": 100.0,
+      "reconciled": false,
+      "channel_count": 1,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-16",
+    "desc": "mix paid+social+organic, G6 fecha: reconciliado",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "paid",
+            "organic"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "social"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "organic"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid",
+            "social",
+            "organic"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "paid": 120,
+        "social": 80,
+        "organic": 0
+      },
+      "g6_total_conversions": 4
+    },
+    "expected": {
+      "attributed_conversions": 4.0,
+      "total_converted": 4.0,
+      "reconciled": true,
+      "channel_count": 3,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-17",
+    "desc": "CAC alto em canal de credito fracionario",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "paid",
+            "social"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "paid": 500,
+        "social": 100
+      }
+    },
+    "expected": {
+      "channel_count": 2,
+      "best_channel": "social",
+      "worst_channel": "paid",
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-18",
+    "desc": "reconciliacao falha por subatribuicao (G6 maior)",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "social"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "paid": 50,
+        "social": 50
+      },
+      "g6_total_conversions": 5
+    },
+    "expected": {
+      "attributed_conversions": 2.0,
+      "recon_diff_pct": 60.0,
+      "reconciled": false,
+      "channel_count": 2,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-19",
+    "desc": "muitas conversoes 1 canal reconciliam com tolerancia (0.5%)",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "paid": 1990
+      },
+      "g6_total_conversions": 200
+    },
+    "expected": {
+      "attributed_conversions": 199.0,
+      "recon_diff_pct": 0.5,
+      "reconciled": true,
+      "channel_count": 1,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-20",
+    "desc": "2 canais com mesmo CAC: ranking deterministico, sem double-counting",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "x"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "y"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "x": 50,
+        "y": 50
+      }
+    },
+    "expected": {
+      "channel_count": 2,
+      "double_counting": false,
+      "reconciled": true,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-21",
+    "desc": "jornada repetida do mesmo canal 3x na jornada conta como 1 touch-set",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "paid",
+            "paid"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "paid": 100
+      },
+      "g6_total_conversions": 1
+    },
+    "expected": {
+      "attributed_conversions": 1.0,
+      "total_converted": 1.0,
+      "channel_count": 1,
+      "reconciled": true,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-22",
+    "desc": "conversoes nao-convertidas ignoradas no credito",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "social"
+          ],
+          "converted": false
+        },
+        {
+          "touches": [
+            "organic"
+          ],
+          "converted": false
+        }
+      ],
+      "spend": {
+        "paid": 40
+      }
+    },
+    "expected": {
+      "attributed_conversions": 1.0,
+      "total_converted": 1.0,
+      "channel_count": 1,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-23",
+    "desc": "G6 levemente maior dentro de 1%: reconcilia",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "paid": 1000
+      },
+      "g6_total_conversions": 101
+    },
+    "expected": {
+      "attributed_conversions": 100.0,
+      "recon_diff_pct": 0.99,
+      "reconciled": true,
+      "channel_count": 1,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-24",
+    "desc": "best channel = canal de menor CAC entre 3",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "seo"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "referral"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "seo": 20,
+        "paid": 300,
+        "referral": 50
+      }
+    },
+    "expected": {
+      "best_channel": "seo",
+      "worst_channel": "paid",
+      "channel_count": 3,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-25",
+    "desc": "credito fracionario reconcilia com G6 fracionado nao (G6 inteiro)",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "a",
+            "b"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "a",
+            "b"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "a": 50,
+        "b": 50
+      },
+      "g6_total_conversions": 2
+    },
+    "expected": {
+      "attributed_conversions": 2.0,
+      "total_converted": 2.0,
+      "reconciled": true,
+      "channel_count": 2,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-26",
+    "desc": "sem spend para canais: CAC 0 em todos, ranking estavel",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "a"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "b"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {}
+    },
+    "expected": {
+      "channel_count": 2,
+      "reconciled": true,
+      "double_counting": false,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-27",
+    "desc": "6 canais distintos: contagem de canais",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "a"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "b"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "c"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "d"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "e"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "f"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {}
+    },
+    "expected": {
+      "channel_count": 6,
+      "attributed_conversions": 6.0,
+      "total_converted": 6.0,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-28",
+    "desc": "subatribuicao severa por gaps de tracking: reprova",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [],
+          "converted": true
+        },
+        {
+          "touches": [],
+          "converted": true
+        },
+        {
+          "touches": [],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "paid": 40
+      },
+      "g6_total_conversions": 4
+    },
+    "expected": {
+      "attributed_conversions": 1.0,
+      "total_converted": 4.0,
+      "recon_diff_pct": 75.0,
+      "reconciled": false,
+      "channel_count": 1,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-29",
+    "desc": "conversoes parciais convertem credito proporcional",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "email",
+            "paid",
+            "social"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "email": 10,
+        "paid": 200,
+        "social": 30
+      }
+    },
+    "expected": {
+      "attributed_conversions": 2.0,
+      "total_converted": 2.0,
+      "channel_count": 3,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-30",
+    "desc": "recon exato 0% com multitouch fechando G6",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "a",
+            "b"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "b",
+            "c"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "a",
+            "c"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "a": 30,
+        "b": 30,
+        "c": 30
+      },
+      "g6_total_conversions": 3
+    },
+    "expected": {
+      "attributed_conversions": 3.0,
+      "recon_diff_pct": 0.0,
+      "reconciled": true,
+      "channel_count": 3,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-31",
+    "desc": "double_counting nunca verdadeiro na atribuicao linear honesta",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "a",
+            "b",
+            "c"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "a",
+            "b",
+            "c"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "a",
+            "b",
+            "c"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "a",
+            "b",
+            "c"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "a",
+            "b",
+            "c"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "a": 10,
+        "b": 10,
+        "c": 10
+      },
+      "g6_total_conversions": 5
+    },
+    "expected": {
+      "attributed_conversions": 5.0,
+      "total_converted": 5.0,
+      "double_counting": false,
+      "reconciled": true,
+      "by": "g7-attribution-analyst"
+    }
+  },
+  {
+    "id": "aa-32",
+    "desc": "G6 menor que atribuido fora de tolerancia: reprova reconciliacao",
+    "tenant_id": "t-eval-g07",
+    "attribution": {
+      "journeys": [
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        },
+        {
+          "touches": [
+            "paid"
+          ],
+          "converted": true
+        }
+      ],
+      "spend": {
+        "paid": 500
+      },
+      "g6_total_conversions": 40
+    },
+    "expected": {
+      "attributed_conversions": 50.0,
+      "recon_diff_pct": 25.0,
+      "reconciled": false,
+      "channel_count": 1,
+      "by": "g7-attribution-analyst"
+    }
+  }
 ]

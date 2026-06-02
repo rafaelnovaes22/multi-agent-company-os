@@ -2,25 +2,549 @@
   {
     "id": "eval-01",
     "desc": "35 casos cobrindo 3 positivos e 3 negativos, fresca -> PASS",
-    "eval": {"case_count": 35, "positive_covered": 3, "negative_covered": 3, "age_days": 30, "leakage": false},
-    "expected": {"case_count": 35, "coverage_pct": 100.0, "covers_clause": true, "is_fresh": true, "valid": true, "status": "PASS", "gap_count": 0}
+    "eval": {
+      "case_count": 35,
+      "positive_covered": 3,
+      "negative_covered": 3,
+      "age_days": 30,
+      "leakage": false
+    },
+    "expected": {
+      "case_count": 35,
+      "coverage_pct": 100.0,
+      "covers_clause": true,
+      "is_fresh": true,
+      "valid": true,
+      "status": "PASS",
+      "gap_count": 0
+    }
   },
   {
     "id": "eval-02",
     "desc": "22 casos so de caminho feliz (sem negativos) -> FAIL",
-    "eval": {"case_count": 22, "positive_covered": 3, "negative_covered": 0, "age_days": 10, "leakage": false},
-    "expected": {"case_count": 22, "covers_clause": false, "valid": false, "status": "FAIL", "gap_count": 2}
+    "eval": {
+      "case_count": 22,
+      "positive_covered": 3,
+      "negative_covered": 0,
+      "age_days": 10,
+      "leakage": false
+    },
+    "expected": {
+      "case_count": 22,
+      "covers_clause": false,
+      "valid": false,
+      "status": "FAIL",
+      "gap_count": 2
+    }
   },
   {
     "id": "eval-03",
     "desc": "suite com 6 meses sem atualizacao -> FAIL por freshness",
-    "eval": {"case_count": 40, "positive_covered": 4, "negative_covered": 4, "age_days": 180, "leakage": false},
-    "expected": {"is_fresh": false, "valid": false, "status": "FAIL", "gap_count": 1}
+    "eval": {
+      "case_count": 40,
+      "positive_covered": 4,
+      "negative_covered": 4,
+      "age_days": 180,
+      "leakage": false
+    },
+    "expected": {
+      "is_fresh": false,
+      "valid": false,
+      "status": "FAIL",
+      "gap_count": 1
+    }
   },
   {
     "id": "eval-04",
     "desc": "leakage detectado -> FAIL mesmo com cobertura completa",
-    "eval": {"case_count": 50, "positive_covered": 5, "negative_covered": 5, "age_days": 20, "leakage": true},
-    "expected": {"leakage": true, "valid": false, "status": "FAIL", "gap_count": 1}
+    "eval": {
+      "case_count": 50,
+      "positive_covered": 5,
+      "negative_covered": 5,
+      "age_days": 20,
+      "leakage": true
+    },
+    "expected": {
+      "leakage": true,
+      "valid": false,
+      "status": "FAIL",
+      "gap_count": 1
+    }
+  },
+  {
+    "id": "eval-05",
+    "desc": "limiar exato: 30 casos -> has_min ok",
+    "eval": {
+      "case_count": 30,
+      "positive_covered": 3,
+      "negative_covered": 3,
+      "age_days": 10,
+      "leakage": false
+    },
+    "expected": {
+      "case_count": 30,
+      "valid": true,
+      "status": "PASS",
+      "gap_count": 0,
+      "covers_clause": true
+    }
+  },
+  {
+    "id": "eval-06",
+    "desc": "fronteira -1: 29 casos -> FAIL por minimo",
+    "eval": {
+      "case_count": 29,
+      "positive_covered": 3,
+      "negative_covered": 3,
+      "age_days": 10,
+      "leakage": false
+    },
+    "expected": {
+      "case_count": 29,
+      "valid": false,
+      "status": "FAIL",
+      "gap_count": 1
+    }
+  },
+  {
+    "id": "eval-07",
+    "desc": "31 casos (acima do minimo) com cobertura -> PASS",
+    "eval": {
+      "case_count": 31,
+      "positive_covered": 3,
+      "negative_covered": 3,
+      "age_days": 10,
+      "leakage": false
+    },
+    "expected": {
+      "valid": true,
+      "status": "PASS",
+      "gap_count": 0
+    }
+  },
+  {
+    "id": "eval-08",
+    "desc": "positivos no limiar 3, negativos abaixo (2) -> FAIL cobertura",
+    "eval": {
+      "case_count": 40,
+      "positive_covered": 3,
+      "negative_covered": 2,
+      "age_days": 10,
+      "leakage": false
+    },
+    "expected": {
+      "covers_clause": false,
+      "valid": false,
+      "status": "FAIL",
+      "gap_count": 1
+    }
+  },
+  {
+    "id": "eval-09",
+    "desc": "negativos no limiar 3, positivos abaixo (2) -> FAIL cobertura",
+    "eval": {
+      "case_count": 40,
+      "positive_covered": 2,
+      "negative_covered": 3,
+      "age_days": 10,
+      "leakage": false
+    },
+    "expected": {
+      "covers_clause": false,
+      "valid": false,
+      "status": "FAIL",
+      "gap_count": 1
+    }
+  },
+  {
+    "id": "eval-10",
+    "desc": "ambos abaixo (2 e 2) -> 2 gaps de cobertura",
+    "eval": {
+      "case_count": 40,
+      "positive_covered": 2,
+      "negative_covered": 2,
+      "age_days": 10,
+      "leakage": false
+    },
+    "expected": {
+      "covers_clause": false,
+      "valid": false,
+      "status": "FAIL",
+      "gap_count": 2,
+      "coverage_pct": 66.7
+    }
+  },
+  {
+    "id": "eval-11",
+    "desc": "zero positivos zero negativos -> 2 gaps, cobertura 0%",
+    "eval": {
+      "case_count": 40,
+      "positive_covered": 0,
+      "negative_covered": 0,
+      "age_days": 10,
+      "leakage": false
+    },
+    "expected": {
+      "covers_clause": false,
+      "valid": false,
+      "status": "FAIL",
+      "gap_count": 2,
+      "coverage_pct": 0.0
+    }
+  },
+  {
+    "id": "eval-12",
+    "desc": "so positivos (5) sem negativos -> 1 gap negativos",
+    "eval": {
+      "case_count": 40,
+      "positive_covered": 5,
+      "negative_covered": 0,
+      "age_days": 10,
+      "leakage": false
+    },
+    "expected": {
+      "covers_clause": false,
+      "valid": false,
+      "status": "FAIL",
+      "gap_count": 1
+    }
+  },
+  {
+    "id": "eval-13",
+    "desc": "so negativos (5) sem positivos -> 1 gap positivos",
+    "eval": {
+      "case_count": 40,
+      "positive_covered": 0,
+      "negative_covered": 5,
+      "age_days": 10,
+      "leakage": false
+    },
+    "expected": {
+      "covers_clause": false,
+      "valid": false,
+      "status": "FAIL",
+      "gap_count": 1
+    }
+  },
+  {
+    "id": "eval-14",
+    "desc": "limiar exato de freshness: 90d -> fresca",
+    "eval": {
+      "case_count": 35,
+      "positive_covered": 3,
+      "negative_covered": 3,
+      "age_days": 90,
+      "leakage": false
+    },
+    "expected": {
+      "is_fresh": true,
+      "valid": true,
+      "status": "PASS",
+      "gap_count": 0
+    }
+  },
+  {
+    "id": "eval-15",
+    "desc": "fronteira +1: 91d -> stale, FAIL",
+    "eval": {
+      "case_count": 35,
+      "positive_covered": 3,
+      "negative_covered": 3,
+      "age_days": 91,
+      "leakage": false
+    },
+    "expected": {
+      "is_fresh": false,
+      "valid": false,
+      "status": "FAIL",
+      "gap_count": 1
+    }
+  },
+  {
+    "id": "eval-16",
+    "desc": "suite recem criada (0d) -> fresca",
+    "eval": {
+      "case_count": 35,
+      "positive_covered": 3,
+      "negative_covered": 3,
+      "age_days": 0,
+      "leakage": false
+    },
+    "expected": {
+      "is_fresh": true,
+      "valid": true,
+      "status": "PASS"
+    }
+  },
+  {
+    "id": "eval-17",
+    "desc": "poucos casos + sem negativos + stale -> 3 gaps",
+    "eval": {
+      "case_count": 10,
+      "positive_covered": 3,
+      "negative_covered": 0,
+      "age_days": 120,
+      "leakage": false
+    },
+    "expected": {
+      "valid": false,
+      "status": "FAIL",
+      "gap_count": 3
+    }
+  },
+  {
+    "id": "eval-18",
+    "desc": "poucos casos + leakage -> 2 gaps",
+    "eval": {
+      "case_count": 15,
+      "positive_covered": 4,
+      "negative_covered": 4,
+      "age_days": 30,
+      "leakage": true
+    },
+    "expected": {
+      "valid": false,
+      "status": "FAIL",
+      "gap_count": 2,
+      "leakage": true
+    }
+  },
+  {
+    "id": "eval-19",
+    "desc": "pior caso: tudo errado -> 5 gaps",
+    "eval": {
+      "case_count": 5,
+      "positive_covered": 0,
+      "negative_covered": 0,
+      "age_days": 200,
+      "leakage": true
+    },
+    "expected": {
+      "valid": false,
+      "status": "FAIL",
+      "gap_count": 5,
+      "coverage_pct": 0.0
+    }
+  },
+  {
+    "id": "eval-20",
+    "desc": "stale + leakage com casos e cobertura ok -> 2 gaps",
+    "eval": {
+      "case_count": 40,
+      "positive_covered": 3,
+      "negative_covered": 3,
+      "age_days": 100,
+      "leakage": true
+    },
+    "expected": {
+      "valid": false,
+      "status": "FAIL",
+      "gap_count": 2,
+      "is_fresh": false
+    }
+  },
+  {
+    "id": "eval-21",
+    "desc": "cobertura alta (6+6) -> coverage_pct cap 100",
+    "eval": {
+      "case_count": 40,
+      "positive_covered": 6,
+      "negative_covered": 6,
+      "age_days": 10,
+      "leakage": false
+    },
+    "expected": {
+      "coverage_pct": 100.0,
+      "covers_clause": true,
+      "valid": true,
+      "status": "PASS"
+    }
+  },
+  {
+    "id": "eval-22",
+    "desc": "cobertura parcial 4+1 -> 83.3% mas covers_clause False",
+    "eval": {
+      "case_count": 40,
+      "positive_covered": 4,
+      "negative_covered": 1,
+      "age_days": 10,
+      "leakage": false
+    },
+    "expected": {
+      "coverage_pct": 83.3,
+      "covers_clause": false,
+      "valid": false,
+      "status": "FAIL",
+      "gap_count": 1
+    }
+  },
+  {
+    "id": "eval-23",
+    "desc": "cobertura 1+1 -> 33.3%",
+    "eval": {
+      "case_count": 40,
+      "positive_covered": 1,
+      "negative_covered": 1,
+      "age_days": 10,
+      "leakage": false
+    },
+    "expected": {
+      "coverage_pct": 33.3,
+      "covers_clause": false,
+      "gap_count": 2
+    }
+  },
+  {
+    "id": "eval-24",
+    "desc": "cobertura 5+1 -> 100% (cap) mas falta negativos",
+    "eval": {
+      "case_count": 40,
+      "positive_covered": 5,
+      "negative_covered": 1,
+      "age_days": 10,
+      "leakage": false
+    },
+    "expected": {
+      "coverage_pct": 100.0,
+      "covers_clause": false,
+      "valid": false,
+      "gap_count": 1
+    }
+  },
+  {
+    "id": "eval-25",
+    "desc": "isola minimo: so case_count falha (resto ok)",
+    "eval": {
+      "case_count": 20,
+      "positive_covered": 4,
+      "negative_covered": 4,
+      "age_days": 10,
+      "leakage": false
+    },
+    "expected": {
+      "valid": false,
+      "status": "FAIL",
+      "gap_count": 1,
+      "covers_clause": true,
+      "is_fresh": true
+    }
+  },
+  {
+    "id": "eval-26",
+    "desc": "isola cobertura: so negativos faltam (resto ok)",
+    "eval": {
+      "case_count": 40,
+      "positive_covered": 4,
+      "negative_covered": 1,
+      "age_days": 10,
+      "leakage": false
+    },
+    "expected": {
+      "valid": false,
+      "covers_clause": false,
+      "is_fresh": true,
+      "gap_count": 1
+    }
+  },
+  {
+    "id": "eval-27",
+    "desc": "isola freshness: so age falha (resto ok)",
+    "eval": {
+      "case_count": 40,
+      "positive_covered": 4,
+      "negative_covered": 4,
+      "age_days": 95,
+      "leakage": false
+    },
+    "expected": {
+      "valid": false,
+      "is_fresh": false,
+      "covers_clause": true,
+      "gap_count": 1
+    }
+  },
+  {
+    "id": "eval-28",
+    "desc": "isola leakage: so leakage falha (resto ok)",
+    "eval": {
+      "case_count": 40,
+      "positive_covered": 4,
+      "negative_covered": 4,
+      "age_days": 10,
+      "leakage": true
+    },
+    "expected": {
+      "valid": false,
+      "leakage": true,
+      "covers_clause": true,
+      "is_fresh": true,
+      "gap_count": 1
+    }
+  },
+  {
+    "id": "eval-29",
+    "desc": "suite ampliada apos modo de falha de producao -> PASS",
+    "eval": {
+      "case_count": 48,
+      "positive_covered": 4,
+      "negative_covered": 5,
+      "age_days": 5,
+      "leakage": false
+    },
+    "expected": {
+      "case_count": 48,
+      "covers_clause": true,
+      "valid": true,
+      "status": "PASS",
+      "gap_count": 0
+    }
+  },
+  {
+    "id": "eval-30",
+    "desc": "defaults ausentes (tudo 0/omitido) -> FAIL maximo",
+    "eval": {},
+    "expected": {
+      "case_count": 0,
+      "covers_clause": false,
+      "valid": false,
+      "status": "FAIL",
+      "coverage_pct": 0.0
+    }
+  },
+  {
+    "id": "eval-31",
+    "desc": "30 casos exatos mas com leakage -> FAIL apesar do minimo",
+    "eval": {
+      "case_count": 30,
+      "positive_covered": 3,
+      "negative_covered": 3,
+      "age_days": 10,
+      "leakage": true
+    },
+    "expected": {
+      "case_count": 30,
+      "valid": false,
+      "status": "FAIL",
+      "gap_count": 1,
+      "leakage": true
+    }
+  },
+  {
+    "id": "eval-32",
+    "desc": "cobertura cheia exata (3+3) com 30 casos e 90d -> PASS no triplo limiar",
+    "eval": {
+      "case_count": 30,
+      "positive_covered": 3,
+      "negative_covered": 3,
+      "age_days": 90,
+      "leakage": false
+    },
+    "expected": {
+      "valid": true,
+      "status": "PASS",
+      "gap_count": 0,
+      "coverage_pct": 100.0,
+      "is_fresh": true
+    }
   }
 ]

@@ -62,5 +62,891 @@
       "deflection_rate": 0.0,
       "gap_count": 1
     }
+  },
+  {
+    "id": "kb-04",
+    "desc": "tema de alto volume coberto, lacunas de baixo volume -> deflection alto, cobertura baixa",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "billing",
+          "tickets": 900,
+          "has_article": true
+        },
+        {
+          "theme": "x",
+          "tickets": 10,
+          "has_article": false
+        },
+        {
+          "theme": "y",
+          "tickets": 10,
+          "has_article": false
+        },
+        {
+          "theme": "z",
+          "tickets": 10,
+          "has_article": false
+        }
+      ]
+    },
+    "expected": {
+      "deflection_rate": 96.8,
+      "coverage_pct": 25.0,
+      "gap_count": 3
+    }
+  },
+  {
+    "id": "kb-05",
+    "desc": "lacuna de ALTO volume sem artigo -> deflection baixo apesar de cobertura alta",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "a",
+          "tickets": 5,
+          "has_article": true
+        },
+        {
+          "theme": "b",
+          "tickets": 5,
+          "has_article": true
+        },
+        {
+          "theme": "c",
+          "tickets": 5,
+          "has_article": true
+        },
+        {
+          "theme": "hot",
+          "tickets": 500,
+          "has_article": false
+        }
+      ]
+    },
+    "expected": {
+      "deflection_rate": 2.9,
+      "coverage_pct": 75.0,
+      "gap_count": 1,
+      "gaps": [
+        "hot"
+      ]
+    }
+  },
+  {
+    "id": "kb-06",
+    "desc": "split 50/50 de volume, metade dos temas com artigo",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "a",
+          "tickets": 50,
+          "has_article": true
+        },
+        {
+          "theme": "b",
+          "tickets": 50,
+          "has_article": false
+        }
+      ]
+    },
+    "expected": {
+      "deflection_rate": 50.0,
+      "coverage_pct": 50.0,
+      "gap_count": 1
+    }
+  },
+  {
+    "id": "kb-07",
+    "desc": "varias lacunas preservam ordem na lista gaps",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "login",
+          "tickets": 10,
+          "has_article": true
+        },
+        {
+          "theme": "senha",
+          "tickets": 20,
+          "has_article": false
+        },
+        {
+          "theme": "fatura",
+          "tickets": 30,
+          "has_article": false
+        },
+        {
+          "theme": "api",
+          "tickets": 40,
+          "has_article": false
+        }
+      ]
+    },
+    "expected": {
+      "gap_count": 3,
+      "gaps": [
+        "senha",
+        "fatura",
+        "api"
+      ]
+    }
+  },
+  {
+    "id": "kb-08",
+    "desc": "todos com artigo -> gaps vazio",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "a",
+          "tickets": 10,
+          "has_article": true
+        },
+        {
+          "theme": "b",
+          "tickets": 10,
+          "has_article": true
+        },
+        {
+          "theme": "c",
+          "tickets": 10,
+          "has_article": true
+        }
+      ]
+    },
+    "expected": {
+      "gap_count": 0,
+      "gaps": [],
+      "coverage_pct": 100.0,
+      "deflection_rate": 100.0
+    }
+  },
+  {
+    "id": "kb-09",
+    "desc": "nenhum com artigo -> deflection 0, cobertura 0",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "a",
+          "tickets": 10,
+          "has_article": false
+        },
+        {
+          "theme": "b",
+          "tickets": 20,
+          "has_article": false
+        }
+      ]
+    },
+    "expected": {
+      "deflection_rate": 0.0,
+      "coverage_pct": 0.0,
+      "gap_count": 2,
+      "gaps": [
+        "a",
+        "b"
+      ]
+    }
+  },
+  {
+    "id": "kb-10",
+    "desc": "tema coberto com 0 tickets -> conta na cobertura, nao no volume",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "raro",
+          "tickets": 0,
+          "has_article": true
+        },
+        {
+          "theme": "comum",
+          "tickets": 100,
+          "has_article": true
+        }
+      ]
+    },
+    "expected": {
+      "deflection_rate": 100.0,
+      "coverage_pct": 100.0,
+      "gap_count": 0
+    }
+  },
+  {
+    "id": "kb-11",
+    "desc": "todos com 0 tickets -> total 0 -> deflection 0.0 (sem divisao)",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "a",
+          "tickets": 0,
+          "has_article": true
+        },
+        {
+          "theme": "b",
+          "tickets": 0,
+          "has_article": false
+        }
+      ]
+    },
+    "expected": {
+      "deflection_rate": 0.0,
+      "coverage_pct": 50.0,
+      "gap_count": 1
+    }
+  },
+  {
+    "id": "kb-12",
+    "desc": "lacuna com 0 tickets ainda conta como gap",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "hot",
+          "tickets": 100,
+          "has_article": true
+        },
+        {
+          "theme": "frio",
+          "tickets": 0,
+          "has_article": false
+        }
+      ]
+    },
+    "expected": {
+      "deflection_rate": 100.0,
+      "gap_count": 1,
+      "gaps": [
+        "frio"
+      ],
+      "coverage_pct": 50.0
+    }
+  },
+  {
+    "id": "kb-13",
+    "desc": "lista de temas vazia -> deflection 0, cobertura 0, gap_count 0",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": []
+    },
+    "expected": {
+      "deflection_rate": 0.0,
+      "coverage_pct": 0.0,
+      "gap_count": 0,
+      "gaps": []
+    }
+  },
+  {
+    "id": "kb-14",
+    "desc": "kb sem themes -> tudo zero",
+    "tenant_id": "t-eval-g09",
+    "kb": {},
+    "expected": {
+      "deflection_rate": 0.0,
+      "gap_count": 0
+    }
+  },
+  {
+    "id": "kb-15",
+    "desc": "unico tema coberto -> 100% deflection e cobertura",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "solo",
+          "tickets": 42,
+          "has_article": true
+        }
+      ]
+    },
+    "expected": {
+      "deflection_rate": 100.0,
+      "coverage_pct": 100.0,
+      "gap_count": 0
+    }
+  },
+  {
+    "id": "kb-16",
+    "desc": "unico tema sem artigo -> 0% deflection",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "solo",
+          "tickets": 42,
+          "has_article": false
+        }
+      ]
+    },
+    "expected": {
+      "deflection_rate": 0.0,
+      "coverage_pct": 0.0,
+      "gap_count": 1,
+      "gaps": [
+        "solo"
+      ]
+    }
+  },
+  {
+    "id": "kb-17",
+    "desc": "deflection 1/3 do volume -> 33.3 (arredondado)",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "a",
+          "tickets": 100,
+          "has_article": true
+        },
+        {
+          "theme": "b",
+          "tickets": 100,
+          "has_article": false
+        },
+        {
+          "theme": "c",
+          "tickets": 100,
+          "has_article": false
+        }
+      ]
+    },
+    "expected": {
+      "deflection_rate": 33.3,
+      "coverage_pct": 33.3,
+      "gap_count": 2
+    }
+  },
+  {
+    "id": "kb-18",
+    "desc": "deflection 2/3 do volume -> 66.7",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "a",
+          "tickets": 100,
+          "has_article": true
+        },
+        {
+          "theme": "b",
+          "tickets": 100,
+          "has_article": true
+        },
+        {
+          "theme": "c",
+          "tickets": 100,
+          "has_article": false
+        }
+      ]
+    },
+    "expected": {
+      "deflection_rate": 66.7,
+      "coverage_pct": 66.7,
+      "gap_count": 1
+    }
+  },
+  {
+    "id": "kb-19",
+    "desc": "cobertura 25% (1 de 4 temas) com volume desbalanceado",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "big",
+          "tickets": 70,
+          "has_article": true
+        },
+        {
+          "theme": "a",
+          "tickets": 10,
+          "has_article": false
+        },
+        {
+          "theme": "b",
+          "tickets": 10,
+          "has_article": false
+        },
+        {
+          "theme": "c",
+          "tickets": 10,
+          "has_article": false
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 25.0,
+      "deflection_rate": 70.0,
+      "gap_count": 3
+    }
+  },
+  {
+    "id": "kb-20",
+    "desc": "cobertura 7 de 8 temas -> 87.5%",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "t0",
+          "tickets": 10,
+          "has_article": true
+        },
+        {
+          "theme": "t1",
+          "tickets": 10,
+          "has_article": true
+        },
+        {
+          "theme": "t2",
+          "tickets": 10,
+          "has_article": true
+        },
+        {
+          "theme": "t3",
+          "tickets": 10,
+          "has_article": true
+        },
+        {
+          "theme": "t4",
+          "tickets": 10,
+          "has_article": true
+        },
+        {
+          "theme": "t5",
+          "tickets": 10,
+          "has_article": true
+        },
+        {
+          "theme": "t6",
+          "tickets": 10,
+          "has_article": true
+        },
+        {
+          "theme": "t7",
+          "tickets": 10,
+          "has_article": false
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 87.5,
+      "gap_count": 1,
+      "deflection_rate": 87.5
+    }
+  },
+  {
+    "id": "kb-21",
+    "desc": "artigo legado presente conta como cobertura (sinal de obsolescencia avaliado a parte)",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "feature_antiga",
+          "tickets": 5,
+          "has_article": true
+        },
+        {
+          "theme": "novo_fluxo",
+          "tickets": 200,
+          "has_article": true
+        }
+      ]
+    },
+    "expected": {
+      "coverage_pct": 100.0,
+      "deflection_rate": 100.0,
+      "gap_count": 0
+    }
+  },
+  {
+    "id": "kb-22",
+    "desc": "lacuna recorrente de alto volume aparece em gaps",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "checkout",
+          "tickets": 300,
+          "has_article": false
+        },
+        {
+          "theme": "login",
+          "tickets": 50,
+          "has_article": true
+        }
+      ]
+    },
+    "expected": {
+      "gaps": [
+        "checkout"
+      ],
+      "gap_count": 1,
+      "deflection_rate": 14.3
+    }
+  },
+  {
+    "id": "kb-23",
+    "desc": "muitos temas pequenos cobertos + 1 grande lacuna -> deflection baixo",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "a",
+          "tickets": 5,
+          "has_article": true
+        },
+        {
+          "theme": "b",
+          "tickets": 5,
+          "has_article": true
+        },
+        {
+          "theme": "c",
+          "tickets": 5,
+          "has_article": true
+        },
+        {
+          "theme": "d",
+          "tickets": 5,
+          "has_article": true
+        },
+        {
+          "theme": "mega",
+          "tickets": 980,
+          "has_article": false
+        }
+      ]
+    },
+    "expected": {
+      "deflection_rate": 2.0,
+      "coverage_pct": 80.0,
+      "gap_count": 1,
+      "gaps": [
+        "mega"
+      ]
+    }
+  },
+  {
+    "id": "kb-24",
+    "desc": "deflection 100 (gap tem 0 tickets) mas cobertura 50%",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "ativo",
+          "tickets": 80,
+          "has_article": true
+        },
+        {
+          "theme": "morto",
+          "tickets": 0,
+          "has_article": false
+        }
+      ]
+    },
+    "expected": {
+      "deflection_rate": 100.0,
+      "coverage_pct": 50.0,
+      "gap_count": 1
+    }
+  },
+  {
+    "id": "kb-25",
+    "desc": "mix realista: 5 temas, 3 cobertos -> deflection ponderado",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "a",
+          "tickets": 200,
+          "has_article": true
+        },
+        {
+          "theme": "b",
+          "tickets": 150,
+          "has_article": true
+        },
+        {
+          "theme": "c",
+          "tickets": 100,
+          "has_article": true
+        },
+        {
+          "theme": "d",
+          "tickets": 50,
+          "has_article": false
+        },
+        {
+          "theme": "e",
+          "tickets": 50,
+          "has_article": false
+        }
+      ]
+    },
+    "expected": {
+      "deflection_rate": 81.8,
+      "coverage_pct": 60.0,
+      "gap_count": 2,
+      "gaps": [
+        "d",
+        "e"
+      ]
+    }
+  },
+  {
+    "id": "kb-26",
+    "desc": "mix: 1 tema dominante coberto domina deflection",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "dominante",
+          "tickets": 1000,
+          "has_article": true
+        },
+        {
+          "theme": "nicho",
+          "tickets": 100,
+          "has_article": false
+        }
+      ]
+    },
+    "expected": {
+      "deflection_rate": 90.9,
+      "coverage_pct": 50.0,
+      "gap_count": 1
+    }
+  },
+  {
+    "id": "kb-27",
+    "desc": "mix: 1 tema dominante NAO coberto derruba deflection",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "dominante",
+          "tickets": 1000,
+          "has_article": false
+        },
+        {
+          "theme": "nicho",
+          "tickets": 100,
+          "has_article": true
+        }
+      ]
+    },
+    "expected": {
+      "deflection_rate": 9.1,
+      "coverage_pct": 50.0,
+      "gap_count": 1,
+      "gaps": [
+        "dominante"
+      ]
+    }
+  },
+  {
+    "id": "kb-28",
+    "desc": "6 temas iguais, 4 cobertos -> 66.7 deflection e cobertura",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "t0",
+          "tickets": 25,
+          "has_article": true
+        },
+        {
+          "theme": "t1",
+          "tickets": 25,
+          "has_article": true
+        },
+        {
+          "theme": "t2",
+          "tickets": 25,
+          "has_article": true
+        },
+        {
+          "theme": "t3",
+          "tickets": 25,
+          "has_article": true
+        },
+        {
+          "theme": "g1",
+          "tickets": 25,
+          "has_article": false
+        },
+        {
+          "theme": "g2",
+          "tickets": 25,
+          "has_article": false
+        }
+      ]
+    },
+    "expected": {
+      "deflection_rate": 66.7,
+      "coverage_pct": 66.7,
+      "gap_count": 2
+    }
+  },
+  {
+    "id": "kb-29",
+    "desc": "10 temas todos cobertos -> 100% e zero lacunas",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "t0",
+          "tickets": 10,
+          "has_article": true
+        },
+        {
+          "theme": "t1",
+          "tickets": 10,
+          "has_article": true
+        },
+        {
+          "theme": "t2",
+          "tickets": 10,
+          "has_article": true
+        },
+        {
+          "theme": "t3",
+          "tickets": 10,
+          "has_article": true
+        },
+        {
+          "theme": "t4",
+          "tickets": 10,
+          "has_article": true
+        },
+        {
+          "theme": "t5",
+          "tickets": 10,
+          "has_article": true
+        },
+        {
+          "theme": "t6",
+          "tickets": 10,
+          "has_article": true
+        },
+        {
+          "theme": "t7",
+          "tickets": 10,
+          "has_article": true
+        },
+        {
+          "theme": "t8",
+          "tickets": 10,
+          "has_article": true
+        },
+        {
+          "theme": "t9",
+          "tickets": 10,
+          "has_article": true
+        }
+      ]
+    },
+    "expected": {
+      "deflection_rate": 100.0,
+      "coverage_pct": 100.0,
+      "gap_count": 0
+    }
+  },
+  {
+    "id": "kb-30",
+    "desc": "deflection 80% via volume (800/1000) cobertura 50%",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "a",
+          "tickets": 800,
+          "has_article": true
+        },
+        {
+          "theme": "b",
+          "tickets": 200,
+          "has_article": false
+        }
+      ]
+    },
+    "expected": {
+      "deflection_rate": 80.0,
+      "coverage_pct": 50.0,
+      "gap_count": 1,
+      "gaps": [
+        "b"
+      ]
+    }
+  },
+  {
+    "id": "kb-31",
+    "desc": "deflection 20% via volume (200/1000) cobertura 50%",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "a",
+          "tickets": 200,
+          "has_article": true
+        },
+        {
+          "theme": "b",
+          "tickets": 800,
+          "has_article": false
+        }
+      ]
+    },
+    "expected": {
+      "deflection_rate": 20.0,
+      "coverage_pct": 50.0,
+      "gap_count": 1,
+      "gaps": [
+        "b"
+      ]
+    }
+  },
+  {
+    "id": "kb-32",
+    "desc": "tres lacunas distintas listadas em ordem",
+    "tenant_id": "t-eval-g09",
+    "kb": {
+      "themes": [
+        {
+          "theme": "ok",
+          "tickets": 100,
+          "has_article": true
+        },
+        {
+          "theme": "g1",
+          "tickets": 1,
+          "has_article": false
+        },
+        {
+          "theme": "g2",
+          "tickets": 1,
+          "has_article": false
+        },
+        {
+          "theme": "g3",
+          "tickets": 1,
+          "has_article": false
+        }
+      ]
+    },
+    "expected": {
+      "gap_count": 3,
+      "gaps": [
+        "g1",
+        "g2",
+        "g3"
+      ],
+      "coverage_pct": 25.0
+    }
   }
 ]

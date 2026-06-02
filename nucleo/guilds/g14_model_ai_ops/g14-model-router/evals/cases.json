@@ -2,19 +2,462 @@
   {
     "id": "mr-01",
     "desc": "SLA 0.85 -> mais barato que cumpre = medio",
-    "routing": {"min_quality": 0.85, "ledger": "operating"},
-    "expected": {"selected_model": "medio", "cost": 3.0, "fell_back": false, "blocked": false, "candidate_count": 2, "status": "ok"}
+    "routing": {
+      "min_quality": 0.85,
+      "ledger": "operating"
+    },
+    "expected": {
+      "selected_model": "medio",
+      "cost": 3.0,
+      "fell_back": false,
+      "blocked": false,
+      "candidate_count": 2,
+      "status": "ok"
+    }
   },
   {
     "id": "mr-02",
-    "desc": "primario caiu -> fallback do barato para medio",
-    "routing": {"min_quality": 0.75, "primary_down": true, "ledger": "operating"},
-    "expected": {"selected_model": "medio", "cost": 3.0, "fell_back": true, "blocked": false, "candidate_count": 3, "status": "fallback"}
+    "desc": "primário caiu -> fallback do barato para medio",
+    "routing": {
+      "min_quality": 0.75,
+      "primary_down": true,
+      "ledger": "operating"
+    },
+    "expected": {
+      "selected_model": "medio",
+      "cost": 3.0,
+      "fell_back": true,
+      "blocked": false,
+      "candidate_count": 3,
+      "status": "fallback"
+    }
   },
   {
     "id": "mr-03",
-    "desc": "billable: so forte cumpre 0.95 mas estoura teto C3 -> bloqueado",
-    "routing": {"min_quality": 0.95, "ledger": "billable", "cost_cap": 5.0},
-    "expected": {"selected_model": "forte", "cost": 10.0, "blocked": true, "candidate_count": 1, "status": "blocked"}
+    "desc": "tarefa simples SLA 0.75 -> barato (3 candidatos)",
+    "routing": {
+      "min_quality": 0.75,
+      "ledger": "operating"
+    },
+    "expected": {
+      "selected_model": "barato",
+      "cost": 1.0,
+      "fell_back": false,
+      "candidate_count": 3,
+      "status": "ok"
+    }
+  },
+  {
+    "id": "mr-04",
+    "desc": "tarefa crítica SLA 0.95 -> só forte qualifica",
+    "routing": {
+      "min_quality": 0.95,
+      "ledger": "operating"
+    },
+    "expected": {
+      "selected_model": "forte",
+      "cost": 10.0,
+      "candidate_count": 1,
+      "status": "ok"
+    }
+  },
+  {
+    "id": "mr-05",
+    "desc": "billable SLA 0.85 cap 2: medio (custo 3) excede e barato não cumpre SLA -> bloqueia",
+    "routing": {
+      "min_quality": 0.85,
+      "ledger": "billable",
+      "cost_cap": 2.0
+    },
+    "expected": {
+      "selected_model": "medio",
+      "blocked": true,
+      "status": "blocked"
+    }
+  },
+  {
+    "id": "mr-06",
+    "desc": "billable cap 5 sem alternativa abaixo (só forte custo 10) -> bloqueia mantendo seleção",
+    "routing": {
+      "min_quality": 0.95,
+      "ledger": "billable",
+      "cost_cap": 5.0
+    },
+    "expected": {
+      "selected_model": "forte",
+      "blocked": true,
+      "status": "blocked",
+      "candidate_count": 1
+    }
+  },
+  {
+    "id": "mr-07",
+    "desc": "SLA acima de tudo (0.99) -> nenhum candidato",
+    "routing": {
+      "min_quality": 0.99,
+      "ledger": "operating"
+    },
+    "expected": {
+      "selected_model": null,
+      "candidate_count": 0,
+      "blocked": false,
+      "status": "ok"
+    }
+  },
+  {
+    "id": "mr-08",
+    "desc": "fronteira SLA exatamente 0.80 -> barato qualifica",
+    "routing": {
+      "min_quality": 0.8,
+      "ledger": "operating"
+    },
+    "expected": {
+      "selected_model": "barato",
+      "cost": 1.0,
+      "candidate_count": 3,
+      "status": "ok"
+    }
+  },
+  {
+    "id": "mr-09",
+    "desc": "fronteira SLA 0.81 exclui barato -> medio",
+    "routing": {
+      "min_quality": 0.81,
+      "ledger": "operating"
+    },
+    "expected": {
+      "selected_model": "medio",
+      "candidate_count": 2,
+      "status": "ok"
+    }
+  },
+  {
+    "id": "mr-10",
+    "desc": "fronteira SLA exatamente 0.90 -> medio",
+    "routing": {
+      "min_quality": 0.9,
+      "ledger": "operating"
+    },
+    "expected": {
+      "selected_model": "medio",
+      "candidate_count": 2,
+      "status": "ok"
+    }
+  },
+  {
+    "id": "mr-11",
+    "desc": "fronteira SLA 0.91 exclui medio -> forte",
+    "routing": {
+      "min_quality": 0.91,
+      "ledger": "operating"
+    },
+    "expected": {
+      "selected_model": "forte",
+      "candidate_count": 1,
+      "status": "ok"
+    }
+  },
+  {
+    "id": "mr-12",
+    "desc": "fronteira SLA exatamente 0.97 -> forte qualifica",
+    "routing": {
+      "min_quality": 0.97,
+      "ledger": "operating"
+    },
+    "expected": {
+      "selected_model": "forte",
+      "candidate_count": 1,
+      "status": "ok"
+    }
+  },
+  {
+    "id": "mr-13",
+    "desc": "primário caiu mas só 1 candidato (forte) -> sem fallback",
+    "routing": {
+      "min_quality": 0.95,
+      "primary_down": true,
+      "ledger": "operating"
+    },
+    "expected": {
+      "selected_model": "forte",
+      "fell_back": false,
+      "candidate_count": 1,
+      "status": "ok"
+    }
+  },
+  {
+    "id": "mr-14",
+    "desc": "primário caiu, 2 candidatos (medio/forte) -> fallback para forte",
+    "routing": {
+      "min_quality": 0.9,
+      "primary_down": true,
+      "ledger": "operating"
+    },
+    "expected": {
+      "selected_model": "forte",
+      "cost": 10.0,
+      "fell_back": true,
+      "candidate_count": 2,
+      "status": "fallback"
+    }
+  },
+  {
+    "id": "mr-15",
+    "desc": "billable cap 1 com barato custo 1 (não excede) -> ok",
+    "routing": {
+      "min_quality": 0.8,
+      "ledger": "billable",
+      "cost_cap": 1.0
+    },
+    "expected": {
+      "selected_model": "barato",
+      "cost": 1.0,
+      "blocked": false,
+      "status": "ok"
+    }
+  },
+  {
+    "id": "mr-16",
+    "desc": "billable cap 3 e medio custo 3 (não excede) -> ok",
+    "routing": {
+      "min_quality": 0.85,
+      "ledger": "billable",
+      "cost_cap": 3.0
+    },
+    "expected": {
+      "selected_model": "medio",
+      "cost": 3.0,
+      "blocked": false,
+      "status": "ok"
+    }
+  },
+  {
+    "id": "mr-17",
+    "desc": "billable SLA 0.85 cap 2.9: medio excede e barato não cumpre SLA -> bloqueia (seleção fica em medio)",
+    "routing": {
+      "min_quality": 0.85,
+      "ledger": "billable",
+      "cost_cap": 2.9
+    },
+    "expected": {
+      "selected_model": "medio",
+      "blocked": true,
+      "status": "blocked",
+      "candidate_count": 2
+    }
+  },
+  {
+    "id": "mr-18",
+    "desc": "operating ignora cost_cap (firewall só billable)",
+    "routing": {
+      "min_quality": 0.95,
+      "ledger": "operating",
+      "cost_cap": 1.0
+    },
+    "expected": {
+      "selected_model": "forte",
+      "cost": 10.0,
+      "blocked": false,
+      "status": "ok"
+    }
+  },
+  {
+    "id": "mr-19",
+    "desc": "defaults (operating, SLA 0.85) -> medio",
+    "routing": {},
+    "expected": {
+      "selected_model": "medio",
+      "cost": 3.0,
+      "candidate_count": 2,
+      "status": "ok"
+    }
+  },
+  {
+    "id": "mr-20",
+    "desc": "billable cap 100 generoso -> seleciona normal sem bloqueio",
+    "routing": {
+      "min_quality": 0.95,
+      "ledger": "billable",
+      "cost_cap": 100.0
+    },
+    "expected": {
+      "selected_model": "forte",
+      "cost": 10.0,
+      "blocked": false,
+      "status": "ok"
+    }
+  },
+  {
+    "id": "mr-21",
+    "desc": "qualidade reportada bate com o tier selecionado (medio=0.90)",
+    "routing": {
+      "min_quality": 0.85,
+      "ledger": "operating"
+    },
+    "expected": {
+      "selected_model": "medio",
+      "quality": 0.9,
+      "latency_ms": 700
+    }
+  },
+  {
+    "id": "mr-22",
+    "desc": "latência do barato é 400ms",
+    "routing": {
+      "min_quality": 0.75,
+      "ledger": "operating"
+    },
+    "expected": {
+      "selected_model": "barato",
+      "latency_ms": 400,
+      "quality": 0.8
+    }
+  },
+  {
+    "id": "mr-23",
+    "desc": "latência do forte é 1500ms",
+    "routing": {
+      "min_quality": 0.97,
+      "ledger": "operating"
+    },
+    "expected": {
+      "selected_model": "forte",
+      "latency_ms": 1500,
+      "quality": 0.97
+    }
+  },
+  {
+    "id": "mr-24",
+    "desc": "primário caiu billable cap 3: fallback p/ medio dentro do cap -> fallback",
+    "routing": {
+      "min_quality": 0.75,
+      "primary_down": true,
+      "ledger": "billable",
+      "cost_cap": 3.0
+    },
+    "expected": {
+      "selected_model": "medio",
+      "cost": 3.0,
+      "fell_back": true,
+      "blocked": false,
+      "status": "fallback"
+    }
+  },
+  {
+    "id": "mr-25",
+    "desc": "primário caiu billable cap 1: fallback p/ medio excede cap -> rebaixa p/ barato",
+    "routing": {
+      "min_quality": 0.75,
+      "primary_down": true,
+      "ledger": "billable",
+      "cost_cap": 1.0
+    },
+    "expected": {
+      "selected_model": "barato",
+      "cost": 1.0,
+      "blocked": false,
+      "fell_back": true,
+      "status": "fallback"
+    }
+  },
+  {
+    "id": "mr-26",
+    "desc": "SLA 1.0 impossível mesmo com primário caído -> sem candidato",
+    "routing": {
+      "min_quality": 1.0,
+      "primary_down": true,
+      "ledger": "operating"
+    },
+    "expected": {
+      "selected_model": null,
+      "candidate_count": 0,
+      "status": "ok"
+    }
+  },
+  {
+    "id": "mr-27",
+    "desc": "billable sem cost_cap -> sem firewall, seleção normal",
+    "routing": {
+      "min_quality": 0.95,
+      "ledger": "billable"
+    },
+    "expected": {
+      "selected_model": "forte",
+      "cost": 10.0,
+      "blocked": false,
+      "status": "ok"
+    }
+  },
+  {
+    "id": "mr-28",
+    "desc": "SLA baixíssimo 0.10 -> 3 candidatos, escolhe barato",
+    "routing": {
+      "min_quality": 0.1,
+      "ledger": "operating"
+    },
+    "expected": {
+      "candidate_count": 3,
+      "selected_model": "barato",
+      "status": "ok"
+    }
+  },
+  {
+    "id": "mr-29",
+    "desc": "billable SLA 0.95 cap 10 = custo forte (não excede) -> ok",
+    "routing": {
+      "min_quality": 0.95,
+      "ledger": "billable",
+      "cost_cap": 10.0
+    },
+    "expected": {
+      "selected_model": "forte",
+      "cost": 10.0,
+      "blocked": false,
+      "status": "ok"
+    }
+  },
+  {
+    "id": "mr-30",
+    "desc": "billable SLA 0.85 cap 1: sem opção elegível abaixo do cap -> bloqueia (seleção fica em medio)",
+    "routing": {
+      "min_quality": 0.85,
+      "ledger": "billable",
+      "cost_cap": 1.0
+    },
+    "expected": {
+      "selected_model": "medio",
+      "blocked": true,
+      "status": "blocked"
+    }
+  },
+  {
+    "id": "mr-31",
+    "desc": "billable SLA 0.80 cap 1: barato cumpre e cabe no cap -> ok",
+    "routing": {
+      "min_quality": 0.8,
+      "ledger": "billable",
+      "cost_cap": 1.0
+    },
+    "expected": {
+      "selected_model": "barato",
+      "cost": 1.0,
+      "blocked": false,
+      "status": "ok"
+    }
+  },
+  {
+    "id": "mr-32",
+    "desc": "caso saudável SLA 0.88 -> medio sem fallback nem bloqueio",
+    "routing": {
+      "min_quality": 0.88,
+      "ledger": "operating"
+    },
+    "expected": {
+      "selected_model": "medio",
+      "cost": 3.0,
+      "fell_back": false,
+      "blocked": false,
+      "status": "ok"
+    }
   }
 ]

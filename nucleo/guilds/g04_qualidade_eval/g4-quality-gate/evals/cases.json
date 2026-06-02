@@ -1,26 +1,640 @@
 [
-  {"id": "qg-01", "desc": "todos os criterios duros + lovability -> PASS",
-   "gate": {"pass_rate": 90, "coverage_pct": 85, "e2e_green": true,
-     "no_regression": true, "load_pass": true, "lovability_score": 8},
-   "expected": {"decision": "PASS", "valid": true, "failed_criteria": [],
-     "lovability": 8, "bypass_used": false}},
-
-  {"id": "qg-02", "desc": "tecnicamente verde mas nao-lovable -> FAIL por lovability",
-   "gate": {"pass_rate": 92, "coverage_pct": 88, "e2e_green": true,
-     "no_regression": true, "load_pass": true, "lovability_score": 5},
-   "expected": {"decision": "FAIL", "valid": false,
-     "failed_criteria": ["lovability"], "lovability": 5, "bypass_used": false}},
-
-  {"id": "qg-03", "desc": "E2E vermelho e cobertura baixa -> FAIL",
-   "gate": {"pass_rate": 86, "coverage_pct": 74, "e2e_green": false,
-     "no_regression": true, "load_pass": true, "lovability_score": 9},
-   "expected": {"decision": "FAIL", "valid": false,
-     "failed_criteria": ["coverage", "e2e"], "bypass_used": false}},
-
-  {"id": "qg-04", "desc": "cobertura 74% mas bypass de incidente auditado -> PASS_BYPASS",
-   "gate": {"pass_rate": 90, "coverage_pct": 74, "e2e_green": true,
-     "no_regression": true, "load_pass": true, "lovability_score": 8,
-     "incident_bypass": true},
-   "expected": {"decision": "PASS_BYPASS", "valid": true,
-     "failed_criteria": ["coverage"], "bypass_used": true}}
+  {
+    "id": "qg-01",
+    "desc": "todos os criterios duros + lovability -> PASS",
+    "gate": {
+      "pass_rate": 90,
+      "coverage_pct": 85,
+      "e2e_green": true,
+      "no_regression": true,
+      "load_pass": true,
+      "lovability_score": 8
+    },
+    "expected": {
+      "decision": "PASS",
+      "valid": true,
+      "failed_criteria": [],
+      "lovability": 8,
+      "bypass_used": false
+    }
+  },
+  {
+    "id": "qg-02",
+    "desc": "tecnicamente verde mas nao-lovable -> FAIL por lovability",
+    "gate": {
+      "pass_rate": 92,
+      "coverage_pct": 88,
+      "e2e_green": true,
+      "no_regression": true,
+      "load_pass": true,
+      "lovability_score": 5
+    },
+    "expected": {
+      "decision": "FAIL",
+      "valid": false,
+      "failed_criteria": [
+        "lovability"
+      ],
+      "lovability": 5,
+      "bypass_used": false
+    }
+  },
+  {
+    "id": "qg-03",
+    "desc": "E2E vermelho e cobertura baixa -> FAIL",
+    "gate": {
+      "pass_rate": 86,
+      "coverage_pct": 74,
+      "e2e_green": false,
+      "no_regression": true,
+      "load_pass": true,
+      "lovability_score": 9
+    },
+    "expected": {
+      "decision": "FAIL",
+      "valid": false,
+      "failed_criteria": [
+        "coverage",
+        "e2e"
+      ],
+      "bypass_used": false
+    }
+  },
+  {
+    "id": "qg-04",
+    "desc": "cobertura 74% mas bypass de incidente auditado -> PASS_BYPASS",
+    "gate": {
+      "pass_rate": 90,
+      "coverage_pct": 74,
+      "e2e_green": true,
+      "no_regression": true,
+      "load_pass": true,
+      "lovability_score": 8,
+      "incident_bypass": true
+    },
+    "expected": {
+      "decision": "PASS_BYPASS",
+      "valid": true,
+      "failed_criteria": [
+        "coverage"
+      ],
+      "bypass_used": true
+    }
+  },
+  {
+    "id": "qg-05",
+    "desc": "so pass_rate falha (84<85) -> FAIL",
+    "gate": {
+      "pass_rate": 84,
+      "coverage_pct": 85,
+      "e2e_green": true,
+      "no_regression": true,
+      "load_pass": true,
+      "lovability_score": 8
+    },
+    "expected": {
+      "decision": "FAIL",
+      "valid": false,
+      "failed_criteria": [
+        "pass_rate"
+      ],
+      "bypass_used": false
+    }
+  },
+  {
+    "id": "qg-06",
+    "desc": "pass_rate exatamente 85 (limiar) -> PASS",
+    "gate": {
+      "pass_rate": 85,
+      "coverage_pct": 85,
+      "e2e_green": true,
+      "no_regression": true,
+      "load_pass": true,
+      "lovability_score": 8
+    },
+    "expected": {
+      "decision": "PASS",
+      "valid": true,
+      "failed_criteria": []
+    }
+  },
+  {
+    "id": "qg-07",
+    "desc": "so coverage falha (79<80) -> FAIL",
+    "gate": {
+      "pass_rate": 90,
+      "coverage_pct": 79,
+      "e2e_green": true,
+      "no_regression": true,
+      "load_pass": true,
+      "lovability_score": 8
+    },
+    "expected": {
+      "decision": "FAIL",
+      "valid": false,
+      "failed_criteria": [
+        "coverage"
+      ]
+    }
+  },
+  {
+    "id": "qg-08",
+    "desc": "coverage exatamente 80 (limiar) -> PASS",
+    "gate": {
+      "pass_rate": 90,
+      "coverage_pct": 80,
+      "e2e_green": true,
+      "no_regression": true,
+      "load_pass": true,
+      "lovability_score": 8
+    },
+    "expected": {
+      "decision": "PASS",
+      "valid": true,
+      "failed_criteria": []
+    }
+  },
+  {
+    "id": "qg-09",
+    "desc": "so e2e falha -> FAIL",
+    "gate": {
+      "pass_rate": 90,
+      "coverage_pct": 85,
+      "e2e_green": false,
+      "no_regression": true,
+      "load_pass": true,
+      "lovability_score": 8
+    },
+    "expected": {
+      "decision": "FAIL",
+      "valid": false,
+      "failed_criteria": [
+        "e2e"
+      ]
+    }
+  },
+  {
+    "id": "qg-10",
+    "desc": "so no_regression falha -> FAIL",
+    "gate": {
+      "pass_rate": 90,
+      "coverage_pct": 85,
+      "e2e_green": true,
+      "no_regression": false,
+      "load_pass": true,
+      "lovability_score": 8
+    },
+    "expected": {
+      "decision": "FAIL",
+      "valid": false,
+      "failed_criteria": [
+        "no_regression"
+      ]
+    }
+  },
+  {
+    "id": "qg-11",
+    "desc": "so load_sla falha -> FAIL",
+    "gate": {
+      "pass_rate": 90,
+      "coverage_pct": 85,
+      "e2e_green": true,
+      "no_regression": true,
+      "load_pass": false,
+      "lovability_score": 8
+    },
+    "expected": {
+      "decision": "FAIL",
+      "valid": false,
+      "failed_criteria": [
+        "load_sla"
+      ]
+    }
+  },
+  {
+    "id": "qg-12",
+    "desc": "so lovability falha (6<7) -> FAIL",
+    "gate": {
+      "pass_rate": 90,
+      "coverage_pct": 85,
+      "e2e_green": true,
+      "no_regression": true,
+      "load_pass": true,
+      "lovability_score": 6
+    },
+    "expected": {
+      "decision": "FAIL",
+      "valid": false,
+      "failed_criteria": [
+        "lovability"
+      ],
+      "lovability": 6
+    }
+  },
+  {
+    "id": "qg-13",
+    "desc": "lovability exatamente 7 (limiar) -> PASS",
+    "gate": {
+      "pass_rate": 90,
+      "coverage_pct": 85,
+      "e2e_green": true,
+      "no_regression": true,
+      "load_pass": true,
+      "lovability_score": 7
+    },
+    "expected": {
+      "decision": "PASS",
+      "valid": true,
+      "failed_criteria": [],
+      "lovability": 7
+    }
+  },
+  {
+    "id": "qg-14",
+    "desc": "multiplos falhos: ordem pass_rate,coverage,e2e",
+    "gate": {
+      "pass_rate": 80,
+      "coverage_pct": 70,
+      "e2e_green": false,
+      "no_regression": true,
+      "load_pass": true,
+      "lovability_score": 8
+    },
+    "expected": {
+      "decision": "FAIL",
+      "valid": false,
+      "failed_criteria": [
+        "pass_rate",
+        "coverage",
+        "e2e"
+      ]
+    }
+  },
+  {
+    "id": "qg-15",
+    "desc": "todos os 6 criterios falham -> FAIL com lista completa",
+    "gate": {
+      "pass_rate": 50,
+      "coverage_pct": 40,
+      "e2e_green": false,
+      "no_regression": false,
+      "load_pass": false,
+      "lovability_score": 2
+    },
+    "expected": {
+      "decision": "FAIL",
+      "valid": false,
+      "failed_criteria": [
+        "pass_rate",
+        "coverage",
+        "e2e",
+        "no_regression",
+        "load_sla",
+        "lovability"
+      ],
+      "bypass_used": false
+    }
+  },
+  {
+    "id": "qg-16",
+    "desc": "tecnicamente verde COM bypass flag -> PASS normal (bypass nao usado)",
+    "gate": {
+      "pass_rate": 90,
+      "coverage_pct": 85,
+      "e2e_green": true,
+      "no_regression": true,
+      "load_pass": true,
+      "lovability_score": 8,
+      "incident_bypass": true
+    },
+    "expected": {
+      "decision": "PASS",
+      "valid": true,
+      "failed_criteria": [],
+      "bypass_used": false
+    }
+  },
+  {
+    "id": "qg-17",
+    "desc": "E2E vermelho mas bypass auditado -> PASS_BYPASS",
+    "gate": {
+      "pass_rate": 90,
+      "coverage_pct": 85,
+      "e2e_green": false,
+      "no_regression": true,
+      "load_pass": true,
+      "lovability_score": 8,
+      "incident_bypass": true
+    },
+    "expected": {
+      "decision": "PASS_BYPASS",
+      "valid": true,
+      "failed_criteria": [
+        "e2e"
+      ],
+      "bypass_used": true
+    }
+  },
+  {
+    "id": "qg-18",
+    "desc": "E2E vermelho SEM bypass -> FAIL invalido",
+    "gate": {
+      "pass_rate": 90,
+      "coverage_pct": 85,
+      "e2e_green": false,
+      "no_regression": true,
+      "load_pass": true,
+      "lovability_score": 8
+    },
+    "expected": {
+      "decision": "FAIL",
+      "valid": false,
+      "failed_criteria": [
+        "e2e"
+      ],
+      "bypass_used": false
+    }
+  },
+  {
+    "id": "qg-19",
+    "desc": "cobertura+lovability falham mas bypass -> PASS_BYPASS",
+    "gate": {
+      "pass_rate": 90,
+      "coverage_pct": 70,
+      "e2e_green": true,
+      "no_regression": true,
+      "load_pass": true,
+      "lovability_score": 4,
+      "incident_bypass": true
+    },
+    "expected": {
+      "decision": "PASS_BYPASS",
+      "valid": true,
+      "failed_criteria": [
+        "coverage",
+        "lovability"
+      ],
+      "bypass_used": true
+    }
+  },
+  {
+    "id": "qg-20",
+    "desc": "load falha bypass=false explicito -> FAIL",
+    "gate": {
+      "pass_rate": 90,
+      "coverage_pct": 85,
+      "e2e_green": true,
+      "no_regression": true,
+      "load_pass": false,
+      "lovability_score": 8,
+      "incident_bypass": false
+    },
+    "expected": {
+      "decision": "FAIL",
+      "valid": false,
+      "failed_criteria": [
+        "load_sla"
+      ],
+      "bypass_used": false
+    }
+  },
+  {
+    "id": "qg-21",
+    "desc": "testes verdes lovability 5 -> FAIL (3 pontos de taste faltando)",
+    "gate": {
+      "pass_rate": 90,
+      "coverage_pct": 85,
+      "e2e_green": true,
+      "no_regression": true,
+      "load_pass": true,
+      "lovability_score": 5
+    },
+    "expected": {
+      "decision": "FAIL",
+      "valid": false,
+      "failed_criteria": [
+        "lovability"
+      ],
+      "lovability": 5
+    }
+  },
+  {
+    "id": "qg-22",
+    "desc": "pass_rate 84.9 logo abaixo -> FAIL",
+    "gate": {
+      "pass_rate": 84.9,
+      "coverage_pct": 85,
+      "e2e_green": true,
+      "no_regression": true,
+      "load_pass": true,
+      "lovability_score": 8
+    },
+    "expected": {
+      "decision": "FAIL",
+      "valid": false,
+      "failed_criteria": [
+        "pass_rate"
+      ]
+    }
+  },
+  {
+    "id": "qg-23",
+    "desc": "coverage 79.9 logo abaixo -> FAIL",
+    "gate": {
+      "pass_rate": 90,
+      "coverage_pct": 79.9,
+      "e2e_green": true,
+      "no_regression": true,
+      "load_pass": true,
+      "lovability_score": 8
+    },
+    "expected": {
+      "decision": "FAIL",
+      "valid": false,
+      "failed_criteria": [
+        "coverage"
+      ]
+    }
+  },
+  {
+    "id": "qg-24",
+    "desc": "todos altissimos -> PASS",
+    "gate": {
+      "pass_rate": 100,
+      "coverage_pct": 100,
+      "e2e_green": true,
+      "no_regression": true,
+      "load_pass": true,
+      "lovability_score": 10
+    },
+    "expected": {
+      "decision": "PASS",
+      "valid": true,
+      "failed_criteria": [],
+      "lovability": 10
+    }
+  },
+  {
+    "id": "qg-25",
+    "desc": "lovability 6.9 -> FAIL",
+    "gate": {
+      "pass_rate": 90,
+      "coverage_pct": 85,
+      "e2e_green": true,
+      "no_regression": true,
+      "load_pass": true,
+      "lovability_score": 6.9
+    },
+    "expected": {
+      "decision": "FAIL",
+      "valid": false,
+      "failed_criteria": [
+        "lovability"
+      ]
+    }
+  },
+  {
+    "id": "qg-26",
+    "desc": "regressao detectada -> FAIL no_regression",
+    "gate": {
+      "pass_rate": 90,
+      "coverage_pct": 85,
+      "e2e_green": true,
+      "no_regression": false,
+      "load_pass": true,
+      "lovability_score": 8
+    },
+    "expected": {
+      "decision": "FAIL",
+      "valid": false,
+      "failed_criteria": [
+        "no_regression"
+      ]
+    }
+  },
+  {
+    "id": "qg-27",
+    "desc": "todos falham mas bypass de incidente -> PASS_BYPASS",
+    "gate": {
+      "pass_rate": 50,
+      "coverage_pct": 40,
+      "e2e_green": false,
+      "no_regression": false,
+      "load_pass": false,
+      "lovability_score": 1,
+      "incident_bypass": true
+    },
+    "expected": {
+      "decision": "PASS_BYPASS",
+      "valid": true,
+      "bypass_used": true,
+      "failed_criteria": [
+        "pass_rate",
+        "coverage",
+        "e2e",
+        "no_regression",
+        "load_sla",
+        "lovability"
+      ]
+    }
+  },
+  {
+    "id": "qg-28",
+    "desc": "tudo tecnico verde, lovability 3 sem bypass -> FAIL",
+    "gate": {
+      "pass_rate": 90,
+      "coverage_pct": 85,
+      "e2e_green": true,
+      "no_regression": true,
+      "load_pass": true,
+      "lovability_score": 3
+    },
+    "expected": {
+      "decision": "FAIL",
+      "valid": false,
+      "failed_criteria": [
+        "lovability"
+      ],
+      "lovability": 3,
+      "bypass_used": false
+    }
+  },
+  {
+    "id": "qg-29",
+    "desc": "coverage e lovability falham -> ordem na lista",
+    "gate": {
+      "pass_rate": 90,
+      "coverage_pct": 75,
+      "e2e_green": true,
+      "no_regression": true,
+      "load_pass": true,
+      "lovability_score": 5
+    },
+    "expected": {
+      "decision": "FAIL",
+      "valid": false,
+      "failed_criteria": [
+        "coverage",
+        "lovability"
+      ]
+    }
+  },
+  {
+    "id": "qg-30",
+    "desc": "pass_rate e load falham -> FAIL",
+    "gate": {
+      "pass_rate": 80,
+      "coverage_pct": 85,
+      "e2e_green": true,
+      "no_regression": true,
+      "load_pass": false,
+      "lovability_score": 8
+    },
+    "expected": {
+      "decision": "FAIL",
+      "valid": false,
+      "failed_criteria": [
+        "pass_rate",
+        "load_sla"
+      ]
+    }
+  },
+  {
+    "id": "qg-31",
+    "desc": "todos exatamente no limiar -> PASS",
+    "gate": {
+      "pass_rate": 85,
+      "coverage_pct": 80,
+      "e2e_green": true,
+      "no_regression": true,
+      "load_pass": true,
+      "lovability_score": 7
+    },
+    "expected": {
+      "decision": "PASS",
+      "valid": true,
+      "failed_criteria": [],
+      "lovability": 7,
+      "bypass_used": false
+    }
+  },
+  {
+    "id": "qg-32",
+    "desc": "limiar exato + bypass flag presente -> PASS sem usar bypass",
+    "gate": {
+      "pass_rate": 85,
+      "coverage_pct": 80,
+      "e2e_green": true,
+      "no_regression": true,
+      "load_pass": true,
+      "lovability_score": 7,
+      "incident_bypass": true
+    },
+    "expected": {
+      "decision": "PASS",
+      "valid": true,
+      "bypass_used": false,
+      "failed_criteria": []
+    }
+  }
 ]

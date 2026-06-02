@@ -1,30 +1,992 @@
 [
-  {"id": "ok-01", "desc": "dominio: north-star do dia e scorecard com 1 KR em risco",
-   "tenant_id": "t-eval-g01", "statement": "Calcule e publique a north-star de hoje",
-   "northstar": {"outcomes_delivered": 100, "referral_propensity_score": 80},
-   "okr": {"krs": [
-     {"name": "ativacao", "target": 100, "actual": 90},
-     {"name": "retencao", "target": 50, "actual": 20}
-   ]},
-   "expected": {"by": "g1-okr-steward", "daily_value": 80.0, "quality_factor": 0.8,
-     "kr_count": 2, "attainment": 0.65, "at_risk_count": 1, "health": "amarelo"}},
-
-  {"id": "ok-02", "desc": "dominio: todos os KRs on_track -> saude verde",
-   "tenant_id": "t-eval-g01", "statement": "Algum KR em risco neste ciclo?",
-   "northstar": {"outcomes_delivered": 200, "referral_propensity_score": 50},
-   "okr": {"krs": [
-     {"name": "kr1", "target": 10, "actual": 10},
-     {"name": "kr2", "target": 10, "actual": 9}
-   ]},
-   "expected": {"by": "g1-okr-steward", "daily_value": 100.0, "quality_factor": 0.5,
-     "kr_count": 2, "attainment": 0.95, "at_risk_count": 0, "health": "verde"}},
-
-  {"id": "ok-03", "desc": "dominio: KR off_track + RPS saturado -> saude vermelho",
-   "tenant_id": "t-eval-g01", "statement": "Atualize o scorecard de OKRs",
-   "northstar": {"outcomes_delivered": 0, "referral_propensity_score": 120},
-   "okr": {"krs": [
-     {"name": "north_star_growth", "target": 100, "actual": 30}
-   ]},
-   "expected": {"by": "g1-okr-steward", "daily_value": 0.0, "quality_factor": 1.0,
-     "kr_count": 1, "attainment": 0.3, "at_risk_count": 1, "health": "vermelho"}}
+  {
+    "id": "ok-01",
+    "desc": "dominio: north-star do dia e scorecard com 1 KR em risco",
+    "tenant_id": "t-eval-g01",
+    "statement": "Calcule e publique a north-star de hoje",
+    "northstar": {
+      "outcomes_delivered": 100,
+      "referral_propensity_score": 80
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "ativacao",
+          "target": 100,
+          "actual": 90
+        },
+        {
+          "name": "retencao",
+          "target": 50,
+          "actual": 20
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 80.0,
+      "quality_factor": 0.8,
+      "kr_count": 2,
+      "attainment": 0.65,
+      "at_risk_count": 1,
+      "health": "amarelo"
+    }
+  },
+  {
+    "id": "ok-02",
+    "desc": "dominio: todos os KRs on_track -> saude verde",
+    "tenant_id": "t-eval-g01",
+    "statement": "Algum KR em risco neste ciclo?",
+    "northstar": {
+      "outcomes_delivered": 200,
+      "referral_propensity_score": 50
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "kr1",
+          "target": 10,
+          "actual": 10
+        },
+        {
+          "name": "kr2",
+          "target": 10,
+          "actual": 9
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 100.0,
+      "quality_factor": 0.5,
+      "kr_count": 2,
+      "attainment": 0.95,
+      "at_risk_count": 0,
+      "health": "verde"
+    }
+  },
+  {
+    "id": "ok-03",
+    "desc": "dominio: KR off_track + RPS saturado -> saude vermelho",
+    "tenant_id": "t-eval-g01",
+    "statement": "Atualize o scorecard de OKRs",
+    "northstar": {
+      "outcomes_delivered": 0,
+      "referral_propensity_score": 120
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "north_star_growth",
+          "target": 100,
+          "actual": 30
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 0.0,
+      "quality_factor": 1.0,
+      "kr_count": 1,
+      "attainment": 0.3,
+      "at_risk_count": 1,
+      "health": "vermelho"
+    }
+  },
+  {
+    "id": "ok-04",
+    "desc": "north-star alta: RPS instrumentado como KR de growth (positivo)",
+    "tenant_id": "t-eval-g01",
+    "statement": "north-star alta: RPS instrumentado como KR de growth (positivo)",
+    "northstar": {
+      "outcomes_delivered": 500,
+      "referral_propensity_score": 90
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "referral_propensity",
+          "target": 100,
+          "actual": 90
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 450.0,
+      "quality_factor": 0.9,
+      "kr_count": 1,
+      "attainment": 0.9,
+      "at_risk_count": 0,
+      "health": "verde"
+    }
+  },
+  {
+    "id": "ok-05",
+    "desc": "fronteira on_track exata: score=0.7 conta como on_track",
+    "tenant_id": "t-eval-g01",
+    "statement": "fronteira on_track exata: score=0.7 conta como on_track",
+    "northstar": {
+      "outcomes_delivered": 300,
+      "referral_propensity_score": 70
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "kr",
+          "target": 100,
+          "actual": 70
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 210.0,
+      "quality_factor": 0.7,
+      "kr_count": 1,
+      "attainment": 0.7,
+      "at_risk_count": 0,
+      "health": "verde"
+    }
+  },
+  {
+    "id": "ok-06",
+    "desc": "fronteira logo abaixo de on_track: 0.69 vira at_risk",
+    "tenant_id": "t-eval-g01",
+    "statement": "fronteira logo abaixo de on_track: 0.69 vira at_risk",
+    "northstar": {
+      "outcomes_delivered": 300,
+      "referral_propensity_score": 70
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "kr",
+          "target": 100,
+          "actual": 69
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 210.0,
+      "quality_factor": 0.7,
+      "kr_count": 1,
+      "attainment": 0.69,
+      "at_risk_count": 1,
+      "health": "amarelo"
+    }
+  },
+  {
+    "id": "ok-07",
+    "desc": "fronteira at_risk exata: score=0.4",
+    "tenant_id": "t-eval-g01",
+    "statement": "fronteira at_risk exata: score=0.4",
+    "northstar": {
+      "outcomes_delivered": 100,
+      "referral_propensity_score": 40
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "kr",
+          "target": 100,
+          "actual": 40
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 40.0,
+      "quality_factor": 0.4,
+      "kr_count": 1,
+      "attainment": 0.4,
+      "at_risk_count": 1,
+      "health": "amarelo"
+    }
+  },
+  {
+    "id": "ok-08",
+    "desc": "fronteira logo abaixo de at_risk: 0.39 vira off_track",
+    "tenant_id": "t-eval-g01",
+    "statement": "fronteira logo abaixo de at_risk: 0.39 vira off_track",
+    "northstar": {
+      "outcomes_delivered": 100,
+      "referral_propensity_score": 40
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "kr",
+          "target": 100,
+          "actual": 39
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 40.0,
+      "quality_factor": 0.4,
+      "kr_count": 1,
+      "attainment": 0.39,
+      "at_risk_count": 1,
+      "health": "vermelho"
+    }
+  },
+  {
+    "id": "ok-09",
+    "desc": "KR superou a meta: score satura em 1.0",
+    "tenant_id": "t-eval-g01",
+    "statement": "KR superou a meta: score satura em 1.0",
+    "northstar": {
+      "outcomes_delivered": 250,
+      "referral_propensity_score": 80
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "kr",
+          "target": 50,
+          "actual": 75
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 200.0,
+      "quality_factor": 0.8,
+      "kr_count": 1,
+      "attainment": 1.0,
+      "at_risk_count": 0,
+      "health": "verde"
+    }
+  },
+  {
+    "id": "ok-10",
+    "desc": "RPS zero: quality_factor 0 -> north-star colapsa a 0",
+    "tenant_id": "t-eval-g01",
+    "statement": "RPS zero: quality_factor 0 -> north-star colapsa a 0",
+    "northstar": {
+      "outcomes_delivered": 400,
+      "referral_propensity_score": 0
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "kr",
+          "target": 10,
+          "actual": 10
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 0.0,
+      "quality_factor": 0.0,
+      "kr_count": 1,
+      "attainment": 1.0,
+      "at_risk_count": 0,
+      "health": "verde"
+    }
+  },
+  {
+    "id": "ok-11",
+    "desc": "precedencia: 1 on_track + 1 off_track, media puxa amarelo mas at_risk impede verde",
+    "tenant_id": "t-eval-g01",
+    "statement": "precedencia: 1 on_track + 1 off_track, media puxa amarelo mas at_risk impede verde",
+    "northstar": {
+      "outcomes_delivered": 200,
+      "referral_propensity_score": 60
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "a",
+          "target": 100,
+          "actual": 100
+        },
+        {
+          "name": "b",
+          "target": 100,
+          "actual": 30
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 120.0,
+      "quality_factor": 0.6,
+      "kr_count": 2,
+      "attainment": 0.65,
+      "at_risk_count": 1,
+      "health": "amarelo"
+    }
+  },
+  {
+    "id": "ok-12",
+    "desc": "precedencia: att>=0.7 mas existe at_risk -> nao pode ser verde (amarelo)",
+    "tenant_id": "t-eval-g01",
+    "statement": "precedencia: att>=0.7 mas existe at_risk -> nao pode ser verde (amarelo)",
+    "northstar": {
+      "outcomes_delivered": 200,
+      "referral_propensity_score": 60
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "a",
+          "target": 100,
+          "actual": 100
+        },
+        {
+          "name": "b",
+          "target": 100,
+          "actual": 100
+        },
+        {
+          "name": "c",
+          "target": 100,
+          "actual": 50
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 120.0,
+      "quality_factor": 0.6,
+      "kr_count": 3,
+      "attainment": 0.833,
+      "at_risk_count": 1,
+      "health": "amarelo"
+    }
+  },
+  {
+    "id": "ok-13",
+    "desc": "todos off_track -> vermelho",
+    "tenant_id": "t-eval-g01",
+    "statement": "todos off_track -> vermelho",
+    "northstar": {
+      "outcomes_delivered": 100,
+      "referral_propensity_score": 50
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "a",
+          "target": 100,
+          "actual": 10
+        },
+        {
+          "name": "b",
+          "target": 100,
+          "actual": 20
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 50.0,
+      "quality_factor": 0.5,
+      "kr_count": 2,
+      "attainment": 0.15,
+      "at_risk_count": 2,
+      "health": "vermelho"
+    }
+  },
+  {
+    "id": "ok-14",
+    "desc": "todos at_risk (nenhum off) -> att~0.5 amarelo",
+    "tenant_id": "t-eval-g01",
+    "statement": "todos at_risk (nenhum off) -> att~0.5 amarelo",
+    "northstar": {
+      "outcomes_delivered": 100,
+      "referral_propensity_score": 50
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "a",
+          "target": 100,
+          "actual": 50
+        },
+        {
+          "name": "b",
+          "target": 100,
+          "actual": 60
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 50.0,
+      "quality_factor": 0.5,
+      "kr_count": 2,
+      "attainment": 0.55,
+      "at_risk_count": 2,
+      "health": "amarelo"
+    }
+  },
+  {
+    "id": "ok-15",
+    "desc": "muitos KRs, mix, 2 em risco",
+    "tenant_id": "t-eval-g01",
+    "statement": "muitos KRs, mix, 2 em risco",
+    "northstar": {
+      "outcomes_delivered": 1000,
+      "referral_propensity_score": 75
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "a",
+          "target": 100,
+          "actual": 90
+        },
+        {
+          "name": "b",
+          "target": 100,
+          "actual": 80
+        },
+        {
+          "name": "c",
+          "target": 100,
+          "actual": 50
+        },
+        {
+          "name": "d",
+          "target": 100,
+          "actual": 30
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 750.0,
+      "quality_factor": 0.75,
+      "kr_count": 4,
+      "attainment": 0.625,
+      "at_risk_count": 2,
+      "health": "amarelo"
+    }
+  },
+  {
+    "id": "ok-16",
+    "desc": "target zero: divisao protegida score 0 -> off_track",
+    "tenant_id": "t-eval-g01",
+    "statement": "target zero: divisao protegida score 0 -> off_track",
+    "northstar": {
+      "outcomes_delivered": 100,
+      "referral_propensity_score": 50
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "kr",
+          "target": 0,
+          "actual": 10
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 50.0,
+      "quality_factor": 0.5,
+      "kr_count": 1,
+      "attainment": 0.0,
+      "at_risk_count": 1,
+      "health": "vermelho"
+    }
+  },
+  {
+    "id": "ok-17",
+    "desc": "actual zero: score 0 off_track",
+    "tenant_id": "t-eval-g01",
+    "statement": "actual zero: score 0 off_track",
+    "northstar": {
+      "outcomes_delivered": 100,
+      "referral_propensity_score": 50
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "kr",
+          "target": 100,
+          "actual": 0
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 50.0,
+      "quality_factor": 0.5,
+      "kr_count": 1,
+      "attainment": 0.0,
+      "at_risk_count": 1,
+      "health": "vermelho"
+    }
+  },
+  {
+    "id": "ok-18",
+    "desc": "scorecard sem KRs: attainment 0, sem at_risk, vermelho",
+    "tenant_id": "t-eval-g01",
+    "statement": "scorecard sem KRs: attainment 0, sem at_risk, vermelho",
+    "northstar": {
+      "outcomes_delivered": 300,
+      "referral_propensity_score": 80
+    },
+    "okr": {
+      "krs": []
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 240.0,
+      "quality_factor": 0.8,
+      "kr_count": 0,
+      "attainment": 0.0,
+      "at_risk_count": 0,
+      "health": "vermelho"
+    }
+  },
+  {
+    "id": "ok-19",
+    "desc": "north-star fracionaria arredondada a 2 casas",
+    "tenant_id": "t-eval-g01",
+    "statement": "north-star fracionaria arredondada a 2 casas",
+    "northstar": {
+      "outcomes_delivered": 333,
+      "referral_propensity_score": 33
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "kr",
+          "target": 100,
+          "actual": 80
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 109.89,
+      "quality_factor": 0.33,
+      "kr_count": 1,
+      "attainment": 0.8,
+      "at_risk_count": 0,
+      "health": "verde"
+    }
+  },
+  {
+    "id": "ok-20",
+    "desc": "RPS 100 exato -> quality 1.0",
+    "tenant_id": "t-eval-g01",
+    "statement": "RPS 100 exato -> quality 1.0",
+    "northstar": {
+      "outcomes_delivered": 120,
+      "referral_propensity_score": 100
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "kr",
+          "target": 100,
+          "actual": 75
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 120.0,
+      "quality_factor": 1.0,
+      "kr_count": 1,
+      "attainment": 0.75,
+      "at_risk_count": 0,
+      "health": "verde"
+    }
+  },
+  {
+    "id": "ok-21",
+    "desc": "RPS 35 -> quality 0.35",
+    "tenant_id": "t-eval-g01",
+    "statement": "RPS 35 -> quality 0.35",
+    "northstar": {
+      "outcomes_delivered": 200,
+      "referral_propensity_score": 35
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "kr",
+          "target": 100,
+          "actual": 85
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 70.0,
+      "quality_factor": 0.35,
+      "kr_count": 1,
+      "attainment": 0.85,
+      "at_risk_count": 0,
+      "health": "verde"
+    }
+  },
+  {
+    "id": "ok-22",
+    "desc": "KR exatamente na meta -> on_track verde",
+    "tenant_id": "t-eval-g01",
+    "statement": "KR exatamente na meta -> on_track verde",
+    "northstar": {
+      "outcomes_delivered": 150,
+      "referral_propensity_score": 90
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "kr",
+          "target": 80,
+          "actual": 80
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 135.0,
+      "quality_factor": 0.9,
+      "kr_count": 1,
+      "attainment": 1.0,
+      "at_risk_count": 0,
+      "health": "verde"
+    }
+  },
+  {
+    "id": "ok-23",
+    "desc": "3 KRs todos on_track alto -> verde",
+    "tenant_id": "t-eval-g01",
+    "statement": "3 KRs todos on_track alto -> verde",
+    "northstar": {
+      "outcomes_delivered": 600,
+      "referral_propensity_score": 95
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "a",
+          "target": 100,
+          "actual": 95
+        },
+        {
+          "name": "b",
+          "target": 100,
+          "actual": 98
+        },
+        {
+          "name": "c",
+          "target": 100,
+          "actual": 100
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 570.0,
+      "quality_factor": 0.95,
+      "kr_count": 3,
+      "attainment": 0.977,
+      "at_risk_count": 0,
+      "health": "verde"
+    }
+  },
+  {
+    "id": "ok-24",
+    "desc": "2 off + 1 on, att baixo -> vermelho",
+    "tenant_id": "t-eval-g01",
+    "statement": "2 off + 1 on, att baixo -> vermelho",
+    "northstar": {
+      "outcomes_delivered": 100,
+      "referral_propensity_score": 50
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "a",
+          "target": 100,
+          "actual": 100
+        },
+        {
+          "name": "b",
+          "target": 100,
+          "actual": 10
+        },
+        {
+          "name": "c",
+          "target": 100,
+          "actual": 5
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 50.0,
+      "quality_factor": 0.5,
+      "kr_count": 3,
+      "attainment": 0.383,
+      "at_risk_count": 2,
+      "health": "vermelho"
+    }
+  },
+  {
+    "id": "ok-25",
+    "desc": "att fronteira 0.4 exata com at_risk -> amarelo",
+    "tenant_id": "t-eval-g01",
+    "statement": "att fronteira 0.4 exata com at_risk -> amarelo",
+    "northstar": {
+      "outcomes_delivered": 100,
+      "referral_propensity_score": 50
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "a",
+          "target": 100,
+          "actual": 40
+        },
+        {
+          "name": "b",
+          "target": 100,
+          "actual": 40
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 50.0,
+      "quality_factor": 0.5,
+      "kr_count": 2,
+      "attainment": 0.4,
+      "at_risk_count": 2,
+      "health": "amarelo"
+    }
+  },
+  {
+    "id": "ok-26",
+    "desc": "att logo abaixo 0.4 -> vermelho",
+    "tenant_id": "t-eval-g01",
+    "statement": "att logo abaixo 0.4 -> vermelho",
+    "northstar": {
+      "outcomes_delivered": 100,
+      "referral_propensity_score": 50
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "a",
+          "target": 100,
+          "actual": 39
+        },
+        {
+          "name": "b",
+          "target": 100,
+          "actual": 39
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 50.0,
+      "quality_factor": 0.5,
+      "kr_count": 2,
+      "attainment": 0.39,
+      "at_risk_count": 2,
+      "health": "vermelho"
+    }
+  },
+  {
+    "id": "ok-27",
+    "desc": "RPS negativo (coleta quebrada) clamp a 0",
+    "tenant_id": "t-eval-g01",
+    "statement": "RPS negativo (coleta quebrada) clamp a 0",
+    "northstar": {
+      "outcomes_delivered": 500,
+      "referral_propensity_score": -20
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "kr",
+          "target": 100,
+          "actual": 90
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 0.0,
+      "quality_factor": 0.0,
+      "kr_count": 1,
+      "attainment": 0.9,
+      "at_risk_count": 0,
+      "health": "verde"
+    }
+  },
+  {
+    "id": "ok-28",
+    "desc": "RPS >100 satura em 1.0, north-star = outcomes",
+    "tenant_id": "t-eval-g01",
+    "statement": "RPS >100 satura em 1.0, north-star = outcomes",
+    "northstar": {
+      "outcomes_delivered": 80,
+      "referral_propensity_score": 150
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "kr",
+          "target": 100,
+          "actual": 90
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 80.0,
+      "quality_factor": 1.0,
+      "kr_count": 1,
+      "attainment": 0.9,
+      "at_risk_count": 0,
+      "health": "verde"
+    }
+  },
+  {
+    "id": "ok-29",
+    "desc": "KR unico on_track perfeito -> verde",
+    "tenant_id": "t-eval-g01",
+    "statement": "KR unico on_track perfeito -> verde",
+    "northstar": {
+      "outcomes_delivered": 100,
+      "referral_propensity_score": 70
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "kr",
+          "target": 100,
+          "actual": 100
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 70.0,
+      "quality_factor": 0.7,
+      "kr_count": 1,
+      "attainment": 1.0,
+      "at_risk_count": 0,
+      "health": "verde"
+    }
+  },
+  {
+    "id": "ok-30",
+    "desc": "mix 4 KRs: 3 on 1 off -> amarelo (at_risk presente, att alto)",
+    "tenant_id": "t-eval-g01",
+    "statement": "mix 4 KRs: 3 on 1 off -> amarelo (at_risk presente, att alto)",
+    "northstar": {
+      "outcomes_delivered": 100,
+      "referral_propensity_score": 50
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "a",
+          "target": 100,
+          "actual": 100
+        },
+        {
+          "name": "b",
+          "target": 100,
+          "actual": 100
+        },
+        {
+          "name": "c",
+          "target": 100,
+          "actual": 100
+        },
+        {
+          "name": "d",
+          "target": 100,
+          "actual": 30
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 50.0,
+      "quality_factor": 0.5,
+      "kr_count": 4,
+      "attainment": 0.825,
+      "at_risk_count": 1,
+      "health": "amarelo"
+    }
+  },
+  {
+    "id": "ok-31",
+    "desc": "north-star tipica build-in-public: 1000 outcomes RPS 65",
+    "tenant_id": "t-eval-g01",
+    "statement": "north-star tipica build-in-public: 1000 outcomes RPS 65",
+    "northstar": {
+      "outcomes_delivered": 1000,
+      "referral_propensity_score": 65
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "ativacao",
+          "target": 100,
+          "actual": 72
+        },
+        {
+          "name": "retencao",
+          "target": 100,
+          "actual": 55
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 650.0,
+      "quality_factor": 0.65,
+      "kr_count": 2,
+      "attainment": 0.635,
+      "at_risk_count": 1,
+      "health": "amarelo"
+    }
+  },
+  {
+    "id": "ok-32",
+    "desc": "KR levemente acima da meta + RPS medio",
+    "tenant_id": "t-eval-g01",
+    "statement": "KR levemente acima da meta + RPS medio",
+    "northstar": {
+      "outcomes_delivered": 420,
+      "referral_propensity_score": 45
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "kr",
+          "target": 200,
+          "actual": 210
+        }
+      ]
+    },
+    "expected": {
+      "by": "g1-okr-steward",
+      "daily_value": 189.0,
+      "quality_factor": 0.45,
+      "kr_count": 1,
+      "attainment": 1.0,
+      "at_risk_count": 0,
+      "health": "verde"
+    }
+  }
 ]

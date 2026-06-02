@@ -10,12 +10,17 @@
     },
     "expected": {
       "projected_revenue": 133100.0,
-      "months": 3
+      "months": 3,
+      "scenarios": {
+        "base": 133100.0,
+        "otimista": 152087.5,
+        "conservador": 115762.5
+      }
     }
   },
   {
     "id": "fp-02",
-    "desc": "sem crescimento",
+    "desc": "sem crescimento: cenarios todos iguais a base",
     "tenant_id": "t-eval-g10",
     "forecast": {
       "base_revenue": 50000,
@@ -23,7 +28,12 @@
       "months": 6
     },
     "expected": {
-      "projected_revenue": 50000.0
+      "projected_revenue": 50000.0,
+      "scenarios": {
+        "base": 50000.0,
+        "otimista": 50000.0,
+        "conservador": 50000.0
+      }
     }
   },
   {
@@ -37,6 +47,557 @@
     },
     "expected": {
       "projected_revenue": 243101.25
+    }
+  },
+  {
+    "id": "fp-04",
+    "desc": "1 mes 20%",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 100000,
+      "growth_rate": 0.2,
+      "months": 1
+    },
+    "expected": {
+      "projected_revenue": 120000.0,
+      "months": 1,
+      "scenarios": {
+        "base": 120000.0,
+        "otimista": 130000.0,
+        "conservador": 110000.0
+      }
+    }
+  },
+  {
+    "id": "fp-05",
+    "desc": "12 meses 3%",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 80000,
+      "growth_rate": 0.03,
+      "months": 12
+    },
+    "expected": {
+      "projected_revenue": 114060.87,
+      "months": 12,
+      "scenarios": {
+        "base": 114060.87,
+        "otimista": 135670.51,
+        "conservador": 95649.45
+      }
+    }
+  },
+  {
+    "id": "fp-06",
+    "desc": "crescimento negativo (declinio) 1 mes",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 100000,
+      "growth_rate": -0.1,
+      "months": 1
+    },
+    "expected": {
+      "projected_revenue": 90000.0,
+      "months": 1,
+      "scenarios": {
+        "base": 90000.0,
+        "otimista": 85000.0,
+        "conservador": 95000.0
+      }
+    }
+  },
+  {
+    "id": "fp-07",
+    "desc": "declinio composto 6 meses",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 120000,
+      "growth_rate": -0.05,
+      "months": 6
+    },
+    "expected": {
+      "projected_revenue": 88211.03,
+      "months": 6,
+      "scenarios": {
+        "base": 88211.03,
+        "otimista": 75167.77,
+        "conservador": 103088.2
+      }
+    }
+  },
+  {
+    "id": "fp-08",
+    "desc": "base pequena alto crescimento",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 1000,
+      "growth_rate": 0.5,
+      "months": 3
+    },
+    "expected": {
+      "projected_revenue": 3375.0,
+      "months": 3,
+      "scenarios": {
+        "base": 3375.0,
+        "otimista": 5359.38,
+        "conservador": 1953.12
+      }
+    }
+  },
+  {
+    "id": "fp-09",
+    "desc": "horizonte longo 18 meses banda",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 60000,
+      "growth_rate": 0.02,
+      "months": 18
+    },
+    "expected": {
+      "projected_revenue": 85694.77,
+      "months": 18,
+      "scenarios": {
+        "base": 85694.77,
+        "otimista": 102145.98,
+        "conservador": 71768.85
+      }
+    }
+  },
+  {
+    "id": "fp-10",
+    "desc": "crescimento 8% 6 meses",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 150000,
+      "growth_rate": 0.08,
+      "months": 6
+    },
+    "expected": {
+      "projected_revenue": 238031.15,
+      "months": 6,
+      "scenarios": {
+        "base": 238031.15,
+        "otimista": 296073.4,
+        "conservador": 189797.85
+      }
+    }
+  },
+  {
+    "id": "fp-11",
+    "desc": "crescimento 15% 2 meses",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 90000,
+      "growth_rate": 0.15,
+      "months": 2
+    },
+    "expected": {
+      "projected_revenue": 119025.0,
+      "months": 2,
+      "scenarios": {
+        "base": 119025.0,
+        "otimista": 135056.25,
+        "conservador": 104006.25
+      }
+    }
+  },
+  {
+    "id": "fp-12",
+    "desc": "conservador entre base e otimista 10% 3m",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 100000,
+      "growth_rate": 0.1,
+      "months": 3
+    },
+    "expected": {
+      "projected_revenue": 133100.0,
+      "months": 3,
+      "scenarios": {
+        "base": 133100.0,
+        "otimista": 152087.5,
+        "conservador": 115762.5
+      }
+    }
+  },
+  {
+    "id": "fp-13",
+    "desc": "2% 1 mes (ruido minimo)",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 500000,
+      "growth_rate": 0.02,
+      "months": 1
+    },
+    "expected": {
+      "projected_revenue": 510000.0,
+      "months": 1,
+      "scenarios": {
+        "base": 510000.0,
+        "otimista": 515000.0,
+        "conservador": 505000.0
+      }
+    }
+  },
+  {
+    "id": "fp-14",
+    "desc": "30% 1 mes agressivo",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 10000,
+      "growth_rate": 0.3,
+      "months": 1
+    },
+    "expected": {
+      "projected_revenue": 13000.0,
+      "months": 1,
+      "scenarios": {
+        "base": 13000.0,
+        "otimista": 14500.0,
+        "conservador": 11500.0
+      }
+    }
+  },
+  {
+    "id": "fp-15",
+    "desc": "7% 9 meses",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 250000,
+      "growth_rate": 0.07,
+      "months": 9
+    },
+    "expected": {
+      "projected_revenue": 459614.8,
+      "months": 9,
+      "scenarios": {
+        "base": 459614.8,
+        "otimista": 614045.44,
+        "conservador": 340724.34
+      }
+    }
+  },
+  {
+    "id": "fp-16",
+    "desc": "4% 12 meses",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 100000,
+      "growth_rate": 0.04,
+      "months": 12
+    },
+    "expected": {
+      "projected_revenue": 160103.22,
+      "months": 12,
+      "scenarios": {
+        "base": 160103.22,
+        "otimista": 201219.65,
+        "conservador": 126824.18
+      }
+    }
+  },
+  {
+    "id": "fp-17",
+    "desc": "sem crescimento 1 mes",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 75000,
+      "growth_rate": 0.0,
+      "months": 1
+    },
+    "expected": {
+      "projected_revenue": 75000.0,
+      "months": 1,
+      "scenarios": {
+        "base": 75000.0,
+        "otimista": 75000.0,
+        "conservador": 75000.0
+      }
+    }
+  },
+  {
+    "id": "fp-18",
+    "desc": "10% 5 meses",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 100000,
+      "growth_rate": 0.1,
+      "months": 5
+    },
+    "expected": {
+      "projected_revenue": 161051.0,
+      "months": 5,
+      "scenarios": {
+        "base": 161051.0,
+        "otimista": 201135.72,
+        "conservador": 127628.16
+      }
+    }
+  },
+  {
+    "id": "fp-19",
+    "desc": "declinio 10% 3 meses",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 200000,
+      "growth_rate": -0.1,
+      "months": 3
+    },
+    "expected": {
+      "projected_revenue": 145800.0,
+      "months": 3,
+      "scenarios": {
+        "base": 145800.0,
+        "otimista": 122825.0,
+        "conservador": 171475.0
+      }
+    }
+  },
+  {
+    "id": "fp-20",
+    "desc": "6% 4 meses",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 300000,
+      "growth_rate": 0.06,
+      "months": 4
+    },
+    "expected": {
+      "projected_revenue": 378743.09,
+      "months": 4,
+      "scenarios": {
+        "base": 378743.09,
+        "otimista": 423474.48,
+        "conservador": 337652.64
+      }
+    }
+  },
+  {
+    "id": "fp-21",
+    "desc": "12% 3 meses",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 100000,
+      "growth_rate": 0.12,
+      "months": 3
+    },
+    "expected": {
+      "projected_revenue": 140492.8,
+      "months": 3,
+      "scenarios": {
+        "base": 140492.8,
+        "otimista": 164303.2,
+        "conservador": 119101.6
+      }
+    }
+  },
+  {
+    "id": "fp-22",
+    "desc": "1% 6 meses banda estreita",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 1000000,
+      "growth_rate": 0.01,
+      "months": 6
+    },
+    "expected": {
+      "projected_revenue": 1061520.15,
+      "months": 6,
+      "scenarios": {
+        "base": 1061520.15,
+        "otimista": 1093443.26,
+        "conservador": 1030377.51
+      }
+    }
+  },
+  {
+    "id": "fp-23",
+    "desc": "25% 2 meses",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 40000,
+      "growth_rate": 0.25,
+      "months": 2
+    },
+    "expected": {
+      "projected_revenue": 62500.0,
+      "months": 2,
+      "scenarios": {
+        "base": 62500.0,
+        "otimista": 75625.0,
+        "conservador": 50625.0
+      }
+    }
+  },
+  {
+    "id": "fp-24",
+    "desc": "9% 3 meses",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 100000,
+      "growth_rate": 0.09,
+      "months": 3
+    },
+    "expected": {
+      "projected_revenue": 129502.9,
+      "months": 3,
+      "scenarios": {
+        "base": 129502.9,
+        "otimista": 146213.54,
+        "conservador": 114116.61
+      }
+    }
+  },
+  {
+    "id": "fp-25",
+    "desc": "3% 3 meses",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 500000,
+      "growth_rate": 0.03,
+      "months": 3
+    },
+    "expected": {
+      "projected_revenue": 546363.5,
+      "months": 3,
+      "scenarios": {
+        "base": 546363.5,
+        "otimista": 570583.06,
+        "conservador": 522839.19
+      }
+    }
+  },
+  {
+    "id": "fp-26",
+    "desc": "11% 4 meses",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 100000,
+      "growth_rate": 0.11,
+      "months": 4
+    },
+    "expected": {
+      "projected_revenue": 151807.04,
+      "months": 4,
+      "scenarios": {
+        "base": 151807.04,
+        "otimista": 184205.97,
+        "conservador": 123882.47
+      }
+    }
+  },
+  {
+    "id": "fp-27",
+    "desc": "declinio 2% 12 meses",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 100000,
+      "growth_rate": -0.02,
+      "months": 12
+    },
+    "expected": {
+      "projected_revenue": 78471.67,
+      "months": 12,
+      "scenarios": {
+        "base": 78471.67,
+        "otimista": 69384.24,
+        "conservador": 88638.49
+      }
+    }
+  },
+  {
+    "id": "fp-28",
+    "desc": "18% 1 mes",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 60000,
+      "growth_rate": 0.18,
+      "months": 1
+    },
+    "expected": {
+      "projected_revenue": 70800.0,
+      "months": 1,
+      "scenarios": {
+        "base": 70800.0,
+        "otimista": 76200.0,
+        "conservador": 65400.0
+      }
+    }
+  },
+  {
+    "id": "fp-29",
+    "desc": "5% 6 meses",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 200000,
+      "growth_rate": 0.05,
+      "months": 6
+    },
+    "expected": {
+      "projected_revenue": 268019.13,
+      "months": 6,
+      "scenarios": {
+        "base": 268019.13,
+        "otimista": 308660.31,
+        "conservador": 231938.68
+      }
+    }
+  },
+  {
+    "id": "fp-30",
+    "desc": "10% 6 meses",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 100000,
+      "growth_rate": 0.1,
+      "months": 6
+    },
+    "expected": {
+      "projected_revenue": 177156.1,
+      "months": 6,
+      "scenarios": {
+        "base": 177156.1,
+        "otimista": 231306.08,
+        "conservador": 134009.56
+      }
+    }
+  },
+  {
+    "id": "fp-31",
+    "desc": "2% 3 meses base alta",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 2000000,
+      "growth_rate": 0.02,
+      "months": 3
+    },
+    "expected": {
+      "projected_revenue": 2122416.0,
+      "months": 3,
+      "scenarios": {
+        "base": 2122416.0,
+        "otimista": 2185454.0,
+        "conservador": 2060602.0
+      }
+    }
+  },
+  {
+    "id": "fp-32",
+    "desc": "crescimento 100% 1 mes (extremo isolado)",
+    "tenant_id": "t-eval-g10",
+    "forecast": {
+      "base_revenue": 1000,
+      "growth_rate": 1.0,
+      "months": 1
+    },
+    "expected": {
+      "projected_revenue": 2000.0,
+      "months": 1,
+      "scenarios": {
+        "base": 2000.0,
+        "otimista": 2500.0,
+        "conservador": 1500.0
+      }
     }
   }
 ]

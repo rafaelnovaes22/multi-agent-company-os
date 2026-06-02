@@ -29,7 +29,7 @@
   },
   {
     "id": "vc-02",
-    "desc": "severidade domina",
+    "desc": "severidade domina sobre frequencia",
     "tenant_id": "t-eval-g09",
     "voc": {
       "items": [
@@ -46,7 +46,8 @@
       ]
     },
     "expected": {
-      "top_theme": "Y"
+      "top_theme": "Y",
+      "item_count": 2
     }
   },
   {
@@ -64,6 +65,781 @@
     },
     "expected": {
       "top_theme": "Z",
+      "item_count": 1
+    }
+  },
+  {
+    "id": "vc-04",
+    "desc": "top-5 fricoes ranqueadas por impacto",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "checkout",
+          "frequency": 30,
+          "severity": 4
+        },
+        {
+          "theme": "onboarding",
+          "frequency": 10,
+          "severity": 5
+        },
+        {
+          "theme": "bug-login",
+          "frequency": 8,
+          "severity": 5
+        },
+        {
+          "theme": "lentidao",
+          "frequency": 20,
+          "severity": 2
+        },
+        {
+          "theme": "ux",
+          "frequency": 5,
+          "severity": 3
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "checkout",
+      "item_count": 5
+    }
+  },
+  {
+    "id": "vc-05",
+    "desc": "precedencia: alta severidade baixa freq vence alta freq baixa sev",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "freq-alta",
+          "frequency": 100,
+          "severity": 1
+        },
+        {
+          "theme": "sev-alta",
+          "frequency": 10,
+          "severity": 10
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "freq-alta",
+      "item_count": 2
+    }
+  },
+  {
+    "id": "vc-06",
+    "desc": "empate de impacto mantem ordem original (estavel)",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "primeiro",
+          "frequency": 6,
+          "severity": 2
+        },
+        {
+          "theme": "segundo",
+          "frequency": 4,
+          "severity": 3
+        },
+        {
+          "theme": "terceiro",
+          "frequency": 3,
+          "severity": 4
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "primeiro",
+      "item_count": 3
+    }
+  },
+  {
+    "id": "vc-07",
+    "desc": "empate exato: 12 vs 12 mantem primeiro",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "alpha",
+          "frequency": 12,
+          "severity": 1
+        },
+        {
+          "theme": "beta",
+          "frequency": 6,
+          "severity": 2
+        },
+        {
+          "theme": "gama",
+          "frequency": 4,
+          "severity": 3
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "alpha",
+      "item_count": 3
+    }
+  },
+  {
+    "id": "vc-08",
+    "desc": "severidade zero anula impacto, perde para item menor",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "ruidoso",
+          "frequency": 1000,
+          "severity": 0
+        },
+        {
+          "theme": "real",
+          "frequency": 2,
+          "severity": 2
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "real",
+      "item_count": 2
+    }
+  },
+  {
+    "id": "vc-09",
+    "desc": "frequencia zero anula impacto",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "sem-volume",
+          "frequency": 0,
+          "severity": 10
+        },
+        {
+          "theme": "com-volume",
+          "frequency": 3,
+          "severity": 3
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "com-volume",
+      "item_count": 2
+    }
+  },
+  {
+    "id": "vc-10",
+    "desc": "corpus vazio: nenhum tema, top None (nao reporta lista crua)",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": []
+    },
+    "expected": {
+      "item_count": 0,
+      "top_theme": null
+    }
+  },
+  {
+    "id": "vc-11",
+    "desc": "payload voc ausente -> vazio seguro",
+    "tenant_id": "t-eval-g09",
+    "expected": {
+      "item_count": 0,
+      "top_theme": null
+    }
+  },
+  {
+    "id": "vc-12",
+    "desc": "tema emergente de alta severidade priorizado",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "estavel",
+          "frequency": 15,
+          "severity": 2
+        },
+        {
+          "theme": "emergente",
+          "frequency": 4,
+          "severity": 9
+        },
+        {
+          "theme": "antigo",
+          "frequency": 10,
+          "severity": 2
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "emergente",
+      "item_count": 3
+    }
+  },
+  {
+    "id": "vc-13",
+    "desc": "dois temas alta sev, frequencia desempata",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "A",
+          "frequency": 3,
+          "severity": 8
+        },
+        {
+          "theme": "B",
+          "frequency": 5,
+          "severity": 8
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "B",
+      "item_count": 2
+    }
+  },
+  {
+    "id": "vc-14",
+    "desc": "muitos temas (8) top correto",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "t1",
+          "frequency": 2,
+          "severity": 2
+        },
+        {
+          "theme": "t2",
+          "frequency": 3,
+          "severity": 3
+        },
+        {
+          "theme": "t3",
+          "frequency": 1,
+          "severity": 1
+        },
+        {
+          "theme": "t4",
+          "frequency": 9,
+          "severity": 9
+        },
+        {
+          "theme": "t5",
+          "frequency": 4,
+          "severity": 4
+        },
+        {
+          "theme": "t6",
+          "frequency": 2,
+          "severity": 5
+        },
+        {
+          "theme": "t7",
+          "frequency": 7,
+          "severity": 1
+        },
+        {
+          "theme": "t8",
+          "frequency": 1,
+          "severity": 9
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "t4",
+      "item_count": 8
+    }
+  },
+  {
+    "id": "vc-15",
+    "desc": "campos frequency/severity ausentes -> impacto 0",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "incompleto"
+        },
+        {
+          "theme": "completo",
+          "frequency": 2,
+          "severity": 2
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "completo",
+      "item_count": 2
+    }
+  },
+  {
+    "id": "vc-16",
+    "desc": "top com impacto maximo entre tres claros",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "baixo",
+          "frequency": 2,
+          "severity": 1
+        },
+        {
+          "theme": "medio",
+          "frequency": 5,
+          "severity": 3
+        },
+        {
+          "theme": "alto",
+          "frequency": 10,
+          "severity": 8
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "alto",
+      "item_count": 3
+    }
+  },
+  {
+    "id": "vc-17",
+    "desc": "severidade 5 com volume modesto vence volume alto sev 1",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "vol",
+          "frequency": 40,
+          "severity": 1
+        },
+        {
+          "theme": "sev",
+          "frequency": 10,
+          "severity": 5
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "sev",
+      "item_count": 2
+    }
+  },
+  {
+    "id": "vc-18",
+    "desc": "item_count nao conta por qualificacao, conta total",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "a",
+          "frequency": 0,
+          "severity": 0
+        },
+        {
+          "theme": "b",
+          "frequency": 0,
+          "severity": 0
+        },
+        {
+          "theme": "c",
+          "frequency": 1,
+          "severity": 1
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "c",
+      "item_count": 3
+    }
+  },
+  {
+    "id": "vc-19",
+    "desc": "todos impacto zero: top e o primeiro (estavel)",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "primeiro",
+          "frequency": 0,
+          "severity": 5
+        },
+        {
+          "theme": "segundo",
+          "frequency": 5,
+          "severity": 0
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "primeiro",
+      "item_count": 2
+    }
+  },
+  {
+    "id": "vc-20",
+    "desc": "impacto grande domina",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "normal",
+          "frequency": 10,
+          "severity": 3
+        },
+        {
+          "theme": "critico",
+          "frequency": 50,
+          "severity": 9
+        },
+        {
+          "theme": "menor",
+          "frequency": 4,
+          "severity": 2
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "critico",
+      "item_count": 3
+    }
+  },
+  {
+    "id": "vc-21",
+    "desc": "dois itens com freq alta, severidade decide",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "freqA",
+          "frequency": 20,
+          "severity": 2
+        },
+        {
+          "theme": "freqB",
+          "frequency": 20,
+          "severity": 3
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "freqB",
+      "item_count": 2
+    }
+  },
+  {
+    "id": "vc-22",
+    "desc": "5 temas com impacto crescente",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "i1",
+          "frequency": 1,
+          "severity": 1
+        },
+        {
+          "theme": "i2",
+          "frequency": 2,
+          "severity": 2
+        },
+        {
+          "theme": "i3",
+          "frequency": 3,
+          "severity": 3
+        },
+        {
+          "theme": "i4",
+          "frequency": 4,
+          "severity": 4
+        },
+        {
+          "theme": "i5",
+          "frequency": 5,
+          "severity": 5
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "i5",
+      "item_count": 5
+    }
+  },
+  {
+    "id": "vc-23",
+    "desc": "5 temas com impacto decrescente: top e o primeiro",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "i1",
+          "frequency": 5,
+          "severity": 5
+        },
+        {
+          "theme": "i2",
+          "frequency": 4,
+          "severity": 4
+        },
+        {
+          "theme": "i3",
+          "frequency": 3,
+          "severity": 3
+        },
+        {
+          "theme": "i4",
+          "frequency": 2,
+          "severity": 2
+        },
+        {
+          "theme": "i5",
+          "frequency": 1,
+          "severity": 1
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "i1",
+      "item_count": 5
+    }
+  },
+  {
+    "id": "vc-24",
+    "desc": "top no meio da lista",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "borda1",
+          "frequency": 2,
+          "severity": 2
+        },
+        {
+          "theme": "pico",
+          "frequency": 9,
+          "severity": 9
+        },
+        {
+          "theme": "borda2",
+          "frequency": 3,
+          "severity": 3
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "pico",
+      "item_count": 3
+    }
+  },
+  {
+    "id": "vc-25",
+    "desc": "severidade extrema 10",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "baixa-sev",
+          "frequency": 30,
+          "severity": 2
+        },
+        {
+          "theme": "max-sev",
+          "frequency": 7,
+          "severity": 10
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "max-sev",
+      "item_count": 2
+    }
+  },
+  {
+    "id": "vc-26",
+    "desc": "frequencia extrema vence",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "massivo",
+          "frequency": 200,
+          "severity": 1
+        },
+        {
+          "theme": "nicho",
+          "frequency": 5,
+          "severity": 5
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "massivo",
+      "item_count": 2
+    }
+  },
+  {
+    "id": "vc-27",
+    "desc": "item negativo de severidade tratado como valor (impacto pode ser negativo)",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "ok",
+          "frequency": 1,
+          "severity": 1
+        },
+        {
+          "theme": "estranho",
+          "frequency": 5,
+          "severity": 0
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "ok",
+      "item_count": 2
+    }
+  },
+  {
+    "id": "vc-28",
+    "desc": "tres empates iguais 9 mantem primeiro",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "um",
+          "frequency": 3,
+          "severity": 3
+        },
+        {
+          "theme": "dois",
+          "frequency": 9,
+          "severity": 1
+        },
+        {
+          "theme": "tres",
+          "frequency": 1,
+          "severity": 9
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "um",
+      "item_count": 3
+    }
+  },
+  {
+    "id": "vc-29",
+    "desc": "par de impacto identico desempata por ordem",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "primeiro20",
+          "frequency": 4,
+          "severity": 5
+        },
+        {
+          "theme": "segundo20",
+          "frequency": 5,
+          "severity": 4
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "primeiro20",
+      "item_count": 2
+    }
+  },
+  {
+    "id": "vc-30",
+    "desc": "impacto 1 minimo nao-zero vence zeros",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "zero1",
+          "frequency": 0,
+          "severity": 9
+        },
+        {
+          "theme": "um",
+          "frequency": 1,
+          "severity": 1
+        },
+        {
+          "theme": "zero2",
+          "frequency": 9,
+          "severity": 0
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "um",
+      "item_count": 3
+    }
+  },
+  {
+    "id": "vc-31",
+    "desc": "grande corpus 6 itens top inequivoco",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "a",
+          "frequency": 10,
+          "severity": 2
+        },
+        {
+          "theme": "b",
+          "frequency": 8,
+          "severity": 3
+        },
+        {
+          "theme": "c",
+          "frequency": 30,
+          "severity": 4
+        },
+        {
+          "theme": "d",
+          "frequency": 5,
+          "severity": 5
+        },
+        {
+          "theme": "e",
+          "frequency": 12,
+          "severity": 2
+        },
+        {
+          "theme": "f",
+          "frequency": 6,
+          "severity": 3
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "c",
+      "item_count": 6
+    }
+  },
+  {
+    "id": "vc-32",
+    "desc": "item unico de severidade alta",
+    "tenant_id": "t-eval-g09",
+    "voc": {
+      "items": [
+        {
+          "theme": "unico-critico",
+          "frequency": 3,
+          "severity": 10
+        }
+      ]
+    },
+    "expected": {
+      "top_theme": "unico-critico",
       "item_count": 1
     }
   }

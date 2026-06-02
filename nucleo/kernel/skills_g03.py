@@ -141,3 +141,95 @@ def api_contract_diff(state, *, llm, store, spec):
         "breaking_changes": breaking, "compatible": compatible, "recommended_bump": bump,
         "requires_human_review": not compatible,
     }, f"Voce e {spec['id']}: {len(breaking)} breaking change(s), bump {bump}.", llm)
+
+
+# ---------------------------------------------------------------------------
+# Burn-down R3-A — g3-db-schema: revisão determinística de migração de schema.
+# Precedência de bloqueio (do mais grave ao menos): sem rollback -> quebra de
+# contrato sem versionamento -> não backward-compatible -> PII não classificada ->
+# integridade referencial violada -> ok. C2: migração aplica/reverte sem perda,
+# mantém compatibilidade e marca PII (DELIVERED = up_down_validated && pii_map.updated).
+# ---------------------------------------------------------------------------
+@register("schema_change_review")
+def schema_change_review(state, *, llm, store, spec):
+    m = state["task"].get("migration", {}) or {}
+    has_rollback = bool(m.get("rollback_tested", False))
+    backward_compatible = bool(m.get("backward_compatible", True))
+    breaks_api_unversioned = bool(m.get("breaks_api_unversioned", False))
+    referential_ok = bool(m.get("referential_integrity_ok", True))
+    pii_columns = m.get("pii_columns", []) or []
+    pii_unclassified = [c.get("name") for c in pii_columns if not c.get("classified", False)]
+    pii_map_complete = not pii_unclassified
+
+    if not has_rollback:
+        status = "sem_rollback"
+    elif breaks_api_unversioned:
+        status = "quebra_contrato"
+    elif not backward_compatible:
+        status = "incompativel"
+    elif pii_unclassified:
+        status = "pii_nao_classificada"
+    elif not referential_ok:
+        status = "integridade_violada"
+    else:
+        status = "ok"
+
+    safe_to_merge = status == "ok"
+    # Espelha o trigger DELIVERED do catálogo sem usar a chave proibida 'delivered'.
+    up_down_validated = has_rollback and backward_compatible and not breaks_api_unversioned
+    return _out(spec, state, {
+        "agent_id": spec["id"], "has_rollback": has_rollback,
+        "backward_compatible": backward_compatible, "compatible": not breaks_api_unversioned,
+        "pii_unclassified_count": len(pii_unclassified), "pii_map_complete": pii_map_complete,
+        "referential_integrity_ok": referential_ok, "status": status,
+        "up_down_validated": up_down_validated, "safe_to_merge": safe_to_merge,
+        "requires_human_review": not safe_to_merge,
+    }, f"Voce e {spec['id']}: migracao status {status}, merge {'ok' if safe_to_merge else 'bloqueado'}.", llm)
+
+
+# ---------------------------------------------------------------------------
+# Burn-down R3-A — g3-dependency-warden: decisão determinística de bump de dependência.
+# Política: licença proibida/dep abandonada bloqueia; major exige plano; breaking sem
+# código ajustado exige fix; CI vermelho bloqueia; senão aprova (patch/minor = auto).
+# C2: deps sem CVE explorável, build verde, licenças compatíveis (DELIVERED = cve_clean && ci.green).
+# ---------------------------------------------------------------------------
+_LICENCAS_PROIBIDAS = {"AGPL-3.0", "SSPL", "GPL-3.0", "BUSL-1.1", "Commons-Clause"}
+_CVE_SLA_DAYS = {"critica": 2, "alta": 7, "media": 30, "baixa": 90}
+
+
+@register("dependency_bump_review")
+def dependency_bump_review(state, *, llm, store, spec):
+    d = state["task"].get("dependency", {}) or {}
+    cve = d.get("cve_severity")                       # None | critica | alta | media | baixa
+    bump = (d.get("bump_type") or "patch").lower()    # patch | minor | major
+    has_breaking = bool(d.get("has_breaking_changes", False))
+    code_adjusted = bool(d.get("code_adjusted", False))
+    has_plan = bool(d.get("has_migration_plan", False))
+    ci_green = bool(d.get("ci_green", True))
+    license_id = d.get("license", "MIT")
+    abandoned = bool(d.get("abandoned", False))
+
+    license_ok = license_id not in _LICENCAS_PROIBIDAS
+    if not license_ok:
+        decision = "block_licenca"
+    elif abandoned:
+        decision = "block_abandonada"
+    elif bump == "major" and not has_plan:
+        decision = "needs_plan"
+    elif has_breaking and not code_adjusted:
+        decision = "needs_code_fix"
+    elif not ci_green:
+        decision = "ci_vermelho"
+    else:
+        decision = "approve_bump"
+
+    approved = decision == "approve_bump"
+    auto_mergeable = approved and bump in ("patch", "minor")
+    cve_addressed = approved and cve is not None       # o bump aprovado limpa a CVE
+    requires_review = not auto_mergeable               # major/bloqueio/pendência -> humano
+    return _out(spec, state, {
+        "agent_id": spec["id"], "cve_severity": cve, "bump_type": bump, "decision": decision,
+        "license_ok": license_ok, "abandoned": abandoned, "auto_mergeable": auto_mergeable,
+        "cve_addressed": cve_addressed, "exposure_sla_days": _CVE_SLA_DAYS.get(cve),
+        "requires_human_review": requires_review,
+    }, f"Voce e {spec['id']}: bump {bump} -> {decision}.", llm)

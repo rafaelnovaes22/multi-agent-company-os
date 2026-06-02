@@ -227,3 +227,65 @@ def access_review(state, *, llm, store, spec):
         "revoke_actions": revoke_actions, "recertify_actions": recertify_actions,
         "status": status,
     }, f"Voce e {spec['id']}: {len(findings)} achados IAM, status {status}.", llm)
+
+
+# ---------------------------------------------------------------------------
+# Burn-down R3-A — g5-agentshield-scanner: varredura determinística da config de UM
+# agente contra o baseline AgentShield. Espelha nucleo/security/agentshield.py mas
+# opera sobre state["task"]["scan"] (payload do caso) p/ ser autocontido e determinístico.
+# Acha: over-privilege (worker com tool de escrita sem justificativa), violação C7
+# (SDK de fornecedor citado como tool), exec arbitrário em MCP sem gate, eval/guardians
+# ausentes (pré-condição C4), e drift de modo (escalada de autonomia sem aprovação).
+# ---------------------------------------------------------------------------
+_PRIVILEGED_TOOLS = {"repo.write", "db.migrate", "shell.exec", "infra.apply"}
+_VENDOR_SDKS = ("openai", "anthropic", "stripe", "twilio", "whatsapp-web", "boto3", "langchain")
+_AUTONOMY_ORDER = {"SHADOW": 0, "PILOT": 1, "ASSISTED": 2, "AUTONOMOUS": 3}
+
+
+@register("agentshield_scan")
+def agentshield_scan(state, *, llm, store, spec):
+    sc = state["task"].get("scan", {}) or {}
+    role = sc.get("role", "worker")
+    tools = sc.get("tools", []) or []
+    justified = set(sc.get("justified_tools", []) or [])
+    guardians = sc.get("guardians", []) or []
+    has_evals = bool(sc.get("has_evals", True))
+    mode = sc.get("mode")
+    prev_mode = sc.get("prev_mode")
+    mode_change_approved = bool(sc.get("mode_change_approved", False))
+    mcp_arbitrary_exec = bool(sc.get("mcp_arbitrary_exec", False))
+
+    findings = []  # cada um: (severidade, tipo)
+    # over-privilege: worker com tool de escrita não justificada
+    over = [t for t in tools if t in _PRIVILEGED_TOOLS and t not in justified]
+    if role == "worker" and over:
+        findings.append(("high", "over_privilege"))
+    # C7: SDK de fornecedor citado como tool
+    c7_violations = [t for t in tools if any(v in str(t).lower() for v in _VENDOR_SDKS)]
+    if c7_violations:
+        findings.append(("high", "c7_vendor_sdk"))
+    # MCP com execução arbitrária sem gate humano
+    if mcp_arbitrary_exec:
+        findings.append(("high", "mcp_arbitrary_exec"))
+    # pré-condição de promoção C4
+    if not has_evals:
+        findings.append(("high", "sem_eval_suite"))
+    if not guardians:
+        findings.append(("med", "sem_guardians"))
+    # drift: escalada de autonomia entre releases sem aprovação cruzada
+    drift_detected = bool(
+        prev_mode and mode and _AUTONOMY_ORDER.get(mode, 0) > _AUTONOMY_ORDER.get(prev_mode, 0)
+        and not mode_change_approved
+    )
+    if drift_detected:
+        findings.append(("high", "config_drift"))
+
+    high_count = sum(1 for sev, _ in findings if sev == "high")
+    verdict = "fail" if high_count else ("warn" if findings else "pass")
+    return _out(spec, state, {
+        "agent_id": spec["id"], "scanned_agent": sc.get("agent_id"),
+        "verdict": verdict, "finding_count": len(findings), "high_count": high_count,
+        "over_privilege": bool(over) and role == "worker", "c7_violation": bool(c7_violations),
+        "drift_detected": drift_detected, "missing_evals": not has_evals,
+        "missing_guardians": not guardians, "requires_human_review": verdict == "fail",
+    }, f"Voce e {spec['id']}: scan de {sc.get('agent_id')} -> {verdict} ({len(findings)} achados).", llm)

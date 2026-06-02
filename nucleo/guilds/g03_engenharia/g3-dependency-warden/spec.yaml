@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: guardian
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: guardian_check
+act_handler: dependency_bump_review
 outcome_clause:
   statement: 'Guardião de Dependências entrega dependency_warden.artifact verificável
     para: manter dependências atualizadas e livres de CVEs sem quebrar o build.'

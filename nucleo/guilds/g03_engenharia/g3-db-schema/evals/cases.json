@@ -1,902 +1,596 @@
 [
   {
     "id": "g3-db-schema-01",
-    "desc": "Modelador de Schema de Dados caso 1: risco low, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 1",
-    "artifact_type": "db_schema.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "build",
-      "review"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 1
+    "desc": "migracao reversivel, compativel, PII classificada",
+    "migration": {
+      "rollback_tested": true,
+      "backward_compatible": true,
+      "breaks_api_unversioned": false,
+      "referential_integrity_ok": true,
+      "pii_columns": [
+        {
+          "name": "email",
+          "classified": true
+        },
+        {
+          "name": "cpf",
+          "classified": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "low",
+      "status": "ok",
+      "safe_to_merge": true,
       "requires_human_review": false,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "build"
-      ]
+      "pii_map_complete": true,
+      "up_down_validated": true
     }
   },
   {
     "id": "g3-db-schema-02",
-    "desc": "Modelador de Schema de Dados caso 2: risco medium, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 2",
-    "artifact_type": "db_schema.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "review",
-      "route"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 2
+    "desc": "add coluna nullable backward-compat com rollback",
+    "migration": {
+      "rollback_tested": true,
+      "backward_compatible": true,
+      "referential_integrity_ok": true
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "review"
-      ]
+      "status": "ok",
+      "safe_to_merge": true,
+      "requires_human_review": false
     }
   },
   {
     "id": "g3-db-schema-03",
-    "desc": "Modelador de Schema de Dados caso 3: risco high, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 3",
-    "artifact_type": "db_schema.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "route",
-      "verify"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 3
+    "desc": "indice novo, sem PII, reversivel",
+    "migration": {
+      "rollback_tested": true,
+      "backward_compatible": true,
+      "referential_integrity_ok": true,
+      "pii_columns": []
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "route"
-      ]
+      "status": "ok",
+      "safe_to_merge": true,
+      "pii_map_complete": true
     }
   },
   {
     "id": "g3-db-schema-04",
-    "desc": "Modelador de Schema de Dados caso 4: risco critical, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 4",
-    "artifact_type": "db_schema.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "verify",
-      "remediate"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 4
+    "desc": "PII toda classificada e ligada a retencao",
+    "migration": {
+      "rollback_tested": true,
+      "backward_compatible": true,
+      "referential_integrity_ok": true,
+      "pii_columns": [
+        {
+          "name": "nome",
+          "classified": true
+        },
+        {
+          "name": "telefone",
+          "classified": true
+        },
+        {
+          "name": "endereco",
+          "classified": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "verify"
-      ]
+      "status": "ok",
+      "safe_to_merge": true,
+      "pii_unclassified_count": 0,
+      "pii_map_complete": true
     }
   },
   {
     "id": "g3-db-schema-05",
-    "desc": "Modelador de Schema de Dados caso 5: risco low, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 5",
-    "artifact_type": "db_schema.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "remediate",
-      "plan"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 5
+    "desc": "migracao sem script de rollback",
+    "migration": {
+      "rollback_tested": false,
+      "backward_compatible": true,
+      "referential_integrity_ok": true
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "remediate"
-      ]
+      "status": "sem_rollback",
+      "safe_to_merge": false,
+      "requires_human_review": true,
+      "has_rollback": false,
+      "up_down_validated": false
     }
   },
   {
     "id": "g3-db-schema-06",
-    "desc": "Modelador de Schema de Dados caso 6: risco medium, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 6",
-    "artifact_type": "db_schema.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "plan",
-      "build"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 6
+    "desc": "rollback nao testado bloqueia ainda que PII ok",
+    "migration": {
+      "rollback_tested": false,
+      "backward_compatible": true,
+      "referential_integrity_ok": true,
+      "pii_columns": [
+        {
+          "name": "email",
+          "classified": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "plan"
-      ]
+      "status": "sem_rollback",
+      "safe_to_merge": false
     }
   },
   {
     "id": "g3-db-schema-07",
-    "desc": "Modelador de Schema de Dados caso 7: risco high, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 7",
-    "artifact_type": "db_schema.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "build",
-      "review"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 7
+    "desc": "default (rollback ausente) bloqueia",
+    "migration": {
+      "backward_compatible": true
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "build"
-      ]
+      "status": "sem_rollback",
+      "safe_to_merge": false,
+      "has_rollback": false
     }
   },
   {
     "id": "g3-db-schema-08",
-    "desc": "Modelador de Schema de Dados caso 8: risco critical, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 8",
-    "artifact_type": "db_schema.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "review",
-      "route"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 8
+    "desc": "sem_rollback precede quebra de contrato",
+    "migration": {
+      "rollback_tested": false,
+      "breaks_api_unversioned": true
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "review"
-      ]
+      "status": "sem_rollback",
+      "safe_to_merge": false
     }
   },
   {
     "id": "g3-db-schema-09",
-    "desc": "Modelador de Schema de Dados caso 9: risco low, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 9",
-    "artifact_type": "db_schema.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "route",
-      "verify"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 9
+    "desc": "drop de coluna usada por API sem versionar",
+    "migration": {
+      "rollback_tested": true,
+      "breaks_api_unversioned": true,
+      "backward_compatible": true,
+      "referential_integrity_ok": true
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "route"
-      ]
+      "status": "quebra_contrato",
+      "safe_to_merge": false,
+      "requires_human_review": true,
+      "compatible": false,
+      "up_down_validated": false
     }
   },
   {
     "id": "g3-db-schema-10",
-    "desc": "Modelador de Schema de Dados caso 10: risco medium, bloqueio",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 10",
-    "artifact_type": "db_schema.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "verify",
-      "remediate"
-    ],
-    "signals": {
-      "blocked": true,
-      "case_index": 10
+    "desc": "rename de campo quebra contrato existente",
+    "migration": {
+      "rollback_tested": true,
+      "breaks_api_unversioned": true,
+      "referential_integrity_ok": true
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "verify"
-      ]
+      "status": "quebra_contrato",
+      "safe_to_merge": false,
+      "compatible": false
     }
   },
   {
     "id": "g3-db-schema-11",
-    "desc": "Modelador de Schema de Dados caso 11: risco high, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 11",
-    "artifact_type": "db_schema.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "remediate",
-      "plan"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 11
+    "desc": "quebra_contrato precede incompativel",
+    "migration": {
+      "rollback_tested": true,
+      "breaks_api_unversioned": true,
+      "backward_compatible": false
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "remediate"
-      ]
+      "status": "quebra_contrato",
+      "safe_to_merge": false
     }
   },
   {
     "id": "g3-db-schema-12",
-    "desc": "Modelador de Schema de Dados caso 12: risco critical, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 12",
-    "artifact_type": "db_schema.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "plan",
-      "build"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 12
+    "desc": "quebra_contrato precede PII nao classificada",
+    "migration": {
+      "rollback_tested": true,
+      "breaks_api_unversioned": true,
+      "pii_columns": [
+        {
+          "name": "cpf",
+          "classified": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "plan"
-      ]
+      "status": "quebra_contrato",
+      "safe_to_merge": false,
+      "compatible": false
     }
   },
   {
     "id": "g3-db-schema-13",
-    "desc": "Modelador de Schema de Dados caso 13: risco low, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 13",
-    "artifact_type": "db_schema.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "build",
-      "review"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 13
+    "desc": "NOT NULL sem default em tabela populada",
+    "migration": {
+      "rollback_tested": true,
+      "backward_compatible": false,
+      "breaks_api_unversioned": false,
+      "referential_integrity_ok": true
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "build"
-      ]
+      "status": "incompativel",
+      "safe_to_merge": false,
+      "requires_human_review": true,
+      "backward_compatible": false,
+      "up_down_validated": false
     }
   },
   {
     "id": "g3-db-schema-14",
-    "desc": "Modelador de Schema de Dados caso 14: risco medium, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 14",
-    "artifact_type": "db_schema.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "review",
-      "route"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 14
+    "desc": "mudanca de tipo nao backward-compat",
+    "migration": {
+      "rollback_tested": true,
+      "backward_compatible": false,
+      "referential_integrity_ok": true
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "review"
-      ]
+      "status": "incompativel",
+      "safe_to_merge": false,
+      "backward_compatible": false
     }
   },
   {
     "id": "g3-db-schema-15",
-    "desc": "Modelador de Schema de Dados caso 15: risco high, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 15",
-    "artifact_type": "db_schema.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "route",
-      "verify"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 15
+    "desc": "incompativel precede PII",
+    "migration": {
+      "rollback_tested": true,
+      "backward_compatible": false,
+      "pii_columns": [
+        {
+          "name": "email",
+          "classified": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "route"
-      ]
+      "status": "incompativel",
+      "safe_to_merge": false
     }
   },
   {
     "id": "g3-db-schema-16",
-    "desc": "Modelador de Schema de Dados caso 16: risco critical, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 16",
-    "artifact_type": "db_schema.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "verify",
-      "remediate"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 16
+    "desc": "incompativel precede integridade",
+    "migration": {
+      "rollback_tested": true,
+      "backward_compatible": false,
+      "referential_integrity_ok": false
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "verify"
-      ]
+      "status": "incompativel",
+      "safe_to_merge": false
     }
   },
   {
     "id": "g3-db-schema-17",
-    "desc": "Modelador de Schema de Dados caso 17: risco low, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 17",
-    "artifact_type": "db_schema.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "remediate",
-      "plan"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 17
+    "desc": "coluna de dado pessoal sem classificacao",
+    "migration": {
+      "rollback_tested": true,
+      "backward_compatible": true,
+      "referential_integrity_ok": true,
+      "pii_columns": [
+        {
+          "name": "cpf",
+          "classified": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "remediate"
-      ]
+      "status": "pii_nao_classificada",
+      "safe_to_merge": false,
+      "requires_human_review": true,
+      "pii_unclassified_count": 1,
+      "pii_map_complete": false
     }
   },
   {
     "id": "g3-db-schema-18",
-    "desc": "Modelador de Schema de Dados caso 18: risco medium, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 18",
-    "artifact_type": "db_schema.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "plan",
-      "build"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 18
+    "desc": "duas PII, uma sem classificar",
+    "migration": {
+      "rollback_tested": true,
+      "backward_compatible": true,
+      "referential_integrity_ok": true,
+      "pii_columns": [
+        {
+          "name": "email",
+          "classified": true
+        },
+        {
+          "name": "telefone",
+          "classified": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "plan"
-      ]
+      "status": "pii_nao_classificada",
+      "safe_to_merge": false,
+      "pii_unclassified_count": 1,
+      "pii_map_complete": false
     }
   },
   {
     "id": "g3-db-schema-19",
-    "desc": "Modelador de Schema de Dados caso 19: risco high, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 19",
-    "artifact_type": "db_schema.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "build",
-      "review"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 19
+    "desc": "tres PII, duas sem classificar",
+    "migration": {
+      "rollback_tested": true,
+      "backward_compatible": true,
+      "referential_integrity_ok": true,
+      "pii_columns": [
+        {
+          "name": "cpf",
+          "classified": false
+        },
+        {
+          "name": "rg",
+          "classified": false
+        },
+        {
+          "name": "nome",
+          "classified": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "build"
-      ]
+      "status": "pii_nao_classificada",
+      "safe_to_merge": false,
+      "pii_unclassified_count": 2
     }
   },
   {
     "id": "g3-db-schema-20",
-    "desc": "Modelador de Schema de Dados caso 20: risco critical, bloqueio",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 20",
-    "artifact_type": "db_schema.artifact",
-    "risk": "critical",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "review",
-      "route"
-    ],
-    "signals": {
-      "blocked": true,
-      "case_index": 20
+    "desc": "PII nao classificada precede integridade",
+    "migration": {
+      "rollback_tested": true,
+      "backward_compatible": true,
+      "referential_integrity_ok": false,
+      "pii_columns": [
+        {
+          "name": "cpf",
+          "classified": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "blocked",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "review"
-      ]
+      "status": "pii_nao_classificada",
+      "safe_to_merge": false
     }
   },
   {
     "id": "g3-db-schema-21",
-    "desc": "Modelador de Schema de Dados caso 21: risco low, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 21",
-    "artifact_type": "db_schema.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "route",
-      "verify"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 21
+    "desc": "FK orfa / integridade referencial violada",
+    "migration": {
+      "rollback_tested": true,
+      "backward_compatible": true,
+      "breaks_api_unversioned": false,
+      "referential_integrity_ok": false
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "route"
-      ]
+      "status": "integridade_violada",
+      "safe_to_merge": false,
+      "requires_human_review": true,
+      "referential_integrity_ok": false
     }
   },
   {
     "id": "g3-db-schema-22",
-    "desc": "Modelador de Schema de Dados caso 22: risco medium, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 22",
-    "artifact_type": "db_schema.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "verify",
-      "remediate"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 22
+    "desc": "integridade violada, resto ok",
+    "migration": {
+      "rollback_tested": true,
+      "backward_compatible": true,
+      "referential_integrity_ok": false,
+      "pii_columns": [
+        {
+          "name": "email",
+          "classified": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "verify"
-      ]
+      "status": "integridade_violada",
+      "safe_to_merge": false,
+      "referential_integrity_ok": false
     }
   },
   {
     "id": "g3-db-schema-23",
-    "desc": "Modelador de Schema de Dados caso 23: risco high, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 23",
-    "artifact_type": "db_schema.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "remediate",
-      "plan"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 23
+    "desc": "tudo ok com varias PII classificadas",
+    "migration": {
+      "rollback_tested": true,
+      "backward_compatible": true,
+      "referential_integrity_ok": true,
+      "pii_columns": [
+        {
+          "name": "a",
+          "classified": true
+        },
+        {
+          "name": "b",
+          "classified": true
+        },
+        {
+          "name": "c",
+          "classified": true
+        },
+        {
+          "name": "d",
+          "classified": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "remediate"
-      ]
+      "status": "ok",
+      "safe_to_merge": true,
+      "pii_unclassified_count": 0
     }
   },
   {
     "id": "g3-db-schema-24",
-    "desc": "Modelador de Schema de Dados caso 24: risco critical, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 24",
-    "artifact_type": "db_schema.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "plan",
-      "build"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 24
+    "desc": "sem PII declarada, mapa completo trivialmente",
+    "migration": {
+      "rollback_tested": true,
+      "backward_compatible": true,
+      "referential_integrity_ok": true
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "plan"
-      ]
+      "status": "ok",
+      "pii_map_complete": true,
+      "pii_unclassified_count": 0
     }
   },
   {
     "id": "g3-db-schema-25",
-    "desc": "Modelador de Schema de Dados caso 25: risco low, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 25",
-    "artifact_type": "db_schema.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "build",
-      "review"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 25
+    "desc": "up_down_validated falso quando incompativel",
+    "migration": {
+      "rollback_tested": true,
+      "backward_compatible": false,
+      "referential_integrity_ok": true
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "build"
-      ]
+      "status": "incompativel",
+      "up_down_validated": false
     }
   },
   {
     "id": "g3-db-schema-26",
-    "desc": "Modelador de Schema de Dados caso 26: risco medium, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 26",
-    "artifact_type": "db_schema.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "review",
-      "route"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 26
+    "desc": "up_down_validated verdadeiro no caminho feliz",
+    "migration": {
+      "rollback_tested": true,
+      "backward_compatible": true,
+      "breaks_api_unversioned": false,
+      "referential_integrity_ok": true
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "review"
-      ]
+      "status": "ok",
+      "up_down_validated": true,
+      "safe_to_merge": true
     }
   },
   {
     "id": "g3-db-schema-27",
-    "desc": "Modelador de Schema de Dados caso 27: risco high, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 27",
-    "artifact_type": "db_schema.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "route",
-      "verify"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 27
+    "desc": "muitas PII todas classificadas",
+    "migration": {
+      "rollback_tested": true,
+      "backward_compatible": true,
+      "referential_integrity_ok": true,
+      "pii_columns": [
+        {
+          "name": "col0",
+          "classified": true
+        },
+        {
+          "name": "col1",
+          "classified": true
+        },
+        {
+          "name": "col2",
+          "classified": true
+        },
+        {
+          "name": "col3",
+          "classified": true
+        },
+        {
+          "name": "col4",
+          "classified": true
+        },
+        {
+          "name": "col5",
+          "classified": true
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "route"
-      ]
+      "status": "ok",
+      "pii_unclassified_count": 0,
+      "pii_map_complete": true
     }
   },
   {
     "id": "g3-db-schema-28",
-    "desc": "Modelador de Schema de Dados caso 28: risco critical, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 28",
-    "artifact_type": "db_schema.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "verify",
-      "remediate"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 28
+    "desc": "todas PII sem classificar",
+    "migration": {
+      "rollback_tested": true,
+      "backward_compatible": true,
+      "referential_integrity_ok": true,
+      "pii_columns": [
+        {
+          "name": "x",
+          "classified": false
+        },
+        {
+          "name": "y",
+          "classified": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "verify"
-      ]
+      "status": "pii_nao_classificada",
+      "pii_unclassified_count": 2,
+      "safe_to_merge": false
     }
   },
   {
     "id": "g3-db-schema-29",
-    "desc": "Modelador de Schema de Dados caso 29: risco low, ready",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 29",
-    "artifact_type": "db_schema.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "remediate",
-      "plan"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 29
+    "desc": "sem rollback e PII pendente sem_rollback vence",
+    "migration": {
+      "rollback_tested": false,
+      "pii_columns": [
+        {
+          "name": "cpf",
+          "classified": false
+        }
+      ]
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "remediate"
-      ]
+      "status": "sem_rollback",
+      "safe_to_merge": false
     }
   },
   {
     "id": "g3-db-schema-30",
-    "desc": "Modelador de Schema de Dados caso 30: risco medium, bloqueio",
-    "request": "Executar Modelador de Schema de Dados para cenário sintético 30",
-    "artifact_type": "db_schema.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g3-db-schema",
-    "capabilities": [
-      "plan",
-      "build"
-    ],
-    "signals": {
-      "blocked": true,
-      "case_index": 30
+    "desc": "compativel versionado (nao quebra) e ok",
+    "migration": {
+      "rollback_tested": true,
+      "backward_compatible": true,
+      "breaks_api_unversioned": false,
+      "referential_integrity_ok": true
     },
     "expected": {
-      "agent_id": "g3-db-schema",
-      "handler_kind": "spec_driven",
-      "artifact_type": "db_schema.artifact",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g3-db-schema",
-      "capabilities_any": [
-        "plan"
-      ]
+      "status": "ok",
+      "compatible": true,
+      "safe_to_merge": true
+    }
+  },
+  {
+    "id": "g3-db-schema-31",
+    "desc": "requires_human_review sempre que bloqueia",
+    "migration": {
+      "rollback_tested": true,
+      "referential_integrity_ok": false
+    },
+    "expected": {
+      "status": "integridade_violada",
+      "requires_human_review": true
+    }
+  },
+  {
+    "id": "g3-db-schema-32",
+    "desc": "requires_human_review falso no ok",
+    "migration": {
+      "rollback_tested": true,
+      "backward_compatible": true,
+      "referential_integrity_ok": true
+    },
+    "expected": {
+      "status": "ok",
+      "requires_human_review": false
     }
   }
 ]

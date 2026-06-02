@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: guardian
 mode: SHADOW
 target_mode: AUTONOMOUS
-act_handler: guardian_check
+act_handler: agentshield_scan
 outcome_clause:
   statement: 'AgentShield Scanner entrega agentshield_scanner.artifact verificável
     para: varrer continuamente as configs, definições MCP e hooks dos 150+ agentes

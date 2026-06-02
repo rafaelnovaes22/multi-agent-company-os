@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: spec_driven
+act_handler: schema_change_review
 outcome_clause:
   statement: 'Modelador de Schema de Dados entrega db_schema.artifact verificável
     para: modelar e migrar o schema de dados de forma segura, versionada e reversível.'

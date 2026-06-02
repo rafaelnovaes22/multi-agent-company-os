@@ -9,6 +9,8 @@ Assinatura de um handler:
 """
 from __future__ import annotations
 
+import os
+
 from .guardians import validate_outcome_clause
 from .loaders import load_icp, load_offerings
 from ..product.catalog import recommend as recommend_product_agents
@@ -248,20 +250,49 @@ def _bucket(value, thresholds):
 # ---------------------------------------------------------------------------
 # Factory batch — handlers genéricos para materializar agentes do catálogo
 # ---------------------------------------------------------------------------
+_SOUL_CACHE: dict = {}
+
+
+def _load_soul(spec) -> str:
+    """Lê o soul.md (persona/princípios) do disco, cacheado por caminho. A persona base
+    mora no arquivo; overrides por tenant chegam via store (state['context']['soul'])."""
+    spec_dir = spec.get("_spec_dir")
+    if not spec_dir:
+        return ""
+    ref = spec.get("soul_ref", "soul.md")
+    path = os.path.join(spec_dir, ref)
+    if path not in _SOUL_CACHE:
+        try:
+            with open(path, encoding="utf-8") as f:
+                _SOUL_CACHE[path] = f.read().strip()
+        except OSError:
+            _SOUL_CACHE[path] = ""
+    return _SOUL_CACHE[path]
+
+
 def _build_generative_prompt(state, spec, *, artifact_type, risk, requires_review):
-    """Monta um prompt REAL para os agentes generativos: enunciado da task + identidade +
-    cláusula de outcome (C2 da spec) + memória/perfil do tenant (state['context']). Substitui
-    o antigo prompt só-metadata, que fazia o LLM responder genericamente. O contrato de saída
-    não muda — só a qualidade do conteúdo gerado. Com FakeLLMProvider o texto segue canônico
-    (eval determinístico); com LLM real, o conteúdo passa a ser fiel à task e ao C2."""
+    """Monta um prompt REAL para os agentes generativos: persona (soul.md) + enunciado da
+    task + identidade + cláusula de outcome (C2 da spec) + memória/perfil do tenant
+    (state['context']). Substitui o antigo prompt só-metadata, que fazia o LLM responder
+    genericamente. O contrato de saída não muda — só a qualidade do conteúdo gerado. Com
+    FakeLLMProvider o texto segue canônico (eval determinístico); com LLM real, o conteúdo
+    passa a ser fiel à persona, à task e ao C2."""
     task = state["task"]
     oc = spec.get("outcome_clause") or {}
     ctx = state.get("context") or {}
     statement = task.get("statement") or "(sem enunciado informado)"
     parts = [
         f"Você é o agente {spec['id']} da guilda {spec.get('guild', '?')}.",
+    ]
+    soul = _load_soul(spec)
+    tenant_soul = ctx.get("soul") or {}
+    if soul:
+        parts.append(f"Sua persona e princípios (soul):\n{soul}")
+    if tenant_soul:
+        parts.append(f"Ajustes de persona para este cliente: {tenant_soul}")
+    parts += [
         f"Tarefa: {statement}",
-        f"Produza o artefato '{artifact_type}', fiel à cláusula de outcome abaixo.",
+        f"Produza o artefato '{artifact_type}', fiel à persona e à cláusula de outcome abaixo.",
     ]
     if oc.get("statement"):
         parts.append(f"Cláusula de outcome (C2): {oc['statement']}")

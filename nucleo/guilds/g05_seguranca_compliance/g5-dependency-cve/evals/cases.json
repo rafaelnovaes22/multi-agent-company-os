@@ -2,60 +2,831 @@
   {
     "id": "cv-01",
     "desc": "CVE critica com exploit publico em caminho ativo -> despacha remediacao",
-    "statement": "Priorize esta CVE com exploit publico em caminho ativo e dispare patch",
+    "statement": "CVE critica com exploit publico em caminho ativo -> despacha remediacao",
     "cve": {
       "items": [
-        {"id": "CVE-2024-0001", "cvss": 9.8, "epss": 0.9, "in_active_path": true, "exploit_public": true}
+        {
+          "id": "CVE-2024-0001",
+          "cvss": 9.8,
+          "epss": 0.9,
+          "in_active_path": true,
+          "exploit_public": true
+        }
       ]
     },
     "expected": {
-      "by": "g5-dependency-cve",
       "cve_count": 1,
       "critical_open": 1,
       "exploitable_count": 1,
       "top_priority_id": "CVE-2024-0001",
       "remediation_dispatched": true,
-      "delivered_event": "cve.remediation_dispatched"
+      "delivered_event": "cve.remediation_dispatched",
+      "by": "g5-dependency-cve"
     }
   },
   {
     "id": "cv-02",
     "desc": "CVEs de baixa exploitabilidade fora de caminho ativo -> scan limpo",
-    "statement": "Conclua a varredura de CVEs do SBOM sem ruido de remediacao",
+    "statement": "CVEs de baixa exploitabilidade fora de caminho ativo -> scan limpo",
     "cve": {
       "items": [
-        {"id": "CVE-2024-0050", "cvss": 5.0, "epss": 0.1, "in_active_path": false},
-        {"id": "CVE-2024-0051", "cvss": 3.0, "epss": 0.05, "in_active_path": false}
+        {
+          "id": "CVE-2024-0050",
+          "cvss": 5.0,
+          "epss": 0.1,
+          "in_active_path": false
+        },
+        {
+          "id": "CVE-2024-0051",
+          "cvss": 3.0,
+          "epss": 0.05,
+          "in_active_path": false
+        }
       ]
     },
     "expected": {
-      "by": "g5-dependency-cve",
       "cve_count": 2,
       "critical_open": 0,
       "exploitable_count": 0,
       "top_priority_id": "CVE-2024-0050",
       "remediation_dispatched": false,
-      "delivered_event": "cve.scan_completed"
+      "delivered_event": "cve.scan_completed",
+      "by": "g5-dependency-cve"
     }
   },
   {
     "id": "cv-03",
     "desc": "mix: CVE alta exploravel em caminho ativo lidera ranking -> despacha",
-    "statement": "Priorize por exploitabilidade real e despache remediacao com versao-alvo",
+    "statement": "mix: CVE alta exploravel em caminho ativo lidera ranking -> despacha",
     "cve": {
       "items": [
-        {"id": "CVE-2024-0100", "cvss": 8.5, "epss": 0.6, "in_active_path": true},
-        {"id": "CVE-2024-0101", "cvss": 6.0, "epss": 0.2, "in_active_path": false}
+        {
+          "id": "CVE-2024-0100",
+          "cvss": 8.5,
+          "epss": 0.6,
+          "in_active_path": true
+        },
+        {
+          "id": "CVE-2024-0101",
+          "cvss": 6.0,
+          "epss": 0.2,
+          "in_active_path": false
+        }
       ]
     },
     "expected": {
-      "by": "g5-dependency-cve",
       "cve_count": 2,
       "critical_open": 0,
       "exploitable_count": 1,
       "top_priority_id": "CVE-2024-0100",
       "remediation_dispatched": true,
-      "delivered_event": "cve.remediation_dispatched"
+      "delivered_event": "cve.remediation_dispatched",
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-04",
+    "desc": "SBOM sem CVEs -> scan_completed, nada a despachar",
+    "statement": "SBOM sem CVEs -> scan_completed, nada a despachar",
+    "cve": {
+      "items": []
+    },
+    "expected": {
+      "cve_count": 0,
+      "critical_open": 0,
+      "exploitable_count": 0,
+      "top_priority_id": null,
+      "remediation_dispatched": false,
+      "delivered_event": "cve.scan_completed",
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-05",
+    "desc": "CVSS exatamente 9.0 -> critica (limiar), despacha por critical_open",
+    "statement": "CVSS exatamente 9.0 -> critica (limiar), despacha por critical_open",
+    "cve": {
+      "items": [
+        {
+          "id": "C-9.0",
+          "cvss": 9.0,
+          "epss": 0.1,
+          "in_active_path": false
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 1,
+      "critical_open": 1,
+      "exploitable_count": 0,
+      "remediation_dispatched": true,
+      "delivered_event": "cve.remediation_dispatched",
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-06",
+    "desc": "CVSS 8.9 logo abaixo de 9.0 -> alta, nao critica",
+    "statement": "CVSS 8.9 logo abaixo de 9.0 -> alta, nao critica",
+    "cve": {
+      "items": [
+        {
+          "id": "A-8.9",
+          "cvss": 8.9,
+          "epss": 0.1,
+          "in_active_path": false
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 1,
+      "critical_open": 0,
+      "exploitable_count": 0,
+      "remediation_dispatched": false,
+      "delivered_event": "cve.scan_completed",
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-07",
+    "desc": "CVSS exatamente 7.0 -> alta (limiar inferior de alta)",
+    "statement": "CVSS exatamente 7.0 -> alta (limiar inferior de alta)",
+    "cve": {
+      "items": [
+        {
+          "id": "A-7.0",
+          "cvss": 7.0,
+          "epss": 0.1,
+          "in_active_path": false
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 1,
+      "critical_open": 0,
+      "exploitable_count": 0,
+      "remediation_dispatched": false,
+      "delivered_event": "cve.scan_completed",
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-08",
+    "desc": "CVSS 6.9 logo abaixo de 7.0 -> media",
+    "statement": "CVSS 6.9 logo abaixo de 7.0 -> media",
+    "cve": {
+      "items": [
+        {
+          "id": "M-6.9",
+          "cvss": 6.9,
+          "epss": 0.1,
+          "in_active_path": false
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 1,
+      "critical_open": 0,
+      "exploitable_count": 0,
+      "remediation_dispatched": false,
+      "delivered_event": "cve.scan_completed",
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-09",
+    "desc": "CVSS exatamente 4.0 -> media (limiar inferior de media)",
+    "statement": "CVSS exatamente 4.0 -> media (limiar inferior de media)",
+    "cve": {
+      "items": [
+        {
+          "id": "M-4.0",
+          "cvss": 4.0,
+          "epss": 0.1,
+          "in_active_path": false
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 1,
+      "critical_open": 0,
+      "exploitable_count": 0,
+      "remediation_dispatched": false,
+      "delivered_event": "cve.scan_completed",
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-10",
+    "desc": "CVSS 3.9 logo abaixo de 4.0 -> baixa",
+    "statement": "CVSS 3.9 logo abaixo de 4.0 -> baixa",
+    "cve": {
+      "items": [
+        {
+          "id": "B-3.9",
+          "cvss": 3.9,
+          "epss": 0.1,
+          "in_active_path": false
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 1,
+      "critical_open": 0,
+      "exploitable_count": 0,
+      "remediation_dispatched": false,
+      "delivered_event": "cve.scan_completed",
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-11",
+    "desc": "EPSS exatamente 0.5 em caminho ativo -> exploravel, despacha",
+    "statement": "EPSS exatamente 0.5 em caminho ativo -> exploravel, despacha",
+    "cve": {
+      "items": [
+        {
+          "id": "E-0.5",
+          "cvss": 6.0,
+          "epss": 0.5,
+          "in_active_path": true
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 1,
+      "critical_open": 0,
+      "exploitable_count": 1,
+      "remediation_dispatched": true,
+      "delivered_event": "cve.remediation_dispatched",
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-12",
+    "desc": "EPSS 0.49 em caminho ativo, sem exploit publico -> NAO exploravel",
+    "statement": "EPSS 0.49 em caminho ativo, sem exploit publico -> NAO exploravel",
+    "cve": {
+      "items": [
+        {
+          "id": "E-0.49",
+          "cvss": 6.0,
+          "epss": 0.49,
+          "in_active_path": true
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 1,
+      "critical_open": 0,
+      "exploitable_count": 0,
+      "remediation_dispatched": false,
+      "delivered_event": "cve.scan_completed",
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-13",
+    "desc": "EPSS alto (0.9) mas FORA de caminho ativo -> nao exploravel (exposicao manda)",
+    "statement": "EPSS alto (0.9) mas FORA de caminho ativo -> nao exploravel (exposicao manda)",
+    "cve": {
+      "items": [
+        {
+          "id": "E-noactive",
+          "cvss": 7.5,
+          "epss": 0.9,
+          "in_active_path": false
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 1,
+      "critical_open": 0,
+      "exploitable_count": 0,
+      "remediation_dispatched": false,
+      "delivered_event": "cve.scan_completed",
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-14",
+    "desc": "exploit_public=true em caminho ativo compensa EPSS baixo -> exploravel",
+    "statement": "exploit_public=true em caminho ativo compensa EPSS baixo -> exploravel",
+    "cve": {
+      "items": [
+        {
+          "id": "E-pub",
+          "cvss": 5.0,
+          "epss": 0.05,
+          "in_active_path": true,
+          "exploit_public": true
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 1,
+      "critical_open": 0,
+      "exploitable_count": 1,
+      "remediation_dispatched": true,
+      "delivered_event": "cve.remediation_dispatched",
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-15",
+    "desc": "exploit_public=true mas FORA de caminho ativo -> nao exploravel",
+    "statement": "exploit_public=true mas FORA de caminho ativo -> nao exploravel",
+    "cve": {
+      "items": [
+        {
+          "id": "E-pub-noactive",
+          "cvss": 5.0,
+          "epss": 0.9,
+          "in_active_path": false,
+          "exploit_public": true
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 1,
+      "critical_open": 0,
+      "exploitable_count": 0,
+      "remediation_dispatched": false,
+      "delivered_event": "cve.scan_completed",
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-16",
+    "desc": "priority = cvss*epss*1.5 em caminho ativo (9.8*0.9*1.5=13.23)",
+    "statement": "priority = cvss*epss*1.5 em caminho ativo (9.8*0.9*1.5=13.23)",
+    "cve": {
+      "items": [
+        {
+          "id": "P-active",
+          "cvss": 9.8,
+          "epss": 0.9,
+          "in_active_path": true
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 1,
+      "critical_open": 1,
+      "exploitable_count": 1,
+      "top_priority_id": "P-active",
+      "remediation_dispatched": true,
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-17",
+    "desc": "fator exposicao 0.4 fora de caminho ativo penaliza prioridade",
+    "statement": "fator exposicao 0.4 fora de caminho ativo penaliza prioridade",
+    "cve": {
+      "items": [
+        {
+          "id": "P-inactive",
+          "cvss": 9.8,
+          "epss": 0.9,
+          "in_active_path": false
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 1,
+      "critical_open": 1,
+      "exploitable_count": 0,
+      "top_priority_id": "P-inactive",
+      "remediation_dispatched": true,
+      "delivered_event": "cve.remediation_dispatched",
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-18",
+    "desc": "ranking ordena por prioridade: ativa de cvss menor vence inativa de cvss maior",
+    "statement": "ranking ordena por prioridade: ativa de cvss menor vence inativa de cvss maior",
+    "cve": {
+      "items": [
+        {
+          "id": "LOW-active",
+          "cvss": 7.0,
+          "epss": 0.8,
+          "in_active_path": true
+        },
+        {
+          "id": "HIGH-inactive",
+          "cvss": 9.5,
+          "epss": 0.8,
+          "in_active_path": false
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 2,
+      "critical_open": 1,
+      "exploitable_count": 1,
+      "top_priority_id": "LOW-active",
+      "remediation_dispatched": true,
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-19",
+    "desc": "tres CVEs, top eh a de maior cvss*epss*exposicao",
+    "statement": "tres CVEs, top eh a de maior cvss*epss*exposicao",
+    "cve": {
+      "items": [
+        {
+          "id": "T1",
+          "cvss": 5.0,
+          "epss": 0.3,
+          "in_active_path": true
+        },
+        {
+          "id": "T2",
+          "cvss": 8.0,
+          "epss": 0.7,
+          "in_active_path": true
+        },
+        {
+          "id": "T3",
+          "cvss": 6.0,
+          "epss": 0.4,
+          "in_active_path": false
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 3,
+      "top_priority_id": "T2",
+      "exploitable_count": 1,
+      "remediation_dispatched": true,
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-20",
+    "desc": "critica fora de caminho ativo ainda dispara remediacao (critical_open>0)",
+    "statement": "critica fora de caminho ativo ainda dispara remediacao (critical_open>0)",
+    "cve": {
+      "items": [
+        {
+          "id": "CRIT-inactive",
+          "cvss": 9.5,
+          "epss": 0.1,
+          "in_active_path": false
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 1,
+      "critical_open": 1,
+      "exploitable_count": 0,
+      "remediation_dispatched": true,
+      "delivered_event": "cve.remediation_dispatched",
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-21",
+    "desc": "duas criticas -> critical_open=2, despacha",
+    "statement": "duas criticas -> critical_open=2, despacha",
+    "cve": {
+      "items": [
+        {
+          "id": "CR1",
+          "cvss": 9.1,
+          "epss": 0.2,
+          "in_active_path": false
+        },
+        {
+          "id": "CR2",
+          "cvss": 10.0,
+          "epss": 0.3,
+          "in_active_path": false
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 2,
+      "critical_open": 2,
+      "exploitable_count": 0,
+      "top_priority_id": "CR2",
+      "remediation_dispatched": true,
+      "delivered_event": "cve.remediation_dispatched",
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-22",
+    "desc": "alta exploravel sem nenhuma critica -> dispara so por exploitabilidade",
+    "statement": "alta exploravel sem nenhuma critica -> dispara so por exploitabilidade",
+    "cve": {
+      "items": [
+        {
+          "id": "EX1",
+          "cvss": 7.5,
+          "epss": 0.7,
+          "in_active_path": true
+        },
+        {
+          "id": "EX2",
+          "cvss": 5.0,
+          "epss": 0.1,
+          "in_active_path": false
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 2,
+      "critical_open": 0,
+      "exploitable_count": 1,
+      "remediation_dispatched": true,
+      "delivered_event": "cve.remediation_dispatched",
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-23",
+    "desc": "tres exploraveis em caminho ativo (EPSS>=0.5) -> exploitable_count=3",
+    "statement": "tres exploraveis em caminho ativo (EPSS>=0.5) -> exploitable_count=3",
+    "cve": {
+      "items": [
+        {
+          "id": "X1",
+          "cvss": 6.0,
+          "epss": 0.5,
+          "in_active_path": true
+        },
+        {
+          "id": "X2",
+          "cvss": 7.0,
+          "epss": 0.6,
+          "in_active_path": true
+        },
+        {
+          "id": "X3",
+          "cvss": 8.0,
+          "epss": 0.9,
+          "in_active_path": true
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 3,
+      "critical_open": 0,
+      "exploitable_count": 3,
+      "remediation_dispatched": true,
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-24",
+    "desc": "mix grande: 1 critica + 1 exploravel + 2 ruido -> dispara, conta certo",
+    "statement": "mix grande: 1 critica + 1 exploravel + 2 ruido -> dispara, conta certo",
+    "cve": {
+      "items": [
+        {
+          "id": "G1",
+          "cvss": 9.2,
+          "epss": 0.1,
+          "in_active_path": false
+        },
+        {
+          "id": "G2",
+          "cvss": 7.0,
+          "epss": 0.8,
+          "in_active_path": true
+        },
+        {
+          "id": "G3",
+          "cvss": 4.0,
+          "epss": 0.05,
+          "in_active_path": false
+        },
+        {
+          "id": "G4",
+          "cvss": 2.0,
+          "epss": 0.01,
+          "in_active_path": false
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 4,
+      "critical_open": 1,
+      "exploitable_count": 1,
+      "remediation_dispatched": true,
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-25",
+    "desc": "todas baixas e fora de caminho -> scan limpo, exploitable_count=0",
+    "statement": "todas baixas e fora de caminho -> scan limpo, exploitable_count=0",
+    "cve": {
+      "items": [
+        {
+          "id": "N1",
+          "cvss": 3.0,
+          "epss": 0.4,
+          "in_active_path": false
+        },
+        {
+          "id": "N2",
+          "cvss": 2.5,
+          "epss": 0.6,
+          "in_active_path": false
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 2,
+      "critical_open": 0,
+      "exploitable_count": 0,
+      "remediation_dispatched": false,
+      "delivered_event": "cve.scan_completed",
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-26",
+    "desc": "item sem epss (default 0) em caminho ativo -> nao exploravel",
+    "statement": "item sem epss (default 0) em caminho ativo -> nao exploravel",
+    "cve": {
+      "items": [
+        {
+          "id": "NOEPSS",
+          "cvss": 8.0,
+          "in_active_path": true
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 1,
+      "critical_open": 0,
+      "exploitable_count": 0,
+      "remediation_dispatched": false,
+      "delivered_event": "cve.scan_completed",
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-27",
+    "desc": "item sem cvss (default 0) -> baixa, nao critica",
+    "statement": "item sem cvss (default 0) -> baixa, nao critica",
+    "cve": {
+      "items": [
+        {
+          "id": "NOCVSS",
+          "epss": 0.9,
+          "in_active_path": true,
+          "exploit_public": true
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 1,
+      "critical_open": 0,
+      "exploitable_count": 1,
+      "remediation_dispatched": true,
+      "delivered_event": "cve.remediation_dispatched",
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-28",
+    "desc": "critica em caminho ativo com EPSS<0.5 e sem exploit publico -> nao exploravel mas dispara por critical",
+    "statement": "critica em caminho ativo com EPSS<0.5 e sem exploit publico -> nao exploravel mas dispara por critical",
+    "cve": {
+      "items": [
+        {
+          "id": "CR-active-lowepss",
+          "cvss": 9.3,
+          "epss": 0.2,
+          "in_active_path": true
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 1,
+      "critical_open": 1,
+      "exploitable_count": 0,
+      "remediation_dispatched": true,
+      "delivered_event": "cve.remediation_dispatched",
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-29",
+    "desc": "nem critica nem exploravel mesmo com cvss alta inativa -> NAO despacha",
+    "statement": "nem critica nem exploravel mesmo com cvss alta inativa -> NAO despacha",
+    "cve": {
+      "items": [
+        {
+          "id": "HI-inactive",
+          "cvss": 8.8,
+          "epss": 0.9,
+          "in_active_path": false
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 1,
+      "critical_open": 0,
+      "exploitable_count": 0,
+      "remediation_dispatched": false,
+      "delivered_event": "cve.scan_completed",
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-30",
+    "desc": "media em caminho ativo com EPSS exatamente 0.5 -> exploravel, despacha",
+    "statement": "media em caminho ativo com EPSS exatamente 0.5 -> exploravel, despacha",
+    "cve": {
+      "items": [
+        {
+          "id": "MED-active-0.5",
+          "cvss": 4.5,
+          "epss": 0.5,
+          "in_active_path": true
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 1,
+      "critical_open": 0,
+      "exploitable_count": 1,
+      "remediation_dispatched": true,
+      "delivered_event": "cve.remediation_dispatched",
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-31",
+    "desc": "duas exploraveis + uma critica inativa -> exploitable_count=2, critical_open=1",
+    "statement": "duas exploraveis + uma critica inativa -> exploitable_count=2, critical_open=1",
+    "cve": {
+      "items": [
+        {
+          "id": "MX1",
+          "cvss": 9.4,
+          "epss": 0.1,
+          "in_active_path": false
+        },
+        {
+          "id": "MX2",
+          "cvss": 6.0,
+          "epss": 0.6,
+          "in_active_path": true
+        },
+        {
+          "id": "MX3",
+          "cvss": 5.0,
+          "epss": 0.55,
+          "in_active_path": true
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 3,
+      "critical_open": 1,
+      "exploitable_count": 2,
+      "remediation_dispatched": true,
+      "by": "g5-dependency-cve"
+    }
+  },
+  {
+    "id": "cv-32",
+    "desc": "duas exploraveis: top eh a de maior cvss*epss (6.5*0.6=3.9 > 4.5*0.6=2.7)",
+    "statement": "duas exploraveis: top eh a de maior cvss*epss (6.5*0.6=3.9 > 4.5*0.6=2.7)",
+    "cve": {
+      "items": [
+        {
+          "id": "P-a",
+          "cvss": 4.5,
+          "epss": 0.6,
+          "in_active_path": true
+        },
+        {
+          "id": "P-b",
+          "cvss": 6.5,
+          "epss": 0.6,
+          "in_active_path": true
+        }
+      ]
+    },
+    "expected": {
+      "cve_count": 2,
+      "critical_open": 0,
+      "exploitable_count": 2,
+      "top_priority_id": "P-b",
+      "remediation_dispatched": true,
+      "delivered_event": "cve.remediation_dispatched",
+      "by": "g5-dependency-cve"
     }
   }
 ]

@@ -2,25 +2,557 @@
   {
     "id": "c6-01",
     "desc": "agente AI com trace, desvio 0% -> PASS",
-    "telemetry": {"outcomes_delivered": 100, "traces": 100, "ai_enabled": true, "has_llm_trace": true, "canonical_fields": true},
-    "expected": {"outcomes_traces_delta": 0.0, "within_threshold": true, "telemetry_ok": true, "valid": true, "status": "PASS"}
+    "telemetry": {
+      "outcomes_delivered": 100,
+      "traces": 100,
+      "ai_enabled": true,
+      "has_llm_trace": true,
+      "canonical_fields": true
+    },
+    "expected": {
+      "outcomes_traces_delta": 0.0,
+      "within_threshold": true,
+      "telemetry_ok": true,
+      "valid": true,
+      "status": "PASS"
+    }
   },
   {
     "id": "c6-02",
     "desc": "desvio outcomes<->traces de 3% -> FAIL",
-    "telemetry": {"outcomes_delivered": 97, "traces": 100, "ai_enabled": true, "has_llm_trace": true, "canonical_fields": true},
-    "expected": {"outcomes_traces_delta": 0.03, "delta_pct": 3.0, "within_threshold": false, "valid": false, "status": "FAIL"}
+    "telemetry": {
+      "outcomes_delivered": 97,
+      "traces": 100,
+      "ai_enabled": true,
+      "has_llm_trace": true,
+      "canonical_fields": true
+    },
+    "expected": {
+      "outcomes_traces_delta": 0.03,
+      "delta_pct": 3.0,
+      "within_threshold": false,
+      "valid": false,
+      "status": "FAIL"
+    }
   },
   {
     "id": "c6-03",
     "desc": "agente ai_enabled=false com audit-log completo -> PASS",
-    "telemetry": {"outcomes_delivered": 50, "traces": 50, "ai_enabled": false, "has_audit_log": true, "canonical_fields": true},
-    "expected": {"outcomes_traces_delta": 0.0, "telemetry_ok": true, "valid": true, "status": "PASS"}
+    "telemetry": {
+      "outcomes_delivered": 50,
+      "traces": 50,
+      "ai_enabled": false,
+      "has_audit_log": true,
+      "canonical_fields": true
+    },
+    "expected": {
+      "outcomes_traces_delta": 0.0,
+      "telemetry_ok": true,
+      "valid": true,
+      "status": "PASS"
+    }
   },
   {
     "id": "c6-04",
     "desc": "agente AI sem trace LLM ligado -> FAIL",
-    "telemetry": {"outcomes_delivered": 100, "traces": 100, "ai_enabled": true, "has_llm_trace": false, "canonical_fields": true},
-    "expected": {"telemetry_ok": false, "valid": false, "status": "FAIL"}
+    "telemetry": {
+      "outcomes_delivered": 100,
+      "traces": 100,
+      "ai_enabled": true,
+      "has_llm_trace": false,
+      "canonical_fields": true
+    },
+    "expected": {
+      "telemetry_ok": false,
+      "valid": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c6-05",
+    "desc": "limiar exato 1% (99 vs 100) -> within, PASS",
+    "telemetry": {
+      "outcomes_delivered": 99,
+      "traces": 100,
+      "ai_enabled": true,
+      "has_llm_trace": true,
+      "canonical_fields": true
+    },
+    "expected": {
+      "outcomes_traces_delta": 0.01,
+      "delta_pct": 1.0,
+      "within_threshold": true,
+      "valid": true,
+      "status": "PASS"
+    }
+  },
+  {
+    "id": "c6-06",
+    "desc": "fronteira acima: 2% (98 vs 100) -> FAIL",
+    "telemetry": {
+      "outcomes_delivered": 98,
+      "traces": 100,
+      "ai_enabled": true,
+      "has_llm_trace": true,
+      "canonical_fields": true
+    },
+    "expected": {
+      "outcomes_traces_delta": 0.02,
+      "delta_pct": 2.0,
+      "within_threshold": false,
+      "valid": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c6-07",
+    "desc": "desvio fracionario abaixo de 1% (995 vs 1000=0.5%) -> PASS",
+    "telemetry": {
+      "outcomes_delivered": 995,
+      "traces": 1000,
+      "ai_enabled": true,
+      "has_llm_trace": true,
+      "canonical_fields": true
+    },
+    "expected": {
+      "outcomes_traces_delta": 0.005,
+      "delta_pct": 0.5,
+      "within_threshold": true,
+      "valid": true,
+      "status": "PASS"
+    }
+  },
+  {
+    "id": "c6-08",
+    "desc": "desvio 1.1% (989 vs 1000) -> FAIL (acima do teto)",
+    "telemetry": {
+      "outcomes_delivered": 989,
+      "traces": 1000,
+      "ai_enabled": true,
+      "has_llm_trace": true,
+      "canonical_fields": true
+    },
+    "expected": {
+      "outcomes_traces_delta": 0.011,
+      "delta_pct": 1.1,
+      "within_threshold": false,
+      "valid": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c6-09",
+    "desc": "base usa o maior: mais traces que outcomes (100 vs 102)",
+    "telemetry": {
+      "outcomes_delivered": 100,
+      "traces": 102,
+      "ai_enabled": true,
+      "has_llm_trace": true,
+      "canonical_fields": true
+    },
+    "expected": {
+      "outcomes_traces_delta": 0.0196,
+      "within_threshold": false,
+      "valid": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c6-10",
+    "desc": "desvio enorme (50 vs 100 = 50%) -> FAIL",
+    "telemetry": {
+      "outcomes_delivered": 50,
+      "traces": 100,
+      "ai_enabled": true,
+      "has_llm_trace": true,
+      "canonical_fields": true
+    },
+    "expected": {
+      "outcomes_traces_delta": 0.5,
+      "delta_pct": 50.0,
+      "within_threshold": false,
+      "valid": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c6-11",
+    "desc": "AI com trace presente -> telemetry_ok",
+    "telemetry": {
+      "outcomes_delivered": 10,
+      "traces": 10,
+      "ai_enabled": true,
+      "has_llm_trace": true,
+      "canonical_fields": true
+    },
+    "expected": {
+      "telemetry_ok": true,
+      "valid": true,
+      "status": "PASS"
+    }
+  },
+  {
+    "id": "c6-12",
+    "desc": "AI ignora audit-log: tem audit mas nao trace -> FAIL",
+    "telemetry": {
+      "outcomes_delivered": 10,
+      "traces": 10,
+      "ai_enabled": true,
+      "has_llm_trace": false,
+      "has_audit_log": true,
+      "canonical_fields": true
+    },
+    "expected": {
+      "telemetry_ok": false,
+      "valid": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c6-13",
+    "desc": "nao-AI sem audit-log -> telemetry_ok False, FAIL",
+    "telemetry": {
+      "outcomes_delivered": 10,
+      "traces": 10,
+      "ai_enabled": false,
+      "has_audit_log": false,
+      "canonical_fields": true
+    },
+    "expected": {
+      "telemetry_ok": false,
+      "valid": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c6-14",
+    "desc": "nao-AI ignora trace LLM: tem trace mas nao audit -> FAIL",
+    "telemetry": {
+      "outcomes_delivered": 10,
+      "traces": 10,
+      "ai_enabled": false,
+      "has_llm_trace": true,
+      "has_audit_log": false,
+      "canonical_fields": true
+    },
+    "expected": {
+      "telemetry_ok": false,
+      "valid": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c6-15",
+    "desc": "nao-AI com audit-log -> telemetry_ok",
+    "telemetry": {
+      "outcomes_delivered": 10,
+      "traces": 10,
+      "ai_enabled": false,
+      "has_audit_log": true,
+      "canonical_fields": true
+    },
+    "expected": {
+      "telemetry_ok": true,
+      "valid": true,
+      "status": "PASS"
+    }
+  },
+  {
+    "id": "c6-16",
+    "desc": "AI sem trace e desvio alto -> FAIL por ambos",
+    "telemetry": {
+      "outcomes_delivered": 80,
+      "traces": 100,
+      "ai_enabled": true,
+      "has_llm_trace": false,
+      "canonical_fields": true
+    },
+    "expected": {
+      "telemetry_ok": false,
+      "within_threshold": false,
+      "valid": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c6-17",
+    "desc": "eventos sem campos canonicos (sem trace_id/inputs_hash) -> FAIL",
+    "telemetry": {
+      "outcomes_delivered": 100,
+      "traces": 100,
+      "ai_enabled": true,
+      "has_llm_trace": true,
+      "canonical_fields": false
+    },
+    "expected": {
+      "canonical_fields": false,
+      "within_threshold": true,
+      "telemetry_ok": true,
+      "valid": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c6-18",
+    "desc": "canonical_fields default True quando omitido -> PASS",
+    "telemetry": {
+      "outcomes_delivered": 100,
+      "traces": 100,
+      "ai_enabled": true,
+      "has_llm_trace": true
+    },
+    "expected": {
+      "canonical_fields": true,
+      "valid": true,
+      "status": "PASS"
+    }
+  },
+  {
+    "id": "c6-19",
+    "desc": "desvio ok + telemetria ok mas sem campos canonicos -> FAIL",
+    "telemetry": {
+      "outcomes_delivered": 50,
+      "traces": 50,
+      "ai_enabled": false,
+      "has_audit_log": true,
+      "canonical_fields": false
+    },
+    "expected": {
+      "canonical_fields": false,
+      "telemetry_ok": true,
+      "valid": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c6-20",
+    "desc": "isola desvio: so within falha (telemetria+canonico ok)",
+    "telemetry": {
+      "outcomes_delivered": 90,
+      "traces": 100,
+      "ai_enabled": true,
+      "has_llm_trace": true,
+      "canonical_fields": true
+    },
+    "expected": {
+      "within_threshold": false,
+      "telemetry_ok": true,
+      "canonical_fields": true,
+      "valid": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c6-21",
+    "desc": "isola telemetria: so telemetry_ok falha (desvio+canonico ok)",
+    "telemetry": {
+      "outcomes_delivered": 100,
+      "traces": 100,
+      "ai_enabled": true,
+      "has_llm_trace": false,
+      "canonical_fields": true
+    },
+    "expected": {
+      "within_threshold": true,
+      "telemetry_ok": false,
+      "canonical_fields": true,
+      "valid": false
+    }
+  },
+  {
+    "id": "c6-22",
+    "desc": "isola canonico: so canonical falha (desvio+telemetria ok)",
+    "telemetry": {
+      "outcomes_delivered": 100,
+      "traces": 100,
+      "ai_enabled": true,
+      "has_llm_trace": true,
+      "canonical_fields": false
+    },
+    "expected": {
+      "within_threshold": true,
+      "telemetry_ok": true,
+      "canonical_fields": false,
+      "valid": false
+    }
+  },
+  {
+    "id": "c6-23",
+    "desc": "as tres falham juntas -> FAIL",
+    "telemetry": {
+      "outcomes_delivered": 70,
+      "traces": 100,
+      "ai_enabled": true,
+      "has_llm_trace": false,
+      "canonical_fields": false
+    },
+    "expected": {
+      "within_threshold": false,
+      "telemetry_ok": false,
+      "canonical_fields": false,
+      "valid": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c6-24",
+    "desc": "shadow process: outcomes entregues mas zero traces -> desvio 100%, FAIL",
+    "telemetry": {
+      "outcomes_delivered": 40,
+      "traces": 0,
+      "ai_enabled": true,
+      "has_llm_trace": false,
+      "canonical_fields": true
+    },
+    "expected": {
+      "outcomes_traces_delta": 1.0,
+      "delta_pct": 100.0,
+      "within_threshold": false,
+      "telemetry_ok": false,
+      "valid": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c6-25",
+    "desc": "sem nenhuma atividade (0 e 0) -> desvio 0 mas telemetria ausente p/ AI",
+    "telemetry": {
+      "outcomes_delivered": 0,
+      "traces": 0,
+      "ai_enabled": true,
+      "has_llm_trace": false,
+      "canonical_fields": true
+    },
+    "expected": {
+      "outcomes_traces_delta": 0.0,
+      "within_threshold": true,
+      "telemetry_ok": false,
+      "valid": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c6-26",
+    "desc": "sem atividade nao-AI com audit -> PASS (desvio 0)",
+    "telemetry": {
+      "outcomes_delivered": 0,
+      "traces": 0,
+      "ai_enabled": false,
+      "has_audit_log": true,
+      "canonical_fields": true
+    },
+    "expected": {
+      "outcomes_traces_delta": 0.0,
+      "telemetry_ok": true,
+      "valid": true,
+      "status": "PASS"
+    }
+  },
+  {
+    "id": "c6-27",
+    "desc": "volume alto com desvio 0.1% -> PASS",
+    "telemetry": {
+      "outcomes_delivered": 9990,
+      "traces": 10000,
+      "ai_enabled": true,
+      "has_llm_trace": true,
+      "canonical_fields": true
+    },
+    "expected": {
+      "outcomes_traces_delta": 0.001,
+      "delta_pct": 0.1,
+      "within_threshold": true,
+      "valid": true,
+      "status": "PASS"
+    }
+  },
+  {
+    "id": "c6-28",
+    "desc": "desvio exatamente no limite com volume grande (9900 vs 10000 = 1%)",
+    "telemetry": {
+      "outcomes_delivered": 9900,
+      "traces": 10000,
+      "ai_enabled": true,
+      "has_llm_trace": true,
+      "canonical_fields": true
+    },
+    "expected": {
+      "outcomes_traces_delta": 0.01,
+      "within_threshold": true,
+      "valid": true,
+      "status": "PASS"
+    }
+  },
+  {
+    "id": "c6-29",
+    "desc": "mais outcomes que traces (102 vs 100) -> base=102, FAIL",
+    "telemetry": {
+      "outcomes_delivered": 102,
+      "traces": 100,
+      "ai_enabled": true,
+      "has_llm_trace": true,
+      "canonical_fields": true
+    },
+    "expected": {
+      "outcomes_traces_delta": 0.0196,
+      "within_threshold": false,
+      "valid": false
+    }
+  },
+  {
+    "id": "c6-30",
+    "desc": "nao-AI com desvio dentro do teto e audit -> PASS",
+    "telemetry": {
+      "outcomes_delivered": 199,
+      "traces": 200,
+      "ai_enabled": false,
+      "has_audit_log": true,
+      "canonical_fields": true
+    },
+    "expected": {
+      "outcomes_traces_delta": 0.005,
+      "within_threshold": true,
+      "telemetry_ok": true,
+      "valid": true,
+      "status": "PASS"
+    }
+  },
+  {
+    "id": "c6-31",
+    "desc": "nao-AI com desvio alto mesmo com audit -> FAIL por desvio",
+    "telemetry": {
+      "outcomes_delivered": 180,
+      "traces": 200,
+      "ai_enabled": false,
+      "has_audit_log": true,
+      "canonical_fields": true
+    },
+    "expected": {
+      "outcomes_traces_delta": 0.1,
+      "delta_pct": 10.0,
+      "within_threshold": false,
+      "telemetry_ok": true,
+      "valid": false,
+      "status": "FAIL"
+    }
+  },
+  {
+    "id": "c6-32",
+    "desc": "caminho feliz AI completo: desvio 0, trace, canonico -> PASS",
+    "telemetry": {
+      "outcomes_delivered": 500,
+      "traces": 500,
+      "ai_enabled": true,
+      "has_llm_trace": true,
+      "canonical_fields": true
+    },
+    "expected": {
+      "outcomes_traces_delta": 0.0,
+      "within_threshold": true,
+      "telemetry_ok": true,
+      "canonical_fields": true,
+      "valid": true,
+      "status": "PASS"
+    }
   }
 ]

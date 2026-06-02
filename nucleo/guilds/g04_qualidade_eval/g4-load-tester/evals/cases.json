@@ -1,30 +1,944 @@
 [
-  {"id": "lt-01", "desc": "p95 dentro do target e erro baixo -> PASS (sem C3)",
-   "load": {"latencies_ms": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
-     "requests": 1000, "errors": 5, "duration_s": 10,
-     "p95_target_ms": 2000, "error_rate_target_pct": 1.0},
-   "expected": {"p50_ms": 600.0, "p95_ms": 1000.0, "p99_ms": 1000.0,
-     "throughput_rps": 100.0, "error_rate_pct": 0.5, "sla_ok": true,
-     "c3_ok": true, "sla_verdict": "PASS"}},
-
-  {"id": "lt-02", "desc": "p95 estoura o target -> FAIL",
-   "load": {"latencies_ms": [1000, 1500, 2000, 2500, 3000],
-     "requests": 500, "errors": 2, "duration_s": 5,
-     "p95_target_ms": 2000, "error_rate_target_pct": 1.0},
-   "expected": {"p95_ms": 3000.0, "throughput_rps": 100.0, "error_rate_pct": 0.4,
-     "sla_ok": false, "sla_verdict": "FAIL"}},
-
-  {"id": "lt-03", "desc": "SLA ok mas custo estoura C3 (ratio 0.5 > 0.25) -> FAIL",
-   "load": {"latencies_ms": [100, 200, 300, 400], "requests": 400, "errors": 0,
-     "duration_s": 4, "p95_target_ms": 2000, "error_rate_target_pct": 1.0,
-     "cost_under_load": 5.0, "price": 10.0},
-   "expected": {"error_rate_pct": 0.0, "sla_ok": true, "c3_ok": false,
-     "cost_ratio": 0.5, "sla_verdict": "FAIL"}},
-
-  {"id": "lt-04", "desc": "SLA ok e custo dentro de C3 (ratio 0.2 <= 0.25) -> PASS",
-   "load": {"latencies_ms": [100, 200, 300, 400], "requests": 400, "errors": 0,
-     "duration_s": 4, "p95_target_ms": 2000, "error_rate_target_pct": 1.0,
-     "cost_under_load": 2.0, "price": 10.0},
-   "expected": {"c3_ok": true, "cost_ratio": 0.2, "sla_ok": true,
-     "sla_verdict": "PASS"}}
+  {
+    "id": "lt-01",
+    "desc": "p95 dentro do target e erro baixo -> PASS (sem C3)",
+    "load": {
+      "latencies_ms": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "requests": 1000,
+      "errors": 5,
+      "duration_s": 10,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0
+    },
+    "expected": {
+      "p50_ms": 600.0,
+      "p95_ms": 1000.0,
+      "p99_ms": 1000.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 0.5,
+      "sla_ok": true,
+      "c3_ok": true,
+      "sla_verdict": "PASS"
+    }
+  },
+  {
+    "id": "lt-02",
+    "desc": "p95 estoura o target -> FAIL",
+    "load": {
+      "latencies_ms": [
+        1000,
+        1500,
+        2000,
+        2500,
+        3000
+      ],
+      "requests": 500,
+      "errors": 2,
+      "duration_s": 5,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0
+    },
+    "expected": {
+      "p50_ms": 2000.0,
+      "p95_ms": 3000.0,
+      "p99_ms": 3000.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 0.4,
+      "sla_ok": false,
+      "sla_verdict": "FAIL"
+    }
+  },
+  {
+    "id": "lt-03",
+    "desc": "SLA ok mas custo estoura C3 (ratio 0.5 > 0.25) -> FAIL",
+    "load": {
+      "latencies_ms": [
+        100,
+        200,
+        300,
+        400
+      ],
+      "requests": 400,
+      "errors": 0,
+      "duration_s": 4,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0,
+      "cost_under_load": 5.0,
+      "price": 10.0
+    },
+    "expected": {
+      "p50_ms": 200.0,
+      "p95_ms": 400.0,
+      "p99_ms": 400.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 0.0,
+      "sla_ok": true,
+      "c3_ok": false,
+      "cost_ratio": 0.5,
+      "sla_verdict": "FAIL"
+    }
+  },
+  {
+    "id": "lt-04",
+    "desc": "SLA ok e custo dentro de C3 (ratio 0.2 <= 0.25) -> PASS",
+    "load": {
+      "latencies_ms": [
+        100,
+        200,
+        300,
+        400
+      ],
+      "requests": 400,
+      "errors": 0,
+      "duration_s": 4,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0,
+      "cost_under_load": 2.0,
+      "price": 10.0
+    },
+    "expected": {
+      "p50_ms": 200.0,
+      "p95_ms": 400.0,
+      "p99_ms": 400.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 0.0,
+      "c3_ok": true,
+      "cost_ratio": 0.2,
+      "sla_ok": true,
+      "sla_verdict": "PASS"
+    }
+  },
+  {
+    "id": "lt-05",
+    "desc": "p95 exatamente no target 2000 -> PASS",
+    "load": {
+      "latencies_ms": [
+        1000,
+        1100,
+        1200,
+        1300,
+        1400,
+        1500,
+        1600,
+        1700,
+        1800,
+        2000
+      ],
+      "requests": 1000,
+      "errors": 0,
+      "duration_s": 10,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0
+    },
+    "expected": {
+      "p50_ms": 1500.0,
+      "p95_ms": 2000.0,
+      "p99_ms": 2000.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 0.0,
+      "sla_ok": true,
+      "sla_verdict": "PASS"
+    }
+  },
+  {
+    "id": "lt-06",
+    "desc": "error_rate exatamente 1.0% no target -> PASS",
+    "load": {
+      "latencies_ms": [
+        100,
+        200,
+        300,
+        400
+      ],
+      "requests": 1000,
+      "errors": 10,
+      "duration_s": 10,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0
+    },
+    "expected": {
+      "p50_ms": 200.0,
+      "p95_ms": 400.0,
+      "p99_ms": 400.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 1.0,
+      "sla_ok": true,
+      "sla_verdict": "PASS"
+    }
+  },
+  {
+    "id": "lt-07",
+    "desc": "error_rate 1.1% acima do target -> FAIL",
+    "load": {
+      "latencies_ms": [
+        100,
+        200,
+        300,
+        400
+      ],
+      "requests": 1000,
+      "errors": 11,
+      "duration_s": 10,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0
+    },
+    "expected": {
+      "p50_ms": 200.0,
+      "p95_ms": 400.0,
+      "p99_ms": 400.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 1.1,
+      "sla_ok": false,
+      "sla_verdict": "FAIL"
+    }
+  },
+  {
+    "id": "lt-08",
+    "desc": "p95 1800ms contra target 2000 -> PASS",
+    "load": {
+      "latencies_ms": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1400,
+        1500,
+        1600,
+        1800
+      ],
+      "requests": 3000,
+      "errors": 0,
+      "duration_s": 30,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0
+    },
+    "expected": {
+      "p50_ms": 1300.0,
+      "p95_ms": 1800.0,
+      "p99_ms": 1800.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 0.0,
+      "sla_ok": true,
+      "sla_verdict": "PASS"
+    }
+  },
+  {
+    "id": "lt-09",
+    "desc": "p95 ok mas erro 5% -> FAIL por error_rate",
+    "load": {
+      "latencies_ms": [
+        100,
+        200,
+        300,
+        400
+      ],
+      "requests": 1000,
+      "errors": 50,
+      "duration_s": 10,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0
+    },
+    "expected": {
+      "p50_ms": 200.0,
+      "p95_ms": 400.0,
+      "p99_ms": 400.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 5.0,
+      "sla_ok": false,
+      "sla_verdict": "FAIL"
+    }
+  },
+  {
+    "id": "lt-10",
+    "desc": "erro 0% mas p95 estoura -> FAIL por latencia",
+    "load": {
+      "latencies_ms": [
+        2500,
+        2600,
+        2700,
+        2800,
+        2900,
+        3000,
+        3100,
+        3200,
+        3300,
+        3400
+      ],
+      "requests": 1000,
+      "errors": 0,
+      "duration_s": 10,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0
+    },
+    "expected": {
+      "p50_ms": 3000.0,
+      "p95_ms": 3400.0,
+      "p99_ms": 3400.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 0.0,
+      "sla_ok": false,
+      "sla_verdict": "FAIL"
+    }
+  },
+  {
+    "id": "lt-11",
+    "desc": "custo ratio exatamente 0.25 (limiar C3) -> PASS",
+    "load": {
+      "latencies_ms": [
+        100,
+        200,
+        300,
+        400
+      ],
+      "requests": 400,
+      "errors": 0,
+      "duration_s": 4,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0,
+      "cost_under_load": 2.5,
+      "price": 10.0
+    },
+    "expected": {
+      "p50_ms": 200.0,
+      "p95_ms": 400.0,
+      "p99_ms": 400.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 0.0,
+      "cost_ratio": 0.25,
+      "c3_ok": true,
+      "sla_ok": true,
+      "sla_verdict": "PASS"
+    }
+  },
+  {
+    "id": "lt-12",
+    "desc": "custo ratio 0.26 logo acima de C3 -> FAIL",
+    "load": {
+      "latencies_ms": [
+        100,
+        200,
+        300,
+        400
+      ],
+      "requests": 400,
+      "errors": 0,
+      "duration_s": 4,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0,
+      "cost_under_load": 2.6,
+      "price": 10.0
+    },
+    "expected": {
+      "p50_ms": 200.0,
+      "p95_ms": 400.0,
+      "p99_ms": 400.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 0.0,
+      "cost_ratio": 0.26,
+      "c3_ok": false,
+      "sla_ok": true,
+      "sla_verdict": "FAIL"
+    }
+  },
+  {
+    "id": "lt-13",
+    "desc": "p95 estoura E custo estoura C3 -> FAIL (ambos)",
+    "load": {
+      "latencies_ms": [
+        2500,
+        2600,
+        2700,
+        2800,
+        2900
+      ],
+      "requests": 500,
+      "errors": 0,
+      "duration_s": 5,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0,
+      "cost_under_load": 8.0,
+      "price": 10.0
+    },
+    "expected": {
+      "p50_ms": 2700.0,
+      "p95_ms": 2900.0,
+      "p99_ms": 2900.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 0.0,
+      "sla_ok": false,
+      "c3_ok": false,
+      "cost_ratio": 0.8,
+      "sla_verdict": "FAIL"
+    }
+  },
+  {
+    "id": "lt-14",
+    "desc": "sem preco (output nao-BL) -> C3 nao aplica, PASS se SLA ok",
+    "load": {
+      "latencies_ms": [
+        100,
+        200,
+        300,
+        400
+      ],
+      "requests": 400,
+      "errors": 0,
+      "duration_s": 4,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0
+    },
+    "expected": {
+      "p50_ms": 200.0,
+      "p95_ms": 400.0,
+      "p99_ms": 400.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 0.0,
+      "c3_ok": true,
+      "cost_ratio": null,
+      "sla_ok": true,
+      "sla_verdict": "PASS"
+    }
+  },
+  {
+    "id": "lt-15",
+    "desc": "throughput 200 rps",
+    "load": {
+      "latencies_ms": [
+        100,
+        200,
+        300,
+        400,
+        500
+      ],
+      "requests": 2000,
+      "errors": 0,
+      "duration_s": 10,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0
+    },
+    "expected": {
+      "p50_ms": 300.0,
+      "p95_ms": 500.0,
+      "p99_ms": 500.0,
+      "throughput_rps": 200.0,
+      "error_rate_pct": 0.0,
+      "sla_ok": true,
+      "sla_verdict": "PASS"
+    }
+  },
+  {
+    "id": "lt-16",
+    "desc": "3x pico previsto p95 dentro -> PASS",
+    "load": {
+      "latencies_ms": [
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1400,
+        1500,
+        1900
+      ],
+      "requests": 9000,
+      "errors": 20,
+      "duration_s": 30,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0
+    },
+    "expected": {
+      "p50_ms": 1000.0,
+      "p95_ms": 1900.0,
+      "p99_ms": 1900.0,
+      "throughput_rps": 300.0,
+      "error_rate_pct": 0.22,
+      "sla_ok": true,
+      "sla_verdict": "PASS"
+    }
+  },
+  {
+    "id": "lt-17",
+    "desc": "target de erro 0.5%: 0.4% PASS",
+    "load": {
+      "latencies_ms": [
+        100,
+        200,
+        300,
+        400
+      ],
+      "requests": 1000,
+      "errors": 4,
+      "duration_s": 10,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 0.5
+    },
+    "expected": {
+      "p50_ms": 200.0,
+      "p95_ms": 400.0,
+      "p99_ms": 400.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 0.4,
+      "sla_ok": true,
+      "sla_verdict": "PASS"
+    }
+  },
+  {
+    "id": "lt-18",
+    "desc": "target de erro 0.5%: 0.6% FAIL",
+    "load": {
+      "latencies_ms": [
+        100,
+        200,
+        300,
+        400
+      ],
+      "requests": 1000,
+      "errors": 6,
+      "duration_s": 10,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 0.5
+    },
+    "expected": {
+      "p50_ms": 200.0,
+      "p95_ms": 400.0,
+      "p99_ms": 400.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 0.6,
+      "sla_ok": false,
+      "sla_verdict": "FAIL"
+    }
+  },
+  {
+    "id": "lt-19",
+    "desc": "zero erros -> error_rate 0",
+    "load": {
+      "latencies_ms": [
+        100,
+        200,
+        300
+      ],
+      "requests": 300,
+      "errors": 0,
+      "duration_s": 3,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0
+    },
+    "expected": {
+      "p50_ms": 200.0,
+      "p95_ms": 300.0,
+      "p99_ms": 300.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 0.0,
+      "sla_ok": true,
+      "sla_verdict": "PASS"
+    }
+  },
+  {
+    "id": "lt-20",
+    "desc": "target p95 500ms: 400 PASS",
+    "load": {
+      "latencies_ms": [
+        100,
+        200,
+        300,
+        400
+      ],
+      "requests": 400,
+      "errors": 0,
+      "duration_s": 4,
+      "p95_target_ms": 500,
+      "error_rate_target_pct": 1.0
+    },
+    "expected": {
+      "p50_ms": 200.0,
+      "p95_ms": 400.0,
+      "p99_ms": 400.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 0.0,
+      "sla_ok": true,
+      "sla_verdict": "PASS"
+    }
+  },
+  {
+    "id": "lt-21",
+    "desc": "target p95 300ms: 400 FAIL",
+    "load": {
+      "latencies_ms": [
+        100,
+        200,
+        300,
+        400
+      ],
+      "requests": 400,
+      "errors": 0,
+      "duration_s": 4,
+      "p95_target_ms": 300,
+      "error_rate_target_pct": 1.0
+    },
+    "expected": {
+      "p50_ms": 200.0,
+      "p95_ms": 400.0,
+      "p99_ms": 400.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 0.0,
+      "sla_ok": false,
+      "sla_verdict": "FAIL"
+    }
+  },
+  {
+    "id": "lt-22",
+    "desc": "custo dentro C3 (0.1) e SLA ok -> PASS",
+    "load": {
+      "latencies_ms": [
+        100,
+        200,
+        300,
+        400
+      ],
+      "requests": 400,
+      "errors": 0,
+      "duration_s": 4,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0,
+      "cost_under_load": 1.0,
+      "price": 10.0
+    },
+    "expected": {
+      "p50_ms": 200.0,
+      "p95_ms": 400.0,
+      "p99_ms": 400.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 0.0,
+      "cost_ratio": 0.1,
+      "c3_ok": true,
+      "sla_ok": true,
+      "sla_verdict": "PASS"
+    }
+  },
+  {
+    "id": "lt-23",
+    "desc": "custo estoura C3 (1.0 ratio) mesmo com SLA -> FAIL",
+    "load": {
+      "latencies_ms": [
+        100,
+        200,
+        300,
+        400
+      ],
+      "requests": 400,
+      "errors": 0,
+      "duration_s": 4,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0,
+      "cost_under_load": 10.0,
+      "price": 10.0
+    },
+    "expected": {
+      "p50_ms": 200.0,
+      "p95_ms": 400.0,
+      "p99_ms": 400.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 0.0,
+      "cost_ratio": 1.0,
+      "c3_ok": false,
+      "sla_ok": true,
+      "sla_verdict": "FAIL"
+    }
+  },
+  {
+    "id": "lt-24",
+    "desc": "20 amostras crescentes p95",
+    "load": {
+      "latencies_ms": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1400,
+        1500,
+        1600,
+        1700,
+        1800,
+        1900,
+        2000
+      ],
+      "requests": 2000,
+      "errors": 0,
+      "duration_s": 20,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0
+    },
+    "expected": {
+      "p50_ms": 1000.0,
+      "p95_ms": 2000.0,
+      "p99_ms": 2000.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 0.0,
+      "sla_ok": true,
+      "sla_verdict": "PASS"
+    }
+  },
+  {
+    "id": "lt-25",
+    "desc": "erro 10% -> FAIL contundente",
+    "load": {
+      "latencies_ms": [
+        100,
+        200,
+        300
+      ],
+      "requests": 1000,
+      "errors": 100,
+      "duration_s": 10,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0
+    },
+    "expected": {
+      "p50_ms": 200.0,
+      "p95_ms": 300.0,
+      "p99_ms": 300.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 10.0,
+      "sla_ok": false,
+      "sla_verdict": "FAIL"
+    }
+  },
+  {
+    "id": "lt-26",
+    "desc": "C3 0.30 ratio acima -> FAIL apesar SLA verde",
+    "load": {
+      "latencies_ms": [
+        100,
+        200,
+        300,
+        400
+      ],
+      "requests": 400,
+      "errors": 0,
+      "duration_s": 4,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0,
+      "cost_under_load": 3.0,
+      "price": 10.0
+    },
+    "expected": {
+      "p50_ms": 200.0,
+      "p95_ms": 400.0,
+      "p99_ms": 400.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 0.0,
+      "cost_ratio": 0.3,
+      "c3_ok": false,
+      "sla_ok": true,
+      "sla_verdict": "FAIL"
+    }
+  },
+  {
+    "id": "lt-27",
+    "desc": "relata p50/p95/p99 (negativo: nao so media)",
+    "load": {
+      "latencies_ms": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000,
+        1100,
+        1200
+      ],
+      "requests": 1200,
+      "errors": 0,
+      "duration_s": 12,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0
+    },
+    "expected": {
+      "p50_ms": 600.0,
+      "p95_ms": 1200.0,
+      "p99_ms": 1200.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 0.0,
+      "sla_ok": true,
+      "sla_verdict": "PASS"
+    }
+  },
+  {
+    "id": "lt-28",
+    "desc": "throughput 500 rps p95 ok -> PASS",
+    "load": {
+      "latencies_ms": [
+        200,
+        400,
+        600,
+        800,
+        1000
+      ],
+      "requests": 5000,
+      "errors": 10,
+      "duration_s": 10,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0
+    },
+    "expected": {
+      "p50_ms": 600.0,
+      "p95_ms": 1000.0,
+      "p99_ms": 1000.0,
+      "throughput_rps": 500.0,
+      "error_rate_pct": 0.2,
+      "sla_ok": true,
+      "sla_verdict": "PASS"
+    }
+  },
+  {
+    "id": "lt-29",
+    "desc": "custo dentro C3 mas erro 3% -> FAIL por erro",
+    "load": {
+      "latencies_ms": [
+        100,
+        200,
+        300,
+        400
+      ],
+      "requests": 1000,
+      "errors": 30,
+      "duration_s": 10,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0,
+      "cost_under_load": 1.0,
+      "price": 10.0
+    },
+    "expected": {
+      "p50_ms": 200.0,
+      "p95_ms": 400.0,
+      "p99_ms": 400.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 3.0,
+      "cost_ratio": 0.1,
+      "c3_ok": true,
+      "sla_ok": false,
+      "sla_verdict": "FAIL"
+    }
+  },
+  {
+    "id": "lt-30",
+    "desc": "p95==target e C3==0.25 e erro==target -> PASS no limiar triplo",
+    "load": {
+      "latencies_ms": [
+        1000,
+        1100,
+        1200,
+        1300,
+        1400,
+        1500,
+        1600,
+        1700,
+        1800,
+        2000
+      ],
+      "requests": 1000,
+      "errors": 10,
+      "duration_s": 10,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0,
+      "cost_under_load": 2.5,
+      "price": 10.0
+    },
+    "expected": {
+      "p50_ms": 1500.0,
+      "p95_ms": 2000.0,
+      "p99_ms": 2000.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 1.0,
+      "cost_ratio": 0.25,
+      "c3_ok": true,
+      "sla_ok": true,
+      "sla_verdict": "PASS"
+    }
+  },
+  {
+    "id": "lt-31",
+    "desc": "amostra pequena p95 = maior",
+    "load": {
+      "latencies_ms": [
+        300,
+        600,
+        900
+      ],
+      "requests": 300,
+      "errors": 0,
+      "duration_s": 3,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0
+    },
+    "expected": {
+      "p50_ms": 600.0,
+      "p95_ms": 900.0,
+      "p99_ms": 900.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 0.0,
+      "sla_ok": true,
+      "sla_verdict": "PASS"
+    }
+  },
+  {
+    "id": "lt-32",
+    "desc": "custo zero com preco -> ratio 0 PASS",
+    "load": {
+      "latencies_ms": [
+        100,
+        200,
+        300,
+        400
+      ],
+      "requests": 400,
+      "errors": 0,
+      "duration_s": 4,
+      "p95_target_ms": 2000,
+      "error_rate_target_pct": 1.0,
+      "cost_under_load": 0.0,
+      "price": 10.0
+    },
+    "expected": {
+      "p50_ms": 200.0,
+      "p95_ms": 400.0,
+      "p99_ms": 400.0,
+      "throughput_rps": 100.0,
+      "error_rate_pct": 0.0,
+      "cost_ratio": 0.0,
+      "c3_ok": true,
+      "sla_ok": true,
+      "sla_verdict": "PASS"
+    }
+  }
 ]

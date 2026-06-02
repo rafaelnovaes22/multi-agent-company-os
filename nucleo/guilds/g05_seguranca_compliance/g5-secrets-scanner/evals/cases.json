@@ -1,59 +1,735 @@
 [
   {
     "id": "sc-01",
-    "desc": "chave AWS hardcoded (prefixo de provedor) -> achado de alta confianca, bloqueia",
-    "statement": "Varra este PR por segredos / credenciais hardcoded",
+    "desc": "chave AWS hardcoded (prefixo de provedor) -> achado alta confianca, bloqueia",
+    "statement": "chave AWS hardcoded (prefixo de provedor) -> achado alta confianca, bloqueia",
     "scan": {
       "candidates": [
-        {"value": "AKIAIOSFODNN7EXAMPLE", "location": "src/config.py:12"},
-        {"value": "password", "location": "src/config.py:13"}
+        {
+          "value": "AKIAIOSFODNN7EXAMPLE",
+          "location": "src/config.py:12"
+        },
+        {
+          "value": "password",
+          "location": "src/config.py:13"
+        }
       ]
     },
     "expected": {
-      "by": "g5-secrets-scanner",
       "scanned_count": 2,
       "finding_count": 1,
       "high_confidence_count": 1,
       "blocked": true,
-      "delivered_event": "secrets.finding_opened"
+      "delivered_event": "secrets.finding_opened",
+      "by": "g5-secrets-scanner"
     }
   },
   {
     "id": "sc-02",
     "desc": "token de alta entropia sem prefixo -> achado de media confianca",
-    "statement": "Token apareceu em log -- abra achado e plano de rotacao",
+    "statement": "token de alta entropia sem prefixo -> achado de media confianca",
     "scan": {
       "candidates": [
-        {"value": "x7Jk9Lm2Qp4Rt6Vw8Zb", "location": "logs/app.log:441"}
+        {
+          "value": "x7Jk9Lm2Qp4Rt6Vw8Zb",
+          "location": "logs/app.log:441"
+        }
       ]
     },
     "expected": {
-      "by": "g5-secrets-scanner",
       "scanned_count": 1,
       "finding_count": 1,
       "high_confidence_count": 0,
       "blocked": true,
-      "delivered_event": "secrets.finding_opened"
+      "delivered_event": "secrets.finding_opened",
+      "by": "g5-secrets-scanner"
     }
   },
   {
     "id": "sc-03",
     "desc": "varredura limpa (allowlist absorve falso-positivo) -> scan_completed",
-    "statement": "Conclua a varredura de historico do repositorio",
+    "statement": "varredura limpa (allowlist absorve falso-positivo) -> scan_completed",
     "scan": {
       "candidates": [
-        {"value": "this_is_a_normal_config_value", "location": "config.yaml:3"},
-        {"value": "aaaaaaaaaaaaaaaaaaaa", "location": "fixtures/test.txt:1"}
+        {
+          "value": "this_is_a_normal_config_value",
+          "location": "config.yaml:3"
+        },
+        {
+          "value": "aaaaaaaaaaaaaaaaaaaa",
+          "location": "fixtures/test.txt:1"
+        }
       ],
-      "allowlist": ["this_is_a_normal_config_value"]
+      "allowlist": [
+        "this_is_a_normal_config_value"
+      ]
     },
     "expected": {
-      "by": "g5-secrets-scanner",
       "scanned_count": 2,
       "finding_count": 0,
       "high_confidence_count": 0,
       "blocked": false,
-      "delivered_event": "secrets.scan_completed"
+      "delivered_event": "secrets.scan_completed",
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-04",
+    "desc": "nenhum candidato -> scan_completed",
+    "statement": "nenhum candidato -> scan_completed",
+    "scan": {
+      "candidates": []
+    },
+    "expected": {
+      "scanned_count": 0,
+      "finding_count": 0,
+      "high_confidence_count": 0,
+      "blocked": false,
+      "delivered_event": "secrets.scan_completed",
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-05",
+    "desc": "prefixo sk- (OpenAI) curto e baixa entropia ainda eh alta confianca",
+    "statement": "prefixo sk- (OpenAI) curto e baixa entropia ainda eh alta confianca",
+    "scan": {
+      "candidates": [
+        {
+          "value": "sk-abc123",
+          "location": "src/api.py:5"
+        }
+      ]
+    },
+    "expected": {
+      "scanned_count": 1,
+      "finding_count": 1,
+      "high_confidence_count": 1,
+      "blocked": true,
+      "delivered_event": "secrets.finding_opened",
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-06",
+    "desc": "prefixo ghp_ (GitHub PAT) -> alta confianca, bloqueia",
+    "statement": "prefixo ghp_ (GitHub PAT) -> alta confianca, bloqueia",
+    "scan": {
+      "candidates": [
+        {
+          "value": "ghp_aBcDeFgHiJkLmNoPqRsTuVwXyZ012345",
+          "location": "scripts/deploy.sh:9"
+        }
+      ]
+    },
+    "expected": {
+      "scanned_count": 1,
+      "finding_count": 1,
+      "high_confidence_count": 1,
+      "blocked": true,
+      "delivered_event": "secrets.finding_opened",
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-07",
+    "desc": "prefixo xoxb- (Slack bot) -> alta confianca",
+    "statement": "prefixo xoxb- (Slack bot) -> alta confianca",
+    "scan": {
+      "candidates": [
+        {
+          "value": "xoxb-12345-abcde",
+          "location": "config/slack.json:2"
+        }
+      ]
+    },
+    "expected": {
+      "scanned_count": 1,
+      "finding_count": 1,
+      "high_confidence_count": 1,
+      "blocked": true,
+      "delivered_event": "secrets.finding_opened",
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-08",
+    "desc": "prefixo AIza (Google API) -> alta confianca",
+    "statement": "prefixo AIza (Google API) -> alta confianca",
+    "scan": {
+      "candidates": [
+        {
+          "value": "AIzaSyD-1234567890abcdefg",
+          "location": ".env:7"
+        }
+      ]
+    },
+    "expected": {
+      "scanned_count": 1,
+      "finding_count": 1,
+      "high_confidence_count": 1,
+      "blocked": true,
+      "delivered_event": "secrets.finding_opened",
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-09",
+    "desc": "prefixo glpat- (GitLab PAT) -> alta confianca",
+    "statement": "prefixo glpat- (GitLab PAT) -> alta confianca",
+    "scan": {
+      "candidates": [
+        {
+          "value": "glpat-AbCdEf123456",
+          "location": "ci/vars.yml:3"
+        }
+      ]
+    },
+    "expected": {
+      "scanned_count": 1,
+      "finding_count": 1,
+      "high_confidence_count": 1,
+      "blocked": true,
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-10",
+    "desc": "prefixo ASIA (AWS STS) -> alta confianca",
+    "statement": "prefixo ASIA (AWS STS) -> alta confianca",
+    "scan": {
+      "candidates": [
+        {
+          "value": "ASIAIOSFODNN7EXAMPLE",
+          "location": "tmp/creds:1"
+        }
+      ]
+    },
+    "expected": {
+      "scanned_count": 1,
+      "finding_count": 1,
+      "high_confidence_count": 1,
+      "blocked": true,
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-11",
+    "desc": "entropia exatamente 3.5 com len 16 -> achado media confianca (limiar inclusivo)",
+    "statement": "entropia exatamente 3.5 com len 16 -> achado media confianca (limiar inclusivo)",
+    "scan": {
+      "candidates": [
+        {
+          "value": "aabbccddefghijkl",
+          "location": "data/blob.txt:1"
+        }
+      ]
+    },
+    "expected": {
+      "scanned_count": 1,
+      "finding_count": 1,
+      "high_confidence_count": 0,
+      "blocked": true,
+      "delivered_event": "secrets.finding_opened",
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-12",
+    "desc": "entropia 3.453 logo abaixo de 3.5 -> NAO eh segredo, scan limpo",
+    "statement": "entropia 3.453 logo abaixo de 3.5 -> NAO eh segredo, scan limpo",
+    "scan": {
+      "candidates": [
+        {
+          "value": "aabbbcddefghijkl",
+          "location": "data/blob.txt:2"
+        }
+      ]
+    },
+    "expected": {
+      "scanned_count": 1,
+      "finding_count": 0,
+      "high_confidence_count": 0,
+      "blocked": false,
+      "delivered_event": "secrets.scan_completed",
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-13",
+    "desc": "alta entropia mas len 15 (<16) -> NAO dispara (limiar de comprimento)",
+    "statement": "alta entropia mas len 15 (<16) -> NAO dispara (limiar de comprimento)",
+    "scan": {
+      "candidates": [
+        {
+          "value": "abcdefghijklmno",
+          "location": "src/util.js:1"
+        }
+      ]
+    },
+    "expected": {
+      "scanned_count": 1,
+      "finding_count": 0,
+      "high_confidence_count": 0,
+      "blocked": false,
+      "delivered_event": "secrets.scan_completed",
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-14",
+    "desc": "mesma classe com len 16 (limiar) e alta entropia -> achado media",
+    "statement": "mesma classe com len 16 (limiar) e alta entropia -> achado media",
+    "scan": {
+      "candidates": [
+        {
+          "value": "abcdefghijklmnop",
+          "location": "src/util.js:2"
+        }
+      ]
+    },
+    "expected": {
+      "scanned_count": 1,
+      "finding_count": 1,
+      "high_confidence_count": 0,
+      "blocked": true,
+      "delivered_event": "secrets.finding_opened",
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-15",
+    "desc": "string longa repetitiva (entropia ~0) -> sem achado",
+    "statement": "string longa repetitiva (entropia ~0) -> sem achado",
+    "scan": {
+      "candidates": [
+        {
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaa",
+          "location": "test/fixture.txt:1"
+        }
+      ]
+    },
+    "expected": {
+      "scanned_count": 1,
+      "finding_count": 0,
+      "high_confidence_count": 0,
+      "blocked": false,
+      "delivered_event": "secrets.scan_completed",
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-16",
+    "desc": "palavra de dicionario curta -> sem achado",
+    "statement": "palavra de dicionario curta -> sem achado",
+    "scan": {
+      "candidates": [
+        {
+          "value": "password",
+          "location": "README.md:10"
+        }
+      ]
+    },
+    "expected": {
+      "scanned_count": 1,
+      "finding_count": 0,
+      "high_confidence_count": 0,
+      "blocked": false,
+      "delivered_event": "secrets.scan_completed",
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-17",
+    "desc": "chave de provedor na allowlist -> ignorada, scan limpo",
+    "statement": "chave de provedor na allowlist -> ignorada, scan limpo",
+    "scan": {
+      "candidates": [
+        {
+          "value": "AKIAIOSFODNN7EXAMPLE",
+          "location": "src/config.py:1"
+        }
+      ],
+      "allowlist": [
+        "AKIAIOSFODNN7EXAMPLE"
+      ]
+    },
+    "expected": {
+      "scanned_count": 1,
+      "finding_count": 0,
+      "high_confidence_count": 0,
+      "blocked": false,
+      "delivered_event": "secrets.scan_completed",
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-18",
+    "desc": "allowlist remove 1 de 2 achados -> resta 1, ainda bloqueia",
+    "statement": "allowlist remove 1 de 2 achados -> resta 1, ainda bloqueia",
+    "scan": {
+      "candidates": [
+        {
+          "value": "AKIAIOSFODNN7EXAMPLE",
+          "location": "a.py:1"
+        },
+        {
+          "value": "ghp_aBcDeFgHiJkLmNoPqRsTuVwXyZ012345",
+          "location": "b.py:1"
+        }
+      ],
+      "allowlist": [
+        "AKIAIOSFODNN7EXAMPLE"
+      ]
+    },
+    "expected": {
+      "scanned_count": 2,
+      "finding_count": 1,
+      "high_confidence_count": 1,
+      "blocked": true,
+      "delivered_event": "secrets.finding_opened",
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-19",
+    "desc": "allowlist nao corresponde (valor diferente) -> achado permanece",
+    "statement": "allowlist nao corresponde (valor diferente) -> achado permanece",
+    "scan": {
+      "candidates": [
+        {
+          "value": "AKIAIOSFODNN7EXAMPLE",
+          "location": "a.py:1"
+        }
+      ],
+      "allowlist": [
+        "AKIAOUTRACHAVE000000"
+      ]
+    },
+    "expected": {
+      "scanned_count": 1,
+      "finding_count": 1,
+      "high_confidence_count": 1,
+      "blocked": true,
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-20",
+    "desc": "duas chaves de provedor -> 2 achados, 2 alta confianca",
+    "statement": "duas chaves de provedor -> 2 achados, 2 alta confianca",
+    "scan": {
+      "candidates": [
+        {
+          "value": "AKIAIOSFODNN7EXAMPLE",
+          "location": "x:1"
+        },
+        {
+          "value": "sk-abc123",
+          "location": "y:2"
+        }
+      ]
+    },
+    "expected": {
+      "scanned_count": 2,
+      "finding_count": 2,
+      "high_confidence_count": 2,
+      "blocked": true,
+      "delivered_event": "secrets.finding_opened",
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-21",
+    "desc": "um provedor (alta) + um por entropia (media) -> 2 achados, 1 alta",
+    "statement": "um provedor (alta) + um por entropia (media) -> 2 achados, 1 alta",
+    "scan": {
+      "candidates": [
+        {
+          "value": "AKIAIOSFODNN7EXAMPLE",
+          "location": "x:1"
+        },
+        {
+          "value": "x7Jk9Lm2Qp4Rt6Vw8Zb",
+          "location": "y:2"
+        }
+      ]
+    },
+    "expected": {
+      "scanned_count": 2,
+      "finding_count": 2,
+      "high_confidence_count": 1,
+      "blocked": true,
+      "delivered_event": "secrets.finding_opened",
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-22",
+    "desc": "tres tokens de alta entropia sem prefixo -> 3 achados, 0 alta confianca",
+    "statement": "tres tokens de alta entropia sem prefixo -> 3 achados, 0 alta confianca",
+    "scan": {
+      "candidates": [
+        {
+          "value": "x7Jk9Lm2Qp4Rt6Vw8Zb",
+          "location": "a:1"
+        },
+        {
+          "value": "Xq9Wm2Kp7Lt4Rv8Nb3Zc",
+          "location": "b:2"
+        },
+        {
+          "value": "abcdefABCDEF12345678",
+          "location": "c:3"
+        }
+      ]
+    },
+    "expected": {
+      "scanned_count": 3,
+      "finding_count": 3,
+      "high_confidence_count": 0,
+      "blocked": true,
+      "delivered_event": "secrets.finding_opened",
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-23",
+    "desc": "valor com prefixo E alta entropia -> classificado alta (prefixo precede)",
+    "statement": "valor com prefixo E alta entropia -> classificado alta (prefixo precede)",
+    "scan": {
+      "candidates": [
+        {
+          "value": "AIzaSyD-1234567890abcdefg",
+          "location": "x:1"
+        }
+      ]
+    },
+    "expected": {
+      "scanned_count": 1,
+      "finding_count": 1,
+      "high_confidence_count": 1,
+      "blocked": true,
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-24",
+    "desc": "1 segredo real + 2 valores triviais -> 1 achado",
+    "statement": "1 segredo real + 2 valores triviais -> 1 achado",
+    "scan": {
+      "candidates": [
+        {
+          "value": "ghp_aBcDeFgHiJkLmNoPqRsTuVwXyZ012345",
+          "location": "a:1"
+        },
+        {
+          "value": "foo",
+          "location": "b:2"
+        },
+        {
+          "value": "enabled",
+          "location": "c:3"
+        }
+      ]
+    },
+    "expected": {
+      "scanned_count": 3,
+      "finding_count": 1,
+      "high_confidence_count": 1,
+      "blocked": true,
+      "delivered_event": "secrets.finding_opened",
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-25",
+    "desc": "varredura de historico totalmente limpa (so configs triviais)",
+    "statement": "varredura de historico totalmente limpa (so configs triviais)",
+    "scan": {
+      "candidates": [
+        {
+          "value": "true",
+          "location": "x:1"
+        },
+        {
+          "value": "8080",
+          "location": "y:2"
+        },
+        {
+          "value": "localhost",
+          "location": "z:3"
+        }
+      ]
+    },
+    "expected": {
+      "scanned_count": 3,
+      "finding_count": 0,
+      "high_confidence_count": 0,
+      "blocked": false,
+      "delivered_event": "secrets.scan_completed",
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-26",
+    "desc": "candidato com value vazio -> ignorado, sem achado",
+    "statement": "candidato com value vazio -> ignorado, sem achado",
+    "scan": {
+      "candidates": [
+        {
+          "value": "",
+          "location": "x:1"
+        }
+      ]
+    },
+    "expected": {
+      "scanned_count": 1,
+      "finding_count": 0,
+      "high_confidence_count": 0,
+      "blocked": false,
+      "delivered_event": "secrets.scan_completed",
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-27",
+    "desc": "value vazio + chave real -> scanned 2, 1 achado",
+    "statement": "value vazio + chave real -> scanned 2, 1 achado",
+    "scan": {
+      "candidates": [
+        {
+          "value": "",
+          "location": "x:1"
+        },
+        {
+          "value": "AKIAIOSFODNN7EXAMPLE",
+          "location": "y:2"
+        }
+      ]
+    },
+    "expected": {
+      "scanned_count": 2,
+      "finding_count": 1,
+      "high_confidence_count": 1,
+      "blocked": true,
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-28",
+    "desc": "token base64-like de alta entropia sem prefixo -> media, bloqueia",
+    "statement": "token base64-like de alta entropia sem prefixo -> media, bloqueia",
+    "scan": {
+      "candidates": [
+        {
+          "value": "Xq9Wm2Kp7Lt4Rv8Nb3Zc",
+          "location": "log:1"
+        }
+      ]
+    },
+    "expected": {
+      "scanned_count": 1,
+      "finding_count": 1,
+      "high_confidence_count": 0,
+      "blocked": true,
+      "delivered_event": "secrets.finding_opened",
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-29",
+    "desc": "allowlist absorve todos os candidatos -> scan_completed",
+    "statement": "allowlist absorve todos os candidatos -> scan_completed",
+    "scan": {
+      "candidates": [
+        {
+          "value": "AKIAIOSFODNN7EXAMPLE",
+          "location": "a:1"
+        },
+        {
+          "value": "sk-abc123",
+          "location": "b:2"
+        }
+      ],
+      "allowlist": [
+        "AKIAIOSFODNN7EXAMPLE",
+        "sk-abc123"
+      ]
+    },
+    "expected": {
+      "scanned_count": 2,
+      "finding_count": 0,
+      "high_confidence_count": 0,
+      "blocked": false,
+      "delivered_event": "secrets.scan_completed",
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-30",
+    "desc": "candidato de entropia limiar na allowlist -> ignorado",
+    "statement": "candidato de entropia limiar na allowlist -> ignorado",
+    "scan": {
+      "candidates": [
+        {
+          "value": "aabbccddefghijkl",
+          "location": "x:1"
+        }
+      ],
+      "allowlist": [
+        "aabbccddefghijkl"
+      ]
+    },
+    "expected": {
+      "scanned_count": 1,
+      "finding_count": 0,
+      "high_confidence_count": 0,
+      "blocked": false,
+      "delivered_event": "secrets.scan_completed",
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-31",
+    "desc": "segredo de alta entropia em log -> abre achado (plano de rotacao)",
+    "statement": "segredo de alta entropia em log -> abre achado (plano de rotacao)",
+    "scan": {
+      "candidates": [
+        {
+          "value": "abcdefABCDEF12345678",
+          "location": "logs/prod.log:88"
+        }
+      ]
+    },
+    "expected": {
+      "scanned_count": 1,
+      "finding_count": 1,
+      "high_confidence_count": 0,
+      "blocked": true,
+      "delivered_event": "secrets.finding_opened",
+      "by": "g5-secrets-scanner"
+    }
+  },
+  {
+    "id": "sc-32",
+    "desc": "len 16 entropia 4.0 (limiar de comprimento exato) -> media confianca",
+    "statement": "len 16 entropia 4.0 (limiar de comprimento exato) -> media confianca",
+    "scan": {
+      "candidates": [
+        {
+          "value": "0123456789abcdef",
+          "location": "x:1"
+        }
+      ]
+    },
+    "expected": {
+      "scanned_count": 1,
+      "finding_count": 1,
+      "high_confidence_count": 0,
+      "blocked": true,
+      "delivered_event": "secrets.finding_opened",
+      "by": "g5-secrets-scanner"
     }
   }
 ]

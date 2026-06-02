@@ -1,31 +1,1555 @@
 [
-  {"id": "hr-01", "desc": "4 cases pass@3, pass-rate por categoria",
-   "eval": {"k": 3, "cases": [
-     {"category": "happy", "successes": 2, "attempts": 3, "cost": 0.1},
-     {"category": "happy", "successes": 0, "attempts": 3, "cost": 0.1},
-     {"category": "adversarial", "successes": 3, "attempts": 3, "cost": 0.2},
-     {"category": "adversarial", "successes": 1, "attempts": 3, "cost": 0.2}]},
-   "expected": {"case_count": 4, "k": 3, "pass_at_k": 75.0,
-     "pass_rate_by_category": {"happy": 33.3, "adversarial": 66.7},
-     "avg_cost_per_case": 0.15}},
-
-  {"id": "hr-02", "desc": "smoke-eval de 8 cases todos verdes -> pass@2 100%",
-   "eval": {"k": 2, "cases": [
-     {"category": "smoke", "successes": 2, "attempts": 2, "cost": 0.05},
-     {"category": "smoke", "successes": 2, "attempts": 2, "cost": 0.05},
-     {"category": "smoke", "successes": 1, "attempts": 2, "cost": 0.05},
-     {"category": "smoke", "successes": 2, "attempts": 2, "cost": 0.05},
-     {"category": "smoke", "successes": 2, "attempts": 2, "cost": 0.05},
-     {"category": "smoke", "successes": 1, "attempts": 2, "cost": 0.05},
-     {"category": "smoke", "successes": 2, "attempts": 2, "cost": 0.05},
-     {"category": "smoke", "successes": 2, "attempts": 2, "cost": 0.05}]},
-   "expected": {"case_count": 8, "k": 2, "pass_at_k": 100.0,
-     "pass_rate_by_category": {"smoke": 87.5}, "avg_cost_per_case": 0.05}},
-
-  {"id": "hr-03", "desc": "categoria unica com metade falhando",
-   "eval": {"k": 1, "cases": [
-     {"category": "recusa", "successes": 1, "attempts": 1, "cost": 0.3},
-     {"category": "recusa", "successes": 0, "attempts": 1, "cost": 0.3}]},
-   "expected": {"case_count": 2, "k": 1, "pass_at_k": 50.0,
-     "pass_rate_by_category": {"recusa": 50.0}, "avg_cost_per_case": 0.3}}
+  {
+    "id": "hr-01",
+    "desc": "4 cases pass@3, pass-rate por categoria",
+    "eval": {
+      "k": 3,
+      "cases": [
+        {
+          "category": "happy",
+          "successes": 2,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "happy",
+          "successes": 0,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "adversarial",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.2
+        },
+        {
+          "category": "adversarial",
+          "successes": 1,
+          "attempts": 3,
+          "cost": 0.2
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 4,
+      "k": 3,
+      "pass_at_k": 75.0,
+      "pass_rate_by_category": {
+        "happy": 33.3,
+        "adversarial": 66.7
+      },
+      "avg_cost_per_case": 0.15
+    }
+  },
+  {
+    "id": "hr-02",
+    "desc": "smoke-eval de 8 cases -> pass@2 100% (>=1 sucesso em cada)",
+    "eval": {
+      "k": 2,
+      "cases": [
+        {
+          "category": "smoke",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.05
+        },
+        {
+          "category": "smoke",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.05
+        },
+        {
+          "category": "smoke",
+          "successes": 1,
+          "attempts": 2,
+          "cost": 0.05
+        },
+        {
+          "category": "smoke",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.05
+        },
+        {
+          "category": "smoke",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.05
+        },
+        {
+          "category": "smoke",
+          "successes": 1,
+          "attempts": 2,
+          "cost": 0.05
+        },
+        {
+          "category": "smoke",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.05
+        },
+        {
+          "category": "smoke",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.05
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 8,
+      "k": 2,
+      "pass_at_k": 100.0,
+      "pass_rate_by_category": {
+        "smoke": 87.5
+      },
+      "avg_cost_per_case": 0.05
+    }
+  },
+  {
+    "id": "hr-03",
+    "desc": "categoria unica com metade falhando",
+    "eval": {
+      "k": 1,
+      "cases": [
+        {
+          "category": "recusa",
+          "successes": 1,
+          "attempts": 1,
+          "cost": 0.3
+        },
+        {
+          "category": "recusa",
+          "successes": 0,
+          "attempts": 1,
+          "cost": 0.3
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 2,
+      "k": 1,
+      "pass_at_k": 50.0,
+      "pass_rate_by_category": {
+        "recusa": 50.0
+      },
+      "avg_cost_per_case": 0.3
+    }
+  },
+  {
+    "id": "hr-04",
+    "desc": "todos os cases passam -> pass@3 100%",
+    "eval": {
+      "k": 3,
+      "cases": [
+        {
+          "category": "happy",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "happy",
+          "successes": 1,
+          "attempts": 3,
+          "cost": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 2,
+      "k": 3,
+      "pass_at_k": 100.0,
+      "pass_rate_by_category": {
+        "happy": 66.7
+      },
+      "avg_cost_per_case": 0.1
+    }
+  },
+  {
+    "id": "hr-05",
+    "desc": "todos falham (0 sucessos) -> pass@k 0%",
+    "eval": {
+      "k": 3,
+      "cases": [
+        {
+          "category": "adversarial",
+          "successes": 0,
+          "attempts": 3,
+          "cost": 0.2
+        },
+        {
+          "category": "adversarial",
+          "successes": 0,
+          "attempts": 3,
+          "cost": 0.2
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 2,
+      "k": 3,
+      "pass_at_k": 0.0,
+      "pass_rate_by_category": {
+        "adversarial": 0.0
+      },
+      "avg_cost_per_case": 0.2
+    }
+  },
+  {
+    "id": "hr-06",
+    "desc": "case com exatamente 1 sucesso em k -> conta como pass",
+    "eval": {
+      "k": 3,
+      "cases": [
+        {
+          "category": "flaky",
+          "successes": 1,
+          "attempts": 3,
+          "cost": 0.15
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 1,
+      "k": 3,
+      "pass_at_k": 100.0,
+      "pass_rate_by_category": {
+        "flaky": 33.3
+      },
+      "avg_cost_per_case": 0.15
+    }
+  },
+  {
+    "id": "hr-07",
+    "desc": "suite de 32 cases pass@3",
+    "eval": {
+      "k": 3,
+      "cases": [
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 0,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 0,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 0,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "c",
+          "successes": 0,
+          "attempts": 3,
+          "cost": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 32,
+      "k": 3,
+      "pass_at_k": 87.5,
+      "pass_rate_by_category": {
+        "c": 87.5
+      },
+      "avg_cost_per_case": 0.1
+    }
+  },
+  {
+    "id": "hr-08",
+    "desc": "tres categorias com pass-rate distintos",
+    "eval": {
+      "k": 3,
+      "cases": [
+        {
+          "category": "A",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "A",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "B",
+          "successes": 1,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "B",
+          "successes": 2,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "C",
+          "successes": 0,
+          "attempts": 3,
+          "cost": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 5,
+      "k": 3,
+      "pass_at_k": 80.0,
+      "pass_rate_by_category": {
+        "A": 100.0,
+        "B": 50.0,
+        "C": 0.0
+      },
+      "avg_cost_per_case": 0.1
+    }
+  },
+  {
+    "id": "hr-09",
+    "desc": "pass@1 todos verdes",
+    "eval": {
+      "k": 1,
+      "cases": [
+        {
+          "category": "x",
+          "successes": 1,
+          "attempts": 1,
+          "cost": 0.2
+        },
+        {
+          "category": "x",
+          "successes": 1,
+          "attempts": 1,
+          "cost": 0.2
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 2,
+      "k": 1,
+      "pass_at_k": 100.0,
+      "pass_rate_by_category": {
+        "x": 100.0
+      },
+      "avg_cost_per_case": 0.2
+    }
+  },
+  {
+    "id": "hr-10",
+    "desc": "pass@5 com sucessos parciais",
+    "eval": {
+      "k": 5,
+      "cases": [
+        {
+          "category": "y",
+          "successes": 2,
+          "attempts": 5,
+          "cost": 0.5
+        },
+        {
+          "category": "y",
+          "successes": 0,
+          "attempts": 5,
+          "cost": 0.5
+        },
+        {
+          "category": "y",
+          "successes": 5,
+          "attempts": 5,
+          "cost": 0.5
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 3,
+      "k": 5,
+      "pass_at_k": 66.7,
+      "pass_rate_by_category": {
+        "y": 46.7
+      },
+      "avg_cost_per_case": 0.5
+    }
+  },
+  {
+    "id": "hr-11",
+    "desc": "attempts omitido usa k como default",
+    "eval": {
+      "k": 4,
+      "cases": [
+        {
+          "category": "z",
+          "successes": 2,
+          "cost": 0.1
+        },
+        {
+          "category": "z",
+          "successes": 0,
+          "cost": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 2,
+      "k": 4,
+      "pass_at_k": 50.0,
+      "pass_rate_by_category": {
+        "z": 25.0
+      },
+      "avg_cost_per_case": 0.1
+    }
+  },
+  {
+    "id": "hr-12",
+    "desc": "um unico case verde",
+    "eval": {
+      "k": 3,
+      "cases": [
+        {
+          "category": "solo",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.4
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 1,
+      "k": 3,
+      "pass_at_k": 100.0,
+      "pass_rate_by_category": {
+        "solo": 100.0
+      },
+      "avg_cost_per_case": 0.4
+    }
+  },
+  {
+    "id": "hr-13",
+    "desc": "categoria ruim isolada (nao so media global)",
+    "eval": {
+      "k": 2,
+      "cases": [
+        {
+          "category": "bom",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.1
+        },
+        {
+          "category": "bom",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.1
+        },
+        {
+          "category": "ruim",
+          "successes": 0,
+          "attempts": 2,
+          "cost": 0.1
+        },
+        {
+          "category": "ruim",
+          "successes": 1,
+          "attempts": 2,
+          "cost": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 4,
+      "k": 2,
+      "pass_at_k": 75.0,
+      "pass_rate_by_category": {
+        "bom": 100.0,
+        "ruim": 25.0
+      },
+      "avg_cost_per_case": 0.1
+    }
+  },
+  {
+    "id": "hr-14",
+    "desc": "custo medio por case calculado",
+    "eval": {
+      "k": 2,
+      "cases": [
+        {
+          "category": "a",
+          "successes": 1,
+          "attempts": 2,
+          "cost": 0.2
+        },
+        {
+          "category": "a",
+          "successes": 1,
+          "attempts": 2,
+          "cost": 0.4
+        },
+        {
+          "category": "a",
+          "successes": 1,
+          "attempts": 2,
+          "cost": 0.6
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 3,
+      "k": 2,
+      "pass_at_k": 100.0,
+      "pass_rate_by_category": {
+        "a": 50.0
+      },
+      "avg_cost_per_case": 0.4
+    }
+  },
+  {
+    "id": "hr-15",
+    "desc": "5 categorias todas verdes pass@2",
+    "eval": {
+      "k": 2,
+      "cases": [
+        {
+          "category": "cat0",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.1
+        },
+        {
+          "category": "cat1",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.1
+        },
+        {
+          "category": "cat2",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.1
+        },
+        {
+          "category": "cat3",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.1
+        },
+        {
+          "category": "cat4",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 5,
+      "k": 2,
+      "pass_at_k": 100.0,
+      "pass_rate_by_category": {
+        "cat0": 100.0,
+        "cat1": 100.0,
+        "cat2": 100.0,
+        "cat3": 100.0,
+        "cat4": 100.0
+      },
+      "avg_cost_per_case": 0.1
+    }
+  },
+  {
+    "id": "hr-16",
+    "desc": "metade passa metade falha -> pass@k 50%",
+    "eval": {
+      "k": 3,
+      "cases": [
+        {
+          "category": "m",
+          "successes": 1,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "m",
+          "successes": 0,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "m",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "m",
+          "successes": 0,
+          "attempts": 3,
+          "cost": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 4,
+      "k": 3,
+      "pass_at_k": 50.0,
+      "pass_rate_by_category": {
+        "m": 33.3
+      },
+      "avg_cost_per_case": 0.1
+    }
+  },
+  {
+    "id": "hr-17",
+    "desc": "cases caros custo medio alto",
+    "eval": {
+      "k": 3,
+      "cases": [
+        {
+          "category": "caro",
+          "successes": 1,
+          "attempts": 3,
+          "cost": 1.5
+        },
+        {
+          "category": "caro",
+          "successes": 2,
+          "attempts": 3,
+          "cost": 2.5
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 2,
+      "k": 3,
+      "pass_at_k": 100.0,
+      "pass_rate_by_category": {
+        "caro": 50.0
+      },
+      "avg_cost_per_case": 2.0
+    }
+  },
+  {
+    "id": "hr-18",
+    "desc": "custo zero -> avg 0",
+    "eval": {
+      "k": 2,
+      "cases": [
+        {
+          "category": "free",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.0
+        },
+        {
+          "category": "free",
+          "successes": 1,
+          "attempts": 2,
+          "cost": 0.0
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 2,
+      "k": 2,
+      "pass_at_k": 100.0,
+      "pass_rate_by_category": {
+        "free": 75.0
+      },
+      "avg_cost_per_case": 0.0
+    }
+  },
+  {
+    "id": "hr-19",
+    "desc": "10 cases pass@3 70%",
+    "eval": {
+      "k": 3,
+      "cases": [
+        {
+          "category": "g",
+          "successes": 2,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "g",
+          "successes": 2,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "g",
+          "successes": 2,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "g",
+          "successes": 2,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "g",
+          "successes": 2,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "g",
+          "successes": 2,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "g",
+          "successes": 2,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "g",
+          "successes": 0,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "g",
+          "successes": 0,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "g",
+          "successes": 0,
+          "attempts": 3,
+          "cost": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 10,
+      "k": 3,
+      "pass_at_k": 70.0,
+      "pass_rate_by_category": {
+        "g": 46.7
+      },
+      "avg_cost_per_case": 0.1
+    }
+  },
+  {
+    "id": "hr-20",
+    "desc": "attempts heterogeneos por case na mesma categoria",
+    "eval": {
+      "k": 3,
+      "cases": [
+        {
+          "category": "h",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "h",
+          "successes": 1,
+          "attempts": 5,
+          "cost": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 2,
+      "k": 3,
+      "pass_at_k": 100.0,
+      "pass_rate_by_category": {
+        "h": 50.0
+      },
+      "avg_cost_per_case": 0.1
+    }
+  },
+  {
+    "id": "hr-21",
+    "desc": "categoria adversarial 0% e happy 100%",
+    "eval": {
+      "k": 2,
+      "cases": [
+        {
+          "category": "happy",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.1
+        },
+        {
+          "category": "happy",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.1
+        },
+        {
+          "category": "adversarial",
+          "successes": 0,
+          "attempts": 2,
+          "cost": 0.1
+        },
+        {
+          "category": "adversarial",
+          "successes": 0,
+          "attempts": 2,
+          "cost": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 4,
+      "k": 2,
+      "pass_at_k": 50.0,
+      "pass_rate_by_category": {
+        "happy": 100.0,
+        "adversarial": 0.0
+      },
+      "avg_cost_per_case": 0.1
+    }
+  },
+  {
+    "id": "hr-22",
+    "desc": "16 cases todos verdes -> 100%",
+    "eval": {
+      "k": 2,
+      "cases": [
+        {
+          "category": "v",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.05
+        },
+        {
+          "category": "v",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.05
+        },
+        {
+          "category": "v",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.05
+        },
+        {
+          "category": "v",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.05
+        },
+        {
+          "category": "v",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.05
+        },
+        {
+          "category": "v",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.05
+        },
+        {
+          "category": "v",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.05
+        },
+        {
+          "category": "v",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.05
+        },
+        {
+          "category": "v",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.05
+        },
+        {
+          "category": "v",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.05
+        },
+        {
+          "category": "v",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.05
+        },
+        {
+          "category": "v",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.05
+        },
+        {
+          "category": "v",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.05
+        },
+        {
+          "category": "v",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.05
+        },
+        {
+          "category": "v",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.05
+        },
+        {
+          "category": "v",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.05
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 16,
+      "k": 2,
+      "pass_at_k": 100.0,
+      "pass_rate_by_category": {
+        "v": 100.0
+      },
+      "avg_cost_per_case": 0.05
+    }
+  },
+  {
+    "id": "hr-23",
+    "desc": "1 sucesso em 10 attempts -> conta pass",
+    "eval": {
+      "k": 10,
+      "cases": [
+        {
+          "category": "raro",
+          "successes": 1,
+          "attempts": 10,
+          "cost": 0.3
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 1,
+      "k": 10,
+      "pass_at_k": 100.0,
+      "pass_rate_by_category": {
+        "raro": 10.0
+      },
+      "avg_cost_per_case": 0.3
+    }
+  },
+  {
+    "id": "hr-24",
+    "desc": "extracao 100% classificacao 0%",
+    "eval": {
+      "k": 3,
+      "cases": [
+        {
+          "category": "extracao",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "extracao",
+          "successes": 2,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "classificacao",
+          "successes": 0,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "classificacao",
+          "successes": 0,
+          "attempts": 3,
+          "cost": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 4,
+      "k": 3,
+      "pass_at_k": 50.0,
+      "pass_rate_by_category": {
+        "extracao": 83.3,
+        "classificacao": 0.0
+      },
+      "avg_cost_per_case": 0.1
+    }
+  },
+  {
+    "id": "hr-25",
+    "desc": "categoria omitida vira 'geral'",
+    "eval": {
+      "k": 2,
+      "cases": [
+        {
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.1
+        },
+        {
+          "successes": 1,
+          "attempts": 2,
+          "cost": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 2,
+      "k": 2,
+      "pass_at_k": 100.0,
+      "pass_rate_by_category": {
+        "geral": 75.0
+      },
+      "avg_cost_per_case": 0.1
+    }
+  },
+  {
+    "id": "hr-26",
+    "desc": "apenas 1 de 4 passa -> pass@k 25%",
+    "eval": {
+      "k": 3,
+      "cases": [
+        {
+          "category": "q",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "q",
+          "successes": 0,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "q",
+          "successes": 0,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "q",
+          "successes": 0,
+          "attempts": 3,
+          "cost": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 4,
+      "k": 3,
+      "pass_at_k": 25.0,
+      "pass_rate_by_category": {
+        "q": 25.0
+      },
+      "avg_cost_per_case": 0.1
+    }
+  },
+  {
+    "id": "hr-27",
+    "desc": "pass-rate fracionario arredondado",
+    "eval": {
+      "k": 3,
+      "cases": [
+        {
+          "category": "r",
+          "successes": 1,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "r",
+          "successes": 2,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "r",
+          "successes": 2,
+          "attempts": 3,
+          "cost": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 3,
+      "k": 3,
+      "pass_at_k": 100.0,
+      "pass_rate_by_category": {
+        "r": 55.6
+      },
+      "avg_cost_per_case": 0.1
+    }
+  },
+  {
+    "id": "hr-28",
+    "desc": "categoria com muitos attempts e poucos sucessos",
+    "eval": {
+      "k": 4,
+      "cases": [
+        {
+          "category": "baixa",
+          "successes": 1,
+          "attempts": 4,
+          "cost": 0.2
+        },
+        {
+          "category": "baixa",
+          "successes": 1,
+          "attempts": 4,
+          "cost": 0.2
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 2,
+      "k": 4,
+      "pass_at_k": 100.0,
+      "pass_rate_by_category": {
+        "baixa": 25.0
+      },
+      "avg_cost_per_case": 0.2
+    }
+  },
+  {
+    "id": "hr-29",
+    "desc": "categoria unica grande 100%",
+    "eval": {
+      "k": 3,
+      "cases": [
+        {
+          "category": "big",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "big",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "big",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "big",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "big",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "big",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "big",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "big",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "big",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "big",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 10,
+      "k": 3,
+      "pass_at_k": 100.0,
+      "pass_rate_by_category": {
+        "big": 100.0
+      },
+      "avg_cost_per_case": 0.1
+    }
+  },
+  {
+    "id": "hr-30",
+    "desc": "9 de 10 passam -> pass@k 90%",
+    "eval": {
+      "k": 3,
+      "cases": [
+        {
+          "category": "p",
+          "successes": 2,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "p",
+          "successes": 2,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "p",
+          "successes": 2,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "p",
+          "successes": 2,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "p",
+          "successes": 2,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "p",
+          "successes": 2,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "p",
+          "successes": 2,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "p",
+          "successes": 2,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "p",
+          "successes": 2,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "p",
+          "successes": 0,
+          "attempts": 3,
+          "cost": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 10,
+      "k": 3,
+      "pass_at_k": 90.0,
+      "pass_rate_by_category": {
+        "p": 60.0
+      },
+      "avg_cost_per_case": 0.1
+    }
+  },
+  {
+    "id": "hr-31",
+    "desc": "custo medio com cases de custo variado",
+    "eval": {
+      "k": 2,
+      "cases": [
+        {
+          "category": "a",
+          "successes": 1,
+          "attempts": 2,
+          "cost": 0.1
+        },
+        {
+          "category": "b",
+          "successes": 1,
+          "attempts": 2,
+          "cost": 0.3
+        },
+        {
+          "category": "c",
+          "successes": 0,
+          "attempts": 2,
+          "cost": 0.5
+        },
+        {
+          "category": "d",
+          "successes": 2,
+          "attempts": 2,
+          "cost": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 4,
+      "k": 2,
+      "pass_at_k": 75.0,
+      "pass_rate_by_category": {
+        "a": 50.0,
+        "b": 50.0,
+        "c": 0.0,
+        "d": 100.0
+      },
+      "avg_cost_per_case": 0.25
+    }
+  },
+  {
+    "id": "hr-32",
+    "desc": "tres categorias todas com falha parcial",
+    "eval": {
+      "k": 3,
+      "cases": [
+        {
+          "category": "A",
+          "successes": 1,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "A",
+          "successes": 0,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "B",
+          "successes": 2,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "B",
+          "successes": 0,
+          "attempts": 3,
+          "cost": 0.1
+        },
+        {
+          "category": "C",
+          "successes": 3,
+          "attempts": 3,
+          "cost": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "case_count": 5,
+      "k": 3,
+      "pass_at_k": 60.0,
+      "pass_rate_by_category": {
+        "A": 16.7,
+        "B": 33.3,
+        "C": 100.0
+      },
+      "avg_cost_per_case": 0.1
+    }
+  }
 ]

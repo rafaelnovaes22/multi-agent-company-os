@@ -1,22 +1,834 @@
 [
-  {"id": "ch-01", "desc": "todos os campos iguais -> merge automatico, sobrevivente o mais completo",
-   "tenant_id": "t-eval-g08",
-   "dedupe": {"record_a": {"id": "A1", "email": "joao@acme.com", "phone": "11999", "name": "Joao Silva", "company_domain": "acme.com"},
-              "record_b": {"id": "B1", "email": "joao@acme.com", "phone": "11999", "name": "Joao Silva", "company_domain": "acme.com"}},
-   "expected": {"match_score": 1.0, "decision": "merge", "is_duplicate": true, "auto_merge": true, "survivor_id": "A1"}},
-  {"id": "ch-02", "desc": "so email igual -> abaixo do limiar de revisao, registros distintos",
-   "tenant_id": "t-eval-g08",
-   "dedupe": {"record_a": {"id": "A2", "email": "ana@x.com", "phone": "11111", "name": "Ana", "company_domain": "x.com"},
-              "record_b": {"id": "B2", "email": "ana@x.com", "phone": "22222", "name": "Outra", "company_domain": "y.com"}},
-   "expected": {"match_score": 0.5, "decision": "distinct", "is_duplicate": false, "auto_merge": false}},
-  {"id": "ch-03", "desc": "email+telefone -> zona de revisao humana",
-   "tenant_id": "t-eval-g08",
-   "dedupe": {"record_a": {"id": "A3", "email": "carlos@z.com", "phone": "33333", "name": "Carlos", "company_domain": "z.com"},
-              "record_b": {"id": "B3", "email": "carlos@z.com", "phone": "33333", "name": "C. Souza", "company_domain": "outro.com"}},
-   "expected": {"match_score": 0.75, "decision": "review", "is_duplicate": false}},
-  {"id": "ch-04", "desc": "email+telefone+nome -> merge automatico",
-   "tenant_id": "t-eval-g08",
-   "dedupe": {"record_a": {"id": "A4", "email": "lia@w.com", "phone": "44444", "name": "Lia Mendes", "company_domain": "w.com"},
-              "record_b": {"id": "B4", "email": "lia@w.com", "phone": "44444", "name": "Lia Mendes"}},
-   "expected": {"match_score": 0.9, "decision": "merge", "is_duplicate": true, "survivor_id": "A4"}}
+  {
+    "id": "ch-01",
+    "desc": "todos os campos iguais -> merge automatico, sobrevivente o mais completo",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A1",
+        "email": "joao@acme.com",
+        "phone": "11999",
+        "name": "Joao Silva",
+        "company_domain": "acme.com"
+      },
+      "record_b": {
+        "id": "B1",
+        "email": "joao@acme.com",
+        "phone": "11999",
+        "name": "Joao Silva",
+        "company_domain": "acme.com"
+      }
+    },
+    "expected": {
+      "match_score": 1.0,
+      "decision": "merge",
+      "is_duplicate": true,
+      "auto_merge": true,
+      "survivor_id": "A1"
+    }
+  },
+  {
+    "id": "ch-02",
+    "desc": "so email igual -> abaixo do limiar de revisao, registros distintos",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A2",
+        "email": "ana@x.com",
+        "phone": "11111",
+        "name": "Ana",
+        "company_domain": "x.com"
+      },
+      "record_b": {
+        "id": "B2",
+        "email": "ana@x.com",
+        "phone": "22222",
+        "name": "Outra",
+        "company_domain": "y.com"
+      }
+    },
+    "expected": {
+      "match_score": 0.5,
+      "decision": "distinct",
+      "is_duplicate": false,
+      "auto_merge": false
+    }
+  },
+  {
+    "id": "ch-03",
+    "desc": "email+telefone -> zona de revisao humana",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A3",
+        "email": "carlos@z.com",
+        "phone": "33333",
+        "name": "Carlos",
+        "company_domain": "z.com"
+      },
+      "record_b": {
+        "id": "B3",
+        "email": "carlos@z.com",
+        "phone": "33333",
+        "name": "C. Souza",
+        "company_domain": "outro.com"
+      }
+    },
+    "expected": {
+      "match_score": 0.75,
+      "decision": "review",
+      "is_duplicate": false
+    }
+  },
+  {
+    "id": "ch-04",
+    "desc": "email+telefone+nome -> merge automatico",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A4",
+        "email": "lia@w.com",
+        "phone": "44444",
+        "name": "Lia Mendes",
+        "company_domain": "w.com"
+      },
+      "record_b": {
+        "id": "B4",
+        "email": "lia@w.com",
+        "phone": "44444",
+        "name": "Lia Mendes"
+      }
+    },
+    "expected": {
+      "match_score": 0.9,
+      "decision": "merge",
+      "is_duplicate": true,
+      "survivor_id": "A4"
+    }
+  },
+  {
+    "id": "ch-05",
+    "desc": "so telefone igual (0.25) -> distinct",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A5",
+        "email": "p1@a.com",
+        "phone": "55555",
+        "name": "Pedro",
+        "company_domain": "a.com"
+      },
+      "record_b": {
+        "id": "B5",
+        "email": "outro@b.com",
+        "phone": "55555",
+        "name": "Paulo",
+        "company_domain": "b.com"
+      }
+    },
+    "expected": {
+      "match_score": 0.25,
+      "decision": "distinct",
+      "is_duplicate": false,
+      "matched_fields": [
+        "phone"
+      ]
+    }
+  },
+  {
+    "id": "ch-06",
+    "desc": "so nome igual (0.15) -> distinct",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A6",
+        "email": "a@a.com",
+        "phone": "1",
+        "name": "Maria Souza",
+        "company_domain": "a.com"
+      },
+      "record_b": {
+        "id": "B6",
+        "email": "b@b.com",
+        "phone": "2",
+        "name": "Maria Souza",
+        "company_domain": "b.com"
+      }
+    },
+    "expected": {
+      "match_score": 0.15,
+      "decision": "distinct",
+      "matched_fields": [
+        "name"
+      ]
+    }
+  },
+  {
+    "id": "ch-07",
+    "desc": "so dominio da empresa (0.10) -> distinct",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A7",
+        "email": "a@a.com",
+        "phone": "1",
+        "name": "Joao",
+        "company_domain": "acme.com"
+      },
+      "record_b": {
+        "id": "B7",
+        "email": "b@b.com",
+        "phone": "2",
+        "name": "Maria",
+        "company_domain": "acme.com"
+      }
+    },
+    "expected": {
+      "match_score": 0.1,
+      "decision": "distinct",
+      "matched_fields": [
+        "company_domain"
+      ]
+    }
+  },
+  {
+    "id": "ch-08",
+    "desc": "so email igual (0.5) isolado -> distinct, matched_fields email",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A8",
+        "email": "x@x.com",
+        "phone": "1",
+        "name": "Joao",
+        "company_domain": "a.com"
+      },
+      "record_b": {
+        "id": "B8",
+        "email": "x@x.com",
+        "phone": "2",
+        "name": "Maria",
+        "company_domain": "b.com"
+      }
+    },
+    "expected": {
+      "match_score": 0.5,
+      "decision": "distinct",
+      "matched_fields": [
+        "email"
+      ]
+    }
+  },
+  {
+    "id": "ch-09",
+    "desc": "fronteira 0.60 exato (email 0.5 + dominio 0.10) -> review",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A9",
+        "email": "j@acme.com",
+        "phone": "1",
+        "name": "Joao",
+        "company_domain": "acme.com"
+      },
+      "record_b": {
+        "id": "B9",
+        "email": "j@acme.com",
+        "phone": "2",
+        "name": "Maria",
+        "company_domain": "acme.com"
+      }
+    },
+    "expected": {
+      "match_score": 0.6,
+      "decision": "review",
+      "is_duplicate": false
+    }
+  },
+  {
+    "id": "ch-10",
+    "desc": "0.65 (email + nome) -> review",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A10",
+        "email": "k@k.com",
+        "phone": "1",
+        "name": "Lia Mendes",
+        "company_domain": "a.com"
+      },
+      "record_b": {
+        "id": "B10",
+        "email": "k@k.com",
+        "phone": "2",
+        "name": "Lia Mendes",
+        "company_domain": "b.com"
+      }
+    },
+    "expected": {
+      "match_score": 0.65,
+      "decision": "review"
+    }
+  },
+  {
+    "id": "ch-11",
+    "desc": "fronteira logo abaixo de 0.6 (phone+name+domain=0.5) -> distinct",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A11",
+        "email": "a@a.com",
+        "phone": "9",
+        "name": "Ze Silva",
+        "company_domain": "z.com"
+      },
+      "record_b": {
+        "id": "B11",
+        "email": "b@b.com",
+        "phone": "9",
+        "name": "Ze Silva",
+        "company_domain": "z.com"
+      }
+    },
+    "expected": {
+      "match_score": 0.5,
+      "decision": "distinct"
+    }
+  },
+  {
+    "id": "ch-12",
+    "desc": "fronteira 0.85 exato (email+phone+dominio) -> merge",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A12",
+        "email": "m@m.com",
+        "phone": "888",
+        "name": "Joao",
+        "company_domain": "m.com"
+      },
+      "record_b": {
+        "id": "B12",
+        "email": "m@m.com",
+        "phone": "888",
+        "name": "Maria",
+        "company_domain": "m.com"
+      }
+    },
+    "expected": {
+      "match_score": 0.85,
+      "decision": "merge",
+      "is_duplicate": true,
+      "auto_merge": true
+    }
+  },
+  {
+    "id": "ch-13",
+    "desc": "0.75 (email+nome+dominio) logo abaixo do merge -> review",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A13",
+        "email": "n@acme.com",
+        "phone": "1",
+        "name": "Ana Lima",
+        "company_domain": "acme.com"
+      },
+      "record_b": {
+        "id": "B13",
+        "email": "n@acme.com",
+        "phone": "2",
+        "name": "Ana Lima",
+        "company_domain": "acme.com"
+      }
+    },
+    "expected": {
+      "match_score": 0.75,
+      "decision": "review",
+      "is_duplicate": false
+    }
+  },
+  {
+    "id": "ch-14",
+    "desc": "match total, B mais completo (A sem domain) -> sobrevivente B",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A14",
+        "email": "z@z.com",
+        "phone": "1",
+        "name": "Ze",
+        "company_domain": ""
+      },
+      "record_b": {
+        "id": "B14",
+        "email": "z@z.com",
+        "phone": "1",
+        "name": "Ze",
+        "company_domain": "z.com"
+      }
+    },
+    "expected": {
+      "decision": "merge",
+      "is_duplicate": true,
+      "survivor_id": "B14"
+    }
+  },
+  {
+    "id": "ch-15",
+    "desc": "merge com empate de completude -> A vence (fa>=fb)",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A15",
+        "email": "t@t.com",
+        "phone": "1",
+        "name": "T",
+        "company_domain": "t.com"
+      },
+      "record_b": {
+        "id": "B15",
+        "email": "t@t.com",
+        "phone": "1",
+        "name": "T",
+        "company_domain": "t.com"
+      }
+    },
+    "expected": {
+      "decision": "merge",
+      "survivor_id": "A15"
+    }
+  },
+  {
+    "id": "ch-16",
+    "desc": "merge, A mais completo (B sem name) -> sobrevivente A",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A16",
+        "email": "u@u.com",
+        "phone": "1",
+        "name": "Ursula",
+        "company_domain": "u.com"
+      },
+      "record_b": {
+        "id": "B16",
+        "email": "u@u.com",
+        "phone": "1",
+        "name": "",
+        "company_domain": "u.com"
+      }
+    },
+    "expected": {
+      "decision": "merge",
+      "survivor_id": "A16"
+    }
+  },
+  {
+    "id": "ch-17",
+    "desc": "review -> sem sobrevivente (survivor_id None)",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A17",
+        "email": "v@v.com",
+        "phone": "2",
+        "name": "V",
+        "company_domain": "x.com"
+      },
+      "record_b": {
+        "id": "B17",
+        "email": "v@v.com",
+        "phone": "3",
+        "name": "V",
+        "company_domain": "x.com"
+      }
+    },
+    "expected": {
+      "decision": "review",
+      "survivor_id": null,
+      "is_duplicate": false
+    }
+  },
+  {
+    "id": "ch-18",
+    "desc": "distinct -> survivor None e auto_merge False",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A18",
+        "email": "a@a.com",
+        "phone": "1",
+        "name": "Joao",
+        "company_domain": "a.com"
+      },
+      "record_b": {
+        "id": "B18",
+        "email": "z@z.com",
+        "phone": "9",
+        "name": "Maria",
+        "company_domain": "z.com"
+      }
+    },
+    "expected": {
+      "match_score": 0.0,
+      "decision": "distinct",
+      "survivor_id": null,
+      "auto_merge": false
+    }
+  },
+  {
+    "id": "ch-19",
+    "desc": "normalizacao: email com maiusculas e espacos ainda casa",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A19",
+        "email": "  JOAO@ACME.COM  ",
+        "phone": "111",
+        "name": "Joao",
+        "company_domain": "acme.com"
+      },
+      "record_b": {
+        "id": "B19",
+        "email": "joao@acme.com",
+        "phone": "111",
+        "name": "joao",
+        "company_domain": "ACME.COM"
+      }
+    },
+    "expected": {
+      "match_score": 1.0,
+      "decision": "merge",
+      "is_duplicate": true
+    }
+  },
+  {
+    "id": "ch-20",
+    "desc": "normalizacao de nome (trim+lower) casa email+nome+dominio -> review/merge",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A20",
+        "email": "s@s.com",
+        "phone": "1",
+        "name": "Joao Silva",
+        "company_domain": "s.com"
+      },
+      "record_b": {
+        "id": "B20",
+        "email": "s@s.com",
+        "phone": "1",
+        "name": "  JOAO SILVA  ",
+        "company_domain": "s.com"
+      }
+    },
+    "expected": {
+      "match_score": 1.0,
+      "decision": "merge",
+      "is_duplicate": true
+    }
+  },
+  {
+    "id": "ch-21",
+    "desc": "campos vazios nao contam como match (ambos email vazio)",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A21",
+        "email": "",
+        "phone": "1",
+        "name": "X",
+        "company_domain": ""
+      },
+      "record_b": {
+        "id": "B21",
+        "email": "",
+        "phone": "1",
+        "name": "X",
+        "company_domain": ""
+      }
+    },
+    "expected": {
+      "match_score": 0.4,
+      "decision": "distinct",
+      "matched_fields": [
+        "phone",
+        "name"
+      ]
+    }
+  },
+  {
+    "id": "ch-22",
+    "desc": "um lado sem email -> email nao casa, so phone+name+domain=0.5 -> distinct",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A22",
+        "email": "w@w.com",
+        "phone": "7",
+        "name": "Wanda",
+        "company_domain": "w.com"
+      },
+      "record_b": {
+        "id": "B22",
+        "phone": "7",
+        "name": "Wanda",
+        "company_domain": "w.com"
+      }
+    },
+    "expected": {
+      "match_score": 0.5,
+      "decision": "distinct"
+    }
+  },
+  {
+    "id": "ch-23",
+    "desc": "registros completamente vazios -> score 0, distinct",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A23"
+      },
+      "record_b": {
+        "id": "B23"
+      }
+    },
+    "expected": {
+      "match_score": 0.0,
+      "decision": "distinct",
+      "matched_fields": [],
+      "is_duplicate": false
+    }
+  },
+  {
+    "id": "ch-24",
+    "desc": "ambos vazios sem id -> distinct, survivor None",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {},
+      "record_b": {}
+    },
+    "expected": {
+      "match_score": 0.0,
+      "decision": "distinct",
+      "survivor_id": null
+    }
+  },
+  {
+    "id": "ch-25",
+    "desc": "email+phone (0.75) -> review, matched_fields [email, phone]",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A25",
+        "email": "q@q.com",
+        "phone": "5",
+        "name": "Q1",
+        "company_domain": "a.com"
+      },
+      "record_b": {
+        "id": "B25",
+        "email": "q@q.com",
+        "phone": "5",
+        "name": "Q2",
+        "company_domain": "b.com"
+      }
+    },
+    "expected": {
+      "match_score": 0.75,
+      "decision": "review",
+      "matched_fields": [
+        "email",
+        "phone"
+      ]
+    }
+  },
+  {
+    "id": "ch-26",
+    "desc": "todos os 4 campos casam -> matched_fields completos na ordem dos pesos",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A26",
+        "email": "r@r.com",
+        "phone": "6",
+        "name": "Rui",
+        "company_domain": "r.com"
+      },
+      "record_b": {
+        "id": "B26",
+        "email": "r@r.com",
+        "phone": "6",
+        "name": "Rui",
+        "company_domain": "r.com"
+      }
+    },
+    "expected": {
+      "match_score": 1.0,
+      "matched_fields": [
+        "email",
+        "phone",
+        "name",
+        "company_domain"
+      ],
+      "decision": "merge"
+    }
+  },
+  {
+    "id": "ch-27",
+    "desc": "merge mas A sem id (empate completude) -> survivor None (a.id)",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "email": "noid@a.com",
+        "phone": "1",
+        "name": "NoId",
+        "company_domain": "a.com"
+      },
+      "record_b": {
+        "id": "B27",
+        "email": "noid@a.com",
+        "phone": "1",
+        "name": "NoId",
+        "company_domain": "a.com"
+      }
+    },
+    "expected": {
+      "decision": "merge",
+      "is_duplicate": true,
+      "survivor_id": null
+    }
+  },
+  {
+    "id": "ch-28",
+    "desc": "merge (email+phone+nome=0.90), B com domain extra -> survivor B mais completo",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A28",
+        "email": "c@c.com",
+        "phone": "1",
+        "name": "Carla",
+        "company_domain": ""
+      },
+      "record_b": {
+        "id": "B28",
+        "email": "c@c.com",
+        "phone": "1",
+        "name": "Carla",
+        "company_domain": "c.com"
+      }
+    },
+    "expected": {
+      "match_score": 0.9,
+      "decision": "merge",
+      "survivor_id": "B28"
+    }
+  },
+  {
+    "id": "ch-29",
+    "desc": "0.65 (email+nome) com phone/dominio divergentes -> review",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A29",
+        "email": "d@d.com",
+        "phone": "1",
+        "name": "Dora",
+        "company_domain": "x.com"
+      },
+      "record_b": {
+        "id": "B29",
+        "email": "d@d.com",
+        "phone": "2",
+        "name": "Dora",
+        "company_domain": "y.com"
+      }
+    },
+    "expected": {
+      "match_score": 0.65,
+      "decision": "review",
+      "is_duplicate": false
+    }
+  },
+  {
+    "id": "ch-30",
+    "desc": "0.6 (email+dominio) outro par -> review (limiar inferior inclusivo)",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A30",
+        "email": "e@corp.com",
+        "phone": "1",
+        "name": "Eva",
+        "company_domain": "corp.com"
+      },
+      "record_b": {
+        "id": "B30",
+        "email": "e@corp.com",
+        "phone": "9",
+        "name": "Eric",
+        "company_domain": "corp.com"
+      }
+    },
+    "expected": {
+      "match_score": 0.6,
+      "decision": "review"
+    }
+  },
+  {
+    "id": "ch-31",
+    "desc": "email+phone+nome (0.90) merge, A com domain extra -> survivor A",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A31",
+        "email": "f@f.com",
+        "phone": "3",
+        "name": "Fabio Lima",
+        "company_domain": "f.com"
+      },
+      "record_b": {
+        "id": "B31",
+        "email": "f@f.com",
+        "phone": "3",
+        "name": "Fabio Lima",
+        "company_domain": ""
+      }
+    },
+    "expected": {
+      "match_score": 0.9,
+      "decision": "merge",
+      "survivor_id": "A31"
+    }
+  },
+  {
+    "id": "ch-32",
+    "desc": "match perfeito 1.0, empate -> merge, survivor A",
+    "tenant_id": "t-eval-g08",
+    "dedupe": {
+      "record_a": {
+        "id": "A32",
+        "email": "g@g.com",
+        "phone": "4",
+        "name": "Gui",
+        "company_domain": "g.com"
+      },
+      "record_b": {
+        "id": "B32",
+        "email": "g@g.com",
+        "phone": "4",
+        "name": "Gui",
+        "company_domain": "g.com"
+      }
+    },
+    "expected": {
+      "match_score": 1.0,
+      "decision": "merge",
+      "is_duplicate": true,
+      "auto_merge": true,
+      "survivor_id": "A32"
+    }
+  }
 ]

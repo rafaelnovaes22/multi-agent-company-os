@@ -1,14 +1,827 @@
 [
-  {"id": "fc-01", "desc": "crescimento 10%/período: forecast com IC e backtest dentro da meta",
-   "tenant_id": "t-eval-g06",
-   "forecast": {"history": [100, 110, 121], "periods": 1, "z": 1.96, "backtest": {"actual": [100, 110], "predicted": [98, 112]}},
-   "expected": {"by": "g6-forecaster", "point_forecast": 133.1, "growth_rate": 0.1, "mape_pct": 1.9, "backtest_passed": true, "has_interval": true}},
-  {"id": "fc-02", "desc": "tendência de queda 10%/período em 2 horizontes; MAPE no limite passa",
-   "tenant_id": "t-eval-g06",
-   "forecast": {"history": [200, 180, 162], "periods": 2, "backtest": {"actual": [200], "predicted": [230]}},
-   "expected": {"by": "g6-forecaster", "point_forecast": 131.22, "growth_rate": -0.1, "mape_pct": 15.0, "backtest_passed": true}},
-  {"id": "fc-03", "desc": "MAPE acima da meta reprova o backtest (recalibrar)",
-   "tenant_id": "t-eval-g06",
-   "forecast": {"history": [50, 55], "periods": 1, "backtest": {"actual": [100], "predicted": [150]}},
-   "expected": {"by": "g6-forecaster", "point_forecast": 60.5, "growth_rate": 0.1, "mape_pct": 50.0, "backtest_passed": false}}
+  {
+    "id": "fc-01",
+    "desc": "crescimento 10%/periodo: forecast com IC e backtest dentro da meta",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        110,
+        121
+      ],
+      "periods": 1,
+      "z": 1.96,
+      "backtest": {
+        "actual": [
+          100,
+          110
+        ],
+        "predicted": [
+          98,
+          112
+        ]
+      }
+    },
+    "expected": {
+      "point_forecast": 133.1,
+      "growth_rate": 0.1,
+      "mape_pct": 1.9,
+      "backtest_passed": true,
+      "has_interval": true,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-02",
+    "desc": "tendencia de queda 10%/periodo em 2 horizontes; MAPE no limite passa",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        200,
+        180,
+        162
+      ],
+      "periods": 2,
+      "backtest": {
+        "actual": [
+          200
+        ],
+        "predicted": [
+          230
+        ]
+      }
+    },
+    "expected": {
+      "point_forecast": 131.22,
+      "growth_rate": -0.1,
+      "mape_pct": 15.0,
+      "backtest_passed": true,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-03",
+    "desc": "MAPE acima da meta reprova o backtest (recalibrar)",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        50,
+        55
+      ],
+      "periods": 1,
+      "backtest": {
+        "actual": [
+          100
+        ],
+        "predicted": [
+          150
+        ]
+      }
+    },
+    "expected": {
+      "point_forecast": 60.5,
+      "growth_rate": 0.1,
+      "mape_pct": 50.0,
+      "backtest_passed": false,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-04",
+    "desc": "forecast sempre acompanha IC (nunca previsao pontual): has_interval",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        120,
+        140
+      ],
+      "periods": 1,
+      "backtest": {
+        "actual": [
+          100
+        ],
+        "predicted": [
+          105
+        ]
+      }
+    },
+    "expected": {
+      "has_interval": true,
+      "backtest_passed": true,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-05",
+    "desc": "MAPE exatamente 15% no limiar: backtest passa",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        110
+      ],
+      "periods": 1,
+      "backtest": {
+        "actual": [
+          100
+        ],
+        "predicted": [
+          115
+        ]
+      }
+    },
+    "expected": {
+      "mape_pct": 15.0,
+      "backtest_passed": true,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-06",
+    "desc": "MAPE 16% logo acima do alvo: reprova",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        110
+      ],
+      "periods": 1,
+      "backtest": {
+        "actual": [
+          100
+        ],
+        "predicted": [
+          116
+        ]
+      }
+    },
+    "expected": {
+      "mape_pct": 16.0,
+      "backtest_passed": false,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-07",
+    "desc": "alvo custom 10%; MAPE 12% reprova com alvo apertado",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        110
+      ],
+      "periods": 1,
+      "mape_target": 10.0,
+      "backtest": {
+        "actual": [
+          100
+        ],
+        "predicted": [
+          112
+        ]
+      }
+    },
+    "expected": {
+      "mape_pct": 12.0,
+      "backtest_passed": false,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-08",
+    "desc": "alvo custom 20%; MAPE 18% passa com alvo folgado",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        110
+      ],
+      "periods": 1,
+      "mape_target": 20.0,
+      "backtest": {
+        "actual": [
+          100
+        ],
+        "predicted": [
+          118
+        ]
+      }
+    },
+    "expected": {
+      "mape_pct": 18.0,
+      "backtest_passed": true,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-09",
+    "desc": "sem backtest informado: MAPE 0 e backtest trivialmente passa",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        110,
+        121
+      ],
+      "periods": 1
+    },
+    "expected": {
+      "mape_pct": 0.0,
+      "backtest_passed": true,
+      "has_interval": true,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-10",
+    "desc": "serie flat: crescimento 0, forecast = ultimo valor",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        100,
+        100
+      ],
+      "periods": 1,
+      "backtest": {
+        "actual": [
+          100
+        ],
+        "predicted": [
+          100
+        ]
+      }
+    },
+    "expected": {
+      "growth_rate": 0.0,
+      "point_forecast": 100.0,
+      "mape_pct": 0.0,
+      "backtest_passed": true,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-11",
+    "desc": "historico de 1 ponto: growth 0 e IC degenerado mas has_interval True",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        500
+      ],
+      "periods": 1
+    },
+    "expected": {
+      "growth_rate": 0.0,
+      "point_forecast": 500.0,
+      "has_interval": true,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-12",
+    "desc": "crescimento 20%/periodo em 3 horizontes (composto)",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        120,
+        144
+      ],
+      "periods": 3,
+      "backtest": {
+        "actual": [
+          100
+        ],
+        "predicted": [
+          105
+        ]
+      }
+    },
+    "expected": {
+      "growth_rate": 0.2,
+      "backtest_passed": true,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-13",
+    "desc": "queda 25%/periodo: growth negativo",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        400,
+        300,
+        225
+      ],
+      "periods": 1,
+      "backtest": {
+        "actual": [
+          300
+        ],
+        "predicted": [
+          310
+        ]
+      }
+    },
+    "expected": {
+      "growth_rate": -0.25,
+      "backtest_passed": true,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-14",
+    "desc": "MAPE media de 3 pares: dentro da meta",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        110
+      ],
+      "periods": 1,
+      "backtest": {
+        "actual": [
+          100,
+          200,
+          300
+        ],
+        "predicted": [
+          105,
+          210,
+          309
+        ]
+      }
+    },
+    "expected": {
+      "backtest_passed": true,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-15",
+    "desc": "MAPE media de 3 pares com um erro grande: reprova",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        110
+      ],
+      "periods": 1,
+      "backtest": {
+        "actual": [
+          100,
+          200,
+          300
+        ],
+        "predicted": [
+          200,
+          210,
+          309
+        ]
+      }
+    },
+    "expected": {
+      "backtest_passed": false,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-16",
+    "desc": "z=2.576 (99%) alarga o IC vs base",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        120,
+        140
+      ],
+      "periods": 1,
+      "z": 2.576,
+      "backtest": {
+        "actual": [
+          100
+        ],
+        "predicted": [
+          100
+        ]
+      }
+    },
+    "expected": {
+      "has_interval": true,
+      "backtest_passed": true,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-17",
+    "desc": "z=1.645 (90%) estreita o IC",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        120,
+        140
+      ],
+      "periods": 1,
+      "z": 1.645,
+      "backtest": {
+        "actual": [
+          100
+        ],
+        "predicted": [
+          100
+        ]
+      }
+    },
+    "expected": {
+      "has_interval": true,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-18",
+    "desc": "backtest perfeito: MAPE 0",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        110
+      ],
+      "periods": 1,
+      "backtest": {
+        "actual": [
+          100,
+          200
+        ],
+        "predicted": [
+          100,
+          200
+        ]
+      }
+    },
+    "expected": {
+      "mape_pct": 0.0,
+      "backtest_passed": true,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-19",
+    "desc": "taxas mistas: growth medio das variacoes",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        120,
+        108
+      ],
+      "periods": 1,
+      "backtest": {
+        "actual": [
+          100
+        ],
+        "predicted": [
+          100
+        ]
+      }
+    },
+    "expected": {
+      "backtest_passed": true,
+      "has_interval": true,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-20",
+    "desc": "12 periodos a 5%: forecast anual composto",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        105,
+        110.25
+      ],
+      "periods": 12,
+      "backtest": {
+        "actual": [
+          100
+        ],
+        "predicted": [
+          102
+        ]
+      }
+    },
+    "expected": {
+      "backtest_passed": true,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-21",
+    "desc": "MAPE no fio 14.9% passa",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        110
+      ],
+      "periods": 1,
+      "backtest": {
+        "actual": [
+          1000
+        ],
+        "predicted": [
+          1149
+        ]
+      }
+    },
+    "expected": {
+      "backtest_passed": true,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-22",
+    "desc": "MAPE 15.1% logo acima reprova",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        110
+      ],
+      "periods": 1,
+      "backtest": {
+        "actual": [
+          1000
+        ],
+        "predicted": [
+          1151
+        ]
+      }
+    },
+    "expected": {
+      "backtest_passed": false,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-23",
+    "desc": "queda + MAPE alto: reprova e recalibrar",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        200,
+        150,
+        112.5
+      ],
+      "periods": 1,
+      "backtest": {
+        "actual": [
+          100
+        ],
+        "predicted": [
+          140
+        ]
+      }
+    },
+    "expected": {
+      "growth_rate": -0.25,
+      "backtest_passed": false,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-24",
+    "desc": "backtest com actual zero ignorado (par invalido)",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        110
+      ],
+      "periods": 1,
+      "backtest": {
+        "actual": [
+          0,
+          100
+        ],
+        "predicted": [
+          5,
+          105
+        ]
+      }
+    },
+    "expected": {
+      "mape_pct": 5.0,
+      "backtest_passed": true,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-25",
+    "desc": "crescimento 50% agressivo: previsao em pico",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        150,
+        225
+      ],
+      "periods": 1,
+      "backtest": {
+        "actual": [
+          150
+        ],
+        "predicted": [
+          155
+        ]
+      }
+    },
+    "expected": {
+      "growth_rate": 0.5,
+      "backtest_passed": true,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-26",
+    "desc": "serie longa estavel: growth ~0 e backtest ok",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "periods": 2,
+      "backtest": {
+        "actual": [
+          100,
+          100
+        ],
+        "predicted": [
+          100,
+          101
+        ]
+      }
+    },
+    "expected": {
+      "growth_rate": 0.0,
+      "point_forecast": 100.0,
+      "backtest_passed": true,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-27",
+    "desc": "MAPE alto custom alvo 5%: pequeno erro reprova",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        110
+      ],
+      "periods": 1,
+      "mape_target": 5.0,
+      "backtest": {
+        "actual": [
+          100
+        ],
+        "predicted": [
+          108
+        ]
+      }
+    },
+    "expected": {
+      "mape_pct": 8.0,
+      "backtest_passed": false,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-28",
+    "desc": "crescimento 10% 2 periodos: composto 121% sobre ultimo",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        110
+      ],
+      "periods": 2,
+      "backtest": {
+        "actual": [
+          110
+        ],
+        "predicted": [
+          112
+        ]
+      }
+    },
+    "expected": {
+      "growth_rate": 0.1,
+      "backtest_passed": true,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-29",
+    "desc": "backtest reprova mesmo com forecast crescente saudavel",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        110,
+        121
+      ],
+      "periods": 1,
+      "backtest": {
+        "actual": [
+          100
+        ],
+        "predicted": [
+          200
+        ]
+      }
+    },
+    "expected": {
+      "growth_rate": 0.1,
+      "mape_pct": 100.0,
+      "backtest_passed": false,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-30",
+    "desc": "alvo 15 default; MAPE 7.5% confortavel",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        110
+      ],
+      "periods": 1,
+      "backtest": {
+        "actual": [
+          200,
+          400
+        ],
+        "predicted": [
+          215,
+          415
+        ]
+      }
+    },
+    "expected": {
+      "backtest_passed": true,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-31",
+    "desc": "serie de 2 pontos sem backtest: growth definido, has_interval True",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        80,
+        100
+      ],
+      "periods": 1
+    },
+    "expected": {
+      "growth_rate": 0.25,
+      "point_forecast": 125.0,
+      "has_interval": true,
+      "backtest_passed": true,
+      "by": "g6-forecaster"
+    }
+  },
+  {
+    "id": "fc-32",
+    "desc": "queda 10% com backtest no limite exato 15%: passa",
+    "tenant_id": "t-eval-g06",
+    "forecast": {
+      "history": [
+        100,
+        90
+      ],
+      "periods": 1,
+      "backtest": {
+        "actual": [
+          100
+        ],
+        "predicted": [
+          85
+        ]
+      }
+    },
+    "expected": {
+      "growth_rate": -0.1,
+      "mape_pct": 15.0,
+      "backtest_passed": true,
+      "by": "g6-forecaster"
+    }
+  }
 ]

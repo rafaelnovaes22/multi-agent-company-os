@@ -1,23 +1,546 @@
 [
-  {"id": "rr-01", "desc": "risco vermelho de privacidade com dono atribuído",
-   "tenant_id": "t-eval-g12",
-   "statement": "Converta este incidente de privacidade em item de risco com dono e mitigação",
-   "risk": {"probability": 5, "impact": 4, "category": "privacidade", "owner": "DRI Legal", "mitigation": "patch + notificacao ANPD"},
-   "expected": {"by": "g12-risk-register", "score": 20, "weighted_score": 20.0, "level": "vermelho",
-                "heatmap_cell": "P5I4", "has_owner": true, "has_mitigation": true,
-                "alert_board": true, "blocked": false,
-                "delivered_event": "risk.registered && risk.owner_assigned && risk.scored"}},
-  {"id": "rr-02", "desc": "risco verde operacional sem dono (ponderado pela categoria)",
-   "tenant_id": "t-eval-g12",
-   "statement": "Pontue este risco operacional e atualize o heatmap",
-   "risk": {"probability": 2, "impact": 3, "category": "operacional"},
-   "expected": {"by": "g12-risk-register", "score": 6, "weighted_score": 4.8, "level": "verde",
-                "heatmap_cell": "P2I3", "has_owner": false, "alert_board": false, "escalate": false}},
-  {"id": "rr-03", "desc": "risco amarelo regulatório com dono (delivered)",
-   "tenant_id": "t-eval-g12-2",
-   "statement": "Registre e pontue este risco regulatório com dono atribuído",
-   "risk": {"probability": 3, "impact": 4, "category": "regulatorio", "owner": "Compliance", "mitigation": "roadmap LGPD"},
-   "expected": {"by": "g12-risk-register", "score": 12, "weighted_score": 12.0, "level": "amarelo",
-                "heatmap_cell": "P3I4", "has_owner": true, "alert_board": false,
-                "delivered_event": "risk.registered && risk.owner_assigned && risk.scored"}}
+  {
+    "id": "rr-01",
+    "desc": "risco vermelho de privacidade com dono atribuido",
+    "tenant_id": "t-eval-g12",
+    "statement": "Converta este incidente de privacidade em item de risco com dono e mitigacao",
+    "risk": {
+      "probability": 5,
+      "impact": 4,
+      "category": "privacidade",
+      "owner": "DRI Legal",
+      "mitigation": "patch + notificacao ANPD"
+    },
+    "expected": {
+      "by": "g12-risk-register",
+      "score": 20,
+      "weighted_score": 20.0,
+      "level": "vermelho",
+      "heatmap_cell": "P5I4",
+      "has_owner": true,
+      "has_mitigation": true,
+      "alert_board": true,
+      "blocked": false,
+      "delivered_event": "risk.registered && risk.owner_assigned && risk.scored"
+    }
+  },
+  {
+    "id": "rr-02",
+    "desc": "risco verde operacional sem dono (ponderado pela categoria)",
+    "tenant_id": "t-eval-g12",
+    "statement": "Pontue este risco operacional e atualize o heatmap",
+    "risk": {
+      "probability": 2,
+      "impact": 3,
+      "category": "operacional"
+    },
+    "expected": {
+      "by": "g12-risk-register",
+      "score": 6,
+      "weighted_score": 4.8,
+      "level": "verde",
+      "heatmap_cell": "P2I3",
+      "has_owner": false,
+      "alert_board": false,
+      "escalate": false
+    }
+  },
+  {
+    "id": "rr-03",
+    "desc": "risco amarelo regulatorio com dono (delivered)",
+    "tenant_id": "t-eval-g12-2",
+    "statement": "Registre e pontue este risco regulatorio com dono atribuido",
+    "risk": {
+      "probability": 3,
+      "impact": 4,
+      "category": "regulatorio",
+      "owner": "Compliance",
+      "mitigation": "roadmap LGPD"
+    },
+    "expected": {
+      "by": "g12-risk-register",
+      "score": 12,
+      "weighted_score": 12.0,
+      "level": "amarelo",
+      "heatmap_cell": "P3I4",
+      "has_owner": true,
+      "alert_board": false,
+      "delivered_event": "risk.registered && risk.owner_assigned && risk.scored"
+    }
+  },
+  {
+    "id": "rr-04",
+    "desc": "C2 negativo: risco vermelho SEM dono -> blocked, sem delivered",
+    "risk": {
+      "probability": 5,
+      "impact": 5,
+      "category": "seguranca"
+    },
+    "expected": {
+      "score": 25,
+      "level": "vermelho",
+      "heatmap_cell": "P5I5",
+      "has_owner": false,
+      "alert_board": true,
+      "blocked": true,
+      "escalate": true,
+      "delivered_event": null
+    }
+  },
+  {
+    "id": "rr-05",
+    "desc": "vermelho com dono -> nao bloqueia, alerta board, delivered",
+    "risk": {
+      "probability": 5,
+      "impact": 5,
+      "category": "seguranca",
+      "owner": "CISO",
+      "mitigation": "plano"
+    },
+    "expected": {
+      "score": 25,
+      "level": "vermelho",
+      "blocked": false,
+      "alert_board": true,
+      "escalate": true,
+      "has_owner": true,
+      "delivered_event": "risk.registered && risk.owner_assigned && risk.scored"
+    }
+  },
+  {
+    "id": "rr-06",
+    "desc": "limiar exato amarelo: score=8 (P2I4) -> amarelo",
+    "risk": {
+      "probability": 2,
+      "impact": 4,
+      "category": "legal",
+      "owner": "Juridico"
+    },
+    "expected": {
+      "score": 8,
+      "level": "amarelo",
+      "heatmap_cell": "P2I4",
+      "alert_board": false,
+      "escalate": false
+    }
+  },
+  {
+    "id": "rr-07",
+    "desc": "abaixo do amarelo: score=5 (P1I5) -> verde",
+    "risk": {
+      "probability": 1,
+      "impact": 5,
+      "category": "legal",
+      "owner": "Juridico"
+    },
+    "expected": {
+      "score": 5,
+      "level": "verde",
+      "heatmap_cell": "P1I5",
+      "escalate": false
+    }
+  },
+  {
+    "id": "rr-08",
+    "desc": "fronteira verde/amarelo: score=6 -> verde",
+    "risk": {
+      "probability": 2,
+      "impact": 3,
+      "category": "legal"
+    },
+    "expected": {
+      "score": 6,
+      "level": "verde",
+      "escalate": false,
+      "alert_board": false
+    }
+  },
+  {
+    "id": "rr-09",
+    "desc": "limiar exato vermelho: score=15 (P3I5) -> vermelho",
+    "risk": {
+      "probability": 3,
+      "impact": 5,
+      "category": "financeiro",
+      "owner": "CFO"
+    },
+    "expected": {
+      "score": 15,
+      "level": "vermelho",
+      "heatmap_cell": "P3I5",
+      "alert_board": true,
+      "escalate": true,
+      "has_owner": true,
+      "delivered_event": "risk.registered && risk.owner_assigned && risk.scored"
+    }
+  },
+  {
+    "id": "rr-10",
+    "desc": "fronteira -1 do vermelho: score=12 -> amarelo (P4I3)",
+    "risk": {
+      "probability": 4,
+      "impact": 3,
+      "category": "financeiro",
+      "owner": "CFO"
+    },
+    "expected": {
+      "score": 12,
+      "level": "amarelo",
+      "heatmap_cell": "P4I3",
+      "alert_board": false,
+      "escalate": false
+    }
+  },
+  {
+    "id": "rr-11",
+    "desc": "limiar exato vermelho via P5I3=15",
+    "risk": {
+      "probability": 5,
+      "impact": 3,
+      "category": "ia",
+      "owner": "AI Lead"
+    },
+    "expected": {
+      "score": 15,
+      "level": "vermelho",
+      "heatmap_cell": "P5I3",
+      "escalate": true
+    }
+  },
+  {
+    "id": "rr-12",
+    "desc": "score=16 (P4I4) -> vermelho com dono",
+    "risk": {
+      "probability": 4,
+      "impact": 4,
+      "category": "regulatorio",
+      "owner": "DPO",
+      "mitigation": "x"
+    },
+    "expected": {
+      "score": 16,
+      "level": "vermelho",
+      "heatmap_cell": "P4I4",
+      "blocked": false,
+      "delivered_event": "risk.registered && risk.owner_assigned && risk.scored"
+    }
+  },
+  {
+    "id": "rr-13",
+    "desc": "peso operacional=0.8 sobre score 10",
+    "risk": {
+      "probability": 2,
+      "impact": 5,
+      "category": "operacional",
+      "owner": "Ops"
+    },
+    "expected": {
+      "score": 10,
+      "weighted_score": 8.0,
+      "level": "amarelo",
+      "category": "operacional"
+    }
+  },
+  {
+    "id": "rr-14",
+    "desc": "peso financeiro=0.9 sobre score 10",
+    "risk": {
+      "probability": 2,
+      "impact": 5,
+      "category": "financeiro",
+      "owner": "Fin"
+    },
+    "expected": {
+      "score": 10,
+      "weighted_score": 9.0,
+      "level": "amarelo",
+      "category": "financeiro"
+    }
+  },
+  {
+    "id": "rr-15",
+    "desc": "peso regulatorio=1.0 sobre score 10",
+    "risk": {
+      "probability": 2,
+      "impact": 5,
+      "category": "regulatorio",
+      "owner": "Reg"
+    },
+    "expected": {
+      "score": 10,
+      "weighted_score": 10.0,
+      "level": "amarelo",
+      "category": "regulatorio"
+    }
+  },
+  {
+    "id": "rr-16",
+    "desc": "categoria ia=1.0",
+    "risk": {
+      "probability": 3,
+      "impact": 3,
+      "category": "ia",
+      "owner": "AI"
+    },
+    "expected": {
+      "score": 9,
+      "weighted_score": 9.0,
+      "level": "amarelo",
+      "category": "ia"
+    }
+  },
+  {
+    "id": "rr-17",
+    "desc": "categoria seguranca=1.0",
+    "risk": {
+      "probability": 4,
+      "impact": 2,
+      "category": "seguranca",
+      "owner": "Sec"
+    },
+    "expected": {
+      "score": 8,
+      "weighted_score": 8.0,
+      "level": "amarelo",
+      "category": "seguranca"
+    }
+  },
+  {
+    "id": "rr-18",
+    "desc": "categoria legal=1.0",
+    "risk": {
+      "probability": 2,
+      "impact": 2,
+      "category": "legal"
+    },
+    "expected": {
+      "score": 4,
+      "weighted_score": 4.0,
+      "level": "verde",
+      "category": "legal"
+    }
+  },
+  {
+    "id": "rr-19",
+    "desc": "categoria desconhecida -> peso default 0.8",
+    "risk": {
+      "probability": 2,
+      "impact": 5,
+      "category": "reputacional",
+      "owner": "Comms"
+    },
+    "expected": {
+      "score": 10,
+      "weighted_score": 8.0,
+      "level": "amarelo"
+    }
+  },
+  {
+    "id": "rr-20",
+    "desc": "categoria omitida -> default operacional (peso 0.8)",
+    "risk": {
+      "probability": 2,
+      "impact": 5,
+      "owner": "Ops"
+    },
+    "expected": {
+      "score": 10,
+      "weighted_score": 8.0,
+      "category": "operacional",
+      "level": "amarelo"
+    }
+  },
+  {
+    "id": "rr-21",
+    "desc": "dono presente mas score=0 (impact ausente) -> sem delivered",
+    "risk": {
+      "probability": 3,
+      "category": "legal",
+      "owner": "Juridico"
+    },
+    "expected": {
+      "score": 0,
+      "has_owner": true,
+      "delivered_event": null,
+      "level": "verde"
+    }
+  },
+  {
+    "id": "rr-22",
+    "desc": "score>0 mas SEM dono -> sem delivered",
+    "risk": {
+      "probability": 2,
+      "impact": 2,
+      "category": "operacional"
+    },
+    "expected": {
+      "score": 4,
+      "has_owner": false,
+      "delivered_event": null,
+      "level": "verde"
+    }
+  },
+  {
+    "id": "rr-23",
+    "desc": "dono + score>0 (verde) -> delivered satisfeito",
+    "risk": {
+      "probability": 1,
+      "impact": 2,
+      "category": "operacional",
+      "owner": "Ops"
+    },
+    "expected": {
+      "score": 2,
+      "has_owner": true,
+      "level": "verde",
+      "delivered_event": "risk.registered && risk.owner_assigned && risk.scored"
+    }
+  },
+  {
+    "id": "rr-24",
+    "desc": "nem dono nem score -> sem delivered",
+    "risk": {
+      "category": "legal"
+    },
+    "expected": {
+      "score": 0,
+      "has_owner": false,
+      "delivered_event": null
+    }
+  },
+  {
+    "id": "rr-25",
+    "desc": "dono sem mitigacao definida ainda -> has_mitigation False",
+    "risk": {
+      "probability": 3,
+      "impact": 3,
+      "category": "operacional",
+      "owner": "Ops"
+    },
+    "expected": {
+      "has_owner": true,
+      "has_mitigation": false,
+      "score": 9,
+      "level": "amarelo"
+    }
+  },
+  {
+    "id": "rr-26",
+    "desc": "dono e mitigacao ambos presentes",
+    "risk": {
+      "probability": 3,
+      "impact": 3,
+      "category": "operacional",
+      "owner": "Ops",
+      "mitigation": "playbook"
+    },
+    "expected": {
+      "has_owner": true,
+      "has_mitigation": true,
+      "delivered_event": "risk.registered && risk.owner_assigned && risk.scored"
+    }
+  },
+  {
+    "id": "rr-27",
+    "desc": "escalada: subiu de amarelo para vermelho",
+    "risk": {
+      "probability": 5,
+      "impact": 4,
+      "category": "regulatorio",
+      "owner": "DPO",
+      "prev_level": "amarelo"
+    },
+    "expected": {
+      "level": "vermelho",
+      "escalate": true,
+      "alert_board": true
+    }
+  },
+  {
+    "id": "rr-28",
+    "desc": "permanece vermelho (ja era) -> ainda escalate por ser vermelho",
+    "risk": {
+      "probability": 5,
+      "impact": 5,
+      "category": "seguranca",
+      "owner": "CISO",
+      "prev_level": "vermelho"
+    },
+    "expected": {
+      "level": "vermelho",
+      "escalate": true,
+      "alert_board": true
+    }
+  },
+  {
+    "id": "rr-29",
+    "desc": "verde com prev_level vermelho (desescalou) -> nao escala",
+    "risk": {
+      "probability": 1,
+      "impact": 2,
+      "category": "operacional",
+      "owner": "Ops",
+      "prev_level": "vermelho"
+    },
+    "expected": {
+      "level": "verde",
+      "escalate": false,
+      "alert_board": false
+    }
+  },
+  {
+    "id": "rr-30",
+    "desc": "risco minimo P1I1 verde",
+    "risk": {
+      "probability": 1,
+      "impact": 1,
+      "category": "operacional",
+      "owner": "Ops"
+    },
+    "expected": {
+      "score": 1,
+      "weighted_score": 0.8,
+      "level": "verde",
+      "heatmap_cell": "P1I1",
+      "escalate": false
+    }
+  },
+  {
+    "id": "rr-31",
+    "desc": "catastrofico P5I5 financeiro sem dono -> vermelho bloqueado",
+    "risk": {
+      "probability": 5,
+      "impact": 5,
+      "category": "financeiro"
+    },
+    "expected": {
+      "score": 25,
+      "weighted_score": 22.5,
+      "level": "vermelho",
+      "blocked": true,
+      "has_owner": false,
+      "delivered_event": null
+    }
+  },
+  {
+    "id": "rr-32",
+    "desc": "deriva de modelo (risco ia) vermelho com dono -> delivered + alerta",
+    "risk": {
+      "probability": 4,
+      "impact": 5,
+      "category": "ia",
+      "owner": "AI Founder",
+      "mitigation": "reauditoria"
+    },
+    "expected": {
+      "score": 20,
+      "weighted_score": 20.0,
+      "level": "vermelho",
+      "heatmap_cell": "P4I5",
+      "alert_board": true,
+      "escalate": true,
+      "blocked": false,
+      "delivered_event": "risk.registered && risk.owner_assigned && risk.scored"
+    }
+  }
 ]

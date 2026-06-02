@@ -1,7 +1,7 @@
 [
   {
     "id": "tx-01",
-    "desc": "simples",
+    "desc": "simples com periodo",
     "tenant_id": "t-eval-g10",
     "tax": {
       "revenue": 100000,
@@ -9,33 +9,496 @@
       "period": "2026-05"
     },
     "expected": {
+      "effective_rate": 0.06,
       "total_tax": 6000.0,
-      "regime": "simples"
+      "revenue": 100000,
+      "regime": "simples",
+      "period": "2026-05"
     }
   },
   {
     "id": "tx-02",
-    "desc": "presumido",
+    "desc": "presumido sobre 200k",
     "tenant_id": "t-eval-g10",
     "tax": {
       "revenue": 200000,
       "regime": "presumido"
     },
     "expected": {
-      "total_tax": 22660.0
+      "effective_rate": 0.1133,
+      "total_tax": 22660.0,
+      "revenue": 200000,
+      "regime": "presumido"
     }
   },
   {
     "id": "tx-03",
-    "desc": "aliquota explicita",
+    "desc": "aliquota explicita 15% sobrepoe default",
     "tenant_id": "t-eval-g10",
     "tax": {
       "revenue": 50000,
       "rate": 0.15
     },
     "expected": {
+      "effective_rate": 0.15,
       "total_tax": 7500.0,
-      "effective_rate": 0.15
+      "revenue": 50000
+    }
+  },
+  {
+    "id": "tx-04",
+    "desc": "real 15%",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 100000,
+      "regime": "real",
+      "period": "2026-Q2"
+    },
+    "expected": {
+      "effective_rate": 0.15,
+      "total_tax": 15000.0,
+      "revenue": 100000,
+      "regime": "real",
+      "period": "2026-Q2"
+    }
+  },
+  {
+    "id": "tx-05",
+    "desc": "caminho feliz simples periodo mensal",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 80000,
+      "regime": "simples",
+      "period": "2026-04"
+    },
+    "expected": {
+      "effective_rate": 0.06,
+      "total_tax": 4800.0,
+      "revenue": 80000,
+      "regime": "simples",
+      "period": "2026-04"
+    }
+  },
+  {
+    "id": "tx-06",
+    "desc": "precedencia: rate explicito vence regime simples",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 100000,
+      "regime": "simples",
+      "rate": 0.1133
+    },
+    "expected": {
+      "effective_rate": 0.1133,
+      "total_tax": 11330.0,
+      "revenue": 100000,
+      "regime": "simples"
+    }
+  },
+  {
+    "id": "tx-07",
+    "desc": "precedencia: rate 0.18 vence regime presumido",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 100000,
+      "regime": "presumido",
+      "rate": 0.18
+    },
+    "expected": {
+      "effective_rate": 0.18,
+      "total_tax": 18000.0,
+      "revenue": 100000,
+      "regime": "presumido"
+    }
+  },
+  {
+    "id": "tx-08",
+    "desc": "mudanca de aliquota por config: rate nova 0.07 aplicada",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 100000,
+      "regime": "simples",
+      "rate": 0.07,
+      "period": "2026-06"
+    },
+    "expected": {
+      "effective_rate": 0.07,
+      "total_tax": 7000.0,
+      "revenue": 100000,
+      "regime": "simples",
+      "period": "2026-06"
+    }
+  },
+  {
+    "id": "tx-09",
+    "desc": "aliquota antiga 0.06 (antes da mudanca)",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 100000,
+      "regime": "simples",
+      "rate": 0.06,
+      "period": "2026-05"
+    },
+    "expected": {
+      "effective_rate": 0.06,
+      "total_tax": 6000.0,
+      "revenue": 100000,
+      "regime": "simples",
+      "period": "2026-05"
+    }
+  },
+  {
+    "id": "tx-10",
+    "desc": "isola simples 150k",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 150000,
+      "regime": "simples"
+    },
+    "expected": {
+      "effective_rate": 0.06,
+      "total_tax": 9000.0,
+      "revenue": 150000,
+      "regime": "simples"
+    }
+  },
+  {
+    "id": "tx-11",
+    "desc": "isola presumido 150k",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 150000,
+      "regime": "presumido"
+    },
+    "expected": {
+      "effective_rate": 0.1133,
+      "total_tax": 16995.0,
+      "revenue": 150000,
+      "regime": "presumido"
+    }
+  },
+  {
+    "id": "tx-12",
+    "desc": "isola real 150k",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 150000,
+      "regime": "real"
+    },
+    "expected": {
+      "effective_rate": 0.15,
+      "total_tax": 22500.0,
+      "revenue": 150000,
+      "regime": "real"
+    }
+  },
+  {
+    "id": "tx-13",
+    "desc": "receita zero -> tributo zero",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 0,
+      "regime": "simples",
+      "period": "2026-05"
+    },
+    "expected": {
+      "effective_rate": 0.06,
+      "total_tax": 0.0,
+      "revenue": 0,
+      "regime": "simples",
+      "period": "2026-05"
+    }
+  },
+  {
+    "id": "tx-14",
+    "desc": "receita 1 centavo arredondamento",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 0.01,
+      "regime": "simples"
+    },
+    "expected": {
+      "effective_rate": 0.06,
+      "total_tax": 0.0,
+      "revenue": 0.01,
+      "regime": "simples"
+    }
+  },
+  {
+    "id": "tx-15",
+    "desc": "aliquota zero (regime isento hipotetico)",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 100000,
+      "rate": 0.0
+    },
+    "expected": {
+      "effective_rate": 0.0,
+      "total_tax": 0.0,
+      "revenue": 100000
+    }
+  },
+  {
+    "id": "tx-16",
+    "desc": "receita alta real",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 2000000,
+      "regime": "real",
+      "period": "2026-Q2"
+    },
+    "expected": {
+      "effective_rate": 0.15,
+      "total_tax": 300000.0,
+      "revenue": 2000000,
+      "regime": "real",
+      "period": "2026-Q2"
+    }
+  },
+  {
+    "id": "tx-17",
+    "desc": "simples receita media",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 65000,
+      "regime": "simples",
+      "period": "2026-03"
+    },
+    "expected": {
+      "effective_rate": 0.06,
+      "total_tax": 3900.0,
+      "revenue": 65000,
+      "regime": "simples",
+      "period": "2026-03"
+    }
+  },
+  {
+    "id": "tx-18",
+    "desc": "presumido receita quebrada",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 47333.33,
+      "regime": "presumido"
+    },
+    "expected": {
+      "effective_rate": 0.1133,
+      "total_tax": 5362.87,
+      "revenue": 47333.33,
+      "regime": "presumido"
+    }
+  },
+  {
+    "id": "tx-19",
+    "desc": "real valor redondo",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 300000,
+      "regime": "real"
+    },
+    "expected": {
+      "effective_rate": 0.15,
+      "total_tax": 45000.0,
+      "revenue": 300000,
+      "regime": "real"
+    }
+  },
+  {
+    "id": "tx-20",
+    "desc": "aliquota explicita 0.0925 (composta hipotetica)",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 120000,
+      "rate": 0.0925
+    },
+    "expected": {
+      "effective_rate": 0.0925,
+      "total_tax": 11100.0,
+      "revenue": 120000
+    }
+  },
+  {
+    "id": "tx-21",
+    "desc": "simples teto faixa",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 240000,
+      "regime": "simples"
+    },
+    "expected": {
+      "effective_rate": 0.06,
+      "total_tax": 14400.0,
+      "revenue": 240000,
+      "regime": "simples"
+    }
+  },
+  {
+    "id": "tx-22",
+    "desc": "presumido com periodo trimestral",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 180000,
+      "regime": "presumido",
+      "period": "2026-Q1"
+    },
+    "expected": {
+      "effective_rate": 0.1133,
+      "total_tax": 20394.0,
+      "revenue": 180000,
+      "regime": "presumido",
+      "period": "2026-Q1"
+    }
+  },
+  {
+    "id": "tx-23",
+    "desc": "real grande com periodo",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 5000000,
+      "regime": "real",
+      "period": "2026-05"
+    },
+    "expected": {
+      "effective_rate": 0.15,
+      "total_tax": 750000.0,
+      "revenue": 5000000,
+      "regime": "real",
+      "period": "2026-05"
+    }
+  },
+  {
+    "id": "tx-24",
+    "desc": "simples minimo",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 100,
+      "regime": "simples"
+    },
+    "expected": {
+      "effective_rate": 0.06,
+      "total_tax": 6.0,
+      "revenue": 100,
+      "regime": "simples"
+    }
+  },
+  {
+    "id": "tx-25",
+    "desc": "aliquota 0.11 explicita",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 90000,
+      "rate": 0.11
+    },
+    "expected": {
+      "effective_rate": 0.11,
+      "total_tax": 9900.0,
+      "revenue": 90000
+    }
+  },
+  {
+    "id": "tx-26",
+    "desc": "presumido pequeno",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 5000,
+      "regime": "presumido"
+    },
+    "expected": {
+      "effective_rate": 0.1133,
+      "total_tax": 566.5,
+      "revenue": 5000,
+      "regime": "presumido"
+    }
+  },
+  {
+    "id": "tx-27",
+    "desc": "real medio com centavos",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 12345.67,
+      "regime": "real"
+    },
+    "expected": {
+      "effective_rate": 0.15,
+      "total_tax": 1851.85,
+      "revenue": 12345.67,
+      "regime": "real"
+    }
+  },
+  {
+    "id": "tx-28",
+    "desc": "simples valor alto",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 900000,
+      "regime": "simples"
+    },
+    "expected": {
+      "effective_rate": 0.06,
+      "total_tax": 54000.0,
+      "revenue": 900000,
+      "regime": "simples"
+    }
+  },
+  {
+    "id": "tx-29",
+    "desc": "aliquota explicita 0.06 sobre regime real (explicito vence)",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 100000,
+      "regime": "real",
+      "rate": 0.06
+    },
+    "expected": {
+      "effective_rate": 0.06,
+      "total_tax": 6000.0,
+      "revenue": 100000,
+      "regime": "real"
+    }
+  },
+  {
+    "id": "tx-30",
+    "desc": "presumido teto",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 375000,
+      "regime": "presumido"
+    },
+    "expected": {
+      "effective_rate": 0.1133,
+      "total_tax": 42487.5,
+      "revenue": 375000,
+      "regime": "presumido"
+    }
+  },
+  {
+    "id": "tx-31",
+    "desc": "aliquota 0.20 explicita extrema",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 50000,
+      "rate": 0.2
+    },
+    "expected": {
+      "effective_rate": 0.2,
+      "total_tax": 10000.0,
+      "revenue": 50000
+    }
+  },
+  {
+    "id": "tx-32",
+    "desc": "simples receita com centavos e periodo",
+    "tenant_id": "t-eval-g10",
+    "tax": {
+      "revenue": 83333.33,
+      "regime": "simples",
+      "period": "2026-06"
+    },
+    "expected": {
+      "effective_rate": 0.06,
+      "total_tax": 5000.0,
+      "revenue": 83333.33,
+      "regime": "simples",
+      "period": "2026-06"
     }
   }
 ]

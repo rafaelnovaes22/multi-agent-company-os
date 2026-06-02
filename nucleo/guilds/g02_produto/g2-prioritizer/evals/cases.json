@@ -8,10 +8,20 @@
       "impact": 2,
       "confidence": 0.8,
       "effort": 4,
-      "sources": {"reach": "telemetria", "impact": "jtbd", "confidence": "experimento", "effort": "g03"}
+      "sources": {
+        "reach": "telemetria",
+        "impact": "jtbd",
+        "confidence": "experimento",
+        "effort": "g03"
+      }
     },
     "expected": {
       "rice_score": 400.0,
+      "reach": 1000,
+      "impact": 2,
+      "confidence": 0.8,
+      "effort": 4,
+      "factors_sourced": 4,
       "all_factors_sourced": true,
       "low_confidence": false,
       "needs_experiment": false,
@@ -27,10 +37,19 @@
       "impact": 1,
       "confidence": 0.3,
       "effort": 2,
-      "sources": {"reach": "telemetria", "impact": "jtbd"}
+      "sources": {
+        "reach": "telemetria",
+        "impact": "jtbd"
+      }
     },
     "expected": {
       "rice_score": 75.0,
+      "reach": 500,
+      "impact": 1,
+      "confidence": 0.3,
+      "effort": 2,
+      "factors_sourced": 2,
+      "all_factors_sourced": false,
       "low_confidence": true,
       "needs_experiment": true,
       "status": "rebaixado_experimento"
@@ -48,10 +67,819 @@
     },
     "expected": {
       "rice_score": 600.0,
+      "reach": 2000,
+      "impact": 3,
+      "confidence": 1.0,
+      "effort": 10,
       "factors_sourced": 0,
       "all_factors_sourced": false,
+      "low_confidence": false,
       "needs_experiment": false,
       "status": "sem_fonte"
+    }
+  },
+  {
+    "id": "rice-04",
+    "desc": "Reach/Impact de uso real + Effort da Eng: auditavel",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 3000,
+      "impact": 2,
+      "confidence": 0.7,
+      "effort": 6,
+      "sources": {
+        "reach": "telemetria",
+        "impact": "jtbd",
+        "confidence": "experimento",
+        "effort": "g03"
+      }
+    },
+    "expected": {
+      "rice_score": 700.0,
+      "reach": 3000,
+      "impact": 2,
+      "confidence": 0.7,
+      "effort": 6,
+      "factors_sourced": 4,
+      "all_factors_sourced": true,
+      "low_confidence": false,
+      "needs_experiment": false,
+      "status": "auditavel"
+    }
+  },
+  {
+    "id": "rice-05",
+    "desc": "fronteira confidence exata 0.5 -> NAO e baixa (>=0.5 ok)",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 1000,
+      "impact": 1,
+      "confidence": 0.5,
+      "effort": 5,
+      "sources": {
+        "reach": "telemetria",
+        "impact": "jtbd",
+        "confidence": "experimento",
+        "effort": "g03"
+      }
+    },
+    "expected": {
+      "rice_score": 100.0,
+      "reach": 1000,
+      "impact": 1,
+      "confidence": 0.5,
+      "effort": 5,
+      "factors_sourced": 4,
+      "all_factors_sourced": true,
+      "low_confidence": false,
+      "needs_experiment": false,
+      "status": "auditavel"
+    }
+  },
+  {
+    "id": "rice-06",
+    "desc": "fronteira confidence 0.49 -> baixa, rebaixado",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 1000,
+      "impact": 1,
+      "confidence": 0.49,
+      "effort": 5,
+      "sources": {
+        "reach": "telemetria",
+        "impact": "jtbd",
+        "confidence": "experimento",
+        "effort": "g03"
+      }
+    },
+    "expected": {
+      "rice_score": 98.0,
+      "reach": 1000,
+      "impact": 1,
+      "confidence": 0.49,
+      "effort": 5,
+      "factors_sourced": 4,
+      "all_factors_sourced": true,
+      "low_confidence": true,
+      "needs_experiment": true,
+      "status": "rebaixado_experimento"
+    }
+  },
+  {
+    "id": "rice-07",
+    "desc": "precedencia: confidence baixa MESMO com 4 fontes -> rebaixado (nao auditavel)",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 1000,
+      "impact": 2,
+      "confidence": 0.2,
+      "effort": 4,
+      "sources": {
+        "reach": "telemetria",
+        "impact": "jtbd",
+        "confidence": "experimento",
+        "effort": "g03"
+      }
+    },
+    "expected": {
+      "rice_score": 100.0,
+      "reach": 1000,
+      "impact": 2,
+      "confidence": 0.2,
+      "effort": 4,
+      "factors_sourced": 4,
+      "all_factors_sourced": true,
+      "low_confidence": true,
+      "needs_experiment": true,
+      "status": "rebaixado_experimento"
+    }
+  },
+  {
+    "id": "rice-08",
+    "desc": "precedencia: confidence baixa E sem fontes -> rebaixado vence sem_fonte",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 800,
+      "impact": 1,
+      "confidence": 0.1,
+      "effort": 2
+    },
+    "expected": {
+      "rice_score": 40.0,
+      "reach": 800,
+      "impact": 1,
+      "confidence": 0.1,
+      "effort": 2,
+      "factors_sourced": 0,
+      "all_factors_sourced": false,
+      "low_confidence": true,
+      "needs_experiment": true,
+      "status": "rebaixado_experimento"
+    }
+  },
+  {
+    "id": "rice-09",
+    "desc": "impact massivo (3) com confianca alta -> auditavel",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 5000,
+      "impact": 3,
+      "confidence": 0.9,
+      "effort": 15,
+      "sources": {
+        "reach": "telemetria",
+        "impact": "jtbd",
+        "confidence": "experimento",
+        "effort": "g03"
+      }
+    },
+    "expected": {
+      "rice_score": 900.0,
+      "reach": 5000,
+      "impact": 3,
+      "confidence": 0.9,
+      "effort": 15,
+      "factors_sourced": 4,
+      "all_factors_sourced": true,
+      "low_confidence": false,
+      "needs_experiment": false,
+      "status": "auditavel"
+    }
+  },
+  {
+    "id": "rice-10",
+    "desc": "impact minimo (0.25) -> score baixo, auditavel",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 4000,
+      "impact": 0.25,
+      "confidence": 0.8,
+      "effort": 2,
+      "sources": {
+        "reach": "telemetria",
+        "impact": "jtbd",
+        "confidence": "experimento",
+        "effort": "g03"
+      }
+    },
+    "expected": {
+      "rice_score": 400.0,
+      "reach": 4000,
+      "impact": 0.25,
+      "confidence": 0.8,
+      "effort": 2,
+      "factors_sourced": 4,
+      "all_factors_sourced": true,
+      "low_confidence": false,
+      "needs_experiment": false,
+      "status": "auditavel"
+    }
+  },
+  {
+    "id": "rice-11",
+    "desc": "effort zero -> score 0 (divisao protegida), confianca alta auditavel",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 1000,
+      "impact": 2,
+      "confidence": 0.8,
+      "effort": 0,
+      "sources": {
+        "reach": "telemetria",
+        "impact": "jtbd",
+        "confidence": "experimento",
+        "effort": "g03"
+      }
+    },
+    "expected": {
+      "rice_score": 0.0,
+      "reach": 1000,
+      "impact": 2,
+      "confidence": 0.8,
+      "effort": 0,
+      "factors_sourced": 4,
+      "all_factors_sourced": true,
+      "low_confidence": false,
+      "needs_experiment": false,
+      "status": "auditavel"
+    }
+  },
+  {
+    "id": "rice-12",
+    "desc": "3 de 4 fontes -> nao all_sourced, mas conf alta -> sem_fonte",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 2000,
+      "impact": 2,
+      "confidence": 0.7,
+      "effort": 8,
+      "sources": {
+        "reach": "telemetria",
+        "impact": "jtbd",
+        "confidence": "experimento"
+      }
+    },
+    "expected": {
+      "rice_score": 350.0,
+      "reach": 2000,
+      "impact": 2,
+      "confidence": 0.7,
+      "effort": 8,
+      "factors_sourced": 3,
+      "all_factors_sourced": false,
+      "low_confidence": false,
+      "needs_experiment": false,
+      "status": "sem_fonte"
+    }
+  },
+  {
+    "id": "rice-13",
+    "desc": "fonte so de reach -> sem_fonte",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 1500,
+      "impact": 1,
+      "confidence": 0.6,
+      "effort": 3,
+      "sources": {
+        "reach": "telemetria"
+      }
+    },
+    "expected": {
+      "rice_score": 300.0,
+      "reach": 1500,
+      "impact": 1,
+      "confidence": 0.6,
+      "effort": 3,
+      "factors_sourced": 1,
+      "all_factors_sourced": false,
+      "low_confidence": false,
+      "needs_experiment": false,
+      "status": "sem_fonte"
+    }
+  },
+  {
+    "id": "rice-14",
+    "desc": "confidence 1.0 perfeita, todas fontes -> auditavel alto",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 10000,
+      "impact": 2,
+      "confidence": 1.0,
+      "effort": 20,
+      "sources": {
+        "reach": "telemetria",
+        "impact": "jtbd",
+        "confidence": "experimento",
+        "effort": "g03"
+      }
+    },
+    "expected": {
+      "rice_score": 1000.0,
+      "reach": 10000,
+      "impact": 2,
+      "confidence": 1.0,
+      "effort": 20,
+      "factors_sourced": 4,
+      "all_factors_sourced": true,
+      "low_confidence": false,
+      "needs_experiment": false,
+      "status": "auditavel"
+    }
+  },
+  {
+    "id": "rice-15",
+    "desc": "item de baixa confianca classico (viés ignorado) -> rebaixado",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 600,
+      "impact": 2,
+      "confidence": 0.25,
+      "effort": 3
+    },
+    "expected": {
+      "rice_score": 100.0,
+      "reach": 600,
+      "impact": 2,
+      "confidence": 0.25,
+      "effort": 3,
+      "factors_sourced": 0,
+      "all_factors_sourced": false,
+      "low_confidence": true,
+      "needs_experiment": true,
+      "status": "rebaixado_experimento"
+    }
+  },
+  {
+    "id": "rice-16",
+    "desc": "effort alto reduz score, auditavel",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 2000,
+      "impact": 1,
+      "confidence": 0.6,
+      "effort": 40,
+      "sources": {
+        "reach": "telemetria",
+        "impact": "jtbd",
+        "confidence": "experimento",
+        "effort": "g03"
+      }
+    },
+    "expected": {
+      "rice_score": 30.0,
+      "reach": 2000,
+      "impact": 1,
+      "confidence": 0.6,
+      "effort": 40,
+      "factors_sourced": 4,
+      "all_factors_sourced": true,
+      "low_confidence": false,
+      "needs_experiment": false,
+      "status": "auditavel"
+    }
+  },
+  {
+    "id": "rice-17",
+    "desc": "confidence 0.5 sem fontes -> sem_fonte (nao baixa)",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 1000,
+      "impact": 1,
+      "confidence": 0.5,
+      "effort": 2
+    },
+    "expected": {
+      "rice_score": 250.0,
+      "reach": 1000,
+      "impact": 1,
+      "confidence": 0.5,
+      "effort": 2,
+      "factors_sourced": 0,
+      "all_factors_sourced": false,
+      "low_confidence": false,
+      "needs_experiment": false,
+      "status": "sem_fonte"
+    }
+  },
+  {
+    "id": "rice-18",
+    "desc": "reach grande, impact pequeno",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 50000,
+      "impact": 0.5,
+      "confidence": 0.8,
+      "effort": 10,
+      "sources": {
+        "reach": "telemetria",
+        "impact": "jtbd",
+        "confidence": "experimento",
+        "effort": "g03"
+      }
+    },
+    "expected": {
+      "rice_score": 2000.0,
+      "reach": 50000,
+      "impact": 0.5,
+      "confidence": 0.8,
+      "effort": 10,
+      "factors_sourced": 4,
+      "all_factors_sourced": true,
+      "low_confidence": false,
+      "needs_experiment": false,
+      "status": "auditavel"
+    }
+  },
+  {
+    "id": "rice-19",
+    "desc": "2 de 4 fontes, confianca ok -> sem_fonte",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 1200,
+      "impact": 2,
+      "confidence": 0.65,
+      "effort": 4,
+      "sources": {
+        "reach": "telemetria",
+        "effort": "g03"
+      }
+    },
+    "expected": {
+      "rice_score": 390.0,
+      "reach": 1200,
+      "impact": 2,
+      "confidence": 0.65,
+      "effort": 4,
+      "factors_sourced": 2,
+      "all_factors_sourced": false,
+      "low_confidence": false,
+      "needs_experiment": false,
+      "status": "sem_fonte"
+    }
+  },
+  {
+    "id": "rice-20",
+    "desc": "confidence 0.4 -> baixa, rebaixado",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 900,
+      "impact": 1,
+      "confidence": 0.4,
+      "effort": 3,
+      "sources": {
+        "reach": "telemetria",
+        "impact": "jtbd",
+        "confidence": "experimento",
+        "effort": "g03"
+      }
+    },
+    "expected": {
+      "rice_score": 120.0,
+      "reach": 900,
+      "impact": 1,
+      "confidence": 0.4,
+      "effort": 3,
+      "factors_sourced": 4,
+      "all_factors_sourced": true,
+      "low_confidence": true,
+      "needs_experiment": true,
+      "status": "rebaixado_experimento"
+    }
+  },
+  {
+    "id": "rice-21",
+    "desc": "score fracionario arredondado 2 casas",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 333,
+      "impact": 1,
+      "confidence": 0.7,
+      "effort": 7,
+      "sources": {
+        "reach": "telemetria",
+        "impact": "jtbd",
+        "confidence": "experimento",
+        "effort": "g03"
+      }
+    },
+    "expected": {
+      "rice_score": 33.3,
+      "reach": 333,
+      "impact": 1,
+      "confidence": 0.7,
+      "effort": 7,
+      "factors_sourced": 4,
+      "all_factors_sourced": true,
+      "low_confidence": false,
+      "needs_experiment": false,
+      "status": "auditavel"
+    }
+  },
+  {
+    "id": "rice-22",
+    "desc": "item grande totalmente lastreado",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 8000,
+      "impact": 3,
+      "confidence": 0.85,
+      "effort": 12,
+      "sources": {
+        "reach": "telemetria",
+        "impact": "jtbd",
+        "confidence": "experimento",
+        "effort": "g03"
+      }
+    },
+    "expected": {
+      "rice_score": 1700.0,
+      "reach": 8000,
+      "impact": 3,
+      "confidence": 0.85,
+      "effort": 12,
+      "factors_sourced": 4,
+      "all_factors_sourced": true,
+      "low_confidence": false,
+      "needs_experiment": false,
+      "status": "auditavel"
+    }
+  },
+  {
+    "id": "rice-23",
+    "desc": "confidence 0.51 -> nao baixa, mas falta fonte -> sem_fonte",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 1000,
+      "impact": 2,
+      "confidence": 0.51,
+      "effort": 5
+    },
+    "expected": {
+      "rice_score": 204.0,
+      "reach": 1000,
+      "impact": 2,
+      "confidence": 0.51,
+      "effort": 5,
+      "factors_sourced": 0,
+      "all_factors_sourced": false,
+      "low_confidence": false,
+      "needs_experiment": false,
+      "status": "sem_fonte"
+    }
+  },
+  {
+    "id": "rice-24",
+    "desc": "todos fatores, confianca media-alta -> auditavel",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 2500,
+      "impact": 2,
+      "confidence": 0.75,
+      "effort": 5,
+      "sources": {
+        "reach": "telemetria",
+        "impact": "jtbd",
+        "confidence": "experimento",
+        "effort": "g03"
+      }
+    },
+    "expected": {
+      "rice_score": 750.0,
+      "reach": 2500,
+      "impact": 2,
+      "confidence": 0.75,
+      "effort": 5,
+      "factors_sourced": 4,
+      "all_factors_sourced": true,
+      "low_confidence": false,
+      "needs_experiment": false,
+      "status": "auditavel"
+    }
+  },
+  {
+    "id": "rice-25",
+    "desc": "confidence 0.05 quase nula -> rebaixado",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 700,
+      "impact": 1,
+      "confidence": 0.05,
+      "effort": 1,
+      "sources": {
+        "reach": "telemetria",
+        "impact": "jtbd",
+        "confidence": "experimento",
+        "effort": "g03"
+      }
+    },
+    "expected": {
+      "rice_score": 35.0,
+      "reach": 700,
+      "impact": 1,
+      "confidence": 0.05,
+      "effort": 1,
+      "factors_sourced": 4,
+      "all_factors_sourced": true,
+      "low_confidence": true,
+      "needs_experiment": true,
+      "status": "rebaixado_experimento"
+    }
+  },
+  {
+    "id": "rice-26",
+    "desc": "effort 1 (rapido), impact 2 -> score alto auditavel",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 300,
+      "impact": 2,
+      "confidence": 0.9,
+      "effort": 1,
+      "sources": {
+        "reach": "telemetria",
+        "impact": "jtbd",
+        "confidence": "experimento",
+        "effort": "g03"
+      }
+    },
+    "expected": {
+      "rice_score": 540.0,
+      "reach": 300,
+      "impact": 2,
+      "confidence": 0.9,
+      "effort": 1,
+      "factors_sourced": 4,
+      "all_factors_sourced": true,
+      "low_confidence": false,
+      "needs_experiment": false,
+      "status": "auditavel"
+    }
+  },
+  {
+    "id": "rice-27",
+    "desc": "sem nenhuma fonte e confianca alta -> sem_fonte",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 4000,
+      "impact": 3,
+      "confidence": 0.95,
+      "effort": 8
+    },
+    "expected": {
+      "rice_score": 1425.0,
+      "reach": 4000,
+      "impact": 3,
+      "confidence": 0.95,
+      "effort": 8,
+      "factors_sourced": 0,
+      "all_factors_sourced": false,
+      "low_confidence": false,
+      "needs_experiment": false,
+      "status": "sem_fonte"
+    }
+  },
+  {
+    "id": "rice-28",
+    "desc": "fonte parcial sem confidence-source mas conf alta -> sem_fonte",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 2000,
+      "impact": 2,
+      "confidence": 0.8,
+      "effort": 4,
+      "sources": {
+        "reach": "telemetria",
+        "impact": "jtbd",
+        "effort": "g03"
+      }
+    },
+    "expected": {
+      "rice_score": 800.0,
+      "reach": 2000,
+      "impact": 2,
+      "confidence": 0.8,
+      "effort": 4,
+      "factors_sourced": 3,
+      "all_factors_sourced": false,
+      "low_confidence": false,
+      "needs_experiment": false,
+      "status": "sem_fonte"
+    }
+  },
+  {
+    "id": "rice-29",
+    "desc": "confidence 0.45 -> baixa rebaixado mesmo all sourced",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 1000,
+      "impact": 1,
+      "confidence": 0.45,
+      "effort": 2,
+      "sources": {
+        "reach": "telemetria",
+        "impact": "jtbd",
+        "confidence": "experimento",
+        "effort": "g03"
+      }
+    },
+    "expected": {
+      "rice_score": 225.0,
+      "reach": 1000,
+      "impact": 1,
+      "confidence": 0.45,
+      "effort": 2,
+      "factors_sourced": 4,
+      "all_factors_sourced": true,
+      "low_confidence": true,
+      "needs_experiment": true,
+      "status": "rebaixado_experimento"
+    }
+  },
+  {
+    "id": "rice-30",
+    "desc": "reach pequeno nicho, alta confianca, auditavel",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 50,
+      "impact": 3,
+      "confidence": 0.9,
+      "effort": 2,
+      "sources": {
+        "reach": "telemetria",
+        "impact": "jtbd",
+        "confidence": "experimento",
+        "effort": "g03"
+      }
+    },
+    "expected": {
+      "rice_score": 67.5,
+      "reach": 50,
+      "impact": 3,
+      "confidence": 0.9,
+      "effort": 2,
+      "factors_sourced": 4,
+      "all_factors_sourced": true,
+      "low_confidence": false,
+      "needs_experiment": false,
+      "status": "auditavel"
+    }
+  },
+  {
+    "id": "rice-31",
+    "desc": "re-rank: impact subiu para 3 apos experimento -> auditavel",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 2000,
+      "impact": 3,
+      "confidence": 0.7,
+      "effort": 6,
+      "sources": {
+        "reach": "telemetria",
+        "impact": "jtbd",
+        "confidence": "experimento",
+        "effort": "g03"
+      }
+    },
+    "expected": {
+      "rice_score": 700.0,
+      "reach": 2000,
+      "impact": 3,
+      "confidence": 0.7,
+      "effort": 6,
+      "factors_sourced": 4,
+      "all_factors_sourced": true,
+      "low_confidence": false,
+      "needs_experiment": false,
+      "status": "auditavel"
+    }
+  },
+  {
+    "id": "rice-32",
+    "desc": "confidence exata 0.5 com todas fontes -> auditavel (limiar nao dispara)",
+    "tenant_id": "t-eval-g02",
+    "rice": {
+      "reach": 1000,
+      "impact": 2,
+      "confidence": 0.5,
+      "effort": 4,
+      "sources": {
+        "reach": "telemetria",
+        "impact": "jtbd",
+        "confidence": "experimento",
+        "effort": "g03"
+      }
+    },
+    "expected": {
+      "rice_score": 250.0,
+      "reach": 1000,
+      "impact": 2,
+      "confidence": 0.5,
+      "effort": 4,
+      "factors_sourced": 4,
+      "all_factors_sourced": true,
+      "low_confidence": false,
+      "needs_experiment": false,
+      "status": "auditavel"
     }
   }
 ]

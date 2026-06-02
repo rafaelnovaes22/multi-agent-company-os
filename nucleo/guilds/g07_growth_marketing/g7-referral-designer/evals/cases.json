@@ -1,35 +1,744 @@
 [
-  {"id": "rd-01", "desc": "programa viral: k-factor = 1.0, dentro do orçamento, fraude baixa -> viral",
-   "tenant_id": "t-eval-g07",
-   "referral": {"users": 1000, "invites_sent": 4000, "invite_conversions": 1000,
-                "delight_cost": 5000, "op_budget": 8000, "fraud_invites": 80,
-                "propensity_signals": {"engagement": 0.8, "nps": 50, "past_referrals": 3}},
-   "expected": {"by": "g7-referral-designer", "invites_per_user": 4.0, "invite_conv_rate": 0.25,
-                "k_factor": 1.0, "cost_per_conversion": 5.0, "budget_ok": true,
-                "fraud_rate_pct": 2.0, "viral": true, "propensity_score": 74.5,
-                "status": "viral"}},
-
-  {"id": "rd-02", "desc": "abaixo do viral: k-factor 0.5 (convites_por_usuario 2, conv 25%)",
-   "tenant_id": "t-eval-g07",
-   "referral": {"users": 1000, "invites_sent": 2000, "invite_conversions": 500,
-                "delight_cost": 2500, "op_budget": 8000, "fraud_invites": 40,
-                "propensity_signals": {"engagement": 0.6, "nps": 20, "past_referrals": 1}},
-   "expected": {"by": "g7-referral-designer", "invites_per_user": 2.0, "k_factor": 0.5,
-                "cost_per_conversion": 5.0, "budget_ok": true, "viral": false,
-                "propensity_score": 52.0, "status": "abaixo_viral"}},
-
-  {"id": "rd-03", "desc": "fraude alta: 10% de convites fraudulentos -> status fraude_alta",
-   "tenant_id": "t-eval-g07",
-   "referral": {"users": 1000, "invites_sent": 2000, "invite_conversions": 1000,
-                "delight_cost": 3000, "op_budget": 8000, "fraud_invites": 200,
-                "propensity_signals": {"engagement": 0.5, "nps": 0, "past_referrals": 0}},
-   "expected": {"by": "g7-referral-designer", "k_factor": 1.0, "fraud_rate_pct": 10.0,
-                "viral": true, "status": "fraude_alta"}},
-
-  {"id": "rd-04", "desc": "estoura orçamento OP de delight -> status estoura_orcamento",
-   "tenant_id": "t-eval-g07",
-   "referral": {"users": 1000, "invites_sent": 3000, "invite_conversions": 900,
-                "delight_cost": 9000, "op_budget": 5000, "fraud_invites": 30,
-                "propensity_signals": {"engagement": 0.7, "nps": 30, "past_referrals": 2}},
-   "expected": {"by": "g7-referral-designer", "budget_ok": false, "status": "estoura_orcamento"}}
+  {
+    "id": "rd-01",
+    "desc": "programa viral: k-factor = 1.0, dentro do orcamento, fraude baixa -> viral",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 1000,
+      "invites_sent": 4000,
+      "invite_conversions": 1000,
+      "delight_cost": 5000,
+      "op_budget": 8000,
+      "fraud_invites": 80,
+      "propensity_signals": {
+        "engagement": 0.8,
+        "nps": 50,
+        "past_referrals": 3
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "invites_per_user": 4.0,
+      "invite_conv_rate": 0.25,
+      "k_factor": 1.0,
+      "cost_per_conversion": 5.0,
+      "budget_ok": true,
+      "fraud_rate_pct": 2.0,
+      "viral": true,
+      "propensity_score": 74.5,
+      "status": "viral"
+    }
+  },
+  {
+    "id": "rd-02",
+    "desc": "abaixo do viral: k-factor 0.5 (convites_por_usuario 2, conv 25%)",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 1000,
+      "invites_sent": 2000,
+      "invite_conversions": 500,
+      "delight_cost": 2500,
+      "op_budget": 8000,
+      "fraud_invites": 40,
+      "propensity_signals": {
+        "engagement": 0.6,
+        "nps": 20,
+        "past_referrals": 1
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "invites_per_user": 2.0,
+      "k_factor": 0.5,
+      "cost_per_conversion": 5.0,
+      "budget_ok": true,
+      "viral": false,
+      "propensity_score": 52.0,
+      "status": "abaixo_viral"
+    }
+  },
+  {
+    "id": "rd-03",
+    "desc": "fraude alta: 10% de convites fraudulentos -> status fraude_alta",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 1000,
+      "invites_sent": 2000,
+      "invite_conversions": 1000,
+      "delight_cost": 3000,
+      "op_budget": 8000,
+      "fraud_invites": 200,
+      "propensity_signals": {
+        "engagement": 0.5,
+        "nps": 0,
+        "past_referrals": 0
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "k_factor": 1.0,
+      "fraud_rate_pct": 10.0,
+      "viral": true,
+      "status": "fraude_alta"
+    }
+  },
+  {
+    "id": "rd-04",
+    "desc": "estoura orcamento OP de delight -> status estoura_orcamento",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 1000,
+      "invites_sent": 3000,
+      "invite_conversions": 900,
+      "delight_cost": 9000,
+      "op_budget": 5000,
+      "fraud_invites": 30,
+      "propensity_signals": {
+        "engagement": 0.7,
+        "nps": 30,
+        "past_referrals": 2
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "budget_ok": false,
+      "status": "estoura_orcamento"
+    }
+  },
+  {
+    "id": "rd-05",
+    "desc": "fronteira k=1.0 exato (5 convites/user x 20% conv) -> viral",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 100,
+      "invites_sent": 500,
+      "invite_conversions": 100,
+      "delight_cost": 1000,
+      "op_budget": 5000,
+      "fraud_invites": 10,
+      "propensity_signals": {
+        "engagement": 0.5,
+        "nps": 0,
+        "past_referrals": 0
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "k_factor": 1.0,
+      "viral": true,
+      "status": "viral"
+    }
+  },
+  {
+    "id": "rd-06",
+    "desc": "fronteira logo abaixo k=0.9801 (3.3 x 0.297) -> abaixo_viral",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 1000,
+      "invites_sent": 3300,
+      "invite_conversions": 980,
+      "delight_cost": 1000,
+      "op_budget": 5000,
+      "fraud_invites": 10,
+      "propensity_signals": {
+        "engagement": 0.4,
+        "nps": 0,
+        "past_referrals": 0
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "viral": false,
+      "status": "abaixo_viral"
+    }
+  },
+  {
+    "id": "rd-07",
+    "desc": "k=1.2 (2 convites/user x 60% conv) bem acima do viral",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 500,
+      "invites_sent": 1000,
+      "invite_conversions": 600,
+      "delight_cost": 1500,
+      "op_budget": 5000,
+      "fraud_invites": 20,
+      "propensity_signals": {
+        "engagement": 0.9,
+        "nps": 80,
+        "past_referrals": 5
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "k_factor": 1.2,
+      "viral": true,
+      "status": "viral",
+      "propensity_score": 92.0
+    }
+  },
+  {
+    "id": "rd-08",
+    "desc": "fronteira fraude=5.0% exato (NAO dispara, >5 estrito) -> abaixo_viral",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 1000,
+      "invites_sent": 2000,
+      "invite_conversions": 400,
+      "delight_cost": 1000,
+      "op_budget": 5000,
+      "fraud_invites": 100,
+      "propensity_signals": {
+        "engagement": 0.3,
+        "nps": 0,
+        "past_referrals": 0
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "fraud_rate_pct": 5.0,
+      "status": "abaixo_viral"
+    }
+  },
+  {
+    "id": "rd-09",
+    "desc": "fronteira fraude=5.05% (acima de 5) -> fraude_alta",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 1000,
+      "invites_sent": 2000,
+      "invite_conversions": 1200,
+      "delight_cost": 1000,
+      "op_budget": 5000,
+      "fraud_invites": 101,
+      "propensity_signals": {
+        "engagement": 0.5,
+        "nps": 0,
+        "past_referrals": 0
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "fraud_rate_pct": 5.05,
+      "status": "fraude_alta"
+    }
+  },
+  {
+    "id": "rd-10",
+    "desc": "precedencia: fraude alta E estoura orcamento -> fraude_alta vence",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 1000,
+      "invites_sent": 2000,
+      "invite_conversions": 1000,
+      "delight_cost": 9000,
+      "op_budget": 3000,
+      "fraud_invites": 300,
+      "propensity_signals": {
+        "engagement": 0.5,
+        "nps": 0,
+        "past_referrals": 0
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "fraud_rate_pct": 15.0,
+      "budget_ok": false,
+      "status": "fraude_alta"
+    }
+  },
+  {
+    "id": "rd-11",
+    "desc": "precedencia: viral (k>1) mas fraude alta -> fraude_alta vence",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 100,
+      "invites_sent": 1000,
+      "invite_conversions": 500,
+      "delight_cost": 1000,
+      "op_budget": 5000,
+      "fraud_invites": 200,
+      "propensity_signals": {
+        "engagement": 0.5,
+        "nps": 0,
+        "past_referrals": 0
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "k_factor": 5.0,
+      "viral": true,
+      "fraud_rate_pct": 20.0,
+      "status": "fraude_alta"
+    }
+  },
+  {
+    "id": "rd-12",
+    "desc": "precedencia: viral (k>1) mas estoura orcamento -> estoura_orcamento vence",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 100,
+      "invites_sent": 1000,
+      "invite_conversions": 500,
+      "delight_cost": 6000,
+      "op_budget": 5000,
+      "fraud_invites": 10,
+      "propensity_signals": {
+        "engagement": 0.5,
+        "nps": 0,
+        "past_referrals": 0
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "k_factor": 5.0,
+      "viral": true,
+      "budget_ok": false,
+      "status": "estoura_orcamento"
+    }
+  },
+  {
+    "id": "rd-13",
+    "desc": "fronteira delight=orcamento exato (<= passa) -> budget_ok, abaixo_viral",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 1000,
+      "invites_sent": 2000,
+      "invite_conversions": 400,
+      "delight_cost": 5000,
+      "op_budget": 5000,
+      "fraud_invites": 10,
+      "propensity_signals": {
+        "engagement": 0.4,
+        "nps": 0,
+        "past_referrals": 0
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "budget_ok": true,
+      "status": "abaixo_viral"
+    }
+  },
+  {
+    "id": "rd-14",
+    "desc": "fronteira delight=orcamento+1 -> estoura_orcamento",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 1000,
+      "invites_sent": 2000,
+      "invite_conversions": 400,
+      "delight_cost": 5001,
+      "op_budget": 5000,
+      "fraud_invites": 10,
+      "propensity_signals": {
+        "engagement": 0.4,
+        "nps": 0,
+        "past_referrals": 0
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "budget_ok": false,
+      "status": "estoura_orcamento"
+    }
+  },
+  {
+    "id": "rd-15",
+    "desc": "sem orcamento OP definido (op_budget=0) -> budget_ok False -> estoura_orcamento",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 1000,
+      "invites_sent": 2000,
+      "invite_conversions": 400,
+      "delight_cost": 100,
+      "op_budget": 0,
+      "fraud_invites": 10,
+      "propensity_signals": {
+        "engagement": 0.4,
+        "nps": 0,
+        "past_referrals": 0
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "budget_ok": false,
+      "status": "estoura_orcamento"
+    }
+  },
+  {
+    "id": "rd-16",
+    "desc": "propensity maximo: engagement 1.0, nps 100, past 5 -> 100.0",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 100,
+      "invites_sent": 200,
+      "invite_conversions": 100,
+      "delight_cost": 100,
+      "op_budget": 5000,
+      "fraud_invites": 0,
+      "propensity_signals": {
+        "engagement": 1.0,
+        "nps": 100,
+        "past_referrals": 5
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "propensity_score": 100.0
+    }
+  },
+  {
+    "id": "rd-17",
+    "desc": "propensity: past_referrals limitado em 5 (8 nao soma mais) -> 100.0",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 100,
+      "invites_sent": 200,
+      "invite_conversions": 100,
+      "delight_cost": 100,
+      "op_budget": 5000,
+      "fraud_invites": 0,
+      "propensity_signals": {
+        "engagement": 1.0,
+        "nps": 100,
+        "past_referrals": 8
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "propensity_score": 100.0
+    }
+  },
+  {
+    "id": "rd-18",
+    "desc": "propensity minimo: engagement 0, nps -100, past 0 -> 0.0",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 100,
+      "invites_sent": 200,
+      "invite_conversions": 100,
+      "delight_cost": 100,
+      "op_budget": 5000,
+      "fraud_invites": 0,
+      "propensity_signals": {
+        "engagement": 0.0,
+        "nps": -100,
+        "past_referrals": 0
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "propensity_score": 0.0
+    }
+  },
+  {
+    "id": "rd-19",
+    "desc": "propensity: nps=0 midpoint, eng 0.5, past 2 -> 48.0",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 100,
+      "invites_sent": 200,
+      "invite_conversions": 100,
+      "delight_cost": 100,
+      "op_budget": 5000,
+      "fraud_invites": 0,
+      "propensity_signals": {
+        "engagement": 0.5,
+        "nps": 0,
+        "past_referrals": 2
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "propensity_score": 48.0
+    }
+  },
+  {
+    "id": "rd-20",
+    "desc": "sem propensity_signals -> nps default 0 (midpoint) da 15.0, viral",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 100,
+      "invites_sent": 200,
+      "invite_conversions": 100,
+      "delight_cost": 100,
+      "op_budget": 5000,
+      "fraud_invites": 0
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "propensity_score": 15.0,
+      "viral": true
+    }
+  },
+  {
+    "id": "rd-21",
+    "desc": "zero usuarios -> invites_per_user e k_factor 0",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 0,
+      "invites_sent": 100,
+      "invite_conversions": 50,
+      "delight_cost": 100,
+      "op_budget": 5000,
+      "fraud_invites": 0
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "invites_per_user": 0.0,
+      "k_factor": 0.0,
+      "viral": false,
+      "status": "abaixo_viral"
+    }
+  },
+  {
+    "id": "rd-22",
+    "desc": "zero convites enviados -> conv_rate 0, fraud_rate 0",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 100,
+      "invites_sent": 0,
+      "invite_conversions": 0,
+      "delight_cost": 100,
+      "op_budget": 5000,
+      "fraud_invites": 0
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "invite_conv_rate": 0.0,
+      "k_factor": 0.0,
+      "fraud_rate_pct": 0.0,
+      "status": "abaixo_viral"
+    }
+  },
+  {
+    "id": "rd-23",
+    "desc": "zero conversoes -> cost_per_conversion 0.0",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 100,
+      "invites_sent": 200,
+      "invite_conversions": 0,
+      "delight_cost": 1000,
+      "op_budget": 5000,
+      "fraud_invites": 0
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "cost_per_conversion": 0.0,
+      "k_factor": 0.0,
+      "status": "abaixo_viral"
+    }
+  },
+  {
+    "id": "rd-24",
+    "desc": "referral vazio -> tudo zero, sem orcamento -> estoura_orcamento",
+    "tenant_id": "t-eval-g07",
+    "referral": {},
+    "expected": {
+      "by": "g7-referral-designer",
+      "k_factor": 0.0,
+      "budget_ok": false,
+      "status": "estoura_orcamento"
+    }
+  },
+  {
+    "id": "rd-25",
+    "desc": "custo por conversao = delight/conversoes = 2000/250 = 8.0",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 500,
+      "invites_sent": 1000,
+      "invite_conversions": 250,
+      "delight_cost": 2000,
+      "op_budget": 5000,
+      "fraud_invites": 10,
+      "propensity_signals": {
+        "engagement": 0.5,
+        "nps": 0,
+        "past_referrals": 0
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "cost_per_conversion": 8.0,
+      "invite_conv_rate": 0.25,
+      "k_factor": 0.5,
+      "status": "abaixo_viral"
+    }
+  },
+  {
+    "id": "rd-26",
+    "desc": "viral forte: k=2.0, dentro orcamento, fraude baixa, propensity alto",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 200,
+      "invites_sent": 800,
+      "invite_conversions": 400,
+      "delight_cost": 1000,
+      "op_budget": 4000,
+      "fraud_invites": 8,
+      "propensity_signals": {
+        "engagement": 0.9,
+        "nps": 60,
+        "past_referrals": 4
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "k_factor": 2.0,
+      "viral": true,
+      "budget_ok": true,
+      "fraud_rate_pct": 1.0,
+      "status": "viral",
+      "propensity_score": 85.0
+    }
+  },
+  {
+    "id": "rd-27",
+    "desc": "k=1.0125 logo acima do limiar -> viral",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 800,
+      "invites_sent": 3000,
+      "invite_conversions": 810,
+      "delight_cost": 1000,
+      "op_budget": 5000,
+      "fraud_invites": 10,
+      "propensity_signals": {
+        "engagement": 0.5,
+        "nps": 0,
+        "past_referrals": 0
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "viral": true,
+      "status": "viral"
+    }
+  },
+  {
+    "id": "rd-28",
+    "desc": "invites_per_user com arredondamento 3.333 (1000/300)",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 300,
+      "invites_sent": 1000,
+      "invite_conversions": 200,
+      "delight_cost": 500,
+      "op_budget": 5000,
+      "fraud_invites": 0,
+      "propensity_signals": {
+        "engagement": 0.5,
+        "nps": 0,
+        "past_referrals": 0
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "invites_per_user": 3.333,
+      "status": "abaixo_viral"
+    }
+  },
+  {
+    "id": "rd-29",
+    "desc": "fraude 8% domina apesar de orcamento ok e nao-viral -> fraude_alta",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 1000,
+      "invites_sent": 2500,
+      "invite_conversions": 500,
+      "delight_cost": 500,
+      "op_budget": 5000,
+      "fraud_invites": 200,
+      "propensity_signals": {
+        "engagement": 0.5,
+        "nps": 0,
+        "past_referrals": 0
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "fraud_rate_pct": 8.0,
+      "viral": false,
+      "status": "fraude_alta"
+    }
+  },
+  {
+    "id": "rd-30",
+    "desc": "dentro do orcamento, fraude baixa, k=0.8 -> abaixo_viral",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 1000,
+      "invites_sent": 2000,
+      "invite_conversions": 800,
+      "delight_cost": 2000,
+      "op_budget": 5000,
+      "fraud_invites": 20,
+      "propensity_signals": {
+        "engagement": 0.7,
+        "nps": 40,
+        "past_referrals": 3
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "k_factor": 0.8,
+      "budget_ok": true,
+      "fraud_rate_pct": 1.0,
+      "viral": false,
+      "status": "abaixo_viral"
+    }
+  },
+  {
+    "id": "rd-31",
+    "desc": "tres condicoes negativas (fraude+estoura+nao viral) -> fraude_alta no topo",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 1000,
+      "invites_sent": 2000,
+      "invite_conversions": 300,
+      "delight_cost": 9000,
+      "op_budget": 4000,
+      "fraud_invites": 250,
+      "propensity_signals": {
+        "engagement": 0.2,
+        "nps": -50,
+        "past_referrals": 0
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "fraud_rate_pct": 12.5,
+      "budget_ok": false,
+      "viral": false,
+      "status": "fraude_alta"
+    }
+  },
+  {
+    "id": "rd-32",
+    "desc": "viral limpo k=1.0, propensity baixo (eng 0.2 nps -50 past 0) -> propensity 17.5",
+    "tenant_id": "t-eval-g07",
+    "referral": {
+      "users": 100,
+      "invites_sent": 200,
+      "invite_conversions": 100,
+      "delight_cost": 200,
+      "op_budget": 5000,
+      "fraud_invites": 2,
+      "propensity_signals": {
+        "engagement": 0.2,
+        "nps": -50,
+        "past_referrals": 0
+      }
+    },
+    "expected": {
+      "by": "g7-referral-designer",
+      "k_factor": 1.0,
+      "viral": true,
+      "status": "viral",
+      "propensity_score": 17.5
+    }
+  }
 ]

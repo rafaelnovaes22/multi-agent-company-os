@@ -1,20 +1,569 @@
 [
   {
     "id": "co-01",
-    "desc": "cache 50% sem regressao -> aplica, economia 50%",
-    "optimization": {"baseline_cost": 10.0, "cache_hit_rate": 0.5, "quality_after": 1.0, "baseline_quality": 1.0, "quality_tolerance": 0.02},
-    "expected": {"optimized_cost": 5.0, "savings": 5.0, "savings_pct": 50.0, "quality_regression": 0.0, "quality_ok": true, "applied": true, "status": "applied"}
+    "desc": "cache 50% sem regressão -> aplica, economia 50%",
+    "optimization": {
+      "baseline_cost": 10.0,
+      "cache_hit_rate": 0.5,
+      "quality_after": 1.0,
+      "baseline_quality": 1.0,
+      "quality_tolerance": 0.02
+    },
+    "expected": {
+      "optimized_cost": 5.0,
+      "savings": 5.0,
+      "savings_pct": 50.0,
+      "quality_regression": 0.0,
+      "quality_ok": true,
+      "applied": true,
+      "status": "applied"
+    }
   },
   {
     "id": "co-02",
-    "desc": "economia alta mas qualidade cai 0.10 alem da tolerancia -> nao aplica",
-    "optimization": {"baseline_cost": 10.0, "cache_hit_rate": 0.8, "quality_after": 0.90, "baseline_quality": 1.0, "quality_tolerance": 0.02},
-    "expected": {"optimized_cost": 2.0, "savings": 8.0, "savings_pct": 80.0, "quality_regression": 0.1, "quality_ok": false, "applied": false, "status": "quality_regression"}
+    "desc": "economia alta mas qualidade cai 0.10 além da tolerância -> não aplica",
+    "optimization": {
+      "baseline_cost": 10.0,
+      "cache_hit_rate": 0.8,
+      "quality_after": 0.9,
+      "baseline_quality": 1.0,
+      "quality_tolerance": 0.02
+    },
+    "expected": {
+      "optimized_cost": 2.0,
+      "savings": 8.0,
+      "savings_pct": 80.0,
+      "quality_regression": 0.1,
+      "quality_ok": false,
+      "applied": false,
+      "status": "quality_regression"
+    }
   },
   {
     "id": "co-03",
-    "desc": "batching 25% + compressao 20% sem cache -> aplica, economia 40%",
-    "optimization": {"baseline_cost": 8.0, "cache_hit_rate": 0.0, "batch_savings": 0.25, "prompt_compression": 0.20, "quality_after": 1.0, "baseline_quality": 1.0, "quality_tolerance": 0.02},
-    "expected": {"optimized_cost": 4.8, "savings": 3.2, "savings_pct": 40.0, "quality_ok": true, "applied": true, "status": "applied"}
+    "desc": "sem otimização (tudo zero) -> sem economia",
+    "optimization": {
+      "baseline_cost": 10.0,
+      "cache_hit_rate": 0.0,
+      "batch_savings": 0.0,
+      "prompt_compression": 0.0,
+      "quality_after": 1.0,
+      "baseline_quality": 1.0
+    },
+    "expected": {
+      "optimized_cost": 10.0,
+      "savings": 0.0,
+      "savings_pct": 0.0,
+      "applied": false,
+      "status": "no_savings"
+    }
+  },
+  {
+    "id": "co-04",
+    "desc": "batching 40% sem cache -> custo 6.0",
+    "optimization": {
+      "baseline_cost": 10.0,
+      "batch_savings": 0.4,
+      "quality_after": 1.0,
+      "baseline_quality": 1.0
+    },
+    "expected": {
+      "optimized_cost": 6.0,
+      "savings": 4.0,
+      "savings_pct": 40.0,
+      "applied": true,
+      "status": "applied"
+    }
+  },
+  {
+    "id": "co-05",
+    "desc": "compressão 30% sem cache/batch -> custo 7.0",
+    "optimization": {
+      "baseline_cost": 10.0,
+      "prompt_compression": 0.3,
+      "quality_after": 1.0,
+      "baseline_quality": 1.0
+    },
+    "expected": {
+      "optimized_cost": 7.0,
+      "savings": 3.0,
+      "savings_pct": 30.0,
+      "applied": true,
+      "status": "applied"
+    }
+  },
+  {
+    "id": "co-06",
+    "desc": "cache 0.5 + batch 0.5 + compressão 0.5 -> fator 0.125",
+    "optimization": {
+      "baseline_cost": 80.0,
+      "cache_hit_rate": 0.5,
+      "batch_savings": 0.5,
+      "prompt_compression": 0.5,
+      "quality_after": 1.0,
+      "baseline_quality": 1.0
+    },
+    "expected": {
+      "optimized_cost": 10.0,
+      "savings": 70.0,
+      "savings_pct": 87.5,
+      "applied": true,
+      "status": "applied"
+    }
+  },
+  {
+    "id": "co-07",
+    "desc": "fronteira: regressão exatamente na tolerância 0.02 -> aceita",
+    "optimization": {
+      "baseline_cost": 10.0,
+      "cache_hit_rate": 0.5,
+      "quality_after": 0.98,
+      "baseline_quality": 1.0,
+      "quality_tolerance": 0.02
+    },
+    "expected": {
+      "quality_regression": 0.02,
+      "quality_ok": true,
+      "applied": true,
+      "status": "applied"
+    }
+  },
+  {
+    "id": "co-08",
+    "desc": "fronteira+: regressão 0.021 além da tolerância -> bloqueia",
+    "optimization": {
+      "baseline_cost": 10.0,
+      "cache_hit_rate": 0.5,
+      "quality_after": 0.979,
+      "baseline_quality": 1.0,
+      "quality_tolerance": 0.02
+    },
+    "expected": {
+      "quality_regression": 0.021,
+      "quality_ok": false,
+      "applied": false,
+      "status": "quality_regression"
+    }
+  },
+  {
+    "id": "co-09",
+    "desc": "precedência: sem economia E regressão -> status quality_regression (q vence)",
+    "optimization": {
+      "baseline_cost": 10.0,
+      "cache_hit_rate": 0.0,
+      "batch_savings": 0.0,
+      "prompt_compression": 0.0,
+      "quality_after": 0.8,
+      "baseline_quality": 1.0,
+      "quality_tolerance": 0.02
+    },
+    "expected": {
+      "savings": 0.0,
+      "quality_regression": 0.2,
+      "quality_ok": false,
+      "applied": false,
+      "status": "quality_regression"
+    }
+  },
+  {
+    "id": "co-10",
+    "desc": "qualidade melhorou pós-otimização -> regressão negativa, aceita",
+    "optimization": {
+      "baseline_cost": 10.0,
+      "cache_hit_rate": 0.3,
+      "quality_after": 1.0,
+      "baseline_quality": 0.95,
+      "quality_tolerance": 0.02
+    },
+    "expected": {
+      "quality_regression": -0.05,
+      "quality_ok": true,
+      "applied": true,
+      "status": "applied"
+    }
+  },
+  {
+    "id": "co-11",
+    "desc": "cache 100% -> custo zerado, economia total",
+    "optimization": {
+      "baseline_cost": 10.0,
+      "cache_hit_rate": 1.0,
+      "quality_after": 1.0,
+      "baseline_quality": 1.0
+    },
+    "expected": {
+      "optimized_cost": 0.0,
+      "savings": 10.0,
+      "savings_pct": 100.0,
+      "applied": true,
+      "status": "applied"
+    }
+  },
+  {
+    "id": "co-12",
+    "desc": "cache servindo resposta obsoleta (qualidade despenca) -> bloqueia",
+    "optimization": {
+      "baseline_cost": 10.0,
+      "cache_hit_rate": 0.9,
+      "quality_after": 0.7,
+      "baseline_quality": 1.0,
+      "quality_tolerance": 0.02
+    },
+    "expected": {
+      "quality_regression": 0.3,
+      "quality_ok": false,
+      "applied": false,
+      "status": "quality_regression"
+    }
+  },
+  {
+    "id": "co-13",
+    "desc": "tolerância default 0.02: queda 0.01 aceita",
+    "optimization": {
+      "baseline_cost": 10.0,
+      "cache_hit_rate": 0.4,
+      "quality_after": 0.99,
+      "baseline_quality": 1.0
+    },
+    "expected": {
+      "quality_regression": 0.01,
+      "quality_ok": true,
+      "applied": true,
+      "status": "applied"
+    }
+  },
+  {
+    "id": "co-14",
+    "desc": "tolerância folgada 0.1: queda 0.08 aceita com economia",
+    "optimization": {
+      "baseline_cost": 10.0,
+      "cache_hit_rate": 0.5,
+      "quality_after": 0.92,
+      "baseline_quality": 1.0,
+      "quality_tolerance": 0.1
+    },
+    "expected": {
+      "quality_regression": 0.08,
+      "quality_ok": true,
+      "applied": true,
+      "status": "applied"
+    }
+  },
+  {
+    "id": "co-15",
+    "desc": "tolerância apertada 0.005: queda 0.01 bloqueia",
+    "optimization": {
+      "baseline_cost": 10.0,
+      "cache_hit_rate": 0.5,
+      "quality_after": 0.99,
+      "baseline_quality": 1.0,
+      "quality_tolerance": 0.005
+    },
+    "expected": {
+      "quality_regression": 0.01,
+      "quality_ok": false,
+      "applied": false,
+      "status": "quality_regression"
+    }
+  },
+  {
+    "id": "co-16",
+    "desc": "cache 25% -> economia 25%",
+    "optimization": {
+      "baseline_cost": 40.0,
+      "cache_hit_rate": 0.25,
+      "quality_after": 1.0,
+      "baseline_quality": 1.0
+    },
+    "expected": {
+      "optimized_cost": 30.0,
+      "savings": 10.0,
+      "savings_pct": 25.0,
+      "applied": true,
+      "status": "applied"
+    }
+  },
+  {
+    "id": "co-17",
+    "desc": "custo baseline 0 -> savings_pct 0, sem economia",
+    "optimization": {
+      "baseline_cost": 0,
+      "cache_hit_rate": 0.5,
+      "quality_after": 1.0,
+      "baseline_quality": 1.0
+    },
+    "expected": {
+      "optimized_cost": 0.0,
+      "savings": 0.0,
+      "savings_pct": 0.0,
+      "applied": false,
+      "status": "no_savings"
+    }
+  },
+  {
+    "id": "co-18",
+    "desc": "batch 0.5 + compressão 0.5 sem cache -> fator 0.25",
+    "optimization": {
+      "baseline_cost": 40.0,
+      "batch_savings": 0.5,
+      "prompt_compression": 0.5,
+      "quality_after": 1.0,
+      "baseline_quality": 1.0
+    },
+    "expected": {
+      "optimized_cost": 10.0,
+      "savings": 30.0,
+      "savings_pct": 75.0,
+      "applied": true,
+      "status": "applied"
+    }
+  },
+  {
+    "id": "co-19",
+    "desc": "qualidade ok mas zero economia -> no_savings",
+    "optimization": {
+      "baseline_cost": 10.0,
+      "quality_after": 1.0,
+      "baseline_quality": 1.0
+    },
+    "expected": {
+      "savings": 0.0,
+      "quality_ok": true,
+      "applied": false,
+      "status": "no_savings"
+    }
+  },
+  {
+    "id": "co-20",
+    "desc": "cache 70% com queda 0.015 dentro da tolerância -> aplica",
+    "optimization": {
+      "baseline_cost": 10.0,
+      "cache_hit_rate": 0.7,
+      "quality_after": 0.985,
+      "baseline_quality": 1.0,
+      "quality_tolerance": 0.02
+    },
+    "expected": {
+      "optimized_cost": 3.0,
+      "savings": 7.0,
+      "quality_regression": 0.015,
+      "quality_ok": true,
+      "applied": true,
+      "status": "applied"
+    }
+  },
+  {
+    "id": "co-21",
+    "desc": "cache 0.8 + batch 0.5 -> fator 0.1",
+    "optimization": {
+      "baseline_cost": 100.0,
+      "cache_hit_rate": 0.8,
+      "batch_savings": 0.5,
+      "quality_after": 1.0,
+      "baseline_quality": 1.0
+    },
+    "expected": {
+      "optimized_cost": 10.0,
+      "savings": 90.0,
+      "savings_pct": 90.0,
+      "applied": true,
+      "status": "applied"
+    }
+  },
+  {
+    "id": "co-22",
+    "desc": "qualidade boa mas economia exatamente 0 -> no_savings",
+    "optimization": {
+      "baseline_cost": 50.0,
+      "cache_hit_rate": 0.0,
+      "batch_savings": 0.0,
+      "prompt_compression": 0.0,
+      "quality_after": 1.0,
+      "baseline_quality": 1.0
+    },
+    "expected": {
+      "savings": 0.0,
+      "quality_ok": true,
+      "applied": false,
+      "status": "no_savings"
+    }
+  },
+  {
+    "id": "co-23",
+    "desc": "compressão 70% -> custo 3.0",
+    "optimization": {
+      "baseline_cost": 10.0,
+      "prompt_compression": 0.7,
+      "quality_after": 1.0,
+      "baseline_quality": 1.0
+    },
+    "expected": {
+      "optimized_cost": 3.0,
+      "savings": 7.0,
+      "savings_pct": 70.0,
+      "applied": true,
+      "status": "applied"
+    }
+  },
+  {
+    "id": "co-24",
+    "desc": "cache 0.5 + compressão 0.4 -> fator 0.3",
+    "optimization": {
+      "baseline_cost": 100.0,
+      "cache_hit_rate": 0.5,
+      "prompt_compression": 0.4,
+      "quality_after": 1.0,
+      "baseline_quality": 1.0
+    },
+    "expected": {
+      "optimized_cost": 30.0,
+      "savings": 70.0,
+      "savings_pct": 70.0,
+      "applied": true,
+      "status": "applied"
+    }
+  },
+  {
+    "id": "co-25",
+    "desc": "economia 90% mas qualidade despenca 0.3 -> bloqueia (qualidade vence)",
+    "optimization": {
+      "baseline_cost": 100.0,
+      "cache_hit_rate": 0.9,
+      "quality_after": 0.7,
+      "baseline_quality": 1.0,
+      "quality_tolerance": 0.02
+    },
+    "expected": {
+      "savings": 90.0,
+      "quality_ok": false,
+      "applied": false,
+      "status": "quality_regression"
+    }
+  },
+  {
+    "id": "co-26",
+    "desc": "cache 10% -> economia 10%",
+    "optimization": {
+      "baseline_cost": 100.0,
+      "cache_hit_rate": 0.1,
+      "quality_after": 1.0,
+      "baseline_quality": 1.0
+    },
+    "expected": {
+      "optimized_cost": 90.0,
+      "savings": 10.0,
+      "savings_pct": 10.0,
+      "applied": true,
+      "status": "applied"
+    }
+  },
+  {
+    "id": "co-27",
+    "desc": "qualidade idêntica ao baseline -> regressão 0, aplica",
+    "optimization": {
+      "baseline_cost": 10.0,
+      "cache_hit_rate": 0.6,
+      "quality_after": 0.95,
+      "baseline_quality": 0.95
+    },
+    "expected": {
+      "quality_regression": 0.0,
+      "quality_ok": true,
+      "applied": true,
+      "status": "applied"
+    }
+  },
+  {
+    "id": "co-28",
+    "desc": "economia mínima (compressão 5%) com qualidade ok -> aplica",
+    "optimization": {
+      "baseline_cost": 100.0,
+      "prompt_compression": 0.05,
+      "quality_after": 1.0,
+      "baseline_quality": 1.0
+    },
+    "expected": {
+      "optimized_cost": 95.0,
+      "savings": 5.0,
+      "savings_pct": 5.0,
+      "applied": true,
+      "status": "applied"
+    }
+  },
+  {
+    "id": "co-29",
+    "desc": "sem economia E regressão acima da tolerância -> quality_regression",
+    "optimization": {
+      "baseline_cost": 10.0,
+      "cache_hit_rate": 0.0,
+      "quality_after": 0.9,
+      "baseline_quality": 1.0,
+      "quality_tolerance": 0.02
+    },
+    "expected": {
+      "savings": 0.0,
+      "quality_regression": 0.1,
+      "quality_ok": false,
+      "applied": false,
+      "status": "quality_regression"
+    }
+  },
+  {
+    "id": "co-30",
+    "desc": "cache 0.2 + batch 0.2 + compressão 0.2 -> fator 0.512",
+    "optimization": {
+      "baseline_cost": 100.0,
+      "cache_hit_rate": 0.2,
+      "batch_savings": 0.2,
+      "prompt_compression": 0.2,
+      "quality_after": 1.0,
+      "baseline_quality": 1.0
+    },
+    "expected": {
+      "optimized_cost": 51.2,
+      "savings": 48.8,
+      "savings_pct": 48.8,
+      "applied": true,
+      "status": "applied"
+    }
+  },
+  {
+    "id": "co-31",
+    "desc": "caso ideal: economia 50% qualidade mantida -> aplica completo",
+    "optimization": {
+      "baseline_cost": 20.0,
+      "cache_hit_rate": 0.5,
+      "quality_after": 1.0,
+      "baseline_quality": 1.0,
+      "quality_tolerance": 0.02
+    },
+    "expected": {
+      "optimized_cost": 10.0,
+      "savings": 10.0,
+      "savings_pct": 50.0,
+      "quality_regression": 0.0,
+      "quality_ok": true,
+      "applied": true,
+      "status": "applied"
+    }
+  },
+  {
+    "id": "co-32",
+    "desc": "cache 90% com queda 0.02 (na tolerância) -> aplica",
+    "optimization": {
+      "baseline_cost": 10.0,
+      "cache_hit_rate": 0.9,
+      "quality_after": 0.98,
+      "baseline_quality": 1.0,
+      "quality_tolerance": 0.02
+    },
+    "expected": {
+      "optimized_cost": 1.0,
+      "savings": 9.0,
+      "quality_regression": 0.02,
+      "quality_ok": true,
+      "applied": true,
+      "status": "applied"
+    }
   }
 ]

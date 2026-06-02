@@ -18,7 +18,8 @@
     },
     "expected": {
       "sentiment_score": 0.533,
-      "alert_raised": false
+      "alert_raised": false,
+      "status": "positivo"
     }
   },
   {
@@ -39,7 +40,9 @@
       ]
     },
     "expected": {
-      "alert_raised": true
+      "sentiment_score": -0.533,
+      "alert_raised": true,
+      "status": "negativo"
     }
   },
   {
@@ -61,7 +64,648 @@
     },
     "expected": {
       "sentiment_score": 0.0,
+      "alert_raised": false,
+      "status": "neutro"
+    }
+  },
+  {
+    "id": "sm-04",
+    "desc": "forte positivo (conta saudavel)",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "signals": [
+        {
+          "polarity": 0.9
+        },
+        {
+          "polarity": 0.8
+        },
+        {
+          "polarity": 0.7
+        },
+        {
+          "polarity": 0.95
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": 0.838,
+      "status": "positivo",
       "alert_raised": false
+    }
+  },
+  {
+    "id": "sm-05",
+    "desc": "crise: media muito negativa dispara alerta",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "signals": [
+        {
+          "polarity": -0.9
+        },
+        {
+          "polarity": -0.85
+        },
+        {
+          "polarity": -0.95
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": -0.9,
+      "alert_raised": true,
+      "status": "negativo"
+    }
+  },
+  {
+    "id": "sm-06",
+    "desc": "fronteira status: exatamente -0.2 NAO e negativo (usa < estrito)",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "signals": [
+        {
+          "polarity": -0.2
+        },
+        {
+          "polarity": -0.2
+        },
+        {
+          "polarity": -0.2
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": -0.2,
+      "status": "neutro",
+      "alert_raised": false
+    }
+  },
+  {
+    "id": "sm-07",
+    "desc": "fronteira status: -0.201 (abaixo) ja e negativo",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "signals": [
+        {
+          "polarity": -0.201
+        },
+        {
+          "polarity": -0.201
+        },
+        {
+          "polarity": -0.201
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": -0.201,
+      "status": "negativo"
+    }
+  },
+  {
+    "id": "sm-08",
+    "desc": "fronteira status: exatamente +0.2 NAO e positivo (usa > estrito)",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "signals": [
+        {
+          "polarity": 0.2
+        },
+        {
+          "polarity": 0.2
+        },
+        {
+          "polarity": 0.2
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": 0.2,
+      "status": "neutro",
+      "alert_raised": false
+    }
+  },
+  {
+    "id": "sm-09",
+    "desc": "fronteira status: +0.201 ja e positivo",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "signals": [
+        {
+          "polarity": 0.201
+        },
+        {
+          "polarity": 0.201
+        },
+        {
+          "polarity": 0.201
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": 0.201,
+      "status": "positivo"
+    }
+  },
+  {
+    "id": "sm-10",
+    "desc": "fronteira alerta: score == threshold default (-0.2) NAO alerta",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "signals": [
+        {
+          "polarity": -0.2
+        },
+        {
+          "polarity": -0.2
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": -0.2,
+      "alert_raised": false
+    }
+  },
+  {
+    "id": "sm-11",
+    "desc": "fronteira alerta: score logo abaixo do threshold default alerta",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "signals": [
+        {
+          "polarity": -0.3
+        },
+        {
+          "polarity": -0.1
+        },
+        {
+          "polarity": -0.25
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": -0.217,
+      "alert_raised": true
+    }
+  },
+  {
+    "id": "sm-12",
+    "desc": "threshold custom mais frouxo (-0.5): media -0.3 NAO alerta",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "threshold": -0.5,
+      "signals": [
+        {
+          "polarity": -0.3
+        },
+        {
+          "polarity": -0.3
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": -0.3,
+      "alert_raised": false,
+      "status": "negativo"
+    }
+  },
+  {
+    "id": "sm-13",
+    "desc": "threshold custom mais rigoroso (-0.1): media -0.3 alerta",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "threshold": -0.1,
+      "signals": [
+        {
+          "polarity": -0.3
+        },
+        {
+          "polarity": -0.3
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": -0.3,
+      "alert_raised": true,
+      "status": "negativo"
+    }
+  },
+  {
+    "id": "sm-14",
+    "desc": "threshold custom positivo (0.5): media 0.4 alerta mesmo sendo status positivo",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "threshold": 0.5,
+      "signals": [
+        {
+          "polarity": 0.4
+        },
+        {
+          "polarity": 0.4
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": 0.4,
+      "alert_raised": true,
+      "status": "positivo"
+    }
+  },
+  {
+    "id": "sm-15",
+    "desc": "threshold custom exato: score==threshold custom NAO alerta",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "threshold": 0.0,
+      "signals": [
+        {
+          "polarity": 0.1
+        },
+        {
+          "polarity": -0.1
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": 0.0,
+      "alert_raised": false
+    }
+  },
+  {
+    "id": "sm-16",
+    "desc": "signal_count reflete numero de sinais",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "signals": [
+        {
+          "polarity": 0.1
+        },
+        {
+          "polarity": 0.2
+        },
+        {
+          "polarity": 0.3
+        },
+        {
+          "polarity": 0.4
+        },
+        {
+          "polarity": 0.5
+        }
+      ]
+    },
+    "expected": {
+      "signal_count": 5,
+      "sentiment_score": 0.3,
+      "status": "positivo"
+    }
+  },
+  {
+    "id": "sm-17",
+    "desc": "sinal unico negativo",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "signals": [
+        {
+          "polarity": -0.6
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": -0.6,
+      "signal_count": 1,
+      "alert_raised": true,
+      "status": "negativo"
+    }
+  },
+  {
+    "id": "sm-18",
+    "desc": "sem sinais: score 0, sem alerta, neutro (nao inventa crise)",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "signals": []
+    },
+    "expected": {
+      "sentiment_score": 0.0,
+      "alert_raised": false,
+      "status": "neutro",
+      "signal_count": 0
+    }
+  },
+  {
+    "id": "sm-19",
+    "desc": "payload sentiment ausente -> default seguro neutro",
+    "tenant_id": "t-eval-g09",
+    "expected": {
+      "sentiment_score": 0.0,
+      "alert_raised": false,
+      "status": "neutro",
+      "signal_count": 0
+    }
+  },
+  {
+    "id": "sm-20",
+    "desc": "maioria positiva com 1 outlier: media positiva, sem alerta (anti falso-positivo)",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "signals": [
+        {
+          "polarity": 0.7
+        },
+        {
+          "polarity": 0.8
+        },
+        {
+          "polarity": 0.6
+        },
+        {
+          "polarity": -0.9
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": 0.3,
+      "alert_raised": false,
+      "status": "positivo"
+    }
+  },
+  {
+    "id": "sm-21",
+    "desc": "deterioracao em conta-chave: media -0.4 dispara retencao (alerta)",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "signals": [
+        {
+          "polarity": -0.5
+        },
+        {
+          "polarity": -0.4
+        },
+        {
+          "polarity": -0.3
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": -0.4,
+      "alert_raised": true,
+      "status": "negativo"
+    }
+  },
+  {
+    "id": "sm-22",
+    "desc": "recuperacao: media volta a neutro, sem alerta",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "signals": [
+        {
+          "polarity": -0.1
+        },
+        {
+          "polarity": 0.1
+        },
+        {
+          "polarity": 0.0
+        },
+        {
+          "polarity": 0.1
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": 0.025,
+      "alert_raised": false,
+      "status": "neutro"
+    }
+  },
+  {
+    "id": "sm-23",
+    "desc": "limiar exato negativo combinado com alerta: media -0.2 status neutro e sem alerta",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "signals": [
+        {
+          "polarity": -0.1
+        },
+        {
+          "polarity": -0.3
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": -0.2,
+      "status": "neutro",
+      "alert_raised": false
+    }
+  },
+  {
+    "id": "sm-24",
+    "desc": "pico negativo canal publico: forte alerta",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "signals": [
+        {
+          "polarity": -0.95
+        },
+        {
+          "polarity": -0.9
+        },
+        {
+          "polarity": -0.8
+        },
+        {
+          "polarity": -0.85
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": -0.875,
+      "alert_raised": true,
+      "status": "negativo"
+    }
+  },
+  {
+    "id": "sm-25",
+    "desc": "polaridade default 0 quando campo ausente no sinal",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "signals": [
+        {
+          "polarity": 0.6
+        },
+        {},
+        {
+          "polarity": 0.6
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": 0.4,
+      "signal_count": 3,
+      "status": "positivo"
+    }
+  },
+  {
+    "id": "sm-26",
+    "desc": "threshold custom muito rigoroso: ate neutro alerta",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "threshold": 0.3,
+      "signals": [
+        {
+          "polarity": 0.0
+        },
+        {
+          "polarity": 0.0
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": 0.0,
+      "alert_raised": true,
+      "status": "neutro"
+    }
+  },
+  {
+    "id": "sm-27",
+    "desc": "mix positivo claro alto count",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "signals": [
+        {
+          "polarity": 0.4
+        },
+        {
+          "polarity": 0.5
+        },
+        {
+          "polarity": 0.6
+        },
+        {
+          "polarity": 0.3
+        },
+        {
+          "polarity": 0.7
+        },
+        {
+          "polarity": 0.5
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": 0.5,
+      "status": "positivo",
+      "alert_raised": false,
+      "signal_count": 6
+    }
+  },
+  {
+    "id": "sm-28",
+    "desc": "borda inferior do neutro: -0.19",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "signals": [
+        {
+          "polarity": -0.19
+        },
+        {
+          "polarity": -0.19
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": -0.19,
+      "status": "neutro",
+      "alert_raised": false
+    }
+  },
+  {
+    "id": "sm-29",
+    "desc": "borda superior do neutro: 0.19",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "signals": [
+        {
+          "polarity": 0.19
+        },
+        {
+          "polarity": 0.19
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": 0.19,
+      "status": "neutro",
+      "alert_raised": false
+    }
+  },
+  {
+    "id": "sm-30",
+    "desc": "todos zero -> neutro",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "signals": [
+        {
+          "polarity": 0.0
+        },
+        {
+          "polarity": 0.0
+        },
+        {
+          "polarity": 0.0
+        },
+        {
+          "polarity": 0.0
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": 0.0,
+      "status": "neutro",
+      "alert_raised": false,
+      "signal_count": 4
+    }
+  },
+  {
+    "id": "sm-31",
+    "desc": "alerta no limiar custom + status positivo (alerta!=status)",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "threshold": 0.6,
+      "signals": [
+        {
+          "polarity": 0.5
+        },
+        {
+          "polarity": 0.5
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": 0.5,
+      "alert_raised": true,
+      "status": "positivo"
+    }
+  },
+  {
+    "id": "sm-32",
+    "desc": "negativo profundo, threshold custom frouxo nao alerta",
+    "tenant_id": "t-eval-g09",
+    "sentiment": {
+      "threshold": -0.95,
+      "signals": [
+        {
+          "polarity": -0.9
+        },
+        {
+          "polarity": -0.9
+        }
+      ]
+    },
+    "expected": {
+      "sentiment_score": -0.9,
+      "alert_raised": false,
+      "status": "negativo"
     }
   }
 ]

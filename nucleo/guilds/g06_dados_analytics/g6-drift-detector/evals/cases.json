@@ -1,14 +1,695 @@
 [
-  {"id": "dr-01", "desc": "queda de 6pp de acurácia/mês: drift de qualidade confirma rebaixamento",
-   "tenant_id": "t-eval-g06",
-   "drift": {"quality_drop_pp": 6, "cost_increase_pct": 0, "volume_change_pct": 0, "prompt_hash_changed": false, "economics_recomputed": true},
-   "expected": {"by": "g6-drift-detector", "drifted_dimensions": ["quality"], "drift_confirmed": true, "drift_count": 1, "demote_mode": true, "target_mode": "ASSISTED"}},
-  {"id": "dr-02", "desc": "prompt_hash mudou sem recálculo de economia: drift de prompt",
-   "tenant_id": "t-eval-g06",
-   "drift": {"quality_drop_pp": 0, "cost_increase_pct": 5, "volume_change_pct": 10, "prompt_hash_changed": true, "economics_recomputed": false},
-   "expected": {"by": "g6-drift-detector", "drifted_dimensions": ["prompt"], "drift_confirmed": true, "drift_count": 1, "demote_mode": true}},
-  {"id": "dr-03", "desc": "tudo dentro dos limiares: sem drift, mantém AUTONOMOUS",
-   "tenant_id": "t-eval-g06",
-   "drift": {"quality_drop_pp": 3, "cost_increase_pct": 10, "volume_change_pct": 10, "prompt_hash_changed": true, "economics_recomputed": true},
-   "expected": {"by": "g6-drift-detector", "drifted_dimensions": [], "drift_confirmed": false, "drift_count": 0, "demote_mode": false, "target_mode": "AUTONOMOUS"}}
+  {
+    "id": "dr-01",
+    "desc": "queda de 6pp de acuracia/mes: drift de qualidade confirma rebaixamento",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 6,
+      "cost_increase_pct": 0,
+      "volume_change_pct": 0,
+      "prompt_hash_changed": false,
+      "economics_recomputed": true
+    },
+    "expected": {
+      "drifted_dimensions": [
+        "quality"
+      ],
+      "drift_confirmed": true,
+      "drift_count": 1,
+      "demote_mode": true,
+      "target_mode": "ASSISTED",
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-02",
+    "desc": "prompt_hash mudou sem recalculo de economia: drift de prompt",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 0,
+      "cost_increase_pct": 5,
+      "volume_change_pct": 10,
+      "prompt_hash_changed": true,
+      "economics_recomputed": false
+    },
+    "expected": {
+      "drifted_dimensions": [
+        "prompt"
+      ],
+      "drift_confirmed": true,
+      "drift_count": 1,
+      "demote_mode": true,
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-03",
+    "desc": "tudo dentro dos limiares: sem drift, mantem AUTONOMOUS",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 3,
+      "cost_increase_pct": 10,
+      "volume_change_pct": 10,
+      "prompt_hash_changed": true,
+      "economics_recomputed": true
+    },
+    "expected": {
+      "drifted_dimensions": [],
+      "drift_confirmed": false,
+      "drift_count": 0,
+      "demote_mode": false,
+      "target_mode": "AUTONOMOUS",
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-04",
+    "desc": "quality exatamente 5pp: drift no limiar",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 5,
+      "cost_increase_pct": 0,
+      "volume_change_pct": 0,
+      "prompt_hash_changed": false,
+      "economics_recomputed": true
+    },
+    "expected": {
+      "dimensions": {
+        "quality": true
+      },
+      "drifted_dimensions": [
+        "quality"
+      ],
+      "drift_confirmed": true,
+      "drift_count": 1,
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-05",
+    "desc": "quality 4.9pp: logo abaixo, sem drift",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 4.9,
+      "cost_increase_pct": 0,
+      "volume_change_pct": 0,
+      "prompt_hash_changed": false,
+      "economics_recomputed": true
+    },
+    "expected": {
+      "dimensions": {
+        "quality": false
+      },
+      "drifted_dimensions": [],
+      "drift_confirmed": false,
+      "drift_count": 0,
+      "target_mode": "AUTONOMOUS",
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-06",
+    "desc": "custo +18%/mes: drift de custo (reporta ao margin-watch)",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 0,
+      "cost_increase_pct": 18,
+      "volume_change_pct": 0,
+      "prompt_hash_changed": false,
+      "economics_recomputed": true
+    },
+    "expected": {
+      "dimensions": {
+        "cost": true
+      },
+      "drifted_dimensions": [
+        "cost"
+      ],
+      "drift_confirmed": true,
+      "drift_count": 1,
+      "demote_mode": true,
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-07",
+    "desc": "custo exatamente 15%: drift no limiar",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 0,
+      "cost_increase_pct": 15,
+      "volume_change_pct": 0,
+      "prompt_hash_changed": false,
+      "economics_recomputed": true
+    },
+    "expected": {
+      "dimensions": {
+        "cost": true
+      },
+      "drifted_dimensions": [
+        "cost"
+      ],
+      "drift_confirmed": true,
+      "drift_count": 1,
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-08",
+    "desc": "custo 14.9%: logo abaixo, sem drift",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 0,
+      "cost_increase_pct": 14.9,
+      "volume_change_pct": 0,
+      "prompt_hash_changed": false,
+      "economics_recomputed": true
+    },
+    "expected": {
+      "dimensions": {
+        "cost": false
+      },
+      "drifted_dimensions": [],
+      "drift_confirmed": false,
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-09",
+    "desc": "volume +30%: drift no limiar (alta)",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 0,
+      "cost_increase_pct": 0,
+      "volume_change_pct": 30,
+      "prompt_hash_changed": false,
+      "economics_recomputed": true
+    },
+    "expected": {
+      "dimensions": {
+        "volume": true
+      },
+      "drifted_dimensions": [
+        "volume"
+      ],
+      "drift_confirmed": true,
+      "drift_count": 1,
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-10",
+    "desc": "volume -30%: drift no limiar (queda, abs)",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 0,
+      "cost_increase_pct": 0,
+      "volume_change_pct": -30,
+      "prompt_hash_changed": false,
+      "economics_recomputed": true
+    },
+    "expected": {
+      "dimensions": {
+        "volume": true
+      },
+      "drifted_dimensions": [
+        "volume"
+      ],
+      "drift_confirmed": true,
+      "drift_count": 1,
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-11",
+    "desc": "volume -29%: logo abaixo do limiar abs, sem drift",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 0,
+      "cost_increase_pct": 0,
+      "volume_change_pct": -29,
+      "prompt_hash_changed": false,
+      "economics_recomputed": true
+    },
+    "expected": {
+      "dimensions": {
+        "volume": false
+      },
+      "drifted_dimensions": [],
+      "drift_confirmed": false,
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-12",
+    "desc": "volume +29.9%: logo abaixo, sem drift",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 0,
+      "cost_increase_pct": 0,
+      "volume_change_pct": 29.9,
+      "prompt_hash_changed": false,
+      "economics_recomputed": true
+    },
+    "expected": {
+      "dimensions": {
+        "volume": false
+      },
+      "drifted_dimensions": [],
+      "drift_confirmed": false,
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-13",
+    "desc": "prompt_hash mudou COM recalculo de economia: nao e drift de prompt",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 0,
+      "cost_increase_pct": 0,
+      "volume_change_pct": 0,
+      "prompt_hash_changed": true,
+      "economics_recomputed": true
+    },
+    "expected": {
+      "dimensions": {
+        "prompt": false
+      },
+      "drifted_dimensions": [],
+      "drift_confirmed": false,
+      "target_mode": "AUTONOMOUS",
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-14",
+    "desc": "prompt_hash NAO mudou e sem recalculo: nao e drift",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 0,
+      "cost_increase_pct": 0,
+      "volume_change_pct": 0,
+      "prompt_hash_changed": false,
+      "economics_recomputed": false
+    },
+    "expected": {
+      "dimensions": {
+        "prompt": false
+      },
+      "drifted_dimensions": [],
+      "drift_confirmed": false,
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-15",
+    "desc": "quality+cost juntos: 2 dimensoes em drift",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 8,
+      "cost_increase_pct": 20,
+      "volume_change_pct": 0,
+      "prompt_hash_changed": false,
+      "economics_recomputed": true
+    },
+    "expected": {
+      "drifted_dimensions": [
+        "quality",
+        "cost"
+      ],
+      "drift_confirmed": true,
+      "drift_count": 2,
+      "demote_mode": true,
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-16",
+    "desc": "todas as 4 dimensoes em drift",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 10,
+      "cost_increase_pct": 25,
+      "volume_change_pct": 40,
+      "prompt_hash_changed": true,
+      "economics_recomputed": false
+    },
+    "expected": {
+      "drifted_dimensions": [
+        "quality",
+        "cost",
+        "volume",
+        "prompt"
+      ],
+      "drift_confirmed": true,
+      "drift_count": 4,
+      "demote_mode": true,
+      "target_mode": "ASSISTED",
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-17",
+    "desc": "volume+prompt: 2 dimensoes",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 0,
+      "cost_increase_pct": 0,
+      "volume_change_pct": -50,
+      "prompt_hash_changed": true,
+      "economics_recomputed": false
+    },
+    "expected": {
+      "drifted_dimensions": [
+        "volume",
+        "prompt"
+      ],
+      "drift_confirmed": true,
+      "drift_count": 2,
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-18",
+    "desc": "payload vazio: defaults sem drift, mantem AUTONOMOUS",
+    "tenant_id": "t-eval-g06",
+    "drift": {},
+    "expected": {
+      "drifted_dimensions": [],
+      "drift_confirmed": false,
+      "drift_count": 0,
+      "demote_mode": false,
+      "target_mode": "AUTONOMOUS",
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-19",
+    "desc": "so quality alto, prompt ausente: 1 dimensao",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 7
+    },
+    "expected": {
+      "dimensions": {
+        "quality": true,
+        "prompt": false
+      },
+      "drifted_dimensions": [
+        "quality"
+      ],
+      "drift_count": 1,
+      "drift_confirmed": true,
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-20",
+    "desc": "custo +50%: drift severo de custo",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 0,
+      "cost_increase_pct": 50,
+      "volume_change_pct": 0,
+      "prompt_hash_changed": false,
+      "economics_recomputed": false
+    },
+    "expected": {
+      "dimensions": {
+        "cost": true,
+        "prompt": false
+      },
+      "drifted_dimensions": [
+        "cost"
+      ],
+      "drift_count": 1,
+      "demote_mode": true,
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-21",
+    "desc": "quedas pequenas em tudo: sem drift",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 2,
+      "cost_increase_pct": 3,
+      "volume_change_pct": 5,
+      "prompt_hash_changed": false,
+      "economics_recomputed": true
+    },
+    "expected": {
+      "drifted_dimensions": [],
+      "drift_confirmed": false,
+      "target_mode": "AUTONOMOUS",
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-22",
+    "desc": "volume grande +80%: drift de volume (pico)",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 0,
+      "cost_increase_pct": 0,
+      "volume_change_pct": 80,
+      "prompt_hash_changed": false,
+      "economics_recomputed": true
+    },
+    "expected": {
+      "dimensions": {
+        "volume": true
+      },
+      "drifted_dimensions": [
+        "volume"
+      ],
+      "drift_count": 1,
+      "demote_mode": true,
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-23",
+    "desc": "quality+prompt: degradacao com prompt sem recalculo",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 6,
+      "cost_increase_pct": 0,
+      "volume_change_pct": 0,
+      "prompt_hash_changed": true,
+      "economics_recomputed": false
+    },
+    "expected": {
+      "drifted_dimensions": [
+        "quality",
+        "prompt"
+      ],
+      "drift_count": 2,
+      "drift_confirmed": true,
+      "target_mode": "ASSISTED",
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-24",
+    "desc": "cost+volume: drift duplo de eficiencia",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 0,
+      "cost_increase_pct": 16,
+      "volume_change_pct": -35,
+      "prompt_hash_changed": false,
+      "economics_recomputed": true
+    },
+    "expected": {
+      "drifted_dimensions": [
+        "cost",
+        "volume"
+      ],
+      "drift_count": 2,
+      "demote_mode": true,
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-25",
+    "desc": "quality 5.0 exato + cost 14.9: so quality dispara",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 5,
+      "cost_increase_pct": 14.9,
+      "volume_change_pct": 0,
+      "prompt_hash_changed": false,
+      "economics_recomputed": true
+    },
+    "expected": {
+      "dimensions": {
+        "quality": true,
+        "cost": false
+      },
+      "drifted_dimensions": [
+        "quality"
+      ],
+      "drift_count": 1,
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-26",
+    "desc": "volume zero, demais ok: sem drift",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 0,
+      "cost_increase_pct": 0,
+      "volume_change_pct": 0,
+      "prompt_hash_changed": false,
+      "economics_recomputed": true
+    },
+    "expected": {
+      "drifted_dimensions": [],
+      "drift_confirmed": false,
+      "demote_mode": false,
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-27",
+    "desc": "prompt drift isolado mantem demais limpos",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 1,
+      "cost_increase_pct": 2,
+      "volume_change_pct": -10,
+      "prompt_hash_changed": true,
+      "economics_recomputed": false
+    },
+    "expected": {
+      "dimensions": {
+        "quality": false,
+        "cost": false,
+        "volume": false,
+        "prompt": true
+      },
+      "drifted_dimensions": [
+        "prompt"
+      ],
+      "drift_count": 1,
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-28",
+    "desc": "quality enorme 30pp: drift critico de qualidade",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 30,
+      "cost_increase_pct": 0,
+      "volume_change_pct": 0,
+      "prompt_hash_changed": false,
+      "economics_recomputed": true
+    },
+    "expected": {
+      "dimensions": {
+        "quality": true
+      },
+      "drifted_dimensions": [
+        "quality"
+      ],
+      "drift_count": 1,
+      "demote_mode": true,
+      "target_mode": "ASSISTED",
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-29",
+    "desc": "cost no limiar + volume no limiar: 2 dimensoes na borda",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 0,
+      "cost_increase_pct": 15,
+      "volume_change_pct": 30,
+      "prompt_hash_changed": false,
+      "economics_recomputed": true
+    },
+    "expected": {
+      "drifted_dimensions": [
+        "cost",
+        "volume"
+      ],
+      "drift_count": 2,
+      "drift_confirmed": true,
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-30",
+    "desc": "volume -30 exato com prompt ok: so volume",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 0,
+      "cost_increase_pct": 0,
+      "volume_change_pct": -30,
+      "prompt_hash_changed": true,
+      "economics_recomputed": true
+    },
+    "expected": {
+      "dimensions": {
+        "volume": true,
+        "prompt": false
+      },
+      "drifted_dimensions": [
+        "volume"
+      ],
+      "drift_count": 1,
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-31",
+    "desc": "tres dimensoes menos prompt",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 5,
+      "cost_increase_pct": 15,
+      "volume_change_pct": 30,
+      "prompt_hash_changed": true,
+      "economics_recomputed": true
+    },
+    "expected": {
+      "drifted_dimensions": [
+        "quality",
+        "cost",
+        "volume"
+      ],
+      "drift_count": 3,
+      "demote_mode": true,
+      "by": "g6-drift-detector"
+    }
+  },
+  {
+    "id": "dr-32",
+    "desc": "negativo C2: agente degrada mas economics recomputed esconde so o prompt; quality dispara assim mesmo",
+    "tenant_id": "t-eval-g06",
+    "drift": {
+      "quality_drop_pp": 5.5,
+      "cost_increase_pct": 0,
+      "volume_change_pct": 0,
+      "prompt_hash_changed": true,
+      "economics_recomputed": true
+    },
+    "expected": {
+      "dimensions": {
+        "quality": true,
+        "prompt": false
+      },
+      "drifted_dimensions": [
+        "quality"
+      ],
+      "drift_count": 1,
+      "drift_confirmed": true,
+      "demote_mode": true,
+      "by": "g6-drift-detector"
+    }
+  }
 ]

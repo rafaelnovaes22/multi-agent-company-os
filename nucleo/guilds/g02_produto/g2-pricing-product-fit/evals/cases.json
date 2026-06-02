@@ -14,11 +14,14 @@
     "expected": {
       "recommended_price": 30.0,
       "has_wtp": true,
-      "c3_ratio": 0.2667,
+      "sample_size": 200,
       "c3_pass": false,
-      "min_price_c3": 32.0,
+      "billable": true,
+      "tier": "outcome_based",
       "blocked": true,
-      "status": "viola_c3"
+      "status": "viola_c3",
+      "c3_ratio": 0.2667,
+      "min_price_c3": 32.0
     }
   },
   {
@@ -36,11 +39,14 @@
     "expected": {
       "recommended_price": 50.0,
       "has_wtp": true,
-      "c3_ratio": 0.2,
+      "sample_size": 150,
       "c3_pass": true,
-      "min_price_c3": 40.0,
+      "billable": true,
+      "tier": "top_up",
       "blocked": false,
-      "status": "aprovado"
+      "status": "aprovado",
+      "c3_ratio": 0.2,
+      "min_price_c3": 40.0
     }
   },
   {
@@ -58,9 +64,731 @@
     "expected": {
       "recommended_price": 15.0,
       "has_wtp": false,
+      "sample_size": 0,
       "c3_pass": true,
+      "billable": false,
+      "tier": "assinatura",
+      "blocked": true,
+      "status": "sem_wtp",
+      "c3_ratio": 0.1333
+    }
+  },
+  {
+    "id": "wtp-04",
+    "desc": "feature mapeada a camada certa (top_up) com WTP medido",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 30,
+      "too_expensive": 90,
+      "sample_size": 300,
+      "outcome_cost": 12,
+      "billable": true,
+      "tier": "top_up"
+    },
+    "expected": {
+      "recommended_price": 60.0,
+      "has_wtp": true,
+      "sample_size": 300,
+      "c3_pass": true,
+      "billable": true,
+      "tier": "top_up",
+      "blocked": false,
+      "status": "aprovado",
+      "c3_ratio": 0.2,
+      "min_price_c3": 48.0
+    }
+  },
+  {
+    "id": "wtp-05",
+    "desc": "outcome_based billable validado contra custo (C3 ok)",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 100,
+      "too_expensive": 300,
+      "sample_size": 500,
+      "outcome_cost": 40,
+      "billable": true,
+      "tier": "outcome_based"
+    },
+    "expected": {
+      "recommended_price": 200.0,
+      "has_wtp": true,
+      "sample_size": 500,
+      "c3_pass": true,
+      "billable": true,
+      "tier": "outcome_based",
+      "blocked": false,
+      "status": "aprovado",
+      "c3_ratio": 0.2,
+      "min_price_c3": 160.0
+    }
+  },
+  {
+    "id": "wtp-06",
+    "desc": "freemium OP sem cobranca: C3 nao se aplica, aprovado",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 0,
+      "too_expensive": 40,
+      "sample_size": 120,
+      "outcome_cost": 15,
+      "billable": false,
+      "tier": "assinatura"
+    },
+    "expected": {
+      "recommended_price": 20.0,
+      "has_wtp": true,
+      "sample_size": 120,
+      "c3_pass": true,
+      "billable": false,
+      "tier": "assinatura",
+      "blocked": false,
+      "status": "aprovado",
+      "c3_ratio": 0.75
+    }
+  },
+  {
+    "id": "wtp-07",
+    "desc": "preco sugerido sem teste de WTP (sample 0) -> bloqueado",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 50,
+      "too_expensive": 150,
+      "sample_size": 0,
+      "outcome_cost": 10,
+      "billable": true,
+      "tier": "top_up"
+    },
+    "expected": {
+      "recommended_price": 100.0,
+      "has_wtp": false,
+      "sample_size": 0,
+      "c3_pass": true,
+      "billable": true,
+      "tier": "top_up",
+      "blocked": true,
+      "status": "sem_wtp",
+      "c3_ratio": 0.1,
+      "min_price_c3": 40.0
+    }
+  },
+  {
+    "id": "wtp-08",
+    "desc": "fronteira C3 exata: ratio == 0.25 -> passa (aprovado)",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 40,
+      "too_expensive": 60,
+      "sample_size": 100,
+      "outcome_cost": 12.5,
+      "billable": true,
+      "tier": "outcome_based"
+    },
+    "expected": {
+      "recommended_price": 50.0,
+      "has_wtp": true,
+      "sample_size": 100,
+      "c3_pass": true,
+      "billable": true,
+      "tier": "outcome_based",
+      "blocked": false,
+      "status": "aprovado",
+      "c3_ratio": 0.25,
+      "min_price_c3": 50.0
+    }
+  },
+  {
+    "id": "wtp-09",
+    "desc": "fronteira C3: ratio logo acima de 0.25 -> viola",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 40,
+      "too_expensive": 60,
+      "sample_size": 100,
+      "outcome_cost": 12.55,
+      "billable": true,
+      "tier": "outcome_based"
+    },
+    "expected": {
+      "recommended_price": 50.0,
+      "has_wtp": true,
+      "sample_size": 100,
+      "c3_pass": false,
+      "billable": true,
+      "tier": "outcome_based",
+      "blocked": true,
+      "status": "viola_c3",
+      "c3_ratio": 0.251,
+      "min_price_c3": 50.2
+    }
+  },
+  {
+    "id": "wtp-10",
+    "desc": "precedencia: sem WTP E violaria C3 -> sem_wtp vence",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 10,
+      "too_expensive": 20,
+      "sample_size": 0,
+      "outcome_cost": 50,
+      "billable": true,
+      "tier": "top_up"
+    },
+    "expected": {
+      "recommended_price": 15.0,
+      "has_wtp": false,
+      "sample_size": 0,
+      "c3_pass": false,
+      "billable": true,
+      "tier": "top_up",
+      "blocked": true,
+      "status": "sem_wtp",
+      "c3_ratio": 3.3333,
+      "min_price_c3": 200.0
+    }
+  },
+  {
+    "id": "wtp-11",
+    "desc": "billable com custo zero -> C3 trivialmente ok",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 20,
+      "too_expensive": 60,
+      "sample_size": 80,
+      "outcome_cost": 0,
+      "billable": true,
+      "tier": "top_up"
+    },
+    "expected": {
+      "recommended_price": 40.0,
+      "has_wtp": true,
+      "sample_size": 80,
+      "c3_pass": true,
+      "billable": true,
+      "tier": "top_up",
+      "blocked": false,
+      "status": "aprovado",
+      "c3_ratio": 0.0,
+      "min_price_c3": 0.0
+    }
+  },
+  {
+    "id": "wtp-12",
+    "desc": "tier invalido cai para assinatura",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 15,
+      "too_expensive": 45,
+      "sample_size": 90,
+      "outcome_cost": 5,
+      "billable": true,
+      "tier": "premium"
+    },
+    "expected": {
+      "recommended_price": 30.0,
+      "has_wtp": true,
+      "sample_size": 90,
+      "c3_pass": true,
+      "billable": true,
+      "tier": "assinatura",
+      "blocked": false,
+      "status": "aprovado",
+      "c3_ratio": 0.1667,
+      "min_price_c3": 20.0
+    }
+  },
+  {
+    "id": "wtp-13",
+    "desc": "amostra=1 (minima) ja conta como WTP medido",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 10,
+      "too_expensive": 30,
+      "sample_size": 1,
+      "outcome_cost": 4,
+      "billable": true,
+      "tier": "top_up"
+    },
+    "expected": {
+      "recommended_price": 20.0,
+      "has_wtp": true,
+      "sample_size": 1,
+      "c3_pass": true,
+      "billable": true,
+      "tier": "top_up",
+      "blocked": false,
+      "status": "aprovado",
+      "c3_ratio": 0.2,
+      "min_price_c3": 16.0
+    }
+  },
+  {
+    "id": "wtp-14",
+    "desc": "custo alto em outcome_based viola C3 forte",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 50,
+      "too_expensive": 100,
+      "sample_size": 250,
+      "outcome_cost": 60,
+      "billable": true,
+      "tier": "outcome_based"
+    },
+    "expected": {
+      "recommended_price": 75.0,
+      "has_wtp": true,
+      "sample_size": 250,
+      "c3_pass": false,
+      "billable": true,
+      "tier": "outcome_based",
+      "blocked": true,
+      "status": "viola_c3",
+      "c3_ratio": 0.8,
+      "min_price_c3": 240.0
+    }
+  },
+  {
+    "id": "wtp-15",
+    "desc": "nao billable com custo alto -> ainda aprovado (C3 nao trava OP)",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 10,
+      "too_expensive": 30,
+      "sample_size": 60,
+      "outcome_cost": 100,
+      "billable": false,
+      "tier": "assinatura"
+    },
+    "expected": {
+      "recommended_price": 20.0,
+      "has_wtp": true,
+      "sample_size": 60,
+      "c3_pass": true,
+      "billable": false,
+      "tier": "assinatura",
+      "blocked": false,
+      "status": "aprovado",
+      "c3_ratio": 5.0
+    }
+  },
+  {
+    "id": "wtp-16",
+    "desc": "preco recomendado alto, custo baixo, folga de C3",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 200,
+      "too_expensive": 600,
+      "sample_size": 400,
+      "outcome_cost": 50,
+      "billable": true,
+      "tier": "outcome_based"
+    },
+    "expected": {
+      "recommended_price": 400.0,
+      "has_wtp": true,
+      "sample_size": 400,
+      "c3_pass": true,
+      "billable": true,
+      "tier": "outcome_based",
+      "blocked": false,
+      "status": "aprovado",
+      "c3_ratio": 0.125,
+      "min_price_c3": 200.0
+    }
+  },
+  {
+    "id": "wtp-17",
+    "desc": "billable c3 exatamente no limite com numeros redondos",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 0,
+      "too_expensive": 80,
+      "sample_size": 100,
+      "outcome_cost": 10,
+      "billable": true,
+      "tier": "top_up"
+    },
+    "expected": {
+      "recommended_price": 40.0,
+      "has_wtp": true,
+      "sample_size": 100,
+      "c3_pass": true,
+      "billable": true,
+      "tier": "top_up",
+      "blocked": false,
+      "status": "aprovado",
+      "c3_ratio": 0.25,
+      "min_price_c3": 40.0
+    }
+  },
+  {
+    "id": "wtp-18",
+    "desc": "WTP com cheap==expensive (faixa estreita)",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 50,
+      "too_expensive": 50,
+      "sample_size": 200,
+      "outcome_cost": 10,
+      "billable": true,
+      "tier": "top_up"
+    },
+    "expected": {
+      "recommended_price": 50.0,
+      "has_wtp": true,
+      "sample_size": 200,
+      "c3_pass": true,
+      "billable": true,
+      "tier": "top_up",
+      "blocked": false,
+      "status": "aprovado",
+      "c3_ratio": 0.2,
+      "min_price_c3": 40.0
+    }
+  },
+  {
+    "id": "wtp-19",
+    "desc": "sem WTP e nao billable -> sem_wtp (bloqueado)",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 0,
+      "too_expensive": 0,
+      "sample_size": 50,
+      "outcome_cost": 5,
+      "billable": false,
+      "tier": "assinatura"
+    },
+    "expected": {
+      "recommended_price": 0.0,
+      "has_wtp": false,
+      "sample_size": 50,
+      "c3_pass": true,
+      "billable": false,
+      "tier": "assinatura",
       "blocked": true,
       "status": "sem_wtp"
+    }
+  },
+  {
+    "id": "wtp-20",
+    "desc": "preco 0 (ambos 0) -> has_wtp False mesmo com amostra",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 0,
+      "too_expensive": 0,
+      "sample_size": 300,
+      "outcome_cost": 0,
+      "billable": true,
+      "tier": "top_up"
+    },
+    "expected": {
+      "recommended_price": 0.0,
+      "has_wtp": false,
+      "sample_size": 300,
+      "c3_pass": false,
+      "billable": true,
+      "tier": "top_up",
+      "blocked": true,
+      "status": "sem_wtp",
+      "min_price_c3": 0.0
+    }
+  },
+  {
+    "id": "wtp-21",
+    "desc": "outcome_based grande validado C3 ok",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 500,
+      "too_expensive": 1500,
+      "sample_size": 1000,
+      "outcome_cost": 200,
+      "billable": true,
+      "tier": "outcome_based"
+    },
+    "expected": {
+      "recommended_price": 1000.0,
+      "has_wtp": true,
+      "sample_size": 1000,
+      "c3_pass": true,
+      "billable": true,
+      "tier": "outcome_based",
+      "blocked": false,
+      "status": "aprovado",
+      "c3_ratio": 0.2,
+      "min_price_c3": 800.0
+    }
+  },
+  {
+    "id": "wtp-22",
+    "desc": "custo = 25% exato com preco fracionario",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 33,
+      "too_expensive": 67,
+      "sample_size": 150,
+      "outcome_cost": 12.5,
+      "billable": true,
+      "tier": "top_up"
+    },
+    "expected": {
+      "recommended_price": 50.0,
+      "has_wtp": true,
+      "sample_size": 150,
+      "c3_pass": true,
+      "billable": true,
+      "tier": "top_up",
+      "blocked": false,
+      "status": "aprovado",
+      "c3_ratio": 0.25,
+      "min_price_c3": 50.0
+    }
+  },
+  {
+    "id": "wtp-23",
+    "desc": "viola C3 levemente acima do teto",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 80,
+      "too_expensive": 120,
+      "sample_size": 200,
+      "outcome_cost": 26,
+      "billable": true,
+      "tier": "outcome_based"
+    },
+    "expected": {
+      "recommended_price": 100.0,
+      "has_wtp": true,
+      "sample_size": 200,
+      "c3_pass": false,
+      "billable": true,
+      "tier": "outcome_based",
+      "blocked": true,
+      "status": "viola_c3",
+      "c3_ratio": 0.26,
+      "min_price_c3": 104.0
+    }
+  },
+  {
+    "id": "wtp-24",
+    "desc": "assinatura billable dentro de C3",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 60,
+      "too_expensive": 140,
+      "sample_size": 300,
+      "outcome_cost": 20,
+      "billable": true,
+      "tier": "assinatura"
+    },
+    "expected": {
+      "recommended_price": 100.0,
+      "has_wtp": true,
+      "sample_size": 300,
+      "c3_pass": true,
+      "billable": true,
+      "tier": "assinatura",
+      "blocked": false,
+      "status": "aprovado",
+      "c3_ratio": 0.2,
+      "min_price_c3": 80.0
+    }
+  },
+  {
+    "id": "wtp-25",
+    "desc": "amostra grande, C3 confortavel",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 90,
+      "too_expensive": 210,
+      "sample_size": 800,
+      "outcome_cost": 30,
+      "billable": true,
+      "tier": "outcome_based"
+    },
+    "expected": {
+      "recommended_price": 150.0,
+      "has_wtp": true,
+      "sample_size": 800,
+      "c3_pass": true,
+      "billable": true,
+      "tier": "outcome_based",
+      "blocked": false,
+      "status": "aprovado",
+      "c3_ratio": 0.2,
+      "min_price_c3": 120.0
+    }
+  },
+  {
+    "id": "wtp-26",
+    "desc": "nao billable, com WTP -> aprovado",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 25,
+      "too_expensive": 75,
+      "sample_size": 120,
+      "outcome_cost": 5,
+      "billable": false,
+      "tier": "assinatura"
+    },
+    "expected": {
+      "recommended_price": 50.0,
+      "has_wtp": true,
+      "sample_size": 120,
+      "c3_pass": true,
+      "billable": false,
+      "tier": "assinatura",
+      "blocked": false,
+      "status": "aprovado",
+      "c3_ratio": 0.1
+    }
+  },
+  {
+    "id": "wtp-27",
+    "desc": "billable viola C3 por custo == 30% do preco",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 40,
+      "too_expensive": 160,
+      "sample_size": 200,
+      "outcome_cost": 30,
+      "billable": true,
+      "tier": "top_up"
+    },
+    "expected": {
+      "recommended_price": 100.0,
+      "has_wtp": true,
+      "sample_size": 200,
+      "c3_pass": false,
+      "billable": true,
+      "tier": "top_up",
+      "blocked": true,
+      "status": "viola_c3",
+      "c3_ratio": 0.3,
+      "min_price_c3": 120.0
+    }
+  },
+  {
+    "id": "wtp-28",
+    "desc": "precedencia: WTP ok + C3 ok -> aprovado",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 120,
+      "too_expensive": 280,
+      "sample_size": 350,
+      "outcome_cost": 40,
+      "billable": true,
+      "tier": "outcome_based"
+    },
+    "expected": {
+      "recommended_price": 200.0,
+      "has_wtp": true,
+      "sample_size": 350,
+      "c3_pass": true,
+      "billable": true,
+      "tier": "outcome_based",
+      "blocked": false,
+      "status": "aprovado",
+      "c3_ratio": 0.2,
+      "min_price_c3": 160.0
+    }
+  },
+  {
+    "id": "wtp-29",
+    "desc": "WTP ok mas viola C3 -> bloqueado por C3",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 20,
+      "too_expensive": 60,
+      "sample_size": 200,
+      "outcome_cost": 15,
+      "billable": true,
+      "tier": "outcome_based"
+    },
+    "expected": {
+      "recommended_price": 40.0,
+      "has_wtp": true,
+      "sample_size": 200,
+      "c3_pass": false,
+      "billable": true,
+      "tier": "outcome_based",
+      "blocked": true,
+      "status": "viola_c3",
+      "c3_ratio": 0.375,
+      "min_price_c3": 60.0
+    }
+  },
+  {
+    "id": "wtp-30",
+    "desc": "custo igual ao preco -> ratio 1.0 viola C3",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 50,
+      "too_expensive": 50,
+      "sample_size": 100,
+      "outcome_cost": 50,
+      "billable": true,
+      "tier": "top_up"
+    },
+    "expected": {
+      "recommended_price": 50.0,
+      "has_wtp": true,
+      "sample_size": 100,
+      "c3_pass": false,
+      "billable": true,
+      "tier": "top_up",
+      "blocked": true,
+      "status": "viola_c3",
+      "c3_ratio": 1.0,
+      "min_price_c3": 200.0
+    }
+  },
+  {
+    "id": "wtp-31",
+    "desc": "preco baixo billable, custo proporcional ok",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 4,
+      "too_expensive": 16,
+      "sample_size": 75,
+      "outcome_cost": 2,
+      "billable": true,
+      "tier": "top_up"
+    },
+    "expected": {
+      "recommended_price": 10.0,
+      "has_wtp": true,
+      "sample_size": 75,
+      "c3_pass": true,
+      "billable": true,
+      "tier": "top_up",
+      "blocked": false,
+      "status": "aprovado",
+      "c3_ratio": 0.2,
+      "min_price_c3": 8.0
+    }
+  },
+  {
+    "id": "wtp-32",
+    "desc": "freemium teto: nao billable, WTP medido, aprovado",
+    "tenant_id": "t-eval-g02",
+    "pricing": {
+      "too_cheap": 0,
+      "too_expensive": 20,
+      "sample_size": 200,
+      "outcome_cost": 3,
+      "billable": false,
+      "tier": "assinatura"
+    },
+    "expected": {
+      "recommended_price": 10.0,
+      "has_wtp": true,
+      "sample_size": 200,
+      "c3_pass": true,
+      "billable": false,
+      "tier": "assinatura",
+      "blocked": false,
+      "status": "aprovado",
+      "c3_ratio": 0.3
     }
   }
 ]

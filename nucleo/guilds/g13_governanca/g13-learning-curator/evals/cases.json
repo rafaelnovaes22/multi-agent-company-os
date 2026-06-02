@@ -2,25 +2,477 @@
   {
     "id": "learn-01",
     "desc": "instinct recorrente em 5 agentes, confianca dentro do modo -> promove a skill",
-    "learning": {"novelty": 0.8, "novelty_threshold": 0.3, "confidence": "shadow", "agent_mode": "SHADOW", "recurrence": 5, "evolve_threshold": 5},
-    "expected": {"is_novel": true, "confidence_ok": true, "persist": true, "promote_to_skill": true, "veto_count": 0}
+    "learning": {
+      "novelty": 0.8,
+      "novelty_threshold": 0.3,
+      "confidence": "shadow",
+      "agent_mode": "SHADOW",
+      "recurrence": 5,
+      "evolve_threshold": 5
+    },
+    "expected": {
+      "is_novel": true,
+      "confidence_ok": true,
+      "persist": true,
+      "promote_to_skill": true,
+      "veto_count": 0
+    }
   },
   {
     "id": "learn-02",
     "desc": "fato com CPF embutido -> veto, nao persiste",
-    "learning": {"novelty": 0.9, "novelty_threshold": 0.3, "confidence": "shadow", "agent_mode": "SHADOW", "has_pii": true},
-    "expected": {"persist": false, "promote_to_skill": false, "veto_count": 1}
+    "learning": {
+      "novelty": 0.9,
+      "novelty_threshold": 0.3,
+      "confidence": "shadow",
+      "agent_mode": "SHADOW",
+      "has_pii": true
+    },
+    "expected": {
+      "persist": false,
+      "promote_to_skill": false,
+      "veto_count": 1
+    }
   },
   {
     "id": "learn-03",
     "desc": "confianca autonomous num agente em SHADOW -> veto por exceder o modo",
-    "learning": {"novelty": 0.7, "novelty_threshold": 0.3, "confidence": "autonomous", "agent_mode": "SHADOW"},
-    "expected": {"confidence_ok": false, "persist": false, "veto_count": 1}
+    "learning": {
+      "novelty": 0.7,
+      "novelty_threshold": 0.3,
+      "confidence": "autonomous",
+      "agent_mode": "SHADOW"
+    },
+    "expected": {
+      "confidence_ok": false,
+      "persist": false,
+      "veto_count": 1
+    }
   },
   {
     "id": "learn-04",
     "desc": "fato de baixa novidade que so infla o contexto -> nao persiste",
-    "learning": {"novelty": 0.1, "novelty_threshold": 0.3, "confidence": "shadow", "agent_mode": "SHADOW"},
-    "expected": {"is_novel": false, "persist": false, "veto_count": 1}
+    "learning": {
+      "novelty": 0.1,
+      "novelty_threshold": 0.3,
+      "confidence": "shadow",
+      "agent_mode": "SHADOW"
+    },
+    "expected": {
+      "is_novel": false,
+      "persist": false,
+      "veto_count": 1
+    }
+  },
+  {
+    "id": "learn-05",
+    "desc": "limiar exato de novidade: 0.3 -> novel, persiste",
+    "learning": {
+      "novelty": 0.3,
+      "novelty_threshold": 0.3,
+      "confidence": "shadow",
+      "agent_mode": "SHADOW"
+    },
+    "expected": {
+      "is_novel": true,
+      "persist": true,
+      "veto_count": 0
+    }
+  },
+  {
+    "id": "learn-06",
+    "desc": "fronteira -0.01: 0.29 -> nao novel, veto",
+    "learning": {
+      "novelty": 0.29,
+      "novelty_threshold": 0.3,
+      "confidence": "shadow",
+      "agent_mode": "SHADOW"
+    },
+    "expected": {
+      "is_novel": false,
+      "persist": false,
+      "veto_count": 1
+    }
+  },
+  {
+    "id": "learn-07",
+    "desc": "threshold customizado 0.5, novelty 0.5 -> novel",
+    "learning": {
+      "novelty": 0.5,
+      "novelty_threshold": 0.5,
+      "confidence": "shadow",
+      "agent_mode": "SHADOW"
+    },
+    "expected": {
+      "is_novel": true,
+      "persist": true,
+      "veto_count": 0
+    }
+  },
+  {
+    "id": "learn-08",
+    "desc": "threshold customizado 0.5, novelty 0.49 -> nao novel",
+    "learning": {
+      "novelty": 0.49,
+      "novelty_threshold": 0.5,
+      "confidence": "shadow",
+      "agent_mode": "SHADOW"
+    },
+    "expected": {
+      "is_novel": false,
+      "persist": false,
+      "veto_count": 1
+    }
+  },
+  {
+    "id": "learn-09",
+    "desc": "novidade maxima 1.0",
+    "learning": {
+      "novelty": 1.0,
+      "novelty_threshold": 0.3,
+      "confidence": "shadow",
+      "agent_mode": "SHADOW"
+    },
+    "expected": {
+      "is_novel": true,
+      "novelty": 1.0,
+      "persist": true
+    }
+  },
+  {
+    "id": "learn-10",
+    "desc": "novidade zero -> veto",
+    "learning": {
+      "novelty": 0.0,
+      "novelty_threshold": 0.3,
+      "confidence": "local",
+      "agent_mode": "SHADOW"
+    },
+    "expected": {
+      "is_novel": false,
+      "persist": false,
+      "veto_count": 1,
+      "novelty": 0.0
+    }
+  },
+  {
+    "id": "learn-11",
+    "desc": "modo SHADOW aceita confianca local (abaixo do teto)",
+    "learning": {
+      "novelty": 0.6,
+      "confidence": "local",
+      "agent_mode": "SHADOW"
+    },
+    "expected": {
+      "confidence_ok": true,
+      "persist": true
+    }
+  },
+  {
+    "id": "learn-12",
+    "desc": "modo SHADOW aceita confianca shadow (no teto)",
+    "learning": {
+      "novelty": 0.6,
+      "confidence": "shadow",
+      "agent_mode": "SHADOW"
+    },
+    "expected": {
+      "confidence_ok": true,
+      "persist": true
+    }
+  },
+  {
+    "id": "learn-13",
+    "desc": "modo SHADOW rejeita confianca assisted (acima do teto)",
+    "learning": {
+      "novelty": 0.6,
+      "confidence": "assisted",
+      "agent_mode": "SHADOW"
+    },
+    "expected": {
+      "confidence_ok": false,
+      "persist": false,
+      "veto_count": 1
+    }
+  },
+  {
+    "id": "learn-14",
+    "desc": "modo PILOT mapeia para teto shadow: assisted excede",
+    "learning": {
+      "novelty": 0.6,
+      "confidence": "assisted",
+      "agent_mode": "PILOT"
+    },
+    "expected": {
+      "confidence_ok": false,
+      "persist": false,
+      "veto_count": 1
+    }
+  },
+  {
+    "id": "learn-15",
+    "desc": "modo PILOT aceita shadow",
+    "learning": {
+      "novelty": 0.6,
+      "confidence": "shadow",
+      "agent_mode": "PILOT"
+    },
+    "expected": {
+      "confidence_ok": true,
+      "persist": true
+    }
+  },
+  {
+    "id": "learn-16",
+    "desc": "modo ASSISTED aceita assisted (no teto)",
+    "learning": {
+      "novelty": 0.6,
+      "confidence": "assisted",
+      "agent_mode": "ASSISTED"
+    },
+    "expected": {
+      "confidence_ok": true,
+      "persist": true
+    }
+  },
+  {
+    "id": "learn-17",
+    "desc": "modo ASSISTED rejeita autonomous (acima)",
+    "learning": {
+      "novelty": 0.6,
+      "confidence": "autonomous",
+      "agent_mode": "ASSISTED"
+    },
+    "expected": {
+      "confidence_ok": false,
+      "persist": false,
+      "veto_count": 1
+    }
+  },
+  {
+    "id": "learn-18",
+    "desc": "modo AUTONOMOUS aceita autonomous (topo)",
+    "learning": {
+      "novelty": 0.6,
+      "confidence": "autonomous",
+      "agent_mode": "AUTONOMOUS"
+    },
+    "expected": {
+      "confidence_ok": true,
+      "persist": true
+    }
+  },
+  {
+    "id": "learn-19",
+    "desc": "C2: sobe confianca shadow->assisted quando agente promovido a ASSISTED",
+    "learning": {
+      "novelty": 0.7,
+      "confidence": "assisted",
+      "agent_mode": "ASSISTED"
+    },
+    "expected": {
+      "confidence_ok": true,
+      "persist": true,
+      "is_novel": true
+    }
+  },
+  {
+    "id": "learn-20",
+    "desc": "modo desconhecido -> teto local; shadow excede",
+    "learning": {
+      "novelty": 0.6,
+      "confidence": "shadow",
+      "agent_mode": "BOGUS"
+    },
+    "expected": {
+      "confidence_ok": false,
+      "persist": false,
+      "veto_count": 1
+    }
+  },
+  {
+    "id": "learn-21",
+    "desc": "modo desconhecido aceita confianca local",
+    "learning": {
+      "novelty": 0.6,
+      "confidence": "local",
+      "agent_mode": "BOGUS"
+    },
+    "expected": {
+      "confidence_ok": true,
+      "persist": true
+    }
+  },
+  {
+    "id": "learn-22",
+    "desc": "hardcode de tenant -> veto C8, nao persiste",
+    "learning": {
+      "novelty": 0.8,
+      "confidence": "shadow",
+      "agent_mode": "SHADOW",
+      "has_tenant_hardcode": true
+    },
+    "expected": {
+      "persist": false,
+      "veto_count": 1,
+      "promote_to_skill": false
+    }
+  },
+  {
+    "id": "learn-23",
+    "desc": "PII + hardcode juntos -> 2 vetos",
+    "learning": {
+      "novelty": 0.8,
+      "confidence": "shadow",
+      "agent_mode": "SHADOW",
+      "has_pii": true,
+      "has_tenant_hardcode": true
+    },
+    "expected": {
+      "persist": false,
+      "veto_count": 2
+    }
+  },
+  {
+    "id": "learn-24",
+    "desc": "PII + baixa novidade -> 2 vetos",
+    "learning": {
+      "novelty": 0.1,
+      "confidence": "shadow",
+      "agent_mode": "SHADOW",
+      "has_pii": true
+    },
+    "expected": {
+      "persist": false,
+      "veto_count": 2,
+      "is_novel": false
+    }
+  },
+  {
+    "id": "learn-25",
+    "desc": "todos os vetos: PII + hardcode + baixa novidade + confianca excede -> 4 vetos",
+    "learning": {
+      "novelty": 0.1,
+      "confidence": "autonomous",
+      "agent_mode": "SHADOW",
+      "has_pii": true,
+      "has_tenant_hardcode": true
+    },
+    "expected": {
+      "persist": false,
+      "veto_count": 4,
+      "is_novel": false,
+      "confidence_ok": false
+    }
+  },
+  {
+    "id": "learn-26",
+    "desc": "persiste mas recorrencia 4 (<5) -> nao promove a skill",
+    "learning": {
+      "novelty": 0.8,
+      "confidence": "shadow",
+      "agent_mode": "SHADOW",
+      "recurrence": 4,
+      "evolve_threshold": 5
+    },
+    "expected": {
+      "persist": true,
+      "promote_to_skill": false,
+      "veto_count": 0
+    }
+  },
+  {
+    "id": "learn-27",
+    "desc": "limiar exato de evolve: recorrencia 5 -> promove",
+    "learning": {
+      "novelty": 0.8,
+      "confidence": "shadow",
+      "agent_mode": "SHADOW",
+      "recurrence": 5,
+      "evolve_threshold": 5
+    },
+    "expected": {
+      "persist": true,
+      "promote_to_skill": true
+    }
+  },
+  {
+    "id": "learn-28",
+    "desc": "recorrencia alta MAS com veto (PII) -> nao promove (persist domina)",
+    "learning": {
+      "novelty": 0.8,
+      "confidence": "shadow",
+      "agent_mode": "SHADOW",
+      "recurrence": 10,
+      "has_pii": true
+    },
+    "expected": {
+      "persist": false,
+      "promote_to_skill": false,
+      "veto_count": 1
+    }
+  },
+  {
+    "id": "learn-29",
+    "desc": "recorrencia acima do limiar (8) -> promove",
+    "learning": {
+      "novelty": 0.9,
+      "confidence": "shadow",
+      "agent_mode": "SHADOW",
+      "recurrence": 8,
+      "evolve_threshold": 5
+    },
+    "expected": {
+      "persist": true,
+      "promote_to_skill": true
+    }
+  },
+  {
+    "id": "learn-30",
+    "desc": "threshold de evolve customizado 3, recorrencia 3 -> promove",
+    "learning": {
+      "novelty": 0.7,
+      "confidence": "shadow",
+      "agent_mode": "SHADOW",
+      "recurrence": 3,
+      "evolve_threshold": 3
+    },
+    "expected": {
+      "persist": true,
+      "promote_to_skill": true
+    }
+  },
+  {
+    "id": "learn-31",
+    "desc": "sem recorrencia (default 0) -> persiste mas nao promove",
+    "learning": {
+      "novelty": 0.7,
+      "confidence": "shadow",
+      "agent_mode": "SHADOW"
+    },
+    "expected": {
+      "persist": true,
+      "promote_to_skill": false,
+      "veto_count": 0
+    }
+  },
+  {
+    "id": "learn-32",
+    "desc": "caminho feliz completo: novel, confianca ok, sem PII, recorrente -> promove",
+    "learning": {
+      "novelty": 0.95,
+      "novelty_threshold": 0.3,
+      "confidence": "assisted",
+      "agent_mode": "AUTONOMOUS",
+      "recurrence": 7,
+      "evolve_threshold": 5
+    },
+    "expected": {
+      "is_novel": true,
+      "confidence_ok": true,
+      "persist": true,
+      "promote_to_skill": true,
+      "veto_count": 0
+    }
   }
 ]

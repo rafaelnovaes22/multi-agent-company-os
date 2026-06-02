@@ -1,14 +1,751 @@
 [
-  {"id": "ca-01", "desc": "coorte saudável: D30 acima de 30% e sem queda vs anterior",
-   "tenant_id": "t-eval-g06",
-   "cohort": {"size": 1000, "retained": {"d1": 600, "d7": 400, "d30": 300}, "prev_d30_pct": 35, "segment": "canal-organico"},
-   "expected": {"by": "g6-cohort-analyst", "cohort_size": 1000, "d1_pct": 60.0, "d7_pct": 40.0, "d30_pct": 30.0, "drop_pp": 5.0, "retention_drop": false, "status": "saudavel"}},
-  {"id": "ca-02", "desc": "queda anômala de retenção: D30 cai 20pp e aciona churn-predictor",
-   "tenant_id": "t-eval-g06",
-   "cohort": {"size": 500, "retained": {"d1": 250, "d7": 150, "d30": 50}, "prev_d30_pct": 30},
-   "expected": {"by": "g6-cohort-analyst", "d30_pct": 10.0, "drop_pp": 20.0, "retention_drop": true, "alert_churn_predictor": true, "status": "queda"}},
-  {"id": "ca-03", "desc": "sem baseline anterior: D30 abaixo de 30% gera atenção",
-   "tenant_id": "t-eval-g06",
-   "cohort": {"size": 200, "retained": {"d1": 100, "d7": 50, "d30": 40}},
-   "expected": {"by": "g6-cohort-analyst", "d1_pct": 50.0, "d7_pct": 25.0, "d30_pct": 20.0, "retention_drop": false, "drop_pp": 0.0, "status": "atencao"}}
+  {
+    "id": "ca-01",
+    "desc": "coorte saudavel: D30 acima de 30% e sem queda vs anterior",
+    "statement": "coorte saudavel: D30 acima de 30% e sem queda vs anterior",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 1000,
+      "retained": {
+        "d1": 600,
+        "d7": 400,
+        "d30": 300
+      },
+      "prev_d30_pct": 35,
+      "segment": "canal-organico"
+    },
+    "expected": {
+      "cohort_size": 1000,
+      "d1_pct": 60.0,
+      "d7_pct": 40.0,
+      "d30_pct": 30.0,
+      "drop_pp": 5.0,
+      "retention_drop": false,
+      "status": "saudavel",
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-02",
+    "desc": "queda anomala de retencao: D30 cai 20pp e aciona churn-predictor",
+    "statement": "queda anomala de retencao: D30 cai 20pp e aciona churn-predictor",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 500,
+      "retained": {
+        "d1": 250,
+        "d7": 150,
+        "d30": 50
+      },
+      "prev_d30_pct": 30
+    },
+    "expected": {
+      "d30_pct": 10.0,
+      "drop_pp": 20.0,
+      "retention_drop": true,
+      "alert_churn_predictor": true,
+      "status": "queda",
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-03",
+    "desc": "sem baseline anterior: D30 abaixo de 30% gera atencao",
+    "statement": "sem baseline anterior: D30 abaixo de 30% gera atencao",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 200,
+      "retained": {
+        "d1": 100,
+        "d7": 50,
+        "d30": 40
+      }
+    },
+    "expected": {
+      "d1_pct": 50.0,
+      "d7_pct": 25.0,
+      "d30_pct": 20.0,
+      "retention_drop": false,
+      "drop_pp": 0.0,
+      "status": "atencao",
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-04",
+    "desc": "D30 exatamente 30% sem prev -> saudavel (limiar inclusivo)",
+    "statement": "D30 exatamente 30% sem prev -> saudavel (limiar inclusivo)",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 1000,
+      "retained": {
+        "d1": 700,
+        "d7": 500,
+        "d30": 300
+      }
+    },
+    "expected": {
+      "d30_pct": 30.0,
+      "retention_drop": false,
+      "drop_pp": 0.0,
+      "status": "saudavel",
+      "alert_churn_predictor": false,
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-05",
+    "desc": "D30 29.9% sem prev -> atencao (logo abaixo de 30)",
+    "statement": "D30 29.9% sem prev -> atencao (logo abaixo de 30)",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 1000,
+      "retained": {
+        "d1": 700,
+        "d7": 500,
+        "d30": 299
+      }
+    },
+    "expected": {
+      "d30_pct": 29.9,
+      "retention_drop": false,
+      "status": "atencao",
+      "alert_churn_predictor": false,
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-06",
+    "desc": "queda exatamente 10pp -> retention_drop True, aciona churn (limiar inclusivo)",
+    "statement": "queda exatamente 10pp -> retention_drop True, aciona churn (limiar inclusivo)",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 1000,
+      "retained": {
+        "d1": 600,
+        "d7": 400,
+        "d30": 400
+      },
+      "prev_d30_pct": 50
+    },
+    "expected": {
+      "d30_pct": 40.0,
+      "drop_pp": 10.0,
+      "retention_drop": true,
+      "alert_churn_predictor": true,
+      "status": "queda",
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-07",
+    "desc": "queda 9.9pp -> NAO dispara (logo abaixo de 10)",
+    "statement": "queda 9.9pp -> NAO dispara (logo abaixo de 10)",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 1000,
+      "retained": {
+        "d1": 600,
+        "d7": 400,
+        "d30": 401
+      },
+      "prev_d30_pct": 50
+    },
+    "expected": {
+      "d30_pct": 40.1,
+      "drop_pp": 9.9,
+      "retention_drop": false,
+      "alert_churn_predictor": false,
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-08",
+    "desc": "D30 alto (45%) mas queda de 15pp -> status queda (precede saudavel)",
+    "statement": "D30 alto (45%) mas queda de 15pp -> status queda (precede saudavel)",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 1000,
+      "retained": {
+        "d1": 700,
+        "d7": 550,
+        "d30": 450
+      },
+      "prev_d30_pct": 60
+    },
+    "expected": {
+      "d30_pct": 45.0,
+      "drop_pp": 15.0,
+      "retention_drop": true,
+      "status": "queda",
+      "alert_churn_predictor": true,
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-09",
+    "desc": "D30 baixo (15%) com queda de 20pp -> status queda (precede atencao)",
+    "statement": "D30 baixo (15%) com queda de 20pp -> status queda (precede atencao)",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 1000,
+      "retained": {
+        "d1": 400,
+        "d7": 250,
+        "d30": 150
+      },
+      "prev_d30_pct": 35
+    },
+    "expected": {
+      "d30_pct": 15.0,
+      "drop_pp": 20.0,
+      "retention_drop": true,
+      "status": "queda",
+      "alert_churn_predictor": true,
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-10",
+    "desc": "D30 SUBIU vs anterior (drop negativo) -> sem alarme, saudavel",
+    "statement": "D30 SUBIU vs anterior (drop negativo) -> sem alarme, saudavel",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 1000,
+      "retained": {
+        "d1": 700,
+        "d7": 550,
+        "d30": 450
+      },
+      "prev_d30_pct": 30
+    },
+    "expected": {
+      "d30_pct": 45.0,
+      "drop_pp": -15.0,
+      "retention_drop": false,
+      "status": "saudavel",
+      "alert_churn_predictor": false,
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-11",
+    "desc": "melhora porem D30 ainda <30 -> atencao (sem queda)",
+    "statement": "melhora porem D30 ainda <30 -> atencao (sem queda)",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 1000,
+      "retained": {
+        "d1": 400,
+        "d7": 300,
+        "d30": 250
+      },
+      "prev_d30_pct": 20
+    },
+    "expected": {
+      "d30_pct": 25.0,
+      "drop_pp": -5.0,
+      "retention_drop": false,
+      "status": "atencao",
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-12",
+    "desc": "prev presente, queda 5pp, D30 40% -> saudavel",
+    "statement": "prev presente, queda 5pp, D30 40% -> saudavel",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 1000,
+      "retained": {
+        "d1": 700,
+        "d7": 500,
+        "d30": 400
+      },
+      "prev_d30_pct": 45
+    },
+    "expected": {
+      "d30_pct": 40.0,
+      "drop_pp": 5.0,
+      "retention_drop": false,
+      "status": "saudavel",
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-13",
+    "desc": "coorte segmentada por plano -> segment refletido",
+    "statement": "coorte segmentada por plano -> segment refletido",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 800,
+      "retained": {
+        "d1": 500,
+        "d7": 350,
+        "d30": 280
+      },
+      "segment": "plano-pro"
+    },
+    "expected": {
+      "segment": "plano-pro",
+      "d30_pct": 35.0,
+      "status": "saudavel",
+      "retention_drop": false,
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-14",
+    "desc": "coorte segmentada por canal pago com queda -> queda + segment",
+    "statement": "coorte segmentada por canal pago com queda -> queda + segment",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 600,
+      "retained": {
+        "d1": 300,
+        "d7": 180,
+        "d30": 60
+      },
+      "prev_d30_pct": 25,
+      "segment": "canal-pago"
+    },
+    "expected": {
+      "segment": "canal-pago",
+      "d30_pct": 10.0,
+      "drop_pp": 15.0,
+      "retention_drop": true,
+      "status": "queda",
+      "alert_churn_predictor": true,
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-15",
+    "desc": "size 0 -> todos pct 0, atencao (D30<30), sem queda",
+    "statement": "size 0 -> todos pct 0, atencao (D30<30), sem queda",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 0,
+      "retained": {
+        "d1": 0,
+        "d7": 0,
+        "d30": 0
+      }
+    },
+    "expected": {
+      "cohort_size": 0,
+      "d1_pct": 0.0,
+      "d7_pct": 0.0,
+      "d30_pct": 0.0,
+      "retention_drop": false,
+      "drop_pp": 0.0,
+      "status": "atencao",
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-16",
+    "desc": "retencao 100% em D30 -> saudavel",
+    "statement": "retencao 100% em D30 -> saudavel",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 100,
+      "retained": {
+        "d1": 100,
+        "d7": 100,
+        "d30": 100
+      }
+    },
+    "expected": {
+      "d1_pct": 100.0,
+      "d7_pct": 100.0,
+      "d30_pct": 100.0,
+      "status": "saudavel",
+      "retention_drop": false,
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-17",
+    "desc": "retencao zero em D30 com prev alto -> queda severa",
+    "statement": "retencao zero em D30 com prev alto -> queda severa",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 500,
+      "retained": {
+        "d1": 200,
+        "d7": 50,
+        "d30": 0
+      },
+      "prev_d30_pct": 40
+    },
+    "expected": {
+      "d30_pct": 0.0,
+      "drop_pp": 40.0,
+      "retention_drop": true,
+      "status": "queda",
+      "alert_churn_predictor": true,
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-18",
+    "desc": "D30 identico ao anterior (drop 0) e D30>=30 -> saudavel",
+    "statement": "D30 identico ao anterior (drop 0) e D30>=30 -> saudavel",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 1000,
+      "retained": {
+        "d1": 600,
+        "d7": 450,
+        "d30": 350
+      },
+      "prev_d30_pct": 35
+    },
+    "expected": {
+      "d30_pct": 35.0,
+      "drop_pp": 0.0,
+      "retention_drop": false,
+      "status": "saudavel",
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-19",
+    "desc": "D30 identico ao anterior mas <30 -> atencao (drop 0)",
+    "statement": "D30 identico ao anterior mas <30 -> atencao (drop 0)",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 1000,
+      "retained": {
+        "d1": 500,
+        "d7": 300,
+        "d30": 250
+      },
+      "prev_d30_pct": 25
+    },
+    "expected": {
+      "d30_pct": 25.0,
+      "drop_pp": 0.0,
+      "retention_drop": false,
+      "status": "atencao",
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-20",
+    "desc": "pct fracionario: 333/1000 -> 33.3%",
+    "statement": "pct fracionario: 333/1000 -> 33.3%",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 1000,
+      "retained": {
+        "d1": 700,
+        "d7": 500,
+        "d30": 333
+      }
+    },
+    "expected": {
+      "d30_pct": 33.3,
+      "status": "saudavel",
+      "retention_drop": false,
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-21",
+    "desc": "pct 1/3 da coorte: 100/300 -> 33.3%",
+    "statement": "pct 1/3 da coorte: 100/300 -> 33.3%",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 300,
+      "retained": {
+        "d1": 200,
+        "d7": 150,
+        "d30": 100
+      }
+    },
+    "expected": {
+      "d1_pct": 66.7,
+      "d7_pct": 50.0,
+      "d30_pct": 33.3,
+      "status": "saudavel",
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-22",
+    "desc": "D1/D7 baixos mas D30>=30 -> saudavel (status so olha D30)",
+    "statement": "D1/D7 baixos mas D30>=30 -> saudavel (status so olha D30)",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 1000,
+      "retained": {
+        "d1": 100,
+        "d7": 90,
+        "d30": 350
+      }
+    },
+    "expected": {
+      "d1_pct": 10.0,
+      "d7_pct": 9.0,
+      "d30_pct": 35.0,
+      "status": "saudavel",
+      "retention_drop": false,
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-23",
+    "desc": "sem dados de retidos -> pcts 0, atencao",
+    "statement": "sem dados de retidos -> pcts 0, atencao",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 500
+    },
+    "expected": {
+      "d1_pct": 0.0,
+      "d7_pct": 0.0,
+      "d30_pct": 0.0,
+      "status": "atencao",
+      "retention_drop": false,
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-24",
+    "desc": "so D1 informado, D30 ausente (0) -> atencao",
+    "statement": "so D1 informado, D30 ausente (0) -> atencao",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 1000,
+      "retained": {
+        "d1": 800
+      }
+    },
+    "expected": {
+      "d1_pct": 80.0,
+      "d7_pct": 0.0,
+      "d30_pct": 0.0,
+      "status": "atencao",
+      "retention_drop": false,
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-25",
+    "desc": "prev baixo (12%) e D30 1% -> drop 11pp dispara mesmo D30<30",
+    "statement": "prev baixo (12%) e D30 1% -> drop 11pp dispara mesmo D30<30",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 1000,
+      "retained": {
+        "d1": 200,
+        "d7": 80,
+        "d30": 10
+      },
+      "prev_d30_pct": 12
+    },
+    "expected": {
+      "d30_pct": 1.0,
+      "drop_pp": 11.0,
+      "retention_drop": true,
+      "status": "queda",
+      "alert_churn_predictor": true,
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-26",
+    "desc": "sem queda -> alert_churn_predictor False (isola gatilho)",
+    "statement": "sem queda -> alert_churn_predictor False (isola gatilho)",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 1000,
+      "retained": {
+        "d1": 700,
+        "d7": 500,
+        "d30": 400
+      },
+      "prev_d30_pct": 42
+    },
+    "expected": {
+      "d30_pct": 40.0,
+      "drop_pp": 2.0,
+      "retention_drop": false,
+      "alert_churn_predictor": false,
+      "status": "saudavel",
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-27",
+    "desc": "coorte canonica reproduzivel -> metric_canonical True sempre",
+    "statement": "coorte canonica reproduzivel -> metric_canonical True sempre",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 2000,
+      "retained": {
+        "d1": 1400,
+        "d7": 1000,
+        "d30": 800
+      },
+      "segment": "data-entrada-2026-01"
+    },
+    "expected": {
+      "d30_pct": 40.0,
+      "status": "saudavel",
+      "segment": "data-entrada-2026-01",
+      "metric_canonical": true,
+      "by": "g6-cohort-analyst"
+    }
+  },
+  {
+    "id": "ca-28",
+    "desc": "D30 32% com queda de 8pp (<10) -> saudavel, sem alerta",
+    "statement": "D30 32% com queda de 8pp (<10) -> saudavel, sem alerta",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 1000,
+      "retained": {
+        "d1": 600,
+        "d7": 450,
+        "d30": 320
+      },
+      "prev_d30_pct": 40
+    },
+    "expected": {
+      "d30_pct": 32.0,
+      "drop_pp": 8.0,
+      "retention_drop": false,
+      "status": "saudavel",
+      "alert_churn_predictor": false,
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-29",
+    "desc": "colapso de coorte: D30 5% vs prev 55% -> queda 50pp",
+    "statement": "colapso de coorte: D30 5% vs prev 55% -> queda 50pp",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 400,
+      "retained": {
+        "d1": 100,
+        "d7": 40,
+        "d30": 20
+      },
+      "prev_d30_pct": 55
+    },
+    "expected": {
+      "d30_pct": 5.0,
+      "drop_pp": 50.0,
+      "retention_drop": true,
+      "status": "queda",
+      "alert_churn_predictor": true,
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-30",
+    "desc": "D30 30% E queda exatamente 10pp -> queda (gatilho precede saudavel)",
+    "statement": "D30 30% E queda exatamente 10pp -> queda (gatilho precede saudavel)",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 1000,
+      "retained": {
+        "d1": 600,
+        "d7": 450,
+        "d30": 300
+      },
+      "prev_d30_pct": 40
+    },
+    "expected": {
+      "d30_pct": 30.0,
+      "drop_pp": 10.0,
+      "retention_drop": true,
+      "status": "queda",
+      "alert_churn_predictor": true,
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-31",
+    "desc": "D30 22% com queda 5pp -> atencao (sem queda, D30<30)",
+    "statement": "D30 22% com queda 5pp -> atencao (sem queda, D30<30)",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 1000,
+      "retained": {
+        "d1": 400,
+        "d7": 300,
+        "d30": 220
+      },
+      "prev_d30_pct": 27
+    },
+    "expected": {
+      "d30_pct": 22.0,
+      "drop_pp": 5.0,
+      "retention_drop": false,
+      "status": "atencao",
+      "alert_churn_predictor": false,
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  },
+  {
+    "id": "ca-32",
+    "desc": "coorte de ativados retem forte (D30 60%) -> saudavel",
+    "statement": "coorte de ativados retem forte (D30 60%) -> saudavel",
+    "tenant_id": "t-eval-g06",
+    "cohort": {
+      "size": 500,
+      "retained": {
+        "d1": 400,
+        "d7": 350,
+        "d30": 300
+      },
+      "segment": "ativados"
+    },
+    "expected": {
+      "d1_pct": 80.0,
+      "d7_pct": 70.0,
+      "d30_pct": 60.0,
+      "status": "saudavel",
+      "segment": "ativados",
+      "retention_drop": false,
+      "drop_pp": 0.0,
+      "by": "g6-cohort-analyst",
+      "metric_canonical": true
+    }
+  }
 ]

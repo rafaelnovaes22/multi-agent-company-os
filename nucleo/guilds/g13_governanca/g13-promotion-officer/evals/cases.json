@@ -1,26 +1,551 @@
 [
   {
     "id": "gate-01",
-    "desc": "pass@k acima do limiar e 16 dias em SHADOW -> promover",
-    "gate": {"pass_at_k": 0.95, "passk_threshold": 0.9, "shadow_days": 16, "min_shadow_days": 14, "guardians_pending": 0},
-    "expected": {"decision": "promover", "promoted": true, "gates_passed": true, "blocked": false}
+    "desc": "pass@k acima do limiar e 16 dias SHADOW -> promover",
+    "gate": {
+      "pass_at_k": 0.95,
+      "passk_threshold": 0.9,
+      "shadow_days": 16,
+      "min_shadow_days": 14,
+      "guardians_pending": 0
+    },
+    "expected": {
+      "decision": "promover",
+      "promoted": true,
+      "gates_passed": true,
+      "blocked": false
+    }
   },
   {
     "id": "gate-02",
-    "desc": "janela SHADOW de so 9 dias -> bloquear",
-    "gate": {"pass_at_k": 0.95, "passk_threshold": 0.9, "shadow_days": 9, "min_shadow_days": 14, "guardians_pending": 0},
-    "expected": {"decision": "bloquear", "promoted": false, "gates_passed": false, "reason": "janela SHADOW insuficiente"}
+    "desc": "janela SHADOW de só 9 dias -> bloquear",
+    "gate": {
+      "pass_at_k": 0.95,
+      "passk_threshold": 0.9,
+      "shadow_days": 9,
+      "min_shadow_days": 14,
+      "guardians_pending": 0
+    },
+    "expected": {
+      "decision": "bloquear",
+      "promoted": false,
+      "gates_passed": false,
+      "reason": "janela SHADOW insuficiente"
+    }
   },
   {
     "id": "gate-03",
-    "desc": "drift de -6pp num agente -> rebaixar",
-    "gate": {"pass_at_k": 0.95, "shadow_days": 30, "drift_pp": -6},
-    "expected": {"decision": "rebaixar", "promoted": false, "blocked": true, "reason": "drift"}
+    "desc": "pass@k abaixo do limiar -> bloquear",
+    "gate": {
+      "pass_at_k": 0.8,
+      "passk_threshold": 0.9,
+      "shadow_days": 20,
+      "min_shadow_days": 14,
+      "guardians_pending": 0
+    },
+    "expected": {
+      "decision": "bloquear",
+      "promoted": false,
+      "gates_passed": false,
+      "reason": "pass@k abaixo do limiar"
+    }
   },
   {
     "id": "gate-04",
-    "desc": "caminho-critico sem cross-approval (mesma pessoa) -> aguardar",
-    "gate": {"pass_at_k": 0.95, "passk_threshold": 0.9, "shadow_days": 20, "min_shadow_days": 14, "guardians_pending": 0, "critical_path": true, "dri_approver": "ana", "founder_approver": "ana"},
-    "expected": {"decision": "aguardar_cross_approval", "promoted": false, "gates_passed": true, "cross_approval_ok": false}
+    "desc": "guardian pendente bloqueia promoção",
+    "gate": {
+      "pass_at_k": 0.95,
+      "passk_threshold": 0.9,
+      "shadow_days": 20,
+      "min_shadow_days": 14,
+      "guardians_pending": 1
+    },
+    "expected": {
+      "decision": "bloquear",
+      "promoted": false,
+      "gates_passed": false,
+      "reason": "guardian pendente"
+    }
+  },
+  {
+    "id": "gate-05",
+    "desc": "drift -6pp de acurácia -> rebaixar (precede tudo)",
+    "gate": {
+      "pass_at_k": 0.99,
+      "passk_threshold": 0.9,
+      "shadow_days": 40,
+      "min_shadow_days": 14,
+      "guardians_pending": 0,
+      "drift_pp": -6
+    },
+    "expected": {
+      "decision": "rebaixar",
+      "promoted": false,
+      "blocked": true,
+      "gates_passed": false,
+      "cross_approval_ok": false,
+      "reason": "drift"
+    }
+  },
+  {
+    "id": "gate-06",
+    "desc": "fronteira drift exatamente -5pp -> rebaixar",
+    "gate": {
+      "pass_at_k": 0.99,
+      "passk_threshold": 0.9,
+      "shadow_days": 40,
+      "min_shadow_days": 14,
+      "guardians_pending": 0,
+      "drift_pp": -5
+    },
+    "expected": {
+      "decision": "rebaixar",
+      "promoted": false,
+      "reason": "drift"
+    }
+  },
+  {
+    "id": "gate-07",
+    "desc": "fronteira drift -4pp NÃO rebaixa, segue gates -> promover",
+    "gate": {
+      "pass_at_k": 0.95,
+      "passk_threshold": 0.9,
+      "shadow_days": 20,
+      "min_shadow_days": 14,
+      "guardians_pending": 0,
+      "drift_pp": -4
+    },
+    "expected": {
+      "decision": "promover",
+      "promoted": true,
+      "gates_passed": true
+    }
+  },
+  {
+    "id": "gate-08",
+    "desc": "caminho-crítico segura até DRI e founder aprovarem",
+    "gate": {
+      "pass_at_k": 0.95,
+      "passk_threshold": 0.9,
+      "shadow_days": 20,
+      "min_shadow_days": 14,
+      "guardians_pending": 0,
+      "critical_path": true,
+      "dri_approver": null,
+      "founder_approver": null
+    },
+    "expected": {
+      "decision": "aguardar_cross_approval",
+      "promoted": false,
+      "gates_passed": true,
+      "cross_approval_ok": false,
+      "reason": "cross-approval DRI!=founder pendente"
+    }
+  },
+  {
+    "id": "gate-09",
+    "desc": "mesma pessoa como DRI e founder -> cross-approval inválida",
+    "gate": {
+      "pass_at_k": 0.95,
+      "passk_threshold": 0.9,
+      "shadow_days": 20,
+      "min_shadow_days": 14,
+      "guardians_pending": 0,
+      "critical_path": true,
+      "dri_approver": "ana",
+      "founder_approver": "ana"
+    },
+    "expected": {
+      "decision": "aguardar_cross_approval",
+      "promoted": false,
+      "cross_approval_ok": false
+    }
+  },
+  {
+    "id": "gate-10",
+    "desc": "caminho-crítico com DRI!=founder -> promover",
+    "gate": {
+      "pass_at_k": 0.95,
+      "passk_threshold": 0.9,
+      "shadow_days": 20,
+      "min_shadow_days": 14,
+      "guardians_pending": 0,
+      "critical_path": true,
+      "dri_approver": "ana",
+      "founder_approver": "rafael"
+    },
+    "expected": {
+      "decision": "promover",
+      "promoted": true,
+      "cross_approval_ok": true,
+      "gates_passed": true
+    }
+  },
+  {
+    "id": "gate-11",
+    "desc": "fronteira pass@k exatamente no limiar 0.9 -> conta como gate ok",
+    "gate": {
+      "pass_at_k": 0.9,
+      "passk_threshold": 0.9,
+      "shadow_days": 20,
+      "min_shadow_days": 14,
+      "guardians_pending": 0
+    },
+    "expected": {
+      "decision": "promover",
+      "promoted": true,
+      "gates_passed": true
+    }
+  },
+  {
+    "id": "gate-12",
+    "desc": "fronteira pass@k 0.89 logo abaixo -> bloquear",
+    "gate": {
+      "pass_at_k": 0.89,
+      "passk_threshold": 0.9,
+      "shadow_days": 20,
+      "min_shadow_days": 14,
+      "guardians_pending": 0
+    },
+    "expected": {
+      "decision": "bloquear",
+      "gates_passed": false,
+      "reason": "pass@k abaixo do limiar"
+    }
+  },
+  {
+    "id": "gate-13",
+    "desc": "fronteira janela exatamente 14 dias -> ok",
+    "gate": {
+      "pass_at_k": 0.95,
+      "passk_threshold": 0.9,
+      "shadow_days": 14,
+      "min_shadow_days": 14,
+      "guardians_pending": 0
+    },
+    "expected": {
+      "decision": "promover",
+      "gates_passed": true,
+      "promoted": true
+    }
+  },
+  {
+    "id": "gate-14",
+    "desc": "fronteira janela 13 dias -> bloquear",
+    "gate": {
+      "pass_at_k": 0.95,
+      "passk_threshold": 0.9,
+      "shadow_days": 13,
+      "min_shadow_days": 14,
+      "guardians_pending": 0
+    },
+    "expected": {
+      "decision": "bloquear",
+      "gates_passed": false,
+      "reason": "janela SHADOW insuficiente"
+    }
+  },
+  {
+    "id": "gate-15",
+    "desc": "precedência: pass@k baixo E janela curta -> motivo pass@k (verificado 1º)",
+    "gate": {
+      "pass_at_k": 0.5,
+      "passk_threshold": 0.9,
+      "shadow_days": 3,
+      "min_shadow_days": 14,
+      "guardians_pending": 0
+    },
+    "expected": {
+      "decision": "bloquear",
+      "gates_passed": false,
+      "reason": "pass@k abaixo do limiar"
+    }
+  },
+  {
+    "id": "gate-16",
+    "desc": "precedência: janela curta E guardian pendente -> motivo janela (antes do guardian)",
+    "gate": {
+      "pass_at_k": 0.95,
+      "passk_threshold": 0.9,
+      "shadow_days": 5,
+      "min_shadow_days": 14,
+      "guardians_pending": 2
+    },
+    "expected": {
+      "decision": "bloquear",
+      "gates_passed": false,
+      "reason": "janela SHADOW insuficiente"
+    }
+  },
+  {
+    "id": "gate-17",
+    "desc": "fora do caminho-crítico não exige cross-approval",
+    "gate": {
+      "pass_at_k": 0.95,
+      "passk_threshold": 0.9,
+      "shadow_days": 20,
+      "min_shadow_days": 14,
+      "guardians_pending": 0,
+      "critical_path": false
+    },
+    "expected": {
+      "decision": "promover",
+      "cross_approval_ok": true,
+      "promoted": true
+    }
+  },
+  {
+    "id": "gate-18",
+    "desc": "caminho-crítico só com DRI (sem founder) -> aguardar",
+    "gate": {
+      "pass_at_k": 0.95,
+      "passk_threshold": 0.9,
+      "shadow_days": 20,
+      "min_shadow_days": 14,
+      "guardians_pending": 0,
+      "critical_path": true,
+      "dri_approver": "ana",
+      "founder_approver": null
+    },
+    "expected": {
+      "decision": "aguardar_cross_approval",
+      "cross_approval_ok": false,
+      "promoted": false
+    }
+  },
+  {
+    "id": "gate-19",
+    "desc": "caminho-crítico só com founder (sem DRI) -> aguardar",
+    "gate": {
+      "pass_at_k": 0.95,
+      "passk_threshold": 0.9,
+      "shadow_days": 20,
+      "min_shadow_days": 14,
+      "guardians_pending": 0,
+      "critical_path": true,
+      "dri_approver": null,
+      "founder_approver": "rafael"
+    },
+    "expected": {
+      "decision": "aguardar_cross_approval",
+      "cross_approval_ok": false
+    }
+  },
+  {
+    "id": "gate-20",
+    "desc": "precedência: drift -8 mesmo com gates falhando -> rebaixar (não bloquear)",
+    "gate": {
+      "pass_at_k": 0.2,
+      "passk_threshold": 0.9,
+      "shadow_days": 1,
+      "min_shadow_days": 14,
+      "guardians_pending": 3,
+      "drift_pp": -8
+    },
+    "expected": {
+      "decision": "rebaixar",
+      "blocked": true,
+      "reason": "drift"
+    }
+  },
+  {
+    "id": "gate-21",
+    "desc": "3 guardians pendentes -> bloquear por guardian",
+    "gate": {
+      "pass_at_k": 0.95,
+      "passk_threshold": 0.9,
+      "shadow_days": 20,
+      "min_shadow_days": 14,
+      "guardians_pending": 3
+    },
+    "expected": {
+      "decision": "bloquear",
+      "gates_passed": false,
+      "reason": "guardian pendente"
+    }
+  },
+  {
+    "id": "gate-22",
+    "desc": "drift positivo +3pp (melhora) não rebaixa",
+    "gate": {
+      "pass_at_k": 0.95,
+      "passk_threshold": 0.9,
+      "shadow_days": 20,
+      "min_shadow_days": 14,
+      "guardians_pending": 0,
+      "drift_pp": 3
+    },
+    "expected": {
+      "decision": "promover",
+      "promoted": true,
+      "gates_passed": true
+    }
+  },
+  {
+    "id": "gate-23",
+    "desc": "caminho-crítico com gates falhando -> bloquear (gates antes da cross-approval)",
+    "gate": {
+      "pass_at_k": 0.5,
+      "passk_threshold": 0.9,
+      "shadow_days": 20,
+      "min_shadow_days": 14,
+      "guardians_pending": 0,
+      "critical_path": true,
+      "dri_approver": "ana",
+      "founder_approver": "rafael"
+    },
+    "expected": {
+      "decision": "bloquear",
+      "gates_passed": false,
+      "reason": "pass@k abaixo do limiar"
+    }
+  },
+  {
+    "id": "gate-24",
+    "desc": "limiar customizado 0.95: pass@k 0.93 -> bloquear",
+    "gate": {
+      "pass_at_k": 0.93,
+      "passk_threshold": 0.95,
+      "shadow_days": 20,
+      "min_shadow_days": 14,
+      "guardians_pending": 0
+    },
+    "expected": {
+      "decision": "bloquear",
+      "gates_passed": false,
+      "reason": "pass@k abaixo do limiar"
+    }
+  },
+  {
+    "id": "gate-25",
+    "desc": "janela mínima customizada 30d: 20d -> bloquear",
+    "gate": {
+      "pass_at_k": 0.95,
+      "passk_threshold": 0.9,
+      "shadow_days": 20,
+      "min_shadow_days": 30,
+      "guardians_pending": 0
+    },
+    "expected": {
+      "decision": "bloquear",
+      "gates_passed": false,
+      "reason": "janela SHADOW insuficiente"
+    }
+  },
+  {
+    "id": "gate-26",
+    "desc": "defaults (limiar 0.9 / 14d): pass@k 0.91, 15d -> promover",
+    "gate": {
+      "pass_at_k": 0.91,
+      "shadow_days": 15,
+      "guardians_pending": 0
+    },
+    "expected": {
+      "decision": "promover",
+      "promoted": true,
+      "gates_passed": true
+    }
+  },
+  {
+    "id": "gate-27",
+    "desc": "defaults: 10 dias < 14 -> bloquear",
+    "gate": {
+      "pass_at_k": 0.95,
+      "shadow_days": 10,
+      "guardians_pending": 0
+    },
+    "expected": {
+      "decision": "bloquear",
+      "reason": "janela SHADOW insuficiente"
+    }
+  },
+  {
+    "id": "gate-28",
+    "desc": "drift -5 com pass@k perfeito ainda rebaixa",
+    "gate": {
+      "pass_at_k": 1.0,
+      "passk_threshold": 0.9,
+      "shadow_days": 60,
+      "min_shadow_days": 14,
+      "guardians_pending": 0,
+      "drift_pp": -5
+    },
+    "expected": {
+      "decision": "rebaixar",
+      "promoted": false
+    }
+  },
+  {
+    "id": "gate-29",
+    "desc": "caminho-crítico com aprovadores ok mas guardian pendente -> bloquear",
+    "gate": {
+      "pass_at_k": 0.95,
+      "passk_threshold": 0.9,
+      "shadow_days": 20,
+      "min_shadow_days": 14,
+      "guardians_pending": 1,
+      "critical_path": true,
+      "dri_approver": "ana",
+      "founder_approver": "rafael"
+    },
+    "expected": {
+      "decision": "bloquear",
+      "gates_passed": false,
+      "reason": "guardian pendente"
+    }
+  },
+  {
+    "id": "gate-30",
+    "desc": "caso limpo: pass@k 1.0, 90 dias, 0 guardians -> promover",
+    "gate": {
+      "pass_at_k": 1.0,
+      "passk_threshold": 0.9,
+      "shadow_days": 90,
+      "min_shadow_days": 14,
+      "guardians_pending": 0
+    },
+    "expected": {
+      "decision": "promover",
+      "promoted": true,
+      "gates_passed": true,
+      "blocked": false
+    }
+  },
+  {
+    "id": "gate-31",
+    "desc": "não-crítico ignora founder==dri iguais (cross n/a)",
+    "gate": {
+      "pass_at_k": 0.95,
+      "passk_threshold": 0.9,
+      "shadow_days": 20,
+      "min_shadow_days": 14,
+      "guardians_pending": 0,
+      "critical_path": false,
+      "dri_approver": "ana",
+      "founder_approver": "ana"
+    },
+    "expected": {
+      "decision": "promover",
+      "cross_approval_ok": true,
+      "promoted": true
+    }
+  },
+  {
+    "id": "gate-32",
+    "desc": "drift severo -10pp -> rebaixar com bloqueio",
+    "gate": {
+      "pass_at_k": 0.95,
+      "passk_threshold": 0.9,
+      "shadow_days": 20,
+      "min_shadow_days": 14,
+      "guardians_pending": 0,
+      "drift_pp": -10
+    },
+    "expected": {
+      "decision": "rebaixar",
+      "blocked": true,
+      "reason": "drift",
+      "cross_approval_ok": false
+    }
   }
 ]

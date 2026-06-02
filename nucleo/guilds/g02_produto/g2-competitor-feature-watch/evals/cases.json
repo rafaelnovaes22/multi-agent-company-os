@@ -1,902 +1,483 @@
 [
   {
     "id": "g2-competitor-feature-watch-01",
-    "desc": "Vigia de Features de Concorrentes: cenário 01 risco=low status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 1,
-      "blocked": false
+    "desc": "feature ataca JTBD core -> responder",
+    "signal": {
+      "source": "https://rival.com/changelog",
+      "source_public": true,
+      "substance": true,
+      "jtbd_relevance": "core",
+      "threat_level": "low"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "status": "classificado",
+      "recommendation": "responder",
+      "routed": true,
+      "signal_committed": true,
+      "requires_human_review": true
     }
   },
   {
     "id": "g2-competitor-feature-watch-02",
-    "desc": "Vigia de Features de Concorrentes: cenário 02 risco=medium status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g2-competitor-feature-watch",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 2,
-      "blocked": false
+    "desc": "ameaca alta ao fosso -> responder",
+    "signal": {
+      "source": "https://rival.com/blog",
+      "source_public": true,
+      "substance": true,
+      "jtbd_relevance": "adjacent",
+      "threat_level": "high"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g2-competitor-feature-watch",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "status": "classificado",
+      "recommendation": "responder",
+      "routed": true
     }
   },
   {
     "id": "g2-competitor-feature-watch-03",
-    "desc": "Vigia de Features de Concorrentes: cenário 03 risco=high status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-competitor-feature-watch",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 3,
-      "blocked": false
+    "desc": "changelog relevante adjacente -> observar",
+    "signal": {
+      "source": "https://rival.com/releases",
+      "source_public": true,
+      "substance": true,
+      "jtbd_relevance": "adjacent",
+      "threat_level": "low"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g2-competitor-feature-watch",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "status": "classificado",
+      "recommendation": "observar",
+      "routed": true
     }
   },
   {
     "id": "g2-competitor-feature-watch-04",
-    "desc": "Vigia de Features de Concorrentes: cenário 04 risco=critical status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-competitor-feature-watch",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 4,
-      "blocked": false
+    "desc": "ameaca media -> observar",
+    "signal": {
+      "source": "https://rival.com/x",
+      "source_public": true,
+      "substance": true,
+      "jtbd_relevance": "none",
+      "threat_level": "medium"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g2-competitor-feature-watch",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "status": "classificado",
+      "recommendation": "observar",
+      "routed": true
     }
   },
   {
     "id": "g2-competitor-feature-watch-05",
-    "desc": "Vigia de Features de Concorrentes: cenário 05 risco=low status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g2-competitor-feature-watch",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 5,
-      "blocked": false
+    "desc": "sem relevancia nem ameaca -> ignorar mas classificado",
+    "signal": {
+      "source": "https://rival.com/x",
+      "source_public": true,
+      "substance": true,
+      "jtbd_relevance": "none",
+      "threat_level": "none"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g2-competitor-feature-watch",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "status": "classificado",
+      "recommendation": "ignorar",
+      "routed": false,
+      "signal_committed": true
     }
   },
   {
     "id": "g2-competitor-feature-watch-06",
-    "desc": "Vigia de Features de Concorrentes: cenário 06 risco=medium status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-competitor-feature-watch",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 6,
-      "blocked": false
+    "desc": "anuncio sem substancia -> ruido, nao roteado",
+    "signal": {
+      "source": "https://rival.com/pr",
+      "source_public": true,
+      "substance": false,
+      "jtbd_relevance": "core",
+      "threat_level": "high"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g2-competitor-feature-watch",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "status": "ruido",
+      "recommendation": "ignorar",
+      "routed": false,
+      "signal_committed": false
     }
   },
   {
     "id": "g2-competitor-feature-watch-07",
-    "desc": "Vigia de Features de Concorrentes: cenário 07 risco=high status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 7,
-      "blocked": false
+    "desc": "sinal sem fonte verificavel -> rejeitado",
+    "signal": {
+      "source": null,
+      "source_public": true,
+      "substance": true,
+      "jtbd_relevance": "core"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "status": "rejeitado_fonte",
+      "routed": false,
+      "source_public": false,
+      "signal_committed": false
     }
   },
   {
     "id": "g2-competitor-feature-watch-08",
-    "desc": "Vigia de Features de Concorrentes: cenário 08 risco=critical status=blocked",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "critical",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g2-competitor-feature-watch",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 8,
-      "blocked": true
+    "desc": "fonte nao publica (coleta ilicita) -> rejeitado",
+    "signal": {
+      "source": "leak-interno",
+      "source_public": false,
+      "substance": true,
+      "jtbd_relevance": "core",
+      "threat_level": "high"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "blocked",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g2-competitor-feature-watch",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "status": "rejeitado_fonte",
+      "routed": false,
+      "source_public": false,
+      "requires_human_review": false
     }
   },
   {
     "id": "g2-competitor-feature-watch-09",
-    "desc": "Vigia de Features de Concorrentes: cenário 09 risco=low status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g2-competitor-feature-watch",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 9,
-      "blocked": false
+    "desc": "sinal duplicado de outro ja registrado",
+    "signal": {
+      "source": "https://rival.com/x",
+      "source_public": true,
+      "substance": true,
+      "duplicate_of": "sig-123",
+      "jtbd_relevance": "core"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g2-competitor-feature-watch",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "status": "duplicado",
+      "is_duplicate": true,
+      "routed": false,
+      "signal_committed": false
     }
   },
   {
     "id": "g2-competitor-feature-watch-10",
-    "desc": "Vigia de Features de Concorrentes: cenário 10 risco=medium status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g2-competitor-feature-watch",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 10,
-      "blocked": false
+    "desc": "rejeitado_fonte precede duplicado",
+    "signal": {
+      "source": null,
+      "duplicate_of": "sig-9",
+      "jtbd_relevance": "core"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g2-competitor-feature-watch",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "status": "rejeitado_fonte",
+      "source_public": false
     }
   },
   {
     "id": "g2-competitor-feature-watch-11",
-    "desc": "Vigia de Features de Concorrentes: cenário 11 risco=high status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-competitor-feature-watch",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 11,
-      "blocked": false
+    "desc": "duplicado precede ruido",
+    "signal": {
+      "source": "https://rival.com/x",
+      "source_public": true,
+      "duplicate_of": "sig-1",
+      "substance": false
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g2-competitor-feature-watch",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "status": "duplicado",
+      "is_duplicate": true
     }
   },
   {
     "id": "g2-competitor-feature-watch-12",
-    "desc": "Vigia de Features de Concorrentes: cenário 12 risco=critical status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-competitor-feature-watch",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 12,
-      "blocked": false
+    "desc": "ruido precede classificacao",
+    "signal": {
+      "source": "https://rival.com/x",
+      "source_public": true,
+      "substance": false,
+      "jtbd_relevance": "core",
+      "threat_level": "high"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g2-competitor-feature-watch",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "status": "ruido",
+      "routed": false
     }
   },
   {
     "id": "g2-competitor-feature-watch-13",
-    "desc": "Vigia de Features de Concorrentes: cenário 13 risco=low status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 13,
-      "blocked": false
+    "desc": "core + high -> responder (ambos gatilhos)",
+    "signal": {
+      "source": "https://rival.com/c",
+      "source_public": true,
+      "substance": true,
+      "jtbd_relevance": "core",
+      "threat_level": "high"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "status": "classificado",
+      "recommendation": "responder",
+      "routed": true,
+      "requires_human_review": true
     }
   },
   {
     "id": "g2-competitor-feature-watch-14",
-    "desc": "Vigia de Features de Concorrentes: cenário 14 risco=medium status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g2-competitor-feature-watch",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 14,
-      "blocked": false
+    "desc": "adjacent + medium -> observar",
+    "signal": {
+      "source": "https://rival.com/d",
+      "source_public": true,
+      "substance": true,
+      "jtbd_relevance": "adjacent",
+      "threat_level": "medium"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g2-competitor-feature-watch",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "recommendation": "observar",
+      "routed": true
     }
   },
   {
     "id": "g2-competitor-feature-watch-15",
-    "desc": "Vigia de Features de Concorrentes: cenário 15 risco=high status=blocked",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "high",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g2-competitor-feature-watch",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 15,
-      "blocked": true
+    "desc": "none + low -> ignorar",
+    "signal": {
+      "source": "https://rival.com/e",
+      "source_public": true,
+      "substance": true,
+      "jtbd_relevance": "none",
+      "threat_level": "low"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "blocked",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g2-competitor-feature-watch",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "recommendation": "ignorar",
+      "routed": false,
+      "status": "classificado"
     }
   },
   {
     "id": "g2-competitor-feature-watch-16",
-    "desc": "Vigia de Features de Concorrentes: cenário 16 risco=critical status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-competitor-feature-watch",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 16,
-      "blocked": false
+    "desc": "default substance/relevance ausentes -> tratado como none",
+    "signal": {
+      "source": "https://rival.com/f",
+      "source_public": true
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g2-competitor-feature-watch",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "status": "classificado",
+      "recommendation": "ignorar",
+      "routed": false
     }
   },
   {
     "id": "g2-competitor-feature-watch-17",
-    "desc": "Vigia de Features de Concorrentes: cenário 17 risco=low status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g2-competitor-feature-watch",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 17,
-      "blocked": false
+    "desc": "has_substance refletido no output",
+    "signal": {
+      "source": "https://rival.com/g",
+      "source_public": true,
+      "substance": true,
+      "jtbd_relevance": "core"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g2-competitor-feature-watch",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "has_substance": true,
+      "recommendation": "responder"
     }
   },
   {
     "id": "g2-competitor-feature-watch-18",
-    "desc": "Vigia de Features de Concorrentes: cenário 18 risco=medium status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-competitor-feature-watch",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 18,
-      "blocked": false
+    "desc": "observar nao exige revisao humana",
+    "signal": {
+      "source": "https://rival.com/h",
+      "source_public": true,
+      "substance": true,
+      "jtbd_relevance": "adjacent"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g2-competitor-feature-watch",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "recommendation": "observar",
+      "requires_human_review": false
     }
   },
   {
     "id": "g2-competitor-feature-watch-19",
-    "desc": "Vigia de Features de Concorrentes: cenário 19 risco=high status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 19,
-      "blocked": false
+    "desc": "responder exige revisao humana",
+    "signal": {
+      "source": "https://rival.com/i",
+      "source_public": true,
+      "substance": true,
+      "jtbd_relevance": "core"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "recommendation": "responder",
+      "requires_human_review": true
     }
   },
   {
     "id": "g2-competitor-feature-watch-20",
-    "desc": "Vigia de Features de Concorrentes: cenário 20 risco=critical status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-competitor-feature-watch",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 20,
-      "blocked": false
+    "desc": "signal_committed so quando classificado",
+    "signal": {
+      "source": "https://rival.com/j",
+      "source_public": true,
+      "substance": true,
+      "jtbd_relevance": "none",
+      "threat_level": "medium"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g2-competitor-feature-watch",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "signal_committed": true,
+      "status": "classificado"
     }
   },
   {
     "id": "g2-competitor-feature-watch-21",
-    "desc": "Vigia de Features de Concorrentes: cenário 21 risco=low status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g2-competitor-feature-watch",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 21,
-      "blocked": false
+    "desc": "ruido nao commita sinal",
+    "signal": {
+      "source": "https://rival.com/k",
+      "source_public": true,
+      "substance": false
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g2-competitor-feature-watch",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "signal_committed": false,
+      "status": "ruido"
     }
   },
   {
     "id": "g2-competitor-feature-watch-22",
-    "desc": "Vigia de Features de Concorrentes: cenário 22 risco=medium status=blocked",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g2-competitor-feature-watch",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 22,
-      "blocked": true
+    "desc": "core + none threat ainda responder",
+    "signal": {
+      "source": "https://rival.com/l",
+      "source_public": true,
+      "substance": true,
+      "jtbd_relevance": "core",
+      "threat_level": "none"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g2-competitor-feature-watch",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "recommendation": "responder",
+      "routed": true
     }
   },
   {
     "id": "g2-competitor-feature-watch-23",
-    "desc": "Vigia de Features de Concorrentes: cenário 23 risco=high status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-competitor-feature-watch",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 23,
-      "blocked": false
+    "desc": "high threat + none jtbd ainda responder",
+    "signal": {
+      "source": "https://rival.com/m",
+      "source_public": true,
+      "substance": true,
+      "jtbd_relevance": "none",
+      "threat_level": "high"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g2-competitor-feature-watch",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "recommendation": "responder",
+      "routed": true
     }
   },
   {
     "id": "g2-competitor-feature-watch-24",
-    "desc": "Vigia de Features de Concorrentes: cenário 24 risco=critical status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-competitor-feature-watch",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 24,
-      "blocked": false
+    "desc": "medium threat + none -> observar",
+    "signal": {
+      "source": "https://rival.com/n",
+      "source_public": true,
+      "substance": true,
+      "jtbd_relevance": "none",
+      "threat_level": "medium"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g2-competitor-feature-watch",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "recommendation": "observar"
     }
   },
   {
     "id": "g2-competitor-feature-watch-25",
-    "desc": "Vigia de Features de Concorrentes: cenário 25 risco=low status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 25,
-      "blocked": false
+    "desc": "adjacent + none threat -> observar",
+    "signal": {
+      "source": "https://rival.com/o",
+      "source_public": true,
+      "substance": true,
+      "jtbd_relevance": "adjacent",
+      "threat_level": "none"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "recommendation": "observar",
+      "routed": true
     }
   },
   {
     "id": "g2-competitor-feature-watch-26",
-    "desc": "Vigia de Features de Concorrentes: cenário 26 risco=medium status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g2-competitor-feature-watch",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 26,
-      "blocked": false
+    "desc": "fonte vazia string conta como sem fonte",
+    "signal": {
+      "source": "",
+      "source_public": true,
+      "substance": true,
+      "jtbd_relevance": "core"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g2-competitor-feature-watch",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "status": "rejeitado_fonte",
+      "source_public": false
     }
   },
   {
     "id": "g2-competitor-feature-watch-27",
-    "desc": "Vigia de Features de Concorrentes: cenário 27 risco=high status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-competitor-feature-watch",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 27,
-      "blocked": false
+    "desc": "routed True para responder",
+    "signal": {
+      "source": "https://rival.com/p",
+      "source_public": true,
+      "substance": true,
+      "jtbd_relevance": "core"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g2-competitor-feature-watch",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "routed": true
     }
   },
   {
     "id": "g2-competitor-feature-watch-28",
-    "desc": "Vigia de Features de Concorrentes: cenário 28 risco=critical status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-competitor-feature-watch",
-    "capabilities": [
-      "config_driven",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 28,
-      "blocked": false
+    "desc": "routed False para ignorar",
+    "signal": {
+      "source": "https://rival.com/q",
+      "source_public": true,
+      "substance": true,
+      "jtbd_relevance": "none",
+      "threat_level": "low"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g2-competitor-feature-watch",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "routed": false
     }
   },
   {
     "id": "g2-competitor-feature-watch-29",
-    "desc": "Vigia de Features de Concorrentes: cenário 29 risco=low status=blocked",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "low",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g2-competitor-feature-watch",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 29,
-      "blocked": true
+    "desc": "is_duplicate False quando nao duplicado",
+    "signal": {
+      "source": "https://rival.com/r",
+      "source_public": true,
+      "substance": true,
+      "jtbd_relevance": "adjacent"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "blocked",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g2-competitor-feature-watch",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "is_duplicate": false,
+      "recommendation": "observar"
     }
   },
   {
     "id": "g2-competitor-feature-watch-30",
-    "desc": "Vigia de Features de Concorrentes: cenário 30 risco=medium status=ready",
-    "artifact_type": "competitor-feature-watch.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g2-competitor-feature-watch",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 30,
-      "blocked": false
+    "desc": "duplicado com fonte publica ainda duplicado",
+    "signal": {
+      "source": "https://rival.com/s",
+      "source_public": true,
+      "substance": true,
+      "duplicate_of": "sig-x",
+      "jtbd_relevance": "adjacent"
     },
     "expected": {
-      "agent_id": "g2-competitor-feature-watch",
-      "handler_kind": "spec_driven",
-      "artifact_type": "competitor-feature-watch.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g2-competitor-feature-watch",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "status": "duplicado",
+      "routed": false
+    }
+  },
+  {
+    "id": "g2-competitor-feature-watch-31",
+    "desc": "ruido sobrepoe relevancia adjacente",
+    "signal": {
+      "source": "https://rival.com/t",
+      "source_public": true,
+      "substance": false,
+      "jtbd_relevance": "adjacent",
+      "threat_level": "medium"
+    },
+    "expected": {
+      "status": "ruido",
+      "recommendation": "ignorar"
+    }
+  },
+  {
+    "id": "g2-competitor-feature-watch-32",
+    "desc": "classificado com source_public True",
+    "signal": {
+      "source": "https://rival.com/u",
+      "source_public": true,
+      "substance": true,
+      "jtbd_relevance": "adjacent"
+    },
+    "expected": {
+      "source_public": true,
+      "status": "classificado"
     }
   }
 ]

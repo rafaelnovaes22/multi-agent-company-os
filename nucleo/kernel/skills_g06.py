@@ -328,3 +328,46 @@ def experiment_readout(state, *, llm, store, spec):
         "significant": significant, "guardrail_ok": guardrail_ok, "valid_readout": valid,
         "decision": decision, "learning_registered": valid,
     }, f"Voce e {spec['id']}: uplift {uplift_pp}pp, z={z_stat}, decisao {decision}.", llm)
+
+
+# ---------------------------------------------------------------------------
+# Burn-down R3-A final - g6-pipeline-builder: revisao deterministica de run de pipeline.
+# Precedencia de bloqueio: contrato quebrado (a montante bloqueia load) > run falhou >
+# duplicatas pos-load > reprocesso nao idempotente > schema falhou > freshness violada > ok.
+# C2: dados frescos, completos, dentro do contrato (DELIVERED = run_succeeded && contract_passed).
+# ---------------------------------------------------------------------------
+@register("pipeline_run_review")
+def pipeline_run_review(state, *, llm, store, spec):
+    r = state["task"].get("run", {}) or {}
+    contract_passed = bool(r.get("contract_passed", True))
+    run_succeeded = bool(r.get("run_succeeded", True))
+    duplicate_count = int(r.get("duplicates", 0) or 0)
+    is_reprocess = bool(r.get("is_reprocess", False))
+    idempotent = bool(r.get("idempotent_reprocess", True))
+    schema_ok = bool(r.get("schema_test_passed", True))
+    freshness = float(r.get("freshness_minutes", 0) or 0)
+    sla = float(r.get("sla_minutes", 0) or 0)
+    fresh = (sla <= 0) or freshness <= sla
+
+    if not contract_passed:
+        status = "contrato_quebrado"
+    elif not run_succeeded:
+        status = "run_falhou"
+    elif duplicate_count > 0:
+        status = "duplicatas"
+    elif is_reprocess and not idempotent:
+        status = "reprocesso_nao_idempotente"
+    elif not schema_ok:
+        status = "schema_falhou"
+    elif not fresh:
+        status = "freshness_violada"
+    else:
+        status = "ok"
+
+    load_blocked = status != "ok"
+    run_clean = run_succeeded and contract_passed and duplicate_count == 0
+    return _out(spec, state, {
+        "agent_id": spec["id"], "fresh": fresh, "duplicate_count": duplicate_count,
+        "contract_passed": contract_passed, "status": status, "load_blocked": load_blocked,
+        "run_clean": run_clean, "requires_human_review": load_blocked,
+    }, f"Voce e {spec['id']}: run {status}, load {'bloqueado' if load_blocked else 'ok'}.", llm)

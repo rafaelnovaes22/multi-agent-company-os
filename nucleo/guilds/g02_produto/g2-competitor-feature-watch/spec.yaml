@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: spec_driven
+act_handler: competitor_signal_triage
 outcome_clause:
   statement: 'Vigia de Features de Concorrentes entrega competitor-feature-watch.artifact
     verificável para: Rastrear features e mudanças de produto de concorrentes e traduzi-las

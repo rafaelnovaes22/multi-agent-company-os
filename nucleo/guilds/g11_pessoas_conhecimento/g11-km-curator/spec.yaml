@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: AUTONOMOUS
-act_handler: spec_driven
+act_handler: knowledge_curation
 outcome_clause:
   statement: 'Knowledge Management Curator entrega km-curator.artifact verificável
     para: Curar o conhecimento da empresa no Company Brain — desduplicar, classificar,

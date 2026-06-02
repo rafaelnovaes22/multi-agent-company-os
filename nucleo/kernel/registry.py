@@ -100,7 +100,7 @@ def build_guild_supervisor(workers, checkpointer, *, guild_key="G?"):
             print(f"  [{guild_key}-sup] intent='{intent}' -> worker: {chosen}")
         return {"route": chosen}
 
-    def dispatch(state):
+    def dispatch(state, config):
         sid = state.get("route")
         if not sid or sid not in by_id:
             return {"results": {}}
@@ -111,7 +111,8 @@ def build_guild_supervisor(workers, checkpointer, *, guild_key="G?"):
                         **(state.get("payload") or {})},
                "mode": state.get("mode", "SHADOW"), "ledger": spec.get("ledger"),
                "run_id": rid, "verbose": state.get("verbose")}
-        out = agent.invoke(sub, config={"configurable": {"thread_id": rid}}).get("output")
+        # config herdado: o worker é subgrafo do supervisor (gate C4 propaga); rid só p/ telemetria.
+        out = agent.invoke(sub, config).get("output")
         return {"results": {sid: out}}
 
     g = StateGraph(GenGuildState)
@@ -158,16 +159,18 @@ def build_company(root, llm, brain, store, checkpointer):
             print(f"  [CEO-OS] intent='{state.get('intent')}' -> guilda: {gk}")
         return {"route": gk}
 
-    def dispatch(state):
+    def dispatch(state, config):
         gk = state.get("route")
         sup = guild_sups.get(gk)
         if not sup:
             return {"result": {"error": f"sem guilda para '{gk}'"}}
         payload = state.get("payload") or {}
         statement = payload.get("statement") or state.get("intent", "")
+        # config herdado: guilda (e seus workers) são subgrafos do CEO-OS — cadeia de 3 níveis
+        # compartilha o checkpoint do topo, então interrupt/resume atravessa company->guild->worker.
         out = sup.invoke({"payload": payload, "statement": statement,
-                          "mode": "SHADOW", "verbose": state.get("verbose")},
-                         config={"configurable": {"thread_id": "g-" + uuid.uuid4().hex[:6]}})
+                          "mode": state.get("mode", "SHADOW"), "verbose": state.get("verbose")},
+                         config)
         return {"result": {"guild": gk, "results": out.get("results")}}
 
     g = StateGraph(CompanyState)

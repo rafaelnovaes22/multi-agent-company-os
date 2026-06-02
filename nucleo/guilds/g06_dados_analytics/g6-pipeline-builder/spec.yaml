@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: spec_driven
+act_handler: pipeline_run_review
 outcome_clause:
   statement: 'Construtor de Pipelines de Dados entrega pipeline-builder.artifact verificável
     para: construir e manter os pipelines que alimentam o Company Brain a partir do

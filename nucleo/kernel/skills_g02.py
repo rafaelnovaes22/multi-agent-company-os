@@ -188,3 +188,44 @@ def feedback_route(state, *, llm, store, spec):
         "emerging_themes": emerging, "churn_risk_count": churn, "high_severity_count": high_sev,
         "requires_human_review": bool(churn or emerging),
     }, f"Voce e {spec['id']}: {len(items)} feedbacks, {churn} churn-risk, emergentes={emerging}.", llm)
+
+
+# ---------------------------------------------------------------------------
+# Burn-down R3-A final - g2-competitor-feature-watch: triagem deterministica de
+# sinal competitivo. Rejeita sem fonte publica; dedup; descarta ruido de marketing;
+# classifica relevancia (JTBD x ameaca) em recomendacao ignorar/observar/responder e
+# roteia. C2: sinal com fonte publica e relevancia classificada (DELIVERED = competitor.signal.committed).
+# ---------------------------------------------------------------------------
+@register("competitor_signal_triage")
+def competitor_signal_triage(state, *, llm, store, spec):
+    s = state["task"].get("signal", {}) or {}
+    source = s.get("source")
+    source_public = bool(s.get("source_public", True)) and bool(source)
+    duplicate_of = s.get("duplicate_of")
+    substance = bool(s.get("substance", True))
+    jtbd = (s.get("jtbd_relevance") or "none").lower()   # core | adjacent | none
+    threat = (s.get("threat_level") or "none").lower()   # high | medium | low | none
+
+    if not source_public:
+        status, recommendation, routed = "rejeitado_fonte", "ignorar", False
+    elif duplicate_of:
+        status, recommendation, routed = "duplicado", "ignorar", False
+    elif not substance:
+        status, recommendation, routed = "ruido", "ignorar", False
+    else:
+        if threat == "high" or jtbd == "core":
+            recommendation = "responder"
+        elif threat == "medium" or jtbd == "adjacent":
+            recommendation = "observar"
+        else:
+            recommendation = "ignorar"
+        routed = recommendation in ("observar", "responder")
+        status = "classificado"
+
+    signal_committed = status == "classificado"
+    return _out(spec, state, {
+        "agent_id": spec["id"], "source_public": source_public, "is_duplicate": bool(duplicate_of),
+        "has_substance": substance, "status": status, "recommendation": recommendation,
+        "routed": routed, "signal_committed": signal_committed,
+        "requires_human_review": recommendation == "responder",
+    }, f"Voce e {spec['id']}: sinal {status} -> {recommendation}.", llm)

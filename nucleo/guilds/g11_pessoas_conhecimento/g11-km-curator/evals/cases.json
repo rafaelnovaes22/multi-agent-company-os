@@ -1,902 +1,472 @@
 [
   {
     "id": "g11-km-curator-01",
-    "desc": "Knowledge Management Curator: cenário 01 risco=low status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 1,
-      "blocked": false
+    "desc": "doc classificado, unico, com acesso e fresco -> curado",
+    "document": {
+      "category": "politica",
+      "owner": "ana",
+      "review_period_days": 180,
+      "age_days": 30
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "status": "curado",
+      "indexable": true,
+      "classified": true,
+      "dedup_resolved": true,
+      "access_applied": true,
+      "requires_human_review": false
     }
   },
   {
     "id": "g11-km-curator-02",
-    "desc": "Knowledge Management Curator: cenário 02 risco=medium status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g11-km-curator",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 2,
-      "blocked": false
+    "desc": "doc fresco sem PII -> curado",
+    "document": {
+      "category": "prd",
+      "owner": "bob",
+      "age_days": 10,
+      "review_period_days": 90
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g11-km-curator",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "status": "curado",
+      "indexable": true
     }
   },
   {
     "id": "g11-km-curator-03",
-    "desc": "Knowledge Management Curator: cenário 03 risco=high status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-km-curator",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 3,
-      "blocked": false
+    "desc": "confidencial COM controle de acesso -> curado",
+    "document": {
+      "category": "contrato",
+      "owner": "ana",
+      "sensitive": true,
+      "access_controlled": true,
+      "age_days": 5,
+      "review_period_days": 365
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g11-km-curator",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "status": "curado",
+      "access_applied": true,
+      "indexable": true
     }
   },
   {
     "id": "g11-km-curator-04",
-    "desc": "Knowledge Management Curator: cenário 04 risco=critical status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-km-curator",
-    "capabilities": [
-      "config_driven",
-      "knowledge_indexing"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 4,
-      "blocked": false
+    "desc": "duplicata arquivada -> dedup resolvido, curado",
+    "document": {
+      "category": "nota",
+      "owner": "ana",
+      "duplicate_of": "doc-1",
+      "archived": true,
+      "age_days": 2,
+      "review_period_days": 90
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g11-km-curator",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "status": "curado",
+      "dedup_resolved": true,
+      "indexable": true
     }
   },
   {
     "id": "g11-km-curator-05",
-    "desc": "Knowledge Management Curator: cenário 05 risco=low status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g11-km-curator",
-    "capabilities": [
-      "knowledge_indexing",
-      "human_loop_roi"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 5,
-      "blocked": false
+    "desc": "confidencial SEM controle -> acesso_exposto (pior)",
+    "document": {
+      "category": "contrato",
+      "owner": "ana",
+      "sensitive": true,
+      "access_controlled": false,
+      "age_days": 1,
+      "review_period_days": 365
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g11-km-curator",
-      "capabilities_any": [
-        "knowledge_indexing"
-      ]
+      "status": "acesso_exposto",
+      "access_applied": false,
+      "indexable": false,
+      "requires_human_review": true
     }
   },
   {
     "id": "g11-km-curator-06",
-    "desc": "Knowledge Management Curator: cenário 06 risco=medium status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-km-curator",
-    "capabilities": [
-      "human_loop_roi",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 6,
-      "blocked": false
+    "desc": "acesso_exposto precede nao_classificado",
+    "document": {
+      "sensitive": true,
+      "access_controlled": false
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g11-km-curator",
-      "capabilities_any": [
-        "human_loop_roi"
-      ]
+      "status": "acesso_exposto",
+      "access_applied": false
     }
   },
   {
     "id": "g11-km-curator-07",
-    "desc": "Knowledge Management Curator: cenário 07 risco=high status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 7,
-      "blocked": false
+    "desc": "acesso_exposto precede duplicata",
+    "document": {
+      "category": "x",
+      "owner": "y",
+      "sensitive": true,
+      "access_controlled": false,
+      "duplicate_of": "d1"
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "status": "acesso_exposto"
     }
   },
   {
     "id": "g11-km-curator-08",
-    "desc": "Knowledge Management Curator: cenário 08 risco=critical status=blocked",
-    "artifact_type": "km-curator.artifact",
-    "risk": "critical",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g11-km-curator",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 8,
-      "blocked": true
+    "desc": "PII confidencial exposto na busca geral",
+    "document": {
+      "category": "rh",
+      "owner": "ana",
+      "sensitive": true,
+      "access_controlled": false,
+      "age_days": 1,
+      "review_period_days": 180
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "blocked",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g11-km-curator",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "status": "acesso_exposto",
+      "indexable": false
     }
   },
   {
     "id": "g11-km-curator-09",
-    "desc": "Knowledge Management Curator: cenário 09 risco=low status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g11-km-curator",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 9,
-      "blocked": false
+    "desc": "sem categoria -> nao_classificado",
+    "document": {
+      "owner": "ana",
+      "age_days": 1,
+      "review_period_days": 90
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g11-km-curator",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "status": "nao_classificado",
+      "classified": false,
+      "indexable": false,
+      "requires_human_review": false
     }
   },
   {
     "id": "g11-km-curator-10",
-    "desc": "Knowledge Management Curator: cenário 10 risco=medium status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g11-km-curator",
-    "capabilities": [
-      "config_driven",
-      "knowledge_indexing"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 10,
-      "blocked": false
+    "desc": "sem dono -> nao_classificado",
+    "document": {
+      "category": "prd",
+      "age_days": 1,
+      "review_period_days": 90
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g11-km-curator",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "status": "nao_classificado",
+      "classified": false
     }
   },
   {
     "id": "g11-km-curator-11",
-    "desc": "Knowledge Management Curator: cenário 11 risco=high status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-km-curator",
-    "capabilities": [
-      "knowledge_indexing",
-      "human_loop_roi"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 11,
-      "blocked": false
+    "desc": "sem categoria nem dono -> nao_classificado",
+    "document": {
+      "age_days": 1,
+      "review_period_days": 90
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g11-km-curator",
-      "capabilities_any": [
-        "knowledge_indexing"
-      ]
+      "status": "nao_classificado",
+      "classified": false,
+      "indexable": false
     }
   },
   {
     "id": "g11-km-curator-12",
-    "desc": "Knowledge Management Curator: cenário 12 risco=critical status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-km-curator",
-    "capabilities": [
-      "human_loop_roi",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 12,
-      "blocked": false
+    "desc": "nao_classificado precede duplicata",
+    "document": {
+      "owner": "ana",
+      "duplicate_of": "d1"
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g11-km-curator",
-      "capabilities_any": [
-        "human_loop_roi"
-      ]
+      "status": "nao_classificado",
+      "classified": false
     }
   },
   {
     "id": "g11-km-curator-13",
-    "desc": "Knowledge Management Curator: cenário 13 risco=low status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 13,
-      "blocked": false
+    "desc": "nao_classificado precede vencido",
+    "document": {
+      "category": "x",
+      "age_days": 999,
+      "review_period_days": 30
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "status": "nao_classificado"
     }
   },
   {
     "id": "g11-km-curator-14",
-    "desc": "Knowledge Management Curator: cenário 14 risco=medium status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g11-km-curator",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 14,
-      "blocked": false
+    "desc": "duas versoes conflitantes (duplicata nao arquivada)",
+    "document": {
+      "category": "politica",
+      "owner": "ana",
+      "duplicate_of": "pol-v1",
+      "archived": false,
+      "age_days": 5,
+      "review_period_days": 180
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g11-km-curator",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "status": "duplicata_nao_resolvida",
+      "dedup_resolved": false,
+      "indexable": false,
+      "requires_human_review": true
     }
   },
   {
     "id": "g11-km-curator-15",
-    "desc": "Knowledge Management Curator: cenário 15 risco=high status=blocked",
-    "artifact_type": "km-curator.artifact",
-    "risk": "high",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g11-km-curator",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 15,
-      "blocked": true
+    "desc": "duplicata nao resolvida precede vencido",
+    "document": {
+      "category": "x",
+      "owner": "y",
+      "duplicate_of": "d1",
+      "archived": false,
+      "age_days": 999,
+      "review_period_days": 30
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "blocked",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g11-km-curator",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "status": "duplicata_nao_resolvida",
+      "dedup_resolved": false
     }
   },
   {
     "id": "g11-km-curator-16",
-    "desc": "Knowledge Management Curator: cenário 16 risco=critical status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-km-curator",
-    "capabilities": [
-      "config_driven",
-      "knowledge_indexing"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 16,
-      "blocked": false
+    "desc": "duplicata resolvida (archived) nao bloqueia",
+    "document": {
+      "category": "x",
+      "owner": "y",
+      "duplicate_of": "d1",
+      "archived": true,
+      "age_days": 5,
+      "review_period_days": 90
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g11-km-curator",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "status": "curado",
+      "dedup_resolved": true
     }
   },
   {
     "id": "g11-km-curator-17",
-    "desc": "Knowledge Management Curator: cenário 17 risco=low status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g11-km-curator",
-    "capabilities": [
-      "knowledge_indexing",
-      "human_loop_roi"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 17,
-      "blocked": false
+    "desc": "politica vencida -> flag owner review",
+    "document": {
+      "category": "politica",
+      "owner": "ana",
+      "age_days": 400,
+      "review_period_days": 365
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g11-km-curator",
-      "capabilities_any": [
-        "knowledge_indexing"
-      ]
+      "status": "vencido",
+      "stale": true,
+      "flag_owner_review": true,
+      "indexable": false
     }
   },
   {
     "id": "g11-km-curator-18",
-    "desc": "Knowledge Management Curator: cenário 18 risco=medium status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-km-curator",
-    "capabilities": [
-      "human_loop_roi",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 18,
-      "blocked": false
+    "desc": "doc dentro da data de revisao -> nao vencido",
+    "document": {
+      "category": "politica",
+      "owner": "ana",
+      "age_days": 100,
+      "review_period_days": 365
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g11-km-curator",
-      "capabilities_any": [
-        "human_loop_roi"
-      ]
+      "status": "curado",
+      "stale": false,
+      "flag_owner_review": false
     }
   },
   {
     "id": "g11-km-curator-19",
-    "desc": "Knowledge Management Curator: cenário 19 risco=high status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 19,
-      "blocked": false
+    "desc": "exatamente na data de revisao nao e vencido (>)",
+    "document": {
+      "category": "x",
+      "owner": "y",
+      "age_days": 180,
+      "review_period_days": 180
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "status": "curado",
+      "stale": false
     }
   },
   {
     "id": "g11-km-curator-20",
-    "desc": "Knowledge Management Curator: cenário 20 risco=critical status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-km-curator",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 20,
-      "blocked": false
+    "desc": "um dia alem da revisao -> vencido",
+    "document": {
+      "category": "x",
+      "owner": "y",
+      "age_days": 181,
+      "review_period_days": 180
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g11-km-curator",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "status": "vencido",
+      "stale": true
     }
   },
   {
     "id": "g11-km-curator-21",
-    "desc": "Knowledge Management Curator: cenário 21 risco=low status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g11-km-curator",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 21,
-      "blocked": false
+    "desc": "sem review_period -> nunca vencido",
+    "document": {
+      "category": "x",
+      "owner": "y",
+      "age_days": 9999
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g11-km-curator",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "status": "curado",
+      "stale": false
     }
   },
   {
     "id": "g11-km-curator-22",
-    "desc": "Knowledge Management Curator: cenário 22 risco=medium status=blocked",
-    "artifact_type": "km-curator.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g11-km-curator",
-    "capabilities": [
-      "config_driven",
-      "knowledge_indexing"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 22,
-      "blocked": true
+    "desc": "confidencial controlado e vencido -> vencido (acesso ok)",
+    "document": {
+      "category": "contrato",
+      "owner": "ana",
+      "sensitive": true,
+      "access_controlled": true,
+      "age_days": 400,
+      "review_period_days": 180
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g11-km-curator",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "status": "vencido",
+      "access_applied": true,
+      "stale": true
     }
   },
   {
     "id": "g11-km-curator-23",
-    "desc": "Knowledge Management Curator: cenário 23 risco=high status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-km-curator",
-    "capabilities": [
-      "knowledge_indexing",
-      "human_loop_roi"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 23,
-      "blocked": false
+    "desc": "nao sensivel dispensa controle de acesso",
+    "document": {
+      "category": "blog",
+      "owner": "ana",
+      "sensitive": false,
+      "age_days": 10,
+      "review_period_days": 365
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g11-km-curator",
-      "capabilities_any": [
-        "knowledge_indexing"
-      ]
+      "status": "curado",
+      "access_applied": true
     }
   },
   {
     "id": "g11-km-curator-24",
-    "desc": "Knowledge Management Curator: cenário 24 risco=critical status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-km-curator",
-    "capabilities": [
-      "human_loop_roi",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 24,
-      "blocked": false
+    "desc": "indexable so quando curado",
+    "document": {
+      "category": "x",
+      "owner": "y",
+      "age_days": 10,
+      "review_period_days": 90
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g11-km-curator",
-      "capabilities_any": [
-        "human_loop_roi"
-      ]
+      "indexable": true,
+      "status": "curado"
     }
   },
   {
     "id": "g11-km-curator-25",
-    "desc": "Knowledge Management Curator: cenário 25 risco=low status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 25,
-      "blocked": false
+    "desc": "vencido nao e indexavel como canonico",
+    "document": {
+      "category": "x",
+      "owner": "y",
+      "age_days": 500,
+      "review_period_days": 90
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "indexable": false,
+      "status": "vencido"
     }
   },
   {
     "id": "g11-km-curator-26",
-    "desc": "Knowledge Management Curator: cenário 26 risco=medium status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g11-km-curator",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 26,
-      "blocked": false
+    "desc": "requires_human_review so em exposto/duplicata",
+    "document": {
+      "category": "x",
+      "owner": "y",
+      "duplicate_of": "d",
+      "archived": false
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g11-km-curator",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "requires_human_review": true,
+      "status": "duplicata_nao_resolvida"
     }
   },
   {
     "id": "g11-km-curator-27",
-    "desc": "Knowledge Management Curator: cenário 27 risco=high status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-km-curator",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 27,
-      "blocked": false
+    "desc": "vencido nao exige revisao humana do curador",
+    "document": {
+      "category": "x",
+      "owner": "y",
+      "age_days": 500,
+      "review_period_days": 90
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g11-km-curator",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "requires_human_review": false,
+      "status": "vencido"
     }
   },
   {
     "id": "g11-km-curator-28",
-    "desc": "Knowledge Management Curator: cenário 28 risco=critical status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-km-curator",
-    "capabilities": [
-      "config_driven",
-      "knowledge_indexing"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 28,
-      "blocked": false
+    "desc": "nao_classificado nao exige revisao humana",
+    "document": {
+      "age_days": 1,
+      "review_period_days": 90
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g11-km-curator",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "requires_human_review": false,
+      "status": "nao_classificado"
     }
   },
   {
     "id": "g11-km-curator-29",
-    "desc": "Knowledge Management Curator: cenário 29 risco=low status=blocked",
-    "artifact_type": "km-curator.artifact",
-    "risk": "low",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g11-km-curator",
-    "capabilities": [
-      "knowledge_indexing",
-      "human_loop_roi"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 29,
-      "blocked": true
+    "desc": "acesso_exposto exige revisao humana",
+    "document": {
+      "category": "x",
+      "owner": "y",
+      "sensitive": true,
+      "access_controlled": false
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "blocked",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g11-km-curator",
-      "capabilities_any": [
-        "knowledge_indexing"
-      ]
+      "requires_human_review": true
     }
   },
   {
     "id": "g11-km-curator-30",
-    "desc": "Knowledge Management Curator: cenário 30 risco=medium status=ready",
-    "artifact_type": "km-curator.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g11-km-curator",
-    "capabilities": [
-      "human_loop_roi",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 30,
-      "blocked": false
+    "desc": "doc completo classificado fresco curado",
+    "document": {
+      "category": "post-mortem",
+      "owner": "carol",
+      "age_days": 3,
+      "review_period_days": 180,
+      "sensitive": false
     },
     "expected": {
-      "agent_id": "g11-km-curator",
-      "handler_kind": "spec_driven",
-      "artifact_type": "km-curator.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g11-km-curator",
-      "capabilities_any": [
-        "human_loop_roi"
-      ]
+      "status": "curado",
+      "classified": true,
+      "indexable": true
+    }
+  },
+  {
+    "id": "g11-km-curator-31",
+    "desc": "dedup_resolved True quando nao duplicata",
+    "document": {
+      "category": "x",
+      "owner": "y",
+      "age_days": 5,
+      "review_period_days": 90
+    },
+    "expected": {
+      "dedup_resolved": true
+    }
+  },
+  {
+    "id": "g11-km-curator-32",
+    "desc": "stale flag separado de classified",
+    "document": {
+      "category": "x",
+      "owner": "y",
+      "age_days": 500,
+      "review_period_days": 100
+    },
+    "expected": {
+      "classified": true,
+      "stale": true,
+      "status": "vencido"
     }
   }
 ]

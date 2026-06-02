@@ -122,3 +122,46 @@ def interview_schedule(state, *, llm, store, spec):
         "scorecards_complete_pct": round(decisions_ready / len(candidates) * 100, 1) if candidates else 100.0,
         "status": status,
     }, f"Voce e {spec['id']}: {scheduled}/{len(candidates)} candidatos agendados, status {status}.", llm)
+
+
+# ---------------------------------------------------------------------------
+# Burn-down R3-A final - g11-km-curator: curadoria deterministica de conhecimento.
+# Precedencia de bloqueio: acesso exposto (confidencial sem controle) > nao classificado
+# > duplicata nao resolvida > vencido (flag de freshness) > curado. C2: conhecimento
+# canonico, classificado, fresco, com governanca de acesso
+# (DELIVERED = artifact.classified && dedup_resolved && access_policy.applied).
+# ---------------------------------------------------------------------------
+@register("knowledge_curation")
+def knowledge_curation(state, *, llm, store, spec):
+    d = state["task"].get("document", {}) or {}
+    category = d.get("category")
+    owner = d.get("owner")
+    classified = bool(category and owner)
+    duplicate_of = d.get("duplicate_of")
+    archived = bool(d.get("archived", False))
+    dedup_resolved = (duplicate_of is None) or archived
+    sensitive = bool(d.get("sensitive", False))
+    access_controlled = bool(d.get("access_controlled", False))
+    access_applied = (not sensitive) or access_controlled
+    age = float(d.get("age_days", 0) or 0)
+    review_period = float(d.get("review_period_days", 0) or 0)
+    stale = review_period > 0 and age > review_period
+
+    if not access_applied:
+        status = "acesso_exposto"
+    elif not classified:
+        status = "nao_classificado"
+    elif not dedup_resolved:
+        status = "duplicata_nao_resolvida"
+    elif stale:
+        status = "vencido"
+    else:
+        status = "curado"
+
+    indexable = status == "curado"
+    return _out(spec, state, {
+        "agent_id": spec["id"], "classified": classified, "dedup_resolved": dedup_resolved,
+        "access_applied": access_applied, "stale": stale, "flag_owner_review": stale,
+        "status": status, "indexable": indexable,
+        "requires_human_review": status in ("acesso_exposto", "duplicata_nao_resolvida"),
+    }, f"Voce e {spec['id']}: documento {status}.", llm)

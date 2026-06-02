@@ -317,7 +317,10 @@ def _catalog_agent_output(state, *, llm, spec, handler_kind: str):
             "rationale": content,
             "by": spec["id"],
         },
-        "cost_tokens": _tokens(content),
+        # Custo de inferência = ENTRADA (prompt) + SAÍDA (content). Com o prompt rico
+        # (task + C2 + contexto), os tokens de entrada deixaram de ser desprezíveis e
+        # precisam entrar na contabilidade (C6 / g10-token-cost-accountant).
+        "cost_tokens": _tokens(prompt) + _tokens(content),
         "citations": ["spec:" + spec["id"], "catalog:" + str(spec.get("guild", "?"))],
     }
 

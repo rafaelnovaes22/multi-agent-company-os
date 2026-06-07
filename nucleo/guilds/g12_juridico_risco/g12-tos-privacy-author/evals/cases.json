@@ -1,902 +1,1079 @@
 [
   {
-    "id": "g12-tos-privacy-author-01",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 01 risco=low status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 1,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-01",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [
+        "cadastro"
+      ],
+      "legal_bases": {
+        "cadastro": "execucao_contrato"
+      },
+      "version_bumped": false,
+      "changelog_published": false,
+      "product_consistent": true,
+      "material_change": true,
+      "reconsent_triggered": true,
+      "approved_taste_gate": true,
+      "published": true,
+      "doc_version": "v1.1",
+      "owner_team": "privacy"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 1,
+      "missing_legal_bases": [],
+      "product_consistent": true,
+      "version_bumped": false,
+      "changelog_published": false,
+      "material_change": true,
+      "reconsent_triggered": true,
+      "approved_taste_gate": true,
+      "lgpd_compliant": false,
+      "status": "versioning_missing",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-tos-privacy-author-02",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 02 risco=medium status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g12-tos-privacy-author",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 2,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-02",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [
+        "cadastro",
+        "analytics"
+      ],
+      "legal_bases": {
+        "cadastro": "execucao_contrato",
+        "analytics": "legitimo_interesse"
+      },
+      "version_bumped": true,
+      "changelog_published": true,
+      "product_consistent": false,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "published": true,
+      "doc_version": "v1.2",
+      "owner_team": "product"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g12-tos-privacy-author",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 2,
+      "missing_legal_bases": [],
+      "product_consistent": false,
+      "version_bumped": true,
+      "changelog_published": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "lgpd_compliant": false,
+      "status": "product_mismatch",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-tos-privacy-author-03",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 03 risco=high status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-tos-privacy-author",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 3,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-03",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [
+        "pagamento",
+        "suporte"
+      ],
+      "legal_bases": {
+        "pagamento": "execucao_contrato"
+      },
+      "version_bumped": true,
+      "changelog_published": true,
+      "product_consistent": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": false,
+      "published": true,
+      "doc_version": "v1.3",
+      "owner_team": "security"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g12-tos-privacy-author",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 2,
+      "missing_legal_bases": [
+        "suporte"
+      ],
+      "product_consistent": true,
+      "version_bumped": true,
+      "changelog_published": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": false,
+      "lgpd_compliant": false,
+      "status": "missing_legal_basis",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-tos-privacy-author-04",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 04 risco=critical status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-tos-privacy-author",
-    "capabilities": [
-      "config_driven",
-      "legal_review"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 4,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-04",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [
+        "marketing",
+        "analytics",
+        "suporte"
+      ],
+      "legal_bases": {
+        "marketing": "execucao_contrato",
+        "analytics": "legitimo_interesse",
+        "suporte": "consentimento"
+      },
+      "version_bumped": true,
+      "changelog_published": true,
+      "product_consistent": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "published": false,
+      "doc_version": "v1.4",
+      "owner_team": "legal"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g12-tos-privacy-author",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 3,
+      "missing_legal_bases": [],
+      "product_consistent": true,
+      "version_bumped": true,
+      "changelog_published": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "lgpd_compliant": true,
+      "status": "ready_to_publish",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-tos-privacy-author-05",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 05 risco=low status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g12-tos-privacy-author",
-    "capabilities": [
-      "legal_review",
-      "risk_register"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 5,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-05",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [],
+      "legal_bases": {},
+      "version_bumped": true,
+      "changelog_published": true,
+      "product_consistent": true,
+      "material_change": true,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "published": true,
+      "doc_version": "v1.5",
+      "owner_team": "privacy"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g12-tos-privacy-author",
-      "capabilities_any": [
-        "legal_review"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 0,
+      "missing_legal_bases": [],
+      "product_consistent": true,
+      "version_bumped": true,
+      "changelog_published": true,
+      "material_change": true,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "lgpd_compliant": false,
+      "status": "reconsent_missing",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-tos-privacy-author-06",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 06 risco=medium status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-tos-privacy-author",
-    "capabilities": [
-      "risk_register",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 6,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-06",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [
+        "cadastro"
+      ],
+      "legal_bases": {
+        "cadastro": "execucao_contrato"
+      },
+      "version_bumped": true,
+      "changelog_published": true,
+      "product_consistent": true,
+      "material_change": true,
+      "reconsent_triggered": true,
+      "approved_taste_gate": true,
+      "published": true,
+      "doc_version": "v1.6",
+      "owner_team": "product"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g12-tos-privacy-author",
-      "capabilities_any": [
-        "risk_register"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 1,
+      "missing_legal_bases": [],
+      "product_consistent": true,
+      "version_bumped": true,
+      "changelog_published": true,
+      "material_change": true,
+      "reconsent_triggered": true,
+      "approved_taste_gate": true,
+      "lgpd_compliant": true,
+      "status": "published",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-tos-privacy-author-07",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 07 risco=high status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 7,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-07",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [
+        "cadastro",
+        "analytics"
+      ],
+      "legal_bases": {
+        "cadastro": "execucao_contrato",
+        "analytics": "legitimo_interesse"
+      },
+      "version_bumped": false,
+      "changelog_published": true,
+      "product_consistent": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "published": true,
+      "doc_version": "v1.7",
+      "owner_team": "security"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 2,
+      "missing_legal_bases": [],
+      "product_consistent": true,
+      "version_bumped": false,
+      "changelog_published": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "lgpd_compliant": false,
+      "status": "versioning_missing",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-tos-privacy-author-08",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 08 risco=critical status=blocked",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "critical",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g12-tos-privacy-author",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 8,
-      "blocked": true
+    "id": "g12-tos-privacy-author-domain-08",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [
+        "pagamento",
+        "suporte"
+      ],
+      "legal_bases": {
+        "pagamento": "execucao_contrato",
+        "suporte": "legitimo_interesse"
+      },
+      "version_bumped": true,
+      "changelog_published": false,
+      "product_consistent": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "published": true,
+      "doc_version": "v1.8",
+      "owner_team": "legal"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "blocked",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g12-tos-privacy-author",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 2,
+      "missing_legal_bases": [],
+      "product_consistent": true,
+      "version_bumped": true,
+      "changelog_published": false,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "lgpd_compliant": false,
+      "status": "versioning_missing",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-tos-privacy-author-09",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 09 risco=low status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g12-tos-privacy-author",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 9,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-09",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [
+        "marketing",
+        "analytics",
+        "suporte"
+      ],
+      "legal_bases": {
+        "marketing": "execucao_contrato",
+        "analytics": "legitimo_interesse",
+        "suporte": "consentimento"
+      },
+      "version_bumped": true,
+      "changelog_published": true,
+      "product_consistent": true,
+      "material_change": true,
+      "reconsent_triggered": true,
+      "approved_taste_gate": true,
+      "published": false,
+      "doc_version": "v1.9",
+      "owner_team": "privacy"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g12-tos-privacy-author",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 3,
+      "missing_legal_bases": [],
+      "product_consistent": true,
+      "version_bumped": true,
+      "changelog_published": true,
+      "material_change": true,
+      "reconsent_triggered": true,
+      "approved_taste_gate": true,
+      "lgpd_compliant": true,
+      "status": "ready_to_publish",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-tos-privacy-author-10",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 10 risco=medium status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g12-tos-privacy-author",
-    "capabilities": [
-      "config_driven",
-      "legal_review"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 10,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-10",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [],
+      "legal_bases": {},
+      "version_bumped": true,
+      "changelog_published": true,
+      "product_consistent": false,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "published": true,
+      "doc_version": "v2.0",
+      "owner_team": "product"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g12-tos-privacy-author",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 0,
+      "missing_legal_bases": [],
+      "product_consistent": false,
+      "version_bumped": true,
+      "changelog_published": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "lgpd_compliant": false,
+      "status": "product_mismatch",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-tos-privacy-author-11",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 11 risco=high status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-tos-privacy-author",
-    "capabilities": [
-      "legal_review",
-      "risk_register"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 11,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-11",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [
+        "cadastro"
+      ],
+      "legal_bases": {
+        "cadastro": "execucao_contrato"
+      },
+      "version_bumped": true,
+      "changelog_published": true,
+      "product_consistent": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "published": true,
+      "doc_version": "v2.1",
+      "owner_team": "security"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g12-tos-privacy-author",
-      "capabilities_any": [
-        "legal_review"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 1,
+      "missing_legal_bases": [],
+      "product_consistent": true,
+      "version_bumped": true,
+      "changelog_published": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "lgpd_compliant": true,
+      "status": "published",
+      "requires_human_review": false
     }
   },
   {
-    "id": "g12-tos-privacy-author-12",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 12 risco=critical status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-tos-privacy-author",
-    "capabilities": [
-      "risk_register",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 12,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-12",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [
+        "cadastro",
+        "analytics"
+      ],
+      "legal_bases": {
+        "cadastro": "execucao_contrato",
+        "analytics": "legitimo_interesse"
+      },
+      "version_bumped": true,
+      "changelog_published": true,
+      "product_consistent": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": false,
+      "published": true,
+      "doc_version": "v2.2",
+      "owner_team": "legal"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g12-tos-privacy-author",
-      "capabilities_any": [
-        "risk_register"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 2,
+      "missing_legal_bases": [],
+      "product_consistent": true,
+      "version_bumped": true,
+      "changelog_published": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": false,
+      "lgpd_compliant": false,
+      "status": "taste_gate_pending",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-tos-privacy-author-13",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 13 risco=low status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 13,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-13",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [
+        "pagamento",
+        "suporte"
+      ],
+      "legal_bases": {
+        "pagamento": "execucao_contrato"
+      },
+      "version_bumped": false,
+      "changelog_published": true,
+      "product_consistent": true,
+      "material_change": true,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "published": true,
+      "doc_version": "v2.3",
+      "owner_team": "privacy"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 2,
+      "missing_legal_bases": [
+        "suporte"
+      ],
+      "product_consistent": true,
+      "version_bumped": false,
+      "changelog_published": true,
+      "material_change": true,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "lgpd_compliant": false,
+      "status": "missing_legal_basis",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-tos-privacy-author-14",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 14 risco=medium status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g12-tos-privacy-author",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 14,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-14",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [
+        "marketing",
+        "analytics",
+        "suporte"
+      ],
+      "legal_bases": {
+        "marketing": "execucao_contrato",
+        "analytics": "legitimo_interesse",
+        "suporte": "consentimento"
+      },
+      "version_bumped": true,
+      "changelog_published": true,
+      "product_consistent": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "published": false,
+      "doc_version": "v2.4",
+      "owner_team": "product"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g12-tos-privacy-author",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 3,
+      "missing_legal_bases": [],
+      "product_consistent": true,
+      "version_bumped": true,
+      "changelog_published": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "lgpd_compliant": true,
+      "status": "ready_to_publish",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-tos-privacy-author-15",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 15 risco=high status=blocked",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "high",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g12-tos-privacy-author",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 15,
-      "blocked": true
+    "id": "g12-tos-privacy-author-domain-15",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [],
+      "legal_bases": {},
+      "version_bumped": true,
+      "changelog_published": false,
+      "product_consistent": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "published": true,
+      "doc_version": "v2.5",
+      "owner_team": "security"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "blocked",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g12-tos-privacy-author",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 0,
+      "missing_legal_bases": [],
+      "product_consistent": true,
+      "version_bumped": true,
+      "changelog_published": false,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "lgpd_compliant": false,
+      "status": "versioning_missing",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-tos-privacy-author-16",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 16 risco=critical status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-tos-privacy-author",
-    "capabilities": [
-      "config_driven",
-      "legal_review"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 16,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-16",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [
+        "cadastro"
+      ],
+      "legal_bases": {
+        "cadastro": "execucao_contrato"
+      },
+      "version_bumped": true,
+      "changelog_published": true,
+      "product_consistent": true,
+      "material_change": true,
+      "reconsent_triggered": true,
+      "approved_taste_gate": true,
+      "published": true,
+      "doc_version": "v2.6",
+      "owner_team": "legal"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g12-tos-privacy-author",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 1,
+      "missing_legal_bases": [],
+      "product_consistent": true,
+      "version_bumped": true,
+      "changelog_published": true,
+      "material_change": true,
+      "reconsent_triggered": true,
+      "approved_taste_gate": true,
+      "lgpd_compliant": true,
+      "status": "published",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-tos-privacy-author-17",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 17 risco=low status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g12-tos-privacy-author",
-    "capabilities": [
-      "legal_review",
-      "risk_register"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 17,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-17",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [
+        "cadastro",
+        "analytics"
+      ],
+      "legal_bases": {
+        "cadastro": "execucao_contrato",
+        "analytics": "legitimo_interesse"
+      },
+      "version_bumped": true,
+      "changelog_published": true,
+      "product_consistent": true,
+      "material_change": true,
+      "reconsent_triggered": true,
+      "approved_taste_gate": true,
+      "published": true,
+      "doc_version": "v2.7",
+      "owner_team": "privacy"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g12-tos-privacy-author",
-      "capabilities_any": [
-        "legal_review"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 2,
+      "missing_legal_bases": [],
+      "product_consistent": true,
+      "version_bumped": true,
+      "changelog_published": true,
+      "material_change": true,
+      "reconsent_triggered": true,
+      "approved_taste_gate": true,
+      "lgpd_compliant": true,
+      "status": "published",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-tos-privacy-author-18",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 18 risco=medium status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-tos-privacy-author",
-    "capabilities": [
-      "risk_register",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 18,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-18",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [
+        "pagamento",
+        "suporte"
+      ],
+      "legal_bases": {
+        "pagamento": "execucao_contrato",
+        "suporte": "legitimo_interesse"
+      },
+      "version_bumped": true,
+      "changelog_published": true,
+      "product_consistent": false,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "published": true,
+      "doc_version": "v2.8",
+      "owner_team": "product"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g12-tos-privacy-author",
-      "capabilities_any": [
-        "risk_register"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 2,
+      "missing_legal_bases": [],
+      "product_consistent": false,
+      "version_bumped": true,
+      "changelog_published": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "lgpd_compliant": false,
+      "status": "product_mismatch",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-tos-privacy-author-19",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 19 risco=high status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 19,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-19",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [
+        "marketing",
+        "analytics",
+        "suporte"
+      ],
+      "legal_bases": {
+        "marketing": "execucao_contrato",
+        "analytics": "legitimo_interesse",
+        "suporte": "consentimento"
+      },
+      "version_bumped": false,
+      "changelog_published": true,
+      "product_consistent": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "published": false,
+      "doc_version": "v2.9",
+      "owner_team": "security"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 3,
+      "missing_legal_bases": [],
+      "product_consistent": true,
+      "version_bumped": false,
+      "changelog_published": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "lgpd_compliant": false,
+      "status": "versioning_missing",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-tos-privacy-author-20",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 20 risco=critical status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-tos-privacy-author",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 20,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-20",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [],
+      "legal_bases": {},
+      "version_bumped": true,
+      "changelog_published": true,
+      "product_consistent": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "published": true,
+      "doc_version": "v3.0",
+      "owner_team": "legal"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g12-tos-privacy-author",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 0,
+      "missing_legal_bases": [],
+      "product_consistent": true,
+      "version_bumped": true,
+      "changelog_published": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "lgpd_compliant": true,
+      "status": "published",
+      "requires_human_review": false
     }
   },
   {
-    "id": "g12-tos-privacy-author-21",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 21 risco=low status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g12-tos-privacy-author",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 21,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-21",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [
+        "cadastro"
+      ],
+      "legal_bases": {
+        "cadastro": "execucao_contrato"
+      },
+      "version_bumped": true,
+      "changelog_published": true,
+      "product_consistent": true,
+      "material_change": true,
+      "reconsent_triggered": false,
+      "approved_taste_gate": false,
+      "published": true,
+      "doc_version": "v3.1",
+      "owner_team": "privacy"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g12-tos-privacy-author",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 1,
+      "missing_legal_bases": [],
+      "product_consistent": true,
+      "version_bumped": true,
+      "changelog_published": true,
+      "material_change": true,
+      "reconsent_triggered": false,
+      "approved_taste_gate": false,
+      "lgpd_compliant": false,
+      "status": "reconsent_missing",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-tos-privacy-author-22",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 22 risco=medium status=blocked",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g12-tos-privacy-author",
-    "capabilities": [
-      "config_driven",
-      "legal_review"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 22,
-      "blocked": true
+    "id": "g12-tos-privacy-author-domain-22",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [
+        "cadastro",
+        "analytics"
+      ],
+      "legal_bases": {
+        "cadastro": "execucao_contrato",
+        "analytics": "legitimo_interesse"
+      },
+      "version_bumped": true,
+      "changelog_published": false,
+      "product_consistent": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "published": true,
+      "doc_version": "v3.2",
+      "owner_team": "product"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g12-tos-privacy-author",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 2,
+      "missing_legal_bases": [],
+      "product_consistent": true,
+      "version_bumped": true,
+      "changelog_published": false,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "lgpd_compliant": false,
+      "status": "versioning_missing",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-tos-privacy-author-23",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 23 risco=high status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-tos-privacy-author",
-    "capabilities": [
-      "legal_review",
-      "risk_register"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 23,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-23",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [
+        "pagamento",
+        "suporte"
+      ],
+      "legal_bases": {
+        "pagamento": "execucao_contrato"
+      },
+      "version_bumped": true,
+      "changelog_published": true,
+      "product_consistent": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "published": true,
+      "doc_version": "v3.3",
+      "owner_team": "security"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g12-tos-privacy-author",
-      "capabilities_any": [
-        "legal_review"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 2,
+      "missing_legal_bases": [
+        "suporte"
+      ],
+      "product_consistent": true,
+      "version_bumped": true,
+      "changelog_published": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "lgpd_compliant": false,
+      "status": "missing_legal_basis",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-tos-privacy-author-24",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 24 risco=critical status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-tos-privacy-author",
-    "capabilities": [
-      "risk_register",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 24,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-24",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [
+        "marketing",
+        "analytics",
+        "suporte"
+      ],
+      "legal_bases": {
+        "marketing": "execucao_contrato",
+        "analytics": "legitimo_interesse",
+        "suporte": "consentimento"
+      },
+      "version_bumped": true,
+      "changelog_published": true,
+      "product_consistent": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "published": false,
+      "doc_version": "v3.4",
+      "owner_team": "legal"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g12-tos-privacy-author",
-      "capabilities_any": [
-        "risk_register"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 3,
+      "missing_legal_bases": [],
+      "product_consistent": true,
+      "version_bumped": true,
+      "changelog_published": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "lgpd_compliant": true,
+      "status": "ready_to_publish",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-tos-privacy-author-25",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 25 risco=low status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 25,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-25",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [],
+      "legal_bases": {},
+      "version_bumped": false,
+      "changelog_published": true,
+      "product_consistent": true,
+      "material_change": true,
+      "reconsent_triggered": true,
+      "approved_taste_gate": true,
+      "published": true,
+      "doc_version": "v3.5",
+      "owner_team": "privacy"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 0,
+      "missing_legal_bases": [],
+      "product_consistent": true,
+      "version_bumped": false,
+      "changelog_published": true,
+      "material_change": true,
+      "reconsent_triggered": true,
+      "approved_taste_gate": true,
+      "lgpd_compliant": false,
+      "status": "versioning_missing",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-tos-privacy-author-26",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 26 risco=medium status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g12-tos-privacy-author",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 26,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-26",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [
+        "cadastro"
+      ],
+      "legal_bases": {
+        "cadastro": "execucao_contrato"
+      },
+      "version_bumped": true,
+      "changelog_published": true,
+      "product_consistent": true,
+      "material_change": true,
+      "reconsent_triggered": true,
+      "approved_taste_gate": true,
+      "published": true,
+      "doc_version": "v3.6",
+      "owner_team": "product"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g12-tos-privacy-author",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 1,
+      "missing_legal_bases": [],
+      "product_consistent": true,
+      "version_bumped": true,
+      "changelog_published": true,
+      "material_change": true,
+      "reconsent_triggered": true,
+      "approved_taste_gate": true,
+      "lgpd_compliant": true,
+      "status": "published",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-tos-privacy-author-27",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 27 risco=high status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-tos-privacy-author",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 27,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-27",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [
+        "cadastro",
+        "analytics"
+      ],
+      "legal_bases": {
+        "cadastro": "execucao_contrato",
+        "analytics": "legitimo_interesse"
+      },
+      "version_bumped": true,
+      "changelog_published": true,
+      "product_consistent": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "published": true,
+      "doc_version": "v3.7",
+      "owner_team": "security"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g12-tos-privacy-author",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 2,
+      "missing_legal_bases": [],
+      "product_consistent": true,
+      "version_bumped": true,
+      "changelog_published": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "lgpd_compliant": true,
+      "status": "published",
+      "requires_human_review": false
     }
   },
   {
-    "id": "g12-tos-privacy-author-28",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 28 risco=critical status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-tos-privacy-author",
-    "capabilities": [
-      "config_driven",
-      "legal_review"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 28,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-28",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [
+        "pagamento",
+        "suporte"
+      ],
+      "legal_bases": {
+        "pagamento": "execucao_contrato",
+        "suporte": "legitimo_interesse"
+      },
+      "version_bumped": true,
+      "changelog_published": true,
+      "product_consistent": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "published": true,
+      "doc_version": "v3.8",
+      "owner_team": "legal"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g12-tos-privacy-author",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 2,
+      "missing_legal_bases": [],
+      "product_consistent": true,
+      "version_bumped": true,
+      "changelog_published": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "lgpd_compliant": true,
+      "status": "published",
+      "requires_human_review": false
     }
   },
   {
-    "id": "g12-tos-privacy-author-29",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 29 risco=low status=blocked",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "low",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g12-tos-privacy-author",
-    "capabilities": [
-      "legal_review",
-      "risk_register"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 29,
-      "blocked": true
+    "id": "g12-tos-privacy-author-domain-29",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [
+        "marketing",
+        "analytics",
+        "suporte"
+      ],
+      "legal_bases": {
+        "marketing": "execucao_contrato",
+        "analytics": "legitimo_interesse",
+        "suporte": "consentimento"
+      },
+      "version_bumped": true,
+      "changelog_published": false,
+      "product_consistent": true,
+      "material_change": true,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "published": false,
+      "doc_version": "v3.9",
+      "owner_team": "privacy"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "blocked",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g12-tos-privacy-author",
-      "capabilities_any": [
-        "legal_review"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 3,
+      "missing_legal_bases": [],
+      "product_consistent": true,
+      "version_bumped": true,
+      "changelog_published": false,
+      "material_change": true,
+      "reconsent_triggered": false,
+      "approved_taste_gate": true,
+      "lgpd_compliant": false,
+      "status": "versioning_missing",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-tos-privacy-author-30",
-    "desc": "Autor de Termos de Uso e Privacidade: cenário 30 risco=medium status=ready",
-    "artifact_type": "tos-privacy-author.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-tos-privacy-author",
-    "capabilities": [
-      "risk_register",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 30,
-      "blocked": false
+    "id": "g12-tos-privacy-author-domain-30",
+    "desc": "tos/privacy varied domain eval",
+    "legal_doc": {
+      "dataflows": [],
+      "legal_bases": {},
+      "version_bumped": true,
+      "changelog_published": true,
+      "product_consistent": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": false,
+      "published": true,
+      "doc_version": "v4.0",
+      "owner_team": "product"
     },
     "expected": {
-      "agent_id": "g12-tos-privacy-author",
-      "handler_kind": "guardian_check",
-      "artifact_type": "tos-privacy-author.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g12-tos-privacy-author",
-      "capabilities_any": [
-        "risk_register"
-      ]
+      "handler_kind": "tos_privacy_doc_review",
+      "dataflow_count": 0,
+      "missing_legal_bases": [],
+      "product_consistent": true,
+      "version_bumped": true,
+      "changelog_published": true,
+      "material_change": false,
+      "reconsent_triggered": false,
+      "approved_taste_gate": false,
+      "lgpd_compliant": false,
+      "status": "taste_gate_pending",
+      "requires_human_review": true
     }
   }
 ]

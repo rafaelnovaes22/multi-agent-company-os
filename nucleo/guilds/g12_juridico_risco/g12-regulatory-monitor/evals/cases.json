@@ -1,902 +1,812 @@
 [
   {
-    "id": "g12-regulatory-monitor-01",
-    "desc": "Monitor Regulatório: cenário 01 risco=low status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 1,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-01",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "ANPD",
+      "applies_to_company": false,
+      "impact": "none",
+      "days_to_deadline": null,
+      "action_owner": null,
+      "action": null,
+      "false_positive_count": 0,
+      "notice_id": "notice-01"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": false,
+      "impact": "none",
+      "impact_assessed": true,
+      "actionable": false,
+      "creates_task": false,
+      "overdue": false,
+      "severity": "low",
+      "status": "monitor_only",
+      "requires_human_review": false
     }
   },
   {
-    "id": "g12-regulatory-monitor-02",
-    "desc": "Monitor Regulatório: cenário 02 risco=medium status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g12-regulatory-monitor",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 2,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-02",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "BACEN",
+      "applies_to_company": true,
+      "impact": "low",
+      "days_to_deadline": 45,
+      "action_owner": "Legal DRI",
+      "action": "avaliar impacto #02",
+      "false_positive_count": 1,
+      "notice_id": "notice-02"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g12-regulatory-monitor",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": true,
+      "impact": "low",
+      "impact_assessed": true,
+      "actionable": false,
+      "creates_task": false,
+      "overdue": false,
+      "severity": "low",
+      "status": "needs_action_plan",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-regulatory-monitor-03",
-    "desc": "Monitor Regulatório: cenário 03 risco=high status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-regulatory-monitor",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 3,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-03",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "ANPD",
+      "applies_to_company": true,
+      "impact": "medium",
+      "days_to_deadline": 20,
+      "action_owner": "Legal DRI",
+      "action": "abrir tarefa #03",
+      "false_positive_count": 0,
+      "notice_id": "notice-03"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g12-regulatory-monitor",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": true,
+      "impact": "medium",
+      "impact_assessed": true,
+      "actionable": true,
+      "creates_task": true,
+      "overdue": false,
+      "severity": "medium",
+      "status": "action_required",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-regulatory-monitor-04",
-    "desc": "Monitor Regulatório: cenário 04 risco=critical status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-regulatory-monitor",
-    "capabilities": [
-      "config_driven",
-      "legal_review"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 4,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-04",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "ANPD",
+      "applies_to_company": true,
+      "impact": "high",
+      "days_to_deadline": 20,
+      "action_owner": "Legal DRI",
+      "action": "abrir tarefa #04",
+      "false_positive_count": 1,
+      "notice_id": "notice-04"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g12-regulatory-monitor",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": true,
+      "impact": "high",
+      "impact_assessed": true,
+      "actionable": true,
+      "creates_task": true,
+      "overdue": false,
+      "severity": "critical",
+      "status": "action_required",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-regulatory-monitor-05",
-    "desc": "Monitor Regulatório: cenário 05 risco=low status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g12-regulatory-monitor",
-    "capabilities": [
-      "legal_review",
-      "risk_register"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 5,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-05",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "regulador_setorial",
+      "applies_to_company": false,
+      "impact": "none",
+      "days_to_deadline": 90,
+      "action_owner": "Legal DRI",
+      "action": "avaliar impacto #05",
+      "false_positive_count": 3,
+      "notice_id": "notice-05"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g12-regulatory-monitor",
-      "capabilities_any": [
-        "legal_review"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": false,
+      "impact": "none",
+      "impact_assessed": true,
+      "actionable": false,
+      "creates_task": false,
+      "overdue": false,
+      "severity": "low",
+      "status": "noise_suppressed",
+      "requires_human_review": false
     }
   },
   {
-    "id": "g12-regulatory-monitor-06",
-    "desc": "Monitor Regulatório: cenário 06 risco=medium status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-regulatory-monitor",
-    "capabilities": [
-      "risk_register",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 6,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-06",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "blog_aleatorio",
+      "applies_to_company": true,
+      "impact": "low",
+      "days_to_deadline": null,
+      "action_owner": "Legal DRI",
+      "action": "avaliar impacto #06",
+      "false_positive_count": 1,
+      "notice_id": "notice-06"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g12-regulatory-monitor",
-      "capabilities_any": [
-        "risk_register"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": false,
+      "applies_to_company": true,
+      "impact": "low",
+      "impact_assessed": false,
+      "actionable": false,
+      "creates_task": false,
+      "overdue": false,
+      "severity": "low",
+      "status": "untrusted_source",
+      "requires_human_review": false
     }
   },
   {
-    "id": "g12-regulatory-monitor-07",
-    "desc": "Monitor Regulatório: cenário 07 risco=high status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 7,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-07",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "ANPD",
+      "applies_to_company": true,
+      "impact": "medium",
+      "days_to_deadline": 45,
+      "action_owner": null,
+      "action": "avaliar impacto #07",
+      "false_positive_count": 0,
+      "notice_id": "notice-07"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": true,
+      "impact": "medium",
+      "impact_assessed": true,
+      "actionable": false,
+      "creates_task": false,
+      "overdue": false,
+      "severity": "medium",
+      "status": "needs_action_plan",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-regulatory-monitor-08",
-    "desc": "Monitor Regulatório: cenário 08 risco=critical status=blocked",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "critical",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g12-regulatory-monitor",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 8,
-      "blocked": true
+    "id": "g12-regulatory-monitor-domain-08",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "BACEN",
+      "applies_to_company": true,
+      "impact": "high",
+      "days_to_deadline": 7,
+      "action_owner": "Legal DRI",
+      "action": null,
+      "false_positive_count": 1,
+      "notice_id": "notice-08"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "blocked",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g12-regulatory-monitor",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": true,
+      "impact": "high",
+      "impact_assessed": true,
+      "actionable": false,
+      "creates_task": false,
+      "overdue": false,
+      "severity": "critical",
+      "status": "needs_action_plan",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-regulatory-monitor-09",
-    "desc": "Monitor Regulatório: cenário 09 risco=low status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g12-regulatory-monitor",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 9,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-09",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "CVM",
+      "applies_to_company": false,
+      "impact": "none",
+      "days_to_deadline": -1,
+      "action_owner": "Legal DRI",
+      "action": "avaliar impacto #09",
+      "false_positive_count": 3,
+      "notice_id": "notice-09"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g12-regulatory-monitor",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": false,
+      "impact": "none",
+      "impact_assessed": true,
+      "actionable": false,
+      "creates_task": false,
+      "overdue": true,
+      "severity": "low",
+      "status": "noise_suppressed",
+      "requires_human_review": false
     }
   },
   {
-    "id": "g12-regulatory-monitor-10",
-    "desc": "Monitor Regulatório: cenário 10 risco=medium status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g12-regulatory-monitor",
-    "capabilities": [
-      "config_driven",
-      "legal_review"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 10,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-10",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "ANPD",
+      "applies_to_company": true,
+      "impact": "high",
+      "days_to_deadline": 20,
+      "action_owner": "Legal DRI",
+      "action": "abrir tarefa #10",
+      "false_positive_count": 1,
+      "notice_id": "notice-10"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g12-regulatory-monitor",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": true,
+      "impact": "high",
+      "impact_assessed": true,
+      "actionable": true,
+      "creates_task": true,
+      "overdue": false,
+      "severity": "critical",
+      "status": "action_required",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-regulatory-monitor-11",
-    "desc": "Monitor Regulatório: cenário 11 risco=high status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-regulatory-monitor",
-    "capabilities": [
-      "legal_review",
-      "risk_register"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 11,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-11",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "regulador_setorial",
+      "applies_to_company": true,
+      "impact": "medium",
+      "days_to_deadline": null,
+      "action_owner": "Legal DRI",
+      "action": "avaliar impacto #11",
+      "false_positive_count": 0,
+      "notice_id": "notice-11"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g12-regulatory-monitor",
-      "capabilities_any": [
-        "legal_review"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": true,
+      "impact": "medium",
+      "impact_assessed": true,
+      "actionable": true,
+      "creates_task": true,
+      "overdue": false,
+      "severity": "medium",
+      "status": "action_required",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-regulatory-monitor-12",
-    "desc": "Monitor Regulatório: cenário 12 risco=critical status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-regulatory-monitor",
-    "capabilities": [
-      "risk_register",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 12,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-12",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "ANPD",
+      "applies_to_company": true,
+      "impact": "high",
+      "days_to_deadline": 20,
+      "action_owner": "Legal DRI",
+      "action": "abrir tarefa #12",
+      "false_positive_count": 1,
+      "notice_id": "notice-12"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g12-regulatory-monitor",
-      "capabilities_any": [
-        "risk_register"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": true,
+      "impact": "high",
+      "impact_assessed": true,
+      "actionable": true,
+      "creates_task": true,
+      "overdue": false,
+      "severity": "critical",
+      "status": "action_required",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-regulatory-monitor-13",
-    "desc": "Monitor Regulatório: cenário 13 risco=low status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 13,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-13",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "ANPD",
+      "applies_to_company": false,
+      "impact": "none",
+      "days_to_deadline": 7,
+      "action_owner": null,
+      "action": "avaliar impacto #13",
+      "false_positive_count": 0,
+      "notice_id": "notice-13"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": false,
+      "impact": "none",
+      "impact_assessed": true,
+      "actionable": false,
+      "creates_task": false,
+      "overdue": false,
+      "severity": "low",
+      "status": "monitor_only",
+      "requires_human_review": false
     }
   },
   {
-    "id": "g12-regulatory-monitor-14",
-    "desc": "Monitor Regulatório: cenário 14 risco=medium status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g12-regulatory-monitor",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 14,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-14",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "BACEN",
+      "applies_to_company": true,
+      "impact": "low",
+      "days_to_deadline": -1,
+      "action_owner": "Legal DRI",
+      "action": "avaliar impacto #14",
+      "false_positive_count": 1,
+      "notice_id": "notice-14"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g12-regulatory-monitor",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": true,
+      "impact": "low",
+      "impact_assessed": true,
+      "actionable": false,
+      "creates_task": false,
+      "overdue": true,
+      "severity": "critical",
+      "status": "overdue",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-regulatory-monitor-15",
-    "desc": "Monitor Regulatório: cenário 15 risco=high status=blocked",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "high",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g12-regulatory-monitor",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 15,
-      "blocked": true
+    "id": "g12-regulatory-monitor-domain-15",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "CVM",
+      "applies_to_company": true,
+      "impact": "medium",
+      "days_to_deadline": 90,
+      "action_owner": "Legal DRI",
+      "action": null,
+      "false_positive_count": 3,
+      "notice_id": "notice-15"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "blocked",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g12-regulatory-monitor",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": true,
+      "impact": "medium",
+      "impact_assessed": true,
+      "actionable": false,
+      "creates_task": false,
+      "overdue": false,
+      "severity": "medium",
+      "status": "needs_action_plan",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-regulatory-monitor-16",
-    "desc": "Monitor Regulatório: cenário 16 risco=critical status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-regulatory-monitor",
-    "capabilities": [
-      "config_driven",
-      "legal_review"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 16,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-16",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "SENACON",
+      "applies_to_company": true,
+      "impact": "high",
+      "days_to_deadline": null,
+      "action_owner": null,
+      "action": "avaliar impacto #16",
+      "false_positive_count": 1,
+      "notice_id": "notice-16"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g12-regulatory-monitor",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": true,
+      "impact": "high",
+      "impact_assessed": true,
+      "actionable": false,
+      "creates_task": false,
+      "overdue": false,
+      "severity": "critical",
+      "status": "needs_action_plan",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-regulatory-monitor-17",
-    "desc": "Monitor Regulatório: cenário 17 risco=low status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g12-regulatory-monitor",
-    "capabilities": [
-      "legal_review",
-      "risk_register"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 17,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-17",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "regulador_setorial",
+      "applies_to_company": false,
+      "impact": "none",
+      "days_to_deadline": 45,
+      "action_owner": "Legal DRI",
+      "action": "avaliar impacto #17",
+      "false_positive_count": 0,
+      "notice_id": "notice-17"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g12-regulatory-monitor",
-      "capabilities_any": [
-        "legal_review"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": false,
+      "impact": "none",
+      "impact_assessed": true,
+      "actionable": false,
+      "creates_task": false,
+      "overdue": false,
+      "severity": "low",
+      "status": "monitor_only",
+      "requires_human_review": false
     }
   },
   {
-    "id": "g12-regulatory-monitor-18",
-    "desc": "Monitor Regulatório: cenário 18 risco=medium status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-regulatory-monitor",
-    "capabilities": [
-      "risk_register",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 18,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-18",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "ANPD",
+      "applies_to_company": true,
+      "impact": "high",
+      "days_to_deadline": 20,
+      "action_owner": "Legal DRI",
+      "action": "abrir tarefa #18",
+      "false_positive_count": 1,
+      "notice_id": "notice-18"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g12-regulatory-monitor",
-      "capabilities_any": [
-        "risk_register"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": true,
+      "impact": "high",
+      "impact_assessed": true,
+      "actionable": true,
+      "creates_task": true,
+      "overdue": false,
+      "severity": "critical",
+      "status": "action_required",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-regulatory-monitor-19",
-    "desc": "Monitor Regulatório: cenário 19 risco=high status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 19,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-19",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "ANPD",
+      "applies_to_company": true,
+      "impact": "medium",
+      "days_to_deadline": -1,
+      "action_owner": null,
+      "action": "avaliar impacto #19",
+      "false_positive_count": 3,
+      "notice_id": "notice-19"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": true,
+      "impact": "medium",
+      "impact_assessed": true,
+      "actionable": false,
+      "creates_task": false,
+      "overdue": true,
+      "severity": "critical",
+      "status": "overdue",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-regulatory-monitor-20",
-    "desc": "Monitor Regulatório: cenário 20 risco=critical status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-regulatory-monitor",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 20,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-20",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "BACEN",
+      "applies_to_company": true,
+      "impact": "high",
+      "days_to_deadline": 90,
+      "action_owner": "Legal DRI",
+      "action": "avaliar impacto #20",
+      "false_positive_count": 1,
+      "notice_id": "notice-20"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g12-regulatory-monitor",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": true,
+      "impact": "high",
+      "impact_assessed": true,
+      "actionable": true,
+      "creates_task": true,
+      "overdue": false,
+      "severity": "critical",
+      "status": "action_required",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-regulatory-monitor-21",
-    "desc": "Monitor Regulatório: cenário 21 risco=low status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g12-regulatory-monitor",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 21,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-21",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "CVM",
+      "applies_to_company": false,
+      "impact": "none",
+      "days_to_deadline": null,
+      "action_owner": "Legal DRI",
+      "action": "avaliar impacto #21",
+      "false_positive_count": 0,
+      "notice_id": "notice-21"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g12-regulatory-monitor",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": false,
+      "impact": "none",
+      "impact_assessed": true,
+      "actionable": false,
+      "creates_task": false,
+      "overdue": false,
+      "severity": "low",
+      "status": "monitor_only",
+      "requires_human_review": false
     }
   },
   {
-    "id": "g12-regulatory-monitor-22",
-    "desc": "Monitor Regulatório: cenário 22 risco=medium status=blocked",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g12-regulatory-monitor",
-    "capabilities": [
-      "config_driven",
-      "legal_review"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 22,
-      "blocked": true
+    "id": "g12-regulatory-monitor-domain-22",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "ANPD",
+      "applies_to_company": true,
+      "impact": "high",
+      "days_to_deadline": 20,
+      "action_owner": "Legal DRI",
+      "action": "abrir tarefa #22",
+      "false_positive_count": 1,
+      "notice_id": "notice-22"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g12-regulatory-monitor",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": true,
+      "impact": "high",
+      "impact_assessed": true,
+      "actionable": true,
+      "creates_task": true,
+      "overdue": false,
+      "severity": "critical",
+      "status": "action_required",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-regulatory-monitor-23",
-    "desc": "Monitor Regulatório: cenário 23 risco=high status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-regulatory-monitor",
-    "capabilities": [
-      "legal_review",
-      "risk_register"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 23,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-23",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "regulador_setorial",
+      "applies_to_company": true,
+      "impact": "medium",
+      "days_to_deadline": 7,
+      "action_owner": "Legal DRI",
+      "action": "avaliar impacto #23",
+      "false_positive_count": 0,
+      "notice_id": "notice-23"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g12-regulatory-monitor",
-      "capabilities_any": [
-        "legal_review"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": true,
+      "impact": "medium",
+      "impact_assessed": true,
+      "actionable": true,
+      "creates_task": true,
+      "overdue": false,
+      "severity": "medium",
+      "status": "action_required",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-regulatory-monitor-24",
-    "desc": "Monitor Regulatório: cenário 24 risco=critical status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-regulatory-monitor",
-    "capabilities": [
-      "risk_register",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 24,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-24",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "ANPD",
+      "applies_to_company": true,
+      "impact": "high",
+      "days_to_deadline": 20,
+      "action_owner": "Legal DRI",
+      "action": "abrir tarefa #24",
+      "false_positive_count": 1,
+      "notice_id": "notice-24"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g12-regulatory-monitor",
-      "capabilities_any": [
-        "risk_register"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": true,
+      "impact": "high",
+      "impact_assessed": true,
+      "actionable": true,
+      "creates_task": true,
+      "overdue": false,
+      "severity": "critical",
+      "status": "action_required",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-regulatory-monitor-25",
-    "desc": "Monitor Regulatório: cenário 25 risco=low status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 25,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-25",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "ANPD",
+      "applies_to_company": false,
+      "impact": "none",
+      "days_to_deadline": 90,
+      "action_owner": null,
+      "action": "avaliar impacto #25",
+      "false_positive_count": 3,
+      "notice_id": "notice-25"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": false,
+      "impact": "none",
+      "impact_assessed": true,
+      "actionable": false,
+      "creates_task": false,
+      "overdue": false,
+      "severity": "low",
+      "status": "noise_suppressed",
+      "requires_human_review": false
     }
   },
   {
-    "id": "g12-regulatory-monitor-26",
-    "desc": "Monitor Regulatório: cenário 26 risco=medium status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g12-regulatory-monitor",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 26,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-26",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "BACEN",
+      "applies_to_company": true,
+      "impact": "low",
+      "days_to_deadline": null,
+      "action_owner": "Legal DRI",
+      "action": "avaliar impacto #26",
+      "false_positive_count": 1,
+      "notice_id": "notice-26"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g12-regulatory-monitor",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": true,
+      "impact": "low",
+      "impact_assessed": true,
+      "actionable": false,
+      "creates_task": false,
+      "overdue": false,
+      "severity": "low",
+      "status": "needs_action_plan",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-regulatory-monitor-27",
-    "desc": "Monitor Regulatório: cenário 27 risco=high status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-regulatory-monitor",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 27,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-27",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "CVM",
+      "applies_to_company": true,
+      "impact": "medium",
+      "days_to_deadline": 45,
+      "action_owner": "Legal DRI",
+      "action": "avaliar impacto #27",
+      "false_positive_count": 0,
+      "notice_id": "notice-27"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g12-regulatory-monitor",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": true,
+      "impact": "medium",
+      "impact_assessed": true,
+      "actionable": true,
+      "creates_task": true,
+      "overdue": false,
+      "severity": "medium",
+      "status": "action_required",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-regulatory-monitor-28",
-    "desc": "Monitor Regulatório: cenário 28 risco=critical status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-regulatory-monitor",
-    "capabilities": [
-      "config_driven",
-      "legal_review"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 28,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-28",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "ANPD",
+      "applies_to_company": true,
+      "impact": "high",
+      "days_to_deadline": 20,
+      "action_owner": "Legal DRI",
+      "action": "abrir tarefa #28",
+      "false_positive_count": 1,
+      "notice_id": "notice-28"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g12-regulatory-monitor",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": true,
+      "impact": "high",
+      "impact_assessed": true,
+      "actionable": true,
+      "creates_task": true,
+      "overdue": false,
+      "severity": "critical",
+      "status": "action_required",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-regulatory-monitor-29",
-    "desc": "Monitor Regulatório: cenário 29 risco=low status=blocked",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "low",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g12-regulatory-monitor",
-    "capabilities": [
-      "legal_review",
-      "risk_register"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 29,
-      "blocked": true
+    "id": "g12-regulatory-monitor-domain-29",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "regulador_setorial",
+      "applies_to_company": false,
+      "impact": "none",
+      "days_to_deadline": -1,
+      "action_owner": "Legal DRI",
+      "action": null,
+      "false_positive_count": 3,
+      "notice_id": "notice-29"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "blocked",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g12-regulatory-monitor",
-      "capabilities_any": [
-        "legal_review"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": true,
+      "applies_to_company": false,
+      "impact": "none",
+      "impact_assessed": true,
+      "actionable": false,
+      "creates_task": false,
+      "overdue": true,
+      "severity": "low",
+      "status": "noise_suppressed",
+      "requires_human_review": false
     }
   },
   {
-    "id": "g12-regulatory-monitor-30",
-    "desc": "Monitor Regulatório: cenário 30 risco=medium status=ready",
-    "artifact_type": "regulatory-monitor.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-regulatory-monitor",
-    "capabilities": [
-      "risk_register",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 30,
-      "blocked": false
+    "id": "g12-regulatory-monitor-domain-30",
+    "desc": "regulatory monitor varied domain eval",
+    "regulatory_change": {
+      "source": "blog_aleatorio",
+      "applies_to_company": true,
+      "impact": "low",
+      "days_to_deadline": 90,
+      "action_owner": "Legal DRI",
+      "action": "avaliar impacto #30",
+      "false_positive_count": 1,
+      "notice_id": "notice-30"
     },
     "expected": {
-      "agent_id": "g12-regulatory-monitor",
-      "handler_kind": "guardian_check",
-      "artifact_type": "regulatory-monitor.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g12-regulatory-monitor",
-      "capabilities_any": [
-        "risk_register"
-      ]
+      "handler_kind": "regulatory_change_assessment",
+      "source_trusted": false,
+      "applies_to_company": true,
+      "impact": "low",
+      "impact_assessed": false,
+      "actionable": false,
+      "creates_task": false,
+      "overdue": false,
+      "severity": "low",
+      "status": "untrusted_source",
+      "requires_human_review": false
     }
   }
 ]

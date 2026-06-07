@@ -181,3 +181,139 @@ def contract_risk_review(state, *, llm, store, spec):
         "flagged_clauses": blocking + yellow, "requires_dpa": requires_dpa,
         "recommendation": rec, "requires_human_review": bool(blocking or requires_dpa),
     }, f"Voce e {spec['id']}: risco {risk}, recomendacao {rec}.", llm)
+
+
+# ---------------------------------------------------------------------------
+# Burn-down handlers — G12: legal/compliance artifacts with deterministic checks.
+# ---------------------------------------------------------------------------
+@register("dpa_subprocessor_review")
+def dpa_subprocessor_review(state, *, llm, store, spec):
+    """g12-dpa-manager — validates DPA coverage, subprocessor due diligence,
+    RoPA freshness, international-transfer safeguards and PII production blocks."""
+    dpa = state["task"].get("dpa", {}) or {}
+    processes_pii = bool(dpa.get("processes_pii"))
+    dpa_signed = bool(dpa.get("dpa_signed"))
+    subprocessor_registered = bool(dpa.get("subprocessor_registered"))
+    due_diligence_ok = bool(dpa.get("due_diligence_ok"))
+    ropa_updated = bool(dpa.get("ropa_updated"))
+    international_transfer = bool(dpa.get("international_transfer"))
+    transfer_safeguard = bool(dpa.get("transfer_safeguard"))
+    production_enabled = bool(dpa.get("production_enabled"))
+
+    if processes_pii and not dpa_signed:
+        status = "blocked_no_dpa" if production_enabled else "dpa_missing_preprod"
+    elif not subprocessor_registered:
+        status = "subprocessor_unregistered"
+    elif not due_diligence_ok:
+        status = "privacy_dd_failed"
+    elif processes_pii and not ropa_updated:
+        status = "ropa_stale"
+    elif international_transfer and not transfer_safeguard:
+        status = "transfer_safeguard_missing"
+    else:
+        status = "approved"
+
+    lgpd_ready = status == "approved" and (not processes_pii or dpa_signed)
+    requires_human_review = status != "approved" or international_transfer
+    return _out(spec, state, {
+        "agent_id": spec["id"], "handler_kind": "dpa_subprocessor_review",
+        "processes_pii": processes_pii, "dpa_signed": dpa_signed,
+        "subprocessor_registered": subprocessor_registered, "due_diligence_ok": due_diligence_ok,
+        "ropa_updated": ropa_updated, "international_transfer": international_transfer,
+        "transfer_safeguard": transfer_safeguard, "lgpd_ready": lgpd_ready,
+        "status": status, "requires_human_review": requires_human_review,
+    }, f"Voce e {spec['id']}: DPA status {status}, LGPD ready={lgpd_ready}.", llm)
+
+
+@register("regulatory_change_assessment")
+def regulatory_change_assessment(state, *, llm, store, spec):
+    """g12-regulatory-monitor — classifies regulatory changes by source, deadline,
+    impact, false-positive history and actionability."""
+    change = state["task"].get("regulatory_change", {}) or {}
+    source = change.get("source")
+    source_trusted = source in {"ANPD", "BACEN", "CVM", "SENACON", "regulador_setorial"}
+    applies = bool(change.get("applies_to_company"))
+    impact = change.get("impact", "none")
+    days = change.get("days_to_deadline")
+    action_owner = bool(change.get("action_owner"))
+    action_defined = bool(change.get("action"))
+    false_positive_count = int(change.get("false_positive_count", 0) or 0)
+    impact_assessed = source_trusted and impact in {"none", "low", "medium", "high"}
+    actionable = source_trusted and applies and impact in {"medium", "high"} and action_defined and action_owner
+    overdue = days is not None and days < 0
+
+    if not source_trusted:
+        status = "untrusted_source"
+    elif false_positive_count >= 3 and not applies:
+        status = "noise_suppressed"
+    elif overdue and applies:
+        status = "overdue"
+    elif not applies or impact == "none":
+        status = "monitor_only"
+    elif not actionable:
+        status = "needs_action_plan"
+    else:
+        status = "action_required"
+
+    if not source_trusted:
+        severity = "low"
+    elif status == "overdue" or (impact == "high" and applies):
+        severity = "critical"
+    elif impact == "medium" and applies:
+        severity = "medium"
+    else:
+        severity = "low"
+    creates_task = status == "action_required"
+    requires_human_review = status in {"overdue", "needs_action_plan", "action_required"}
+    return _out(spec, state, {
+        "agent_id": spec["id"], "handler_kind": "regulatory_change_assessment",
+        "source_trusted": source_trusted, "applies_to_company": applies,
+        "impact": impact, "impact_assessed": impact_assessed,
+        "actionable": actionable, "creates_task": creates_task,
+        "overdue": overdue, "severity": severity, "status": status,
+        "requires_human_review": requires_human_review,
+    }, f"Voce e {spec['id']}: mudanca regulatoria {status}, severidade {severity}.", llm)
+
+
+@register("tos_privacy_doc_review")
+def tos_privacy_doc_review(state, *, llm, store, spec):
+    """g12-tos-privacy-author — validates legal doc versioning, LGPD legal bases,
+    product-dataflow consistency, changelog and re-consent for material changes."""
+    doc = state["task"].get("legal_doc", {}) or {}
+    dataflows = doc.get("dataflows", []) or []
+    bases = doc.get("legal_bases", {}) or {}
+    version_bumped = bool(doc.get("version_bumped"))
+    changelog_published = bool(doc.get("changelog_published"))
+    product_consistent = bool(doc.get("product_consistent"))
+    material_change = bool(doc.get("material_change"))
+    reconsent_triggered = bool(doc.get("reconsent_triggered"))
+    approved_taste_gate = bool(doc.get("approved_taste_gate"))
+    published = bool(doc.get("published"))
+
+    missing_legal_bases = sorted([flow for flow in dataflows if not bases.get(flow)])
+    if not product_consistent:
+        status = "product_mismatch"
+    elif missing_legal_bases:
+        status = "missing_legal_basis"
+    elif not version_bumped or not changelog_published:
+        status = "versioning_missing"
+    elif material_change and not reconsent_triggered:
+        status = "reconsent_missing"
+    elif not approved_taste_gate:
+        status = "taste_gate_pending"
+    elif not published:
+        status = "ready_to_publish"
+    else:
+        status = "published"
+
+    lgpd_compliant = status in {"ready_to_publish", "published"}
+    requires_human_review = status != "published" or material_change
+    return _out(spec, state, {
+        "agent_id": spec["id"], "handler_kind": "tos_privacy_doc_review",
+        "dataflow_count": len(dataflows), "missing_legal_bases": missing_legal_bases,
+        "product_consistent": product_consistent, "version_bumped": version_bumped,
+        "changelog_published": changelog_published, "material_change": material_change,
+        "reconsent_triggered": reconsent_triggered, "approved_taste_gate": approved_taste_gate,
+        "lgpd_compliant": lgpd_compliant, "status": status,
+        "requires_human_review": requires_human_review,
+    }, f"Voce e {spec['id']}: documento legal {status}, LGPD={lgpd_compliant}.", llm)

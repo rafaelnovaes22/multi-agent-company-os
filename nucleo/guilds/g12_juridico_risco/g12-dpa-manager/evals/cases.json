@@ -1,902 +1,932 @@
 [
   {
-    "id": "g12-dpa-manager-01",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 01 risco=low status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 1,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-01",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": false,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": true,
+      "transfer_safeguard": true,
+      "production_enabled": false,
+      "vendor_risk": "low",
+      "data_category": "none",
+      "subprocessor_name": "vendor-01",
+      "processing_region": "EU"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": false,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": true,
+      "transfer_safeguard": true,
+      "lgpd_ready": true,
+      "status": "approved",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-dpa-manager-02",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 02 risco=medium status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g12-dpa-manager",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 2,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-02",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": true,
+      "dpa_signed": false,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "production_enabled": true,
+      "vendor_risk": "medium",
+      "data_category": "contact",
+      "subprocessor_name": "vendor-02",
+      "processing_region": "US"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g12-dpa-manager",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": true,
+      "dpa_signed": false,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "lgpd_ready": false,
+      "status": "blocked_no_dpa",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-dpa-manager-03",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 03 risco=high status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-dpa-manager",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 3,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-03",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": false,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "production_enabled": true,
+      "vendor_risk": "high",
+      "data_category": "financial",
+      "subprocessor_name": "vendor-03",
+      "processing_region": "LATAM"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g12-dpa-manager",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": false,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "lgpd_ready": false,
+      "status": "subprocessor_unregistered",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-dpa-manager-04",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 04 risco=critical status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-dpa-manager",
-    "capabilities": [
-      "config_driven",
-      "legal_review"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 4,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-04",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": false,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "production_enabled": false,
+      "vendor_risk": "low",
+      "data_category": "children",
+      "subprocessor_name": "vendor-04",
+      "processing_region": "GLOBAL"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g12-dpa-manager",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": false,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "lgpd_ready": false,
+      "status": "privacy_dd_failed",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-dpa-manager-05",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 05 risco=low status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g12-dpa-manager",
-    "capabilities": [
-      "legal_review",
-      "risk_register"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 5,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-05",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": false,
+      "international_transfer": true,
+      "transfer_safeguard": false,
+      "production_enabled": true,
+      "vendor_risk": "medium",
+      "data_category": "health",
+      "subprocessor_name": "vendor-05",
+      "processing_region": "BR"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g12-dpa-manager",
-      "capabilities_any": [
-        "legal_review"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": false,
+      "international_transfer": true,
+      "transfer_safeguard": false,
+      "lgpd_ready": false,
+      "status": "ropa_stale",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-dpa-manager-06",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 06 risco=medium status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-dpa-manager",
-    "capabilities": [
-      "risk_register",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 6,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-06",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": false,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": true,
+      "transfer_safeguard": false,
+      "production_enabled": true,
+      "vendor_risk": "high",
+      "data_category": "none",
+      "subprocessor_name": "vendor-06",
+      "processing_region": "EU"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g12-dpa-manager",
-      "capabilities_any": [
-        "risk_register"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": false,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": true,
+      "transfer_safeguard": false,
+      "lgpd_ready": false,
+      "status": "transfer_safeguard_missing",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-dpa-manager-07",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 07 risco=high status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 7,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-07",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "production_enabled": false,
+      "vendor_risk": "low",
+      "data_category": "contact",
+      "subprocessor_name": "vendor-07",
+      "processing_region": "US"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "lgpd_ready": true,
+      "status": "approved",
+      "requires_human_review": false
     }
   },
   {
-    "id": "g12-dpa-manager-08",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 08 risco=critical status=blocked",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "critical",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g12-dpa-manager",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 8,
-      "blocked": true
+    "id": "g12-dpa-manager-domain-08",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": true,
+      "dpa_signed": false,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "production_enabled": true,
+      "vendor_risk": "medium",
+      "data_category": "financial",
+      "subprocessor_name": "vendor-08",
+      "processing_region": "LATAM"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "blocked",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g12-dpa-manager",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": true,
+      "dpa_signed": false,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "lgpd_ready": false,
+      "status": "blocked_no_dpa",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-dpa-manager-09",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 09 risco=low status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g12-dpa-manager",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 9,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-09",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": true,
+      "transfer_safeguard": true,
+      "production_enabled": true,
+      "vendor_risk": "high",
+      "data_category": "children",
+      "subprocessor_name": "vendor-09",
+      "processing_region": "GLOBAL"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g12-dpa-manager",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": true,
+      "transfer_safeguard": true,
+      "lgpd_ready": true,
+      "status": "approved",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-dpa-manager-10",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 10 risco=medium status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g12-dpa-manager",
-    "capabilities": [
-      "config_driven",
-      "legal_review"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 10,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-10",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "production_enabled": false,
+      "vendor_risk": "low",
+      "data_category": "health",
+      "subprocessor_name": "vendor-10",
+      "processing_region": "BR"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g12-dpa-manager",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "lgpd_ready": true,
+      "status": "approved",
+      "requires_human_review": false
     }
   },
   {
-    "id": "g12-dpa-manager-11",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 11 risco=high status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-dpa-manager",
-    "capabilities": [
-      "legal_review",
-      "risk_register"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 11,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-11",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": false,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "production_enabled": true,
+      "vendor_risk": "medium",
+      "data_category": "none",
+      "subprocessor_name": "vendor-11",
+      "processing_region": "EU"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g12-dpa-manager",
-      "capabilities_any": [
-        "legal_review"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": false,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "lgpd_ready": true,
+      "status": "approved",
+      "requires_human_review": false
     }
   },
   {
-    "id": "g12-dpa-manager-12",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 12 risco=critical status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-dpa-manager",
-    "capabilities": [
-      "risk_register",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 12,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-12",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": true,
+      "transfer_safeguard": false,
+      "production_enabled": true,
+      "vendor_risk": "high",
+      "data_category": "contact",
+      "subprocessor_name": "vendor-12",
+      "processing_region": "US"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g12-dpa-manager",
-      "capabilities_any": [
-        "risk_register"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": true,
+      "transfer_safeguard": false,
+      "lgpd_ready": false,
+      "status": "transfer_safeguard_missing",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-dpa-manager-13",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 13 risco=low status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 13,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-13",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": true,
+      "transfer_safeguard": false,
+      "production_enabled": false,
+      "vendor_risk": "low",
+      "data_category": "financial",
+      "subprocessor_name": "vendor-13",
+      "processing_region": "LATAM"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": true,
+      "transfer_safeguard": false,
+      "lgpd_ready": false,
+      "status": "transfer_safeguard_missing",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-dpa-manager-14",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 14 risco=medium status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g12-dpa-manager",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 14,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-14",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": true,
+      "dpa_signed": false,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "production_enabled": true,
+      "vendor_risk": "medium",
+      "data_category": "children",
+      "subprocessor_name": "vendor-14",
+      "processing_region": "GLOBAL"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g12-dpa-manager",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": true,
+      "dpa_signed": false,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "lgpd_ready": false,
+      "status": "blocked_no_dpa",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-dpa-manager-15",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 15 risco=high status=blocked",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "high",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g12-dpa-manager",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 15,
-      "blocked": true
+    "id": "g12-dpa-manager-domain-15",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": false,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "production_enabled": true,
+      "vendor_risk": "high",
+      "data_category": "health",
+      "subprocessor_name": "vendor-15",
+      "processing_region": "BR"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "blocked",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g12-dpa-manager",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": false,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "lgpd_ready": false,
+      "status": "subprocessor_unregistered",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-dpa-manager-16",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 16 risco=critical status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-dpa-manager",
-    "capabilities": [
-      "config_driven",
-      "legal_review"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 16,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-16",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": false,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": false,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "production_enabled": false,
+      "vendor_risk": "low",
+      "data_category": "none",
+      "subprocessor_name": "vendor-16",
+      "processing_region": "EU"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g12-dpa-manager",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": false,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": false,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "lgpd_ready": false,
+      "status": "privacy_dd_failed",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-dpa-manager-17",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 17 risco=low status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g12-dpa-manager",
-    "capabilities": [
-      "legal_review",
-      "risk_register"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 17,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-17",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": false,
+      "international_transfer": true,
+      "transfer_safeguard": true,
+      "production_enabled": true,
+      "vendor_risk": "medium",
+      "data_category": "contact",
+      "subprocessor_name": "vendor-17",
+      "processing_region": "US"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g12-dpa-manager",
-      "capabilities_any": [
-        "legal_review"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": false,
+      "international_transfer": true,
+      "transfer_safeguard": true,
+      "lgpd_ready": false,
+      "status": "ropa_stale",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-dpa-manager-18",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 18 risco=medium status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-dpa-manager",
-    "capabilities": [
-      "risk_register",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 18,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-18",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": true,
+      "transfer_safeguard": false,
+      "production_enabled": true,
+      "vendor_risk": "high",
+      "data_category": "financial",
+      "subprocessor_name": "vendor-18",
+      "processing_region": "LATAM"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g12-dpa-manager",
-      "capabilities_any": [
-        "risk_register"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": true,
+      "transfer_safeguard": false,
+      "lgpd_ready": false,
+      "status": "transfer_safeguard_missing",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-dpa-manager-19",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 19 risco=high status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 19,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-19",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "production_enabled": false,
+      "vendor_risk": "low",
+      "data_category": "children",
+      "subprocessor_name": "vendor-19",
+      "processing_region": "GLOBAL"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "lgpd_ready": true,
+      "status": "approved",
+      "requires_human_review": false
     }
   },
   {
-    "id": "g12-dpa-manager-20",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 20 risco=critical status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-dpa-manager",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 20,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-20",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": true,
+      "dpa_signed": false,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "production_enabled": true,
+      "vendor_risk": "medium",
+      "data_category": "health",
+      "subprocessor_name": "vendor-20",
+      "processing_region": "BR"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g12-dpa-manager",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": true,
+      "dpa_signed": false,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "lgpd_ready": false,
+      "status": "blocked_no_dpa",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-dpa-manager-21",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 21 risco=low status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g12-dpa-manager",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 21,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-21",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": false,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": true,
+      "transfer_safeguard": false,
+      "production_enabled": true,
+      "vendor_risk": "high",
+      "data_category": "none",
+      "subprocessor_name": "vendor-21",
+      "processing_region": "EU"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g12-dpa-manager",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": false,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": true,
+      "transfer_safeguard": false,
+      "lgpd_ready": false,
+      "status": "transfer_safeguard_missing",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-dpa-manager-22",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 22 risco=medium status=blocked",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g12-dpa-manager",
-    "capabilities": [
-      "config_driven",
-      "legal_review"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 22,
-      "blocked": true
+    "id": "g12-dpa-manager-domain-22",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "production_enabled": false,
+      "vendor_risk": "low",
+      "data_category": "contact",
+      "subprocessor_name": "vendor-22",
+      "processing_region": "US"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g12-dpa-manager",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "lgpd_ready": true,
+      "status": "approved",
+      "requires_human_review": false
     }
   },
   {
-    "id": "g12-dpa-manager-23",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 23 risco=high status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-dpa-manager",
-    "capabilities": [
-      "legal_review",
-      "risk_register"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 23,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-23",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "production_enabled": true,
+      "vendor_risk": "medium",
+      "data_category": "financial",
+      "subprocessor_name": "vendor-23",
+      "processing_region": "LATAM"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g12-dpa-manager",
-      "capabilities_any": [
-        "legal_review"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "lgpd_ready": true,
+      "status": "approved",
+      "requires_human_review": false
     }
   },
   {
-    "id": "g12-dpa-manager-24",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 24 risco=critical status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-dpa-manager",
-    "capabilities": [
-      "risk_register",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 24,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-24",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": true,
+      "transfer_safeguard": false,
+      "production_enabled": true,
+      "vendor_risk": "high",
+      "data_category": "children",
+      "subprocessor_name": "vendor-24",
+      "processing_region": "GLOBAL"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g12-dpa-manager",
-      "capabilities_any": [
-        "risk_register"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": true,
+      "transfer_safeguard": false,
+      "lgpd_ready": false,
+      "status": "transfer_safeguard_missing",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-dpa-manager-25",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 25 risco=low status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "human-review",
-    "capabilities": [
-      "brain_trace",
-      "artifact_emission"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 25,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-25",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": true,
+      "transfer_safeguard": true,
+      "production_enabled": false,
+      "vendor_risk": "low",
+      "data_category": "health",
+      "subprocessor_name": "vendor-25",
+      "processing_region": "BR"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "human-review",
-      "capabilities_any": [
-        "brain_trace"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": true,
+      "transfer_safeguard": true,
+      "lgpd_ready": true,
+      "status": "approved",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-dpa-manager-26",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 26 risco=medium status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g12-dpa-manager",
-    "capabilities": [
-      "artifact_emission",
-      "sla_observability"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 26,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-26",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": false,
+      "dpa_signed": false,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "production_enabled": true,
+      "vendor_risk": "medium",
+      "data_category": "none",
+      "subprocessor_name": "vendor-26",
+      "processing_region": "EU"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g12-dpa-manager",
-      "capabilities_any": [
-        "artifact_emission"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": false,
+      "dpa_signed": false,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "lgpd_ready": true,
+      "status": "approved",
+      "requires_human_review": false
     }
   },
   {
-    "id": "g12-dpa-manager-27",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 27 risco=high status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-dpa-manager",
-    "capabilities": [
-      "sla_observability",
-      "config_driven"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 27,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-27",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": false,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "production_enabled": true,
+      "vendor_risk": "high",
+      "data_category": "contact",
+      "subprocessor_name": "vendor-27",
+      "processing_region": "US"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g12-dpa-manager",
-      "capabilities_any": [
-        "sla_observability"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": false,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "lgpd_ready": false,
+      "status": "subprocessor_unregistered",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-dpa-manager-28",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 28 risco=critical status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-dpa-manager",
-    "capabilities": [
-      "config_driven",
-      "legal_review"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 28,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-28",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": false,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "production_enabled": false,
+      "vendor_risk": "low",
+      "data_category": "financial",
+      "subprocessor_name": "vendor-28",
+      "processing_region": "LATAM"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g12-dpa-manager",
-      "capabilities_any": [
-        "config_driven"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": false,
+      "ropa_updated": true,
+      "international_transfer": false,
+      "transfer_safeguard": false,
+      "lgpd_ready": false,
+      "status": "privacy_dd_failed",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-dpa-manager-29",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 29 risco=low status=blocked",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "low",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g12-dpa-manager",
-    "capabilities": [
-      "legal_review",
-      "risk_register"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 29,
-      "blocked": true
+    "id": "g12-dpa-manager-domain-29",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": false,
+      "international_transfer": true,
+      "transfer_safeguard": false,
+      "production_enabled": true,
+      "vendor_risk": "medium",
+      "data_category": "children",
+      "subprocessor_name": "vendor-29",
+      "processing_region": "GLOBAL"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "blocked",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g12-dpa-manager",
-      "capabilities_any": [
-        "legal_review"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": false,
+      "international_transfer": true,
+      "transfer_safeguard": false,
+      "lgpd_ready": false,
+      "status": "ropa_stale",
+      "requires_human_review": true
     }
   },
   {
-    "id": "g12-dpa-manager-30",
-    "desc": "Gestor de DPAs e Subprocessadores: cenário 30 risco=medium status=ready",
-    "artifact_type": "dpa-manager.verdict",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g12-dpa-manager",
-    "capabilities": [
-      "risk_register",
-      "brain_trace"
-    ],
-    "signals": {
-      "source": "catalog_factory",
-      "scenario": 30,
-      "blocked": false
+    "id": "g12-dpa-manager-domain-30",
+    "desc": "DPA/subprocessor varied domain eval",
+    "dpa": {
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": true,
+      "transfer_safeguard": false,
+      "production_enabled": true,
+      "vendor_risk": "high",
+      "data_category": "health",
+      "subprocessor_name": "vendor-30",
+      "processing_region": "BR"
     },
     "expected": {
-      "agent_id": "g12-dpa-manager",
-      "handler_kind": "guardian_check",
-      "artifact_type": "dpa-manager.verdict",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": true,
-      "routed_to": "g12-dpa-manager",
-      "capabilities_any": [
-        "risk_register"
-      ]
+      "handler_kind": "dpa_subprocessor_review",
+      "processes_pii": true,
+      "dpa_signed": true,
+      "subprocessor_registered": true,
+      "due_diligence_ok": true,
+      "ropa_updated": true,
+      "international_transfer": true,
+      "transfer_safeguard": false,
+      "lgpd_ready": false,
+      "status": "transfer_safeguard_missing",
+      "requires_human_review": true
     }
   }
 ]

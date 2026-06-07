@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: AUTONOMOUS
-act_handler: guardian_check
+act_handler: regulatory_change_assessment
 outcome_clause:
   statement: 'Monitor Regulatório entrega regulatory-monitor.verdict verificável para:
     Monitorar continuamente a LGPD e o regulador setorial do nosso mercado (configurável

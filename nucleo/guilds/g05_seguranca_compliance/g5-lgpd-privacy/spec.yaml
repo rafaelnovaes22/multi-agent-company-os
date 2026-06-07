@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: guardian
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: guardian_check
+act_handler: lgpd_privacy_review
 outcome_clause:
   statement: 'LGPD & Privacy entrega lgpd_privacy.artifact verificável para: garantir
     conformidade LGPD em toda a empresa, mapeando categorias de PII e governando seu

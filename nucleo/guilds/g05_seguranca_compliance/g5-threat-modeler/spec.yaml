@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: guardian
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: guardian_check
+act_handler: threat_model_review
 outcome_clause:
   statement: 'Threat Modeler entrega threat_modeler.artifact verificável para: modelar
     ameaças por feature antes da construção, identificando vetores de ataque e controles

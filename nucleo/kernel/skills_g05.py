@@ -289,3 +289,139 @@ def agentshield_scan(state, *, llm, store, spec):
         "drift_detected": drift_detected, "missing_evals": not has_evals,
         "missing_guardians": not guardians, "requires_human_review": verdict == "fail",
     }, f"Voce e {spec['id']}: scan de {sc.get('agent_id')} -> {verdict} ({len(findings)} achados).", llm)
+
+
+# ---------------------------------------------------------------------------
+# Burn-down Track A — deterministic guardian classifiers for remaining G05
+# security/privacy agents. These convert generic guardian_check specs into
+# calculable review gates over payload fields; market/tenant variation remains
+# in eval/spec inputs (C8), not hardcoded per customer.
+# ---------------------------------------------------------------------------
+@register("prompt_injection_guard")
+def prompt_injection_guard(state, *, llm, store, spec):
+    """Scores untrusted prompt content for override/exfiltration/tool-abuse signals."""
+    g = state["task"].get("input_guard", {}) or {}
+    signals = g.get("signals", {}) or {}
+    requested_tools = g.get("requested_tools", []) or []
+    allowed_tools = set(g.get("allowed_tools", []) or [])
+    untrusted_source = not bool(g.get("source_trusted", False))
+
+    score = 0
+    score += 40 if signals.get("override_instructions") else 0
+    score += 30 if signals.get("exfiltration_request") else 0
+    score += 25 if signals.get("tool_abuse") else 0
+    score += 20 if signals.get("hidden_prompt") else 0
+    score += 20 if untrusted_source else 0
+    disallowed_tools = [t for t in requested_tools if t not in allowed_tools]
+    if disallowed_tools:
+        score += 10
+    score = min(100, score)
+
+    risk = "high" if score >= 60 else ("medium" if score >= 30 else "low")
+    verdict = "block" if score >= 60 else ("sanitize" if score >= 30 else "allow")
+    return _out(spec, state, {
+        "handler_kind": "prompt_injection_guard",
+        "content_id": g.get("content_id"),
+        "risk_score": score,
+        "risk": risk,
+        "verdict": verdict,
+        "blocked": verdict == "block",
+        "requires_human_review": score >= 60,
+        "untrusted_source": untrusted_source,
+        "disallowed_tool_count": len(disallowed_tools),
+        "delivered_event": "prompt_injection.review_completed",
+    }, f"Voce e {spec['id']}: prompt risk={risk} score={score} verdict={verdict}.", llm)
+
+
+@register("lgpd_privacy_review")
+def lgpd_privacy_review(state, *, llm, store, spec):
+    """Reviews privacy posture: PII, legal basis, minimization, retention, transfer, DSAR."""
+    p = state["task"].get("privacy_review", {}) or {}
+    pii_categories = p.get("pii_categories", []) or []
+    legal_basis = p.get("legal_basis")
+    consent_present = bool(p.get("consent_present", False))
+    data_minimized = bool(p.get("data_minimized", False))
+    retention_days = p.get("retention_days", 0) or 0
+    international_transfer = bool(p.get("international_transfer", False))
+    transfer_safeguard = bool(p.get("transfer_safeguard", False))
+    dsar_pending_days = p.get("dsar_pending_days", 0) or 0
+
+    pii_detected = bool(pii_categories)
+    special_category = any(c in {"health", "biometric", "children"} for c in pii_categories)
+    issue_weights = []
+    if pii_detected and not legal_basis:
+        issue_weights.append(35)
+    if special_category and not consent_present:
+        issue_weights.append(30)
+    if not data_minimized:
+        issue_weights.append(15)
+    if retention_days > 365:
+        issue_weights.append(15)
+    if international_transfer and not transfer_safeguard:
+        issue_weights.append(25)
+    if dsar_pending_days > 15:
+        issue_weights.append(10)
+
+    compliance_score = max(0, 100 - sum(issue_weights))
+    blocked = bool(
+        (pii_detected and not legal_basis)
+        or (special_category and not consent_present)
+        or (international_transfer and not transfer_safeguard)
+    )
+    status = "blocked" if blocked else ("remediate" if issue_weights else "approved")
+    return _out(spec, state, {
+        "handler_kind": "lgpd_privacy_review",
+        "artifact_id": p.get("artifact_id"),
+        "pii_detected": pii_detected,
+        "special_category": special_category,
+        "compliance_score": compliance_score,
+        "status": status,
+        "blocked": blocked,
+        "requires_human_review": blocked or special_category or compliance_score < 70,
+        "issue_count": len(issue_weights),
+        "delivered_event": "privacy.review_completed",
+    }, f"Voce e {spec['id']}: LGPD status={status} score={compliance_score}.", llm)
+
+
+@register("threat_model_review")
+def threat_model_review(state, *, llm, store, spec):
+    """Scores feature threat-model risk and identifies missing baseline controls."""
+    t = state["task"].get("threat_model", {}) or {}
+    exposed = bool(t.get("internet_exposed", False))
+    auth_required = bool(t.get("auth_required", False))
+    handles_pii = bool(t.get("handles_pii", False))
+    payments = bool(t.get("payments", False))
+    admin_surface = bool(t.get("admin_surface", False))
+    dependency_risk = t.get("dependency_risk", "low")
+    mitigations = set(t.get("mitigations", []) or [])
+
+    score = 0
+    score += 25 if exposed else 0
+    score += 20 if not auth_required else 0
+    score += 15 if handles_pii else 0
+    score += 20 if payments else 0
+    score += 15 if admin_surface else 0
+    score += {"low": 0, "medium": 10, "high": 20}.get(dependency_risk, 0)
+
+    missing_controls = []
+    if exposed and "rate_limit" not in mitigations:
+        missing_controls.append("rate_limit")
+    if (handles_pii or payments) and "encryption" not in mitigations:
+        missing_controls.append("encryption")
+    if (admin_surface or payments) and "audit_log" not in mitigations:
+        missing_controls.append("audit_log")
+    score = min(100, score + 10 * len(missing_controls))
+
+    risk_level = "critical" if score >= 80 else ("high" if score >= 60 else ("medium" if score >= 30 else "low"))
+    status = "blocked" if score >= 80 else ("needs_controls" if missing_controls or score >= 60 else "approved")
+    return _out(spec, state, {
+        "handler_kind": "threat_model_review",
+        "feature_id": t.get("feature_id"),
+        "risk_score": score,
+        "risk_level": risk_level,
+        "missing_controls": missing_controls,
+        "missing_control_count": len(missing_controls),
+        "status": status,
+        "requires_human_review": score >= 60 or bool(missing_controls),
+        "delivered_event": "threat_model.review_completed",
+    }, f"Voce e {spec['id']}: threat risk={risk_level} score={score} status={status}.", llm)

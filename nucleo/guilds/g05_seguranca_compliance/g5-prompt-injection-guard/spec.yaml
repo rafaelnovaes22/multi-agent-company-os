@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: guardian
 mode: SHADOW
 target_mode: AUTONOMOUS
-act_handler: guardian_check
+act_handler: prompt_injection_guard
 outcome_clause:
   statement: 'Prompt Injection Guard entrega prompt_injection_guard.artifact verificável
     para: defender as entradas dos agentes contra injeção de prompt, exfiltração de

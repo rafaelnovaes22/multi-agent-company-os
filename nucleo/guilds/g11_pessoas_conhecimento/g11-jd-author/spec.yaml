@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: AUTONOMOUS
-act_handler: guardian_check
+act_handler: job_description_author
 outcome_clause:
   statement: 'Job Description Author (arquétipos YC) entrega jd-author.verdict verificável
     para: Traduzir uma necessidade de loop humano em uma descrição de vaga enquadrada

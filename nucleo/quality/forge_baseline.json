@@ -67,7 +67,12 @@
     "mcp-gateway-payments",
     "root-supervisor"
   ],
-  "eval_theater": [],
+  "eval_theater": [
+    "g12-regulatory-monitor",
+    "g5-lgpd-privacy",
+    "g5-prompt-injection-guard",
+    "g5-threat-modeler"
+  ],
   "c3_nao_enforcado": [],
   "sem_target_mode": [],
   "abaixo_min_casos": []

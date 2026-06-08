@@ -13,7 +13,7 @@ import os
 import unittest
 
 from nucleo.kernel.verification import verify_code, sha
-from nucleo.kernel.execution import InertExecutor, get_executor, ExecutionProvider
+from nucleo.kernel.execution import InertExecutor, DockerExecutor, get_executor, ExecutionProvider
 
 SEED = {
     "app.py": "def discount(price, percent):\n    return price - price * pct / 100\n",
@@ -58,10 +58,17 @@ class InertIsDefault(unittest.TestCase):
         self.assertIsInstance(ex, InertExecutor)
         self.assertFalse(ex.available)
 
-    def test_docker_ainda_degrada_para_inerte_com_aviso(self):
+    def test_docker_resolve_para_dockerexecutor(self):
         os.environ["EXEC_PROVIDER"] = "docker"
-        with self.assertLogs("nucleo.kernel.execution", level="WARNING"):
-            self.assertIsInstance(get_executor(), InertExecutor)
+        self.assertIsInstance(get_executor(), DockerExecutor)
+
+    def test_dockerexecutor_indisponivel_e_unverified(self):
+        # sem daemon (available=False) o DockerExecutor NÃO executa ⇒ None (UNVERIFIED),
+        # nunca um falso verde. (No nightly Linux+Docker, available=True e executa de fato.)
+        ex = DockerExecutor()
+        ex._avail = False
+        self.assertFalse(ex.available)
+        self.assertIsNone(ex.run_tests({"a.py": "x"}, test_cmd="python -m pytest -q"))
 
     def test_inert_mantem_comportamento_f0(self):
         v = verify_code(FIX_OK, SEED, ORACLE, executor=InertExecutor())

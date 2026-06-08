@@ -1,0 +1,35 @@
+name: forge-exec (nightly)
+
+# Execução REAL (VERIFY-IN-EVAL F2) — roda código dos eval-cases num contêiner hardened.
+# SEPARADO do gate forge.yml e fora de pull_request por SEGURANÇA: executa código só no main
+# já mergeado/revisado, em runner Linux+Docker. Disparo: nightly (cron) + manual (dispatch).
+on:
+  schedule:
+    - cron: "0 6 * * *"   # 06:00 UTC diário
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  forge-exec:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONUTF8: "1"
+      EXEC_PROVIDER: docker
+      EXEC_IMAGE: nucleo-exec:latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Build imagem de execução (com rede; os runs depois são --network none)
+        run: docker build -t nucleo-exec:latest -f nucleo/quality/exec.Dockerfile nucleo/quality
+      - name: Teste de integração do DockerExecutor (sandbox real)
+        run: python -m unittest tests.test_docker_executor
+      - name: Relatório de execução do piloto (static_pass_rate + delivered_rate)
+        run: python -m nucleo.quality.exec_report nucleo/guilds/g03_engenharia/g3-build-error-resolver

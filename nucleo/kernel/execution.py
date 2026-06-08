@@ -17,6 +17,9 @@ from __future__ import annotations
 import abc
 import logging
 import os
+import shutil
+import subprocess
+import tempfile
 
 _log = logging.getLogger(__name__)
 
@@ -55,22 +58,133 @@ class InertExecutor(ExecutionProvider):
         return None
 
 
+# ---------------------------------------------------------------------------
+# DockerExecutor (F2) — execução real em contêiner HARDENED. O eval-case é canal
+# NÃO-CONFIÁVEL: paths são sanitizados; o container roda sem rede, sem capabilities,
+# read-only, non-root, com limites e timeout; nenhum segredo do host é exposto.
+# ---------------------------------------------------------------------------
+def _safe_files(files: dict):
+    """Sanitiza o mapa {path: content} do artefato (canal não-confiável). Rejeita paths
+    absolutos, com '..' ou drive/backslash — evita escapar do workspace efêmero. Retorna o
+    mapa normalizado ou None se algo for inseguro."""
+    if not isinstance(files, dict) or not files:
+        return None
+    safe = {}
+    for path, content in files.items():
+        if not isinstance(path, str) or not isinstance(content, str):
+            return None
+        p = path.replace("\\", "/").strip()
+        if not p or p.startswith("/") or ".." in p.split("/") or ":" in p:
+            return None
+        safe[p] = content
+    return safe
+
+
+def _uid_gid():
+    """uid:gid do processo p/ rodar o container non-root casando o dono do volume (Linux).
+    None no Windows (DockerExecutor só roda de fato no runner Linux)."""
+    getuid = getattr(os, "getuid", None)
+    getgid = getattr(os, "getgid", None)
+    if getuid is None or getgid is None:
+        return None
+    return f"{getuid()}:{getgid()}"
+
+
+class DockerExecutor(ExecutionProvider):
+    """Executa `test_cmd` sobre o repo (semente+patch) num contêiner descartável e hardened.
+
+    Sandbox (defesa em profundidade; Docker ≠ sandbox por si só):
+      --network none   sem rede (o artefato não exfiltra nem baixa nada)
+      --cap-drop ALL + --security-opt no-new-privileges   sem capabilities/escalada
+      --read-only + --tmpfs /tmp   rootfs imutável; só /work (volume) e /tmp são graváveis
+      --user uid:gid   non-root, casando o dono do workspace
+      --pids-limit/--memory/--cpus + timeout   contém fork-bomb/OOM/loop infinito
+    A imagem (EXEC_IMAGE, default nucleo-exec:latest) já traz o runner de teste (pytest) —
+    como não há rede, nada é instalado em runtime. Erro de infra ⇒ None (UNVERIFIED), nunca
+    um falso verde."""
+
+    def __init__(self, image: str = None, timeout_s: float = 60.0):
+        self._image = image or os.environ.get("EXEC_IMAGE", "nucleo-exec:latest")
+        self._timeout = timeout_s
+        self._avail = None
+
+    @property
+    def name(self) -> str:
+        return f"DockerExecutor/{self._image}"
+
+    @property
+    def available(self) -> bool:
+        if self._avail is None:
+            self._avail = self._probe()
+        return self._avail
+
+    def _probe(self) -> bool:
+        if not shutil.which("docker"):
+            return False
+        try:
+            r = subprocess.run(["docker", "version", "--format", "{{.Server.Version}}"],
+                               capture_output=True, timeout=10)
+            return r.returncode == 0
+        except Exception:  # noqa: BLE001
+            return False
+
+    def run_tests(self, files: dict, *, test_cmd: str, timeout_s: float = None):
+        if not self.available:
+            return None
+        safe = _safe_files(files)
+        if safe is None:
+            _log.warning("DockerExecutor: artefato com paths inseguros — não executa.")
+            return None
+        timeout_s = timeout_s or self._timeout
+        with tempfile.TemporaryDirectory(prefix="nucleo-exec-") as wd:
+            for path, content in safe.items():
+                fp = os.path.join(wd, *path.split("/"))
+                os.makedirs(os.path.dirname(fp) or wd, exist_ok=True)
+                with open(fp, "w", encoding="utf-8") as f:
+                    f.write(content)
+            cmd = ["docker", "run", "--rm",
+                   "--network", "none",
+                   "--cap-drop", "ALL",
+                   "--security-opt", "no-new-privileges",
+                   "--pids-limit", "256",
+                   "--memory", "512m", "--cpus", "1",
+                   "--read-only", "--tmpfs", "/tmp:rw,size=64m",
+                   "-v", f"{wd}:/work:rw", "-w", "/work"]
+            ug = _uid_gid()
+            if ug:
+                cmd += ["--user", ug]
+            cmd += [self._image, "sh", "-c", test_cmd]
+            try:
+                r = subprocess.run(cmd, capture_output=True, timeout=timeout_s + 20)
+            except subprocess.TimeoutExpired:
+                _log.warning("DockerExecutor: timeout em %ss — trata como FALHA.", timeout_s)
+                return False
+            except Exception as exc:  # noqa: BLE001
+                _log.warning("DockerExecutor: erro de infra: %s", exc)
+                return None
+            if r.returncode == 0:
+                return True
+            # 125 (docker run), 126/127 (exec/cmd não encontrado) = erro de infra, não de teste.
+            if r.returncode in (125, 126, 127):
+                _log.warning("DockerExecutor: erro de container (rc=%s): %s",
+                             r.returncode, (r.stderr or b"").decode("utf-8", "replace")[:200])
+                return None
+            return False
+
+
 def get_executor() -> ExecutionProvider:
     """Resolve o ExecutionProvider por env (EXEC_PROVIDER). Execução real é OPT-IN EXPLÍCITO;
     sem ela (ou se o runner não estiver disponível) cai no InertExecutor — o eval/CI seguem
     offline e nenhuma entrega é creditada como `delivered` sem execução real.
 
-      EXEC_PROVIDER ausente|inert|none -> InertExecutor (default, F1)
-      EXEC_PROVIDER=docker             -> DockerExecutor (F2 — ainda não disponível; cai no inerte)
+      EXEC_PROVIDER ausente|inert|none -> InertExecutor (default)
+      EXEC_PROVIDER=docker             -> DockerExecutor (F2); se o daemon não responde, o
+                                          próprio executor reporta available=False ⇒ UNVERIFIED
     """
     provider = os.environ.get("EXEC_PROVIDER", "").strip().lower()
     if provider in ("", "inert", "none", "fake"):
         return InertExecutor()
     if provider == "docker":
-        # F2: runner Linux+Docker com sandbox. Enquanto não existe, degrada para inerte
-        # com aviso — nunca finge execução.
-        _log.warning("EXEC_PROVIDER=docker pedido, mas o DockerExecutor (F2) ainda não está "
-                     "disponível; usando InertExecutor (delivered permanece não-verificável).")
-        return InertExecutor()
+        return DockerExecutor()
     _log.warning("EXEC_PROVIDER=%r não reconhecido; usando InertExecutor.", provider)
     return InertExecutor()

@@ -19,7 +19,8 @@
         "must_contain": [
           "percent"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -35,7 +36,6 @@
       "result_parses": true,
       "no_test_gaming": true,
       "static_ok": true,
-      "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
       "requires_human_review": false
@@ -61,7 +61,8 @@
         "must_contain": [
           "percent"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -77,7 +78,6 @@
       "result_parses": true,
       "no_test_gaming": true,
       "static_ok": true,
-      "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
       "requires_human_review": false
@@ -103,7 +103,8 @@
         "must_contain": [
           "sum(items)"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -119,7 +120,6 @@
       "result_parses": true,
       "no_test_gaming": true,
       "static_ok": true,
-      "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
       "requires_human_review": false
@@ -145,7 +145,8 @@
         "must_contain": [
           "sum(items)"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -161,7 +162,6 @@
       "result_parses": true,
       "no_test_gaming": true,
       "static_ok": true,
-      "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
       "requires_human_review": false
@@ -185,7 +185,8 @@
         "must_contain": [
           "from math import sqrt"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -201,7 +202,6 @@
       "result_parses": true,
       "no_test_gaming": true,
       "static_ok": true,
-      "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
       "requires_human_review": false
@@ -225,7 +225,8 @@
         "must_contain": [
           "from math import sqrt"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -241,7 +242,6 @@
       "result_parses": true,
       "no_test_gaming": true,
       "static_ok": true,
-      "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
       "requires_human_review": false
@@ -267,7 +267,8 @@
         "must_contain": [
           "return x * 2"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -283,7 +284,6 @@
       "result_parses": true,
       "no_test_gaming": true,
       "static_ok": true,
-      "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
       "requires_human_review": false
@@ -309,7 +309,8 @@
         "must_contain": [
           "return x * 2"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -325,7 +326,6 @@
       "result_parses": true,
       "no_test_gaming": true,
       "static_ok": true,
-      "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
       "requires_human_review": false
@@ -351,7 +351,8 @@
         "must_contain": [
           "percent"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -367,7 +368,6 @@
       "result_parses": true,
       "no_test_gaming": true,
       "static_ok": true,
-      "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
       "requires_human_review": false
@@ -393,7 +393,8 @@
         "must_contain": [
           "sum(items)"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -409,7 +410,6 @@
       "result_parses": true,
       "no_test_gaming": true,
       "static_ok": true,
-      "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
       "requires_human_review": false
@@ -433,7 +433,8 @@
         "must_contain": [
           "from math import sqrt"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -449,7 +450,6 @@
       "result_parses": true,
       "no_test_gaming": true,
       "static_ok": true,
-      "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
       "requires_human_review": false
@@ -475,7 +475,8 @@
         "must_contain": [
           "return x * 2"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -491,7 +492,6 @@
       "result_parses": true,
       "no_test_gaming": true,
       "static_ok": true,
-      "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
       "requires_human_review": false
@@ -517,7 +517,8 @@
         "must_contain": [
           "percent"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -528,7 +529,6 @@
     "expected": {
       "handler_kind": "spec_executor",
       "static_ok": false,
-      "delivered_ok": false,
       "first_fail": "protected_unmodified",
       "status": "rejected:protected_unmodified",
       "requires_human_review": true,
@@ -557,7 +557,8 @@
         "must_contain": [
           "sum(items)"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -568,7 +569,6 @@
     "expected": {
       "handler_kind": "spec_executor",
       "static_ok": false,
-      "delivered_ok": false,
       "first_fail": "protected_unmodified",
       "status": "rejected:protected_unmodified",
       "requires_human_review": true,
@@ -595,7 +595,8 @@
         "must_contain": [
           "from math import sqrt"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -606,7 +607,6 @@
     "expected": {
       "handler_kind": "spec_executor",
       "static_ok": false,
-      "delivered_ok": false,
       "first_fail": "protected_unmodified",
       "status": "rejected:protected_unmodified",
       "requires_human_review": true,
@@ -635,7 +635,8 @@
         "must_contain": [
           "return x * 2"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -646,7 +647,6 @@
     "expected": {
       "handler_kind": "spec_executor",
       "static_ok": false,
-      "delivered_ok": false,
       "first_fail": "protected_unmodified",
       "status": "rejected:protected_unmodified",
       "requires_human_review": true,
@@ -675,7 +675,8 @@
         "must_contain": [
           "percent"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -685,7 +686,6 @@
     "expected": {
       "handler_kind": "spec_executor",
       "static_ok": false,
-      "delivered_ok": false,
       "first_fail": "touches_bug_file",
       "status": "rejected:touches_bug_file",
       "requires_human_review": true,
@@ -712,7 +712,8 @@
         "must_contain": [
           "sum(items)"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -722,7 +723,6 @@
     "expected": {
       "handler_kind": "spec_executor",
       "static_ok": false,
-      "delivered_ok": false,
       "first_fail": "touches_bug_file",
       "status": "rejected:touches_bug_file",
       "requires_human_review": true,
@@ -747,7 +747,8 @@
         "must_contain": [
           "from math import sqrt"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -757,7 +758,6 @@
     "expected": {
       "handler_kind": "spec_executor",
       "static_ok": false,
-      "delivered_ok": false,
       "first_fail": "touches_bug_file",
       "status": "rejected:touches_bug_file",
       "requires_human_review": true,
@@ -784,7 +784,8 @@
         "must_contain": [
           "return x * 2"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -794,7 +795,6 @@
     "expected": {
       "handler_kind": "spec_executor",
       "static_ok": false,
-      "delivered_ok": false,
       "first_fail": "touches_bug_file",
       "status": "rejected:touches_bug_file",
       "requires_human_review": true,
@@ -821,7 +821,8 @@
         "must_contain": [
           "percent"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -831,7 +832,6 @@
     "expected": {
       "handler_kind": "spec_executor",
       "static_ok": false,
-      "delivered_ok": false,
       "first_fail": "bug_addressed",
       "status": "rejected:bug_addressed",
       "requires_human_review": true,
@@ -859,7 +859,8 @@
         "must_contain": [
           "sum(items)"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -869,7 +870,6 @@
     "expected": {
       "handler_kind": "spec_executor",
       "static_ok": false,
-      "delivered_ok": false,
       "first_fail": "bug_addressed",
       "status": "rejected:bug_addressed",
       "requires_human_review": true,
@@ -897,7 +897,8 @@
         "must_contain": [
           "percent"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -907,7 +908,6 @@
     "expected": {
       "handler_kind": "spec_executor",
       "static_ok": false,
-      "delivered_ok": false,
       "first_fail": "no_test_gaming",
       "status": "rejected:no_test_gaming",
       "requires_human_review": true,
@@ -936,7 +936,8 @@
         "must_contain": [
           "percent"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -946,7 +947,6 @@
     "expected": {
       "handler_kind": "spec_executor",
       "static_ok": false,
-      "delivered_ok": false,
       "first_fail": "no_test_gaming",
       "status": "rejected:no_test_gaming",
       "requires_human_review": true,
@@ -975,7 +975,8 @@
         "must_contain": [
           "percent"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -985,7 +986,6 @@
     "expected": {
       "handler_kind": "spec_executor",
       "static_ok": false,
-      "delivered_ok": false,
       "first_fail": "no_test_gaming",
       "status": "rejected:no_test_gaming",
       "requires_human_review": true,
@@ -1014,7 +1014,8 @@
         "must_contain": [
           "percent"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -1024,7 +1025,6 @@
     "expected": {
       "handler_kind": "spec_executor",
       "static_ok": false,
-      "delivered_ok": false,
       "first_fail": "no_test_gaming",
       "status": "rejected:no_test_gaming",
       "requires_human_review": true,
@@ -1053,7 +1053,8 @@
         "must_contain": [
           "percent"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -1063,7 +1064,6 @@
     "expected": {
       "handler_kind": "spec_executor",
       "static_ok": false,
-      "delivered_ok": false,
       "first_fail": "result_parses",
       "status": "rejected:result_parses",
       "requires_human_review": true,
@@ -1091,7 +1091,8 @@
         "must_contain": [
           "sum(items)"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -1101,7 +1102,6 @@
     "expected": {
       "handler_kind": "spec_executor",
       "static_ok": false,
-      "delivered_ok": false,
       "first_fail": "result_parses",
       "status": "rejected:result_parses",
       "requires_human_review": true,
@@ -1127,7 +1127,8 @@
         "must_contain": [
           "from math import sqrt"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "files": {
@@ -1137,7 +1138,6 @@
     "expected": {
       "handler_kind": "spec_executor",
       "static_ok": false,
-      "delivered_ok": false,
       "first_fail": "result_parses",
       "status": "rejected:result_parses",
       "requires_human_review": true,
@@ -1165,7 +1165,8 @@
         "must_contain": [
           "return x * 2"
         ]
-      }
+      },
+      "test_cmd": "python -m pytest -q"
     },
     "artifact": {
       "content": "Eu identificaria a variável e corrigiria...",
@@ -1175,7 +1176,6 @@
     "expected": {
       "handler_kind": "spec_executor",
       "static_ok": false,
-      "delivered_ok": false,
       "first_fail": "artifact_parseable",
       "status": "rejected:artifact_parseable",
       "requires_human_review": true,

@@ -6,10 +6,15 @@
     "g1-narrative-synthesizer",
     "g1-strategy-supervisor",
     "g10-finance-supervisor",
+    "g11-jd-author",
+    "g11-meeting-notetaker",
     "g11-onboarding-buddy",
     "g11-people-supervisor",
+    "g11-policy-author",
+    "g12-dpa-manager",
     "g12-ip-trademark",
     "g12-legal-supervisor",
+    "g12-tos-privacy-author",
     "g13-artifact-architect",
     "g13-governance-supervisor",
     "g13-security-privacy-guardian",
@@ -62,7 +67,12 @@
     "mcp-gateway-payments",
     "root-supervisor"
   ],
-  "eval_theater": [],
+  "eval_theater": [
+    "g12-regulatory-monitor",
+    "g5-lgpd-privacy",
+    "g5-prompt-injection-guard",
+    "g5-threat-modeler"
+  ],
   "c3_nao_enforcado": [],
   "sem_target_mode": [],
   "abaixo_min_casos": []

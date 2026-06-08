@@ -19,6 +19,7 @@ from __future__ import annotations
 import glob
 import json
 import os
+import re
 import sys
 
 import yaml
@@ -40,6 +41,18 @@ GENERIC = {"spec_driven", "guardian_check", "supervisor_route"}
 CONTRACT_KEYS = {"agent_id", "handler_kind", "artifact_type", "status", "risk",
                  "requires_human_review", "routed_to", "capabilities_any", "capabilities"}
 MIN_CASES = 30
+
+# Descrições de caso "de harness" (geradas em massa por script, não autoradas a partir
+# da INTENÇÃO de um cenário). Quando TODOS os casos de um agente compartilham uma dessas
+# descrições-template, é forte sinal de que o `expected` é replay do próprio handler
+# (eval theater) e não um gabarito independente. Ver os PRs #30/#31/#32 ("...domain eval").
+# NÃO casa descrições de domínio reais nem casos numerados-mas-distintos (protegido por
+# DISTINCT_DESC_MAX abaixo, ex.: "burn scenario 1..30" tem 30 desc distintos).
+_TEMPLATE_DESC = re.compile(
+    r"\b(domain eval|varied|smoke test|placeholder|scenario\s*\d+|cen[áa]rio\s*\d+|"
+    r"test\s*case\s*\d+|caso\s*\d+|dummy|exemplo\s*\d+)\b", re.I)
+TEMPLATE_DESC_FRAC = 0.9   # ≥90% dos casos com desc-template
+DISTINCT_DESC_MAX = 2      # e ≤2 descrições distintas no total
 
 
 def _load(spec_path):
@@ -109,12 +122,21 @@ def collect():
             exp = c.get("expected", {}) or {}
             if any(k in exp for k in ("delivered", "billing_amount")):
                 hard["expected_proibido"].add(aid)
-        # eval theater (catraca): handler determinístico cujos casos NÃO testam nada de domínio
+        # eval theater (catraca): handler determinístico cujos casos não provam capacidade.
+        # Dois sinais: (a) o `expected` não exerce NENHUMA chave de domínio (só contrato), ou
+        # (b) os casos foram gerados em massa com descrições-template homogêneas — proxy de
+        # `expected` = replay do handler, não gabarito autorado da intenção do cenário.
         if not generic:
             domain_keys = set()
+            descs = []
             for c in cases:
                 domain_keys |= {k for k in (c.get("expected", {}) or {}) if k not in CONTRACT_KEYS}
-            if not domain_keys:
+                descs.append((c.get("desc") or "").strip())
+            distinct = len(set(descs))
+            template_frac = (sum(1 for d in descs if _TEMPLATE_DESC.search(d)) / len(descs)
+                             if descs else 0.0)
+            templated = distinct <= DISTINCT_DESC_MAX and template_frac >= TEMPLATE_DESC_FRAC
+            if not domain_keys or templated:
                 ratchet["eval_theater"].add(aid)
 
     return index, hard, ratchet

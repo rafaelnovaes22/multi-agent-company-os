@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: dpa_subprocessor_review
+act_handler: guardian_check
 outcome_clause:
   statement: 'Gestor de DPAs e Subprocessadores entrega dpa-manager.verdict verificável
     para: Gerenciar acordos de tratamento de dados (DPAs) e o ciclo de vida dos subprocessadores,

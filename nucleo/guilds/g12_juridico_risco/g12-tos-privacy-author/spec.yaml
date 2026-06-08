@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: tos_privacy_doc_review
+act_handler: guardian_check
 outcome_clause:
   statement: 'Autor de Termos de Uso e Privacidade entrega tos-privacy-author.verdict
     verificável para: Redigir e manter Termos de Uso e Política de Privacidade do

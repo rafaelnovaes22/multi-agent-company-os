@@ -1,869 +1,902 @@
 [
   {
-    "id": "g11-policy-author-domain-01",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "owner": "People DRI",
-      "review_date": "2026-09-30",
-      "version": "v1.0",
-      "constitution_refs": [
-        "C4",
-        "C7",
-        "LGPD"
-      ],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": true
+    "id": "g11-policy-author-01",
+    "desc": "Internal Policy Author: cenário 01 risco=low status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 1,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": true,
-      "versioned": true,
-      "constitution_aligned": true,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": true,
-      "publishable": true,
-      "status": "publishable",
-      "requires_human_review": false
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-02",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "review_date": "2026-09-30",
-      "version": "v1.0",
-      "constitution_refs": [
-        "C4",
-        "C7",
-        "LGPD"
-      ],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": true
+    "id": "g11-policy-author-02",
+    "desc": "Internal Policy Author: cenário 02 risco=medium status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g11-policy-author",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 2,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": false,
-      "versioned": true,
-      "constitution_aligned": true,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": true,
-      "publishable": false,
-      "status": "owner_review_missing",
-      "requires_human_review": true
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g11-policy-author",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-03",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "owner": "People DRI",
-      "review_date": "2026-09-30",
-      "constitution_refs": [
-        "C4",
-        "C7",
-        "LGPD"
-      ],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": true
+    "id": "g11-policy-author-03",
+    "desc": "Internal Policy Author: cenário 03 risco=high status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-policy-author",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 3,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": true,
-      "versioned": false,
-      "constitution_aligned": true,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": true,
-      "publishable": false,
-      "status": "unversioned",
-      "requires_human_review": true
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g11-policy-author",
+      "capabilities_any": [
+        "sla_observability"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-04",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "owner": "People DRI",
-      "review_date": "2026-09-30",
-      "version": "v1.0",
-      "constitution_refs": [],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": true
+    "id": "g11-policy-author-04",
+    "desc": "Internal Policy Author: cenário 04 risco=critical status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-policy-author",
+    "capabilities": [
+      "config_driven",
+      "knowledge_indexing"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 4,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": true,
-      "versioned": true,
-      "constitution_aligned": false,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": true,
-      "publishable": false,
-      "status": "constitution_gap",
-      "requires_human_review": true
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g11-policy-author",
+      "capabilities_any": [
+        "config_driven"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-05",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "owner": "People DRI",
-      "review_date": "2026-09-30",
-      "version": "v1.0",
-      "constitution_refs": [
-        "C4",
-        "C7",
-        "LGPD"
-      ],
-      "jurisdiction": "BR",
-      "legal_review_passed": false,
-      "guardrail_proposed": true
+    "id": "g11-policy-author-05",
+    "desc": "Internal Policy Author: cenário 05 risco=low status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g11-policy-author",
+    "capabilities": [
+      "knowledge_indexing",
+      "human_loop_roi"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 5,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": true,
-      "versioned": true,
-      "constitution_aligned": true,
-      "br_jurisdiction": true,
-      "legal_gate_passed": false,
-      "guardrail_proposed": true,
-      "publishable": false,
-      "status": "legal_gate_blocked",
-      "requires_human_review": true
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g11-policy-author",
+      "capabilities_any": [
+        "knowledge_indexing"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-06",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "owner": "People DRI",
-      "review_date": "2026-09-30",
-      "version": "v1.0",
-      "constitution_refs": [
-        "C4",
-        "C7",
-        "LGPD"
-      ],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": false
+    "id": "g11-policy-author-06",
+    "desc": "Internal Policy Author: cenário 06 risco=medium status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-policy-author",
+    "capabilities": [
+      "human_loop_roi",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 6,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": true,
-      "versioned": true,
-      "constitution_aligned": true,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": false,
-      "publishable": false,
-      "status": "guardrail_missing",
-      "requires_human_review": true
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g11-policy-author",
+      "capabilities_any": [
+        "human_loop_roi"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-07",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "owner": "People DRI",
-      "review_date": "2026-09-30",
-      "version": "v1.0",
-      "constitution_refs": [
-        "C4",
-        "C7",
-        "LGPD"
-      ],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": true
+    "id": "g11-policy-author-07",
+    "desc": "Internal Policy Author: cenário 07 risco=high status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 7,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": true,
-      "versioned": true,
-      "constitution_aligned": true,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": true,
-      "publishable": true,
-      "status": "publishable",
-      "requires_human_review": false
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-08",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "review_date": "2026-09-30",
-      "version": "v1.0",
-      "constitution_refs": [
-        "C4",
-        "C7",
-        "LGPD"
-      ],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": true
+    "id": "g11-policy-author-08",
+    "desc": "Internal Policy Author: cenário 08 risco=critical status=blocked",
+    "artifact_type": "policy-author.artifact",
+    "risk": "critical",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g11-policy-author",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 8,
+      "blocked": true
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": false,
-      "versioned": true,
-      "constitution_aligned": true,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": true,
-      "publishable": false,
-      "status": "owner_review_missing",
-      "requires_human_review": true
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "blocked",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g11-policy-author",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-09",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "owner": "People DRI",
-      "review_date": "2026-09-30",
-      "constitution_refs": [
-        "C4",
-        "C7",
-        "LGPD"
-      ],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": true
+    "id": "g11-policy-author-09",
+    "desc": "Internal Policy Author: cenário 09 risco=low status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g11-policy-author",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 9,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": true,
-      "versioned": false,
-      "constitution_aligned": true,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": true,
-      "publishable": false,
-      "status": "unversioned",
-      "requires_human_review": true
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g11-policy-author",
+      "capabilities_any": [
+        "sla_observability"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-10",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "owner": "People DRI",
-      "review_date": "2026-09-30",
-      "version": "v1.0",
-      "constitution_refs": [],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": true
+    "id": "g11-policy-author-10",
+    "desc": "Internal Policy Author: cenário 10 risco=medium status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g11-policy-author",
+    "capabilities": [
+      "config_driven",
+      "knowledge_indexing"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 10,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": true,
-      "versioned": true,
-      "constitution_aligned": false,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": true,
-      "publishable": false,
-      "status": "constitution_gap",
-      "requires_human_review": true
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g11-policy-author",
+      "capabilities_any": [
+        "config_driven"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-11",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "owner": "People DRI",
-      "review_date": "2026-09-30",
-      "version": "v1.0",
-      "constitution_refs": [
-        "C4",
-        "C7",
-        "LGPD"
-      ],
-      "jurisdiction": "BR",
-      "legal_review_passed": false,
-      "guardrail_proposed": true
+    "id": "g11-policy-author-11",
+    "desc": "Internal Policy Author: cenário 11 risco=high status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-policy-author",
+    "capabilities": [
+      "knowledge_indexing",
+      "human_loop_roi"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 11,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": true,
-      "versioned": true,
-      "constitution_aligned": true,
-      "br_jurisdiction": true,
-      "legal_gate_passed": false,
-      "guardrail_proposed": true,
-      "publishable": false,
-      "status": "legal_gate_blocked",
-      "requires_human_review": true
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g11-policy-author",
+      "capabilities_any": [
+        "knowledge_indexing"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-12",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "owner": "People DRI",
-      "review_date": "2026-09-30",
-      "version": "v1.0",
-      "constitution_refs": [
-        "C4",
-        "C7",
-        "LGPD"
-      ],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": false
+    "id": "g11-policy-author-12",
+    "desc": "Internal Policy Author: cenário 12 risco=critical status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-policy-author",
+    "capabilities": [
+      "human_loop_roi",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 12,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": true,
-      "versioned": true,
-      "constitution_aligned": true,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": false,
-      "publishable": false,
-      "status": "guardrail_missing",
-      "requires_human_review": true
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g11-policy-author",
+      "capabilities_any": [
+        "human_loop_roi"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-13",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "owner": "People DRI",
-      "review_date": "2026-09-30",
-      "version": "v1.0",
-      "constitution_refs": [
-        "C4",
-        "C7",
-        "LGPD"
-      ],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": true
+    "id": "g11-policy-author-13",
+    "desc": "Internal Policy Author: cenário 13 risco=low status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 13,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": true,
-      "versioned": true,
-      "constitution_aligned": true,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": true,
-      "publishable": true,
-      "status": "publishable",
-      "requires_human_review": false
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-14",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "review_date": "2026-09-30",
-      "version": "v1.0",
-      "constitution_refs": [
-        "C4",
-        "C7",
-        "LGPD"
-      ],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": true
+    "id": "g11-policy-author-14",
+    "desc": "Internal Policy Author: cenário 14 risco=medium status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g11-policy-author",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 14,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": false,
-      "versioned": true,
-      "constitution_aligned": true,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": true,
-      "publishable": false,
-      "status": "owner_review_missing",
-      "requires_human_review": true
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g11-policy-author",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-15",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "owner": "People DRI",
-      "review_date": "2026-09-30",
-      "constitution_refs": [
-        "C4",
-        "C7",
-        "LGPD"
-      ],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": true
+    "id": "g11-policy-author-15",
+    "desc": "Internal Policy Author: cenário 15 risco=high status=blocked",
+    "artifact_type": "policy-author.artifact",
+    "risk": "high",
+    "blocked": true,
+    "requires_human_review": true,
+    "routed_to": "g11-policy-author",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 15,
+      "blocked": true
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": true,
-      "versioned": false,
-      "constitution_aligned": true,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": true,
-      "publishable": false,
-      "status": "unversioned",
-      "requires_human_review": true
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "blocked",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g11-policy-author",
+      "capabilities_any": [
+        "sla_observability"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-16",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "owner": "People DRI",
-      "review_date": "2026-09-30",
-      "version": "v1.0",
-      "constitution_refs": [],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": true
+    "id": "g11-policy-author-16",
+    "desc": "Internal Policy Author: cenário 16 risco=critical status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-policy-author",
+    "capabilities": [
+      "config_driven",
+      "knowledge_indexing"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 16,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": true,
-      "versioned": true,
-      "constitution_aligned": false,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": true,
-      "publishable": false,
-      "status": "constitution_gap",
-      "requires_human_review": true
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g11-policy-author",
+      "capabilities_any": [
+        "config_driven"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-17",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "owner": "People DRI",
-      "review_date": "2026-09-30",
-      "version": "v1.0",
-      "constitution_refs": [
-        "C4",
-        "C7",
-        "LGPD"
-      ],
-      "jurisdiction": "BR",
-      "legal_review_passed": false,
-      "guardrail_proposed": true
+    "id": "g11-policy-author-17",
+    "desc": "Internal Policy Author: cenário 17 risco=low status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g11-policy-author",
+    "capabilities": [
+      "knowledge_indexing",
+      "human_loop_roi"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 17,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": true,
-      "versioned": true,
-      "constitution_aligned": true,
-      "br_jurisdiction": true,
-      "legal_gate_passed": false,
-      "guardrail_proposed": true,
-      "publishable": false,
-      "status": "legal_gate_blocked",
-      "requires_human_review": true
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g11-policy-author",
+      "capabilities_any": [
+        "knowledge_indexing"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-18",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "owner": "People DRI",
-      "review_date": "2026-09-30",
-      "version": "v1.0",
-      "constitution_refs": [
-        "C4",
-        "C7",
-        "LGPD"
-      ],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": false
+    "id": "g11-policy-author-18",
+    "desc": "Internal Policy Author: cenário 18 risco=medium status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-policy-author",
+    "capabilities": [
+      "human_loop_roi",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 18,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": true,
-      "versioned": true,
-      "constitution_aligned": true,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": false,
-      "publishable": false,
-      "status": "guardrail_missing",
-      "requires_human_review": true
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g11-policy-author",
+      "capabilities_any": [
+        "human_loop_roi"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-19",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "owner": "People DRI",
-      "review_date": "2026-09-30",
-      "version": "v1.0",
-      "constitution_refs": [
-        "C4",
-        "C7",
-        "LGPD"
-      ],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": true
+    "id": "g11-policy-author-19",
+    "desc": "Internal Policy Author: cenário 19 risco=high status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 19,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": true,
-      "versioned": true,
-      "constitution_aligned": true,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": true,
-      "publishable": true,
-      "status": "publishable",
-      "requires_human_review": false
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-20",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "review_date": "2026-09-30",
-      "version": "v1.0",
-      "constitution_refs": [
-        "C4",
-        "C7",
-        "LGPD"
-      ],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": true
+    "id": "g11-policy-author-20",
+    "desc": "Internal Policy Author: cenário 20 risco=critical status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-policy-author",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 20,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": false,
-      "versioned": true,
-      "constitution_aligned": true,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": true,
-      "publishable": false,
-      "status": "owner_review_missing",
-      "requires_human_review": true
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g11-policy-author",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-21",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "owner": "People DRI",
-      "review_date": "2026-09-30",
-      "constitution_refs": [
-        "C4",
-        "C7",
-        "LGPD"
-      ],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": true
+    "id": "g11-policy-author-21",
+    "desc": "Internal Policy Author: cenário 21 risco=low status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g11-policy-author",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 21,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": true,
-      "versioned": false,
-      "constitution_aligned": true,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": true,
-      "publishable": false,
-      "status": "unversioned",
-      "requires_human_review": true
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g11-policy-author",
+      "capabilities_any": [
+        "sla_observability"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-22",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "owner": "People DRI",
-      "review_date": "2026-09-30",
-      "version": "v1.0",
-      "constitution_refs": [],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": true
+    "id": "g11-policy-author-22",
+    "desc": "Internal Policy Author: cenário 22 risco=medium status=blocked",
+    "artifact_type": "policy-author.artifact",
+    "risk": "medium",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g11-policy-author",
+    "capabilities": [
+      "config_driven",
+      "knowledge_indexing"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 22,
+      "blocked": true
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": true,
-      "versioned": true,
-      "constitution_aligned": false,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": true,
-      "publishable": false,
-      "status": "constitution_gap",
-      "requires_human_review": true
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "blocked",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g11-policy-author",
+      "capabilities_any": [
+        "config_driven"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-23",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "owner": "People DRI",
-      "review_date": "2026-09-30",
-      "version": "v1.0",
-      "constitution_refs": [
-        "C4",
-        "C7",
-        "LGPD"
-      ],
-      "jurisdiction": "BR",
-      "legal_review_passed": false,
-      "guardrail_proposed": true
+    "id": "g11-policy-author-23",
+    "desc": "Internal Policy Author: cenário 23 risco=high status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-policy-author",
+    "capabilities": [
+      "knowledge_indexing",
+      "human_loop_roi"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 23,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": true,
-      "versioned": true,
-      "constitution_aligned": true,
-      "br_jurisdiction": true,
-      "legal_gate_passed": false,
-      "guardrail_proposed": true,
-      "publishable": false,
-      "status": "legal_gate_blocked",
-      "requires_human_review": true
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g11-policy-author",
+      "capabilities_any": [
+        "knowledge_indexing"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-24",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "owner": "People DRI",
-      "review_date": "2026-09-30",
-      "version": "v1.0",
-      "constitution_refs": [
-        "C4",
-        "C7",
-        "LGPD"
-      ],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": false
+    "id": "g11-policy-author-24",
+    "desc": "Internal Policy Author: cenário 24 risco=critical status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-policy-author",
+    "capabilities": [
+      "human_loop_roi",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 24,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": true,
-      "versioned": true,
-      "constitution_aligned": true,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": false,
-      "publishable": false,
-      "status": "guardrail_missing",
-      "requires_human_review": true
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g11-policy-author",
+      "capabilities_any": [
+        "human_loop_roi"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-25",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "owner": "People DRI",
-      "review_date": "2026-09-30",
-      "version": "v1.0",
-      "constitution_refs": [
-        "C4",
-        "C7",
-        "LGPD"
-      ],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": true
+    "id": "g11-policy-author-25",
+    "desc": "Internal Policy Author: cenário 25 risco=low status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace",
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 25,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": true,
-      "versioned": true,
-      "constitution_aligned": true,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": true,
-      "publishable": true,
-      "status": "publishable",
-      "requires_human_review": false
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "capabilities_any": [
+        "brain_trace"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-26",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "review_date": "2026-09-30",
-      "version": "v1.0",
-      "constitution_refs": [
-        "C4",
-        "C7",
-        "LGPD"
-      ],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": true
+    "id": "g11-policy-author-26",
+    "desc": "Internal Policy Author: cenário 26 risco=medium status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "g11-policy-author",
+    "capabilities": [
+      "artifact_emission",
+      "sla_observability"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 26,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": false,
-      "versioned": true,
-      "constitution_aligned": true,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": true,
-      "publishable": false,
-      "status": "owner_review_missing",
-      "requires_human_review": true
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": false,
+      "routed_to": "g11-policy-author",
+      "capabilities_any": [
+        "artifact_emission"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-27",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "owner": "People DRI",
-      "review_date": "2026-09-30",
-      "constitution_refs": [
-        "C4",
-        "C7",
-        "LGPD"
-      ],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": true
+    "id": "g11-policy-author-27",
+    "desc": "Internal Policy Author: cenário 27 risco=high status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "high",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-policy-author",
+    "capabilities": [
+      "sla_observability",
+      "config_driven"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 27,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": true,
-      "versioned": false,
-      "constitution_aligned": true,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": true,
-      "publishable": false,
-      "status": "unversioned",
-      "requires_human_review": true
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "high",
+      "requires_human_review": true,
+      "routed_to": "g11-policy-author",
+      "capabilities_any": [
+        "sla_observability"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-28",
-    "desc": "policy author domain eval",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "owner": "People DRI",
-      "review_date": "2026-09-30",
-      "version": "v1.0",
-      "constitution_refs": [],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": true
+    "id": "g11-policy-author-28",
+    "desc": "Internal Policy Author: cenário 28 risco=critical status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "critical",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-policy-author",
+    "capabilities": [
+      "config_driven",
+      "knowledge_indexing"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 28,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": true,
-      "versioned": true,
-      "constitution_aligned": false,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": true,
-      "publishable": false,
-      "status": "constitution_gap",
-      "requires_human_review": true
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "critical",
+      "requires_human_review": true,
+      "routed_to": "g11-policy-author",
+      "capabilities_any": [
+        "config_driven"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-29",
-    "desc": "policy author domain eval - viagens nao aciona guardrail de IA",
-    "policy": {
-      "topic": "política de viagens internas",
-      "owner": "People DRI",
-      "review_date": "2026-09-30",
-      "version": "v1.0",
-      "constitution_refs": [
-        "C6"
-      ],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": false
+    "id": "g11-policy-author-29",
+    "desc": "Internal Policy Author: cenário 29 risco=low status=blocked",
+    "artifact_type": "policy-author.artifact",
+    "risk": "low",
+    "blocked": true,
+    "requires_human_review": false,
+    "routed_to": "g11-policy-author",
+    "capabilities": [
+      "knowledge_indexing",
+      "human_loop_roi"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 29,
+      "blocked": true
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": true,
-      "versioned": true,
-      "constitution_aligned": true,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": true,
-      "publishable": true,
-      "status": "publishable",
-      "requires_human_review": false
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "blocked",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "g11-policy-author",
+      "capabilities_any": [
+        "knowledge_indexing"
+      ]
     }
   },
   {
-    "id": "g11-policy-author-domain-30",
-    "desc": "policy author domain eval - ref constitucional desconhecida bloqueia",
-    "policy": {
-      "topic": "uso de agentes e dados internos",
-      "owner": "People DRI",
-      "review_date": "2026-09-30",
-      "version": "v1.0",
-      "constitution_refs": [
-        "C4",
-        "XYZ"
-      ],
-      "jurisdiction": "BR",
-      "legal_review_passed": true,
-      "guardrail_proposed": true
+    "id": "g11-policy-author-30",
+    "desc": "Internal Policy Author: cenário 30 risco=medium status=ready",
+    "artifact_type": "policy-author.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g11-policy-author",
+    "capabilities": [
+      "human_loop_roi",
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "catalog_factory",
+      "scenario": 30,
+      "blocked": false
     },
     "expected": {
-      "handler_kind": "internal_policy_author",
-      "owner_and_review_date_set": true,
-      "versioned": true,
-      "constitution_aligned": false,
-      "br_jurisdiction": true,
-      "legal_gate_passed": true,
-      "guardrail_proposed": true,
-      "publishable": false,
-      "status": "constitution_gap",
-      "requires_human_review": true
+      "agent_id": "g11-policy-author",
+      "handler_kind": "spec_driven",
+      "artifact_type": "policy-author.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g11-policy-author",
+      "capabilities_any": [
+        "human_loop_roi"
+      ]
     }
   }
 ]

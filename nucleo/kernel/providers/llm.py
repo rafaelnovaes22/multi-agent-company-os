@@ -8,7 +8,45 @@ os agentes nascerem em SHADOW sem precisar de chave de API nem rede.
 """
 from __future__ import annotations
 import abc
+import logging
 import os
+import time
+
+_log = logging.getLogger(__name__)
+
+# Robustez do provider real (C7). Em produção (PILOT/AUTONOMOUS) uma chamada pendurada
+# travaria o nó do grafo, e um erro transiente (5xx/rede) derrubaria a entrega. Ambos são
+# configuráveis por env; valem só para os providers REAIS — o FakeLLMProvider é offline.
+def _timeout_s() -> float:
+    try:
+        return float(os.environ.get("LLM_TIMEOUT_S", "60"))
+    except ValueError:
+        return 60.0
+
+
+def _retries() -> int:
+    try:
+        return max(0, int(os.environ.get("LLM_RETRIES", "2")))
+    except ValueError:
+        return 2
+
+
+def _with_retry(call, *, label: str):
+    """Executa `call()` com retry e backoff exponencial em erros transientes. Re-lança a
+    última exceção se todas as tentativas falharem (o caller decide o fallback)."""
+    attempts = _retries() + 1
+    last = None
+    for i in range(attempts):
+        try:
+            return call()
+        except Exception as exc:  # noqa: BLE001 — best-effort; transitório vs permanente é opaco no SDK
+            last = exc
+            if i + 1 < attempts:
+                delay = 0.5 * (2 ** i)
+                _log.warning("LLM %s falhou (tentativa %d/%d): %s — retry em %.1fs",
+                             label, i + 1, attempts, exc, delay)
+                time.sleep(delay)
+    raise last
 
 
 class LLMProvider(abc.ABC):
@@ -45,11 +83,14 @@ class AnthropicProvider(LLMProvider):
         return f"AnthropicProvider/{self.model}"
 
     def complete(self, prompt: str, **kwargs) -> str:
-        msg = self._client.messages.create(
-            model=self.model, max_tokens=kwargs.get("max_tokens", 512),
-            messages=[{"role": "user", "content": prompt}],
-        )
-        return "".join(b.text for b in msg.content if getattr(b, "type", "") == "text")
+        def _call():
+            msg = self._client.messages.create(
+                model=self.model, max_tokens=kwargs.get("max_tokens", 512),
+                messages=[{"role": "user", "content": prompt}],
+                timeout=_timeout_s(),
+            )
+            return "".join(b.text for b in msg.content if getattr(b, "type", "") == "text")
+        return _with_retry(_call, label=self.name)
 
 
 def _use_vertex() -> bool:
@@ -71,15 +112,20 @@ class GoogleProvider(LLMProvider):
 
     def __init__(self, model: str):
         from google import genai  # import tardio: dependência opcional
+        from google.genai import types
         self.model = model
+        # timeout em ms no http layer do google-genai (vale para todas as chamadas do client).
+        http = types.HttpOptions(timeout=int(_timeout_s() * 1000))
         if _use_vertex():
             project = os.environ.get("GOOGLE_CLOUD_PROJECT")
             location = os.environ.get("GOOGLE_CLOUD_LOCATION", "us-central1")
-            self._client = genai.Client(vertexai=True, project=project, location=location)
+            self._client = genai.Client(vertexai=True, project=project, location=location,
+                                        http_options=http)
             self.backend = f"vertex:{project}/{location}"
         else:
             key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
-            self._client = genai.Client(api_key=key) if key else genai.Client()
+            self._client = (genai.Client(api_key=key, http_options=http) if key
+                            else genai.Client(http_options=http))
             self.backend = "developer-api"
 
     @property
@@ -92,8 +138,11 @@ class GoogleProvider(LLMProvider):
             max_output_tokens=kwargs.get("max_tokens", 512),
             thinking_config=types.ThinkingConfig(thinking_budget=0),
         )
-        r = self._client.models.generate_content(model=self.model, contents=prompt, config=cfg)
-        return (r.text or "").strip()
+
+        def _call():
+            r = self._client.models.generate_content(model=self.model, contents=prompt, config=cfg)
+            return (r.text or "").strip()
+        return _with_retry(_call, label=self.name)
 
 
 # Tier de modelo por papel (default; C7). Supervisores/Guardians = modelo forte.
@@ -159,11 +208,16 @@ def get_llm(role: str = "worker") -> LLMProvider:
     if provider == "anthropic":
         try:
             return AnthropicProvider(_anthropic_model(role))
-        except Exception:
-            pass
+        except Exception as exc:  # noqa: BLE001
+            _log.warning("LLM_PROVIDER=anthropic indisponível (%s); usando FakeLLMProvider "
+                         "offline. A frota segue, mas SEM LLM real.", exc)
+            return FakeLLMProvider()
     if provider in ("google", "gemini", "vertex"):
         try:
             return GoogleProvider(_google_model(role))
-        except Exception:
-            pass
+        except Exception as exc:  # noqa: BLE001
+            _log.warning("LLM_PROVIDER=%s indisponível (%s); usando FakeLLMProvider offline. "
+                         "A frota segue, mas SEM LLM real.", provider, exc)
+            return FakeLLMProvider()
+    _log.warning("LLM_PROVIDER=%r não reconhecido; usando FakeLLMProvider offline.", provider)
     return FakeLLMProvider()

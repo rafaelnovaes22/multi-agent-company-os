@@ -36,3 +36,5 @@ jobs:
           python -m nucleo.demo_agentshield
       - name: Guarda de ICP
         run: python -m unittest tests.test_icp_segments
+      - name: Wiring da camada generativa (soul + C2 + custo + opt-in)
+        run: python -m unittest tests.test_generative_prompt

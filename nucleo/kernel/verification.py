@@ -1,0 +1,110 @@
+"""verify_code — oráculo OFFLINE de verificação de artefatos de código (épico VERIFY-IN-EVAL, F0).
+
+Tese (North Star): `delivered` deve ser consequência de um ORÁCULO INDEPENDENTE do agente
+avaliado, no caminho de eval — não declaração do agente nem carimbo de gate. O critério
+(testes/contratos held-out) vem do EVAL-CASE, autorado por um humano; o agente nunca o vê.
+O sinal é FUNÇÃO DO ARTEFATO (inspeção estática: ast/diff/sha contra o oráculo), NUNCA a
+leitura de um booleano de sucesso que o próprio caso declara.
+
+Distinção central (provada offline pelo protótipo c:/tmp/proto_verify_code.py):
+
+  NECESSÁRIO (estático, offline, sempre computável, função do artefato):
+    artifact_parseable   — o artefato tem o formato {files:{path:content}} (não prosa)
+    touches_bug_file     — modificou o arquivo do bug (≠ semente)
+    bug_addressed        — tratou os marcadores do defeito no bug_file (must_remove/must_contain)
+    protected_unmodified — NÃO alterou arquivos protegidos (teste-alvo held-out) — sha256
+    result_parses        — todo .py resultante é sintaticamente válido (ast, sem executar)
+    no_test_gaming       — sem burla óbvia (sys.exit/skip/SkipTest)
+
+  SUFICIENTE (executado, só F2 com runner Linux+Docker): tests_pass = post_exit == 0.
+
+  static_ok    = all(NECESSÁRIOS)                       — já reprova lixo/burla offline
+  delivered_ok = static_ok AND tests_pass (executado)   — OFFLINE tests_pass=UNVERIFIED ⇒ False
+
+LIMITE HONESTO: static_ok é NECESSÁRIO, não SUFICIENTE — um fix "plausível mas logicamente
+errado" passa o estático e só cairia EXECUTANDO (F2). Por isso o eval reporta DOIS números:
+static_pass_rate (F0 move, de 0) e delivered_rate (só F2 move). Zero subprocess; stdlib pura.
+"""
+from __future__ import annotations
+import ast
+import hashlib
+
+NECESSARIOS = ["artifact_parseable", "touches_bug_file", "bug_addressed",
+               "protected_unmodified", "result_parses", "no_test_gaming"]
+
+# Marcadores de burla de teste (anti-gaming) — escrita defensiva, não exaustiva.
+_GAMING_TOKENS = ("sys.exit(0)", "pytest.skip", "raise SkipTest",
+                  "@pytest.mark.skip", "@unittest.skip", "unittest.SkipTest")
+
+
+def sha(s: str) -> str:
+    """sha256 curto (12 hex) de uma string utf-8 — usado p/ travar arquivos protegidos."""
+    return hashlib.sha256((s or "").encode("utf-8")).hexdigest()[:12]
+
+
+def verify_code(artifact: dict, seed: dict, oracle: dict) -> dict:
+    """Verifica um artefato de código contra (semente, oráculo) SEM executar.
+
+    artifact: {"files": {path: content}} produzido pelo agente (o patch).
+    seed:     {path: content} repo-semente (build vermelho por construção).
+    oracle:   {"bug_file", "protected_files": {path: sha}, "bug_markers": {must_remove, must_contain}}.
+
+    Retorna: {signals, static_ok, first_fail, tests_pass, delivered_ok}.
+    """
+    sig: dict = {}
+    seed = seed or {}
+    oracle = oracle or {}
+
+    # (0) artifact_parseable — formato {files:{path:str}}. Texto-livre (handler antigo) FALHA aqui.
+    files = artifact.get("files") if isinstance(artifact, dict) else None
+    sig["artifact_parseable"] = isinstance(files, dict) and bool(files) \
+        and all(isinstance(k, str) and isinstance(v, str) for k, v in files.items())
+    if not sig["artifact_parseable"]:
+        return {"signals": sig, "static_ok": False, "first_fail": "artifact_parseable",
+                "tests_pass": "UNVERIFIED", "delivered_ok": False}
+
+    # repo DEPOIS do patch do agente
+    merged = dict(seed)
+    merged.update(files)
+
+    bug_file = oracle.get("bug_file")
+    # (1) touches_bug_file — modificou o arquivo do bug?  [função do artefato]
+    sig["touches_bug_file"] = bool(bug_file) and bug_file in files \
+        and files[bug_file] != seed.get(bug_file)
+
+    # (1b) bug_addressed — marcadores do defeito tratados no bug_file?  [estático]
+    markers = oracle.get("bug_markers", {}) or {}
+    body = files.get(bug_file, seed.get(bug_file, "")) if bug_file else ""
+    sig["bug_addressed"] = (
+        all(tok not in body for tok in markers.get("must_remove", []))
+        and all(tok in body for tok in markers.get("must_contain", []))
+    )
+
+    # (2) protected_unmodified — não alterou nenhum arquivo protegido (teste-alvo held-out)?  [sha256]
+    prot_ok = True
+    for path, want_hash in (oracle.get("protected_files") or {}).items():
+        if path in files and sha(files[path]) != want_hash:
+            prot_ok = False   # tentou reescrever o próprio oráculo
+    sig["protected_unmodified"] = prot_ok
+
+    # (3) result_parses — todo .py resultante é sintaticamente válido?  [ast, sem executar]
+    parses = True
+    for path, content in merged.items():
+        if path.endswith(".py"):
+            try:
+                ast.parse(content)
+            except SyntaxError:
+                parses = False
+                break
+    sig["result_parses"] = parses
+
+    # (4) no_test_gaming — sem burla óbvia no(s) arquivo(s) que o agente escreveu  [texto]
+    sig["no_test_gaming"] = not any(
+        tok in content for content in files.values() for tok in _GAMING_TOKENS)
+
+    static_ok = all(sig[k] for k in NECESSARIOS)
+    first_fail = next((k for k in NECESSARIOS if not sig[k]), None)
+
+    # SUFICIENTE: offline nunca executa ⇒ UNVERIFIED ⇒ delivered_ok não pode ser True (honesto).
+    return {"signals": sig, "static_ok": static_ok, "first_fail": first_fail,
+            "tests_pass": "UNVERIFIED", "delivered_ok": False}

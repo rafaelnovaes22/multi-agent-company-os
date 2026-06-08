@@ -38,3 +38,5 @@ jobs:
         run: python -m unittest tests.test_icp_segments
       - name: Wiring da camada generativa (soul + C2 + custo + opt-in)
         run: python -m unittest tests.test_generative_prompt
+      - name: Oráculo VERIFY-IN-EVAL F0 (verify_code + spec_executor)
+        run: python -m unittest tests.test_verify_code

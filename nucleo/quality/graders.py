@@ -285,3 +285,7 @@ for _name in (
     "token_cost_accountant", "margin_watch",
 ):
     register(_name)(_g_expected_fields)
+
+# Grader de execução (spec_executor — VERIFY-IN-EVAL F0). Import no fim para registrar via
+# side-effect sem ciclo: graders_exec só usa `register`, já definido acima.
+from . import graders_exec  # noqa: E402,F401

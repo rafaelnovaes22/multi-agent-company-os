@@ -916,3 +916,4 @@ from . import skills_custops   # noqa: E402,F401  (G09)
 from . import skills_g00, skills_g01, skills_g02, skills_g03, skills_g04  # noqa: E402,F401
 from . import skills_g05, skills_g06, skills_g07, skills_g08, skills_g11  # noqa: E402,F401
 from . import skills_g12, skills_g13, skills_g14  # noqa: E402,F401
+from . import skills_exec  # noqa: E402,F401  (spec_executor — VERIFY-IN-EVAL F0)

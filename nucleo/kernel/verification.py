@@ -42,12 +42,16 @@ def sha(s: str) -> str:
     return hashlib.sha256((s or "").encode("utf-8")).hexdigest()[:12]
 
 
-def verify_code(artifact: dict, seed: dict, oracle: dict) -> dict:
-    """Verifica um artefato de código contra (semente, oráculo) SEM executar.
+def verify_code(artifact: dict, seed: dict, oracle: dict, executor=None) -> dict:
+    """Verifica um artefato de código contra (semente, oráculo). Estático sempre; execução
+    SÓ se houver um ExecutionProvider disponível (F2) — senão tests_pass=UNVERIFIED (F0/F1).
 
     artifact: {"files": {path: content}} produzido pelo agente (o patch).
     seed:     {path: content} repo-semente (build vermelho por construção).
-    oracle:   {"bug_file", "protected_files": {path: sha}, "bug_markers": {must_remove, must_contain}}.
+    oracle:   {"bug_file", "protected_files": {path: sha}, "bug_markers": {must_remove, must_contain},
+               "test_cmd"?: comando de teste (usado SÓ na execução real — F2)}.
+    executor: ExecutionProvider | None. None ⇒ não executa (F1 inerte). A execução real só
+              CONFIRMA um sinal já estaticamente válido; nunca lê um booleano do eval-case.
 
     Retorna: {signals, static_ok, first_fail, tests_pass, delivered_ok}.
     """
@@ -105,6 +109,22 @@ def verify_code(artifact: dict, seed: dict, oracle: dict) -> dict:
     static_ok = all(sig[k] for k in NECESSARIOS)
     first_fail = next((k for k in NECESSARIOS if not sig[k]), None)
 
-    # SUFICIENTE: offline nunca executa ⇒ UNVERIFIED ⇒ delivered_ok não pode ser True (honesto).
+    # SUFICIENTE: tests_pass só é bool vindo de EXECUÇÃO real (F2). Sem executor disponível
+    # (F0/F1) ou se o artefato nem passou no estático, fica UNVERIFIED. delivered_ok exige
+    # static_ok E tests_pass executado True — nunca verde-por-fixture, nunca verde-offline.
+    tests_pass = "UNVERIFIED"
+    if static_ok and executor is not None and getattr(executor, "available", False):
+        test_cmd = (oracle.get("test_cmd") or "pytest -q")
+        try:
+            res = executor.run_tests(dict(merged), test_cmd=test_cmd)
+        except Exception as exc:  # noqa: BLE001 — runner falho ⇒ UNVERIFIED, não crash
+            import logging
+            logging.getLogger(__name__).warning("executor %s falhou: %s",
+                                                 getattr(executor, "name", "?"), exc)
+            res = None
+        if isinstance(res, bool):
+            tests_pass = res
+    delivered_ok = tests_pass is True
+
     return {"signals": sig, "static_ok": static_ok, "first_fail": first_fail,
-            "tests_pass": "UNVERIFIED", "delivered_ok": False}
+            "tests_pass": tests_pass, "delivered_ok": delivered_ok}

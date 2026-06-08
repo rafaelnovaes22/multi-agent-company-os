@@ -14,6 +14,7 @@ from __future__ import annotations
 
 from .skills import register, _tokens, _spec_citations
 from .verification import verify_code
+from .execution import get_executor
 
 
 @register("spec_executor")
@@ -35,7 +36,9 @@ def spec_executor(state, *, llm, store, spec):
     artifact_type = task.get("artifact_type") or "build_error_resolver.artifact"
     routed_to = task.get("routed_to") or spec["id"]
 
-    v = verify_code(artifact, seed, oracle)
+    # Executor por env (EXEC_PROVIDER): default InertExecutor ⇒ não executa, tests_pass=UNVERIFIED.
+    # A F2 pluga o DockerExecutor real sem tocar este handler nem o eval-case.
+    v = verify_code(artifact, seed, oracle, executor=get_executor())
     static_ok = v["static_ok"]
     # status honesto: verificado estaticamente vs reprovado (com o 1º critério que falhou).
     status = "verified_static" if static_ok else f"rejected:{v['first_fail']}"

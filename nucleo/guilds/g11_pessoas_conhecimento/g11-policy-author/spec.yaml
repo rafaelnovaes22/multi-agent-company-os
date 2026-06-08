@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: internal_policy_author
+act_handler: spec_driven
 outcome_clause:
   statement: 'Internal Policy Author entrega policy-author.artifact verificável para:
     Redigir, versionar e manter as políticas internas do NÚCLEO (conduta, segurança

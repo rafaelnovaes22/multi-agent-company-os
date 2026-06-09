@@ -11,9 +11,11 @@ Roda offline, sem Docker.
 from __future__ import annotations
 import os
 import unittest
+from unittest import mock
 
 from nucleo.kernel.verification import verify_code, sha
-from nucleo.kernel.execution import InertExecutor, get_executor, ExecutionProvider
+from nucleo.kernel import execution as execmod
+from nucleo.kernel.execution import InertExecutor, DockerExecutor, get_executor, ExecutionProvider
 
 SEED = {
     "app.py": "def discount(price, percent):\n    return price - price * pct / 100\n",
@@ -58,10 +60,17 @@ class InertIsDefault(unittest.TestCase):
         self.assertIsInstance(ex, InertExecutor)
         self.assertFalse(ex.available)
 
-    def test_docker_ainda_degrada_para_inerte_com_aviso(self):
+    def test_docker_resolve_para_dockerexecutor(self):
         os.environ["EXEC_PROVIDER"] = "docker"
-        with self.assertLogs("nucleo.kernel.execution", level="WARNING"):
-            self.assertIsInstance(get_executor(), InertExecutor)
+        self.assertIsInstance(get_executor(), DockerExecutor)
+
+    def test_dockerexecutor_indisponivel_e_unverified(self):
+        # sem daemon (available=False) o DockerExecutor NÃO executa ⇒ None (UNVERIFIED),
+        # nunca um falso verde. (No nightly Linux+Docker, available=True e executa de fato.)
+        ex = DockerExecutor()
+        ex._avail = False
+        self.assertFalse(ex.available)
+        self.assertIsNone(ex.run_tests({"a.py": "x"}, test_cmd="python -m pytest -q"))
 
     def test_inert_mantem_comportamento_f0(self):
         v = verify_code(FIX_OK, SEED, ORACLE, executor=InertExecutor())
@@ -71,6 +80,33 @@ class InertIsDefault(unittest.TestCase):
 
     def test_sem_executor_igual_inert(self):
         self.assertEqual(verify_code(FIX_OK, SEED, ORACLE)["delivered_ok"], False)
+
+
+class DockerCommandHardening(unittest.TestCase):
+    """Trava a config de sandbox do DockerExecutor SEM precisar de Docker (mock de subprocess).
+    Garante que os flags de segurança não regridam silenciosamente."""
+
+    def _captura_cmd(self, files):
+        ex = DockerExecutor()
+        ex._avail = True  # finge daemon presente p/ chegar na montagem do comando
+        fake = mock.Mock(returncode=0, stderr=b"")
+        with mock.patch.object(execmod.subprocess, "run", return_value=fake) as m:
+            ex.run_tests(files, test_cmd="python -m pytest -q")
+        return m.call_args[0][0] if m.call_args else []
+
+    def test_flags_de_seguranca_presentes(self):
+        cmd = " ".join(self._captura_cmd({"app.py": "print(1)\n"}))
+        for flag in ("--rm", "--network none", "--cap-drop ALL",
+                     "--security-opt no-new-privileges", "--read-only",
+                     "--pids-limit", "--memory 512m", "--cpus 1"):
+            self.assertIn(flag, cmd, f"flag de sandbox ausente: {flag}")
+
+    def test_paths_inseguros_nao_executam(self):
+        ex = DockerExecutor()
+        ex._avail = True
+        with mock.patch.object(execmod.subprocess, "run") as m:
+            self.assertIsNone(ex.run_tests({"../x.py": "evil"}, test_cmd="python -m pytest -q"))
+            m.assert_not_called()  # nem chega a rodar docker
 
 
 class ExecutorWiring(unittest.TestCase):

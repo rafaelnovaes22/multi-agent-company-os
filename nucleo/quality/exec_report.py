@@ -15,6 +15,8 @@ Uso (nightly, runner Linux+Docker):
 Sem EXEC_PROVIDER (offline) reporta delivered_rate=0 — honesto, não executou.
 """
 from __future__ import annotations
+import argparse
+import json
 import os
 import sys
 import uuid
@@ -63,21 +65,87 @@ def run(spec_dir: str) -> dict:
             "caught_by_exec": caught_by_exec, "rows": rows}
 
 
-def main(argv):
-    spec_dir = argv[0] if argv else "nucleo/guilds/g03_engenharia/g3-build-error-resolver"
-    ex = get_executor()
-    rep = run(spec_dir)
-    n = rep["n"]
-    print(f"exec_report — {rep['id']}  | executor={ex.name} available={ex.available}\n")
-    print(f"  static_pass_rate = {rep['static_pass']}/{n}  ({100*rep['static_pass']/n:.0f}%)  ← F0 move")
-    print(f"  delivered_rate   = {rep['delivered']}/{n}  ({100*rep['delivered']/n:.0f}%)  ← só execução real move")
-    if not ex.available:
-        print("\n  (executor inerte/indisponível — delivered_rate=0 é honesto: não executou)")
+def _rate(passed: int, total: int) -> dict:
+    percent = round((100 * passed / total), 2) if total else 0.0
+    return {"passed": passed, "total": total, "percent": percent}
+
+
+def summarize(rep: dict, *, executor_name: str, executor_available: bool) -> dict:
+    """Contrato machine-readable do nightly VERIFY-IN-EVAL.
+
+    Mantém os números centrais da tese (static vs delivered) e explicita o gap operacional:
+    casos que passaram no estático mas ainda não viraram entrega validada por execução real.
+    """
+    total = int(rep.get("n") or 0)
+    static_pass = int(rep.get("static_pass") or 0)
+    delivered = int(rep.get("delivered") or 0)
+    caught = list(rep.get("caught_by_exec") or [])
+    static_without_delivery = max(static_pass - delivered, 0)
+    return {
+        "agent_id": rep.get("id"),
+        "executor": {"name": executor_name, "available": bool(executor_available)},
+        "total": total,
+        "static_pass_rate": _rate(static_pass, total),
+        "delivered_rate": _rate(delivered, total),
+        "static_without_delivery_count": static_without_delivery,
+        "caught_by_exec_count": len(caught),
+        "caught_by_exec": [
+            {"id": r.get("id"), "desc": r.get("desc"), "tests_pass": r.get("tests_pass"),
+             "first_fail": r.get("first_fail")}
+            for r in caught
+        ],
+        "rows": rep.get("rows") or [],
+    }
+
+
+def render_text(summary: dict) -> str:
+    """Renderiza o relatório humano; o JSON vem de `summarize`."""
+    static_rate = summary["static_pass_rate"]
+    delivered_rate = summary["delivered_rate"]
+    total = summary["total"]
+    lines = [
+        f"exec_report — {summary['agent_id']}  | executor={summary['executor']['name']} "
+        f"available={summary['executor']['available']}",
+        "",
+        f"  static_pass_rate = {static_rate['passed']}/{total}  ({static_rate['percent']:.0f}%)  ← F0 move",
+        f"  delivered_rate   = {delivered_rate['passed']}/{total}  ({delivered_rate['percent']:.0f}%)  ← só execução real move",
+        f"  static_sem_delivery = {summary['static_without_delivery_count']}/{total}  ← gap a maturar",
+    ]
+    if not summary["executor"]["available"]:
+        lines.append("\n  (executor inerte/indisponível — delivered_rate=0 é honesto: não executou)")
     else:
-        print(f"\n  {len(rep['caught_by_exec'])} artefato(s) passaram o ESTÁTICO mas a EXECUÇÃO reprovou "
-              f"(o que só a F2 pega):")
-        for r in rep["caught_by_exec"]:
-            print(f"    - {r['id']}: {r['desc'][:70]}")
+        lines.append(
+            f"\n  {summary['caught_by_exec_count']} artefato(s) passaram o ESTÁTICO mas a EXECUÇÃO reprovou "
+            "(o que só a F2 pega):"
+        )
+        for row in summary["caught_by_exec"]:
+            desc = (row.get("desc") or "")[:70]
+            lines.append(f"    - {row.get('id')}: {desc}")
+    return "\n".join(lines)
+
+
+def _parse(argv):
+    parser = argparse.ArgumentParser(description="Relatório VERIFY-IN-EVAL: estático vs execução real.")
+    parser.add_argument("spec_dir", nargs="?", default="nucleo/guilds/g03_engenharia/g3-build-error-resolver")
+    parser.add_argument("--json", action="store_true", help="emite somente JSON machine-readable")
+    parser.add_argument("--json-output", help="também grava o resumo JSON neste caminho")
+    return parser.parse_args(argv)
+
+
+def main(argv):
+    args = _parse(argv)
+    ex = get_executor()
+    available = ex.available
+    rep = run(args.spec_dir)
+    summary = summarize(rep, executor_name=ex.name, executor_available=available)
+    json_text = json.dumps(summary, ensure_ascii=False, indent=2, sort_keys=True)
+    if args.json_output:
+        with open(args.json_output, "w", encoding="utf-8") as f:
+            f.write(json_text + "\n")
+    if args.json:
+        print(json_text)
+    else:
+        print(render_text(summary))
     return 0
 
 

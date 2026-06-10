@@ -31,5 +31,13 @@ jobs:
         run: docker build -t nucleo-exec:latest -f nucleo/quality/exec.Dockerfile nucleo/quality
       - name: Teste de integração do DockerExecutor (sandbox real)
         run: python -m unittest tests.test_docker_executor
-      - name: Relatório de execução do piloto (static_pass_rate + delivered_rate)
-        run: python -m nucleo.quality.exec_report nucleo/guilds/g03_engenharia/g3-build-error-resolver
+      - name: Relatório de execução do piloto (humano + JSON)
+        run: |
+          python -m nucleo.quality.exec_report --json-output exec_report.json nucleo/guilds/g03_engenharia/g3-build-error-resolver | tee exec_report.txt
+      - name: Publicar artefatos do relatório VERIFY-IN-EVAL
+        uses: actions/upload-artifact@v4
+        with:
+          name: verify-in-eval-exec-report
+          path: |
+            exec_report.txt
+            exec_report.json

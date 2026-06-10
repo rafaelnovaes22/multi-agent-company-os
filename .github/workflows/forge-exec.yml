@@ -34,6 +34,9 @@ jobs:
       - name: Relatório de execução do piloto (humano + JSON)
         run: |
           python -m nucleo.quality.exec_report --json-output exec_report.json nucleo/guilds/g03_engenharia/g3-build-error-resolver | tee exec_report.txt
+      - name: Relatório de execução do g3-backend-builder (F3, held-out)
+        run: |
+          python -m nucleo.quality.exec_report --json-output exec_report_backend.json nucleo/guilds/g03_engenharia/g3-backend-builder | tee exec_report_backend.txt
       - name: Publicar artefatos do relatório VERIFY-IN-EVAL
         uses: actions/upload-artifact@v4
         with:
@@ -41,3 +44,5 @@ jobs:
           path: |
             exec_report.txt
             exec_report.json
+            exec_report_backend.txt
+            exec_report_backend.json

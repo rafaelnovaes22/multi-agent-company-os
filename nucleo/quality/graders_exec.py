@@ -17,7 +17,7 @@ from .graders import register
 _SIGNAL_KEYS = (
     "static_ok", "delivered_ok", "first_fail",
     "artifact_parseable", "touches_bug_file", "bug_addressed",
-    "protected_unmodified", "result_parses", "no_test_gaming",
+    "protected_unmodified", "heldout_untouched", "result_parses", "no_test_gaming",
     "handler_kind", "status", "requires_human_review",
 )
 

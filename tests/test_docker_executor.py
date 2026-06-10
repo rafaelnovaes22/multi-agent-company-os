@@ -57,6 +57,37 @@ class _DockerIntegration(unittest.TestCase):
                  "    urllib.request.urlopen('http://example.com', timeout=3)\n"}
         self.assertIs(self.ex.run_tests(files, test_cmd="python -m pytest -q"), False)
 
+    def test_natureza_build_heldout_injetado(self):
+        # F3: verify_code injeta o held-out do oráculo e executa de verdade — a implementação
+        # correta credita delivered; a plausível-mas-errada cai SÓ aqui.
+        from nucleo.kernel.verification import verify_code, sha
+        contract = "# Contrato: total = soma de price*qty.\n"
+        seed = {"orders.py": "def create_order(items):\n    raise NotImplementedError  # TODO\n",
+                "docs/contract.md": contract}
+        oracle = {
+            "bug_file": "orders.py",
+            "protected_files": {"docs/contract.md": sha(contract)},
+            "bug_markers": {"must_remove": ["NotImplementedError"],
+                            "must_contain": ["def create_order"]},
+            "heldout_files": {"test_orders.py": (
+                "from orders import create_order\n\ndef test_total():\n"
+                "    assert create_order([{'price': 10.0, 'qty': 2}])['total'] == 20.0\n")},
+            "test_cmd": "python -m pytest -q",
+        }
+        ok = {"files": {"orders.py": (
+            "def create_order(items):\n"
+            "    return {'total': sum(i['price'] * i['qty'] for i in items)}\n")}}
+        plausivel = {"files": {"orders.py": (
+            "def create_order(items):\n"
+            "    return {'total': sum(i['price'] for i in items)}\n")}}
+        r_ok = verify_code(ok, seed, oracle, executor=self.ex)
+        self.assertTrue(r_ok["static_ok"])
+        self.assertTrue(r_ok["delivered_ok"])
+        r_plaus = verify_code(plausivel, seed, oracle, executor=self.ex)
+        self.assertTrue(r_plaus["static_ok"])
+        self.assertIs(r_plaus["tests_pass"], False)
+        self.assertFalse(r_plaus["delivered_ok"])
+
 
 if __name__ == "__main__":
     unittest.main()

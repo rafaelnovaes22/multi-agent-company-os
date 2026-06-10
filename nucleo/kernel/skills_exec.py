@@ -19,12 +19,14 @@ from .execution import get_executor
 
 @register("spec_executor")
 def spec_executor(state, *, llm, store, spec):
-    """g3-build-error-resolver (piloto F0) e demais técnicos verificáveis.
+    """Técnicos verificáveis: g3-build-error-resolver (red→green, piloto F0) e
+    g3-backend-builder (build held-out, F3).
 
     Lê de state['task']:
       artifact — {"files": {path: content}} produzido pelo agente (o patch).
       seed     — {path: content} repo-semente (build vermelho por construção).
-      oracle   — {bug_file, protected_files{path: sha}, bug_markers{must_remove, must_contain}}.
+      oracle   — {bug_file, protected_files{path: sha}, bug_markers{must_remove, must_contain},
+                  heldout_files{path: content}? (natureza build — testes que o agente nunca vê)}.
 
     O oráculo é HELD-OUT (autorado no eval-case); o agente nunca o vê. `verify_code` re-deriva
     o veredito do ARTEFATO — nunca lê um booleano de sucesso declarado pelo caso.
@@ -58,6 +60,7 @@ def spec_executor(state, *, llm, store, spec):
         "touches_bug_file": v["signals"].get("touches_bug_file", False),
         "bug_addressed": v["signals"].get("bug_addressed", False),
         "protected_unmodified": v["signals"].get("protected_unmodified", False),
+        "heldout_untouched": v["signals"].get("heldout_untouched", False),
         "result_parses": v["signals"].get("result_parses", False),
         "no_test_gaming": v["signals"].get("no_test_gaming", False),
         "static_ok": static_ok,

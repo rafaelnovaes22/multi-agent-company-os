@@ -10,13 +10,21 @@ Distinção central (provada offline pelo protótipo c:/tmp/proto_verify_code.py
 
   NECESSÁRIO (estático, offline, sempre computável, função do artefato):
     artifact_parseable   — o artefato tem o formato {files:{path:content}} (não prosa)
-    touches_bug_file     — modificou o arquivo do bug (≠ semente)
-    bug_addressed        — tratou os marcadores do defeito no bug_file (must_remove/must_contain)
-    protected_unmodified — NÃO alterou arquivos protegidos (teste-alvo held-out) — sha256
+    touches_bug_file     — modificou o arquivo-alvo (bug em red→green; esqueleto em build)
+    bug_addressed        — tratou os marcadores do alvo no bug_file (must_remove/must_contain)
+    protected_unmodified — NÃO alterou arquivos protegidos (teste-alvo/contrato) — sha256
+    heldout_untouched    — NÃO declarou nenhum path de teste held-out (não autora o critério)
     result_parses        — todo .py resultante é sintaticamente válido (ast, sem executar)
     no_test_gaming       — sem burla óbvia (sys.exit/skip/SkipTest)
 
   SUFICIENTE (executado, só F2 com runner Linux+Docker): tests_pass = post_exit == 0.
+
+DUAS NATUREZAS do mesmo oráculo code-exec (F3 generaliza, sem bifurcação):
+  red→green (fix)  — o teste-alvo JÁ está na semente, protegido por sha (protected_files).
+  build (held-out) — os testes vêm do EVAL-CASE em `oracle.heldout_files` e NÃO existem na
+                     semente: o agente nunca os vê. Na execução eles são INJETADOS por cima
+                     do merge (semente+patch) — o critério roda sempre na versão do oráculo,
+                     jamais na do artefato; declarar o path de um held-out é reprova estática.
 
   static_ok    = all(NECESSÁRIOS)                       — já reprova lixo/burla offline
   delivered_ok = static_ok AND tests_pass (executado)   — OFFLINE tests_pass=UNVERIFIED ⇒ False
@@ -30,7 +38,7 @@ import ast
 import hashlib
 
 NECESSARIOS = ["artifact_parseable", "touches_bug_file", "bug_addressed",
-               "protected_unmodified", "result_parses", "no_test_gaming"]
+               "protected_unmodified", "heldout_untouched", "result_parses", "no_test_gaming"]
 
 # Marcadores de burla de teste (anti-gaming) — escrita defensiva, não exaustiva.
 _GAMING_TOKENS = ("sys.exit(0)", "pytest.skip", "raise SkipTest",
@@ -49,6 +57,7 @@ def verify_code(artifact: dict, seed: dict, oracle: dict, executor=None) -> dict
     artifact: {"files": {path: content}} produzido pelo agente (o patch).
     seed:     {path: content} repo-semente (build vermelho por construção).
     oracle:   {"bug_file", "protected_files": {path: sha}, "bug_markers": {must_remove, must_contain},
+               "heldout_files"?: {path: content} testes held-out (natureza build — F3),
                "test_cmd"?: comando de teste (usado SÓ na execução real — F2)}.
     executor: ExecutionProvider | None. None ⇒ não executa (F1 inerte). A execução real só
               CONFIRMA um sinal já estaticamente válido; nunca lê um booleano do eval-case.
@@ -84,12 +93,17 @@ def verify_code(artifact: dict, seed: dict, oracle: dict, executor=None) -> dict
         and all(tok in body for tok in markers.get("must_contain", []))
     )
 
-    # (2) protected_unmodified — não alterou nenhum arquivo protegido (teste-alvo held-out)?  [sha256]
+    # (2) protected_unmodified — não alterou nenhum arquivo protegido (teste-alvo/contrato)?  [sha256]
     prot_ok = True
     for path, want_hash in (oracle.get("protected_files") or {}).items():
         if path in files and sha(files[path]) != want_hash:
             prot_ok = False   # tentou reescrever o próprio oráculo
     sig["protected_unmodified"] = prot_ok
+
+    # (2b) heldout_untouched — não declarou nenhum path de teste held-out (natureza build)?
+    # O held-out é o CRITÉRIO: o agente que o escreve está autorando a própria prova.
+    heldout = oracle.get("heldout_files") or {}
+    sig["heldout_untouched"] = not any(path in files for path in heldout)
 
     # (3) result_parses — todo .py resultante é sintaticamente válido?  [ast, sem executar]
     parses = True
@@ -115,8 +129,12 @@ def verify_code(artifact: dict, seed: dict, oracle: dict, executor=None) -> dict
     tests_pass = "UNVERIFIED"
     if static_ok and executor is not None and getattr(executor, "available", False):
         test_cmd = (oracle.get("test_cmd") or "pytest -q")
+        # held-out por ÚLTIMO: o critério executado é sempre a versão do oráculo, nunca a do
+        # artefato (mesmo que algo escape do sinal estático, a injeção sobrescreve).
+        exec_files = dict(merged)
+        exec_files.update(heldout)
         try:
-            res = executor.run_tests(dict(merged), test_cmd=test_cmd)
+            res = executor.run_tests(exec_files, test_cmd=test_cmd)
         except Exception as exc:  # noqa: BLE001 — runner falho ⇒ UNVERIFIED, não crash
             import logging
             logging.getLogger(__name__).warning("executor %s falhou: %s",

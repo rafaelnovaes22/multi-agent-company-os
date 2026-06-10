@@ -31,3 +31,7 @@ secrets.*
 
 # Config local do Claude Code (settings.json + settings.local.json)
 .claude/
+
+node_modules/
+videos/
+package-lock.json

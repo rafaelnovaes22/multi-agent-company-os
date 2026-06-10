@@ -9,3 +9,5 @@ PyYAML>=6
 #   Gemini:  pip install google-genai   + LLM_PROVIDER=google    GEMINI_API_KEY=...
 #   Vertex:  pip install google-genai   + LLM_PROVIDER=vertex GOOGLE_GENAI_USE_VERTEXAI=true \
 #            GOOGLE_CLOUD_PROJECT=<proj> GOOGLE_CLOUD_LOCATION=us-central1  (ADC via gcloud)
+google-genai
+

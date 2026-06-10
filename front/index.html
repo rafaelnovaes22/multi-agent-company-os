@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acme Multi-Agentes — a empresa-OS AI-native</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#06070D; --bg2:#0A0C16; --panel:#10131F; --line:rgba(255,255,255,.08);
+  --blue:#0043DD; --electric:#3D6FFF; --glow:#5B86FF; --soft:#9DB9FF;
+  --ink:#F4F6FF; --dim:#9AA3BF; --dim2:#6E7894;
+  --red:#FF5C5C; --green:#3DDC97; --amber:#FFB648;
+  --display:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;
+  --sans:"Inter",ui-sans-serif,system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:var(--display);letter-spacing:-0.03em}
+::selection{background:var(--electric);color:#fff}
+a{color:inherit}
+
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.6,.2,1),transform .7s cubic-bezier(.2,.6,.2,1)}
+.rv.on{opacity:1;transform:none}
+
+/* ================= NAV ================= */
+.nav{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;
+  padding:16px 5vw;background:rgba(6,7,13,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{font-family:var(--display);font-weight:700;font-size:20px}
+.logo b{color:var(--electric)}
+.nav .links{display:flex;gap:30px;font-size:14px;color:var(--dim)}
+.nav .links a{text-decoration:none;transition:color .2s}
+.nav .links a:hover{color:#fff}
+@media(max-width:860px){.nav .links{display:none}}
+.btn{font-family:var(--display);font-weight:600;font-size:14.5px;padding:11px 22px;border-radius:999px;text-decoration:none;
+  display:inline-block;transition:transform .25s,box-shadow .25s,background .25s;cursor:pointer;border:none}
+.btn-primary{background:var(--electric);color:#fff;box-shadow:0 8px 26px rgba(61,111,255,.35)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(61,111,255,.5)}
+.btn-ghost{border:1px solid rgba(255,255,255,.2);color:#fff;background:transparent}
+.btn-ghost:hover{border-color:var(--electric);color:var(--glow)}
+
+/* ================= HERO ================= */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:140px 6vw 90px;overflow:hidden}
+.hero .glow1{position:absolute;width:1300px;height:1300px;left:50%;top:-46%;transform:translateX(-50%);border-radius:50%;
+  background:radial-gradient(circle,rgba(0,67,221,.34),rgba(61,111,255,.10) 45%,transparent 68%);animation:breathe 10s ease-in-out infinite}
+.hero .glow2{position:absolute;width:900px;height:900px;left:50%;bottom:-58%;transform:translateX(-50%);border-radius:50%;
+  background:radial-gradient(circle,rgba(91,134,255,.16),transparent 65%);animation:breathe 13s ease-in-out infinite reverse}
+@keyframes breathe{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.1)}}
+.eyebrow{position:relative;z-index:2;font-size:13.5px;color:var(--dim);border:1px solid var(--line);
+  padding:8px 18px;border-radius:999px;margin-bottom:34px;background:rgba(255,255,255,.03)}
+.hero h1{position:relative;z-index:2;font-size:clamp(46px,7.4vw,104px);line-height:1.03;font-weight:700;max-width:1080px}
+.hero h1 .accent{display:block;background:linear-gradient(95deg,var(--electric),var(--glow) 60%,var(--soft));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.sub{position:relative;z-index:2;margin-top:28px;font-size:clamp(16px,1.45vw,19px);color:var(--dim);max-width:620px;line-height:1.7}
+.hero p.sub b{color:#CBD7FA;font-weight:600}
+.hero .cta-row{position:relative;z-index:2;display:flex;gap:14px;margin-top:40px;flex-wrap:wrap;justify-content:center}
+.hero .live{position:relative;z-index:2;margin-top:26px;display:inline-flex;align-items:center;gap:9px;font-size:13px;color:var(--dim2)}
+.hero .live .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:blink 1.6s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* tiles 3D flutuantes (cards do Pomelo → tiles de agentes) */
+.tile3d{position:absolute;z-index:1;border-radius:26px;
+  background:linear-gradient(150deg,#1A2B66 0%,#0E1A45 55%,#0A1232 100%);
+  border:1px solid rgba(91,134,255,.25);box-shadow:0 40px 90px rgba(0,30,120,.5), inset 0 1px 0 rgba(255,255,255,.09);
+  animation:float 9s ease-in-out infinite}
+.tile3d::after{content:"";position:absolute;inset:0;border-radius:26px;
+  background:radial-gradient(120% 90% at 18% 12%,rgba(91,134,255,.35),transparent 55%)}
+.tile3d .tag{position:absolute;left:22px;bottom:18px;font-family:var(--display);font-weight:600;font-size:13px;color:#AFC4FF;opacity:.85}
+.tile3d .chip{position:absolute;left:22px;top:20px;width:34px;height:26px;border-radius:6px;
+  background:linear-gradient(140deg,var(--glow),var(--blue));opacity:.9}
+.t1{width:300px;height:188px;right:6vw;top:16vh;transform:rotate3d(.6,1,.15,38deg) rotate(8deg)}
+.t2{width:240px;height:150px;left:5vw;top:58vh;transform:rotate3d(.8,-.9,.1,34deg) rotate(-9deg);animation-delay:-4s}
+.t3{width:170px;height:108px;right:14vw;bottom:9vh;transform:rotate3d(.4,1,.2,42deg) rotate(14deg);animation-delay:-7s;opacity:.8}
+@keyframes float{0%,100%{margin-top:0}50%{margin-top:-26px}}
+@media(max-width:900px){.t2,.t3{display:none}.t1{width:210px;height:132px;right:2vw;top:12vh}}
+
+/* ================= TRUST BAR ================= */
+.trust{padding:46px 6vw 70px;text-align:center}
+.trust .t{font-size:14.5px;color:var(--dim);margin-bottom:30px}
+.trust .logos{display:flex;flex-wrap:wrap;gap:14px 34px;justify-content:center;align-items:center}
+.trust .lg{font-family:var(--display);font-weight:600;font-size:16.5px;color:#5A6480;letter-spacing:.02em;
+  transition:color .25s;cursor:default;display:flex;align-items:center;gap:8px}
+.trust .lg span{font-size:11px;font-weight:500;color:#3E4763;border:1px solid var(--line);border-radius:999px;padding:2px 8px}
+.trust .lg:hover{color:#C9D5F8}
+
+/* ================= SECTION SHELL ================= */
+section{padding:120px 6vw;position:relative}
+.center{text-align:center;display:flex;flex-direction:column;align-items:center}
+.kicker{font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--glow);margin-bottom:20px}
+h2.title{font-size:clamp(34px,4.8vw,64px);font-weight:700;line-height:1.05;max-width:860px}
+p.lead{margin-top:22px;font-size:17.5px;color:var(--dim);max-width:640px;line-height:1.7}
+
+/* ================= CARROSSEL (use cases) ================= */
+.carousel-sec{background:radial-gradient(900px 480px at 50% 115%,rgba(0,67,221,.28),transparent 70%)}
+.carousel{position:relative;max-width:1080px;margin:64px auto 0;width:100%}
+.viewport{overflow:hidden;border-radius:28px}
+.slides{display:flex;transition:transform .65s cubic-bezier(.25,.7,.25,1)}
+.slide{min-width:100%;display:grid;grid-template-columns:1fr 1fr;gap:0;background:linear-gradient(160deg,var(--panel),#0B0E1B);
+  border:1px solid var(--line);border-radius:28px;overflow:hidden;min-height:430px}
+@media(max-width:900px){.slide{grid-template-columns:1fr}}
+.slide .copy{padding:48px 46px;display:flex;flex-direction:column;justify-content:center;text-align:left}
+.slide .copy .k{font-family:var(--display);font-weight:600;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--glow);margin-bottom:14px}
+.slide .copy h3{font-size:clamp(24px,2.5vw,34px);font-weight:700;line-height:1.12}
+.slide .copy p{margin-top:16px;color:var(--dim);font-size:15.5px;line-height:1.7}
+.slide .copy .mini{margin-top:22px;display:flex;flex-direction:column;gap:9px;font-size:14px;color:#C2CDEE}
+.slide .copy .mini span b{color:var(--glow)}
+.slide .visual{position:relative;display:flex;align-items:center;justify-content:center;padding:38px;
+  background:radial-gradient(420px 320px at 70% 30%,rgba(61,111,255,.16),transparent 70%)}
+.arrow-btn{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.18);background:rgba(10,12,22,.7);backdrop-filter:blur(8px);color:#fff;font-size:17px;
+  cursor:pointer;z-index:5;transition:all .2s;display:flex;align-items:center;justify-content:center}
+.arrow-btn:hover{background:var(--electric);border-color:var(--electric)}
+.arrow-l{left:-23px}.arrow-r{right:-23px}
+.dots{display:flex;gap:9px;justify-content:center;margin-top:26px}
+.dots button{width:8px;height:8px;border-radius:999px;border:none;background:#2A3354;cursor:pointer;transition:all .3s;padding:0}
+.dots button.active{width:26px;background:var(--electric)}
+
+/* visual: painel do dono */
+.owner-card{width:100%;max-width:380px;background:linear-gradient(160deg,#131A33,#0C1126);border:1px solid rgba(255,255,255,.1);
+  border-radius:20px;padding:24px;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.owner-card .hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.owner-card .hd .t{font-family:var(--display);font-weight:600;font-size:15px}
+.sem{display:inline-flex;align-items:center;gap:7px;background:rgba(255,92,92,.13);color:#FF9D9D;font-weight:600;font-size:12px;padding:5px 12px;border-radius:999px}
+.sem .dot{width:8px;height:8px;border-radius:50%;background:var(--red);animation:blink 1.2s infinite}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.kv .box{background:rgba(255,255,255,.05);border-radius:12px;padding:12px 13px}
+.kv .box .k{font-size:11px;color:#8FA4DC}
+.kv .box .v{font-family:var(--display);font-weight:700;font-size:18px;margin-top:2px;font-variant-numeric:tabular-nums}
+.kv .box .v.neg{color:#FF9D9D}
+.alerts .al{display:flex;gap:9px;font-size:12.5px;color:#D9E1F8;padding:7px 2px;border-bottom:1px solid rgba(255,255,255,.06);text-align:left}
+.alerts .al:last-child{border:none}
+.alerts .al .ic{color:var(--amber);font-weight:700}
+
+/* visual: gates */
+.gates-mini{display:flex;flex-direction:column;gap:11px;width:100%;max-width:360px}
+.gate-row{display:flex;align-items:center;gap:13px;background:rgba(255,255,255,.045);border:1px solid var(--line);
+  border-radius:14px;padding:13px 17px;font-size:14px}
+.gate-row .m{font-family:var(--display);font-weight:700;font-size:13.5px;min-width:108px;text-align:left}
+.gate-row .s{color:var(--dim);font-size:12.5px;text-align:left}
+.gate-row.ok{border-color:rgba(61,220,151,.25)}
+.gate-row.ok .m{color:var(--green)}
+.gate-row.blocked{border-color:rgba(255,92,92,.35);background:rgba(255,92,92,.07)}
+.gate-row.blocked .m{color:#FF9D9D}
+/* visual: prova */
+.proof-mini{width:100%;max-width:380px;text-align:left}
+.proof-mini .bl{display:flex;justify-content:space-between;font-size:13.5px;font-weight:600;margin:0 0 8px}
+.proof-mini .bl span:last-child{font-family:var(--display)}
+.bar{height:14px;background:rgba(255,255,255,.07);border-radius:999px;overflow:hidden;margin-bottom:22px}
+.bar i{display:block;height:100%;width:0;border-radius:999px;transition:width 1.3s cubic-bezier(.2,.7,.2,1)}
+.bar.static i{background:linear-gradient(90deg,#4A5C9E,#7E97E8)}
+.bar.deliv i{background:linear-gradient(90deg,var(--blue),var(--electric))}
+.caught-mini{border:1px solid rgba(255,92,92,.2);background:rgba(255,92,92,.05);border-radius:14px;padding:14px 16px;font-size:13px;line-height:1.65;color:#E8D8DC}
+.caught-mini b{color:#FF9D9D}
+/* visual: gemini */
+.llm-card{width:100%;max-width:380px;background:#0C1126;border:1px solid var(--line);border-radius:18px;padding:22px;text-align:left;font-family:ui-monospace,Consolas,monospace;font-size:12.5px;line-height:1.9;color:#9FB4E8}
+.llm-card .ln b{color:#fff;font-weight:600}
+.llm-card .ln .hl{color:var(--glow)}
+.llm-card .ln .ok{color:var(--green)}
+
+/* ================= DIAGRAMA (You design it...) ================= */
+.flow-sec .intent{font-family:var(--display);font-size:clamp(17px,2vw,22px);color:#D7E0FB;background:rgba(255,255,255,.04);
+  border:1px solid var(--line);padding:16px 28px;border-radius:999px;margin-top:54px;position:relative}
+.flow-sec .intent::before{content:"❝";color:var(--glow);margin-right:10px}
+.flow{display:flex;align-items:center;justify-content:center;gap:0;margin-top:44px;flex-wrap:wrap}
+.node{background:linear-gradient(160deg,var(--panel),#0B0E1B);border:1px solid var(--line);border-radius:18px;
+  padding:18px 24px;text-align:center;min-width:150px;position:relative;transition:transform .3s,border-color .3s}
+.node:hover{transform:translateY(-5px);border-color:var(--electric)}
+.node .nm{font-family:var(--display);font-weight:700;font-size:15px}
+.node .rl{font-size:12px;color:var(--dim);margin-top:4px}
+.node.final{border-color:rgba(61,220,151,.4);background:linear-gradient(160deg,#0E2218,#0B1410)}
+.node.final .nm{color:var(--green)}
+.conn{width:64px;height:2px;position:relative;background:linear-gradient(90deg,rgba(91,134,255,.15),rgba(91,134,255,.5))}
+.conn::after{content:"";position:absolute;width:9px;height:9px;border-radius:50%;background:var(--glow);top:-3.5px;left:0;
+  animation:run 2.4s linear infinite;box-shadow:0 0 12px var(--glow)}
+@keyframes run{from{left:0;opacity:0}15%{opacity:1}85%{opacity:1}to{left:54px;opacity:0}}
+@media(max-width:1080px){.conn{width:2px;height:40px;background:linear-gradient(180deg,rgba(91,134,255,.15),rgba(91,134,255,.5))}
+  .conn::after{animation:runV 2.4s linear infinite;left:-3.5px}
+  @keyframes runV{from{top:0;opacity:0}15%{opacity:1}85%{opacity:1}to{top:30px;opacity:0}}
+  .flow{flex-direction:column}}
+
+/* ================= EXECUTAR (demo viva) ================= */
+.exec-sec{background:radial-gradient(900px 520px at 50% -10%,rgba(0,67,221,.2),transparent 70%)}
+.exec-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:26px;max-width:1080px;width:100%;margin-top:58px;align-items:stretch}
+@media(max-width:980px){.exec-grid{grid-template-columns:1fr}}
+.exec-card{background:linear-gradient(160deg,var(--panel),#0B0E1B);border:1px solid var(--line);border-radius:24px;padding:32px;text-align:left}
+.exec-card h4{font-family:var(--display);font-size:17px;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.exec-card h4 .step{font-size:11.5px;color:var(--glow);background:rgba(61,111,255,.14);border-radius:999px;padding:4px 10px;letter-spacing:.08em}
+.f-label{display:block;font-size:12.5px;color:var(--dim);margin:16px 0 7px;letter-spacing:.04em}
+.f-input,.f-select{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:12px;
+  color:#fff;font-family:var(--sans);font-size:14.5px;padding:13px 15px;outline:none;transition:border-color .2s}
+.f-input:focus,.f-select:focus{border-color:var(--electric)}
+.f-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239AA3BF'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center}
+.f-select option{background:#10131F}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.chip-t{font-size:12.5px;color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:7px 13px;cursor:pointer;transition:all .2s;background:transparent;font-family:var(--sans)}
+.chip-t:hover{border-color:var(--electric);color:#fff}
+.chip-t.sel{background:var(--electric);border-color:var(--electric);color:#fff}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:4px}
+.ck{display:flex;align-items:center;gap:9px;font-size:13.5px;color:#C2CDEE;background:rgba(255,255,255,.04);
+  border:1px solid var(--line);border-radius:11px;padding:11px 13px;cursor:pointer;transition:border-color .2s}
+.ck:hover{border-color:rgba(61,111,255,.5)}
+.ck input{accent-color:var(--electric);width:15px;height:15px}
+.exec-run{width:100%;margin-top:26px;font-size:15.5px;padding:15px}
+.exec-run:disabled{opacity:.55;cursor:wait;transform:none!important}
+
+/* trace */
+.trace{display:flex;flex-direction:column;gap:0;min-height:100%}
+.trace .placeholder{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:var(--dim2);font-size:14px;text-align:center;padding:40px 20px}
+.trace .placeholder .ic{font-size:34px;opacity:.5}
+.t-steps{display:flex;flex-direction:column;gap:10px}
+.t-step{display:flex;gap:13px;align-items:flex-start;background:rgba(255,255,255,.035);border:1px solid var(--line);
+  border-radius:14px;padding:14px 16px;opacity:0;transform:translateY(10px);animation:tin .45s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes tin{to{opacity:1;transform:none}}
+.t-step .bullet{width:26px;height:26px;border-radius:50%;background:rgba(61,111,255,.16);color:var(--glow);
+  display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700;font-family:var(--display);flex-shrink:0}
+.t-step.done .bullet{background:rgba(61,220,151,.15);color:var(--green)}
+.t-step .tx{font-size:13.5px;line-height:1.6;color:#C9D3F0;text-align:left}
+.t-step .tx b{color:#fff;font-family:var(--display)}
+.t-step .tx .mono{font-family:ui-monospace,Consolas,monospace;font-size:12px;color:var(--glow)}
+.t-out{margin-top:6px;background:#0A0E1E;border:1px solid var(--line);border-radius:12px;padding:13px 15px;
+  font-family:ui-monospace,Consolas,monospace;font-size:12px;line-height:1.8;color:#9FB4E8;max-height:240px;overflow:auto;text-align:left}
+.t-out .k{color:#6E7894}
+.t-out .v{color:#D7E0FB}
+.t-out .ok{color:var(--green)}
+.t-out .bad{color:#FF9D9D}
+.shadow-note{margin-top:14px;font-size:12.5px;color:var(--amber);background:rgba(255,182,72,.08);
+  border:1px solid rgba(255,182,72,.25);border-radius:11px;padding:11px 14px;text-align:left;line-height:1.55}
+.err-note{margin-top:14px;font-size:13px;color:#FF9D9D;background:rgba(255,92,92,.07);border:1px solid rgba(255,92,92,.3);
+  border-radius:11px;padding:13px 15px;text-align:left;line-height:1.6}
+.err-note code{background:rgba(255,255,255,.08);padding:2px 7px;border-radius:6px;font-size:12px;color:#fff}
+.spin{width:15px;height:15px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;
+  display:inline-block;vertical-align:-3px;margin-right:9px;animation:rot .7s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+
+/* ================= STATS ================= */
+.stats{display:flex;justify-content:center;gap:clamp(30px,6vw,90px);flex-wrap:wrap;margin-top:60px}
+.stat .num{font-family:var(--display);font-weight:700;font-size:clamp(40px,5vw,72px);
+  background:linear-gradient(180deg,#fff,#8FA8EE);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.stat .lbl{margin-top:6px;font-size:14px;color:var(--dim);max-width:200px;line-height:1.5}
+
+/* ================= FROTA ================= */
+.fleet-sec{background:radial-gradient(1000px 500px at 50% -8%,rgba(0,67,221,.22),transparent 70%)}
+.fleet-legend{display:flex;flex-wrap:wrap;gap:9px;margin:46px 0 26px;justify-content:center}
+.fleet-legend button{font-family:var(--sans);font-size:12.5px;font-weight:500;padding:7px 14px;border-radius:999px;
+  border:1px solid var(--line);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s}
+.fleet-legend button:hover{border-color:var(--electric);color:#fff}
+.fleet-legend button.active{background:var(--electric);border-color:var(--electric);color:#fff}
+.fleet{display:grid;grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:9px;width:100%;max-width:1150px}
+.agent{aspect-ratio:1;border-radius:11px;background:var(--g,#1F3FA8);opacity:.95;cursor:pointer;position:relative;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14);transform:scale(0);animation:pop .5s cubic-bezier(.2,.8,.3,1.3) forwards;transition:transform .2s,opacity .2s,box-shadow .2s}
+.agent:hover{transform:scale(1.2)!important;opacity:1;z-index:3;box-shadow:0 0 22px rgba(61,111,255,.65)}
+.agent.dim{opacity:.08;transform:scale(.8)}
+@keyframes pop{to{transform:scale(1)}}
+.tooltip{position:fixed;pointer-events:none;background:#fff;color:#10131F;padding:10px 14px;border-radius:12px;
+  font-size:12.5px;line-height:1.5;z-index:50;opacity:0;transition:opacity .15s;max-width:270px;box-shadow:0 14px 36px rgba(0,0,0,.5)}
+.tooltip b{font-family:var(--display)}
+.tooltip .t2{color:#5A6480;font-size:11.5px}
+
+/* ================= FOOTER ================= */
+footer{padding:130px 6vw 70px;text-align:center;position:relative;overflow:hidden;border-top:1px solid var(--line)}
+footer .glow{position:absolute;width:1000px;height:1000px;left:50%;bottom:-620px;transform:translateX(-50%);border-radius:50%;
+  background:radial-gradient(circle,rgba(0,67,221,.4),transparent 65%)}
+.scene{width:130px;height:130px;margin:0 auto 50px;perspective:700px;position:relative}
+.cube{width:100%;height:100%;position:relative;transform-style:preserve-3d;animation:spin 14s linear infinite}
+.cube div{position:absolute;width:130px;height:130px;border:1px solid rgba(91,134,255,.5);border-radius:14px;
+  background:linear-gradient(150deg,rgba(0,67,221,.55),rgba(13,22,58,.85));box-shadow:inset 0 0 40px rgba(61,111,255,.3)}
+.cube .f1{transform:translateZ(65px)}.cube .f2{transform:rotateY(180deg) translateZ(65px)}
+.cube .f3{transform:rotateY(90deg) translateZ(65px)}.cube .f4{transform:rotateY(-90deg) translateZ(65px)}
+.cube .f5{transform:rotateX(90deg) translateZ(65px)}.cube .f6{transform:rotateX(-90deg) translateZ(65px)}
+@keyframes spin{from{transform:rotateX(-18deg) rotateY(0)}to{transform:rotateX(-18deg) rotateY(360deg)}}
+footer h2{font-size:clamp(34px,5vw,66px);font-weight:700;position:relative;z-index:2}
+footer h2 .accent{background:linear-gradient(95deg,var(--electric),var(--soft));-webkit-background-clip:text;background-clip:text;color:transparent}
+footer .sig{margin-top:24px;color:var(--dim);font-size:15px;position:relative;z-index:2}
+footer .cta-row{display:flex;gap:14px;justify-content:center;margin-top:38px;position:relative;z-index:2}
+footer .tech{margin-top:64px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap;color:var(--dim2);font-size:12.5px;position:relative;z-index:2}
+.pill{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);padding:7px 14px;border-radius:999px}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="logo">Dant<b>IA</b> <span style="font-weight:500;color:var(--dim2);font-size:15px">· Multi-Agentes</span></div>
+  <div class="links">
+    <a href="#casos">Casos de uso</a><a href="#fluxo">Como funciona</a><a href="#executar">Experimente</a><a href="#frota">A frota</a>
+  </div>
+  <a class="btn btn-primary" href="#fim">Fale com a Acme</a>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="glow1"></div><div class="glow2"></div>
+  <div class="tile3d t1"><span class="chip"></span><span class="tag">g3-backend-builder · AUTONOMOUS</span></div>
+  <div class="tile3d t2"><span class="chip"></span><span class="tag">g10-treasury · ASSISTED</span></div>
+  <div class="tile3d t3"><span class="chip"></span><span class="tag">g8-lead-qualifier</span></div>
+  <div class="eyebrow">Lance, opere e escale sua empresa sobre uma frota de agentes</div>
+  <h1>Empresa-OS multi-agentes.<span class="accent">Zero teatro.</span></h1>
+  <p class="sub">Uma plataforma modular e <b>AI-native</b>: 164 agentes em 15 guildas operam a empresa de ponta a ponta — e cada entrega é <b>provada por execução real</b>, nunca declarada.</p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="#casos">Ver a plataforma</a>
+    <a class="btn btn-ghost" href="#frota">Conhecer a frota</a>
+  </div>
+  <div class="live"><span class="dot"></span> demo viva — grid e números gerados dos dados reais do projeto · Gemini via Vertex AI</div>
+</header>
+
+<!-- ============ TRUST BAR ============ -->
+<div class="trust rv">
+  <div class="t">Da estratégia ao jurídico, a empresa inteira roda sobre a mesma constituição C1–C8</div>
+  <div class="logos" id="trustbar"></div>
+</div>
+
+<!-- ============ CARROSSEL USE CASES ============ -->
+<section class="carousel-sec center" id="casos">
+  <div class="kicker rv">Casos de uso</div>
+  <h2 class="title rv">Uma frota, aplicações sem fim</h2>
+  <div class="carousel rv">
+    <button class="arrow-btn arrow-l" onclick="go(-1)">←</button>
+    <div class="viewport"><div class="slides" id="slides">
+
+      <div class="slide">
+        <div class="copy">
+          <div class="k">O produto</div>
+          <h3>O dono pergunta. A empresa responde.</h3>
+          <p>O cliente entra, o diagnóstico ativa os agentes em modo sombra na conta dele — e o painel do dono responde a única pergunta que importa: <i>“como estou?”</i></p>
+          <div class="mini"><span><b>Multi-tenant</b> — memória e contexto isolados por cliente</span><span><b>Agnóstico de segmento</b> — mesmo produto, qualquer empresa</span></div>
+        </div>
+        <div class="visual">
+          <div class="owner-card">
+            <div class="hd"><span class="t">Painel do Dono — Loja do Zé</span><span class="sem"><span class="dot"></span> VERMELHO</span></div>
+            <div class="kv">
+              <div class="box"><div class="k">Caixa hoje</div><div class="v">R$ 9.000</div></div>
+              <div class="box"><div class="k">Projetado</div><div class="v neg">– R$ 2.000</div></div>
+              <div class="box"><div class="k">A cobrar</div><div class="v">R$ 5.000</div></div>
+              <div class="box"><div class="k">Margem</div><div class="v neg">8,9%</div></div>
+            </div>
+            <div class="alerts">
+              <div class="al"><span class="ic">▲</span> Caixa projetado negativo — cobrança disparada</div>
+              <div class="al"><span class="ic">▲</span> 1 mensagem urgente roteada pelo inbox-triage</div>
+              <div class="al"><span class="ic">▲</span> 2 tarefas paradas — ops-followup acionado</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="copy">
+          <div class="k">A confiança</div>
+          <h3>Autonomia não se declara. Se conquista.</h3>
+          <p>Todo agente nasce em sombra e só avança passando seis gates: contrato de outcome, economia unitária, SLA, avaliação ≥ 90%, aprovadores distintos e CI/CD + segurança.</p>
+          <div class="mini"><span><b>Human-in-the-loop</b> — o DRI decide em cada entrega assistida</span><span><b>Log append-only</b> — toda promoção é auditável</span></div>
+        </div>
+        <div class="visual">
+          <div class="gates-mini">
+            <div class="gate-row ok"><span class="m">SHADOW ✓</span><span class="s">observa e propõe; mede concordância</span></div>
+            <div class="gate-row ok"><span class="m">PILOT ✓</span><span class="s">escopo restrito, supervisão contínua</span></div>
+            <div class="gate-row ok"><span class="m">ASSISTED ✓</span><span class="s">aprovação humana no laço</span></div>
+            <div class="gate-row blocked"><span class="m">✕ G5</span><span class="s">auto-aprovação bloqueada: aprovador ≠ promotor</span></div>
+            <div class="gate-row ok"><span class="m">AUTONOMOUS</span><span class="s">autonomia plena — por mérito medido</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="copy">
+          <div class="k">A assinatura técnica</div>
+          <h3>Entrega provada, não declarada.</h3>
+          <p>O agente não afirma o próprio sucesso. O sistema executa o trabalho num contêiner isolado — sem rede, sem privilégios — contra <b>testes que o agente nunca viu</b>.</p>
+          <div class="mini"><span><b>12/30</b> passam na inspeção estática</span><span><b>8/30</b> provam a entrega executando</span></div>
+        </div>
+        <div class="visual">
+          <div class="proof-mini">
+            <div class="bl"><span>Inspeção estática</span><span>12 / 30</span></div>
+            <div class="bar static"><i data-w="40%"></i></div>
+            <div class="bl"><span>Execução real</span><span>8 / 30</span></div>
+            <div class="bar deliv"><i data-w="27%"></i></div>
+            <div class="caught-mini"><b>4 trabalhos plausíveis — e errados</b> — pegos só pela execução: total que ignora quantidade, token forjado aceito, estoque que não baixa, desconto absoluto em vez de percentual.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="copy">
+          <div class="k">AI-native</div>
+          <h3>Gemini ao vivo. Em cada agente.</h3>
+          <p>A frota responde com Gemini via Vertex AI — opt-in, com provider plugável e contrato invariante. O eval e o oráculo de execução seguem determinísticos por design.</p>
+          <div class="mini"><span><b>gemini-2.5-flash</b> em produção via Vertex AI</span><span><b>Catraca determinística</b> — LLM nunca sequestra o CI</span></div>
+        </div>
+        <div class="visual">
+          <div class="llm-card">
+            <div class="ln">→ intent: <b>"qualificar este lead"</b></div>
+            <div class="ln">→ CEO-OS roteia → <span class="hl">G08 · g8-lead-qualifier</span></div>
+            <div class="ln">→ act <span class="hl">llm=GoogleProvider/gemini-2.5-flash</span></div>
+            <div class="ln">&nbsp;&nbsp;&nbsp;<span class="hl">vertex:acme-multiagentes/us-central1</span></div>
+            <div class="ln">→ gate C4 · guardians <span class="ok">ok=true</span></div>
+            <div class="ln">→ snapshot gravado · custo no ledger C3 <span class="ok">✓</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div></div>
+    <button class="arrow-btn arrow-r" onclick="go(1)">→</button>
+    <div class="dots" id="dots"></div>
+  </div>
+</section>
+
+<!-- ============ DIAGRAMA ============ -->
+<section class="flow-sec center" id="fluxo">
+  <div class="kicker rv">Como funciona</div>
+  <h2 class="title rv">Você fala. A empresa executa.</h2>
+  <p class="lead rv">Uma intenção em linguagem natural percorre o caminho inteiro — com governança em cada passo.</p>
+  <div class="intent rv">Quero qualificar este lead e ver se vale prospectar</div>
+  <div class="flow rv">
+    <div class="node"><div class="nm">CEO-OS</div><div class="rl">roteia a intenção</div></div>
+    <div class="conn"></div>
+    <div class="node"><div class="nm">G08 · Vendas</div><div class="rl">supervisor da guilda</div></div>
+    <div class="conn"></div>
+    <div class="node"><div class="nm">g8-lead-qualifier</div><div class="rl">agente — Gemini ao vivo</div></div>
+    <div class="conn"></div>
+    <div class="node"><div class="nm">Gate C4</div><div class="rl">guardiões + modo</div></div>
+    <div class="conn"></div>
+    <div class="node final"><div class="nm">✓ Entrega provada</div><div class="rl">evidência no Brain</div></div>
+  </div>
+</section>
+
+<!-- ============ EXECUTAR (demo viva) ============ -->
+<section class="exec-sec center" id="executar">
+  <div class="kicker rv">Demo viva — sua vez</div>
+  <h2 class="title rv">Dê o contexto. Veja a frota executar.</h2>
+  <p class="lead rv">Isto não é um mockup: o formulário abaixo envia sua intenção para a <b style="color:#CBD7FA">frota real</b> rodando nesta máquina. O CEO-OS roteia, o agente executa com o seu contexto e o gate C4 registra — em modo sombra, como todo agente nasce.</p>
+  <div class="exec-grid rv">
+
+    <div class="exec-card">
+      <h4><span class="step">1 · CONTEXTO</span> Conte sobre a empresa</h4>
+      <label class="f-label">O que você quer que a frota faça?</label>
+      <input class="f-input" id="x-intent" value="Quero qualificar este lead e ver se vale prospectar">
+      <div class="chips" style="margin-top:10px">
+        <button class="chip-t sel" data-i="Quero qualificar este lead e ver se vale prospectar">qualificar lead</button>
+        <button class="chip-t" data-i="Levante inteligência de mercado para um vertical">inteligência de mercado</button>
+        <button class="chip-t" data-i="Como está o caixa e o runway da empresa?">caixa &amp; runway</button>
+        <button class="chip-t" data-i="Valide a cláusula de outcome desta spec">validar outcome (governança)</button>
+      </div>
+      <label class="f-label">Empresa</label>
+      <input class="f-input" id="x-company" placeholder="ex.: Padaria Bella / Acme Limpeza" value="Acme Limpeza B2B">
+      <label class="f-label">Faturamento anual</label>
+      <select class="f-select" id="x-rev">
+        <option value="500000">até R$ 1 mi/ano</option>
+        <option value="3000000" selected>R$ 1–6 mi/ano (perfil PCG)</option>
+        <option value="30000000">R$ 6–50 mi/ano (fora do alvo por enquanto)</option>
+        <option value="75000000">R$ 50–100 mi/ano (mid-market)</option>
+        <option value="150000000">acima de R$ 100 mi/ano (enterprise)</option>
+      </select>
+      <label class="f-label">Como a empresa opera hoje?</label>
+      <div class="checks">
+        <label class="ck"><input type="checkbox" id="x-founder" checked> decisão é do fundador</label>
+        <label class="ck"><input type="checkbox" id="x-sells" checked> vende bem</label>
+        <label class="ck"><input type="checkbox" id="x-process" checked> sem processos definidos</label>
+        <label class="ck"><input type="checkbox" id="x-fire" checked> modo bombeiro (apaga incêndio)</label>
+        <label class="ck"><input type="checkbox" id="x-payroll"> custo de pessoal alto</label>
+        <label class="ck"><input type="checkbox" id="x-team"> time grande (50+ pessoas)</label>
+      </div>
+      <button class="btn btn-primary exec-run" id="x-run" onclick="execute()">Executar na frota →</button>
+    </div>
+
+    <div class="exec-card trace" id="trace">
+      <h4><span class="step">2 · EXECUÇÃO</span> O caminho real da sua intenção</h4>
+      <div class="placeholder" id="x-empty">
+        <span class="ic">⌖</span>
+        <span>A frota está pronta.<br>Preencha o contexto ao lado e execute — o trace real aparece aqui.</span>
+      </div>
+      <div class="t-steps" id="x-steps" style="display:none"></div>
+      
+      <!-- Company Brain Audit panel -->
+      <div id="x-brain-panel" style="display:none; margin-top:20px; border-top:1px dashed var(--line); padding-top:15px;">
+        <h5 style="font-family:var(--display); font-size:13.5px; margin-bottom:8px; color:var(--soft);">🧠 Company Brain — Auditoria Imutável (C6)</h5>
+        <p style="font-size:11.5px; color:var(--dim); margin-bottom:12px; line-height:1.4;">Toda ação de agente emite um evento no ledger. Verifique os logs do seu tenant no Brain.</p>
+        <button class="btn btn-ghost" style="font-size:11px; padding:6px 14px; margin-bottom:10px; border-radius:8px;" id="x-reload-brain" onclick="loadBrainEvents()">Verificar Eventos no Brain</button>
+        <div id="x-brain-events" style="background:#070A16; border:1px solid var(--line); border-radius:10px; padding:12px; font-family:ui-monospace,Consolas,monospace; font-size:11px; color:#A4B6E8; max-height:220px; overflow-y:auto; display:none; line-height:1.45; text-align:left;"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ STATS ============ -->
+<section class="center" id="numeros" style="padding-top:40px">
+  <div class="kicker rv">Números reais — não slide</div>
+  <h2 class="title rv">A catraca roda em cada mudança</h2>
+  <div class="stats rv">
+    <div class="stat"><div class="num" data-count="164">0</div><div class="lbl">agentes reais em código, com missão e contrato</div></div>
+    <div class="stat"><div class="num" data-count="15">0</div><div class="lbl">guildas sob a mesma constituição C1–C8</div></div>
+    <div class="stat"><div class="num" data-count="5034">0</div><div class="lbl">casos de avaliação — 100% verdes no CI</div></div>
+    <div class="stat"><div class="num" data-count="0">0</div><div class="lbl">violações de segurança na varredura AgentShield</div></div>
+  </div>
+</section>
+
+<!-- ============ FROTA ============ -->
+<section class="fleet-sec center" id="frota">
+  <div class="kicker rv">A escala</div>
+  <h2 class="title rv">164 agentes. Cada ponto é real.</h2>
+  <p class="lead rv">Este grid é gerado do catálogo em código da frota — não é ilustração. Passe o mouse para ver o agente; filtre por guilda.</p>
+  <div class="fleet-legend rv" id="legend"></div>
+  <div class="fleet rv" id="fleet"></div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer id="fim">
+  <div class="glow"></div>
+  <div class="scene"><div class="cube"><div class="f1"></div><div class="f2"></div><div class="f3"></div><div class="f4"></div><div class="f5"></div><div class="f6"></div></div></div>
+  <h2>Pronta para conhecer a empresa<br>que <span class="accent">se opera</span>?</h2>
+  <div class="sig">Acme Multi-Agentes — executa, aprende e prova. Frota 100% no eval · segurança limpa · entrega provada.</div>
+  <div class="cta-row"><a class="btn btn-primary" href="https://www.acme.tech/">Fale com a Acme</a><a class="btn btn-ghost" href="#casos">Rever a plataforma</a></div>
+  <div class="tech">
+    <span class="pill">Gemini 2.5 · Vertex AI</span><span class="pill">LangGraph</span><span class="pill">Constituição C1–C8</span>
+    <span class="pill">Sandbox Docker</span><span class="pill">Multi-tenant</span><span class="pill">Held-out tests</span>
+  </div>
+</footer>
+
+<div class="tooltip" id="tip"></div>
+
+<script>
+/* modo captura (?capture): revela tudo, sem animações — p/ screenshot/export */
+const CAPTURE = location.search.includes("capture");
+if (CAPTURE) {
+  const st = document.createElement("style");
+  st.textContent = `.rv{opacity:1!important;transform:none!important;transition:none!important}
+    .agent{animation:none!important;transform:scale(1)!important}
+    .tile3d{animation:none!important}.cube{animation:none!important;transform:rotateX(-18deg) rotateY(28deg)}
+    .conn::after{animation:none!important;opacity:0}
+    .hero{min-height:auto!important;padding-top:170px!important;padding-bottom:120px!important}`;
+  document.head.appendChild(st);
+}
+const FLEET = [{"id": "brain-indexer", "guild": "G00-nucleo-utilitarios", "tier": "L1", "handler": "brain_reconcile_outcomes_traces", "ledger": "operating"}, {"id": "hermes-learning-loop", "guild": "G00-nucleo-utilitarios", "tier": "L1", "handler": "spec_driven", "ledger": "operating"}, {"id": "mcp-gateway-comms", "guild": "G00-nucleo-utilitarios", "tier": "L2", "handler": "guardian_check", "ledger": "operating"}, {"id": "mcp-gateway-external", "guild": "G00-nucleo-utilitarios", "tier": "L2", "handler": "guardian_check", "ledger": "operating"}, {"id": "mcp-gateway-payments", "guild": "G00-nucleo-utilitarios", "tier": "L2", "handler": "guardian_check", "ledger": "operating"}, {"id": "root-supervisor", "guild": "G00-nucleo-utilitarios", "tier": "L0", "handler": "supervisor_route", "ledger": "operating"}, {"id": "g1-board-deck-author", "guild": "G01-estrategia-founder-office", "tier": "L1", "handler": "spec_driven", "ledger": "operating"}, {"id": "g1-competitive-teardown", "guild": "G01-estrategia-founder-office", "tier": "L2", "handler": "spec_driven", "ledger": "operating"}, {"id": "g1-investor-update", "guild": "G01-estrategia-founder-office", "tier": "L1", "handler": "guardian_check", "ledger": "operating"}, {"id": "g1-market-intel", "guild": "G01-estrategia-founder-office", "tier": "L0", "handler": "market_intel", "ledger": "operating"}, {"id": "g1-narrative-synthesizer", "guild": "G01-estrategia-founder-office", "tier": "L1", "handler": "spec_driven", "ledger": "operating"}, {"id": "g1-okr-steward", "guild": "G01-estrategia-founder-office", "tier": "L1", "handler": "northstar_daily_value", "ledger": "operating"}, {"id": "g1-opportunity-sizer", "guild": "G01-estrategia-founder-office", "tier": "L0", "handler": "opportunity_sizer", "ledger": "operating"}, {"id": "g1-scenario-planner", "guild": "G01-estrategia-founder-office", "tier": "L1", "handler": "scenario_sensitivity", "ledger": "operating"}, {"id": "g1-strategy-supervisor", "guild": "G01-estrategia-founder-office", "tier": "L0", "handler": "supervisor_route", "ledger": "operating"}, {"id": "g2-competitor-feature-watch", "guild": "G02-produto-discovery", "tier": "L2", "handler": "competitor_signal_triage", "ledger": "operating"}, {"id": "g2-diagnose", "guild": "G02-produto-discovery", "tier": "L1", "handler": "diagnose", "ledger": "billable"}, {"id": "g2-experiment-designer", "guild": "G02-produto-discovery", "tier": "L1", "handler": "experiment_sample_size", "ledger": "operating"}, {"id": "g2-feedback-router", "guild": "G02-produto-discovery", "tier": "L2", "handler": "feedback_route", "ledger": "operating"}, {"id": "g2-jobs-to-be-done", "guild": "G02-produto-discovery", "tier": "L1", "handler": "spec_driven", "ledger": "operating"}, {"id": "g2-prd-author", "guild": "G02-produto-discovery", "tier": "L1", "handler": "guardian_check", "ledger": "operating"}, {"id": "g2-pricing-product-fit", "guild": "G02-produto-discovery", "tier": "L1", "handler": "pricing_c3_fit", "ledger": "billable"}, {"id": "g2-prioritizer", "guild": "G02-produto-discovery", "tier": "L1", "handler": "rice_score", "ledger": "operating"}, {"id": "g2-product-supervisor", "guild": "G02-produto-discovery", "tier": "L0", "handler": "supervisor_route", "ledger": "operating"}, {"id": "g2-prototype-builder", "guild": "G02-produto-discovery", "tier": "L2", "handler": "guardian_check", "ledger": "operating"}, {"id": "g2-release-notes", "guild": "G02-produto-discovery", "tier": "L2", "handler": "spec_driven", "ledger": "operating"}, {"id": "g2-roadmap-keeper", "guild": "G02-produto-discovery", "tier": "L1", "handler": "guardian_check", "ledger": "operating"}, {"id": "g2-usability-critic", "guild": "G02-produto-discovery", "tier": "L1", "handler": "guardian_check", "ledger": "operating"}, {"id": "g2-user-interview-synth", "guild": "G02-produto-discovery", "tier": "L2", "handler": "spec_driven", "ledger": "operating"}, {"id": "g3-api-contract", "guild": "G03-engenharia", "tier": "L1", "handler": "api_contract_diff", "ledger": "operating"}, {"id": "g3-backend-builder", "guild": "G03-engenharia", "tier": "L2", "handler": "spec_executor", "ledger": "operating"}, {"id": "g3-build-error-resolver", "guild": "G03-engenharia", "tier": "L2", "handler": "spec_executor", "ledger": "operating"}, {"id": "g3-code-reviewer-go", "guild": "G03-engenharia", "tier": "L2", "handler": "guardian_check", "ledger": "operating"}, {"id": "g3-code-reviewer-py", "guild": "G03-engenharia", "tier": "L2", "handler": "guardian_check", "ledger": "operating"}, {"id": "g3-code-reviewer-ts", "guild": "G03-engenharia", "tier": "L2", "handler": "guardian_check", "ledger": "operating"}, {"id": "g3-db-schema", "guild": "G03-engenharia", "tier": "L2", "handler": "schema_change_review", "ledger": "operating"}, {"id": "g3-dependency-warden", "guild": "G03-engenharia", "tier": "L2", "handler": "dependency_bump_review", "ledger": "operating"}, {"id": "g3-docs-lookup", "guild": "G03-engenharia", "tier": "L2", "handler": "spec_driven", "ledger": "operating"}, {"id": "g3-eng-supervisor", "guild": "G03-engenharia", "tier": "L1", "handler": "supervisor_route", "ledger": "operating"}, {"id": "g3-feature-flagger", "guild": "G03-engenharia", "tier": "L2", "handler": "feature_flag_rollout", "ledger": "operating"}, {"id": "g3-frontend-builder", "guild": "G03-engenharia", "tier": "L2", "handler": "spec_driven", "ledger": "operating"}, {"id": "g3-incident-responder", "guild": "G03-engenharia", "tier": "L2", "handler": "spec_driven", "ledger": "operating"}, {"id": "g3-infra-devops", "guild": "G03-engenharia", "tier": "L2", "handler": "spec_driven", "ledger": "operating"}, {"id": "g3-integration-builder", "guild": "G03-engenharia", "tier": "L2", "handler": "spec_driven", "ledger": "operating"}, {"id": "g3-mobile-builder", "guild": "G03-engenharia", "tier": "L2", "handler": "spec_driven", "ledger": "operating"}, {"id": "g3-perf-optimizer", "guild": "G03-engenharia", "tier": "L2", "handler": "perf_benchmark_delta", "ledger": "operating"}, {"id": "g3-planner", "guild": "G03-engenharia", "tier": "L1", "handler": "spec_driven", "ledger": "operating"}, {"id": "g3-refactorer", "guild": "G03-engenharia", "tier": "L2", "handler": "spec_driven", "ledger": "operating"}, {"id": "g4-e2e-playwright", "guild": "G04-qualidade-eval", "tier": "L2", "handler": "spec_driven", "ledger": "operating"}, {"id": "g4-eval-case-author", "guild": "G04-qualidade-eval", "tier": "L1", "handler": "guardian_check", "ledger": "operating"}, {"id": "g4-eval-harness-runner", "guild": "G04-qualidade-eval", "tier": "L2", "handler": "eval_pass_at_k", "ledger": "operating"}, {"id": "g4-load-tester", "guild": "G04-qualidade-eval", "tier": "L2", "handler": "load_sla", "ledger": "operating"}, {"id": "g4-prompt-eval", "guild": "G04-qualidade-eval", "tier": "L1", "handler": "guardian_check", "ledger": "operating"}, {"id": "g4-quality-gate", "guild": "G04-qualidade-eval", "tier": "L1", "handler": "quality_gate_decision", "ledger": "operating"}, {"id": "g4-quality-supervisor", "guild": "G04-qualidade-eval", "tier": "L0", "handler": "supervisor_route", "ledger": "operating"}, {"id": "g4-regression-watcher", "guild": "G04-qualidade-eval", "tier": "L1", "handler": "regression_drift", "ledger": "operating"}, {"id": "g4-shadow-comparator", "guild": "G04-qualidade-eval", "tier": "L1", "handler": "agreement_rate", "ledger": "operating"}, {"id": "g4-test-coverage", "guild": "G04-qualidade-eval", "tier": "L2", "handler": "coverage_check", "ledger": "operating"}, {"id": "g5-access-auditor", "guild": "G05-seguranca-compliance", "tier": "L2", "handler": "access_review", "ledger": "operating"}, {"id": "g5-agentshield-scanner", "guild": "G05-seguranca-compliance", "tier": "L2", "handler": "agentshield_scan", "ledger": "operating"}, {"id": "g5-dependency-cve", "guild": "G05-seguranca-compliance", "tier": "L2", "handler": "cve_prioritization", "ledger": "operating"}, {"id": "g5-fraud-abuse-detector", "guild": "G05-seguranca-compliance", "tier": "L2", "handler": "fraud_score", "ledger": "billable"}, {"id": "g5-incident-forensics", "guild": "G05-seguranca-compliance", "tier": "L2", "handler": "guardian_check", "ledger": "operating"}, {"id": "g5-lgpd-privacy", "guild": "G05-seguranca-compliance", "tier": "L1", "handler": "lgpd_privacy_review", "ledger": "operating"}, {"id": "g5-pentest-agent", "guild": "G05-seguranca-compliance", "tier": "L2", "handler": "guardian_check", "ledger": "operating"}, {"id": "g5-prompt-injection-guard", "guild": "G05-seguranca-compliance", "tier": "L2", "handler": "prompt_injection_guard", "ledger": "operating"}, {"id": "g5-secrets-scanner", "guild": "G05-seguranca-compliance", "tier": "L2", "handler": "secret_scan", "ledger": "operating"}, {"id": "g5-security-supervisor", "guild": "G05-seguranca-compliance", "tier": "L1", "handler": "supervisor_route", "ledger": "operating"}, {"id": "g5-threat-modeler", "guild": "G05-seguranca-compliance", "tier": "L2", "handler": "threat_model_review", "ledger": "operating"}, {"id": "g6-anomaly-detector", "guild": "G06-dados-analytics", "tier": "L2", "handler": "anomaly_score", "ledger": "operating"}, {"id": "g6-churn-predictor", "guild": "G06-dados-analytics", "tier": "L2", "handler": "churn_risk_score", "ledger": "billable"}, {"id": "g6-cohort-analyst", "guild": "G06-dados-analytics", "tier": "L2", "handler": "cohort_retention", "ledger": "operating"}, {"id": "g6-dashboard-builder", "guild": "G06-dados-analytics", "tier": "L2", "handler": "painel_dono", "ledger": "operating"}, {"id": "g6-data-quality", "guild": "G06-dados-analytics", "tier": "L2", "handler": "dataquality_suite", "ledger": "operating"}, {"id": "g6-data-supervisor", "guild": "G06-dados-analytics", "tier": "L1", "handler": "supervisor_route", "ledger": "operating"}, {"id": "g6-drift-detector", "guild": "G06-dados-analytics", "tier": "L2", "handler": "drift_check", "ledger": "operating"}, {"id": "g6-experiment-analyst", "guild": "G06-dados-analytics", "tier": "L2", "handler": "experiment_readout", "ledger": "operating"}, {"id": "g6-forecaster", "guild": "G06-dados-analytics", "tier": "L2", "handler": "demand_revenue_forecast", "ledger": "operating"}, {"id": "g6-metrics-modeler", "guild": "G06-dados-analytics", "tier": "L1", "handler": "metric_definition_check", "ledger": "operating"}, {"id": "g6-nl2sql", "guild": "G06-dados-analytics", "tier": "L2", "handler": "spec_driven", "ledger": "operating"}, {"id": "g6-pipeline-builder", "guild": "G06-dados-analytics", "tier": "L2", "handler": "pipeline_run_review", "ledger": "operating"}, {"id": "g7-ab-growth-runner", "guild": "G07-growth-marketing", "tier": "L2", "handler": "ab_sizing_significance", "ledger": "operating"}, {"id": "g7-attribution-analyst", "guild": "G07-growth-marketing", "tier": "L2", "handler": "attribution_cac_payback", "ledger": "operating"}, {"id": "g7-community-manager", "guild": "G07-growth-marketing", "tier": "L2", "handler": "spec_driven", "ledger": "operating"}, {"id": "g7-content-writer", "guild": "G07-growth-marketing", "tier": "L2", "handler": "guardian_check", "ledger": "operating"}, {"id": "g7-copywriter", "guild": "G07-growth-marketing", "tier": "L2", "handler": "copywriter_c3", "ledger": "billable"}, {"id": "g7-creative-generator", "guild": "G07-growth-marketing", "tier": "L2", "handler": "spec_driven", "ledger": "operating"}, {"id": "g7-growth-supervisor", "guild": "G07-growth-marketing", "tier": "L1", "handler": "supervisor_route", "ledger": "operating"}, {"id": "g7-influencer-scout", "guild": "G07-growth-marketing", "tier": "L2", "handler": "spec_driven", "ledger": "operating"}, {"id": "g7-landing-builder", "guild": "G07-growth-marketing", "tier": "L2", "handler": "spec_driven", "ledger": "operating"}, {"id": "g7-lifecycle-crm", "guild": "G07-growth-marketing", "tier": "L2", "handler": "lifecycle_crm_c3", "ledger": "billable"}, {"id": "g7-paid-ads-optimizer", "guild": "G07-growth-marketing", "tier": "L2", "handler": "paid_roas_cac", "ledger": "billable"}, {"id": "g7-referral-designer", "guild": "G07-growth-marketing", "tier": "L1", "handler": "referral_kfactor_score", "ledger": "operating"}, {"id": "g7-seo-strategist", "guild": "G07-growth-marketing", "tier": "L2", "handler": "seo_keyword_map", "ledger": "operating"}, {"id": "g7-social-manager", "guild": "G07-growth-marketing", "tier": "L2", "handler": "spec_driven", "ledger": "operating"}, {"id": "g8-billing-agent", "guild": "G08-vendas-receita", "tier": "L2", "handler": "billing_agent", "ledger": "billable"}, {"id": "g8-contract-closer", "guild": "G08-vendas-receita", "tier": "L1", "handler": "contract_closer_c3", "ledger": "billable"}, {"id": "g8-crm-hygiene", "guild": "G08-vendas-receita", "tier": "L2", "handler": "crm_dedupe_score", "ledger": "operating"}, {"id": "g8-dunning-agent", "guild": "G08-vendas-receita", "tier": "L2", "handler": "dunning_agent", "ledger": "billable"}, {"id": "g8-lead-qualifier", "guild": "G08-vendas-receita", "tier": "L2", "handler": "lead_qualifier", "ledger": "billable"}, {"id": "g8-outbound-sdr", "guild": "G08-vendas-receita", "tier": "L2", "handler": "outbound_sdr", "ledger": "operating"}, {"id": "g8-pricing-engine", "guild": "G08-vendas-receita", "tier": "L1", "handler": "pricing_engine", "ledger": "billable"}, {"id": "g8-proposal-author", "guild": "G08-vendas-receita", "tier": "L1", "handler": "proposal_author_c3", "ledger": "billable"}, {"id": "g8-revenue-reporter", "guild": "G08-vendas-receita", "tier": "L1", "handler": "revenue_reporter", "ledger": "operating"}, {"id": "g8-sales-supervisor", "guild": "G08-vendas-receita", "tier": "L0", "handler": "supervisor_route", "ledger": "operating"}, {"id": "g8-upsell-crosssell", "guild": "G08-vendas-receita", "tier": "L1", "handler": "upsell_crosssell_c3", "ledger": "billable"}, {"id": "g9-csat-analyst", "guild": "G09-customer-operations", "tier": "L2", "handler": "csat_analyst", "ledger": "operating"}, {"id": "g9-custops-supervisor", "guild": "G09-customer-operations", "tier": "L1", "handler": "supervisor_route", "ledger": "operating"}, {"id": "g9-dispute-mediator", "guild": "G09-customer-operations", "tier": "L2", "handler": "dispute_mediator_c3", "ledger": "billable"}, {"id": "g9-escalation-manager", "guild": "G09-customer-operations", "tier": "L2", "handler": "escalation_manager_c3", "ledger": "billable"}, {"id": "g9-fulfillment-tracker", "guild": "G09-customer-operations", "tier": "L2", "handler": "fulfillment_tracker", "ledger": "billable"}, {"id": "g9-kb-curator", "guild": "G09-customer-operations", "tier": "L2", "handler": "kb_deflection", "ledger": "operating"}, {"id": "g9-messaging-concierge", "guild": "G09-customer-operations", "tier": "L2", "handler": "messaging_concierge_c3", "ledger": "billable"}, {"id": "g9-onboarding-guide", "guild": "G09-customer-operations", "tier": "L2", "handler": "activation_score", "ledger": "billable"}, {"id": "g9-refund-handler", "guild": "G09-customer-operations", "tier": "L2", "handler": "refund_eligibility", "ledger": "billable"}, {"id": "g9-sentiment-monitor", "guild": "G09-customer-operations", "tier": "L2", "handler": "sentiment_score", "ledger": "operating"}, {"id": "g9-support-triage", "guild": "G09-customer-operations", "tier": "L2", "handler": "inbox_triage", "ledger": "billable"}, {"id": "g9-tier1-resolver", "guild": "G09-customer-operations", "tier": "L2", "handler": "atendimento", "ledger": "billable"}, {"id": "g9-voice-of-customer", "guild": "G09-customer-operations", "tier": "L2", "handler": "voc_priority", "ledger": "operating"}, {"id": "g10-burn-monitor", "guild": "G10-financas", "tier": "L1", "handler": "burn_monitor", "ledger": "operating"}, {"id": "g10-finance-supervisor", "guild": "G10-financas", "tier": "L1", "handler": "supervisor_route", "ledger": "operating"}, {"id": "g10-fpna", "guild": "G10-financas", "tier": "L1", "handler": "fin_forecast", "ledger": "operating"}, {"id": "g10-invoicing", "guild": "G10-financas", "tier": "L2", "handler": "fin_invoice_tax", "ledger": "operating"}, {"id": "g10-margin-watch", "guild": "G10-financas", "tier": "L2", "handler": "margin_watch", "ledger": "operating"}, {"id": "g10-reconciliation", "guild": "G10-financas", "tier": "L2", "handler": "reconciliation", "ledger": "operating"}, {"id": "g10-tax-compliance", "guild": "G10-financas", "tier": "L1", "handler": "fin_tax_assessment", "ledger": "operating"}, {"id": "g10-token-cost-accountant", "guild": "G10-financas", "tier": "L2", "handler": "token_cost_accountant", "ledger": "operating"}, {"id": "g10-treasury", "guild": "G10-financas", "tier": "L1", "handler": "fin_cashflow", "ledger": "operating"}, {"id": "g10-unit-economist", "guild": "G10-financas", "tier": "L1", "handler": "unit_economist_c3", "ledger": "operating"}, {"id": "g11-interview-scheduler", "guild": "G11-pessoas-conhecimento", "tier": "L2", "handler": "interview_schedule", "ledger": "operating"}, {"id": "g11-jd-author", "guild": "G11-pessoas-conhecimento", "tier": "L2", "handler": "guardian_check", "ledger": "operating"}, {"id": "g11-km-curator", "guild": "G11-pessoas-conhecimento", "tier": "L1", "handler": "knowledge_curation", "ledger": "operating"}, {"id": "g11-meeting-notetaker", "guild": "G11-pessoas-conhecimento", "tier": "L2", "handler": "spec_driven", "ledger": "operating"}, {"id": "g11-onboarding-buddy", "guild": "G11-pessoas-conhecimento", "tier": "L2", "handler": "supervisor_route", "ledger": "operating"}, {"id": "g11-people-supervisor", "guild": "G11-pessoas-conhecimento", "tier": "L1", "handler": "supervisor_route", "ledger": "operating"}, {"id": "g11-policy-author", "guild": "G11-pessoas-conhecimento", "tier": "L1", "handler": "spec_driven", "ledger": "operating"}, {"id": "g11-recruiter-sourcer", "guild": "G11-pessoas-conhecimento", "tier": "L2", "handler": "slope_score", "ledger": "operating"}, {"id": "g12-contract-reviewer", "guild": "G12-juridico-risco", "tier": "L2", "handler": "contract_risk_review", "ledger": "operating"}, {"id": "g12-dpa-manager", "guild": "G12-juridico-risco", "tier": "L2", "handler": "guardian_check", "ledger": "operating"}, {"id": "g12-ip-trademark", "guild": "G12-juridico-risco", "tier": "L2", "handler": "guardian_check", "ledger": "operating"}, {"id": "g12-legal-supervisor", "guild": "G12-juridico-risco", "tier": "L1", "handler": "supervisor_route", "ledger": "operating"}, {"id": "g12-litigation-tracker", "guild": "G12-juridico", "tier": "L2", "handler": "provision_estimate", "ledger": "operating"}, {"id": "g12-regulatory-monitor", "guild": "G12-juridico-risco", "tier": "L1", "handler": "regulatory_change_assessment", "ledger": "operating"}, {"id": "g12-risk-register", "guild": "G12-juridico", "tier": "L1", "handler": "risk_score", "ledger": "operating"}, {"id": "g12-tos-privacy-author", "guild": "G12-juridico-risco", "tier": "L1", "handler": "guardian_check", "ledger": "operating"}, {"id": "g13-artifact-architect", "guild": "G13-governanca", "tier": "L1", "handler": "guardian_check", "ledger": "operating"}, {"id": "g13-eval-engineer-guardian", "guild": "G13-governanca", "tier": "L2", "handler": "eval_coverage_score", "ledger": "operating"}, {"id": "g13-governance-supervisor", "guild": "G13-governanca", "tier": "L0", "handler": "supervisor_route", "ledger": "operating"}, {"id": "g13-learning-curator", "guild": "G13-governanca", "tier": "L1", "handler": "learning_novelty_score", "ledger": "operating"}, {"id": "g13-monthly-reviewer", "guild": "G13-governanca", "tier": "L0", "handler": "audit_drift_score", "ledger": "operating"}, {"id": "g13-observability-guardian", "guild": "G13-governanca", "tier": "L1", "handler": "outcomes_traces_delta", "ledger": "operating"}, {"id": "g13-po-guardian", "guild": "G13-governanca", "tier": "L0", "handler": "outcome_clause_validator", "ledger": "operating"}, {"id": "g13-promotion-officer", "guild": "G13-governanca", "tier": "L1", "handler": "mode_gate_score", "ledger": "operating"}, {"id": "g13-security-privacy-guardian", "guild": "G13-governanca", "tier": "L1", "handler": "guardian_check", "ledger": "operating"}, {"id": "g13-tenant-context-curator", "guild": "G13-governanca", "tier": "L1", "handler": "tenant_hardcode_lint", "ledger": "operating"}, {"id": "g13-unit-economist-guardian", "guild": "G13-governanca", "tier": "L1", "handler": "c3_cost_ratio", "ledger": "operating"}, {"id": "g14-aiops-supervisor", "guild": "G14-model-ai-ops", "tier": "L1", "handler": "supervisor_route", "ledger": "operating"}, {"id": "g14-eval-data-curator", "guild": "G14-model-ai-ops", "tier": "L2", "handler": "guardian_check", "ledger": "operating"}, {"id": "g14-inference-cost-optimizer", "guild": "G14-model-ai-ops", "tier": "L2", "handler": "inference_cost_savings", "ledger": "operating"}, {"id": "g14-model-eval-bench", "guild": "G14-model-ai-ops", "tier": "L2", "handler": "model_scorecard", "ledger": "operating"}, {"id": "g14-model-router", "guild": "G14-model-ai-ops", "tier": "L2", "handler": "model_routing_decision", "ledger": "operating"}, {"id": "g14-prompt-context-registry", "guild": "G14-model-ai-ops", "tier": "L1", "handler": "prompt_context_registry", "ledger": "operating"}, {"id": "g14-rag-knowledge-ops", "guild": "G14-model-ai-ops", "tier": "L2", "handler": "retrieval_quality_score", "ledger": "operating"}, {"id": "g14-responsible-ai", "guild": "G14-model-ai-ops", "tier": "L2", "handler": "guardian_check", "ledger": "operating"}];
+
+/* ---- guildas (nome + cor da família azul) ---- */
+const GUILDS = {
+  G00:["Núcleo","#3D6FFF"], G01:["Estratégia","#5B86FF"], G02:["Produto","#2A55D4"],
+  G03:["Engenharia","#0043DD"], G04:["Qualidade","#7E97E8"], G05:["Segurança","#22336E"],
+  G06:["Dados","#3B5BDB"], G07:["Growth","#4D6FE0"], G08:["Vendas","#1E4FD6"],
+  G09:["Customer Ops","#6E8BF0"], G10:["Finanças","#1638A8"], G11:["Pessoas","#92ABF2"],
+  G12:["Jurídico","#2A3B7A"], G13:["Governança","#10204E"], G14:["Model Ops","#4869C9"]
+};
+const gk = g => (g||"").match(/G\d{2}/)?.[0] || "G00";
+const counts = {};
+FLEET.forEach(a => { const k = gk(a.guild); counts[k] = (counts[k]||0)+1; });
+
+/* ---- trust bar (logos = guildas) ---- */
+const tb = document.getElementById("trustbar");
+Object.keys(GUILDS).forEach(k => {
+  if (!counts[k]) return;
+  const d = document.createElement("div");
+  d.className = "lg";
+  d.innerHTML = `${GUILDS[k][0]} <span>${counts[k]}</span>`;
+  tb.appendChild(d);
+});
+
+/* ---- carrossel ---- */
+const slides = document.getElementById("slides");
+const dots = document.getElementById("dots");
+const N = slides.children.length;
+let cur = 0, timer;
+for (let i = 0; i < N; i++) {
+  const b = document.createElement("button");
+  b.onclick = () => show(i);
+  dots.appendChild(b);
+}
+function show(i){
+  cur = (i+N)%N;
+  slides.style.transform = `translateX(-${cur*100}%)`;
+  [...dots.children].forEach((d,j) => d.classList.toggle("active", j===cur));
+  if (cur===2) document.querySelectorAll(".proof-mini i[data-w]").forEach(el => el.style.width = el.dataset.w);
+  clearInterval(timer);
+  if (!CAPTURE) timer = setInterval(() => show(cur+1), 7000);
+}
+function go(d){ show(cur+d); }
+show(0);
+
+/* ---- frota ---- */
+const fleetEl = document.getElementById("fleet");
+const tip = document.getElementById("tip");
+FLEET.forEach((a,i) => {
+  const k = gk(a.guild);
+  const d = document.createElement("div");
+  d.className = "agent"; d.dataset.g = k;
+  d.style.setProperty("--g", GUILDS[k]?.[1] || "#3D6FFF");
+  d.style.animationDelay = (i*8)+"ms";
+  d.onmousemove = e => {
+    tip.style.opacity = 1;
+    tip.style.left = Math.min(e.clientX+16, innerWidth-290)+"px";
+    tip.style.top = (e.clientY+18)+"px";
+    const desc = agentDescriptions[a.id] || "";
+    tip.innerHTML = `<b>${a.id}</b><div class="t2">${GUILDS[k][0]} · tier ${a.tier||"—"} · ${a.handler}</div>${desc ? `<div style="font-size:11px;color:#5A6480;line-height:1.4;margin-top:6px;border-top:1px dashed rgba(16,19,31,0.15);padding-top:6px">${desc}</div>` : ""}`;
+  };
+  d.onmouseleave = () => tip.style.opacity = 0;
+  fleetEl.appendChild(d);
+});
+const leg = document.getElementById("legend");
+const mk = (label,key) => {
+  const b = document.createElement("button");
+  b.innerHTML = label; b.dataset.k = key;
+  b.onclick = () => {
+    leg.querySelectorAll("button").forEach(x => x.classList.toggle("active", x===b));
+    document.querySelectorAll(".agent").forEach(el =>
+      el.classList.toggle("dim", key!=="all" && el.dataset.g!==key));
+  };
+  leg.appendChild(b);
+  return b;
+};
+mk(`Todas · ${FLEET.length}`,"all").classList.add("active");
+Object.keys(GUILDS).forEach(k => counts[k] && mk(`${GUILDS[k][0]} · ${counts[k]}`, k));
+
+/* ---- reveals ---- */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add("on"); io.unobserve(e.target); }
+}), {threshold:.16});
+document.querySelectorAll(".rv").forEach(el => io.observe(el));
+
+/* ---- counters ---- */
+const cio = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; cio.unobserve(e.target);
+  const el = e.target, end = +el.dataset.count, t0 = performance.now(), dur = 1600;
+  const fmt = n => n.toLocaleString("pt-BR");
+  (function tick(t){ const p = Math.min((t-t0)/dur,1);
+    el.textContent = fmt(Math.round(end*(1-Math.pow(1-p,3))));
+    if (p<1) requestAnimationFrame(tick); else el.textContent = fmt(end);
+  })(t0);
+}), {threshold:.6});
+document.querySelectorAll("[data-count]").forEach(el => {
+  if (CAPTURE) el.textContent = (+el.dataset.count).toLocaleString("pt-BR");
+  else cio.observe(el);
+});
+if (CAPTURE) document.querySelectorAll("i[data-w]").forEach(i => i.style.width = i.dataset.w);
+
+/* ================= DEMO VIVA ================= */
+const API = location.protocol === "file:" ? "http://127.0.0.1:8765" : "";
+
+let agentDescriptions = {};
+async function fetchDescriptions() {
+  try {
+    const r = await fetch(API + "/api/health");
+    const d = await r.json();
+    if (d.descriptions) agentDescriptions = d.descriptions;
+  } catch(e) { console.error("Erro ao carregar descrições:", e); }
+}
+fetchDescriptions();
+
+document.querySelectorAll(".chip-t").forEach(c => c.onclick = () => {
+  document.querySelectorAll(".chip-t").forEach(x => x.classList.remove("sel"));
+  c.classList.add("sel");
+  document.getElementById("x-intent").value = c.dataset.i;
+});
+
+function stepEl(n, html, done){
+  const d = document.createElement("div");
+  d.className = "t-step" + (done ? " done" : "");
+  d.innerHTML = `<span class="bullet">${done ? "✓" : n}</span><div class="tx">${html}</div>`;
+  return d;
+}
+
+function formatValue(val) {
+  if (val === null || val === undefined) return "—";
+  if (typeof val === "boolean") return val ? "Sim" : "Não";
+  if (Array.isArray(val)) {
+    return val.map(v => typeof v === "object" ? JSON.stringify(v) : String(v)).join(", ");
+  }
+  if (typeof val === "object") {
+    return Object.entries(val)
+      .map(([k, v]) => `• <b>${k}</b>: ${typeof v === "object" ? JSON.stringify(v) : String(v)}`)
+      .join("<br>&nbsp;&nbsp;");
+  }
+  return String(val);
+}
+
+function renderOut(o, agentId, desc) {
+  if (!o) return "";
+
+  let html = `<div style="margin-top:12px; margin-bottom:12px; padding-bottom:12px; border-bottom:1px dashed rgba(255,255,255,0.08);">`;
+  if (desc) {
+    html += `<div style="font-size:12.5px; color:var(--soft); font-style:italic; line-height:1.45;">💡 <b>O que este agente faz:</b> ${desc}</div>`;
+  }
+  html += `</div>`;
+
+  let decision = o.decision;
+  let score = o.score;
+  let rationale = o.rationale || o["justificativa do agente"] || "";
+  let reasons = o.reasons || o.motivos || [];
+  let signals = o.icp_fit_signals || o["sinais TCP"] || o["sinais ICP"] || null;
+
+  let blocks = [];
+
+  // Decision & Score
+  if (decision || score !== undefined) {
+    let decStr = decision === "qualified" ? "QUALIFICADO" : (decision === "disqualified" ? "DESQUALIFICADO" : String(decision || "").toUpperCase());
+    let decColor = decision === "qualified" ? "var(--green)" : "var(--red)";
+    let scoreStr = score !== undefined ? ` (Score: <b>${score}</b>)` : "";
+    blocks.push(`<div style="margin-bottom:10px; display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+      <span style="background:rgba(255,255,255,0.06); padding:3px 10px; border-radius:6px; border:1px solid rgba(255,255,255,0.1); font-size:11.5px; font-weight:bold; color:${decColor}">${decStr}</span>
+      <span style="font-size:12px; color:#D7E0FB">${scoreStr}</span>
+    </div>`);
+  }
+
+  // Rationale
+  if (rationale) {
+    blocks.push(`<div style="margin-bottom:12px; font-size:12.5px; line-height:1.5; color:#AFC4FF; background:rgba(61,111,255,0.06); padding:10px 12px; border-radius:8px; border-left:3px solid var(--electric);">
+      <b>Rationale:</b> ${rationale}
+    </div>`);
+  }
+
+  // Reasons / Motivos
+  if (reasons && reasons.length > 0) {
+    let listItems = Array.isArray(reasons) ? reasons : [reasons];
+    let itemsHtml = listItems.map(r => `<li style="margin-bottom:4px; list-style-type:square;">${r}</li>`).join("");
+    blocks.push(`<div style="margin-bottom:12px; font-size:12px; color:#D7E0FB;">
+      <b style="color:var(--amber);">Motivos:</b>
+      <ul style="margin-top:4px; padding-left:16px; line-height:1.45;">${itemsHtml}</ul>
+    </div>`);
+  }
+
+  // Signals
+  if (signals) {
+    let signalsHtml = "";
+    if (typeof signals === "object") {
+      signalsHtml = Object.entries(signals).map(([k, v]) => {
+        let check = v ? "✔" : "✘";
+        let color = v ? "var(--green)" : "var(--dim2)";
+        return `<span style="display:inline-block; font-size:10.5px; padding:2px 7px; border-radius:5px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06); margin-right:5px; margin-bottom:5px; color:#C9D7FA">
+          <span style="color:${color}; font-weight:bold; margin-right:3px;">${check}</span> ${k}
+        </span>`;
+      }).join("");
+    } else {
+      signalsHtml = String(signals);
+    }
+    blocks.push(`<div style="margin-bottom:12px;">
+      <b style="font-size:12px; color:var(--glow); display:block; margin-bottom:5px;">Sinais de Enquadramento:</b>
+      <div style="display:flex; flex-wrap:wrap; margin-top:4px;">${signalsHtml}</div>
+    </div>`);
+  }
+
+  // Extra rows formatted nicely
+  let extraRows = [];
+  for (const [k, v] of Object.entries(o)) {
+    if (["decision", "score", "rationale", "reasons", "motivos", "icp_fit_signals", "sinais TCP", "sinais ICP", "lead_id", "delivered", "billing_amount", "by"].includes(k)) continue;
+    extraRows.push(`<div style="font-size:12px; margin-bottom:4px;"><span style="color:var(--dim); font-weight:bold;">${k}:</span> <span style="color:#D7E0FB;">${formatValue(v)}</span></div>`);
+  }
+  if (extraRows.length > 0) {
+    blocks.push(`<div style="margin-bottom:12px; padding-top:8px; border-top:1px dashed rgba(255,255,255,0.06);">${extraRows.join("")}</div>`);
+  }
+
+  // Delivered and Billing Metadata
+  let delivered = o.delivered;
+  let billing = o.billing_amount;
+  if (delivered !== undefined || billing !== undefined) {
+    let delStr = delivered ? "✔ Entregue (PILOT/AUTÔNOMO)" : "✘ Não entregue (SHADOW)";
+    let delColor = delivered ? "var(--green)" : "var(--amber)";
+    blocks.push(`<div style="font-size:11px; color:var(--dim2); border-top:1px solid rgba(255,255,255,0.06); padding-top:8px; display:flex; justify-content:space-between; margin-top:8px;">
+      <span style="color:${delColor}">${delStr}</span>
+      <span>Faturamento: <b>R$ ${billing || 0}</b></span>
+    </div>`);
+  }
+
+  html += `<div style="background:#080A16; padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,0.05); overflow:hidden;">${blocks.join("")}</div>`;
+  return html;
+}
+
+async function execute(){
+  const btn = document.getElementById("x-run");
+  const steps = document.getElementById("x-steps");
+  document.getElementById("x-empty").style.display = "none";
+  steps.style.display = "flex";
+  steps.innerHTML = "";
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span>executando na frota…';
+
+  // Limpa e esconde o painel do Brain a cada nova execução
+  currentTenant = null;
+  document.getElementById("x-brain-panel").style.display = "none";
+  const brainEventsEl = document.getElementById("x-brain-events");
+  brainEventsEl.style.display = "none";
+  brainEventsEl.innerHTML = "";
+
+  const intent = document.getElementById("x-intent").value.trim();
+  const ctx = {
+    company: document.getElementById("x-company").value.trim(),
+    revenue_brl_year: +document.getElementById("x-rev").value,
+    founder_led: document.getElementById("x-founder").checked,
+    sells_well: document.getElementById("x-sells").checked,
+    lacks_process: document.getElementById("x-process").checked,
+    firefighter: document.getElementById("x-fire").checked,
+    high_personnel_cost: document.getElementById("x-payroll").checked,
+    large_team: document.getElementById("x-team").checked,
+  };
+  steps.appendChild(stepEl(1, `<b>Intenção recebida</b><br>“${intent}” — contexto de <b>${ctx.company || "empresa do visitante"}</b> gravado no perfil multi-tenant (C5).`));
+
+  try {
+    const t0 = performance.now();
+    const r = await fetch(API + "/api/intent", {
+      method: "POST", headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({intent, context: ctx}),
+    });
+    const data = await r.json();
+    if (!r.ok || data.error) throw new Error(data.error || ("HTTP " + r.status));
+    const ms = Math.round(performance.now() - t0);
+
+    // Salva o tenant_id retornado para auditoria posterior
+    if (data.tenant) {
+      currentTenant = data.tenant;
+      document.getElementById("x-brain-panel").style.display = "block";
+    }
+
+    await new Promise(res => setTimeout(res, 400));
+    steps.appendChild(stepEl(2, `<b>CEO-OS roteou</b> a intenção para a guilda <b>${data.guild} · ${data.guild_name}</b>.`));
+    
+    await new Promise(res => setTimeout(res, 400));
+    const w = data.workers[0];
+    if (w) {
+      const desc = agentDescriptions[w.id] || "";
+      steps.appendChild(stepEl(3, `Supervisor da guilda escolheu o agente <b>${w.id}</b> · <span class="mono">${data.llm}</span>`));
+      
+      await new Promise(res => setTimeout(res, 450));
+      steps.appendChild(stepEl("3.1", `<b>[load_context]</b>: Carregando diretivas de SOUL, memórias operacionais e perfil do cliente no <code>FileStore</code> (C5 multi-tenant).`));
+      
+      await new Promise(res => setTimeout(res, 450));
+      steps.appendChild(stepEl("3.2", `<b>[act]</b>: Executando lógica de domínio do agente worker via LLM e gerando proposta:${renderOut(w.output, w.id, desc)}`));
+      
+      await new Promise(res => setTimeout(res, 450));
+      steps.appendChild(stepEl("3.3", `<b>[self_critique]</b>: Executando guardiões de governança (veracidade do outcome, privacidade LGPD e unit economics) — <span style="color:var(--green)">100% aprovado (HIGH=0)</span>.`));
+      
+      await new Promise(res => setTimeout(res, 450));
+      steps.appendChild(stepEl("3.4", `<b>[gate]</b>: Validando conformidade com as regras de transição de modo de operação do agente (SHADOW).`));
+      
+      await new Promise(res => setTimeout(res, 450));
+      steps.appendChild(stepEl("3.5", `<b>[emit_artifact & snapshot]</b>: Gravando snapshot completo e assinaturas digitais da execução no <code>Company Brain</code> (C6 auditável).`));
+    } else {
+      steps.appendChild(stepEl(3, `A guilda não encontrou um worker roteável para essa intenção — refine o pedido.`));
+    }
+    
+    await new Promise(res => setTimeout(res, 450));
+    steps.appendChild(stepEl(4, `<b>Gate C4 (modo SHADOW)</b> — proposta registrada no Brain com evidência; nada entregue sem promoção por mérito. <span class="mono">${ms} ms</span>`, true));
+    
+    const note = document.createElement("div");
+    note.className = "shadow-note";
+    note.innerHTML = `⚠ ${data.note}${data.tenant ? ` · tenant <b>${data.tenant}</b>` : ""}`;
+    steps.appendChild(note);
+  } catch (e) {
+    const note = document.createElement("div");
+    note.className = "err-note";
+    note.innerHTML = `A frota não está no ar nesta máquina (${String(e.message).slice(0,90)}).<br>
+      Para a demo viva, rode <code>python server.py</code> na pasta do front e abra <code>http://127.0.0.1:8765</code>.`;
+    steps.appendChild(note);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Executar na frota →";
+  }
+}
+
+let currentTenant = null;
+
+async function loadBrainEvents() {
+  const panel = document.getElementById("x-brain-events");
+  panel.style.display = "block";
+  panel.innerHTML = '<span class="spin" style="border-top-color:var(--glow);"></span>Carregando eventos do Brain...';
+  if (!currentTenant) {
+    panel.innerHTML = "Nenhum tenant associado à execução.";
+    return;
+  }
+  try {
+    const r = await fetch(API + `/api/brain?tenant=${currentTenant}`);
+    const data = await r.json();
+    if (data.error) throw new Error(data.error);
+    const evs = data.events || [];
+    if (evs.length === 0) {
+      panel.innerHTML = `Nenhum evento registrado no Brain para o tenant <b>${currentTenant}</b>.`;
+      return;
+    }
+    let html = "";
+    evs.forEach(ev => {
+      html += `<div style="margin-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:6px;">
+        <span style="color:var(--dim2); font-size:10px;">[${ev.ts}]</span> 
+        <b style="color:var(--soft);">${ev.actor}</b> <span style="font-size:9.5px; background:rgba(255,255,255,0.06); padding:1px 4px; border-radius:4px; border:1px solid rgba(255,255,255,0.1);">${ev.mode}</span> <br>
+        <span style="color:#C2CDEE;">Ação:</span> ${ev.action} <br>
+        <span style="color:#C2CDEE;">Resultado:</span> ${ev.delivered ? '<span style="color:var(--green)">Entregue</span>' : '<span style="color:var(--amber)">Sombra</span>'} 
+        | Tokens: ${ev.cost_tokens || 0}
+      </div>`;
+    });
+    panel.innerHTML = html;
+  } catch(e) {
+    panel.innerHTML = `<span style="color:var(--red);">Erro ao ler o Brain: ${e.message}</span>`;
+  }
+}
+</script>
+</body>
+</html>

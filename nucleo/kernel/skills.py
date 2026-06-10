@@ -838,29 +838,34 @@ def painel_dono(state, *, llm, store, spec):
 
 
 def _score_lead_against_icp(lead: dict):
-    """Pontua o lead contra os DOIS ICPs do NÚCLEO (ver company/icp.md):
-    - ICP-1 bombeiro/PCG: R$1-20M/ano, founder-led, vende bem mas opera no caos.
+    """Pontua o lead contra os TRÊS ICPs do NÚCLEO (ver company/icp.md, faixas 2026-06-10):
+    - ICP-1 bombeiro/PCG: R$1-6M/ano, founder-led, vende bem mas opera no caos.
     - ICP-2 enterprise: >R$100M/ano (ou setor público), desorganizada em processos,
       time grande e custo de pessoal alto substituível por agentes Acme.
-    A faixa R$20-100M (mid-market) fica fora dos dois alvos por enquanto.
-    `signals['icp_tier']` indica qual perfil foi avaliado (bombeiro | enterprise | fora | mid_market)."""
+    - ICP-3 mid-market: R$50-100M/ano que cresceu além do fundador sem profissionalizar —
+      a faixa sozinha NÃO qualifica; exige dor evidente (processo/custo de pessoal/gargalo).
+    A faixa R$6-50M é DESCONSIDERADA por enquanto (decisão founder 2026-06-10) — não pontua.
+    `signals['icp_tier']` indica o perfil avaliado (bombeiro | enterprise | mid_market |
+    fora_do_alvo | fora)."""
     signals, reasons, score = {}, [], 0
     rev = lead.get("revenue_brl_year", 0) or 0
 
     # Roteia por faturamento (setor público entra como enterprise mesmo sem faturamento alto)
     if rev > 100_000_000 or lead.get("public_sector"):
         tier = "enterprise"
-    elif 1_000_000 <= rev <= 20_000_000:
-        tier = "bombeiro"
-    elif 0 < rev < 1_000_000:
-        tier = "fora"
-    else:
+    elif 50_000_000 <= rev <= 100_000_000:
         tier = "mid_market"
+    elif 1_000_000 <= rev <= 6_000_000:
+        tier = "bombeiro"
+    elif 6_000_000 < rev < 50_000_000:
+        tier = "fora_do_alvo"   # R$6-50M desconsiderada por enquanto — não pontua nem com dor
+    else:
+        tier = "fora"   # <R$1M ou faturamento não informado — faixa não validada não pontua
     signals["icp_tier"] = tier
 
     if tier == "bombeiro":
-        score += 35; signals["faturamento_1a20M"] = True
-        reasons.append("Faturamento na faixa R$1-20M (ICP-1 bombeiro/PCG)")
+        score += 35; signals["faturamento_1a6M"] = True
+        reasons.append("Faturamento na faixa R$1-6M (ICP-1 bombeiro/PCG)")
         if lead.get("founder_led"):
             score += 20; signals["founder_led"] = True; reasons.append("Decisao founder-led")
         if lead.get("sells_well"):
@@ -887,11 +892,30 @@ def _score_lead_against_icp(lead: dict):
             score += 20; signals["custo_pessoal_alto"] = True
             reasons.append("Custo de pessoal alto substituivel por agentes Acme")
 
-    elif tier == "fora":
-        signals["faturamento"] = False; reasons.append("Abaixo de R$1M (pre-ICP)")
-    else:  # mid_market
+    elif tier == "mid_market":
+        score += 30; signals["faturamento_50a100M"] = True
+        reasons.append("Faturamento na faixa R$50-100M (ICP-3 mid-market)")
+        if lead.get("lacks_process") or lead.get("process_disorganized"):
+            score += 20; signals["processos_desorganizados"] = True
+            reasons.append("Processos nao acompanharam o porte (dor central)")
+        if lead.get("high_personnel_cost"):
+            score += 20; signals["custo_pessoal_alto"] = True
+            reasons.append("Custo de pessoal alto substituivel por agentes Acme")
+        if lead.get("large_team") or (lead.get("team_size", 0) or 0) >= 50:
+            score += 15; signals["time_grande"] = True; reasons.append("Time grande (muitas pessoas)")
+        if lead.get("founder_led") or lead.get("firefighter"):
+            score += 10; signals["fundador_gargalo"] = True
+            reasons.append("Fundador ainda e gargalo de decisao")
+        if lead.get("ops_mature"):
+            score -= 30; signals["ops_madura"] = True; reasons.append("Operacao ja madura (desqualifica)")
+
+    elif tier == "fora_do_alvo":
         signals["faturamento"] = False
-        reasons.append("Faixa R$20-100M (mid-market): fora dos ICPs-alvo por enquanto")
+        reasons.append("Faixa R$6-50M desconsiderada por enquanto (decisao 2026-06-10)")
+
+    else:  # fora (<R$1M ou não informado)
+        signals["faturamento"] = False
+        reasons.append("Abaixo de R$1M ou faturamento nao informado (pre-ICP)")
 
     return max(0, min(100, score)), signals, reasons
 

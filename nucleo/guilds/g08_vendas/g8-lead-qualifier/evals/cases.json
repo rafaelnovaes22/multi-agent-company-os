@@ -1,451 +1,566 @@
 [
-  {
-    "id": "lq-01",
-    "desc": "high-fit completo bombeiro",
-    "lead": {
-      "id": "L-h1",
-      "revenue_brl_year": 2500000,
-      "founder_led": true,
-      "sells_well": true,
-      "lacks_process": true,
-      "firefighter": true
-    },
-    "expected": {
-      "decision": "qualified",
-      "track": "assistido (SDR/closer)"
-    }
+ {
+  "id": "lq-01",
+  "desc": "high-fit completo bombeiro",
+  "lead": {
+   "id": "L-h1",
+   "revenue_brl_year": 2500000,
+   "founder_led": true,
+   "sells_well": true,
+   "lacks_process": true,
+   "firefighter": true
   },
-  {
-    "id": "lq-02",
-    "desc": "pequeno demais (<R$1M) -> fora",
-    "lead": {
-      "id": "L-s1",
-      "revenue_brl_year": 400000,
-      "founder_led": true,
-      "lacks_process": true
-    },
-    "expected": {
-      "decision": "disqualified"
-    }
-  },
-  {
-    "id": "lq-03",
-    "desc": "operacao madura (sinal negativo)",
-    "lead": {
-      "id": "L-m1",
-      "revenue_brl_year": 3000000,
-      "founder_led": false,
-      "sells_well": true,
-      "ops_mature": true
-    },
-    "expected": {
-      "decision": "disqualified"
-    }
-  },
-  {
-    "id": "lq-04",
-    "desc": "fit medio bombeiro -> self-serve",
-    "lead": {
-      "id": "L-md1",
-      "revenue_brl_year": 1800000,
-      "founder_led": true,
-      "firefighter": true
-    },
-    "expected": {
-      "decision": "qualified",
-      "track": "self-serve (ativacao no produto)"
-    }
-  },
-  {
-    "id": "lq-05",
-    "desc": "mid-market R$20-100M (fora dos ICPs-alvo)",
-    "lead": {
-      "id": "L-mm1",
-      "revenue_brl_year": 50000000,
-      "founder_led": false,
-      "sells_well": true
-    },
-    "expected": {
-      "decision": "disqualified"
-    }
-  },
-  {
-    "id": "lq-06",
-    "desc": "enterprise >R$100M com custo de pessoal alto",
-    "lead": {
-      "id": "L-e1",
-      "revenue_brl_year": 200000000,
-      "process_disorganized": true,
-      "large_team": true,
-      "high_personnel_cost": true
-    },
-    "expected": {
-      "decision": "qualified",
-      "track": "assistido (SDR/closer)"
-    }
-  },
-  {
-    "id": "lq-07",
-    "desc": "setor publico (ICP-2 enterprise)",
-    "lead": {
-      "id": "L-pub1",
-      "public_sector": true,
-      "process_disorganized": true,
-      "high_personnel_cost": true
-    },
-    "expected": {
-      "decision": "qualified"
-    }
-  },
-  {
-    "id": "lq-08",
-    "desc": "bombeiro topo da faixa (R$18M ainda qualifica)",
-    "lead": {
-      "id": "L-b2",
-      "revenue_brl_year": 18000000,
-      "founder_led": true,
-      "sells_well": true,
-      "lacks_process": true
-    },
-    "expected": {
-      "decision": "qualified"
-    }
-  },
-  {
-    "id": "lq-09",
-    "desc": "bombeiro piso exato R$1M (qualifica)",
-    "lead": {
-      "id": "L-b3",
-      "revenue_brl_year": 1000000,
-      "founder_led": true,
-      "sells_well": true,
-      "lacks_process": true
-    },
-    "expected": {
-      "decision": "qualified",
-      "track": "assistido (SDR/closer)"
-    }
-  },
-  {
-    "id": "lq-10",
-    "desc": "bombeiro teto exato R$20M (qualifica)",
-    "lead": {
-      "id": "L-b4",
-      "revenue_brl_year": 20000000,
-      "founder_led": true,
-      "sells_well": true,
-      "lacks_process": true
-    },
-    "expected": {
-      "decision": "qualified",
-      "track": "assistido (SDR/closer)"
-    }
-  },
-  {
-    "id": "lq-11",
-    "desc": "logo abaixo do piso R$999.999 -> tier fora, descarte",
-    "lead": {
-      "id": "L-f1",
-      "revenue_brl_year": 999999,
-      "founder_led": true,
-      "sells_well": true,
-      "lacks_process": true
-    },
-    "expected": {
-      "decision": "disqualified",
-      "track": "descarte"
-    }
-  },
-  {
-    "id": "lq-12",
-    "desc": "logo acima do teto R$20.000.001 -> mid_market, descarte",
-    "lead": {
-      "id": "L-mm2",
-      "revenue_brl_year": 20000001,
-      "founder_led": true,
-      "sells_well": true,
-      "lacks_process": true
-    },
-    "expected": {
-      "decision": "disqualified",
-      "track": "descarte"
-    }
-  },
-  {
-    "id": "lq-13",
-    "desc": "bombeiro base 35 (so faturamento) -> 35, descarte",
-    "lead": {
-      "id": "L-b5",
-      "revenue_brl_year": 5000000
-    },
-    "expected": {
-      "decision": "disqualified",
-      "track": "descarte"
-    }
-  },
-  {
-    "id": "lq-14",
-    "desc": "bombeiro base+founder=55 -> abaixo de 60, descarte",
-    "lead": {
-      "id": "L-b6",
-      "revenue_brl_year": 5000000,
-      "founder_led": true
-    },
-    "expected": {
-      "decision": "disqualified",
-      "track": "descarte"
-    }
-  },
-  {
-    "id": "lq-15",
-    "desc": "bombeiro founder+sells_well=70 -> qualified self-serve",
-    "lead": {
-      "id": "L-b7",
-      "revenue_brl_year": 5000000,
-      "founder_led": true,
-      "sells_well": true
-    },
-    "expected": {
-      "decision": "qualified",
-      "track": "self-serve (ativacao no produto)"
-    }
-  },
-  {
-    "id": "lq-16",
-    "desc": "fronteira: bombeiro founder+lacks_process=75 -> assistido (limiar exato)",
-    "lead": {
-      "id": "L-b8",
-      "revenue_brl_year": 5000000,
-      "founder_led": true,
-      "lacks_process": true
-    },
-    "expected": {
-      "decision": "qualified",
-      "track": "assistido (SDR/closer)"
-    }
-  },
-  {
-    "id": "lq-17",
-    "desc": "bombeiro sells_well+lacks_process+firefighter=80 -> assistido",
-    "lead": {
-      "id": "L-b9",
-      "revenue_brl_year": 5000000,
-      "sells_well": true,
-      "lacks_process": true,
-      "firefighter": true
-    },
-    "expected": {
-      "decision": "qualified",
-      "track": "assistido (SDR/closer)"
-    }
-  },
-  {
-    "id": "lq-18",
-    "desc": "bombeiro todos os sinais positivos=100 (clamp) -> assistido",
-    "lead": {
-      "id": "L-b10",
-      "revenue_brl_year": 5000000,
-      "founder_led": true,
-      "sells_well": true,
-      "lacks_process": true,
-      "firefighter": true
-    },
-    "expected": {
-      "decision": "qualified",
-      "track": "assistido (SDR/closer)"
-    }
-  },
-  {
-    "id": "lq-19",
-    "desc": "adhd_traits conta como perfil bombeiro (+10) igual firefighter",
-    "lead": {
-      "id": "L-b11",
-      "revenue_brl_year": 5000000,
-      "founder_led": true,
-      "sells_well": true,
-      "adhd_traits": true
-    },
-    "expected": {
-      "decision": "qualified",
-      "track": "assistido (SDR/closer)"
-    }
-  },
-  {
-    "id": "lq-20",
-    "desc": "bombeiro full mas ops_mature (-30): 100-30=70 -> self-serve",
-    "lead": {
-      "id": "L-b12",
-      "revenue_brl_year": 5000000,
-      "founder_led": true,
-      "sells_well": true,
-      "lacks_process": true,
-      "firefighter": true,
-      "ops_mature": true
-    },
-    "expected": {
-      "decision": "qualified",
-      "track": "self-serve (ativacao no produto)"
-    }
-  },
-  {
-    "id": "lq-21",
-    "desc": "bombeiro founder+sells_well(70) - ops_mature(30)=40 -> descarte",
-    "lead": {
-      "id": "L-b13",
-      "revenue_brl_year": 5000000,
-      "founder_led": true,
-      "sells_well": true,
-      "ops_mature": true
-    },
-    "expected": {
-      "decision": "disqualified",
-      "track": "descarte"
-    }
-  },
-  {
-    "id": "lq-22",
-    "desc": "fronteira: R$100M exato NAO e enterprise (>100M estrito) -> mid_market descarte",
-    "lead": {
-      "id": "L-x1",
-      "revenue_brl_year": 100000000,
-      "process_disorganized": true,
-      "high_personnel_cost": true
-    },
-    "expected": {
-      "decision": "disqualified",
-      "track": "descarte"
-    }
-  },
-  {
-    "id": "lq-23",
-    "desc": "fronteira: R$100M+1 -> enterprise; base+disorg=50 ainda descarte",
-    "lead": {
-      "id": "L-e2",
-      "revenue_brl_year": 100000001,
-      "process_disorganized": true
-    },
-    "expected": {
-      "decision": "disqualified",
-      "track": "descarte"
-    }
-  },
-  {
-    "id": "lq-24",
-    "desc": "enterprise base 30 (so faturamento) -> descarte",
-    "lead": {
-      "id": "L-e3",
-      "revenue_brl_year": 300000000
-    },
-    "expected": {
-      "decision": "disqualified",
-      "track": "descarte"
-    }
-  },
-  {
-    "id": "lq-25",
-    "desc": "enterprise base+disorg=50 -> abaixo de 60, descarte",
-    "lead": {
-      "id": "L-e4",
-      "revenue_brl_year": 300000000,
-      "lacks_process": true
-    },
-    "expected": {
-      "decision": "disqualified",
-      "track": "descarte"
-    }
-  },
-  {
-    "id": "lq-26",
-    "desc": "enterprise base+disorg+large_team=65 -> qualified self-serve",
-    "lead": {
-      "id": "L-e5",
-      "revenue_brl_year": 300000000,
-      "process_disorganized": true,
-      "large_team": true
-    },
-    "expected": {
-      "decision": "qualified",
-      "track": "self-serve (ativacao no produto)"
-    }
-  },
-  {
-    "id": "lq-27",
-    "desc": "enterprise full=85 -> assistido",
-    "lead": {
-      "id": "L-e6",
-      "revenue_brl_year": 300000000,
-      "process_disorganized": true,
-      "large_team": true,
-      "high_personnel_cost": true
-    },
-    "expected": {
-      "decision": "qualified",
-      "track": "assistido (SDR/closer)"
-    }
-  },
-  {
-    "id": "lq-28",
-    "desc": "enterprise team_size>=50 conta como time grande (+15)",
-    "lead": {
-      "id": "L-e7",
-      "revenue_brl_year": 300000000,
-      "high_personnel_cost": true,
-      "team_size": 50
-    },
-    "expected": {
-      "decision": "qualified",
-      "track": "self-serve (ativacao no produto)"
-    }
-  },
-  {
-    "id": "lq-29",
-    "desc": "enterprise team_size 49 NAO conta como time grande; base+hpc=50 -> descarte",
-    "lead": {
-      "id": "L-e8",
-      "revenue_brl_year": 300000000,
-      "high_personnel_cost": true,
-      "team_size": 49
-    },
-    "expected": {
-      "decision": "disqualified",
-      "track": "descarte"
-    }
-  },
-  {
-    "id": "lq-30",
-    "desc": "setor publico sem faturamento -> enterprise base+public=45 descarte",
-    "lead": {
-      "id": "L-pub2",
-      "public_sector": true
-    },
-    "expected": {
-      "decision": "disqualified",
-      "track": "descarte"
-    }
-  },
-  {
-    "id": "lq-31",
-    "desc": "setor publico full=85 -> assistido",
-    "lead": {
-      "id": "L-pub3",
-      "public_sector": true,
-      "process_disorganized": true,
-      "high_personnel_cost": true
-    },
-    "expected": {
-      "decision": "qualified",
-      "track": "assistido (SDR/closer)"
-    }
-  },
-  {
-    "id": "lq-32",
-    "desc": "lead sem faturamento e sem sinais -> mid_market, descarte",
-    "lead": {
-      "id": "L-empty"
-    },
-    "expected": {
-      "decision": "disqualified",
-      "track": "descarte"
-    }
+  "expected": {
+   "decision": "qualified",
+   "track": "assistido (SDR/closer)"
   }
+ },
+ {
+  "id": "lq-02",
+  "desc": "pequeno demais (<R$1M) -> fora",
+  "lead": {
+   "id": "L-s1",
+   "revenue_brl_year": 400000,
+   "founder_led": true,
+   "lacks_process": true
+  },
+  "expected": {
+   "decision": "disqualified"
+  }
+ },
+ {
+  "id": "lq-03",
+  "desc": "operacao madura (sinal negativo)",
+  "lead": {
+   "id": "L-m1",
+   "revenue_brl_year": 3000000,
+   "founder_led": false,
+   "sells_well": true,
+   "ops_mature": true
+  },
+  "expected": {
+   "decision": "disqualified"
+  }
+ },
+ {
+  "id": "lq-04",
+  "desc": "fit medio bombeiro -> self-serve",
+  "lead": {
+   "id": "L-md1",
+   "revenue_brl_year": 1800000,
+   "founder_led": true,
+   "firefighter": true
+  },
+  "expected": {
+   "decision": "qualified",
+   "track": "self-serve (ativacao no produto)"
+  }
+ },
+ {
+  "id": "lq-05",
+  "desc": "mid-market R$20-100M (fora dos ICPs-alvo)",
+  "lead": {
+   "id": "L-mm1",
+   "revenue_brl_year": 50000000,
+   "founder_led": false,
+   "sells_well": true
+  },
+  "expected": {
+   "decision": "disqualified"
+  }
+ },
+ {
+  "id": "lq-06",
+  "desc": "enterprise >R$100M com custo de pessoal alto",
+  "lead": {
+   "id": "L-e1",
+   "revenue_brl_year": 200000000,
+   "process_disorganized": true,
+   "large_team": true,
+   "high_personnel_cost": true
+  },
+  "expected": {
+   "decision": "qualified",
+   "track": "assistido (SDR/closer)"
+  }
+ },
+ {
+  "id": "lq-07",
+  "desc": "setor publico (ICP-2 enterprise)",
+  "lead": {
+   "id": "L-pub1",
+   "public_sector": true,
+   "process_disorganized": true,
+   "high_personnel_cost": true
+  },
+  "expected": {
+   "decision": "qualified"
+  }
+ },
+ {
+  "id": "lq-08",
+  "desc": "R$18M caiu na faixa desconsiderada R$6-50M (decisao 2026-06-10)",
+  "lead": {
+   "id": "L-b2",
+   "revenue_brl_year": 18000000,
+   "founder_led": true,
+   "sells_well": true,
+   "lacks_process": true
+  },
+  "expected": {
+   "decision": "disqualified",
+   "track": "descarte"
+  }
+ },
+ {
+  "id": "lq-09",
+  "desc": "bombeiro piso exato R$1M (qualifica)",
+  "lead": {
+   "id": "L-b3",
+   "revenue_brl_year": 1000000,
+   "founder_led": true,
+   "sells_well": true,
+   "lacks_process": true
+  },
+  "expected": {
+   "decision": "qualified",
+   "track": "assistido (SDR/closer)"
+  }
+ },
+ {
+  "id": "lq-10",
+  "desc": "R$20M era teto do bombeiro; hoje esta na faixa desconsiderada",
+  "lead": {
+   "id": "L-b4",
+   "revenue_brl_year": 20000000,
+   "founder_led": true,
+   "sells_well": true,
+   "lacks_process": true
+  },
+  "expected": {
+   "decision": "disqualified",
+   "track": "descarte"
+  }
+ },
+ {
+  "id": "lq-11",
+  "desc": "logo abaixo do piso R$999.999 -> tier fora, descarte",
+  "lead": {
+   "id": "L-f1",
+   "revenue_brl_year": 999999,
+   "founder_led": true,
+   "sells_well": true,
+   "lacks_process": true
+  },
+  "expected": {
+   "decision": "disqualified",
+   "track": "descarte"
+  }
+ },
+ {
+  "id": "lq-12",
+  "desc": "R$20.000.001 segue descartado: dentro da faixa desconsiderada 6-50M",
+  "lead": {
+   "id": "L-mm2",
+   "revenue_brl_year": 20000001,
+   "founder_led": true,
+   "sells_well": true,
+   "lacks_process": true
+  },
+  "expected": {
+   "decision": "disqualified",
+   "track": "descarte"
+  }
+ },
+ {
+  "id": "lq-13",
+  "desc": "bombeiro base 35 (so faturamento) -> 35, descarte",
+  "lead": {
+   "id": "L-b5",
+   "revenue_brl_year": 5000000
+  },
+  "expected": {
+   "decision": "disqualified",
+   "track": "descarte"
+  }
+ },
+ {
+  "id": "lq-14",
+  "desc": "bombeiro base+founder=55 -> abaixo de 60, descarte",
+  "lead": {
+   "id": "L-b6",
+   "revenue_brl_year": 5000000,
+   "founder_led": true
+  },
+  "expected": {
+   "decision": "disqualified",
+   "track": "descarte"
+  }
+ },
+ {
+  "id": "lq-15",
+  "desc": "bombeiro founder+sells_well=70 -> qualified self-serve",
+  "lead": {
+   "id": "L-b7",
+   "revenue_brl_year": 5000000,
+   "founder_led": true,
+   "sells_well": true
+  },
+  "expected": {
+   "decision": "qualified",
+   "track": "self-serve (ativacao no produto)"
+  }
+ },
+ {
+  "id": "lq-16",
+  "desc": "fronteira: bombeiro founder+lacks_process=75 -> assistido (limiar exato)",
+  "lead": {
+   "id": "L-b8",
+   "revenue_brl_year": 5000000,
+   "founder_led": true,
+   "lacks_process": true
+  },
+  "expected": {
+   "decision": "qualified",
+   "track": "assistido (SDR/closer)"
+  }
+ },
+ {
+  "id": "lq-17",
+  "desc": "bombeiro sells_well+lacks_process+firefighter=80 -> assistido",
+  "lead": {
+   "id": "L-b9",
+   "revenue_brl_year": 5000000,
+   "sells_well": true,
+   "lacks_process": true,
+   "firefighter": true
+  },
+  "expected": {
+   "decision": "qualified",
+   "track": "assistido (SDR/closer)"
+  }
+ },
+ {
+  "id": "lq-18",
+  "desc": "bombeiro todos os sinais positivos=100 (clamp) -> assistido",
+  "lead": {
+   "id": "L-b10",
+   "revenue_brl_year": 5000000,
+   "founder_led": true,
+   "sells_well": true,
+   "lacks_process": true,
+   "firefighter": true
+  },
+  "expected": {
+   "decision": "qualified",
+   "track": "assistido (SDR/closer)"
+  }
+ },
+ {
+  "id": "lq-19",
+  "desc": "adhd_traits conta como perfil bombeiro (+10) igual firefighter",
+  "lead": {
+   "id": "L-b11",
+   "revenue_brl_year": 5000000,
+   "founder_led": true,
+   "sells_well": true,
+   "adhd_traits": true
+  },
+  "expected": {
+   "decision": "qualified",
+   "track": "assistido (SDR/closer)"
+  }
+ },
+ {
+  "id": "lq-20",
+  "desc": "bombeiro full mas ops_mature (-30): 100-30=70 -> self-serve",
+  "lead": {
+   "id": "L-b12",
+   "revenue_brl_year": 5000000,
+   "founder_led": true,
+   "sells_well": true,
+   "lacks_process": true,
+   "firefighter": true,
+   "ops_mature": true
+  },
+  "expected": {
+   "decision": "qualified",
+   "track": "self-serve (ativacao no produto)"
+  }
+ },
+ {
+  "id": "lq-21",
+  "desc": "bombeiro founder+sells_well(70) - ops_mature(30)=40 -> descarte",
+  "lead": {
+   "id": "L-b13",
+   "revenue_brl_year": 5000000,
+   "founder_led": true,
+   "sells_well": true,
+   "ops_mature": true
+  },
+  "expected": {
+   "decision": "disqualified",
+   "track": "descarte"
+  }
+ },
+ {
+  "id": "lq-22",
+  "desc": "R$100M exato virou ICP-3 mid-market: dor dupla (processo+folha) qualifica",
+  "lead": {
+   "id": "L-x1",
+   "revenue_brl_year": 100000000,
+   "process_disorganized": true,
+   "high_personnel_cost": true
+  },
+  "expected": {
+   "decision": "qualified",
+   "track": "self-serve (ativacao no produto)"
+  }
+ },
+ {
+  "id": "lq-23",
+  "desc": "fronteira: R$100M+1 -> enterprise; base+disorg=50 ainda descarte",
+  "lead": {
+   "id": "L-e2",
+   "revenue_brl_year": 100000001,
+   "process_disorganized": true
+  },
+  "expected": {
+   "decision": "disqualified",
+   "track": "descarte"
+  }
+ },
+ {
+  "id": "lq-24",
+  "desc": "enterprise base 30 (so faturamento) -> descarte",
+  "lead": {
+   "id": "L-e3",
+   "revenue_brl_year": 300000000
+  },
+  "expected": {
+   "decision": "disqualified",
+   "track": "descarte"
+  }
+ },
+ {
+  "id": "lq-25",
+  "desc": "enterprise base+disorg=50 -> abaixo de 60, descarte",
+  "lead": {
+   "id": "L-e4",
+   "revenue_brl_year": 300000000,
+   "lacks_process": true
+  },
+  "expected": {
+   "decision": "disqualified",
+   "track": "descarte"
+  }
+ },
+ {
+  "id": "lq-26",
+  "desc": "enterprise base+disorg+large_team=65 -> qualified self-serve",
+  "lead": {
+   "id": "L-e5",
+   "revenue_brl_year": 300000000,
+   "process_disorganized": true,
+   "large_team": true
+  },
+  "expected": {
+   "decision": "qualified",
+   "track": "self-serve (ativacao no produto)"
+  }
+ },
+ {
+  "id": "lq-27",
+  "desc": "enterprise full=85 -> assistido",
+  "lead": {
+   "id": "L-e6",
+   "revenue_brl_year": 300000000,
+   "process_disorganized": true,
+   "large_team": true,
+   "high_personnel_cost": true
+  },
+  "expected": {
+   "decision": "qualified",
+   "track": "assistido (SDR/closer)"
+  }
+ },
+ {
+  "id": "lq-28",
+  "desc": "enterprise team_size>=50 conta como time grande (+15)",
+  "lead": {
+   "id": "L-e7",
+   "revenue_brl_year": 300000000,
+   "high_personnel_cost": true,
+   "team_size": 50
+  },
+  "expected": {
+   "decision": "qualified",
+   "track": "self-serve (ativacao no produto)"
+  }
+ },
+ {
+  "id": "lq-29",
+  "desc": "enterprise team_size 49 NAO conta como time grande; base+hpc=50 -> descarte",
+  "lead": {
+   "id": "L-e8",
+   "revenue_brl_year": 300000000,
+   "high_personnel_cost": true,
+   "team_size": 49
+  },
+  "expected": {
+   "decision": "disqualified",
+   "track": "descarte"
+  }
+ },
+ {
+  "id": "lq-30",
+  "desc": "setor publico sem faturamento -> enterprise base+public=45 descarte",
+  "lead": {
+   "id": "L-pub2",
+   "public_sector": true
+  },
+  "expected": {
+   "decision": "disqualified",
+   "track": "descarte"
+  }
+ },
+ {
+  "id": "lq-31",
+  "desc": "setor publico full=85 -> assistido",
+  "lead": {
+   "id": "L-pub3",
+   "public_sector": true,
+   "process_disorganized": true,
+   "high_personnel_cost": true
+  },
+  "expected": {
+   "decision": "qualified",
+   "track": "assistido (SDR/closer)"
+  }
+ },
+ {
+  "id": "lq-32",
+  "desc": "lead sem faturamento e sem sinais -> mid_market, descarte",
+  "lead": {
+   "id": "L-empty"
+  },
+  "expected": {
+   "decision": "disqualified",
+   "track": "descarte"
+  }
+ },
+ {
+  "id": "lq-33",
+  "desc": "teto do bombeiro encolheu para R$6M: borda exata ainda qualifica",
+  "lead": {
+   "id": "L-n1",
+   "revenue_brl_year": 6000000,
+   "founder_led": true,
+   "sells_well": true,
+   "lacks_process": true
+  },
+  "expected": {
+   "decision": "qualified"
+  }
+ },
+ {
+  "id": "lq-34",
+  "desc": "R$6.000.001 e o primeiro real dentro da faixa desconsiderada",
+  "lead": {
+   "id": "L-n2",
+   "revenue_brl_year": 6000001,
+   "founder_led": true,
+   "sells_well": true,
+   "lacks_process": true
+  },
+  "expected": {
+   "decision": "disqualified",
+   "track": "descarte"
+  }
+ },
+ {
+  "id": "lq-35",
+  "desc": "R$30M com dor evidente: a faixa 6-50M nao pontua por decisao, nem com dor",
+  "lead": {
+   "id": "L-n3",
+   "revenue_brl_year": 30000000,
+   "founder_led": true,
+   "lacks_process": true,
+   "high_personnel_cost": true,
+   "large_team": true
+  },
+  "expected": {
+   "decision": "disqualified",
+   "track": "descarte"
+  }
+ },
+ {
+  "id": "lq-36",
+  "desc": "um real abaixo de R$50M ainda esta fora do mid-market",
+  "lead": {
+   "id": "L-n4",
+   "revenue_brl_year": 49999999,
+   "process_disorganized": true,
+   "high_personnel_cost": true
+  },
+  "expected": {
+   "decision": "disqualified",
+   "track": "descarte"
+  }
+ },
+ {
+  "id": "lq-37",
+  "desc": "piso do ICP-3: R$50M com processos desorganizados e folha pesada entra",
+  "lead": {
+   "id": "L-n5",
+   "revenue_brl_year": 50000000,
+   "process_disorganized": true,
+   "high_personnel_cost": true
+  },
+  "expected": {
+   "decision": "qualified",
+   "track": "self-serve (ativacao no produto)"
+  }
+ },
+ {
+  "id": "lq-38",
+  "desc": "mid-market no corte exato (60): processos ruins + fundador-gargalo",
+  "lead": {
+   "id": "L-n6",
+   "revenue_brl_year": 75000000,
+   "process_disorganized": true,
+   "founder_led": true
+  },
+  "expected": {
+   "decision": "qualified",
+   "track": "self-serve (ativacao no produto)"
+  }
+ },
+ {
+  "id": "lq-39",
+  "desc": "R$80M sem nenhuma dor declarada nao passa do score base do ICP-3",
+  "lead": {
+   "id": "L-n7",
+   "revenue_brl_year": 80000000
+  },
+  "expected": {
+   "decision": "disqualified",
+   "track": "descarte"
+  }
+ },
+ {
+  "id": "lq-40",
+  "desc": "mid-market com operacao ja madura: o malus derruba abaixo do corte",
+  "lead": {
+   "id": "L-n8",
+   "revenue_brl_year": 60000000,
+   "process_disorganized": true,
+   "high_personnel_cost": true,
+   "ops_mature": true
+  },
+  "expected": {
+   "decision": "disqualified",
+   "track": "descarte"
+  }
+ }
 ]

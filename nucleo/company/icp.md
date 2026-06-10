@@ -1,7 +1,7 @@
 ---
 artifact: icp
 tier: L0
-version: "0.1.0"
+version: "0.2.0"
 status: draft
 source: "Mensagem de voz (WhatsApp PTT) 2026-05-29 — transcrição em C:/tmp/ptt_2026-05-29_transcricao.txt"
 date: 2026-05-29
@@ -15,16 +15,16 @@ loaded_by: nucleo.kernel.loaders.load_icp
 
 ## Resumo em uma frase
 
-São **dois** perfis de comprador: **(ICP-1) fundadores R$ 1–20 milhões/ano** que **vendem bem mas operam no caos** (perfil "bombeiro"/TDAH, sem processo) — canal de distribuição = **PCG** (Programa de Crescimento Guiado da the CEO); e **(ICP-2) organizações enterprise >R$ 100 milhões/ano** (inclui **setor público**), **desorganizadas em processos**, com **time grande e custo de pessoal alto substituível por agentes Acme**.
+São **três** perfis de comprador: **(ICP-1) fundadores R$ 1–6 milhões/ano** que **vendem bem mas operam no caos** (perfil "bombeiro"/TDAH, sem processo) — canal de distribuição = **PCG** (Programa de Crescimento Guiado da the CEO); **(ICP-2) organizações enterprise >R$ 100 milhões/ano** (inclui **setor público**), **desorganizadas em processos**, com **time grande e custo de pessoal alto substituível por agentes Acme**; e **(ICP-3) mid-market R$ 50–100 milhões/ano** que **cresceu além do fundador sem profissionalizar a operação** — dores híbridas dos dois extremos.
 
-> A faixa **R$ 20–100M (mid-market)** fica **fora dos dois alvos por enquanto** (decisão CEO 2026-05-30: atacar os dois extremos primeiro). O produto é o mesmo; o **pitch e o motion de venda mudam** (PCG = canal quente, ciclo curto; enterprise/público = procurement/licitação, ciclo longo, narrativa de substituição de custo).
+> **A faixa R$ 6–50M é DESCONSIDERADA por enquanto** (decisão founder 2026-06-10) — não pontua na qualificação, nem com dor evidente. Histórico das faixas: R$ 1–5M (2026-05-29) → R$ 1–20M (CEO 2026-05-30, dois extremos) → **R$ 1–6M + mid-market R$ 50–100M (founder 2026-06-10: "vamos ter esses clientes também", excluindo 6–50M)**. O produto é o mesmo; o **pitch e o motion de venda mudam** (PCG = canal quente, ciclo curto; mid-market = venda consultiva founder-led; enterprise/público = procurement/licitação, ciclo longo, narrativa de substituição de custo).
 
 ---
 
 ## Tier 1 (ICP-1) — Bombeiro / PCG (quem compra)
 
 **Firmográfico**
-- Faturamento: **R$ 1M a R$ 20M / ano** (já validou venda; não é ideação).
+- Faturamento: **R$ 1M a R$ 6M / ano** (já validou venda; não é ideação).
 - Estágio: pós-product-market-fit comercial, pré-maturidade operacional.
 - Decisor: o **próprio fundador/sócio** (compra é founder-led).
 - **Canal:** mentorados do **PCG** (audiência quente, pré-qualificada) — dispensa prospecção fria. Tese: *"PCG ensina o que fazer; Acme é o headcount que executa."*
@@ -61,6 +61,24 @@ São **dois** perfis de comprador: **(ICP-1) fundadores R$ 1–20 milhões/ano**
 
 ---
 
+## Tier 1-C (ICP-3) — Mid-market (quem compra)
+
+**Firmográfico**
+- Faturamento: **R$ 50M a R$ 100M / ano**.
+- Estágio: cresceu além da operação founder-led, **sem ter profissionalizado processos**.
+- Decisor: fundador/sócio ainda no comando, ou diretoria enxuta (ciclo médio — mais curto que enterprise, mais longo que PCG).
+
+**Situação / dores (híbridas dos dois extremos)**
+- **Processos desorganizados** que não acompanharam o porte (dor do ICP-1, em escala maior).
+- **Time grande e custo de pessoal alto** com funções repetitivas substituíveis (dor do ICP-2).
+- O fundador ainda é gargalo de decisão, mas a empresa já não cabe na cabeça dele.
+
+**Job-to-be-done (hipótese):** *"Profissionalizar a operação sem parar a empresa — processos que rodam sem mim e custo de folha sob controle."*
+
+> **Qualificação exige dor evidente:** a faixa de faturamento sozinha **não** qualifica (score base não atinge o corte). Precisa de sinal de desorganização, custo de pessoal alto ou fundador-gargalo.
+
+---
+
 ## Tier 2 — Onde encontrá-los (descoberta / sourcing)
 
 > "É a gente entender **onde estão essas pessoas**, onde a gente faz o *scraping*, de onde estão, e como conectar — fazer um **cold B2B outreach** para achá-las."
@@ -83,20 +101,29 @@ São **dois** perfis de comprador: **(ICP-1) fundadores R$ 1–20 milhões/ano**
 
 | ✅ Qualifica | ❌ Desqualifica |
 |---|---|
-| Fatura R$ 1–20M/ano | Pré-receita / ideação (<R$1M) |
-| Fundador "bombeiro", sem processo | Operação já madura, time de ops estruturado |
-| Vende bem mas não escala a operação | Problema é *vender* (não é nosso ICP) |
-| Decisão founder-led | Faixa R$ 20–100M (mid-market, fora do alvo) |
+| Fatura R$ 1–6M/ano | Pré-receita / ideação (<R$1M) |
+| Fundador "bombeiro", sem processo | Faixa R$ 6–50M (desconsiderada por enquanto) |
+| Vende bem mas não escala a operação | Operação já madura, time de ops estruturado |
+| Decisão founder-led | Problema é *vender* (não é nosso ICP) |
 | Quer tirar o caos da cabeça | Não sente a dor de processo/infra |
 
 **ICP-2 (enterprise / setor público)**
 
 | ✅ Qualifica | ❌ Desqualifica |
 |---|---|
-| Fatura > R$ 100M/ano ou órgão público | Faixa R$ 20–100M (mid-market, fora do alvo) |
-| Desorganizada em processos | Processos já maduros/automatizados |
-| Time grande, custo de pessoal alto | Custo de folha baixo (pouco a substituir) |
+| Fatura > R$ 100M/ano ou órgão público | Processos já maduros/automatizados |
+| Desorganizada em processos | Custo de folha baixo (pouco a substituir) |
+| Time grande, custo de pessoal alto | — |
 | Aceita ciclo de procurement/licitação | — |
+
+**ICP-3 (mid-market)**
+
+| ✅ Qualifica | ❌ Desqualifica |
+|---|---|
+| Fatura R$ 50–100M/ano **com dor evidente** | Faixa de faturamento sem sinal de dor |
+| Processos desorganizados para o porte | Faixa R$ 6–50M (desconsiderada por enquanto) |
+| Time grande, custo de pessoal alto | Operação já madura/profissionalizada |
+| Fundador ainda é gargalo de decisão | Custo de folha baixo |
 
 ---
 
@@ -111,7 +138,7 @@ Este artefato L0 é a **fonte única** do perfil de cliente. Agentes carregam vi
 | **g1-market-intel** (G01) | Dimensiona e monitora **onde o ICP se concentra**; alimenta o Tier 2 (fontes de scraping) |
 | **g2-jobs-to-be-done / g2-prd-author** (G02) | Ancoram descoberta e PRD no JTBD do ICP |
 | **g7-referral-designer / g7-content-writer** (G07) | Mensagem e indicação miram o perfil "bombeiro/TDAH" (doutrina de growth, [../../05-DOUTRINA-GTM-LOVABLE.md](../../05-DOUTRINA-GTM-LOVABLE.md)) |
-| **g10-unit-economist** (G10) | Usa as faixas R$ 1–20M (ICP-1) / >R$ 100M (ICP-2) para sanidade de willingness-to-pay / C3 |
+| **g10-unit-economist** (G10) | Usa as faixas R$ 1–6M (ICP-1) / R$ 50–100M (ICP-3) / >R$ 100M (ICP-2) para sanidade de willingness-to-pay / C3 |
 
 ## Conformidade (C-rules)
 

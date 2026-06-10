@@ -1,8 +1,8 @@
-"""Guarda de regressão do scoring de ICP (company/icp.md — dois perfis, decisão CEO 2026-05-30).
+"""Guarda de regressão do scoring de ICP (company/icp.md — três perfis, faixas 2026-06-10).
 
-Trava os 3 eixos que a materialização anterior havia estreitado: enterprise é faixa ABERTA
-(> R$100M, não 80–130M fechado), setor público é alvo (qualifica independente de faturamento),
-e os sinais enterprise (processos desorganizados / time grande / custo de pessoal) pontuam.
+Trava o desenho vigente: ICP-1 bombeiro R$1-6M; faixa R$6-50M DESCONSIDERADA (não pontua
+nem com dor evidente); ICP-3 mid-market R$50-100M (a faixa sozinha não qualifica — exige
+dor); ICP-2 enterprise faixa ABERTA >R$100M + setor público independente de faturamento.
 """
 import unittest
 
@@ -10,14 +10,38 @@ from nucleo.kernel.skills import _score_lead_against_icp
 
 
 class ICPSegmentScoringTest(unittest.TestCase):
-    def test_bombeiro_1m_a_20m_qualifica(self):
+    def test_bombeiro_1m_a_6m_qualifica(self):
         score, signals, reasons = _score_lead_against_icp({
-            "revenue_brl_year": 18_000_000, "founder_led": True,
+            "revenue_brl_year": 5_000_000, "founder_led": True,
             "sells_well": True, "lacks_process": True, "firefighter": True,
         })
         self.assertGreaterEqual(score, 60)
         self.assertEqual(signals["icp_tier"], "bombeiro")
-        self.assertTrue(signals["faturamento_1a20M"])
+        self.assertTrue(signals["faturamento_1a6M"])
+
+    def test_faixa_6_a_50M_desconsiderada_nao_pontua_nem_com_dor(self):
+        # decisão founder 2026-06-10: R$6-50M fora do alvo por enquanto — score zero.
+        score, signals, _ = _score_lead_against_icp({
+            "revenue_brl_year": 18_000_000, "founder_led": True, "sells_well": True,
+            "lacks_process": True, "firefighter": True, "high_personnel_cost": True,
+        })
+        self.assertEqual(signals["icp_tier"], "fora_do_alvo")
+        self.assertEqual(score, 0)
+
+    def test_mid_market_50_a_100M_com_dor_qualifica(self):
+        score, signals, _ = _score_lead_against_icp({
+            "revenue_brl_year": 75_000_000, "process_disorganized": True,
+            "high_personnel_cost": True,
+        })
+        self.assertEqual(signals["icp_tier"], "mid_market")
+        self.assertTrue(signals["faturamento_50a100M"])
+        self.assertGreaterEqual(score, 60)
+
+    def test_mid_market_sem_dor_nao_qualifica(self):
+        # a faixa sozinha não basta: score base fica abaixo do corte.
+        score, signals, _ = _score_lead_against_icp({"revenue_brl_year": 80_000_000})
+        self.assertEqual(signals["icp_tier"], "mid_market")
+        self.assertLess(score, 60)
 
     def test_enterprise_faixa_aberta_acima_de_130M_qualifica(self):
         # Regressão-guarda: > R$130M NÃO pode cair em "fora do ICP" (bug da faixa fechada).
@@ -45,15 +69,16 @@ class ICPSegmentScoringTest(unittest.TestCase):
         self.assertTrue(signals["custo_pessoal_alto"])
         self.assertGreaterEqual(score, 60)
 
-    def test_mid_market_20M_a_100M_fica_fora(self):
-        score, signals, _ = _score_lead_against_icp({"revenue_brl_year": 50_000_000})
-        self.assertEqual(signals["icp_tier"], "mid_market")
-        self.assertLess(score, 60)
-
     def test_abaixo_de_1M_fica_fora(self):
         score, signals, _ = _score_lead_against_icp({"revenue_brl_year": 500_000})
         self.assertEqual(signals["icp_tier"], "fora")
         self.assertLess(score, 60)
+
+    def test_faturamento_nao_informado_nao_ganha_faixa(self):
+        # rev=0 sem setor público: nenhuma faixa validada — não pode somar pontos de faixa.
+        score, signals, _ = _score_lead_against_icp({"founder_led": True, "lacks_process": True})
+        self.assertEqual(signals["icp_tier"], "fora")
+        self.assertEqual(score, 0)
 
 
 if __name__ == "__main__":

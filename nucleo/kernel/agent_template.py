@@ -54,7 +54,7 @@ def build_agent(spec: dict, llm, brain, store, checkpointer):
         return {"scratchpad": (state.get("scratchpad") or []) + [crit]}
 
     def gate(state):
-        return gate_node(state, spec=spec)
+        return gate_node(state, spec=spec, store=store)
 
     def emit_artifact(state):
         return sh.emit_artifact(state, brain=brain, spec=spec)

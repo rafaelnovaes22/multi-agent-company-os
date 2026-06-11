@@ -5,14 +5,41 @@
 - ASSISTED: pausa e pede aprovação humana via `interrupt()` (human-in-the-loop do DRI).
 
 É o mecanismo de "evoluir ganhando autonomia": o agente só sai de SHADOW por gate.
+
+Kill-switch de frota (resiliência operacional, NIST "sobreviver ao inevitável"):
+quando ativo — flag no store (`("fleet",), "kill_switch"`, via governance/promote)
+ou env FLEET_KILL_SWITCH — TODO agente se comporta como SHADOW, independente do
+modo promovido: sem entrega, sem cobrança, sem pausa de aprovação. Contenção da
+frota inteira em 1 comando, sem deploy e sem mexer nos modos persistidos.
 """
 from __future__ import annotations
+import os
+
 from langgraph.types import interrupt
 
+KILL_SWITCH_NS = ("fleet",)
+KILL_SWITCH_KEY = "kill_switch"
+KILL_SWITCH_ENV = "FLEET_KILL_SWITCH"
 
-def gate(state: dict, *, spec: dict) -> dict:
+
+def kill_switch_on(store=None) -> bool:
+    if os.environ.get(KILL_SWITCH_ENV, "").strip().lower() in ("1", "true", "on"):
+        return True
+    if store is None:
+        return False
+    flag = store.get(KILL_SWITCH_NS, KILL_SWITCH_KEY)
+    return bool(flag.get("on")) if isinstance(flag, dict) else bool(flag)
+
+
+def gate(state: dict, *, spec: dict, store=None) -> dict:
     mode = state.get("mode", "SHADOW")
     out = dict(state.get("output") or {})
+
+    if kill_switch_on(store):
+        out.update(delivered=False, billing_amount=0, fleet_kill_switch=True)
+        if state.get("verbose"):
+            print("  -> gate[KILL-SWITCH]: frota contida — sem entrega/cobranca (forca SHADOW)")
+        return {"output": out, "_gate": "proceed"}
 
     if mode == "SHADOW":
         out.update(delivered=False, billing_amount=0)

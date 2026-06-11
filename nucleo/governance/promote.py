@@ -22,7 +22,7 @@ import json
 from ..factory.factory import load_spec
 from ..kernel.gates import KILL_SWITCH_NS, KILL_SWITCH_KEY
 from ..kernel.guardians import validate_outcome_clause
-from ..quality.eval_harness import run_evals
+from ..quality.eval_harness import run_evals, run_security_evals
 
 MODES = ["SHADOW", "PILOT", "ASSISTED", "AUTONOMOUS"]
 REQUIRED = {
@@ -54,9 +54,13 @@ def _gate(g, spec, spec_dir, req, deps):
         return True, "C3 operating (não bloqueia; ROI-vs-headcount)"
     if g == "G3":  # C4 — SLA pré-contratado assinado (observability-guardian)
         return bool(req.get("sla")), f"SLA={'assinado' if req.get('sla') else 'AUSENTE'}"
-    if g == "G4":  # eval-suite passing (eval-engineer)
+    if g == "G4":  # eval-suite passing (eval-engineer) + suite security (invariante: 100%)
         rep = run_evals(spec_dir, **deps)
-        return rep["rate"] >= EVAL_THRESHOLD, f"eval {rep['passed']}/{rep['total']} ({rep['rate']*100:.0f}%) thr={EVAL_THRESHOLD*100:.0f}%"
+        sec = run_security_evals(spec_dir, **deps)
+        sec_ok = sec["total"] == 0 or sec["rate"] >= 1.0  # 0 casos = vácuo (catraca cobra)
+        ok = rep["rate"] >= EVAL_THRESHOLD and sec_ok
+        return ok, (f"eval {rep['passed']}/{rep['total']} ({rep['rate']*100:.0f}%) "
+                    f"thr={EVAL_THRESHOLD*100:.0f}% · security {sec['passed']}/{sec['total']}")
     if g == "G5":  # cross-approval (anti-self-approval)
         po, pr = req.get("approver_po"), req.get("approver_promotion_officer")
         ok = bool(po) and bool(pr) and po != pr

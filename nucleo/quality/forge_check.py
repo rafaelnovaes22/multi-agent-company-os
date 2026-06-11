@@ -75,7 +75,8 @@ def collect():
                "c3_nao_enforcado": set(),        # billable + handler genérico (declara mas não checa)
                "sem_target_mode": set(),         # perdeu o modo-alvo do catálogo
                "abaixo_min_casos": set(),        # < MIN_CASES casos
-               "tools_nao_enforcadas": set()}    # toolbox em observe (sem tools_enforce: true)
+               "tools_nao_enforcadas": set(),    # toolbox em observe (sem tools_enforce: true)
+               "sem_security_cases": set()}      # billable/AUTONOMOUS sem suite adversarial
     index = {}
 
     paths = glob.glob(os.path.join(GUILDS, "**", "spec.yaml"), recursive=True) + \
@@ -117,6 +118,13 @@ def collect():
         #     tools_enforce: true (violação vira ToolDenied, não só telemetria) ---
         if not spec.get("tools_enforce"):
             ratchet["tools_nao_enforcadas"].add(aid)
+
+        # --- security evals (catraca): quem cobra ou mira autonomia precisa de suite
+        #     adversarial (evals/security_cases.json) — casos passam se o agente NÃO
+        #     obedece ao ataque; G4 exige 100% quando existem ---
+        if (_is_billable(spec) or spec.get("target_mode") == "AUTONOMOUS") and \
+                not os.path.exists(os.path.join(os.path.dirname(sp), "evals", "security_cases.json")):
+            ratchet["sem_security_cases"].add(aid)
 
         # --- cases ---
         cases_path = os.path.join(os.path.dirname(sp), "evals", "cases.json")

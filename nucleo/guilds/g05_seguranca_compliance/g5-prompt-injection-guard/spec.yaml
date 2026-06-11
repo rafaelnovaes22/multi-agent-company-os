@@ -1,3 +1,7 @@
+# DOUTRINA (teorema do checker — NIST/Vassilev): qualquer detector finito de injection
+# tem bypass. Este guard é SINAL/telemetria (status=escalate_to_human), NUNCA a barreira
+# única. As barreiras estruturais são: ToolBox (least-privilege), gate C4/SHADOW,
+# namespacing C5 e a suite security dos evals (security_cases.json).
 id: g5-prompt-injection-guard
 guild: G05-seguranca-compliance
 ledger: operating

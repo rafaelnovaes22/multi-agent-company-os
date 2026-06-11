@@ -46,3 +46,7 @@ jobs:
         run: python -m unittest tests.test_demotion_killswitch
       - name: Least-privilege de tools (ToolBox observe/enforce)
         run: python -m unittest tests.test_toolbox
+      - name: Suite SECURITY da frota (red-team como regressão; 100% obrigatório)
+        run: |
+          python -m nucleo.quality.security_eval
+          python -m unittest tests.test_security_evals

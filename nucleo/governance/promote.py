@@ -1,4 +1,4 @@
-"""Promotion (C4) — o único caminho para um agente mudar de modo.
+"""Promotion (C4) — o único caminho para um agente SUBIR de modo.
 
 Aplica os 6 gates + cross-approval (anti-self-approval) e usa o eval-harness como
 Gate 4. SHADOW -> PILOT -> ASSISTED -> AUTONOMOUS. Promoção registrada append-only
@@ -7,6 +7,12 @@ no Brain + store. É o mecanismo de "evoluir ganhando autonomia". Mercado-agnós
 Gates: G1 C2(outcome clause) · G2 C3(economics, billable) · G3 C4(SLA assinado) ·
 G4 eval-suite passing · G5 cross-approval (po != promotion_officer) · G6 CI/CD.
 AUTONOMOUS exige ainda assinatura do security-privacy-guardian.
+
+DESCER nunca tem gate (resiliência operacional, NIST "sobreviver ao inevitável"):
+`demote()` derruba qualquer modo -> SHADOW sem pré-condições, e
+`set_fleet_kill_switch()` contém a frota INTEIRA (todo gate runtime passa a se
+comportar como SHADOW) sem tocar nos modos persistidos. Ambos auditados
+append-only no Brain.
 """
 from __future__ import annotations
 import datetime
@@ -14,6 +20,7 @@ import hashlib
 import json
 
 from ..factory.factory import load_spec
+from ..kernel.gates import KILL_SWITCH_NS, KILL_SWITCH_KEY
 from ..kernel.guardians import validate_outcome_clause
 from ..quality.eval_harness import run_evals
 
@@ -88,3 +95,39 @@ def promote(spec_dir, to_mode, req, deps, brain, store) -> dict:
         log.append({"from": frm, "to": to_mode, "spec_hash": record["spec_hash"], "ts": record["ts"]})
         store.put(("promotions", aid), "log", log)  # append-only
     return {"ok": passed, "agent": aid, "from": frm, "to": to_mode, "gates": checks}
+
+
+def demote(spec_dir, reason: str, req: dict, brain, store) -> dict:
+    """Demoção: qualquer modo -> SHADOW, SEM gates. Conter é sempre permitido —
+    o caminho de volta não pode ter fricção. Idempotente (SHADOW -> SHADOW ok)."""
+    spec = load_spec(spec_dir)
+    aid = spec["id"]
+    frm = current_mode(store, aid)
+    record = {
+        "actor": req.get("actor", "promotion-officer"), "action": "demotion", "agent": aid,
+        "from": frm, "to": "SHADOW", "reason": reason,
+        "spec_hash": _spec_hash(spec),
+        "ts": datetime.datetime.now().isoformat(timespec="seconds"),
+    }
+    brain.emit_event(record)
+    store.put(("modes", aid), "current", "SHADOW")
+    log = store.get(("promotions", aid), "log") or []
+    log.append({"from": frm, "to": "SHADOW", "action": "demotion", "reason": reason,
+                "spec_hash": record["spec_hash"], "ts": record["ts"]})
+    store.put(("promotions", aid), "log", log)  # append-only
+    return {"ok": True, "agent": aid, "from": frm, "to": "SHADOW", "reason": reason}
+
+
+def set_fleet_kill_switch(on: bool, reason: str, req: dict, brain, store) -> dict:
+    """Liga/desliga a contenção da frota inteira. Com a flag ativa, o gate runtime
+    de TODO agente se comporta como SHADOW (sem entrega/cobrança), preservando os
+    modos persistidos — soltar o switch devolve a frota ao estado promovido."""
+    actor = req.get("actor", "promotion-officer")
+    record = {
+        "actor": actor, "action": "fleet_kill_switch", "on": on, "reason": reason,
+        "ts": datetime.datetime.now().isoformat(timespec="seconds"),
+    }
+    brain.emit_event(record)
+    store.put(KILL_SWITCH_NS, KILL_SWITCH_KEY,
+              {"on": on, "reason": reason, "actor": actor, "ts": record["ts"]})
+    return {"ok": True, "on": on, "reason": reason}

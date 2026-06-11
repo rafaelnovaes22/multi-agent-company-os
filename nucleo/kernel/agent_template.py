@@ -16,6 +16,7 @@ from . import self_harness as sh
 from .gates import gate as gate_node
 from .guardians import run_guardians
 from .skills import get_handler
+from .toolbox import guarded
 
 
 def _brief(out: dict) -> str:
@@ -38,7 +39,11 @@ def build_agent(spec: dict, llm, brain, store, checkpointer):
         return sh.load_context(state, store=store, spec=spec)
 
     def act(state):
-        res = handler(state, llm=llm, store=store, spec=spec)
+        # Least-privilege (toolbox): o handler só alcança o que spec.tools declara;
+        # o kernel (load_context/gate/emit/snapshot) segue com brain/store crus.
+        g_llm, g_store = guarded(llm, store, spec=spec, brain=brain,
+                                 run_id=state.get("run_id"))
+        res = handler(state, llm=g_llm, store=g_store, spec=spec)
         if state.get("verbose"):
             print(f"  -> act[{handler_name}]: {_brief(res.get('output'))} (llm={llm.name})")
         return {

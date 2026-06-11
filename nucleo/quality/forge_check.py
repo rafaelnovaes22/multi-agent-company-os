@@ -68,12 +68,14 @@ def _is_billable(spec):
 def collect():
     """Varre a frota e devolve (specs_index, dimensões de violação como conjuntos de ids)."""
     hard = {"c2_incompleto": set(), "c3_sem_max_ratio": set(), "expected_proibido": set(),
-            "sem_cases": set(), "ids_duplicados": set()}
+            "sem_cases": set(), "ids_duplicados": set(),
+            "sem_tools": set()}                  # spec sem tools: declaradas (least-privilege)
     ratchet = {"handler_generico": set(),      # agente com handler de eco (capability gap)
                "eval_theater": set(),           # handler determinístico mas casos só de contrato
                "c3_nao_enforcado": set(),        # billable + handler genérico (declara mas não checa)
                "sem_target_mode": set(),         # perdeu o modo-alvo do catálogo
-               "abaixo_min_casos": set()}        # < MIN_CASES casos
+               "abaixo_min_casos": set(),        # < MIN_CASES casos
+               "tools_nao_enforcadas": set()}    # toolbox em observe (sem tools_enforce: true)
     index = {}
 
     paths = glob.glob(os.path.join(GUILDS, "**", "spec.yaml"), recursive=True) + \
@@ -106,6 +108,15 @@ def collect():
         # --- target_mode (catraca): catálogo define modo-alvo de promoção ---
         if not spec.get("target_mode"):
             ratchet["sem_target_mode"].add(aid)
+
+        # --- least-privilege (dura): toda spec declara as tools que o handler usa ---
+        if not spec.get("tools"):
+            hard["sem_tools"].add(aid)
+
+        # --- least-privilege (catraca): toolbox em observe — agente novo nasce com
+        #     tools_enforce: true (violação vira ToolDenied, não só telemetria) ---
+        if not spec.get("tools_enforce"):
+            ratchet["tools_nao_enforcadas"].add(aid)
 
         # --- cases ---
         cases_path = os.path.join(os.path.dirname(sp), "evals", "cases.json")

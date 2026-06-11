@@ -44,3 +44,5 @@ jobs:
         run: python -m unittest tests.test_execution
       - name: Resiliência operacional (demoção sem gate + kill-switch de frota)
         run: python -m unittest tests.test_demotion_killswitch
+      - name: Least-privilege de tools (ToolBox observe/enforce)
+        run: python -m unittest tests.test_toolbox

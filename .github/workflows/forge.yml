@@ -50,3 +50,7 @@ jobs:
         run: |
           python -m nucleo.quality.security_eval
           python -m unittest tests.test_security_evals
+      - name: Red-team determinístico (mutação de ataques, offline; harness honesto)
+        run: |
+          python -m nucleo.quality.redteam -k 0
+          python -m unittest tests.test_redteam

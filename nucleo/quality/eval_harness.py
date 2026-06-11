@@ -60,7 +60,8 @@ def run_evals(spec_dir, llm, brain, store, checkpointer) -> dict:
 # --------------------------------------------------------------------------
 # Suite SECURITY — grader invertido: passa se o agente NÃO obedece ao ataque.
 # --------------------------------------------------------------------------
-_SECURITY_META = {"id", "desc", "attack", "seed", "forbid_strings", "invariants", "expect"}
+_SECURITY_META = {"id", "desc", "attack", "seed", "forbid_strings", "invariants", "expect",
+                  "mutate"}
 _DEFAULT_INVARIANTS = ["not_delivered", "no_billing", "no_write_denials"]
 
 
@@ -94,11 +95,27 @@ def security_grade(out, case: dict, *, brain, run_id: str):
     return (not fails), ("; ".join(fails) or "ok")
 
 
+def run_security_case(agent, spec: dict, case: dict, *, store, brain) -> tuple:
+    """Roda UM security-case por um agente já materializado e devolve (passed, why).
+    Semeia `seed` no store antes do run; o payload são os campos fora de _SECURITY_META.
+    Reutilizado pela suite (run_security_evals) e pelo red-team (quality/redteam.py)."""
+    for s in case.get("seed") or []:
+        store.put(tuple(s["namespace"]), s["key"], s["value"])
+    payload = {k: v for k, v in case.items() if k not in _SECURITY_META}
+    statement = payload.pop("statement", "security-case")
+    rid = "sec-" + uuid.uuid4().hex[:8]
+    state = {
+        "task": {"agent_id": spec["id"], "guild": spec["guild"],
+                 "statement": statement, **payload},
+        "mode": "SHADOW", "ledger": spec.get("ledger"), "run_id": rid, "verbose": False,
+    }
+    out = agent.invoke(state, config={"configurable": {"thread_id": rid}}).get("output")
+    return security_grade(out, case, brain=brain, run_id=rid)
+
+
 def run_security_evals(spec_dir, llm, brain, store, checkpointer) -> dict:
-    """Roda evals/security_cases.json (se existir) em SHADOW. `seed` semeia o store
-    (ex.: canário de outro tenant) ANTES do run; o payload são os campos fora de
-    _SECURITY_META. total=0 é vácuo (a catraca sem_security_cases do forge_check é
-    quem força casos para billable/target AUTONOMOUS)."""
+    """Roda evals/security_cases.json (se existir) em SHADOW. total=0 é vácuo (a catraca
+    sem_security_cases do forge_check é quem força casos para billable/target AUTONOMOUS)."""
     spec = load_spec(spec_dir)
     _, agent, _ = build_from_spec(spec_dir, llm, brain, store, checkpointer)
 
@@ -107,18 +124,7 @@ def run_security_evals(spec_dir, llm, brain, store, checkpointer) -> dict:
 
     results = []
     for c in cases:
-        for s in c.get("seed") or []:
-            store.put(tuple(s["namespace"]), s["key"], s["value"])
-        payload = {k: v for k, v in c.items() if k not in _SECURITY_META}
-        statement = payload.pop("statement", "security-case")
-        rid = "sec-" + uuid.uuid4().hex[:8]
-        state = {
-            "task": {"agent_id": spec["id"], "guild": spec["guild"],
-                     "statement": statement, **payload},
-            "mode": "SHADOW", "ledger": spec.get("ledger"), "run_id": rid, "verbose": False,
-        }
-        out = agent.invoke(state, config={"configurable": {"thread_id": rid}}).get("output")
-        passed, why = security_grade(out, c, brain=brain, run_id=rid)
+        passed, why = run_security_case(agent, spec, c, store=store, brain=brain)
         results.append({"id": c.get("id"), "desc": c.get("desc"),
                         "attack": c.get("attack"), "passed": passed, "why": why})
 

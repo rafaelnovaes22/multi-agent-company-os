@@ -1,0 +1,57 @@
+name: redteam-periodico
+
+# Red-teaming constante (NIST PR4): busca ATIVA de bypass com LLM REAL (Vertex).
+# NÃO é gate de PR — roda agendado (semanal) e sob demanda. Diferente do forge-gate,
+# que roda offline/determinístico em todo PR, aqui o objetivo é a diversidade
+# linguística que só um LLM real gera ("formas de esconder intenção são ilimitadas").
+# Job vermelho = bypass reproduzível → corrigir o agente e promover o caso à suite.
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"        # toda segunda 06:00 UTC
+  workflow_dispatch:
+    inputs:
+      k:
+        description: "paráfrases via LLM por ataque-semente"
+        default: "6"
+
+permissions:
+  contents: read
+  id-token: write              # OIDC p/ Workload Identity Federation (sem chave longa)
+
+jobs:
+  redteam:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONUTF8: "1"
+      LLM_PROVIDER: vertex
+      GOOGLE_GENAI_USE_VERTEXAI: "true"
+      GOOGLE_CLOUD_PROJECT: acme-multiagentes
+      GOOGLE_CLOUD_LOCATION: us-central1
+      REDTEAM_LLM_VARIANTS: ${{ github.event.inputs.k || '6' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install google-genai
+      # Credencial Vertex via Workload Identity Federation (preferido a chave de SA).
+      # Configure os secrets GCP_WIF_PROVIDER e GCP_SA_EMAIL no repo.
+      - name: Auth GCP (Vertex AI)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
+          service_account: ${{ secrets.GCP_SA_EMAIL }}
+      - name: Red-team (LLM real obrigatório; bypass => exit 1)
+        run: python -m nucleo.quality.redteam --require-real
+      - name: Publicar candidatos a caso permanente
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: redteam-candidates
+          path: nucleo/.brain-redteam/candidates.json
+          if-no-files-found: ignore

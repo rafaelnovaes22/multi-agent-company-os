@@ -13,23 +13,23 @@ porque sem executar não se afirma correção. F2 (runner Linux+Docker) adiciona
 from __future__ import annotations
 
 from .skills import register, _tokens, _spec_citations
-from .verification import verify_code
+from .verification import verify_code, verify_structure, NECESSARIOS, STRUCT_NECESSARIOS
 from .execution import get_executor
 
 
 @register("spec_executor")
 def spec_executor(state, *, llm, store, spec):
-    """Técnicos verificáveis: g3-build-error-resolver (red→green, piloto F0) e
-    g3-backend-builder (build held-out, F3).
+    """Técnicos verificáveis cujo `delivered` vem de um ORÁCULO, não de auto-declaração.
 
-    Lê de state['task']:
-      artifact — {"files": {path: content}} produzido pelo agente (o patch).
-      seed     — {path: content} repo-semente (build vermelho por construção).
-      oracle   — {bug_file, protected_files{path: sha}, bug_markers{must_remove, must_contain},
-                  heldout_files{path: content}? (natureza build — testes que o agente nunca vê)}.
+    Duas naturezas, roteadas pelo oráculo (held-out, autorado no eval-case; o agente nunca o vê):
+      code-exec  (F0/F3/F4a): g3-build-error-resolver, g3-backend/frontend-builder, g3-infra-devops.
+                 `verify_code` re-deriva os sinais do ARTEFATO {files} + execução real (F2).
+      estrutural (F4b):       g3-incident-responder. `oracle["structure"]` define o schema do
+                 documento (postmortem); `verify_structure` checa completude/consistência. SEM
+                 execução ⇒ delivered_ok sempre False (ASSISTED, garantia parcial honesta).
 
-    O oráculo é HELD-OUT (autorado no eval-case); o agente nunca o vê. `verify_code` re-deriva
-    o veredito do ARTEFATO — nunca lê um booleano de sucesso declarado pelo caso.
+    Lê de state['task']: artifact, seed, oracle. O veredito vem do oráculo — nunca de um
+    booleano de sucesso declarado pelo caso.
     """
     task = state.get("task", {}) or {}
     artifact = task.get("artifact") or {}
@@ -38,9 +38,14 @@ def spec_executor(state, *, llm, store, spec):
     artifact_type = task.get("artifact_type") or "build_error_resolver.artifact"
     routed_to = task.get("routed_to") or spec["id"]
 
-    # Executor por env (EXEC_PROVIDER): default InertExecutor ⇒ não executa, tests_pass=UNVERIFIED.
-    # A F2 pluga o DockerExecutor real sem tocar este handler nem o eval-case.
-    v = verify_code(artifact, seed, oracle, executor=get_executor())
+    # Roteia pela natureza do oráculo: structure ⇒ verificação estrutural (sem execução);
+    # senão code-exec (default InertExecutor offline; a F2 pluga o DockerExecutor sem tocar aqui).
+    if oracle.get("structure"):
+        v = verify_structure(artifact, oracle)
+        signal_keys = STRUCT_NECESSARIOS
+    else:
+        v = verify_code(artifact, seed, oracle, executor=get_executor())
+        signal_keys = NECESSARIOS
     static_ok = v["static_ok"]
     # status honesto: verificado estaticamente vs reprovado (com o 1º critério que falhou).
     status = "verified_static" if static_ok else f"rejected:{v['first_fail']}"
@@ -55,17 +60,9 @@ def spec_executor(state, *, llm, store, spec):
         "agent_id": spec["id"],
         "handler_kind": "spec_executor",
         "artifact_type": artifact_type,
-        # sinais do oráculo (função do artefato) — achatados p/ o grader checar direto:
-        "artifact_parseable": v["signals"].get("artifact_parseable", False),
-        "touches_bug_file": v["signals"].get("touches_bug_file", False),
-        "bug_addressed": v["signals"].get("bug_addressed", False),
-        "protected_unmodified": v["signals"].get("protected_unmodified", False),
-        "heldout_untouched": v["signals"].get("heldout_untouched", False),
-        "result_parses": v["signals"].get("result_parses", False),
-        "no_test_gaming": v["signals"].get("no_test_gaming", False),
         "static_ok": static_ok,
-        "tests_pass": v["tests_pass"],       # "UNVERIFIED" offline (F0); bool só em F2
-        "delivered_ok": v["delivered_ok"],   # SEMPRE False offline (honesto)
+        "tests_pass": v["tests_pass"],       # "UNVERIFIED"/bool (code-exec) | "N/A" (estrutural)
+        "delivered_ok": v["delivered_ok"],   # offline/estrutural: SEMPRE False (honesto)
         "first_fail": v["first_fail"],
         "status": status,
         "requires_human_review": requires_review,
@@ -74,4 +71,7 @@ def spec_executor(state, *, llm, store, spec):
         "by": spec["id"],
         "tenant": task.get("tenant_id"),
     }
+    # sinais do oráculo (função do artefato) — achatados p/ o grader checar direto (ausente ⇒ False).
+    for k in signal_keys:
+        out[k] = v["signals"].get(k, False)
     return {"output": out, "cost_tokens": _tokens(rationale), "citations": _spec_citations(state, spec)}

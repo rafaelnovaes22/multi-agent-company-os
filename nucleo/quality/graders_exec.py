@@ -16,8 +16,12 @@ from .graders import register
 # Chaves de sinal que o caso PODE asseverar (todas opcionais; só checa as presentes no expected).
 _SIGNAL_KEYS = (
     "static_ok", "delivered_ok", "first_fail",
+    # code-exec (F0/F3/F4a)
     "artifact_parseable", "touches_bug_file", "bug_addressed",
     "protected_unmodified", "heldout_untouched", "result_parses", "no_test_gaming",
+    # estrutural (F4b — incident-responder)
+    "target_present", "doc_parses", "fields_complete", "timeline_ordered", "durations_valid",
+    "rollback_documented", "followups_actionable", "no_placeholder_gaming",
     "handler_kind", "status", "requires_human_review",
 )
 

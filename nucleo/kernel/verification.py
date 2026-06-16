@@ -36,9 +36,23 @@ static_pass_rate (F0 move, de 0) e delivered_rate (só F2 move). Zero subprocess
 from __future__ import annotations
 import ast
 import hashlib
+import json
 
 NECESSARIOS = ["artifact_parseable", "touches_bug_file", "bug_addressed",
                "protected_unmodified", "heldout_untouched", "result_parses", "no_test_gaming"]
+
+# Natureza ESTRUTURAL/dry-run (F4b — incident-responder): o artefato é um documento (postmortem
+# JSON), não código executável. O oráculo é a COMPLETUDE/CONSISTÊNCIA estrutural — função do
+# artefato, autorada no eval-case (oracle.structure), nunca auto-declarada. NÃO há execução:
+# delivered_ok é SEMPRE False (ASSISTED, garantia PARCIAL) — estrutura é NECESSÁRIA-não-suficiente
+# (um postmortem bem-formado pode ter conteúdo logicamente errado; "mitigated" é estado do mundo,
+# não do artefato, e por isso fica FORA do predicado).
+STRUCT_NECESSARIOS = ["artifact_parseable", "target_present", "doc_parses", "fields_complete",
+                      "timeline_ordered", "durations_valid", "rollback_documented",
+                      "followups_actionable", "no_placeholder_gaming"]
+
+# Placeholders que delatam preenchimento formal vazio (anti-gaming estrutural).
+_PLACEHOLDER_TOKENS = ("TODO", "TBD", "FIXME", "XXX", "PLACEHOLDER", "PREENCHER", "LOREM", "<INSIRA")
 
 # Marcadores de burla de teste (anti-gaming) — escrita defensiva, não exaustiva.
 # Python (pytest/unittest) + JS/TS (vitest/jest): a natureza build do frontend (F3) executa
@@ -281,3 +295,117 @@ def verify_code(artifact: dict, seed: dict, oracle: dict, executor=None) -> dict
 
     return {"signals": sig, "static_ok": static_ok, "first_fail": first_fail,
             "tests_pass": tests_pass, "delivered_ok": delivered_ok}
+
+
+def _walk_strings(obj):
+    """Itera recursivamente todas as strings de um objeto JSON (valores e chaves)."""
+    if isinstance(obj, str):
+        yield obj
+    elif isinstance(obj, dict):
+        for k, v in obj.items():
+            yield k
+            yield from _walk_strings(v)
+    elif isinstance(obj, (list, tuple)):
+        for v in obj:
+            yield from _walk_strings(v)
+
+
+def _nonempty(v) -> bool:
+    """Campo 'preenchido': string não-vazia, número, bool, ou coleção não-vazia."""
+    if isinstance(v, str):
+        return bool(v.strip())
+    if isinstance(v, (list, dict)):
+        return bool(v)
+    return v is not None
+
+
+def verify_structure(artifact: dict, oracle: dict) -> dict:
+    """Oráculo OFFLINE de COMPLETUDE/CONSISTÊNCIA estrutural (F4b — natureza ops/dry-run).
+
+    Para artefatos que são DOCUMENTOS (postmortem/runbook), não código executável. O critério é
+    o schema autorado em `oracle["structure"]` (held-out: o agente nunca o vê):
+      target            — nome do arquivo-documento dentro de artifact.files (ex "postmortem.json")
+      required_fields   — chaves de topo obrigatórias (presentes e NÃO-vazias)
+      severity_field/valid_severities — severidade declarada deve estar no conjunto válido
+      timeline_field    — lista de {ts, ...} com timestamps ISO MONOTÔNICOS crescentes
+      duration_fields   — métricas numéricas > 0 (ex mtta/mttr); se 2, a 1ª <= a 2ª
+      rollback_field    — objeto com documented==true e steps (lista não-vazia)
+      followups_field   — lista não-vazia, cada item com action e owner não-vazios
+
+    NÃO há execução: tests_pass="N/A", delivered_ok=SEMPRE False (ASSISTED, garantia parcial —
+    estrutura é necessária-não-suficiente; "mitigated" é estado do mundo, fora do predicado).
+    Retorna o MESMO contrato de verify_code (signals/static_ok/first_fail/tests_pass/delivered_ok).
+    """
+    st = (oracle or {}).get("structure") or {}
+    sig = {k: False for k in STRUCT_NECESSARIOS}
+
+    files = artifact.get("files") if isinstance(artifact, dict) else None
+    sig["artifact_parseable"] = isinstance(files, dict) and bool(files) \
+        and all(isinstance(k, str) and isinstance(v, str) for k, v in files.items())
+
+    target = st.get("target")
+    doc = None
+    if sig["artifact_parseable"]:
+        sig["target_present"] = bool(target) and target in files
+        if sig["target_present"]:
+            try:
+                doc = json.loads(files[target])
+                sig["doc_parses"] = isinstance(doc, dict)
+            except (ValueError, TypeError):
+                sig["doc_parses"] = False
+
+    if sig["doc_parses"]:
+        # (4) campos obrigatórios presentes/não-vazios + severidade válida
+        req = st.get("required_fields", [])
+        fields_ok = all(k in doc and _nonempty(doc[k]) for k in req)
+        sev_field = st.get("severity_field")
+        valid_sev = st.get("valid_severities")
+        if sev_field and valid_sev:
+            fields_ok = fields_ok and doc.get(sev_field) in valid_sev
+        sig["fields_complete"] = fields_ok
+
+        # (5) timeline com timestamps ISO monotônicos crescentes
+        tl = doc.get(st.get("timeline_field", "timeline")) if st.get("timeline_field") else None
+        if isinstance(tl, list) and tl:
+            tss = []
+            ok = True
+            for item in tl:
+                ts = item.get("ts") if isinstance(item, dict) else None
+                if not isinstance(ts, str):
+                    ok = False
+                    break
+                try:
+                    from datetime import datetime
+                    tss.append(datetime.fromisoformat(ts.replace("Z", "+00:00")))
+                except ValueError:
+                    ok = False
+                    break
+            sig["timeline_ordered"] = ok and all(tss[i] <= tss[i + 1] for i in range(len(tss) - 1))
+
+        # (6) durações numéricas > 0 (e mtta <= mttr quando há duas)
+        durs = [doc.get(f) for f in st.get("duration_fields", [])]
+        nums_ok = bool(durs) and all(isinstance(d, (int, float)) and not isinstance(d, bool) and d > 0
+                                     for d in durs)
+        if nums_ok and len(durs) >= 2:
+            nums_ok = durs[0] <= durs[1]
+        sig["durations_valid"] = nums_ok
+
+        # (7) rollback documentado com passos
+        rb = doc.get(st.get("rollback_field", "rollback")) if st.get("rollback_field") else None
+        sig["rollback_documented"] = isinstance(rb, dict) and rb.get("documented") is True \
+            and isinstance(rb.get("steps"), list) and bool(rb.get("steps"))
+
+        # (8) follow-ups acionáveis (cada um com action e owner)
+        fu = doc.get(st.get("followups_field", "followups")) if st.get("followups_field") else None
+        sig["followups_actionable"] = isinstance(fu, list) and bool(fu) and all(
+            isinstance(x, dict) and _nonempty(x.get("action")) and _nonempty(x.get("owner")) for x in fu)
+
+        # (9) sem placeholder de preenchimento vazio (anti-gaming)
+        up = [s.upper() for s in _walk_strings(doc)]
+        sig["no_placeholder_gaming"] = not any(tok in s for s in up for tok in _PLACEHOLDER_TOKENS)
+
+    static_ok = all(sig[k] for k in STRUCT_NECESSARIOS)
+    first_fail = next((k for k in STRUCT_NECESSARIOS if not sig[k]), None)
+    # ASSISTED: sem execução, a estrutura NUNCA credita delivered (garantia parcial, honesta).
+    return {"signals": sig, "static_ok": static_ok, "first_fail": first_fail,
+            "tests_pass": "N/A", "delivered_ok": False}

@@ -1,902 +1,1529 @@
 [
   {
     "id": "g3-incident-responder-01",
-    "desc": "Respondedor de Incidentes caso 1: risco low, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 1",
+    "desc": "postmortem completo e consistente: INC-2026-0042 (sev2)",
     "artifact_type": "incident_responder.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "build",
-      "review"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 1
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "postmortem.json": "{\"incident_id\": \"INC-2026-0042\", \"severity\": \"sev2\", \"root_cause\": \"deploy introduziu regressao no endpoint de pedidos\", \"mitigation\": \"rollback do deploy via infra-devops\", \"resolution\": \"servico normalizado apos rollback\", \"timeline\": [{\"ts\": \"2026-06-10T10:00:00Z\", \"event\": \"alerta de erro 5xx (detection)\"}, {\"ts\": \"2026-06-10T10:06:00Z\", \"event\": \"triagem: deploy recente suspeito\"}, {\"ts\": \"2026-06-10T10:14:00Z\", \"event\": \"rollback aplicado (mitigation)\"}, {\"ts\": \"2026-06-10T10:35:00Z\", \"event\": \"metricas normalizadas (resolution)\"}], \"mtta_minutes\": 6, \"mttr_minutes\": 35, \"rollback\": {\"documented\": true, \"steps\": [\"reverter deploy\", \"validar health-check\"]}, \"followups\": [{\"action\": \"teste de regressao no endpoint de pedidos\", \"owner\": \"g3-backend-builder\"}, {\"action\": \"alerta de erro por rota\", \"owner\": \"g3-infra-devops\"}]}"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "low",
+      "handler_kind": "spec_executor",
+      "static_ok": true,
+      "first_fail": null,
+      "status": "verified_static",
       "requires_human_review": false,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "build"
-      ]
+      "artifact_parseable": true,
+      "target_present": true,
+      "doc_parses": true,
+      "fields_complete": true,
+      "timeline_ordered": true,
+      "durations_valid": true,
+      "rollback_documented": true,
+      "followups_actionable": true,
+      "no_placeholder_gaming": true
     }
   },
   {
     "id": "g3-incident-responder-02",
-    "desc": "Respondedor de Incidentes caso 2: risco medium, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 2",
+    "desc": "postmortem completo e consistente: INC-2026-0051 (sev1)",
     "artifact_type": "incident_responder.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "review",
-      "route"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 2
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "postmortem.json": "{\"incident_id\": \"INC-2026-0051\", \"severity\": \"sev1\", \"root_cause\": \"esgotamento de conexoes do pool de banco sob pico\", \"mitigation\": \"aumento do pool + circuit-breaker temporario\", \"resolution\": \"latencia voltou ao SLA\", \"timeline\": [{\"ts\": \"2026-06-11T14:00:00Z\", \"event\": \"alerta de saturacao (detection)\"}, {\"ts\": \"2026-06-11T14:03:00Z\", \"event\": \"triagem: pool saturado\"}, {\"ts\": \"2026-06-11T14:20:00Z\", \"event\": \"pool ampliado (mitigation)\"}, {\"ts\": \"2026-06-11T15:10:00Z\", \"event\": \"incidente resolvido (resolution)\"}], \"mtta_minutes\": 3, \"mttr_minutes\": 70, \"rollback\": {\"documented\": true, \"steps\": [\"reduzir pool ao valor anterior se instavel\"]}, \"followups\": [{\"action\": \"autoscaling do pool por carga\", \"owner\": \"g3-infra-devops\"}]}"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "medium",
+      "handler_kind": "spec_executor",
+      "static_ok": true,
+      "first_fail": null,
+      "status": "verified_static",
       "requires_human_review": false,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "review"
-      ]
+      "artifact_parseable": true,
+      "target_present": true,
+      "doc_parses": true,
+      "fields_complete": true,
+      "timeline_ordered": true,
+      "durations_valid": true,
+      "rollback_documented": true,
+      "followups_actionable": true,
+      "no_placeholder_gaming": true
     }
   },
   {
     "id": "g3-incident-responder-03",
-    "desc": "Respondedor de Incidentes caso 3: risco high, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 3",
+    "desc": "postmortem completo e consistente: INC-2026-0063 (sev3)",
     "artifact_type": "incident_responder.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "route",
-      "verify"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 3
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "postmortem.json": "{\"incident_id\": \"INC-2026-0063\", \"severity\": \"sev3\", \"root_cause\": \"feature-flag mal configurada habilitou caminho experimental\", \"mitigation\": \"kill-switch da flag via feature-flagger\", \"resolution\": \"comportamento revertido\", \"timeline\": [{\"ts\": \"2026-06-12T09:30:00Z\", \"event\": \"report de comportamento estranho (detection)\"}, {\"ts\": \"2026-06-12T09:40:00Z\", \"event\": \"flag identificada (triage)\"}, {\"ts\": \"2026-06-12T09:45:00Z\", \"event\": \"flag desligada (mitigation)\"}, {\"ts\": \"2026-06-12T09:50:00Z\", \"event\": \"normalizado (resolution)\"}], \"mtta_minutes\": 10, \"mttr_minutes\": 20, \"rollback\": {\"documented\": true, \"steps\": [\"desligar flag\", \"confirmar caminho padrao\"]}, \"followups\": [{\"action\": \"guardrail de validacao de flags\", \"owner\": \"g3-backend-builder\"}]}"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "route"
-      ]
+      "handler_kind": "spec_executor",
+      "static_ok": true,
+      "first_fail": null,
+      "status": "verified_static",
+      "requires_human_review": false,
+      "artifact_parseable": true,
+      "target_present": true,
+      "doc_parses": true,
+      "fields_complete": true,
+      "timeline_ordered": true,
+      "durations_valid": true,
+      "rollback_documented": true,
+      "followups_actionable": true,
+      "no_placeholder_gaming": true
     }
   },
   {
     "id": "g3-incident-responder-04",
-    "desc": "Respondedor de Incidentes caso 4: risco critical, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 4",
+    "desc": "postmortem completo e consistente: INC-2026-0078 (sev2)",
     "artifact_type": "incident_responder.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "verify",
-      "remediate"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 4
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "postmortem.json": "{\"incident_id\": \"INC-2026-0078\", \"severity\": \"sev2\", \"root_cause\": \"certificado TLS expirado no gateway\", \"mitigation\": \"renovacao e recarregamento do certificado\", \"resolution\": \"handshake restabelecido\", \"timeline\": [{\"ts\": \"2026-06-13T00:01:00Z\", \"event\": \"alerta de TLS (detection)\"}, {\"ts\": \"2026-06-13T00:09:00Z\", \"event\": \"cert expirado confirmado (triage)\"}, {\"ts\": \"2026-06-13T00:25:00Z\", \"event\": \"cert renovado (mitigation)\"}, {\"ts\": \"2026-06-13T00:32:00Z\", \"event\": \"trafego normal (resolution)\"}], \"mtta_minutes\": 8, \"mttr_minutes\": 31, \"rollback\": {\"documented\": true, \"steps\": [\"reaplicar cert anterior valido se a renovacao falhar\"]}, \"followups\": [{\"action\": \"alerta de expiracao com 30 dias\", \"owner\": \"g3-infra-devops\"}, {\"action\": \"rotacao automatizada de certs\", \"owner\": \"g3-infra-devops\"}]}"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "verify"
-      ]
+      "handler_kind": "spec_executor",
+      "static_ok": true,
+      "first_fail": null,
+      "status": "verified_static",
+      "requires_human_review": false,
+      "artifact_parseable": true,
+      "target_present": true,
+      "doc_parses": true,
+      "fields_complete": true,
+      "timeline_ordered": true,
+      "durations_valid": true,
+      "rollback_documented": true,
+      "followups_actionable": true,
+      "no_placeholder_gaming": true
     }
   },
   {
     "id": "g3-incident-responder-05",
-    "desc": "Respondedor de Incidentes caso 5: risco low, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 5",
+    "desc": "postmortem completo e consistente: INC-2026-0091 (sev1)",
     "artifact_type": "incident_responder.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "remediate",
-      "plan"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 5
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "postmortem.json": "{\"incident_id\": \"INC-2026-0091\", \"severity\": \"sev1\", \"root_cause\": \"loop de retry sem backoff amplificou falha de dependencia\", \"mitigation\": \"desabilitar retry agressivo + backoff exponencial\", \"resolution\": \"carga estabilizada\", \"timeline\": [{\"ts\": \"2026-06-14T18:00:00Z\", \"event\": \"tempestade de retries (detection)\"}, {\"ts\": \"2026-06-14T18:04:00Z\", \"event\": \"retry sem backoff identificado (triage)\"}, {\"ts\": \"2026-06-14T18:22:00Z\", \"event\": \"backoff aplicado (mitigation)\"}, {\"ts\": \"2026-06-14T19:05:00Z\", \"event\": \"estabilizado (resolution)\"}], \"mtta_minutes\": 4, \"mttr_minutes\": 65, \"rollback\": {\"documented\": true, \"steps\": [\"reverter config de retry\"]}, \"followups\": [{\"action\": \"padrao de backoff na lib de cliente\", \"owner\": \"g3-backend-builder\"}]}"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "low",
+      "handler_kind": "spec_executor",
+      "static_ok": true,
+      "first_fail": null,
+      "status": "verified_static",
       "requires_human_review": false,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "remediate"
-      ]
+      "artifact_parseable": true,
+      "target_present": true,
+      "doc_parses": true,
+      "fields_complete": true,
+      "timeline_ordered": true,
+      "durations_valid": true,
+      "rollback_documented": true,
+      "followups_actionable": true,
+      "no_placeholder_gaming": true
     }
   },
   {
     "id": "g3-incident-responder-06",
-    "desc": "Respondedor de Incidentes caso 6: risco medium, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 6",
+    "desc": "postmortem completo e consistente: INC-2026-0102 (sev3)",
     "artifact_type": "incident_responder.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "plan",
-      "build"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 6
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "postmortem.json": "{\"incident_id\": \"INC-2026-0102\", \"severity\": \"sev3\", \"root_cause\": \"job de cron duplicado gerou processamento redundante\", \"mitigation\": \"lock distribuido no job\", \"resolution\": \"duplicidade cessou\", \"timeline\": [{\"ts\": \"2026-06-15T02:00:00Z\", \"event\": \"duplicidade detectada (detection)\"}, {\"ts\": \"2026-06-15T02:30:00Z\", \"event\": \"cron duplicado confirmado (triage)\"}, {\"ts\": \"2026-06-15T03:00:00Z\", \"event\": \"lock aplicado (mitigation)\"}, {\"ts\": \"2026-06-15T03:15:00Z\", \"event\": \"resolvido (resolution)\"}], \"mtta_minutes\": 30, \"mttr_minutes\": 75, \"rollback\": {\"documented\": true, \"steps\": [\"remover lock se travar o job\"]}, \"followups\": [{\"action\": \"deduplicacao idempotente no job\", \"owner\": \"g3-backend-builder\"}]}"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "medium",
+      "handler_kind": "spec_executor",
+      "static_ok": true,
+      "first_fail": null,
+      "status": "verified_static",
       "requires_human_review": false,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "plan"
-      ]
+      "artifact_parseable": true,
+      "target_present": true,
+      "doc_parses": true,
+      "fields_complete": true,
+      "timeline_ordered": true,
+      "durations_valid": true,
+      "rollback_documented": true,
+      "followups_actionable": true,
+      "no_placeholder_gaming": true
     }
   },
   {
     "id": "g3-incident-responder-07",
-    "desc": "Respondedor de Incidentes caso 7: risco high, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 7",
+    "desc": "postmortem completo e consistente: INC-2026-0114 (sev2)",
     "artifact_type": "incident_responder.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "build",
-      "review"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 7
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "postmortem.json": "{\"incident_id\": \"INC-2026-0114\", \"severity\": \"sev2\", \"root_cause\": \"limite de memoria baixo causou OOMKill em pico\", \"mitigation\": \"ajuste de limites + HPA por memoria\", \"resolution\": \"pods estaveis\", \"timeline\": [{\"ts\": \"2026-06-15T12:00:00Z\", \"event\": \"OOMKills (detection)\"}, {\"ts\": \"2026-06-15T12:07:00Z\", \"event\": \"limite baixo confirmado (triage)\"}, {\"ts\": \"2026-06-15T12:25:00Z\", \"event\": \"limites ajustados (mitigation)\"}, {\"ts\": \"2026-06-15T12:50:00Z\", \"event\": \"estavel (resolution)\"}], \"mtta_minutes\": 7, \"mttr_minutes\": 50, \"rollback\": {\"documented\": true, \"steps\": [\"reverter limites se houver desperdicio\"]}, \"followups\": [{\"action\": \"teste de carga com perfil de memoria\", \"owner\": \"g3-infra-devops\"}]}"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "build"
-      ]
+      "handler_kind": "spec_executor",
+      "static_ok": true,
+      "first_fail": null,
+      "status": "verified_static",
+      "requires_human_review": false,
+      "artifact_parseable": true,
+      "target_present": true,
+      "doc_parses": true,
+      "fields_complete": true,
+      "timeline_ordered": true,
+      "durations_valid": true,
+      "rollback_documented": true,
+      "followups_actionable": true,
+      "no_placeholder_gaming": true
     }
   },
   {
     "id": "g3-incident-responder-08",
-    "desc": "Respondedor de Incidentes caso 8: risco critical, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 8",
+    "desc": "postmortem completo e consistente: INC-2026-0125 (sev3)",
     "artifact_type": "incident_responder.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "review",
-      "route"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 8
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "postmortem.json": "{\"incident_id\": \"INC-2026-0125\", \"severity\": \"sev3\", \"root_cause\": \"indice ausente degradou consulta apos crescimento de dados\", \"mitigation\": \"criacao de indice + cache de consulta\", \"resolution\": \"consulta dentro do SLA\", \"timeline\": [{\"ts\": \"2026-06-16T08:00:00Z\", \"event\": \"lentidao reportada (detection)\"}, {\"ts\": \"2026-06-16T08:20:00Z\", \"event\": \"full-scan identificado (triage)\"}, {\"ts\": \"2026-06-16T08:45:00Z\", \"event\": \"indice criado (mitigation)\"}, {\"ts\": \"2026-06-16T09:00:00Z\", \"event\": \"normal (resolution)\"}], \"mtta_minutes\": 20, \"mttr_minutes\": 60, \"rollback\": {\"documented\": true, \"steps\": [\"dropar indice se houver impacto em escrita\"]}, \"followups\": [{\"action\": \"revisao de planos de consulta no CI\", \"owner\": \"g3-backend-builder\"}]}"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "review"
-      ]
+      "handler_kind": "spec_executor",
+      "static_ok": true,
+      "first_fail": null,
+      "status": "verified_static",
+      "requires_human_review": false,
+      "artifact_parseable": true,
+      "target_present": true,
+      "doc_parses": true,
+      "fields_complete": true,
+      "timeline_ordered": true,
+      "durations_valid": true,
+      "rollback_documented": true,
+      "followups_actionable": true,
+      "no_placeholder_gaming": true
     }
   },
   {
     "id": "g3-incident-responder-09",
-    "desc": "Respondedor de Incidentes caso 9: risco low, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 9",
+    "desc": "responde com prosa, nao com {files}",
     "artifact_type": "incident_responder.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "route",
-      "verify"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 9
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "summary": "Eu mitigaria e faria um postmortem."
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "route"
-      ]
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "first_fail": "artifact_parseable",
+      "status": "rejected:artifact_parseable",
+      "requires_human_review": true,
+      "artifact_parseable": false,
+      "target_present": false,
+      "doc_parses": false,
+      "fields_complete": false,
+      "timeline_ordered": false,
+      "durations_valid": false,
+      "rollback_documented": false,
+      "followups_actionable": false,
+      "no_placeholder_gaming": false
     }
   },
   {
     "id": "g3-incident-responder-10",
-    "desc": "Respondedor de Incidentes caso 10: risco medium, bloqueio",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 10",
+    "desc": "responde com lista, nao com {files}",
     "artifact_type": "incident_responder.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "verify",
-      "remediate"
-    ],
-    "signals": {
-      "blocked": true,
-      "case_index": 10
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
     },
+    "artifact": [
+      "mitigar",
+      "postmortem"
+    ],
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "verify"
-      ]
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "first_fail": "artifact_parseable",
+      "status": "rejected:artifact_parseable",
+      "requires_human_review": true,
+      "artifact_parseable": false,
+      "target_present": false,
+      "doc_parses": false,
+      "fields_complete": false,
+      "timeline_ordered": false,
+      "durations_valid": false,
+      "rollback_documented": false,
+      "followups_actionable": false,
+      "no_placeholder_gaming": false
     }
   },
   {
     "id": "g3-incident-responder-11",
-    "desc": "Respondedor de Incidentes caso 11: risco high, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 11",
+    "desc": "entrega notes.md, faltando o postmortem.json",
     "artifact_type": "incident_responder.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "remediate",
-      "plan"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 11
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "notes.md": "conteudo qualquer\n"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "high",
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "first_fail": "target_present",
+      "status": "rejected:target_present",
       "requires_human_review": true,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "remediate"
-      ]
+      "artifact_parseable": true,
+      "target_present": false,
+      "doc_parses": false,
+      "fields_complete": false,
+      "timeline_ordered": false,
+      "durations_valid": false,
+      "rollback_documented": false,
+      "followups_actionable": false,
+      "no_placeholder_gaming": false
     }
   },
   {
     "id": "g3-incident-responder-12",
-    "desc": "Respondedor de Incidentes caso 12: risco critical, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 12",
+    "desc": "entrega timeline.txt, faltando o postmortem.json",
     "artifact_type": "incident_responder.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "plan",
-      "build"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 12
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "timeline.txt": "conteudo qualquer\n"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "critical",
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "first_fail": "target_present",
+      "status": "rejected:target_present",
       "requires_human_review": true,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "plan"
-      ]
+      "artifact_parseable": true,
+      "target_present": false,
+      "doc_parses": false,
+      "fields_complete": false,
+      "timeline_ordered": false,
+      "durations_valid": false,
+      "rollback_documented": false,
+      "followups_actionable": false,
+      "no_placeholder_gaming": false
     }
   },
   {
     "id": "g3-incident-responder-13",
-    "desc": "Respondedor de Incidentes caso 13: risco low, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 13",
+    "desc": "entrega resumo.json, faltando o postmortem.json",
     "artifact_type": "incident_responder.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "build",
-      "review"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 13
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "resumo.json": "conteudo qualquer\n"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "build"
-      ]
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "first_fail": "target_present",
+      "status": "rejected:target_present",
+      "requires_human_review": true,
+      "artifact_parseable": true,
+      "target_present": false,
+      "doc_parses": false,
+      "fields_complete": false,
+      "timeline_ordered": false,
+      "durations_valid": false,
+      "rollback_documented": false,
+      "followups_actionable": false,
+      "no_placeholder_gaming": false
     }
   },
   {
     "id": "g3-incident-responder-14",
-    "desc": "Respondedor de Incidentes caso 14: risco medium, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 14",
+    "desc": "postmortem.json nao e JSON valido",
     "artifact_type": "incident_responder.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "review",
-      "route"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 14
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "postmortem.json": "{ incidente: sem aspas "
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "review"
-      ]
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "first_fail": "doc_parses",
+      "status": "rejected:doc_parses",
+      "requires_human_review": true,
+      "artifact_parseable": true,
+      "target_present": true,
+      "doc_parses": false,
+      "fields_complete": false,
+      "timeline_ordered": false,
+      "durations_valid": false,
+      "rollback_documented": false,
+      "followups_actionable": false,
+      "no_placeholder_gaming": false
     }
   },
   {
     "id": "g3-incident-responder-15",
-    "desc": "Respondedor de Incidentes caso 15: risco high, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 15",
+    "desc": "postmortem.json e um array, nao objeto",
     "artifact_type": "incident_responder.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "route",
-      "verify"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 15
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "postmortem.json": "[1,2,3]"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "high",
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "first_fail": "doc_parses",
+      "status": "rejected:doc_parses",
       "requires_human_review": true,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "route"
-      ]
+      "artifact_parseable": true,
+      "target_present": true,
+      "doc_parses": false,
+      "fields_complete": false,
+      "timeline_ordered": false,
+      "durations_valid": false,
+      "rollback_documented": false,
+      "followups_actionable": false,
+      "no_placeholder_gaming": false
     }
   },
   {
     "id": "g3-incident-responder-16",
-    "desc": "Respondedor de Incidentes caso 16: risco critical, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 16",
+    "desc": "postmortem sem causa-raiz (campo obrigatorio)",
     "artifact_type": "incident_responder.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "verify",
-      "remediate"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 16
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "postmortem.json": "{\"incident_id\": \"INC-2026-0042\", \"severity\": \"sev2\", \"mitigation\": \"rollback do deploy via infra-devops\", \"resolution\": \"servico normalizado apos rollback\", \"timeline\": [{\"ts\": \"2026-06-10T10:00:00Z\", \"event\": \"alerta de erro 5xx (detection)\"}, {\"ts\": \"2026-06-10T10:06:00Z\", \"event\": \"triagem: deploy recente suspeito\"}, {\"ts\": \"2026-06-10T10:14:00Z\", \"event\": \"rollback aplicado (mitigation)\"}, {\"ts\": \"2026-06-10T10:35:00Z\", \"event\": \"metricas normalizadas (resolution)\"}], \"mtta_minutes\": 6, \"mttr_minutes\": 35, \"rollback\": {\"documented\": true, \"steps\": [\"reverter deploy\", \"validar health-check\"]}, \"followups\": [{\"action\": \"teste de regressao no endpoint de pedidos\", \"owner\": \"g3-backend-builder\"}, {\"action\": \"alerta de erro por rota\", \"owner\": \"g3-infra-devops\"}]}"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "critical",
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "first_fail": "fields_complete",
+      "status": "rejected:fields_complete",
       "requires_human_review": true,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "verify"
-      ]
+      "artifact_parseable": true,
+      "target_present": true,
+      "doc_parses": true,
+      "fields_complete": false,
+      "timeline_ordered": true,
+      "durations_valid": true,
+      "rollback_documented": true,
+      "followups_actionable": true,
+      "no_placeholder_gaming": true
     }
   },
   {
     "id": "g3-incident-responder-17",
-    "desc": "Respondedor de Incidentes caso 17: risco low, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 17",
+    "desc": "campo resolution vazio (so espacos)",
     "artifact_type": "incident_responder.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "remediate",
-      "plan"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 17
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "postmortem.json": "{\"incident_id\": \"INC-2026-0042\", \"severity\": \"sev2\", \"root_cause\": \"deploy introduziu regressao no endpoint de pedidos\", \"mitigation\": \"rollback do deploy via infra-devops\", \"resolution\": \"  \", \"timeline\": [{\"ts\": \"2026-06-10T10:00:00Z\", \"event\": \"alerta de erro 5xx (detection)\"}, {\"ts\": \"2026-06-10T10:06:00Z\", \"event\": \"triagem: deploy recente suspeito\"}, {\"ts\": \"2026-06-10T10:14:00Z\", \"event\": \"rollback aplicado (mitigation)\"}, {\"ts\": \"2026-06-10T10:35:00Z\", \"event\": \"metricas normalizadas (resolution)\"}], \"mtta_minutes\": 6, \"mttr_minutes\": 35, \"rollback\": {\"documented\": true, \"steps\": [\"reverter deploy\", \"validar health-check\"]}, \"followups\": [{\"action\": \"teste de regressao no endpoint de pedidos\", \"owner\": \"g3-backend-builder\"}, {\"action\": \"alerta de erro por rota\", \"owner\": \"g3-infra-devops\"}]}"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "remediate"
-      ]
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "first_fail": "fields_complete",
+      "status": "rejected:fields_complete",
+      "requires_human_review": true,
+      "artifact_parseable": true,
+      "target_present": true,
+      "doc_parses": true,
+      "fields_complete": false,
+      "timeline_ordered": true,
+      "durations_valid": true,
+      "rollback_documented": true,
+      "followups_actionable": true,
+      "no_placeholder_gaming": true
     }
   },
   {
     "id": "g3-incident-responder-18",
-    "desc": "Respondedor de Incidentes caso 18: risco medium, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 18",
+    "desc": "severidade fora do conjunto valido",
     "artifact_type": "incident_responder.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "plan",
-      "build"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 18
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "postmortem.json": "{\"incident_id\": \"INC-2026-0042\", \"severity\": \"sev9\", \"root_cause\": \"deploy introduziu regressao no endpoint de pedidos\", \"mitigation\": \"rollback do deploy via infra-devops\", \"resolution\": \"servico normalizado apos rollback\", \"timeline\": [{\"ts\": \"2026-06-10T10:00:00Z\", \"event\": \"alerta de erro 5xx (detection)\"}, {\"ts\": \"2026-06-10T10:06:00Z\", \"event\": \"triagem: deploy recente suspeito\"}, {\"ts\": \"2026-06-10T10:14:00Z\", \"event\": \"rollback aplicado (mitigation)\"}, {\"ts\": \"2026-06-10T10:35:00Z\", \"event\": \"metricas normalizadas (resolution)\"}], \"mtta_minutes\": 6, \"mttr_minutes\": 35, \"rollback\": {\"documented\": true, \"steps\": [\"reverter deploy\", \"validar health-check\"]}, \"followups\": [{\"action\": \"teste de regressao no endpoint de pedidos\", \"owner\": \"g3-backend-builder\"}, {\"action\": \"alerta de erro por rota\", \"owner\": \"g3-infra-devops\"}]}"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "plan"
-      ]
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "first_fail": "fields_complete",
+      "status": "rejected:fields_complete",
+      "requires_human_review": true,
+      "artifact_parseable": true,
+      "target_present": true,
+      "doc_parses": true,
+      "fields_complete": false,
+      "timeline_ordered": true,
+      "durations_valid": true,
+      "rollback_documented": true,
+      "followups_actionable": true,
+      "no_placeholder_gaming": true
     }
   },
   {
     "id": "g3-incident-responder-19",
-    "desc": "Respondedor de Incidentes caso 19: risco high, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 19",
+    "desc": "postmortem sem mitigacao registrada",
     "artifact_type": "incident_responder.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "build",
-      "review"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 19
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "postmortem.json": "{\"incident_id\": \"INC-2026-0042\", \"severity\": \"sev2\", \"root_cause\": \"deploy introduziu regressao no endpoint de pedidos\", \"resolution\": \"servico normalizado apos rollback\", \"timeline\": [{\"ts\": \"2026-06-10T10:00:00Z\", \"event\": \"alerta de erro 5xx (detection)\"}, {\"ts\": \"2026-06-10T10:06:00Z\", \"event\": \"triagem: deploy recente suspeito\"}, {\"ts\": \"2026-06-10T10:14:00Z\", \"event\": \"rollback aplicado (mitigation)\"}, {\"ts\": \"2026-06-10T10:35:00Z\", \"event\": \"metricas normalizadas (resolution)\"}], \"mtta_minutes\": 6, \"mttr_minutes\": 35, \"rollback\": {\"documented\": true, \"steps\": [\"reverter deploy\", \"validar health-check\"]}, \"followups\": [{\"action\": \"teste de regressao no endpoint de pedidos\", \"owner\": \"g3-backend-builder\"}, {\"action\": \"alerta de erro por rota\", \"owner\": \"g3-infra-devops\"}]}"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "high",
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "first_fail": "fields_complete",
+      "status": "rejected:fields_complete",
       "requires_human_review": true,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "build"
-      ]
+      "artifact_parseable": true,
+      "target_present": true,
+      "doc_parses": true,
+      "fields_complete": false,
+      "timeline_ordered": true,
+      "durations_valid": true,
+      "rollback_documented": true,
+      "followups_actionable": true,
+      "no_placeholder_gaming": true
     }
   },
   {
     "id": "g3-incident-responder-20",
-    "desc": "Respondedor de Incidentes caso 20: risco critical, bloqueio",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 20",
+    "desc": "timeline com timestamps fora de ordem",
     "artifact_type": "incident_responder.artifact",
-    "risk": "critical",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "review",
-      "route"
-    ],
-    "signals": {
-      "blocked": true,
-      "case_index": 20
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "postmortem.json": "{\"incident_id\": \"INC-2026-0042\", \"severity\": \"sev2\", \"root_cause\": \"deploy introduziu regressao no endpoint de pedidos\", \"mitigation\": \"rollback do deploy via infra-devops\", \"resolution\": \"servico normalizado apos rollback\", \"timeline\": [{\"ts\": \"2026-06-10T10:35:00Z\", \"event\": \"metricas normalizadas (resolution)\"}, {\"ts\": \"2026-06-10T10:14:00Z\", \"event\": \"rollback aplicado (mitigation)\"}, {\"ts\": \"2026-06-10T10:06:00Z\", \"event\": \"triagem: deploy recente suspeito\"}, {\"ts\": \"2026-06-10T10:00:00Z\", \"event\": \"alerta de erro 5xx (detection)\"}], \"mtta_minutes\": 6, \"mttr_minutes\": 35, \"rollback\": {\"documented\": true, \"steps\": [\"reverter deploy\", \"validar health-check\"]}, \"followups\": [{\"action\": \"teste de regressao no endpoint de pedidos\", \"owner\": \"g3-backend-builder\"}, {\"action\": \"alerta de erro por rota\", \"owner\": \"g3-infra-devops\"}]}"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "blocked",
-      "risk": "critical",
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "first_fail": "timeline_ordered",
+      "status": "rejected:timeline_ordered",
       "requires_human_review": true,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "review"
-      ]
+      "artifact_parseable": true,
+      "target_present": true,
+      "doc_parses": true,
+      "fields_complete": true,
+      "timeline_ordered": false,
+      "durations_valid": true,
+      "rollback_documented": true,
+      "followups_actionable": true,
+      "no_placeholder_gaming": true
     }
   },
   {
     "id": "g3-incident-responder-21",
-    "desc": "Respondedor de Incidentes caso 21: risco low, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 21",
+    "desc": "evento de timeline sem timestamp",
     "artifact_type": "incident_responder.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "route",
-      "verify"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 21
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "postmortem.json": "{\"incident_id\": \"INC-2026-0042\", \"severity\": \"sev2\", \"root_cause\": \"deploy introduziu regressao no endpoint de pedidos\", \"mitigation\": \"rollback do deploy via infra-devops\", \"resolution\": \"servico normalizado apos rollback\", \"timeline\": [{\"event\": \"sem ts\"}], \"mtta_minutes\": 6, \"mttr_minutes\": 35, \"rollback\": {\"documented\": true, \"steps\": [\"reverter deploy\", \"validar health-check\"]}, \"followups\": [{\"action\": \"teste de regressao no endpoint de pedidos\", \"owner\": \"g3-backend-builder\"}, {\"action\": \"alerta de erro por rota\", \"owner\": \"g3-infra-devops\"}]}"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "route"
-      ]
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "first_fail": "timeline_ordered",
+      "status": "rejected:timeline_ordered",
+      "requires_human_review": true,
+      "artifact_parseable": true,
+      "target_present": true,
+      "doc_parses": true,
+      "fields_complete": true,
+      "timeline_ordered": false,
+      "durations_valid": true,
+      "rollback_documented": true,
+      "followups_actionable": true,
+      "no_placeholder_gaming": true
     }
   },
   {
     "id": "g3-incident-responder-22",
-    "desc": "Respondedor de Incidentes caso 22: risco medium, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 22",
+    "desc": "timeline vazia",
     "artifact_type": "incident_responder.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "verify",
-      "remediate"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 22
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "postmortem.json": "{\"incident_id\": \"INC-2026-0042\", \"severity\": \"sev2\", \"root_cause\": \"deploy introduziu regressao no endpoint de pedidos\", \"mitigation\": \"rollback do deploy via infra-devops\", \"resolution\": \"servico normalizado apos rollback\", \"timeline\": [], \"mtta_minutes\": 6, \"mttr_minutes\": 35, \"rollback\": {\"documented\": true, \"steps\": [\"reverter deploy\", \"validar health-check\"]}, \"followups\": [{\"action\": \"teste de regressao no endpoint de pedidos\", \"owner\": \"g3-backend-builder\"}, {\"action\": \"alerta de erro por rota\", \"owner\": \"g3-infra-devops\"}]}"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "verify"
-      ]
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "first_fail": "timeline_ordered",
+      "status": "rejected:timeline_ordered",
+      "requires_human_review": true,
+      "artifact_parseable": true,
+      "target_present": true,
+      "doc_parses": true,
+      "fields_complete": true,
+      "timeline_ordered": false,
+      "durations_valid": true,
+      "rollback_documented": true,
+      "followups_actionable": true,
+      "no_placeholder_gaming": true
     }
   },
   {
     "id": "g3-incident-responder-23",
-    "desc": "Respondedor de Incidentes caso 23: risco high, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 23",
+    "desc": "MTTA nao-numerico",
     "artifact_type": "incident_responder.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "remediate",
-      "plan"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 23
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "postmortem.json": "{\"incident_id\": \"INC-2026-0042\", \"severity\": \"sev2\", \"root_cause\": \"deploy introduziu regressao no endpoint de pedidos\", \"mitigation\": \"rollback do deploy via infra-devops\", \"resolution\": \"servico normalizado apos rollback\", \"timeline\": [{\"ts\": \"2026-06-10T10:00:00Z\", \"event\": \"alerta de erro 5xx (detection)\"}, {\"ts\": \"2026-06-10T10:06:00Z\", \"event\": \"triagem: deploy recente suspeito\"}, {\"ts\": \"2026-06-10T10:14:00Z\", \"event\": \"rollback aplicado (mitigation)\"}, {\"ts\": \"2026-06-10T10:35:00Z\", \"event\": \"metricas normalizadas (resolution)\"}], \"mtta_minutes\": \"rapido\", \"mttr_minutes\": 35, \"rollback\": {\"documented\": true, \"steps\": [\"reverter deploy\", \"validar health-check\"]}, \"followups\": [{\"action\": \"teste de regressao no endpoint de pedidos\", \"owner\": \"g3-backend-builder\"}, {\"action\": \"alerta de erro por rota\", \"owner\": \"g3-infra-devops\"}]}"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "high",
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "first_fail": "durations_valid",
+      "status": "rejected:durations_valid",
       "requires_human_review": true,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "remediate"
-      ]
+      "artifact_parseable": true,
+      "target_present": true,
+      "doc_parses": true,
+      "fields_complete": true,
+      "timeline_ordered": true,
+      "durations_valid": false,
+      "rollback_documented": true,
+      "followups_actionable": true,
+      "no_placeholder_gaming": true
     }
   },
   {
     "id": "g3-incident-responder-24",
-    "desc": "Respondedor de Incidentes caso 24: risco critical, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 24",
+    "desc": "MTTA maior que MTTR (inconsistente)",
     "artifact_type": "incident_responder.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "plan",
-      "build"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 24
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "postmortem.json": "{\"incident_id\": \"INC-2026-0042\", \"severity\": \"sev2\", \"root_cause\": \"deploy introduziu regressao no endpoint de pedidos\", \"mitigation\": \"rollback do deploy via infra-devops\", \"resolution\": \"servico normalizado apos rollback\", \"timeline\": [{\"ts\": \"2026-06-10T10:00:00Z\", \"event\": \"alerta de erro 5xx (detection)\"}, {\"ts\": \"2026-06-10T10:06:00Z\", \"event\": \"triagem: deploy recente suspeito\"}, {\"ts\": \"2026-06-10T10:14:00Z\", \"event\": \"rollback aplicado (mitigation)\"}, {\"ts\": \"2026-06-10T10:35:00Z\", \"event\": \"metricas normalizadas (resolution)\"}], \"mtta_minutes\": 90, \"mttr_minutes\": 35, \"rollback\": {\"documented\": true, \"steps\": [\"reverter deploy\", \"validar health-check\"]}, \"followups\": [{\"action\": \"teste de regressao no endpoint de pedidos\", \"owner\": \"g3-backend-builder\"}, {\"action\": \"alerta de erro por rota\", \"owner\": \"g3-infra-devops\"}]}"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "critical",
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "first_fail": "durations_valid",
+      "status": "rejected:durations_valid",
       "requires_human_review": true,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "plan"
-      ]
+      "artifact_parseable": true,
+      "target_present": true,
+      "doc_parses": true,
+      "fields_complete": true,
+      "timeline_ordered": true,
+      "durations_valid": false,
+      "rollback_documented": true,
+      "followups_actionable": true,
+      "no_placeholder_gaming": true
     }
   },
   {
     "id": "g3-incident-responder-25",
-    "desc": "Respondedor de Incidentes caso 25: risco low, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 25",
+    "desc": "MTTR zero (invalido)",
     "artifact_type": "incident_responder.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "build",
-      "review"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 25
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "postmortem.json": "{\"incident_id\": \"INC-2026-0042\", \"severity\": \"sev2\", \"root_cause\": \"deploy introduziu regressao no endpoint de pedidos\", \"mitigation\": \"rollback do deploy via infra-devops\", \"resolution\": \"servico normalizado apos rollback\", \"timeline\": [{\"ts\": \"2026-06-10T10:00:00Z\", \"event\": \"alerta de erro 5xx (detection)\"}, {\"ts\": \"2026-06-10T10:06:00Z\", \"event\": \"triagem: deploy recente suspeito\"}, {\"ts\": \"2026-06-10T10:14:00Z\", \"event\": \"rollback aplicado (mitigation)\"}, {\"ts\": \"2026-06-10T10:35:00Z\", \"event\": \"metricas normalizadas (resolution)\"}], \"mtta_minutes\": 6, \"mttr_minutes\": 0, \"rollback\": {\"documented\": true, \"steps\": [\"reverter deploy\", \"validar health-check\"]}, \"followups\": [{\"action\": \"teste de regressao no endpoint de pedidos\", \"owner\": \"g3-backend-builder\"}, {\"action\": \"alerta de erro por rota\", \"owner\": \"g3-infra-devops\"}]}"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "build"
-      ]
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "first_fail": "durations_valid",
+      "status": "rejected:durations_valid",
+      "requires_human_review": true,
+      "artifact_parseable": true,
+      "target_present": true,
+      "doc_parses": true,
+      "fields_complete": true,
+      "timeline_ordered": true,
+      "durations_valid": false,
+      "rollback_documented": true,
+      "followups_actionable": true,
+      "no_placeholder_gaming": true
     }
   },
   {
     "id": "g3-incident-responder-26",
-    "desc": "Respondedor de Incidentes caso 26: risco medium, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 26",
+    "desc": "rollback marcado como nao documentado",
     "artifact_type": "incident_responder.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "review",
-      "route"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 26
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "postmortem.json": "{\"incident_id\": \"INC-2026-0042\", \"severity\": \"sev2\", \"root_cause\": \"deploy introduziu regressao no endpoint de pedidos\", \"mitigation\": \"rollback do deploy via infra-devops\", \"resolution\": \"servico normalizado apos rollback\", \"timeline\": [{\"ts\": \"2026-06-10T10:00:00Z\", \"event\": \"alerta de erro 5xx (detection)\"}, {\"ts\": \"2026-06-10T10:06:00Z\", \"event\": \"triagem: deploy recente suspeito\"}, {\"ts\": \"2026-06-10T10:14:00Z\", \"event\": \"rollback aplicado (mitigation)\"}, {\"ts\": \"2026-06-10T10:35:00Z\", \"event\": \"metricas normalizadas (resolution)\"}], \"mtta_minutes\": 6, \"mttr_minutes\": 35, \"rollback\": {\"documented\": false, \"steps\": []}, \"followups\": [{\"action\": \"teste de regressao no endpoint de pedidos\", \"owner\": \"g3-backend-builder\"}, {\"action\": \"alerta de erro por rota\", \"owner\": \"g3-infra-devops\"}]}"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "review"
-      ]
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "first_fail": "rollback_documented",
+      "status": "rejected:rollback_documented",
+      "requires_human_review": true,
+      "artifact_parseable": true,
+      "target_present": true,
+      "doc_parses": true,
+      "fields_complete": true,
+      "timeline_ordered": true,
+      "durations_valid": true,
+      "rollback_documented": false,
+      "followups_actionable": true,
+      "no_placeholder_gaming": true
     }
   },
   {
     "id": "g3-incident-responder-27",
-    "desc": "Respondedor de Incidentes caso 27: risco high, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 27",
+    "desc": "rollback sem passos",
     "artifact_type": "incident_responder.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "route",
-      "verify"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 27
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "postmortem.json": "{\"incident_id\": \"INC-2026-0042\", \"severity\": \"sev2\", \"root_cause\": \"deploy introduziu regressao no endpoint de pedidos\", \"mitigation\": \"rollback do deploy via infra-devops\", \"resolution\": \"servico normalizado apos rollback\", \"timeline\": [{\"ts\": \"2026-06-10T10:00:00Z\", \"event\": \"alerta de erro 5xx (detection)\"}, {\"ts\": \"2026-06-10T10:06:00Z\", \"event\": \"triagem: deploy recente suspeito\"}, {\"ts\": \"2026-06-10T10:14:00Z\", \"event\": \"rollback aplicado (mitigation)\"}, {\"ts\": \"2026-06-10T10:35:00Z\", \"event\": \"metricas normalizadas (resolution)\"}], \"mtta_minutes\": 6, \"mttr_minutes\": 35, \"rollback\": {\"documented\": true, \"steps\": []}, \"followups\": [{\"action\": \"teste de regressao no endpoint de pedidos\", \"owner\": \"g3-backend-builder\"}, {\"action\": \"alerta de erro por rota\", \"owner\": \"g3-infra-devops\"}]}"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "high",
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "first_fail": "rollback_documented",
+      "status": "rejected:rollback_documented",
       "requires_human_review": true,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "route"
-      ]
+      "artifact_parseable": true,
+      "target_present": true,
+      "doc_parses": true,
+      "fields_complete": true,
+      "timeline_ordered": true,
+      "durations_valid": true,
+      "rollback_documented": false,
+      "followups_actionable": true,
+      "no_placeholder_gaming": true
     }
   },
   {
     "id": "g3-incident-responder-28",
-    "desc": "Respondedor de Incidentes caso 28: risco critical, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 28",
+    "desc": "follow-up sem owner",
     "artifact_type": "incident_responder.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "verify",
-      "remediate"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 28
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "postmortem.json": "{\"incident_id\": \"INC-2026-0042\", \"severity\": \"sev2\", \"root_cause\": \"deploy introduziu regressao no endpoint de pedidos\", \"mitigation\": \"rollback do deploy via infra-devops\", \"resolution\": \"servico normalizado apos rollback\", \"timeline\": [{\"ts\": \"2026-06-10T10:00:00Z\", \"event\": \"alerta de erro 5xx (detection)\"}, {\"ts\": \"2026-06-10T10:06:00Z\", \"event\": \"triagem: deploy recente suspeito\"}, {\"ts\": \"2026-06-10T10:14:00Z\", \"event\": \"rollback aplicado (mitigation)\"}, {\"ts\": \"2026-06-10T10:35:00Z\", \"event\": \"metricas normalizadas (resolution)\"}], \"mtta_minutes\": 6, \"mttr_minutes\": 35, \"rollback\": {\"documented\": true, \"steps\": [\"reverter deploy\", \"validar health-check\"]}, \"followups\": [{\"action\": \"criar teste\"}]}"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "critical",
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "first_fail": "followups_actionable",
+      "status": "rejected:followups_actionable",
       "requires_human_review": true,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "verify"
-      ]
+      "artifact_parseable": true,
+      "target_present": true,
+      "doc_parses": true,
+      "fields_complete": true,
+      "timeline_ordered": true,
+      "durations_valid": true,
+      "rollback_documented": true,
+      "followups_actionable": false,
+      "no_placeholder_gaming": true
     }
   },
   {
     "id": "g3-incident-responder-29",
-    "desc": "Respondedor de Incidentes caso 29: risco low, ready",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 29",
+    "desc": "sem follow-ups (acoes corretivas)",
     "artifact_type": "incident_responder.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "remediate",
-      "plan"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 29
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "postmortem.json": "{\"incident_id\": \"INC-2026-0042\", \"severity\": \"sev2\", \"root_cause\": \"deploy introduziu regressao no endpoint de pedidos\", \"mitigation\": \"rollback do deploy via infra-devops\", \"resolution\": \"servico normalizado apos rollback\", \"timeline\": [{\"ts\": \"2026-06-10T10:00:00Z\", \"event\": \"alerta de erro 5xx (detection)\"}, {\"ts\": \"2026-06-10T10:06:00Z\", \"event\": \"triagem: deploy recente suspeito\"}, {\"ts\": \"2026-06-10T10:14:00Z\", \"event\": \"rollback aplicado (mitigation)\"}, {\"ts\": \"2026-06-10T10:35:00Z\", \"event\": \"metricas normalizadas (resolution)\"}], \"mtta_minutes\": 6, \"mttr_minutes\": 35, \"rollback\": {\"documented\": true, \"steps\": [\"reverter deploy\", \"validar health-check\"]}, \"followups\": []}"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "remediate"
-      ]
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "first_fail": "followups_actionable",
+      "status": "rejected:followups_actionable",
+      "requires_human_review": true,
+      "artifact_parseable": true,
+      "target_present": true,
+      "doc_parses": true,
+      "fields_complete": true,
+      "timeline_ordered": true,
+      "durations_valid": true,
+      "rollback_documented": true,
+      "followups_actionable": false,
+      "no_placeholder_gaming": true
     }
   },
   {
     "id": "g3-incident-responder-30",
-    "desc": "Respondedor de Incidentes caso 30: risco medium, bloqueio",
-    "request": "Executar Respondedor de Incidentes para cenário sintético 30",
+    "desc": "preenche campo com placeholder (TODO)",
     "artifact_type": "incident_responder.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g3-incident-responder",
-    "capabilities": [
-      "plan",
-      "build"
-    ],
-    "signals": {
-      "blocked": true,
-      "case_index": 30
+    "oracle": {
+      "structure": {
+        "target": "postmortem.json",
+        "required_fields": [
+          "incident_id",
+          "severity",
+          "root_cause",
+          "mitigation",
+          "resolution"
+        ],
+        "severity_field": "severity",
+        "valid_severities": [
+          "sev1",
+          "sev2",
+          "sev3"
+        ],
+        "timeline_field": "timeline",
+        "duration_fields": [
+          "mtta_minutes",
+          "mttr_minutes"
+        ],
+        "rollback_field": "rollback",
+        "followups_field": "followups"
+      }
+    },
+    "artifact": {
+      "files": {
+        "postmortem.json": "{\"incident_id\": \"INC-2026-0042\", \"severity\": \"sev2\", \"root_cause\": \"TODO: investigar depois\", \"mitigation\": \"rollback do deploy via infra-devops\", \"resolution\": \"servico normalizado apos rollback\", \"timeline\": [{\"ts\": \"2026-06-10T10:00:00Z\", \"event\": \"alerta de erro 5xx (detection)\"}, {\"ts\": \"2026-06-10T10:06:00Z\", \"event\": \"triagem: deploy recente suspeito\"}, {\"ts\": \"2026-06-10T10:14:00Z\", \"event\": \"rollback aplicado (mitigation)\"}, {\"ts\": \"2026-06-10T10:35:00Z\", \"event\": \"metricas normalizadas (resolution)\"}], \"mtta_minutes\": 6, \"mttr_minutes\": 35, \"rollback\": {\"documented\": true, \"steps\": [\"reverter deploy\", \"validar health-check\"]}, \"followups\": [{\"action\": \"teste de regressao no endpoint de pedidos\", \"owner\": \"g3-backend-builder\"}, {\"action\": \"alerta de erro por rota\", \"owner\": \"g3-infra-devops\"}]}"
+      }
     },
     "expected": {
-      "agent_id": "g3-incident-responder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "incident_responder.artifact",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g3-incident-responder",
-      "capabilities_any": [
-        "plan"
-      ]
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "first_fail": "no_placeholder_gaming",
+      "status": "rejected:no_placeholder_gaming",
+      "requires_human_review": true,
+      "artifact_parseable": true,
+      "target_present": true,
+      "doc_parses": true,
+      "fields_complete": true,
+      "timeline_ordered": true,
+      "durations_valid": true,
+      "rollback_documented": true,
+      "followups_actionable": true,
+      "no_placeholder_gaming": false
     }
   }
 ]

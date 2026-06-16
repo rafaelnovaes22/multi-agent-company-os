@@ -41,13 +41,65 @@ NECESSARIOS = ["artifact_parseable", "touches_bug_file", "bug_addressed",
                "protected_unmodified", "heldout_untouched", "result_parses", "no_test_gaming"]
 
 # Marcadores de burla de teste (anti-gaming) — escrita defensiva, não exaustiva.
+# Python (pytest/unittest) + JS/TS (vitest/jest): a natureza build do frontend (F3) executa
+# vitest, então as burlas análogas (skip de suíte / matar o runner verde) também são vetadas.
 _GAMING_TOKENS = ("sys.exit(0)", "pytest.skip", "raise SkipTest",
-                  "@pytest.mark.skip", "@unittest.skip", "unittest.SkipTest")
+                  "@pytest.mark.skip", "@unittest.skip", "unittest.SkipTest",
+                  "process.exit(0)", "it.skip(", "test.skip(", "describe.skip(")
+
+# Extensões cujo conteúdo é checado estruturalmente (JS/TS) — não há AST de TS em Python stdlib.
+_JS_EXTS = (".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs")
 
 
 def sha(s: str) -> str:
     """sha256 curto (12 hex) de uma string utf-8 — usado p/ travar arquivos protegidos."""
     return hashlib.sha256((s or "").encode("utf-8")).hexdigest()[:12]
+
+
+def _js_structurally_valid(src: str) -> bool:
+    """Sanidade estrutural OFFLINE de JS/TS (stdlib pura — Python não tem AST de TypeScript).
+
+    NÃO é um parser de verdade: remove comentários (// e /* */) e literais de string/template
+    (', ", `) e exige delimitadores balanceados (){}[]. É NECESSÁRIO-não-suficiente, igual ao
+    ast.parse do lado Python — rejeita truncamento/lixo óbvio (chave/parêntese não fechado,
+    artefato vazio), mas a validação REAL de sintaxe/semântica é a EXECUÇÃO (vitest, F2).
+    """
+    if not src or not src.strip():
+        return False
+    pairs = {")": "(", "]": "[", "}": "{"}
+    opens = set(pairs.values())
+    stack = []
+    quote = None  # ' " ` — dentro de literal, ignora delimitadores
+    i, n = 0, len(src)
+    while i < n:
+        c = src[i]
+        if quote is not None:
+            if c == "\\":          # escape — pula o próximo char
+                i += 2
+                continue
+            if c == quote:
+                quote = None
+            i += 1
+            continue
+        if c == "/" and i + 1 < n and src[i + 1] == "/":   # comentário de linha
+            nl = src.find("\n", i)
+            i = n if nl == -1 else nl
+            continue
+        if c == "/" and i + 1 < n and src[i + 1] == "*":   # comentário de bloco
+            end = src.find("*/", i + 2)
+            if end == -1:
+                return False        # bloco não fechado
+            i = end + 2
+            continue
+        if c in ("'", '"', "`"):
+            quote = c
+        elif c in opens:
+            stack.append(c)
+        elif c in pairs:
+            if not stack or stack.pop() != pairs[c]:
+                return False
+        i += 1
+    return quote is None and not stack
 
 
 def verify_code(artifact: dict, seed: dict, oracle: dict, executor=None) -> dict:
@@ -58,6 +110,7 @@ def verify_code(artifact: dict, seed: dict, oracle: dict, executor=None) -> dict
     seed:     {path: content} repo-semente (build vermelho por construção).
     oracle:   {"bug_file", "protected_files": {path: sha}, "bug_markers": {must_remove, must_contain},
                "heldout_files"?: {path: content} testes held-out (natureza build — F3),
+               "runtime"?: "python"|"node" (default python; node = vitest p/ build do frontend),
                "test_cmd"?: comando de teste (usado SÓ na execução real — F2)}.
     executor: ExecutionProvider | None. None ⇒ não executa (F1 inerte). A execução real só
               CONFIRMA um sinal já estaticamente válido; nunca lê um booleano do eval-case.
@@ -105,13 +158,19 @@ def verify_code(artifact: dict, seed: dict, oracle: dict, executor=None) -> dict
     heldout = oracle.get("heldout_files") or {}
     sig["heldout_untouched"] = not any(path in files for path in heldout)
 
-    # (3) result_parses — todo .py resultante é sintaticamente válido?  [ast, sem executar]
+    # (3) result_parses — todo arquivo de código resultante é sintaticamente válido?
+    # .py: ast.parse (sem executar). .ts/.tsx/.js/...: checagem estrutural (sem AST de TS no
+    # stdlib). Ambos NECESSÁRIOS-não-suficientes; a sintaxe real do JS só cai EXECUTANDO (F2).
     parses = True
     for path, content in merged.items():
         if path.endswith(".py"):
             try:
                 ast.parse(content)
             except SyntaxError:
+                parses = False
+                break
+        elif path.endswith(_JS_EXTS):
+            if not _js_structurally_valid(content):
                 parses = False
                 break
     sig["result_parses"] = parses
@@ -133,8 +192,9 @@ def verify_code(artifact: dict, seed: dict, oracle: dict, executor=None) -> dict
         # artefato (mesmo que algo escape do sinal estático, a injeção sobrescreve).
         exec_files = dict(merged)
         exec_files.update(heldout)
+        runtime = oracle.get("runtime") or "python"
         try:
-            res = executor.run_tests(exec_files, test_cmd=test_cmd)
+            res = executor.run_tests(exec_files, test_cmd=test_cmd, runtime=runtime)
         except Exception as exc:  # noqa: BLE001 — runner falho ⇒ UNVERIFIED, não crash
             import logging
             logging.getLogger(__name__).warning("executor %s falhou: %s",

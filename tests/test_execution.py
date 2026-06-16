@@ -42,8 +42,9 @@ class _FakeExecutor(ExecutionProvider):
     def available(self):
         return True
 
-    def run_tests(self, files, *, test_cmd, timeout_s=60.0):
+    def run_tests(self, files, *, test_cmd, runtime="python", timeout_s=60.0):
         self.called_with = (dict(files), test_cmd)
+        self.runtime = runtime
         return self._verdict
 
 

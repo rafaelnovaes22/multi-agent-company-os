@@ -36,10 +36,13 @@ class ExecutionProvider(abc.ABC):
         return False
 
     @abc.abstractmethod
-    def run_tests(self, files: dict, *, test_cmd: str, timeout_s: float = 60.0):
+    def run_tests(self, files: dict, *, test_cmd: str, runtime: str = "python",
+                  timeout_s: float = 60.0):
         """Aplica `files` a um workspace efêmero e roda `test_cmd`. Retorna:
-        True (exit 0) / False (exit != 0) / None (não executou). Implementações REAIS
-        (F2) devem isolar o workspace, dropar rede/caps e NUNCA expor segredos do host."""
+        True (exit 0) / False (exit != 0) / None (não executou). `runtime` seleciona o
+        ambiente de execução ("python" = pytest, "node" = vitest — natureza build do frontend);
+        cada runtime tem sua imagem hardened. Implementações REAIS (F2) devem isolar o
+        workspace, dropar rede/caps e NUNCA expor segredos do host."""
         ...
 
     @property
@@ -54,7 +57,8 @@ class InertExecutor(ExecutionProvider):
     def available(self) -> bool:
         return False
 
-    def run_tests(self, files: dict, *, test_cmd: str, timeout_s: float = 60.0):
+    def run_tests(self, files: dict, *, test_cmd: str, runtime: str = "python",
+                  timeout_s: float = 60.0):
         return None
 
 
@@ -80,6 +84,16 @@ def _safe_files(files: dict):
     return safe
 
 
+# Tetos de RECURSO por runtime (anti-DoS: fork-bomb/OOM/loop) — NÃO são a fronteira de
+# segurança (essa é network none + cap-drop + no-new-privileges + read-only + non-root, igual
+# p/ todos). vitest+esbuild criam muitas threads/processos (pthread_create EAGAIN sob limites de
+# pytest), então o runtime node recebe teto maior; o python segue enxuto.
+_RESOURCE_LIMITS = {
+    "python": {"pids": "256", "memory": "512m", "cpus": "1", "tmpfs": "64m"},
+    "node": {"pids": "1024", "memory": "1g", "cpus": "2", "tmpfs": "256m"},
+}
+
+
 def _uid_gid():
     """uid:gid do processo p/ rodar o container non-root casando o dono do volume (Linux).
     None no Windows (DockerExecutor só roda de fato no runner Linux)."""
@@ -99,18 +113,26 @@ class DockerExecutor(ExecutionProvider):
       --read-only + --tmpfs /tmp   rootfs imutável; só /work (volume) e /tmp são graváveis
       --user uid:gid   non-root, casando o dono do workspace
       --pids-limit/--memory/--cpus + timeout   contém fork-bomb/OOM/loop infinito
-    A imagem (EXEC_IMAGE, default nucleo-exec:latest) já traz o runner de teste (pytest) —
-    como não há rede, nada é instalado em runtime. Erro de infra ⇒ None (UNVERIFIED), nunca
-    um falso verde."""
+    Cada `runtime` tem sua imagem hardened, já com o runner embutido (sem rede ⇒ nada é
+    instalado em runtime):
+      python (EXEC_IMAGE,      default nucleo-exec:latest)      -> pytest
+      node   (EXEC_IMAGE_NODE, default nucleo-exec-node:latest) -> vitest (build do frontend)
+    Erro de infra ⇒ None (UNVERIFIED), nunca um falso verde."""
 
     def __init__(self, image: str = None, timeout_s: float = 60.0):
-        self._image = image or os.environ.get("EXEC_IMAGE", "nucleo-exec:latest")
+        self._images = {
+            "python": image or os.environ.get("EXEC_IMAGE", "nucleo-exec:latest"),
+            "node": os.environ.get("EXEC_IMAGE_NODE", "nucleo-exec-node:latest"),
+        }
         self._timeout = timeout_s
         self._avail = None
 
+    def _image_for(self, runtime: str) -> str:
+        return self._images.get(runtime or "python", self._images["python"])
+
     @property
     def name(self) -> str:
-        return f"DockerExecutor/{self._image}"
+        return f"DockerExecutor/{self._images['python']}"
 
     @property
     def available(self) -> bool:
@@ -128,13 +150,16 @@ class DockerExecutor(ExecutionProvider):
         except Exception:  # noqa: BLE001
             return False
 
-    def run_tests(self, files: dict, *, test_cmd: str, timeout_s: float = None):
+    def run_tests(self, files: dict, *, test_cmd: str, runtime: str = "python",
+                  timeout_s: float = None):
         if not self.available:
             return None
         safe = _safe_files(files)
         if safe is None:
             _log.warning("DockerExecutor: artefato com paths inseguros — não executa.")
             return None
+        image = self._image_for(runtime)
+        lim = _RESOURCE_LIMITS.get(runtime or "python", _RESOURCE_LIMITS["python"])
         timeout_s = timeout_s or self._timeout
         with tempfile.TemporaryDirectory(prefix="nucleo-exec-") as wd:
             for path, content in safe.items():
@@ -146,14 +171,14 @@ class DockerExecutor(ExecutionProvider):
                    "--network", "none",
                    "--cap-drop", "ALL",
                    "--security-opt", "no-new-privileges",
-                   "--pids-limit", "256",
-                   "--memory", "512m", "--cpus", "1",
-                   "--read-only", "--tmpfs", "/tmp:rw,size=64m",
+                   "--pids-limit", lim["pids"],
+                   "--memory", lim["memory"], "--cpus", lim["cpus"],
+                   "--read-only", "--tmpfs", f"/tmp:rw,size={lim['tmpfs']}",
                    "-v", f"{wd}:/work:rw", "-w", "/work"]
             ug = _uid_gid()
             if ug:
                 cmd += ["--user", ug]
-            cmd += [self._image, "sh", "-c", test_cmd]
+            cmd += [image, "sh", "-c", test_cmd]
             try:
                 r = subprocess.run(cmd, capture_output=True, timeout=timeout_s + 20)
             except subprocess.TimeoutExpired:

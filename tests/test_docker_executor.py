@@ -89,5 +89,63 @@ class _DockerIntegration(unittest.TestCase):
         self.assertFalse(r_plaus["delivered_ok"])
 
 
+class _DockerNodeIntegration(unittest.TestCase):
+    """Natureza BUILD do frontend (F3a-2): execução real com vitest na imagem node.
+    Roda só no nightly (forge-exec.yml) com a imagem nucleo-exec-node; pula localmente
+    sem Docker/imagem. Exige EXEC_IMAGE_NODE apontando p/ a imagem construída."""
+
+    CART_HELDOUT = ("import { it, expect } from 'vitest';\n"
+                    "import { total } from './cart';\n"
+                    "it('soma price*qty', () => { expect(total([{ price: 10, qty: 2 }])).toBe(20); });\n")
+    FIX = ("export function total(items) {\n"
+           "  if (items.length === 0) throw new Error('vazio');\n"
+           "  return items.reduce((a, i) => a + i.price * i.qty, 0);\n}\n")
+    PLAUSIVEL = ("export function total(items) {\n"
+                 "  if (items.length === 0) throw new Error('vazio');\n"
+                 "  return items.reduce((a, i) => a + i.price, 0);\n}\n")  # ignora qty
+
+    @classmethod
+    def setUpClass(cls):
+        cls.ex = DockerExecutor()
+        if not cls.ex.available:
+            raise unittest.SkipTest("Docker indisponível — execução vitest só roda no nightly Linux")
+        files = {"src/cart.ts": cls.FIX, "src/cart.test.ts": cls.CART_HELDOUT,
+                 "package.json": '{ "type": "module" }\n'}
+        probe = cls.ex.run_tests(files, test_cmd="vitest run --reporter=dot", runtime="node")
+        if probe is None:
+            raise unittest.SkipTest("imagem node ausente/infra — pulando integração vitest")
+        cls._files = files
+
+    def test_fix_correto_passa_vitest(self):
+        self.assertIs(self.ex.run_tests(dict(self._files),
+                      test_cmd="vitest run --reporter=dot", runtime="node"), True)
+
+    def test_plausivel_errado_falha_vitest(self):
+        files = dict(self._files)
+        files["src/cart.ts"] = self.PLAUSIVEL
+        # passa o estático mas a EXECUÇÃO (held-out de soma) reprova — o ganho da F2 no node
+        self.assertIs(self.ex.run_tests(files, test_cmd="vitest run --reporter=dot",
+                                        runtime="node"), False)
+
+    def test_natureza_build_node_via_verify_code(self):
+        from nucleo.kernel.verification import verify_code, sha
+        contract = "# Contrato: total = soma price*qty.\n"
+        seed = {"src/cart.ts": "export function total(items) {\n  throw new Error('not implemented');\n}\n",
+                "docs/c.md": contract, "package.json": '{ "type": "module" }\n'}
+        oracle = {
+            "bug_file": "src/cart.ts",
+            "protected_files": {"docs/c.md": sha(contract)},
+            "bug_markers": {"must_remove": ["not implemented"], "must_contain": ["export function total"]},
+            "heldout_files": {"src/cart.test.ts": self.CART_HELDOUT},
+            "runtime": "node", "test_cmd": "vitest run --reporter=dot"}
+        ok = verify_code({"files": {"src/cart.ts": self.FIX}}, seed, oracle, executor=self.ex)
+        self.assertTrue(ok["static_ok"])
+        self.assertTrue(ok["delivered_ok"])
+        plaus = verify_code({"files": {"src/cart.ts": self.PLAUSIVEL}}, seed, oracle, executor=self.ex)
+        self.assertTrue(plaus["static_ok"])
+        self.assertIs(plaus["tests_pass"], False)
+        self.assertFalse(plaus["delivered_ok"])
+
+
 if __name__ == "__main__":
     unittest.main()

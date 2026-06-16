@@ -6,7 +6,14 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: spec_driven
+act_handler: spec_executor
+# VERIFY-IN-EVAL (F3a-2): natureza BUILD do oráculo code-exec com runtime=node (vitest) — os
+# testes são HELD-OUT (oracle.heldout_files, autorados no eval-case; o agente nunca os vê) e
+# injetados por cima do artefato na execução. Verifica a LÓGICA de UI (carrinho/formatação/
+# validação/reducer) headless; o gate visual "lovable/taste" é F4 (browser-exec), não aqui.
+# delivered_event (C2, regra hard) é MANTIDO; delivered_when adiciona o predicado verificável.
+# OFFLINE só static_ok move; delivered_ok exige execução real (vitest, F2).
+delivered_when: static_ok and tests_pass
 outcome_clause:
   statement: 'Construtor de Frontend entrega frontend_builder.artifact verificável
     para: implementar a UI a partir do plano e dos contratos, atingindo o gate de

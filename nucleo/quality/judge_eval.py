@@ -178,7 +178,7 @@ def _avg(rows, key):
     return round(sum(xs) / len(xs), 2) if xs else 0.0
 
 
-def run(judge: str, complete_fn, *, limit: int = 0, dump: bool = False) -> dict:
+def run(judge: str, complete_fn, *, limit: int = 0, dump: bool = False, only=None) -> dict:
     gen_llm = get_llm("worker")
     tmp = tempfile.mkdtemp(prefix="judge-")
     brain = Brain(os.path.join(tmp, "events"))
@@ -186,6 +186,9 @@ def run(judge: str, complete_fn, *, limit: int = 0, dump: bool = False) -> dict:
     cp = MemorySaver()
 
     targets = _targets()
+    if only:  # re-teste barato de agentes específicos (ex.: validar um fix de leak) — aplicado antes de --limit
+        wanted = {a.strip() for a in only if a.strip()}
+        targets = [(sd, sp) for sd, sp in targets if sp["id"] in wanted]
     if limit:
         targets = targets[:limit]
 
@@ -254,6 +257,8 @@ def _parse(argv):
     p.add_argument("--limit", type=int, default=0, help="avalia só os N primeiros agentes (debug/custo).")
     p.add_argument("--dump-artifacts", action="store_true",
                    help="inclui no JSON o artefato gerado por cada agente (campo _artifact) p/ diagnóstico.")
+    p.add_argument("--only", default="",
+                   help="avalia só estes ids (lista separada por vírgula) — re-teste barato de um fix pontual.")
     p.add_argument("--json-output", help="grava o relatório JSON neste caminho.")
     return p.parse_args(argv)
 
@@ -271,7 +276,8 @@ def main(argv):
         return 0
 
     judge_name, complete_fn = _make_judge(judge)
-    rep = run(judge, complete_fn, limit=args.limit, dump=args.dump_artifacts)
+    rep = run(judge, complete_fn, limit=args.limit, dump=args.dump_artifacts,
+              only=args.only.split(",") if args.only else None)
     rep["judge"] = judge_name
     text = render_text(rep)
     if args.json_output:

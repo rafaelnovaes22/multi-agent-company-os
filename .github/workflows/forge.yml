@@ -42,11 +42,12 @@ jobs:
         run: python -m unittest tests.test_verify_code
       - name: Seam de execução VERIFY-IN-EVAL F1 (ExecutionProvider inerte)
         run: python -m unittest tests.test_execution
-      - name: VERIFY-IN-EVAL naturezas held-out (build backend/frontend + ops terraform)
+      - name: VERIFY-IN-EVAL naturezas held-out (build backend/frontend + ops terraform/incident)
         run: |
           python -m unittest tests.test_verify_heldout
           python -m unittest tests.test_verify_frontend
           python -m unittest tests.test_verify_terraform
+          python -m unittest tests.test_verify_incident
       - name: Resiliência operacional (demoção sem gate + kill-switch de frota)
         run: python -m unittest tests.test_demotion_killswitch
       - name: Least-privilege de tools (ToolBox observe/enforce)

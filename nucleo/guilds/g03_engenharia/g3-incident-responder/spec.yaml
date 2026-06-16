@@ -6,7 +6,14 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: spec_driven
+act_handler: spec_executor
+# VERIFY-IN-EVAL (F4b): natureza ESTRUTURAL/dry-run. O oráculo (oracle.structure, HELD-OUT no
+# eval-case; o agente nunca o vê) verifica a COMPLETUDE/CONSISTÊNCIA do postmortem via
+# verify_structure — SEM execução: campos obrigatórios, timeline monotônica, MTTA/MTTR numéricos
+# (mtta≤mttr), rollback com passos, follow-ups com owner, sem placeholders. delivered_event (C2,
+# regra hard) é MANTIDO. NÃO há delivered_when automatizável: delivered_ok é SEMPRE False
+# (ASSISTED, garantia PARCIAL) — estrutura é necessária-não-suficiente e "mitigated" é estado do
+# mundo, fora do predicado; humano revisa o conteúdo e a mitigação real. Offline só static_ok move.
 outcome_clause:
   statement: 'Respondedor de Incidentes entrega incident_responder.artifact verificável
     para: triar, mitigar e fechar o loop de incidentes de produção minimizando impacto

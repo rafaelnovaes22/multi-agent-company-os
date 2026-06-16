@@ -40,8 +40,9 @@ class ExecutionProvider(abc.ABC):
                   timeout_s: float = 60.0):
         """Aplica `files` a um workspace efêmero e roda `test_cmd`. Retorna:
         True (exit 0) / False (exit != 0) / None (não executou). `runtime` seleciona o
-        ambiente de execução ("python" = pytest, "node" = vitest — natureza build do frontend);
-        cada runtime tem sua imagem hardened. Implementações REAIS (F2) devem isolar o
+        ambiente de execução ("python" = pytest, "node" = vitest — build do frontend,
+        "terraform" = terraform test — natureza ops/dry-run); cada runtime tem sua imagem
+        hardened. Implementações REAIS (F2) devem isolar o
         workspace, dropar rede/caps e NUNCA expor segredos do host."""
         ...
 
@@ -91,6 +92,9 @@ def _safe_files(files: dict):
 _RESOURCE_LIMITS = {
     "python": {"pids": "256", "memory": "512m", "cpus": "1", "tmpfs": "64m"},
     "node": {"pids": "1024", "memory": "1g", "cpus": "2", "tmpfs": "256m"},
+    # terraform (natureza ops/dry-run, F4a): validate/test (command=plan), SEM providers de
+    # cloud ⇒ sem rede, determinístico. Escreve .terraform/ em /work e usa /tmp como HOME.
+    "terraform": {"pids": "512", "memory": "1g", "cpus": "2", "tmpfs": "256m"},
 }
 
 
@@ -115,14 +119,16 @@ class DockerExecutor(ExecutionProvider):
       --pids-limit/--memory/--cpus + timeout   contém fork-bomb/OOM/loop infinito
     Cada `runtime` tem sua imagem hardened, já com o runner embutido (sem rede ⇒ nada é
     instalado em runtime):
-      python (EXEC_IMAGE,      default nucleo-exec:latest)      -> pytest
-      node   (EXEC_IMAGE_NODE, default nucleo-exec-node:latest) -> vitest (build do frontend)
+      python    (EXEC_IMAGE,           default nucleo-exec:latest)           -> pytest
+      node      (EXEC_IMAGE_NODE,      default nucleo-exec-node:latest)      -> vitest (frontend)
+      terraform (EXEC_IMAGE_TERRAFORM, default nucleo-exec-terraform:latest) -> terraform test (ops/dry-run)
     Erro de infra ⇒ None (UNVERIFIED), nunca um falso verde."""
 
     def __init__(self, image: str = None, timeout_s: float = 60.0):
         self._images = {
             "python": image or os.environ.get("EXEC_IMAGE", "nucleo-exec:latest"),
             "node": os.environ.get("EXEC_IMAGE_NODE", "nucleo-exec-node:latest"),
+            "terraform": os.environ.get("EXEC_IMAGE_TERRAFORM", "nucleo-exec-terraform:latest"),
         }
         self._timeout = timeout_s
         self._avail = None

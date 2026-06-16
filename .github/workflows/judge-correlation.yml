@@ -25,6 +25,9 @@ on:
       dump_artifacts:
         description: "incluir no JSON o artefato gerado por cada agente (diagnóstico de leak/vagueza)"
         default: "false"
+      only:
+        description: "avaliar só estes ids (lista separada por vírgula) — re-teste barato de um fix pontual"
+        default: ""
 
 permissions:
   contents: read
@@ -65,6 +68,7 @@ jobs:
           if [ "${{ github.event.inputs.dump_artifacts }}" = "true" ]; then DUMP="--dump-artifacts"; fi
           python -m nucleo.quality.judge_eval $REQ $DUMP \
             --limit "${{ github.event.inputs.limit || '0' }}" \
+            --only "${{ github.event.inputs.only || '' }}" \
             --json-output judge_report.json | tee judge_report.txt
       - name: Publicar relatório do juiz
         if: always()

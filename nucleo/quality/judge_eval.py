@@ -178,7 +178,7 @@ def _avg(rows, key):
     return round(sum(xs) / len(xs), 2) if xs else 0.0
 
 
-def run(judge: str, complete_fn, *, limit: int = 0) -> dict:
+def run(judge: str, complete_fn, *, limit: int = 0, dump: bool = False) -> dict:
     gen_llm = get_llm("worker")
     tmp = tempfile.mkdtemp(prefix="judge-")
     brain = Brain(os.path.join(tmp, "events"))
@@ -205,6 +205,8 @@ def run(judge: str, complete_fn, *, limit: int = 0) -> dict:
             content = ""
             v = {"error": f"run:{e}"}
         v.update({"_id": spec["id"], "_guild": spec["guild"], "_content_len": len(content)})
+        if dump:
+            v["_artifact"] = content[:12000]  # diagnóstico: o que o agente gerou (p/ caçar leak/vagueza)
         rows.append(v)
 
     ok = [r for r in rows if "error" not in r]
@@ -250,6 +252,8 @@ def _parse(argv):
     p.add_argument("--require-judge", action="store_true",
                    help="exige credencial do juiz; sem ela, exit 1 (em vez de sair inerte).")
     p.add_argument("--limit", type=int, default=0, help="avalia só os N primeiros agentes (debug/custo).")
+    p.add_argument("--dump-artifacts", action="store_true",
+                   help="inclui no JSON o artefato gerado por cada agente (campo _artifact) p/ diagnóstico.")
     p.add_argument("--json-output", help="grava o relatório JSON neste caminho.")
     return p.parse_args(argv)
 
@@ -267,7 +271,7 @@ def main(argv):
         return 0
 
     judge_name, complete_fn = _make_judge(judge)
-    rep = run(judge, complete_fn, limit=args.limit)
+    rep = run(judge, complete_fn, limit=args.limit, dump=args.dump_artifacts)
     rep["judge"] = judge_name
     text = render_text(rep)
     if args.json_output:

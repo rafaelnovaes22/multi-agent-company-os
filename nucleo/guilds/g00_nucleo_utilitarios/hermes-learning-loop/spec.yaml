@@ -21,6 +21,8 @@ outcome_clause:
   - Persiste um fato duplicado que já existia na MEMORY (novidade não avaliada)
   - Faz merge direto na memória sem PR auditável
   - Promove instinct sem source_run_id, quebrando a rastreabilidade C6
+  - Ilustra instincts/padrões no artefato citando um mercado ou vertical concreto
+    (hardcode C8 — o próprio anti-padrão que deveria rejeitar)
   delivered_event: memory.pr_opened (ou skill.candidate_proposed) registrado no Brain
     com assess_novelty=pass e checagem C1/C6/C8 ok
 economics:

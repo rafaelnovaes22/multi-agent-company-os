@@ -6,7 +6,17 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: spec_driven
+act_handler: spec_executor
+# VERIFY-IN-EVAL (F4a): natureza OPS/DRY-RUN do oráculo code-exec com runtime=terraform. O
+# critério é HELD-OUT (oracle.heldout_files = .tftest.hcl autorado no eval-case; o agente nunca
+# o vê) e injetado por cima na execução: `terraform init -backend=false && validate && test`
+# (command=plan, múltiplos inputs barram hardcode). Verifica a LÓGICA de configuração (locals/
+# outputs/funções) — SEM providers de cloud (sem rede, determinístico). "plan ≠ apply": o
+# oráculo NUNCA aplica; prova plan-válido, não apply-correto-em-produção — por isso o agente
+# segue ASSISTED (garantia PARCIAL: humano revisa o plan real antes do apply).
+# delivered_event (C2, regra hard) é MANTIDO; delivered_when adiciona o predicado verificável.
+# OFFLINE só static_ok move; delivered_ok exige execução real (terraform, F2/nightly).
+delivered_when: static_ok and tests_pass
 outcome_clause:
   statement: 'Infra & DevOps entrega infra_devops.artifact verificável para: prover
     infraestrutura como código, pipelines de CI/CD e deploys confiáveis e reversíveis.'

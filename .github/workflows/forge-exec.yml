@@ -19,6 +19,7 @@ jobs:
       EXEC_PROVIDER: docker
       EXEC_IMAGE: nucleo-exec:latest
       EXEC_IMAGE_NODE: nucleo-exec-node:latest
+      EXEC_IMAGE_TERRAFORM: nucleo-exec-terraform:latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -32,6 +33,8 @@ jobs:
         run: docker build -t nucleo-exec:latest -f nucleo/quality/exec.Dockerfile nucleo/quality
       - name: Build imagem de execução Node/vitest (build do frontend, F3a-2)
         run: docker build -t nucleo-exec-node:latest -f nucleo/quality/exec.node.Dockerfile nucleo/quality
+      - name: Build imagem de execução terraform (ops/dry-run, F4a)
+        run: docker build -t nucleo-exec-terraform:latest -f nucleo/quality/exec.terraform.Dockerfile nucleo/quality
       - name: Teste de integração do DockerExecutor (sandbox real — pytest + vitest)
         run: python -m unittest tests.test_docker_executor
       - name: Relatório de execução do piloto (humano + JSON)
@@ -43,6 +46,9 @@ jobs:
       - name: Relatório de execução do g3-frontend-builder (F3a-2, Node/vitest)
         run: |
           python -m nucleo.quality.exec_report --json-output exec_report_frontend.json nucleo/guilds/g03_engenharia/g3-frontend-builder | tee exec_report_frontend.txt
+      - name: Relatório de execução do g3-infra-devops (F4a, terraform)
+        run: |
+          python -m nucleo.quality.exec_report --json-output exec_report_infra.json nucleo/guilds/g03_engenharia/g3-infra-devops | tee exec_report_infra.txt
       - name: Publicar artefatos do relatório VERIFY-IN-EVAL
         uses: actions/upload-artifact@v4
         with:
@@ -54,3 +60,5 @@ jobs:
             exec_report_backend.json
             exec_report_frontend.txt
             exec_report_frontend.json
+            exec_report_infra.txt
+            exec_report_infra.json

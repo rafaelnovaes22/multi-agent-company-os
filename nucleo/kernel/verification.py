@@ -45,10 +45,17 @@ NECESSARIOS = ["artifact_parseable", "touches_bug_file", "bug_addressed",
 # vitest, então as burlas análogas (skip de suíte / matar o runner verde) também são vetadas.
 _GAMING_TOKENS = ("sys.exit(0)", "pytest.skip", "raise SkipTest",
                   "@pytest.mark.skip", "@unittest.skip", "unittest.SkipTest",
-                  "process.exit(0)", "it.skip(", "test.skip(", "describe.skip(")
+                  "process.exit(0)", "it.skip(", "test.skip(", "describe.skip(",
+                  # terraform test (F4a): falsear o veredito via mock/override do held-out.
+                  "mock_provider", "override_resource", "override_data", "override_module")
 
 # Extensões cujo conteúdo é checado estruturalmente (JS/TS) — não há AST de TS em Python stdlib.
 _JS_EXTS = (".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs")
+
+# Extensões HCL (terraform, natureza ops/dry-run F4a) — idem: sem parser de HCL no stdlib,
+# checagem estrutural necessário-não-suficiente; a sintaxe/semântica real cai no `terraform
+# validate`/`test` (F2). Inclui .tftest.hcl (held-out, só presente na execução).
+_TF_EXTS = (".tf", ".tfvars", ".hcl")
 
 
 def sha(s: str) -> str:
@@ -102,6 +109,70 @@ def _js_structurally_valid(src: str) -> bool:
     return quote is None and not stack
 
 
+def _hcl_structurally_valid(src: str) -> bool:
+    """Sanidade estrutural OFFLINE de HCL/terraform (stdlib pura — sem parser de HCL).
+
+    Espelha _js_structurally_valid: ignora comentários (#, //, /* */), literais "..." (com
+    escape) e blocos heredoc (<<TAG / <<-TAG … TAG) e exige delimitadores (){}[] balanceados.
+    NECESSÁRIO-não-suficiente: rejeita truncamento/lixo óbvio (bloco não fechado, vazio); a
+    validação real de sintaxe/semântica é a EXECUÇÃO (`terraform validate`/`test`, F2).
+    """
+    if not src or not src.strip():
+        return False
+    pairs = {")": "(", "]": "[", "}": "{"}
+    opens = set(pairs.values())
+    stack = []
+    i, n = 0, len(src)
+    while i < n:
+        c = src[i]
+        # heredoc: <<TAG ou <<-TAG → pula até a linha que contém só TAG (delimitadores internos
+        # do corpo não contam, igual a um literal de string multilinha).
+        if c == "<" and i + 1 < n and src[i + 1] == "<":
+            j = i + 2
+            if j < n and src[j] == "-":
+                j += 1
+            start = j
+            while j < n and (src[j].isalnum() or src[j] == "_"):
+                j += 1
+            tag = src[start:j]
+            if tag:
+                end = src.find(tag, j)
+                while end != -1:
+                    ls = src.rfind("\n", 0, end) + 1
+                    if src[ls:end].strip() == "":     # TAG sozinha na linha = fecha o heredoc
+                        break
+                    end = src.find(tag, end + len(tag))
+                if end == -1:
+                    return False                       # heredoc não fechado
+                i = end + len(tag)
+                continue
+        if c == '"':                                   # literal de string (com escape \")
+            i += 1
+            while i < n and src[i] != '"':
+                i += 2 if src[i] == "\\" else 1
+            if i >= n:
+                return False                           # string não fechada
+            i += 1
+            continue
+        if c == "#" or (c == "/" and i + 1 < n and src[i + 1] == "/"):   # comentário de linha
+            nl = src.find("\n", i)
+            i = n if nl == -1 else nl
+            continue
+        if c == "/" and i + 1 < n and src[i + 1] == "*":                 # comentário de bloco
+            end = src.find("*/", i + 2)
+            if end == -1:
+                return False
+            i = end + 2
+            continue
+        if c in opens:
+            stack.append(c)
+        elif c in pairs:
+            if not stack or stack.pop() != pairs[c]:
+                return False
+        i += 1
+    return not stack
+
+
 def verify_code(artifact: dict, seed: dict, oracle: dict, executor=None) -> dict:
     """Verifica um artefato de código contra (semente, oráculo). Estático sempre; execução
     SÓ se houver um ExecutionProvider disponível (F2) — senão tests_pass=UNVERIFIED (F0/F1).
@@ -110,7 +181,7 @@ def verify_code(artifact: dict, seed: dict, oracle: dict, executor=None) -> dict
     seed:     {path: content} repo-semente (build vermelho por construção).
     oracle:   {"bug_file", "protected_files": {path: sha}, "bug_markers": {must_remove, must_contain},
                "heldout_files"?: {path: content} testes held-out (natureza build — F3),
-               "runtime"?: "python"|"node" (default python; node = vitest p/ build do frontend),
+               "runtime"?: "python"|"node"|"terraform" (default python; node=vitest do frontend; terraform=terraform test),
                "test_cmd"?: comando de teste (usado SÓ na execução real — F2)}.
     executor: ExecutionProvider | None. None ⇒ não executa (F1 inerte). A execução real só
               CONFIRMA um sinal já estaticamente válido; nunca lê um booleano do eval-case.
@@ -171,6 +242,10 @@ def verify_code(artifact: dict, seed: dict, oracle: dict, executor=None) -> dict
                 break
         elif path.endswith(_JS_EXTS):
             if not _js_structurally_valid(content):
+                parses = False
+                break
+        elif path.endswith(_TF_EXTS):
+            if not _hcl_structurally_valid(content):
                 parses = False
                 break
     sig["result_parses"] = parses

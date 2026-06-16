@@ -147,5 +147,62 @@ class _DockerNodeIntegration(unittest.TestCase):
         self.assertFalse(plaus["delivered_ok"])
 
 
+class _DockerTerraformIntegration(unittest.TestCase):
+    """Natureza OPS/DRY-RUN (F4a): execução real com `terraform test` (command=plan) na imagem
+    terraform. SEM providers de cloud ⇒ --network none não atrapalha. Roda só no nightly
+    (forge-exec.yml) com nucleo-exec-terraform; pula localmente sem Docker/imagem."""
+
+    HELDOUT = (
+        'run "dev_api" {\n  command = plan\n  variables {\n    env = "DEV"\n    app = "API"\n  }\n'
+        '  assert {\n    condition     = output.resource_name == "dev-api"\n'
+        '    error_message = "lower(env-app)"\n  }\n}\n'
+        'run "prod_web" {\n  command = plan\n  variables {\n    env = "PROD"\n    app = "Web"\n  }\n'
+        '  assert {\n    condition     = output.resource_name == "prod-web"\n'
+        '    error_message = "lower(env-app)"\n  }\n}\n')
+    FIX = ('variable "env" { type = string }\nvariable "app" { type = string }\n'
+           'output "resource_name" {\n  value = lower("${var.env}-${var.app}")\n}\n')
+    PLAUSIVEL = ('variable "env" { type = string }\nvariable "app" { type = string }\n'
+                 'output "resource_name" {\n  value = "${var.env}-${var.app}"\n}\n')  # sem lower()
+    TEST_CMD = "terraform init -backend=false && terraform validate && terraform test"
+
+    @classmethod
+    def setUpClass(cls):
+        cls.ex = DockerExecutor()
+        if not cls.ex.available:
+            raise unittest.SkipTest("Docker indisponível — terraform test só roda no nightly Linux")
+        files = {"main.tf": cls.FIX, "tests/naming.tftest.hcl": cls.HELDOUT}
+        probe = cls.ex.run_tests(files, test_cmd=cls.TEST_CMD, runtime="terraform")
+        if probe is None:
+            raise unittest.SkipTest("imagem terraform ausente/infra — pulando integração")
+
+    def test_fix_correto_passa_terraform_test(self):
+        files = {"main.tf": self.FIX, "tests/naming.tftest.hcl": self.HELDOUT}
+        self.assertIs(self.ex.run_tests(files, test_cmd=self.TEST_CMD, runtime="terraform"), True)
+
+    def test_plausivel_errado_falha_terraform_test(self):
+        files = {"main.tf": self.PLAUSIVEL, "tests/naming.tftest.hcl": self.HELDOUT}
+        # passa o estático, mas a EXECUÇÃO (held-out com 2 inputs) reprova — o ganho da F4a
+        self.assertIs(self.ex.run_tests(files, test_cmd=self.TEST_CMD, runtime="terraform"), False)
+
+    def test_natureza_ops_via_verify_code(self):
+        from nucleo.kernel.verification import verify_code, sha
+        contract = "# Contrato: resource_name = lower(env-app).\n"
+        seed = {"main.tf": 'output "resource_name" {\n  value = "TODO_IMPLEMENT"\n}\n',
+                "docs/c.md": contract}
+        oracle = {
+            "bug_file": "main.tf",
+            "protected_files": {"docs/c.md": sha(contract)},
+            "bug_markers": {"must_remove": ["TODO_IMPLEMENT"], "must_contain": ["resource_name"]},
+            "heldout_files": {"tests/naming.tftest.hcl": self.HELDOUT},
+            "runtime": "terraform", "test_cmd": self.TEST_CMD}
+        ok = verify_code({"files": {"main.tf": self.FIX}}, seed, oracle, executor=self.ex)
+        self.assertTrue(ok["static_ok"])
+        self.assertTrue(ok["delivered_ok"])
+        plaus = verify_code({"files": {"main.tf": self.PLAUSIVEL}}, seed, oracle, executor=self.ex)
+        self.assertTrue(plaus["static_ok"])
+        self.assertIs(plaus["tests_pass"], False)
+        self.assertFalse(plaus["delivered_ok"])
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -49,7 +49,15 @@ jobs:
       - name: Relatório de execução do g3-infra-devops (F4a, terraform)
         run: |
           python -m nucleo.quality.exec_report --json-output exec_report_infra.json nucleo/guilds/g03_engenharia/g3-infra-devops | tee exec_report_infra.txt
+      - name: Gate F6 dos artifacts de execução real
+        run: |
+          python -m nucleo.quality.exec_artifact_gate \
+            exec_report.json \
+            exec_report_backend.json \
+            exec_report_frontend.json \
+            exec_report_infra.json
       - name: Publicar artefatos do relatório VERIFY-IN-EVAL
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: verify-in-eval-exec-report

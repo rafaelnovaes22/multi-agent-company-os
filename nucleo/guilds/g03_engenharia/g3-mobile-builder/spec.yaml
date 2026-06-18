@@ -6,7 +6,9 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: spec_driven
+# VERIFY-IN-EVAL (F4d): natureza MOBILE/held-out. O agente entrega artefato
+# {files}; o oráculo injeta testes Node/React Native held-out autorados no eval-case.
+act_handler: spec_executor
 outcome_clause:
   statement: 'Construtor Mobile entrega mobile_builder.artifact verificável para:
     implementar o aplicativo mobile a partir do plano e dos contratos, com paridade

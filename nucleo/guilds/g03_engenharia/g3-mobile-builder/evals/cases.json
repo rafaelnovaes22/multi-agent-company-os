@@ -1,902 +1,1442 @@
 [
   {
-    "id": "g3-mobile-builder-01",
-    "desc": "Construtor Mobile caso 1: risco low, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 1",
+    "id": "g3-mobile-builder-verify-01",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 01: OnboardingScreen",
+    "request": "Entregar patch mobile verificável para OnboardingScreen no cenário onboarding-01",
     "artifact_type": "mobile_builder.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "build",
-      "review"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 1
+    "artifact": {
+      "files": {
+        "src/screens/OnboardingScreen.ts": "export function renderOnboarding(input: { tenant: string; plan: string; email?: string }) {\n  const result = {\n    screen: \"OnboardingScreen\",\n    scenario: \"onboarding-01\",\n    tenant: input.tenant,\n    plan: input.plan,\n    accessibilityLabel: \"Começar diagnóstico\",\n    readyForStoreReview: true\n  };\n  return result;\n}\n"
+      }
     },
+    "seed": {
+      "src/screens/OnboardingScreen.ts": "export function renderOnboarding(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"OnboardingScreen\",\n    scenario: \"onboarding-01\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_ACCESSIBLE_LABEL\"\n  };\n  return base;\n}\n"
+    },
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/screens/OnboardingScreen.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_ACCESSIBLE_LABEL"
+        ],
+        "must_contain": [
+          "accessibilityLabel: \"Começar diagnóstico\""
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/onboarding-01.test.ts": "import { renderOnboarding } from \"../src/screens/OnboardingScreen.ts\";\n\ntest(\"OnboardingScreen satisfies held-out mobile contract 01\", () => {\n  const out = renderOnboarding({ tenant: \"t-01\", plan: \"operational\", email: \"ops1@example.com\" });\n  expect(out.scenario).toBe(\"onboarding-01\");\n  expect(JSON.stringify(out)).toContain(\"accessibilityLabel\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
+    },
+    "routed_to": "g3-mobile-builder",
     "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "low",
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
       "requires_human_review": false,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "build"
-      ]
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
     }
   },
   {
-    "id": "g3-mobile-builder-02",
-    "desc": "Construtor Mobile caso 2: risco medium, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 2",
+    "id": "g3-mobile-builder-verify-02",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 02: PaywallScreen",
+    "request": "Entregar patch mobile verificável para PaywallScreen no cenário paywall-02",
     "artifact_type": "mobile_builder.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "review",
-      "route"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 2
+    "artifact": {
+      "files": {
+        "src/screens/PaywallScreen.ts": "export function renderPaywall(input: { tenant: string; plan: string; email?: string }) {\n  const result = {\n    screen: \"PaywallScreen\",\n    scenario: \"paywall-02\",\n    tenant: input.tenant,\n    plan: input.plan,\n    priceCopy: \"Plano operacional com fair use\",\n    readyForStoreReview: true\n  };\n  return result;\n}\n"
+      }
     },
+    "seed": {
+      "src/screens/PaywallScreen.ts": "export function renderPaywall(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"PaywallScreen\",\n    scenario: \"paywall-02\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_PRICE_COPY\"\n  };\n  return base;\n}\n"
+    },
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/screens/PaywallScreen.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_PRICE_COPY"
+        ],
+        "must_contain": [
+          "priceCopy: \"Plano operacional com fair use\""
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/paywall-02.test.ts": "import { renderPaywall } from \"../src/screens/PaywallScreen.ts\";\n\ntest(\"PaywallScreen satisfies held-out mobile contract 02\", () => {\n  const out = renderPaywall({ tenant: \"t-02\", plan: \"operational\", email: \"ops2@example.com\" });\n  expect(out.scenario).toBe(\"paywall-02\");\n  expect(JSON.stringify(out)).toContain(\"priceCopy\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
+    },
+    "routed_to": "g3-mobile-builder",
     "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "medium",
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
       "requires_human_review": false,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "review"
-      ]
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
     }
   },
   {
-    "id": "g3-mobile-builder-03",
-    "desc": "Construtor Mobile caso 3: risco high, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 3",
+    "id": "g3-mobile-builder-verify-03",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 03: LeadCaptureForm",
+    "request": "Entregar patch mobile verificável para LeadCaptureForm no cenário lead-03",
     "artifact_type": "mobile_builder.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "route",
-      "verify"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 3
+    "artifact": {
+      "files": {
+        "src/components/LeadCaptureForm.ts": "export function validateLeadForm(input: { tenant: string; plan: string; email?: string }) {\n  const email = input.email || \"\";\n  const result = {\n    screen: \"LeadCaptureForm\",\n    scenario: \"lead-03\",\n    tenant: input.tenant,\n    plan: input.plan,\n    emailValid: email.includes(\"@\"),\n    submitEnabled: email.includes(\"@\") && input.tenant.length > 1\n  };\n  return result;\n}\n"
+      }
     },
-    "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "route"
-      ]
-    }
-  },
-  {
-    "id": "g3-mobile-builder-04",
-    "desc": "Construtor Mobile caso 4: risco critical, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 4",
-    "artifact_type": "mobile_builder.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "verify",
-      "remediate"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 4
+    "seed": {
+      "src/components/LeadCaptureForm.ts": "export function validateLeadForm(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"LeadCaptureForm\",\n    scenario: \"lead-03\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_EMAIL_VALIDATION\"\n  };\n  return base;\n}\n"
     },
-    "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "verify"
-      ]
-    }
-  },
-  {
-    "id": "g3-mobile-builder-05",
-    "desc": "Construtor Mobile caso 5: risco low, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 5",
-    "artifact_type": "mobile_builder.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "remediate",
-      "plan"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 5
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/components/LeadCaptureForm.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_EMAIL_VALIDATION"
+        ],
+        "must_contain": [
+          "emailValid: email.includes(\"@\")"
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/lead-03.test.ts": "import { validateLeadForm } from \"../src/components/LeadCaptureForm.ts\";\n\ntest(\"LeadCaptureForm satisfies held-out mobile contract 03\", () => {\n  const out = validateLeadForm({ tenant: \"t-03\", plan: \"operational\", email: \"ops3@example.com\" });\n  expect(out.scenario).toBe(\"lead-03\");\n  expect(JSON.stringify(out)).toContain(\"emailValid\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
     },
+    "routed_to": "g3-mobile-builder",
     "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "low",
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
       "requires_human_review": false,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "remediate"
-      ]
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
     }
   },
   {
-    "id": "g3-mobile-builder-06",
-    "desc": "Construtor Mobile caso 6: risco medium, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 6",
+    "id": "g3-mobile-builder-verify-04",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 04: OfflineSync",
+    "request": "Entregar patch mobile verificável para OfflineSync no cenário offline-04",
     "artifact_type": "mobile_builder.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "plan",
-      "build"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 6
+    "artifact": {
+      "files": {
+        "src/services/offlineSync.ts": "export function syncOfflineQueue(input: { tenant: string; plan: string; email?: string }) {\n  const result = {\n    screen: \"OfflineSync\",\n    scenario: \"offline-04\",\n    tenant: input.tenant,\n    plan: input.plan,\n    retryPolicy: \"exponential-backoff\",\n    maxAttempts: 3,\n    idempotencyKey: input.tenant + \":\" + \"04\"\n  };\n  return result;\n}\n"
+      }
     },
+    "seed": {
+      "src/services/offlineSync.ts": "export function syncOfflineQueue(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"OfflineSync\",\n    scenario: \"offline-04\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_RETRY_POLICY\"\n  };\n  return base;\n}\n"
+    },
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/services/offlineSync.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_RETRY_POLICY"
+        ],
+        "must_contain": [
+          "retryPolicy: \"exponential-backoff\""
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/offline-04.test.ts": "import { syncOfflineQueue } from \"../src/services/offlineSync.ts\";\n\ntest(\"OfflineSync satisfies held-out mobile contract 04\", () => {\n  const out = syncOfflineQueue({ tenant: \"t-04\", plan: \"operational\", email: \"ops4@example.com\" });\n  expect(out.scenario).toBe(\"offline-04\");\n  expect(JSON.stringify(out)).toContain(\"retryPolicy\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
+    },
+    "routed_to": "g3-mobile-builder",
     "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "medium",
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
       "requires_human_review": false,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "plan"
-      ]
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
     }
   },
   {
-    "id": "g3-mobile-builder-07",
-    "desc": "Construtor Mobile caso 7: risco high, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 7",
+    "id": "g3-mobile-builder-verify-05",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 05: PushConsent",
+    "request": "Entregar patch mobile verificável para PushConsent no cenário push-05",
     "artifact_type": "mobile_builder.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "build",
-      "review"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 7
+    "artifact": {
+      "files": {
+        "src/services/pushConsent.ts": "export function buildPushConsent(input: { tenant: string; plan: string; email?: string }) {\n  const result = {\n    screen: \"PushConsent\",\n    scenario: \"push-05\",\n    tenant: input.tenant,\n    plan: input.plan,\n    consentCopy: \"Receber alertas operacionais\",\n    readyForStoreReview: true\n  };\n  return result;\n}\n"
+      }
     },
-    "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "build"
-      ]
-    }
-  },
-  {
-    "id": "g3-mobile-builder-08",
-    "desc": "Construtor Mobile caso 8: risco critical, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 8",
-    "artifact_type": "mobile_builder.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "review",
-      "route"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 8
+    "seed": {
+      "src/services/pushConsent.ts": "export function buildPushConsent(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"PushConsent\",\n    scenario: \"push-05\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_CONSENT_COPY\"\n  };\n  return base;\n}\n"
     },
-    "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "review"
-      ]
-    }
-  },
-  {
-    "id": "g3-mobile-builder-09",
-    "desc": "Construtor Mobile caso 9: risco low, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 9",
-    "artifact_type": "mobile_builder.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "route",
-      "verify"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 9
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/services/pushConsent.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_CONSENT_COPY"
+        ],
+        "must_contain": [
+          "consentCopy: \"Receber alertas operacionais\""
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/push-05.test.ts": "import { buildPushConsent } from \"../src/services/pushConsent.ts\";\n\ntest(\"PushConsent satisfies held-out mobile contract 05\", () => {\n  const out = buildPushConsent({ tenant: \"t-05\", plan: \"operational\", email: \"ops5@example.com\" });\n  expect(out.scenario).toBe(\"push-05\");\n  expect(JSON.stringify(out)).toContain(\"consentCopy\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
     },
+    "routed_to": "g3-mobile-builder",
     "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "low",
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
       "requires_human_review": false,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "route"
-      ]
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
     }
   },
   {
-    "id": "g3-mobile-builder-10",
-    "desc": "Construtor Mobile caso 10: risco medium, bloqueio",
-    "request": "Executar Construtor Mobile para cenário sintético 10",
+    "id": "g3-mobile-builder-verify-06",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 06: OnboardingScreen",
+    "request": "Entregar patch mobile verificável para OnboardingScreen no cenário onboarding-06",
     "artifact_type": "mobile_builder.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "verify",
-      "remediate"
-    ],
-    "signals": {
-      "blocked": true,
-      "case_index": 10
+    "artifact": {
+      "files": {
+        "src/screens/OnboardingScreen.ts": "export function renderOnboarding(input: { tenant: string; plan: string; email?: string }) {\n  const result = {\n    screen: \"OnboardingScreen\",\n    scenario: \"onboarding-06\",\n    tenant: input.tenant,\n    plan: input.plan,\n    accessibilityLabel: \"Começar diagnóstico\",\n    readyForStoreReview: true\n  };\n  return result;\n}\n"
+      }
     },
+    "seed": {
+      "src/screens/OnboardingScreen.ts": "export function renderOnboarding(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"OnboardingScreen\",\n    scenario: \"onboarding-06\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_ACCESSIBLE_LABEL\"\n  };\n  return base;\n}\n"
+    },
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/screens/OnboardingScreen.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_ACCESSIBLE_LABEL"
+        ],
+        "must_contain": [
+          "accessibilityLabel: \"Começar diagnóstico\""
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/onboarding-06.test.ts": "import { renderOnboarding } from \"../src/screens/OnboardingScreen.ts\";\n\ntest(\"OnboardingScreen satisfies held-out mobile contract 06\", () => {\n  const out = renderOnboarding({ tenant: \"t-06\", plan: \"operational\", email: \"ops6@example.com\" });\n  expect(out.scenario).toBe(\"onboarding-06\");\n  expect(JSON.stringify(out)).toContain(\"accessibilityLabel\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
+    },
+    "routed_to": "g3-mobile-builder",
     "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "blocked",
-      "risk": "medium",
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
       "requires_human_review": false,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "verify"
-      ]
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
     }
   },
   {
-    "id": "g3-mobile-builder-11",
-    "desc": "Construtor Mobile caso 11: risco high, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 11",
+    "id": "g3-mobile-builder-verify-07",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 07: PaywallScreen",
+    "request": "Entregar patch mobile verificável para PaywallScreen no cenário paywall-07",
     "artifact_type": "mobile_builder.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "remediate",
-      "plan"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 11
+    "artifact": {
+      "files": {
+        "src/screens/PaywallScreen.ts": "export function renderPaywall(input: { tenant: string; plan: string; email?: string }) {\n  const result = {\n    screen: \"PaywallScreen\",\n    scenario: \"paywall-07\",\n    tenant: input.tenant,\n    plan: input.plan,\n    priceCopy: \"Plano operacional com fair use\",\n    readyForStoreReview: true\n  };\n  return result;\n}\n"
+      }
     },
-    "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "remediate"
-      ]
-    }
-  },
-  {
-    "id": "g3-mobile-builder-12",
-    "desc": "Construtor Mobile caso 12: risco critical, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 12",
-    "artifact_type": "mobile_builder.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "plan",
-      "build"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 12
+    "seed": {
+      "src/screens/PaywallScreen.ts": "export function renderPaywall(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"PaywallScreen\",\n    scenario: \"paywall-07\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_PRICE_COPY\"\n  };\n  return base;\n}\n"
     },
-    "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "plan"
-      ]
-    }
-  },
-  {
-    "id": "g3-mobile-builder-13",
-    "desc": "Construtor Mobile caso 13: risco low, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 13",
-    "artifact_type": "mobile_builder.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "build",
-      "review"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 13
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/screens/PaywallScreen.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_PRICE_COPY"
+        ],
+        "must_contain": [
+          "priceCopy: \"Plano operacional com fair use\""
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/paywall-07.test.ts": "import { renderPaywall } from \"../src/screens/PaywallScreen.ts\";\n\ntest(\"PaywallScreen satisfies held-out mobile contract 07\", () => {\n  const out = renderPaywall({ tenant: \"t-07\", plan: \"operational\", email: \"ops7@example.com\" });\n  expect(out.scenario).toBe(\"paywall-07\");\n  expect(JSON.stringify(out)).toContain(\"priceCopy\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
     },
+    "routed_to": "g3-mobile-builder",
     "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "low",
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
       "requires_human_review": false,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "build"
-      ]
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
     }
   },
   {
-    "id": "g3-mobile-builder-14",
-    "desc": "Construtor Mobile caso 14: risco medium, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 14",
+    "id": "g3-mobile-builder-verify-08",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 08: LeadCaptureForm",
+    "request": "Entregar patch mobile verificável para LeadCaptureForm no cenário lead-08",
     "artifact_type": "mobile_builder.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "review",
-      "route"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 14
+    "artifact": {
+      "files": {
+        "src/components/LeadCaptureForm.ts": "export function validateLeadForm(input: { tenant: string; plan: string; email?: string }) {\n  const email = input.email || \"\";\n  const result = {\n    screen: \"LeadCaptureForm\",\n    scenario: \"lead-08\",\n    tenant: input.tenant,\n    plan: input.plan,\n    emailValid: email.includes(\"@\"),\n    submitEnabled: email.includes(\"@\") && input.tenant.length > 1\n  };\n  return result;\n}\n"
+      }
     },
+    "seed": {
+      "src/components/LeadCaptureForm.ts": "export function validateLeadForm(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"LeadCaptureForm\",\n    scenario: \"lead-08\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_EMAIL_VALIDATION\"\n  };\n  return base;\n}\n"
+    },
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/components/LeadCaptureForm.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_EMAIL_VALIDATION"
+        ],
+        "must_contain": [
+          "emailValid: email.includes(\"@\")"
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/lead-08.test.ts": "import { validateLeadForm } from \"../src/components/LeadCaptureForm.ts\";\n\ntest(\"LeadCaptureForm satisfies held-out mobile contract 08\", () => {\n  const out = validateLeadForm({ tenant: \"t-08\", plan: \"operational\", email: \"ops8@example.com\" });\n  expect(out.scenario).toBe(\"lead-08\");\n  expect(JSON.stringify(out)).toContain(\"emailValid\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
+    },
+    "routed_to": "g3-mobile-builder",
     "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "medium",
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
       "requires_human_review": false,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "review"
-      ]
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
     }
   },
   {
-    "id": "g3-mobile-builder-15",
-    "desc": "Construtor Mobile caso 15: risco high, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 15",
+    "id": "g3-mobile-builder-verify-09",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 09: OfflineSync",
+    "request": "Entregar patch mobile verificável para OfflineSync no cenário offline-09",
     "artifact_type": "mobile_builder.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "route",
-      "verify"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 15
+    "artifact": {
+      "files": {
+        "src/services/offlineSync.ts": "export function syncOfflineQueue(input: { tenant: string; plan: string; email?: string }) {\n  const result = {\n    screen: \"OfflineSync\",\n    scenario: \"offline-09\",\n    tenant: input.tenant,\n    plan: input.plan,\n    retryPolicy: \"exponential-backoff\",\n    maxAttempts: 3,\n    idempotencyKey: input.tenant + \":\" + \"09\"\n  };\n  return result;\n}\n"
+      }
     },
-    "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "route"
-      ]
-    }
-  },
-  {
-    "id": "g3-mobile-builder-16",
-    "desc": "Construtor Mobile caso 16: risco critical, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 16",
-    "artifact_type": "mobile_builder.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "verify",
-      "remediate"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 16
+    "seed": {
+      "src/services/offlineSync.ts": "export function syncOfflineQueue(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"OfflineSync\",\n    scenario: \"offline-09\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_RETRY_POLICY\"\n  };\n  return base;\n}\n"
     },
-    "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "verify"
-      ]
-    }
-  },
-  {
-    "id": "g3-mobile-builder-17",
-    "desc": "Construtor Mobile caso 17: risco low, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 17",
-    "artifact_type": "mobile_builder.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "remediate",
-      "plan"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 17
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/services/offlineSync.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_RETRY_POLICY"
+        ],
+        "must_contain": [
+          "retryPolicy: \"exponential-backoff\""
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/offline-09.test.ts": "import { syncOfflineQueue } from \"../src/services/offlineSync.ts\";\n\ntest(\"OfflineSync satisfies held-out mobile contract 09\", () => {\n  const out = syncOfflineQueue({ tenant: \"t-09\", plan: \"operational\", email: \"ops9@example.com\" });\n  expect(out.scenario).toBe(\"offline-09\");\n  expect(JSON.stringify(out)).toContain(\"retryPolicy\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
     },
+    "routed_to": "g3-mobile-builder",
     "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "low",
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
       "requires_human_review": false,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "remediate"
-      ]
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
     }
   },
   {
-    "id": "g3-mobile-builder-18",
-    "desc": "Construtor Mobile caso 18: risco medium, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 18",
+    "id": "g3-mobile-builder-verify-10",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 10: PushConsent",
+    "request": "Entregar patch mobile verificável para PushConsent no cenário push-10",
     "artifact_type": "mobile_builder.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "plan",
-      "build"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 18
+    "artifact": {
+      "files": {
+        "src/services/pushConsent.ts": "export function buildPushConsent(input: { tenant: string; plan: string; email?: string }) {\n  const result = {\n    screen: \"PushConsent\",\n    scenario: \"push-10\",\n    tenant: input.tenant,\n    plan: input.plan,\n    consentCopy: \"Receber alertas operacionais\",\n    readyForStoreReview: true\n  };\n  return result;\n}\n"
+      }
     },
+    "seed": {
+      "src/services/pushConsent.ts": "export function buildPushConsent(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"PushConsent\",\n    scenario: \"push-10\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_CONSENT_COPY\"\n  };\n  return base;\n}\n"
+    },
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/services/pushConsent.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_CONSENT_COPY"
+        ],
+        "must_contain": [
+          "consentCopy: \"Receber alertas operacionais\""
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/push-10.test.ts": "import { buildPushConsent } from \"../src/services/pushConsent.ts\";\n\ntest(\"PushConsent satisfies held-out mobile contract 10\", () => {\n  const out = buildPushConsent({ tenant: \"t-10\", plan: \"operational\", email: \"ops10@example.com\" });\n  expect(out.scenario).toBe(\"push-10\");\n  expect(JSON.stringify(out)).toContain(\"consentCopy\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
+    },
+    "routed_to": "g3-mobile-builder",
     "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "medium",
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
       "requires_human_review": false,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "plan"
-      ]
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
     }
   },
   {
-    "id": "g3-mobile-builder-19",
-    "desc": "Construtor Mobile caso 19: risco high, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 19",
+    "id": "g3-mobile-builder-verify-11",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 11: OnboardingScreen",
+    "request": "Entregar patch mobile verificável para OnboardingScreen no cenário onboarding-11",
     "artifact_type": "mobile_builder.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "build",
-      "review"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 19
+    "artifact": {
+      "files": {
+        "src/screens/OnboardingScreen.ts": "export function renderOnboarding(input: { tenant: string; plan: string; email?: string }) {\n  const result = {\n    screen: \"OnboardingScreen\",\n    scenario: \"onboarding-11\",\n    tenant: input.tenant,\n    plan: input.plan,\n    accessibilityLabel: \"Começar diagnóstico\",\n    readyForStoreReview: true\n  };\n  return result;\n}\n"
+      }
     },
-    "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "build"
-      ]
-    }
-  },
-  {
-    "id": "g3-mobile-builder-20",
-    "desc": "Construtor Mobile caso 20: risco critical, bloqueio",
-    "request": "Executar Construtor Mobile para cenário sintético 20",
-    "artifact_type": "mobile_builder.artifact",
-    "risk": "critical",
-    "blocked": true,
-    "requires_human_review": true,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "review",
-      "route"
-    ],
-    "signals": {
-      "blocked": true,
-      "case_index": 20
+    "seed": {
+      "src/screens/OnboardingScreen.ts": "export function renderOnboarding(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"OnboardingScreen\",\n    scenario: \"onboarding-11\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_ACCESSIBLE_LABEL\"\n  };\n  return base;\n}\n"
     },
-    "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "blocked",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "review"
-      ]
-    }
-  },
-  {
-    "id": "g3-mobile-builder-21",
-    "desc": "Construtor Mobile caso 21: risco low, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 21",
-    "artifact_type": "mobile_builder.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "route",
-      "verify"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 21
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/screens/OnboardingScreen.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_ACCESSIBLE_LABEL"
+        ],
+        "must_contain": [
+          "accessibilityLabel: \"Começar diagnóstico\""
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/onboarding-11.test.ts": "import { renderOnboarding } from \"../src/screens/OnboardingScreen.ts\";\n\ntest(\"OnboardingScreen satisfies held-out mobile contract 11\", () => {\n  const out = renderOnboarding({ tenant: \"t-11\", plan: \"operational\", email: \"ops11@example.com\" });\n  expect(out.scenario).toBe(\"onboarding-11\");\n  expect(JSON.stringify(out)).toContain(\"accessibilityLabel\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
     },
+    "routed_to": "g3-mobile-builder",
     "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "low",
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
       "requires_human_review": false,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "route"
-      ]
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
     }
   },
   {
-    "id": "g3-mobile-builder-22",
-    "desc": "Construtor Mobile caso 22: risco medium, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 22",
+    "id": "g3-mobile-builder-verify-12",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 12: PaywallScreen",
+    "request": "Entregar patch mobile verificável para PaywallScreen no cenário paywall-12",
     "artifact_type": "mobile_builder.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "verify",
-      "remediate"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 22
+    "artifact": {
+      "files": {
+        "src/screens/PaywallScreen.ts": "export function renderPaywall(input: { tenant: string; plan: string; email?: string }) {\n  const result = {\n    screen: \"PaywallScreen\",\n    scenario: \"paywall-12\",\n    tenant: input.tenant,\n    plan: input.plan,\n    priceCopy: \"Plano operacional com fair use\",\n    readyForStoreReview: true\n  };\n  return result;\n}\n"
+      }
     },
+    "seed": {
+      "src/screens/PaywallScreen.ts": "export function renderPaywall(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"PaywallScreen\",\n    scenario: \"paywall-12\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_PRICE_COPY\"\n  };\n  return base;\n}\n"
+    },
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/screens/PaywallScreen.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_PRICE_COPY"
+        ],
+        "must_contain": [
+          "priceCopy: \"Plano operacional com fair use\""
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/paywall-12.test.ts": "import { renderPaywall } from \"../src/screens/PaywallScreen.ts\";\n\ntest(\"PaywallScreen satisfies held-out mobile contract 12\", () => {\n  const out = renderPaywall({ tenant: \"t-12\", plan: \"operational\", email: \"ops12@example.com\" });\n  expect(out.scenario).toBe(\"paywall-12\");\n  expect(JSON.stringify(out)).toContain(\"priceCopy\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
+    },
+    "routed_to": "g3-mobile-builder",
     "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "medium",
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
       "requires_human_review": false,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "verify"
-      ]
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
     }
   },
   {
-    "id": "g3-mobile-builder-23",
-    "desc": "Construtor Mobile caso 23: risco high, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 23",
+    "id": "g3-mobile-builder-verify-13",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 13: LeadCaptureForm",
+    "request": "Entregar patch mobile verificável para LeadCaptureForm no cenário lead-13",
     "artifact_type": "mobile_builder.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "remediate",
-      "plan"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 23
+    "artifact": {
+      "files": {
+        "src/components/LeadCaptureForm.ts": "export function validateLeadForm(input: { tenant: string; plan: string; email?: string }) {\n  const email = input.email || \"\";\n  const result = {\n    screen: \"LeadCaptureForm\",\n    scenario: \"lead-13\",\n    tenant: input.tenant,\n    plan: input.plan,\n    emailValid: email.includes(\"@\"),\n    submitEnabled: email.includes(\"@\") && input.tenant.length > 1\n  };\n  return result;\n}\n"
+      }
     },
-    "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "remediate"
-      ]
-    }
-  },
-  {
-    "id": "g3-mobile-builder-24",
-    "desc": "Construtor Mobile caso 24: risco critical, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 24",
-    "artifact_type": "mobile_builder.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "plan",
-      "build"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 24
+    "seed": {
+      "src/components/LeadCaptureForm.ts": "export function validateLeadForm(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"LeadCaptureForm\",\n    scenario: \"lead-13\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_EMAIL_VALIDATION\"\n  };\n  return base;\n}\n"
     },
-    "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "plan"
-      ]
-    }
-  },
-  {
-    "id": "g3-mobile-builder-25",
-    "desc": "Construtor Mobile caso 25: risco low, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 25",
-    "artifact_type": "mobile_builder.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "build",
-      "review"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 25
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/components/LeadCaptureForm.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_EMAIL_VALIDATION"
+        ],
+        "must_contain": [
+          "emailValid: email.includes(\"@\")"
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/lead-13.test.ts": "import { validateLeadForm } from \"../src/components/LeadCaptureForm.ts\";\n\ntest(\"LeadCaptureForm satisfies held-out mobile contract 13\", () => {\n  const out = validateLeadForm({ tenant: \"t-13\", plan: \"operational\", email: \"ops13@example.com\" });\n  expect(out.scenario).toBe(\"lead-13\");\n  expect(JSON.stringify(out)).toContain(\"emailValid\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
     },
+    "routed_to": "g3-mobile-builder",
     "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "low",
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
       "requires_human_review": false,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "build"
-      ]
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
     }
   },
   {
-    "id": "g3-mobile-builder-26",
-    "desc": "Construtor Mobile caso 26: risco medium, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 26",
+    "id": "g3-mobile-builder-verify-14",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 14: OfflineSync",
+    "request": "Entregar patch mobile verificável para OfflineSync no cenário offline-14",
     "artifact_type": "mobile_builder.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "review",
-      "route"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 26
+    "artifact": {
+      "files": {
+        "src/services/offlineSync.ts": "export function syncOfflineQueue(input: { tenant: string; plan: string; email?: string }) {\n  const result = {\n    screen: \"OfflineSync\",\n    scenario: \"offline-14\",\n    tenant: input.tenant,\n    plan: input.plan,\n    retryPolicy: \"exponential-backoff\",\n    maxAttempts: 3,\n    idempotencyKey: input.tenant + \":\" + \"14\"\n  };\n  return result;\n}\n"
+      }
     },
+    "seed": {
+      "src/services/offlineSync.ts": "export function syncOfflineQueue(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"OfflineSync\",\n    scenario: \"offline-14\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_RETRY_POLICY\"\n  };\n  return base;\n}\n"
+    },
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/services/offlineSync.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_RETRY_POLICY"
+        ],
+        "must_contain": [
+          "retryPolicy: \"exponential-backoff\""
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/offline-14.test.ts": "import { syncOfflineQueue } from \"../src/services/offlineSync.ts\";\n\ntest(\"OfflineSync satisfies held-out mobile contract 14\", () => {\n  const out = syncOfflineQueue({ tenant: \"t-14\", plan: \"operational\", email: \"ops14@example.com\" });\n  expect(out.scenario).toBe(\"offline-14\");\n  expect(JSON.stringify(out)).toContain(\"retryPolicy\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
+    },
+    "routed_to": "g3-mobile-builder",
     "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "medium",
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
       "requires_human_review": false,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "review"
-      ]
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
     }
   },
   {
-    "id": "g3-mobile-builder-27",
-    "desc": "Construtor Mobile caso 27: risco high, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 27",
+    "id": "g3-mobile-builder-verify-15",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 15: PushConsent",
+    "request": "Entregar patch mobile verificável para PushConsent no cenário push-15",
     "artifact_type": "mobile_builder.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "route",
-      "verify"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 27
+    "artifact": {
+      "files": {
+        "src/services/pushConsent.ts": "export function buildPushConsent(input: { tenant: string; plan: string; email?: string }) {\n  const result = {\n    screen: \"PushConsent\",\n    scenario: \"push-15\",\n    tenant: input.tenant,\n    plan: input.plan,\n    consentCopy: \"Receber alertas operacionais\",\n    readyForStoreReview: true\n  };\n  return result;\n}\n"
+      }
     },
-    "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "high",
-      "requires_human_review": true,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "route"
-      ]
-    }
-  },
-  {
-    "id": "g3-mobile-builder-28",
-    "desc": "Construtor Mobile caso 28: risco critical, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 28",
-    "artifact_type": "mobile_builder.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "verify",
-      "remediate"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 28
+    "seed": {
+      "src/services/pushConsent.ts": "export function buildPushConsent(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"PushConsent\",\n    scenario: \"push-15\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_CONSENT_COPY\"\n  };\n  return base;\n}\n"
     },
-    "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "critical",
-      "requires_human_review": true,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "verify"
-      ]
-    }
-  },
-  {
-    "id": "g3-mobile-builder-29",
-    "desc": "Construtor Mobile caso 29: risco low, ready",
-    "request": "Executar Construtor Mobile para cenário sintético 29",
-    "artifact_type": "mobile_builder.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "remediate",
-      "plan"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 29
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/services/pushConsent.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_CONSENT_COPY"
+        ],
+        "must_contain": [
+          "consentCopy: \"Receber alertas operacionais\""
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/push-15.test.ts": "import { buildPushConsent } from \"../src/services/pushConsent.ts\";\n\ntest(\"PushConsent satisfies held-out mobile contract 15\", () => {\n  const out = buildPushConsent({ tenant: \"t-15\", plan: \"operational\", email: \"ops15@example.com\" });\n  expect(out.scenario).toBe(\"push-15\");\n  expect(JSON.stringify(out)).toContain(\"consentCopy\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
     },
+    "routed_to": "g3-mobile-builder",
     "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "ready",
-      "risk": "low",
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
       "requires_human_review": false,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "remediate"
-      ]
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
     }
   },
   {
-    "id": "g3-mobile-builder-30",
-    "desc": "Construtor Mobile caso 30: risco medium, bloqueio",
-    "request": "Executar Construtor Mobile para cenário sintético 30",
+    "id": "g3-mobile-builder-verify-16",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 16: OnboardingScreen",
+    "request": "Entregar patch mobile verificável para OnboardingScreen no cenário onboarding-16",
     "artifact_type": "mobile_builder.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g3-mobile-builder",
-    "capabilities": [
-      "plan",
-      "build"
-    ],
-    "signals": {
-      "blocked": true,
-      "case_index": 30
+    "artifact": {
+      "files": {
+        "src/screens/OnboardingScreen.ts": "export function renderOnboarding(input: { tenant: string; plan: string; email?: string }) {\n  const result = {\n    screen: \"OnboardingScreen\",\n    scenario: \"onboarding-16\",\n    tenant: input.tenant,\n    plan: input.plan,\n    accessibilityLabel: \"Começar diagnóstico\",\n    readyForStoreReview: true\n  };\n  return result;\n}\n"
+      }
     },
+    "seed": {
+      "src/screens/OnboardingScreen.ts": "export function renderOnboarding(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"OnboardingScreen\",\n    scenario: \"onboarding-16\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_ACCESSIBLE_LABEL\"\n  };\n  return base;\n}\n"
+    },
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/screens/OnboardingScreen.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_ACCESSIBLE_LABEL"
+        ],
+        "must_contain": [
+          "accessibilityLabel: \"Começar diagnóstico\""
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/onboarding-16.test.ts": "import { renderOnboarding } from \"../src/screens/OnboardingScreen.ts\";\n\ntest(\"OnboardingScreen satisfies held-out mobile contract 16\", () => {\n  const out = renderOnboarding({ tenant: \"t-16\", plan: \"operational\", email: \"ops16@example.com\" });\n  expect(out.scenario).toBe(\"onboarding-16\");\n  expect(JSON.stringify(out)).toContain(\"accessibilityLabel\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
+    },
+    "routed_to": "g3-mobile-builder",
     "expected": {
-      "agent_id": "g3-mobile-builder",
-      "handler_kind": "spec_driven",
-      "artifact_type": "mobile_builder.artifact",
-      "status": "blocked",
-      "risk": "medium",
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
       "requires_human_review": false,
-      "routed_to": "g3-mobile-builder",
-      "capabilities_any": [
-        "plan"
-      ]
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
+    }
+  },
+  {
+    "id": "g3-mobile-builder-verify-17",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 17: PaywallScreen",
+    "request": "Entregar patch mobile verificável para PaywallScreen no cenário paywall-17",
+    "artifact_type": "mobile_builder.artifact",
+    "artifact": {
+      "files": {
+        "src/screens/PaywallScreen.ts": "export function renderPaywall(input: { tenant: string; plan: string; email?: string }) {\n  const result = {\n    screen: \"PaywallScreen\",\n    scenario: \"paywall-17\",\n    tenant: input.tenant,\n    plan: input.plan,\n    priceCopy: \"Plano operacional com fair use\",\n    readyForStoreReview: true\n  };\n  return result;\n}\n"
+      }
+    },
+    "seed": {
+      "src/screens/PaywallScreen.ts": "export function renderPaywall(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"PaywallScreen\",\n    scenario: \"paywall-17\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_PRICE_COPY\"\n  };\n  return base;\n}\n"
+    },
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/screens/PaywallScreen.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_PRICE_COPY"
+        ],
+        "must_contain": [
+          "priceCopy: \"Plano operacional com fair use\""
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/paywall-17.test.ts": "import { renderPaywall } from \"../src/screens/PaywallScreen.ts\";\n\ntest(\"PaywallScreen satisfies held-out mobile contract 17\", () => {\n  const out = renderPaywall({ tenant: \"t-17\", plan: \"operational\", email: \"ops17@example.com\" });\n  expect(out.scenario).toBe(\"paywall-17\");\n  expect(JSON.stringify(out)).toContain(\"priceCopy\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
+    },
+    "routed_to": "g3-mobile-builder",
+    "expected": {
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
+      "requires_human_review": false,
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
+    }
+  },
+  {
+    "id": "g3-mobile-builder-verify-18",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 18: LeadCaptureForm",
+    "request": "Entregar patch mobile verificável para LeadCaptureForm no cenário lead-18",
+    "artifact_type": "mobile_builder.artifact",
+    "artifact": {
+      "files": {
+        "src/components/LeadCaptureForm.ts": "export function validateLeadForm(input: { tenant: string; plan: string; email?: string }) {\n  const email = input.email || \"\";\n  const result = {\n    screen: \"LeadCaptureForm\",\n    scenario: \"lead-18\",\n    tenant: input.tenant,\n    plan: input.plan,\n    emailValid: email.includes(\"@\"),\n    submitEnabled: email.includes(\"@\") && input.tenant.length > 1\n  };\n  return result;\n}\n"
+      }
+    },
+    "seed": {
+      "src/components/LeadCaptureForm.ts": "export function validateLeadForm(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"LeadCaptureForm\",\n    scenario: \"lead-18\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_EMAIL_VALIDATION\"\n  };\n  return base;\n}\n"
+    },
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/components/LeadCaptureForm.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_EMAIL_VALIDATION"
+        ],
+        "must_contain": [
+          "emailValid: email.includes(\"@\")"
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/lead-18.test.ts": "import { validateLeadForm } from \"../src/components/LeadCaptureForm.ts\";\n\ntest(\"LeadCaptureForm satisfies held-out mobile contract 18\", () => {\n  const out = validateLeadForm({ tenant: \"t-18\", plan: \"operational\", email: \"ops18@example.com\" });\n  expect(out.scenario).toBe(\"lead-18\");\n  expect(JSON.stringify(out)).toContain(\"emailValid\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
+    },
+    "routed_to": "g3-mobile-builder",
+    "expected": {
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
+      "requires_human_review": false,
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
+    }
+  },
+  {
+    "id": "g3-mobile-builder-verify-19",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 19: OfflineSync",
+    "request": "Entregar patch mobile verificável para OfflineSync no cenário offline-19",
+    "artifact_type": "mobile_builder.artifact",
+    "artifact": {
+      "files": {
+        "src/services/offlineSync.ts": "export function syncOfflineQueue(input: { tenant: string; plan: string; email?: string }) {\n  const result = {\n    screen: \"OfflineSync\",\n    scenario: \"offline-19\",\n    tenant: input.tenant,\n    plan: input.plan,\n    retryPolicy: \"exponential-backoff\",\n    maxAttempts: 3,\n    idempotencyKey: input.tenant + \":\" + \"19\"\n  };\n  return result;\n}\n"
+      }
+    },
+    "seed": {
+      "src/services/offlineSync.ts": "export function syncOfflineQueue(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"OfflineSync\",\n    scenario: \"offline-19\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_RETRY_POLICY\"\n  };\n  return base;\n}\n"
+    },
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/services/offlineSync.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_RETRY_POLICY"
+        ],
+        "must_contain": [
+          "retryPolicy: \"exponential-backoff\""
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/offline-19.test.ts": "import { syncOfflineQueue } from \"../src/services/offlineSync.ts\";\n\ntest(\"OfflineSync satisfies held-out mobile contract 19\", () => {\n  const out = syncOfflineQueue({ tenant: \"t-19\", plan: \"operational\", email: \"ops19@example.com\" });\n  expect(out.scenario).toBe(\"offline-19\");\n  expect(JSON.stringify(out)).toContain(\"retryPolicy\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
+    },
+    "routed_to": "g3-mobile-builder",
+    "expected": {
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
+      "requires_human_review": false,
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
+    }
+  },
+  {
+    "id": "g3-mobile-builder-verify-20",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 20: PushConsent",
+    "request": "Entregar patch mobile verificável para PushConsent no cenário push-20",
+    "artifact_type": "mobile_builder.artifact",
+    "artifact": {
+      "files": {
+        "src/services/pushConsent.ts": "export function buildPushConsent(input: { tenant: string; plan: string; email?: string }) {\n  const result = {\n    screen: \"PushConsent\",\n    scenario: \"push-20\",\n    tenant: input.tenant,\n    plan: input.plan,\n    consentCopy: \"Receber alertas operacionais\",\n    readyForStoreReview: true\n  };\n  return result;\n}\n"
+      }
+    },
+    "seed": {
+      "src/services/pushConsent.ts": "export function buildPushConsent(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"PushConsent\",\n    scenario: \"push-20\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_CONSENT_COPY\"\n  };\n  return base;\n}\n"
+    },
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/services/pushConsent.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_CONSENT_COPY"
+        ],
+        "must_contain": [
+          "consentCopy: \"Receber alertas operacionais\""
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/push-20.test.ts": "import { buildPushConsent } from \"../src/services/pushConsent.ts\";\n\ntest(\"PushConsent satisfies held-out mobile contract 20\", () => {\n  const out = buildPushConsent({ tenant: \"t-20\", plan: \"operational\", email: \"ops20@example.com\" });\n  expect(out.scenario).toBe(\"push-20\");\n  expect(JSON.stringify(out)).toContain(\"consentCopy\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
+    },
+    "routed_to": "g3-mobile-builder",
+    "expected": {
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
+      "requires_human_review": false,
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
+    }
+  },
+  {
+    "id": "g3-mobile-builder-verify-21",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 21: OnboardingScreen",
+    "request": "Entregar patch mobile verificável para OnboardingScreen no cenário onboarding-21",
+    "artifact_type": "mobile_builder.artifact",
+    "artifact": {
+      "files": {
+        "src/screens/OnboardingScreen.ts": "export function renderOnboarding(input: { tenant: string; plan: string; email?: string }) {\n  const result = {\n    screen: \"OnboardingScreen\",\n    scenario: \"onboarding-21\",\n    tenant: input.tenant,\n    plan: input.plan,\n    accessibilityLabel: \"Começar diagnóstico\",\n    readyForStoreReview: true\n  };\n  return result;\n}\n"
+      }
+    },
+    "seed": {
+      "src/screens/OnboardingScreen.ts": "export function renderOnboarding(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"OnboardingScreen\",\n    scenario: \"onboarding-21\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_ACCESSIBLE_LABEL\"\n  };\n  return base;\n}\n"
+    },
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/screens/OnboardingScreen.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_ACCESSIBLE_LABEL"
+        ],
+        "must_contain": [
+          "accessibilityLabel: \"Começar diagnóstico\""
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/onboarding-21.test.ts": "import { renderOnboarding } from \"../src/screens/OnboardingScreen.ts\";\n\ntest(\"OnboardingScreen satisfies held-out mobile contract 21\", () => {\n  const out = renderOnboarding({ tenant: \"t-21\", plan: \"operational\", email: \"ops21@example.com\" });\n  expect(out.scenario).toBe(\"onboarding-21\");\n  expect(JSON.stringify(out)).toContain(\"accessibilityLabel\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
+    },
+    "routed_to": "g3-mobile-builder",
+    "expected": {
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
+      "requires_human_review": false,
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
+    }
+  },
+  {
+    "id": "g3-mobile-builder-verify-22",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 22: PaywallScreen",
+    "request": "Entregar patch mobile verificável para PaywallScreen no cenário paywall-22",
+    "artifact_type": "mobile_builder.artifact",
+    "artifact": {
+      "files": {
+        "src/screens/PaywallScreen.ts": "export function renderPaywall(input: { tenant: string; plan: string; email?: string }) {\n  const result = {\n    screen: \"PaywallScreen\",\n    scenario: \"paywall-22\",\n    tenant: input.tenant,\n    plan: input.plan,\n    priceCopy: \"Plano operacional com fair use\",\n    readyForStoreReview: true\n  };\n  return result;\n}\n"
+      }
+    },
+    "seed": {
+      "src/screens/PaywallScreen.ts": "export function renderPaywall(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"PaywallScreen\",\n    scenario: \"paywall-22\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_PRICE_COPY\"\n  };\n  return base;\n}\n"
+    },
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/screens/PaywallScreen.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_PRICE_COPY"
+        ],
+        "must_contain": [
+          "priceCopy: \"Plano operacional com fair use\""
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/paywall-22.test.ts": "import { renderPaywall } from \"../src/screens/PaywallScreen.ts\";\n\ntest(\"PaywallScreen satisfies held-out mobile contract 22\", () => {\n  const out = renderPaywall({ tenant: \"t-22\", plan: \"operational\", email: \"ops22@example.com\" });\n  expect(out.scenario).toBe(\"paywall-22\");\n  expect(JSON.stringify(out)).toContain(\"priceCopy\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
+    },
+    "routed_to": "g3-mobile-builder",
+    "expected": {
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
+      "requires_human_review": false,
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
+    }
+  },
+  {
+    "id": "g3-mobile-builder-verify-23",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 23: LeadCaptureForm",
+    "request": "Entregar patch mobile verificável para LeadCaptureForm no cenário lead-23",
+    "artifact_type": "mobile_builder.artifact",
+    "artifact": {
+      "files": {
+        "src/components/LeadCaptureForm.ts": "export function validateLeadForm(input: { tenant: string; plan: string; email?: string }) {\n  const email = input.email || \"\";\n  const result = {\n    screen: \"LeadCaptureForm\",\n    scenario: \"lead-23\",\n    tenant: input.tenant,\n    plan: input.plan,\n    emailValid: email.includes(\"@\"),\n    submitEnabled: email.includes(\"@\") && input.tenant.length > 1\n  };\n  return result;\n}\n"
+      }
+    },
+    "seed": {
+      "src/components/LeadCaptureForm.ts": "export function validateLeadForm(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"LeadCaptureForm\",\n    scenario: \"lead-23\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_EMAIL_VALIDATION\"\n  };\n  return base;\n}\n"
+    },
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/components/LeadCaptureForm.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_EMAIL_VALIDATION"
+        ],
+        "must_contain": [
+          "emailValid: email.includes(\"@\")"
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/lead-23.test.ts": "import { validateLeadForm } from \"../src/components/LeadCaptureForm.ts\";\n\ntest(\"LeadCaptureForm satisfies held-out mobile contract 23\", () => {\n  const out = validateLeadForm({ tenant: \"t-23\", plan: \"operational\", email: \"ops23@example.com\" });\n  expect(out.scenario).toBe(\"lead-23\");\n  expect(JSON.stringify(out)).toContain(\"emailValid\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
+    },
+    "routed_to": "g3-mobile-builder",
+    "expected": {
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
+      "requires_human_review": false,
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
+    }
+  },
+  {
+    "id": "g3-mobile-builder-verify-24",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 24: OfflineSync",
+    "request": "Entregar patch mobile verificável para OfflineSync no cenário offline-24",
+    "artifact_type": "mobile_builder.artifact",
+    "artifact": {
+      "files": {
+        "src/services/offlineSync.ts": "export function syncOfflineQueue(input: { tenant: string; plan: string; email?: string }) {\n  const result = {\n    screen: \"OfflineSync\",\n    scenario: \"offline-24\",\n    tenant: input.tenant,\n    plan: input.plan,\n    retryPolicy: \"exponential-backoff\",\n    maxAttempts: 3,\n    idempotencyKey: input.tenant + \":\" + \"24\"\n  };\n  return result;\n}\n"
+      }
+    },
+    "seed": {
+      "src/services/offlineSync.ts": "export function syncOfflineQueue(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"OfflineSync\",\n    scenario: \"offline-24\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_RETRY_POLICY\"\n  };\n  return base;\n}\n"
+    },
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/services/offlineSync.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_RETRY_POLICY"
+        ],
+        "must_contain": [
+          "retryPolicy: \"exponential-backoff\""
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/offline-24.test.ts": "import { syncOfflineQueue } from \"../src/services/offlineSync.ts\";\n\ntest(\"OfflineSync satisfies held-out mobile contract 24\", () => {\n  const out = syncOfflineQueue({ tenant: \"t-24\", plan: \"operational\", email: \"ops24@example.com\" });\n  expect(out.scenario).toBe(\"offline-24\");\n  expect(JSON.stringify(out)).toContain(\"retryPolicy\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
+    },
+    "routed_to": "g3-mobile-builder",
+    "expected": {
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
+      "requires_human_review": false,
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
+    }
+  },
+  {
+    "id": "g3-mobile-builder-verify-25",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 25: PushConsent",
+    "request": "Entregar patch mobile verificável para PushConsent no cenário push-25",
+    "artifact_type": "mobile_builder.artifact",
+    "artifact": {
+      "files": {
+        "src/services/pushConsent.ts": "export function buildPushConsent(input: { tenant: string; plan: string; email?: string }) {\n  const result = {\n    screen: \"PushConsent\",\n    scenario: \"push-25\",\n    tenant: input.tenant,\n    plan: input.plan,\n    consentCopy: \"Receber alertas operacionais\",\n    readyForStoreReview: true\n  };\n  return result;\n}\n"
+      }
+    },
+    "seed": {
+      "src/services/pushConsent.ts": "export function buildPushConsent(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"PushConsent\",\n    scenario: \"push-25\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_CONSENT_COPY\"\n  };\n  return base;\n}\n"
+    },
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/services/pushConsent.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_CONSENT_COPY"
+        ],
+        "must_contain": [
+          "consentCopy: \"Receber alertas operacionais\""
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/push-25.test.ts": "import { buildPushConsent } from \"../src/services/pushConsent.ts\";\n\ntest(\"PushConsent satisfies held-out mobile contract 25\", () => {\n  const out = buildPushConsent({ tenant: \"t-25\", plan: \"operational\", email: \"ops25@example.com\" });\n  expect(out.scenario).toBe(\"push-25\");\n  expect(JSON.stringify(out)).toContain(\"consentCopy\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
+    },
+    "routed_to": "g3-mobile-builder",
+    "expected": {
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
+      "requires_human_review": false,
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
+    }
+  },
+  {
+    "id": "g3-mobile-builder-verify-26",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 26: OnboardingScreen",
+    "request": "Entregar patch mobile verificável para OnboardingScreen no cenário onboarding-26",
+    "artifact_type": "mobile_builder.artifact",
+    "artifact": {
+      "files": {
+        "src/screens/OnboardingScreen.ts": "export function renderOnboarding(input: { tenant: string; plan: string; email?: string }) {\n  const result = {\n    screen: \"OnboardingScreen\",\n    scenario: \"onboarding-26\",\n    tenant: input.tenant,\n    plan: input.plan,\n    accessibilityLabel: \"Começar diagnóstico\",\n    readyForStoreReview: true\n  };\n  return result;\n}\n"
+      }
+    },
+    "seed": {
+      "src/screens/OnboardingScreen.ts": "export function renderOnboarding(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"OnboardingScreen\",\n    scenario: \"onboarding-26\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_ACCESSIBLE_LABEL\"\n  };\n  return base;\n}\n"
+    },
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/screens/OnboardingScreen.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_ACCESSIBLE_LABEL"
+        ],
+        "must_contain": [
+          "accessibilityLabel: \"Começar diagnóstico\""
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/onboarding-26.test.ts": "import { renderOnboarding } from \"../src/screens/OnboardingScreen.ts\";\n\ntest(\"OnboardingScreen satisfies held-out mobile contract 26\", () => {\n  const out = renderOnboarding({ tenant: \"t-26\", plan: \"operational\", email: \"ops26@example.com\" });\n  expect(out.scenario).toBe(\"onboarding-26\");\n  expect(JSON.stringify(out)).toContain(\"accessibilityLabel\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
+    },
+    "routed_to": "g3-mobile-builder",
+    "expected": {
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
+      "requires_human_review": false,
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
+    }
+  },
+  {
+    "id": "g3-mobile-builder-verify-27",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 27: PaywallScreen",
+    "request": "Entregar patch mobile verificável para PaywallScreen no cenário paywall-27",
+    "artifact_type": "mobile_builder.artifact",
+    "artifact": {
+      "files": {
+        "src/screens/PaywallScreen.ts": "export function renderPaywall(input: { tenant: string; plan: string; email?: string }) {\n  const result = {\n    screen: \"PaywallScreen\",\n    scenario: \"paywall-27\",\n    tenant: input.tenant,\n    plan: input.plan,\n    priceCopy: \"Plano operacional com fair use\",\n    readyForStoreReview: true\n  };\n  return result;\n}\n"
+      }
+    },
+    "seed": {
+      "src/screens/PaywallScreen.ts": "export function renderPaywall(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"PaywallScreen\",\n    scenario: \"paywall-27\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_PRICE_COPY\"\n  };\n  return base;\n}\n"
+    },
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/screens/PaywallScreen.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_PRICE_COPY"
+        ],
+        "must_contain": [
+          "priceCopy: \"Plano operacional com fair use\""
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/paywall-27.test.ts": "import { renderPaywall } from \"../src/screens/PaywallScreen.ts\";\n\ntest(\"PaywallScreen satisfies held-out mobile contract 27\", () => {\n  const out = renderPaywall({ tenant: \"t-27\", plan: \"operational\", email: \"ops27@example.com\" });\n  expect(out.scenario).toBe(\"paywall-27\");\n  expect(JSON.stringify(out)).toContain(\"priceCopy\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
+    },
+    "routed_to": "g3-mobile-builder",
+    "expected": {
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
+      "requires_human_review": false,
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
+    }
+  },
+  {
+    "id": "g3-mobile-builder-verify-28",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 28: LeadCaptureForm",
+    "request": "Entregar patch mobile verificável para LeadCaptureForm no cenário lead-28",
+    "artifact_type": "mobile_builder.artifact",
+    "artifact": {
+      "files": {
+        "src/components/LeadCaptureForm.ts": "export function validateLeadForm(input: { tenant: string; plan: string; email?: string }) {\n  const email = input.email || \"\";\n  const result = {\n    screen: \"LeadCaptureForm\",\n    scenario: \"lead-28\",\n    tenant: input.tenant,\n    plan: input.plan,\n    emailValid: email.includes(\"@\"),\n    submitEnabled: email.includes(\"@\") && input.tenant.length > 1\n  };\n  return result;\n}\n"
+      }
+    },
+    "seed": {
+      "src/components/LeadCaptureForm.ts": "export function validateLeadForm(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"LeadCaptureForm\",\n    scenario: \"lead-28\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_EMAIL_VALIDATION\"\n  };\n  return base;\n}\n"
+    },
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/components/LeadCaptureForm.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_EMAIL_VALIDATION"
+        ],
+        "must_contain": [
+          "emailValid: email.includes(\"@\")"
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/lead-28.test.ts": "import { validateLeadForm } from \"../src/components/LeadCaptureForm.ts\";\n\ntest(\"LeadCaptureForm satisfies held-out mobile contract 28\", () => {\n  const out = validateLeadForm({ tenant: \"t-28\", plan: \"operational\", email: \"ops28@example.com\" });\n  expect(out.scenario).toBe(\"lead-28\");\n  expect(JSON.stringify(out)).toContain(\"emailValid\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
+    },
+    "routed_to": "g3-mobile-builder",
+    "expected": {
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
+      "requires_human_review": false,
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
+    }
+  },
+  {
+    "id": "g3-mobile-builder-verify-29",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 29: OfflineSync",
+    "request": "Entregar patch mobile verificável para OfflineSync no cenário offline-29",
+    "artifact_type": "mobile_builder.artifact",
+    "artifact": {
+      "files": {
+        "src/services/offlineSync.ts": "export function syncOfflineQueue(input: { tenant: string; plan: string; email?: string }) {\n  const result = {\n    screen: \"OfflineSync\",\n    scenario: \"offline-29\",\n    tenant: input.tenant,\n    plan: input.plan,\n    retryPolicy: \"exponential-backoff\",\n    maxAttempts: 3,\n    idempotencyKey: input.tenant + \":\" + \"29\"\n  };\n  return result;\n}\n"
+      }
+    },
+    "seed": {
+      "src/services/offlineSync.ts": "export function syncOfflineQueue(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"OfflineSync\",\n    scenario: \"offline-29\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_RETRY_POLICY\"\n  };\n  return base;\n}\n"
+    },
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/services/offlineSync.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_RETRY_POLICY"
+        ],
+        "must_contain": [
+          "retryPolicy: \"exponential-backoff\""
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/offline-29.test.ts": "import { syncOfflineQueue } from \"../src/services/offlineSync.ts\";\n\ntest(\"OfflineSync satisfies held-out mobile contract 29\", () => {\n  const out = syncOfflineQueue({ tenant: \"t-29\", plan: \"operational\", email: \"ops29@example.com\" });\n  expect(out.scenario).toBe(\"offline-29\");\n  expect(JSON.stringify(out)).toContain(\"retryPolicy\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
+    },
+    "routed_to": "g3-mobile-builder",
+    "expected": {
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
+      "requires_human_review": false,
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
+    }
+  },
+  {
+    "id": "g3-mobile-builder-verify-30",
+    "desc": "VERIFY-IN-EVAL F4d mobile held-out 30: PushConsent",
+    "request": "Entregar patch mobile verificável para PushConsent no cenário push-30",
+    "artifact_type": "mobile_builder.artifact",
+    "artifact": {
+      "files": {
+        "src/services/pushConsent.ts": "export function buildPushConsent(input: { tenant: string; plan: string; email?: string }) {\n  const result = {\n    screen: \"PushConsent\",\n    scenario: \"push-30\",\n    tenant: input.tenant,\n    plan: input.plan,\n    consentCopy: \"Receber alertas operacionais\",\n    readyForStoreReview: true\n  };\n  return result;\n}\n"
+      }
+    },
+    "seed": {
+      "src/services/pushConsent.ts": "export function buildPushConsent(input: { tenant: string; plan: string; email?: string }) {\n  const base = {\n    screen: \"PushConsent\",\n    scenario: \"push-30\",\n    tenant: input.tenant,\n    plan: input.plan,\n    marker: \"TODO_CONSENT_COPY\"\n  };\n  return base;\n}\n"
+    },
+    "oracle": {
+      "runtime": "node",
+      "bug_file": "src/services/pushConsent.ts",
+      "bug_markers": {
+        "must_remove": [
+          "TODO_CONSENT_COPY"
+        ],
+        "must_contain": [
+          "consentCopy: \"Receber alertas operacionais\""
+        ]
+      },
+      "protected_files": {},
+      "heldout_files": {
+        "__tests__/push-30.test.ts": "import { buildPushConsent } from \"../src/services/pushConsent.ts\";\n\ntest(\"PushConsent satisfies held-out mobile contract 30\", () => {\n  const out = buildPushConsent({ tenant: \"t-30\", plan: \"operational\", email: \"ops30@example.com\" });\n  expect(out.scenario).toBe(\"push-30\");\n  expect(JSON.stringify(out)).toContain(\"consentCopy\");\n});\n"
+      },
+      "test_cmd": "npm test -- --runInBand"
+    },
+    "routed_to": "g3-mobile-builder",
+    "expected": {
+      "handler_kind": "spec_executor",
+      "status": "verified_static",
+      "requires_human_review": false,
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "artifact_parseable": true,
+      "touches_bug_file": true,
+      "bug_addressed": true,
+      "protected_unmodified": true,
+      "heldout_untouched": true,
+      "result_parses": true,
+      "no_test_gaming": true,
+      "tests_pass": "UNVERIFIED"
     }
   }
 ]

@@ -51,8 +51,19 @@ STRUCT_NECESSARIOS = ["artifact_parseable", "target_present", "doc_parses", "fie
                       "timeline_ordered", "durations_valid", "rollback_documented",
                       "followups_actionable", "no_placeholder_gaming"]
 
+# Natureza BROWSER/E2E (F4c — g4-e2e-playwright): o artefato é uma suíte Playwright. Neste
+# slice o oráculo checa apenas os necessários estáticos que tornam a suíte auditável: teste alvo,
+# uso explícito de Playwright, cobertura de rotas/assertions held-out e evidência configurada
+# (trace/screenshot/video). SEM browser real no gate offline: delivered_ok sempre False.
+BROWSER_NECESSARIOS = ["artifact_parseable", "target_present", "uses_playwright",
+                       "routes_covered", "assertions_present", "evidence_configured",
+                       "no_browser_gaming"]
+
 # Placeholders que delatam preenchimento formal vazio (anti-gaming estrutural).
 _PLACEHOLDER_TOKENS = ("TODO", "TBD", "FIXME", "XXX", "PLACEHOLDER", "PREENCHER", "LOREM", "<INSIRA")
+
+_BROWSER_GAMING_TOKENS = ("test.skip(", "test.only(", "describe.skip(", "describe.only(",
+                          "page.route(", "browser.route(", "route.fulfill(")
 
 # Marcadores de burla de teste (anti-gaming) — escrita defensiva, não exaustiva.
 # Python (pytest/unittest) + JS/TS (vitest/jest): a natureza build do frontend (F3) executa
@@ -317,6 +328,68 @@ def _nonempty(v) -> bool:
     if isinstance(v, (list, dict)):
         return bool(v)
     return v is not None
+
+
+def verify_browser(artifact: dict, oracle: dict) -> dict:
+    """Oráculo OFFLINE de suíte BROWSER/E2E (F4c — g4-e2e-playwright).
+
+    O critério fica em `oracle["browser"]` e é held-out ao agente:
+      target              — arquivo de teste Playwright esperado (ex.: tests/onboarding.spec.ts)
+      required_routes     — rotas/URLs que precisam aparecer em `page.goto(...)`
+      required_assertions — textos ou seletores que precisam ser assertados com `expect(...)`
+      evidence            — evidências exigidas: trace/screenshot/video
+
+    Este é um predicado NECESSÁRIO-não-suficiente: uma suíte bem formada ainda precisa rodar em
+    browser real para provar produto funcionando. Por isso `tests_pass="N/A"` e
+    `delivered_ok=False` neste slice offline.
+    """
+    br = (oracle or {}).get("browser") or {}
+    sig = {k: False for k in BROWSER_NECESSARIOS}
+
+    files = artifact.get("files") if isinstance(artifact, dict) else None
+    sig["artifact_parseable"] = isinstance(files, dict) and bool(files) \
+        and all(isinstance(k, str) and isinstance(v, str) for k, v in files.items())
+
+    target = br.get("target")
+    body = ""
+    if sig["artifact_parseable"]:
+        sig["target_present"] = bool(target) and target in files
+        if sig["target_present"]:
+            body = files[target]
+
+    if body:
+        sig["uses_playwright"] = "@playwright/test" in body and "test(" in body and "expect(" in body
+        sig["routes_covered"] = all(str(route) in body for route in (br.get("required_routes") or []))
+        sig["assertions_present"] = all(str(assertion) in body for assertion in (br.get("required_assertions") or []))
+
+        all_text = "\n".join(files.values())
+        evidence = br.get("evidence") or []
+        ev_ok = True
+        for ev in evidence:
+            ev = str(ev).lower()
+            lower = all_text.lower()
+            if ev == "trace":
+                ev_ok = ev_ok and ("trace:" in lower and "trace: 'off'" not in lower
+                                   and 'trace: "off"' not in lower)
+            elif ev == "screenshot":
+                ev_ok = ev_ok and ("page.screenshot" in all_text or
+                                   (("screenshot:" in lower) and "screenshot: 'off'" not in lower
+                                    and 'screenshot: "off"' not in lower))
+            elif ev == "video":
+                ev_ok = ev_ok and ("video:" in lower and "video: 'off'" not in lower
+                                   and 'video: "off"' not in lower)
+            else:
+                ev_ok = False
+        sig["evidence_configured"] = bool(evidence) and ev_ok
+
+        upper = [s.upper() for s in _walk_strings(files)]
+        sig["no_browser_gaming"] = not any(tok in body for tok in _BROWSER_GAMING_TOKENS) \
+            and not any(tok in s for s in upper for tok in _PLACEHOLDER_TOKENS)
+
+    static_ok = all(sig[k] for k in BROWSER_NECESSARIOS)
+    first_fail = next((k for k in BROWSER_NECESSARIOS if not sig[k]), None)
+    return {"signals": sig, "static_ok": static_ok, "first_fail": first_fail,
+            "tests_pass": "N/A", "delivered_ok": False}
 
 
 def verify_structure(artifact: dict, oracle: dict) -> dict:

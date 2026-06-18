@@ -22,6 +22,9 @@ _SIGNAL_KEYS = (
     # estrutural (F4b — incident-responder)
     "target_present", "doc_parses", "fields_complete", "timeline_ordered", "durations_valid",
     "rollback_documented", "followups_actionable", "no_placeholder_gaming",
+    # browser/e2e (F4c — g4-e2e-playwright)
+    "uses_playwright", "routes_covered", "assertions_present", "evidence_configured",
+    "no_browser_gaming",
     "handler_kind", "status", "requires_human_review",
 )
 

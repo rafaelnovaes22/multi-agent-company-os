@@ -38,7 +38,6 @@
     "g3-mobile-builder",
     "g3-planner",
     "g3-refactorer",
-    "g4-e2e-playwright",
     "g4-eval-case-author",
     "g4-prompt-eval",
     "g4-quality-supervisor",

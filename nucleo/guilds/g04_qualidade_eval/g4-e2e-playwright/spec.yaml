@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: AUTONOMOUS
-act_handler: spec_driven
+act_handler: spec_executor
 outcome_clause:
   statement: 'Testes E2E de UI entrega e2e_playwright.artifact verificável para: validar
     de ponta a ponta os fluxos de UI que humanos usam, garantindo que a camada onde

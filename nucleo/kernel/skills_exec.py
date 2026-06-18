@@ -13,7 +13,8 @@ porque sem executar não se afirma correção. F2 (runner Linux+Docker) adiciona
 from __future__ import annotations
 
 from .skills import register, _tokens, _spec_citations
-from .verification import verify_code, verify_structure, NECESSARIOS, STRUCT_NECESSARIOS
+from .verification import (BROWSER_NECESSARIOS, NECESSARIOS, STRUCT_NECESSARIOS,
+                           verify_browser, verify_code, verify_structure)
 from .execution import get_executor
 
 
@@ -40,7 +41,10 @@ def spec_executor(state, *, llm, store, spec):
 
     # Roteia pela natureza do oráculo: structure ⇒ verificação estrutural (sem execução);
     # senão code-exec (default InertExecutor offline; a F2 pluga o DockerExecutor sem tocar aqui).
-    if oracle.get("structure"):
+    if oracle.get("browser"):
+        v = verify_browser(artifact, oracle)
+        signal_keys = BROWSER_NECESSARIOS
+    elif oracle.get("structure"):
         v = verify_structure(artifact, oracle)
         signal_keys = STRUCT_NECESSARIOS
     else:

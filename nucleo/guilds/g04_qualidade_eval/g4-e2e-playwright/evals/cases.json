@@ -1,902 +1,1197 @@
 [
   {
-    "id": "g4-e2e-playwright-01",
-    "desc": "Testes E2E de UI caso 1: risco low, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 1",
+    "id": "g4-e2e-playwright-vie-01",
+    "desc": "suíte Playwright cobre signup→dashboard com evidência (signup-happy)",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 01",
     "artifact_type": "e2e_playwright.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
     "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "build",
-      "review"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 1
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('signup-happy', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/signup-happy.png', fullPage: true });\n  // evidencia do cenário signup-happy: trace + screenshot\n});\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
     },
     "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "build"
-      ]
+      "handler_kind": "spec_executor",
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "status": "verified_static",
+      "requires_human_review": false
     }
   },
   {
-    "id": "g4-e2e-playwright-02",
-    "desc": "Testes E2E de UI caso 2: risco medium, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 2",
+    "id": "g4-e2e-playwright-vie-02",
+    "desc": "suíte Playwright cobre signup→dashboard com evidência (signup-mobile)",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 02",
     "artifact_type": "e2e_playwright.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
     "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "review",
-      "route"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 2
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('signup-mobile', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/signup-mobile.png', fullPage: true });\n  // evidencia do cenário signup-mobile: trace + screenshot\n});\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
     },
     "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "review"
-      ]
+      "handler_kind": "spec_executor",
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "status": "verified_static",
+      "requires_human_review": false
     }
   },
   {
-    "id": "g4-e2e-playwright-03",
-    "desc": "Testes E2E de UI caso 3: risco high, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 3",
+    "id": "g4-e2e-playwright-vie-03",
+    "desc": "suíte Playwright cobre signup→dashboard com evidência (signup-returning)",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 03",
     "artifact_type": "e2e_playwright.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
     "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "route",
-      "verify"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 3
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('signup-returning', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/signup-returning.png', fullPage: true });\n  // evidencia do cenário signup-returning: trace + screenshot\n});\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
     },
     "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "high",
+      "handler_kind": "spec_executor",
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "status": "verified_static",
+      "requires_human_review": false
+    }
+  },
+  {
+    "id": "g4-e2e-playwright-vie-04",
+    "desc": "suíte Playwright cobre signup→dashboard com evidência (trial-start)",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 04",
+    "artifact_type": "e2e_playwright.artifact",
+    "routed_to": "g4-e2e-playwright",
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('trial-start', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/trial-start.png', fullPage: true });\n  // evidencia do cenário trial-start: trace + screenshot\n});\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
+    },
+    "expected": {
+      "handler_kind": "spec_executor",
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "status": "verified_static",
+      "requires_human_review": false
+    }
+  },
+  {
+    "id": "g4-e2e-playwright-vie-05",
+    "desc": "suíte Playwright cobre signup→dashboard com evidência (activation-basic)",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 05",
+    "artifact_type": "e2e_playwright.artifact",
+    "routed_to": "g4-e2e-playwright",
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('activation-basic', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/activation-basic.png', fullPage: true });\n  // evidencia do cenário activation-basic: trace + screenshot\n});\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
+    },
+    "expected": {
+      "handler_kind": "spec_executor",
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "status": "verified_static",
+      "requires_human_review": false
+    }
+  },
+  {
+    "id": "g4-e2e-playwright-vie-06",
+    "desc": "suíte Playwright cobre signup→dashboard com evidência (activation-ops)",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 06",
+    "artifact_type": "e2e_playwright.artifact",
+    "routed_to": "g4-e2e-playwright",
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('activation-ops', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/activation-ops.png', fullPage: true });\n  // evidencia do cenário activation-ops: trace + screenshot\n});\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
+    },
+    "expected": {
+      "handler_kind": "spec_executor",
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "status": "verified_static",
+      "requires_human_review": false
+    }
+  },
+  {
+    "id": "g4-e2e-playwright-vie-07",
+    "desc": "suíte Playwright cobre signup→dashboard com evidência (activation-finance)",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 07",
+    "artifact_type": "e2e_playwright.artifact",
+    "routed_to": "g4-e2e-playwright",
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('activation-finance', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/activation-finance.png', fullPage: true });\n  // evidencia do cenário activation-finance: trace + screenshot\n});\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
+    },
+    "expected": {
+      "handler_kind": "spec_executor",
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "status": "verified_static",
+      "requires_human_review": false
+    }
+  },
+  {
+    "id": "g4-e2e-playwright-vie-08",
+    "desc": "suíte Playwright cobre signup→dashboard com evidência (activation-public)",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 08",
+    "artifact_type": "e2e_playwright.artifact",
+    "routed_to": "g4-e2e-playwright",
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('activation-public', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/activation-public.png', fullPage: true });\n  // evidencia do cenário activation-public: trace + screenshot\n});\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
+    },
+    "expected": {
+      "handler_kind": "spec_executor",
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "status": "verified_static",
+      "requires_human_review": false
+    }
+  },
+  {
+    "id": "g4-e2e-playwright-vie-09",
+    "desc": "artefato em prosa sem files reprova parse",
+    "request": "Verificar suíte Playwright inválida",
+    "artifact_type": "e2e_playwright.artifact",
+    "routed_to": "g4-e2e-playwright",
+    "artifact": {
+      "summary": "roteiro em prosa"
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
+    },
+    "expected": {
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "delivered_ok": false,
+      "first_fail": "artifact_parseable",
+      "status": "rejected:artifact_parseable",
+      "requires_human_review": true
+    }
+  },
+  {
+    "id": "g4-e2e-playwright-vie-10",
+    "desc": "arquivo alvo ausente reprova target_present",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 10",
+    "artifact_type": "e2e_playwright.artifact",
+    "routed_to": "g4-e2e-playwright",
+    "artifact": {
+      "files": {
+        "tests/outro.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('wrong-target', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/wrong-target.png', fullPage: true });\n});\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
+    },
+    "expected": {
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "delivered_ok": false,
+      "first_fail": "target_present",
+      "status": "rejected:target_present",
       "requires_human_review": true,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "route"
-      ]
+      "artifact_parseable": true
     }
   },
   {
-    "id": "g4-e2e-playwright-04",
-    "desc": "Testes E2E de UI caso 4: risco critical, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 4",
+    "id": "g4-e2e-playwright-vie-11",
+    "desc": "sem import @playwright/test reprova uses_playwright",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 11",
     "artifact_type": "e2e_playwright.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
     "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "verify",
-      "remediate"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 4
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "test('x', async ({ page }) => { await page.goto('/signup'); });\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
     },
     "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "critical",
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "delivered_ok": false,
+      "first_fail": "uses_playwright",
+      "status": "rejected:uses_playwright",
       "requires_human_review": true,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "verify"
-      ]
+      "artifact_parseable": true,
+      "target_present": true
     }
   },
   {
-    "id": "g4-e2e-playwright-05",
-    "desc": "Testes E2E de UI caso 5: risco low, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 5",
+    "id": "g4-e2e-playwright-vie-12",
+    "desc": "sem test() explícito reprova uses_playwright",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 12",
     "artifact_type": "e2e_playwright.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
     "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "remediate",
-      "plan"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 5
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { expect } from '@playwright/test';\nawait expect(true).toBeTruthy();\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
     },
     "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "remediate"
-      ]
-    }
-  },
-  {
-    "id": "g4-e2e-playwright-06",
-    "desc": "Testes E2E de UI caso 6: risco medium, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 6",
-    "artifact_type": "e2e_playwright.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "plan",
-      "build"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 6
-    },
-    "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "plan"
-      ]
-    }
-  },
-  {
-    "id": "g4-e2e-playwright-07",
-    "desc": "Testes E2E de UI caso 7: risco high, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 7",
-    "artifact_type": "e2e_playwright.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "build",
-      "review"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 7
-    },
-    "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "high",
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "delivered_ok": false,
+      "first_fail": "uses_playwright",
+      "status": "rejected:uses_playwright",
       "requires_human_review": true,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "build"
-      ]
+      "artifact_parseable": true,
+      "target_present": true
     }
   },
   {
-    "id": "g4-e2e-playwright-08",
-    "desc": "Testes E2E de UI caso 8: risco critical, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 8",
+    "id": "g4-e2e-playwright-vie-13",
+    "desc": "não visita dashboard reprova routes_covered",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 13",
     "artifact_type": "e2e_playwright.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
     "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "review",
-      "route"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 8
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('missing-dashboard', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/missing-dashboard.png', fullPage: true });\n});\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
     },
     "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "critical",
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "delivered_ok": false,
+      "first_fail": "routes_covered",
+      "status": "rejected:routes_covered",
       "requires_human_review": true,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "review"
-      ]
+      "artifact_parseable": true,
+      "target_present": true,
+      "uses_playwright": true
     }
   },
   {
-    "id": "g4-e2e-playwright-09",
-    "desc": "Testes E2E de UI caso 9: risco low, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 9",
+    "id": "g4-e2e-playwright-vie-14",
+    "desc": "não visita signup reprova routes_covered",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 14",
     "artifact_type": "e2e_playwright.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
     "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "route",
-      "verify"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 9
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('missing-signup', async ({ page }) => {\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/missing-signup.png', fullPage: true });\n});\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
     },
     "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "route"
-      ]
-    }
-  },
-  {
-    "id": "g4-e2e-playwright-10",
-    "desc": "Testes E2E de UI caso 10: risco medium, bloqueio",
-    "request": "Executar Testes E2E de UI para cenário sintético 10",
-    "artifact_type": "e2e_playwright.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
-    "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "verify",
-      "remediate"
-    ],
-    "signals": {
-      "blocked": true,
-      "case_index": 10
-    },
-    "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "verify"
-      ]
-    }
-  },
-  {
-    "id": "g4-e2e-playwright-11",
-    "desc": "Testes E2E de UI caso 11: risco high, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 11",
-    "artifact_type": "e2e_playwright.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "remediate",
-      "plan"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 11
-    },
-    "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "high",
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "delivered_ok": false,
+      "first_fail": "routes_covered",
+      "status": "rejected:routes_covered",
       "requires_human_review": true,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "remediate"
-      ]
+      "artifact_parseable": true,
+      "target_present": true,
+      "uses_playwright": true
     }
   },
   {
-    "id": "g4-e2e-playwright-12",
-    "desc": "Testes E2E de UI caso 12: risco critical, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 12",
+    "id": "g4-e2e-playwright-vie-15",
+    "desc": "assertion de texto ausente reprova assertions_present",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 15",
     "artifact_type": "e2e_playwright.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
     "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "plan",
-      "build"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 12
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('missing-text', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Olá')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/missing-text.png', fullPage: true });\n});\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
     },
     "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "critical",
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "delivered_ok": false,
+      "first_fail": "assertions_present",
+      "status": "rejected:assertions_present",
       "requires_human_review": true,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "plan"
-      ]
+      "artifact_parseable": true,
+      "target_present": true,
+      "uses_playwright": true,
+      "routes_covered": true
     }
   },
   {
-    "id": "g4-e2e-playwright-13",
-    "desc": "Testes E2E de UI caso 13: risco low, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 13",
+    "id": "g4-e2e-playwright-vie-16",
+    "desc": "assertion de seletor ausente reprova assertions_present",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 16",
     "artifact_type": "e2e_playwright.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
     "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "build",
-      "review"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 13
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('missing-selector', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=partial]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/missing-selector.png', fullPage: true });\n});\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
     },
     "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "build"
-      ]
-    }
-  },
-  {
-    "id": "g4-e2e-playwright-14",
-    "desc": "Testes E2E de UI caso 14: risco medium, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 14",
-    "artifact_type": "e2e_playwright.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "review",
-      "route"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 14
-    },
-    "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "review"
-      ]
-    }
-  },
-  {
-    "id": "g4-e2e-playwright-15",
-    "desc": "Testes E2E de UI caso 15: risco high, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 15",
-    "artifact_type": "e2e_playwright.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "route",
-      "verify"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 15
-    },
-    "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "high",
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "delivered_ok": false,
+      "first_fail": "assertions_present",
+      "status": "rejected:assertions_present",
       "requires_human_review": true,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "route"
-      ]
+      "artifact_parseable": true,
+      "target_present": true,
+      "uses_playwright": true,
+      "routes_covered": true
     }
   },
   {
-    "id": "g4-e2e-playwright-16",
-    "desc": "Testes E2E de UI caso 16: risco critical, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 16",
+    "id": "g4-e2e-playwright-vie-17",
+    "desc": "sem config/trace reprova evidence_configured",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 17",
     "artifact_type": "e2e_playwright.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
     "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "verify",
-      "remediate"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 16
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('no-trace', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/no-trace.png', fullPage: true });\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
     },
     "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "critical",
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "delivered_ok": false,
+      "first_fail": "evidence_configured",
+      "status": "rejected:evidence_configured",
       "requires_human_review": true,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "verify"
-      ]
+      "artifact_parseable": true,
+      "target_present": true,
+      "uses_playwright": true,
+      "routes_covered": true,
+      "assertions_present": true
     }
   },
   {
-    "id": "g4-e2e-playwright-17",
-    "desc": "Testes E2E de UI caso 17: risco low, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 17",
+    "id": "g4-e2e-playwright-vie-18",
+    "desc": "sem screenshot reprova evidence_configured",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 18",
     "artifact_type": "e2e_playwright.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
     "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "remediate",
-      "plan"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 17
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('no-shot', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n});\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'off', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
     },
     "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "remediate"
-      ]
-    }
-  },
-  {
-    "id": "g4-e2e-playwright-18",
-    "desc": "Testes E2E de UI caso 18: risco medium, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 18",
-    "artifact_type": "e2e_playwright.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "plan",
-      "build"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 18
-    },
-    "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "plan"
-      ]
-    }
-  },
-  {
-    "id": "g4-e2e-playwright-19",
-    "desc": "Testes E2E de UI caso 19: risco high, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 19",
-    "artifact_type": "e2e_playwright.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "build",
-      "review"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 19
-    },
-    "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "high",
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "delivered_ok": false,
+      "first_fail": "evidence_configured",
+      "status": "rejected:evidence_configured",
       "requires_human_review": true,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "build"
-      ]
+      "artifact_parseable": true,
+      "target_present": true,
+      "uses_playwright": true,
+      "routes_covered": true,
+      "assertions_present": true
     }
   },
   {
-    "id": "g4-e2e-playwright-20",
-    "desc": "Testes E2E de UI caso 20: risco critical, bloqueio",
-    "request": "Executar Testes E2E de UI para cenário sintético 20",
+    "id": "g4-e2e-playwright-vie-19",
+    "desc": "test.skip reprova anti-gaming",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 19",
     "artifact_type": "e2e_playwright.artifact",
-    "risk": "critical",
-    "blocked": true,
-    "requires_human_review": true,
     "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "review",
-      "route"
-    ],
-    "signals": {
-      "blocked": true,
-      "case_index": 20
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('skip', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/skip.png', fullPage: true });\n});\n\ntest.skip('não roda', async () => {});\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
     },
     "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "blocked",
-      "risk": "critical",
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "delivered_ok": false,
+      "first_fail": "no_browser_gaming",
+      "status": "rejected:no_browser_gaming",
       "requires_human_review": true,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "review"
-      ]
+      "artifact_parseable": true,
+      "target_present": true,
+      "uses_playwright": true,
+      "routes_covered": true,
+      "assertions_present": true,
+      "evidence_configured": true
     }
   },
   {
-    "id": "g4-e2e-playwright-21",
-    "desc": "Testes E2E de UI caso 21: risco low, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 21",
+    "id": "g4-e2e-playwright-vie-20",
+    "desc": "test.only reprova anti-gaming",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 20",
     "artifact_type": "e2e_playwright.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
     "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "route",
-      "verify"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 21
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('only', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/only.png', fullPage: true });\n});\n\ntest.only('só este', async () => {});\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
     },
     "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "route"
-      ]
-    }
-  },
-  {
-    "id": "g4-e2e-playwright-22",
-    "desc": "Testes E2E de UI caso 22: risco medium, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 22",
-    "artifact_type": "e2e_playwright.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "verify",
-      "remediate"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 22
-    },
-    "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "verify"
-      ]
-    }
-  },
-  {
-    "id": "g4-e2e-playwright-23",
-    "desc": "Testes E2E de UI caso 23: risco high, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 23",
-    "artifact_type": "e2e_playwright.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "remediate",
-      "plan"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 23
-    },
-    "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "high",
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "delivered_ok": false,
+      "first_fail": "no_browser_gaming",
+      "status": "rejected:no_browser_gaming",
       "requires_human_review": true,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "remediate"
-      ]
+      "artifact_parseable": true,
+      "target_present": true,
+      "uses_playwright": true,
+      "routes_covered": true,
+      "assertions_present": true,
+      "evidence_configured": true
     }
   },
   {
-    "id": "g4-e2e-playwright-24",
-    "desc": "Testes E2E de UI caso 24: risco critical, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 24",
+    "id": "g4-e2e-playwright-vie-21",
+    "desc": "page.route reprova mock de browser",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 21",
     "artifact_type": "e2e_playwright.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
     "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "plan",
-      "build"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 24
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('mock-route', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/mock-route.png', fullPage: true });\n  await page.route('**/api/**', route => route.fulfill({ status: 200 }));\n});\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
     },
     "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "critical",
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "delivered_ok": false,
+      "first_fail": "no_browser_gaming",
+      "status": "rejected:no_browser_gaming",
       "requires_human_review": true,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "plan"
-      ]
+      "artifact_parseable": true,
+      "target_present": true,
+      "uses_playwright": true,
+      "routes_covered": true,
+      "assertions_present": true,
+      "evidence_configured": true
     }
   },
   {
-    "id": "g4-e2e-playwright-25",
-    "desc": "Testes E2E de UI caso 25: risco low, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 25",
+    "id": "g4-e2e-playwright-vie-22",
+    "desc": "placeholder TODO reprova anti-gaming",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 22",
     "artifact_type": "e2e_playwright.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
     "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "build",
-      "review"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 25
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('todo', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/todo.png', fullPage: true });\n});\n\n// TODO: preencher depois\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
     },
     "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "build"
-      ]
-    }
-  },
-  {
-    "id": "g4-e2e-playwright-26",
-    "desc": "Testes E2E de UI caso 26: risco medium, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 26",
-    "artifact_type": "e2e_playwright.artifact",
-    "risk": "medium",
-    "blocked": false,
-    "requires_human_review": false,
-    "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "review",
-      "route"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 26
-    },
-    "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "review"
-      ]
-    }
-  },
-  {
-    "id": "g4-e2e-playwright-27",
-    "desc": "Testes E2E de UI caso 27: risco high, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 27",
-    "artifact_type": "e2e_playwright.artifact",
-    "risk": "high",
-    "blocked": false,
-    "requires_human_review": true,
-    "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "route",
-      "verify"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 27
-    },
-    "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "high",
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "delivered_ok": false,
+      "first_fail": "no_browser_gaming",
+      "status": "rejected:no_browser_gaming",
       "requires_human_review": true,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "route"
-      ]
+      "artifact_parseable": true,
+      "target_present": true,
+      "uses_playwright": true,
+      "routes_covered": true,
+      "assertions_present": true,
+      "evidence_configured": true
     }
   },
   {
-    "id": "g4-e2e-playwright-28",
-    "desc": "Testes E2E de UI caso 28: risco critical, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 28",
+    "id": "g4-e2e-playwright-vie-23",
+    "desc": "route.fulfill reprova stub explícito",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 23",
     "artifact_type": "e2e_playwright.artifact",
-    "risk": "critical",
-    "blocked": false,
-    "requires_human_review": true,
     "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "verify",
-      "remediate"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 28
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('fulfill', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/fulfill.png', fullPage: true });\n  // route.fulfill({ status: 200 }) não pode substituir produto real\n});\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
     },
     "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "critical",
+      "handler_kind": "spec_executor",
+      "static_ok": false,
+      "delivered_ok": false,
+      "first_fail": "no_browser_gaming",
+      "status": "rejected:no_browser_gaming",
       "requires_human_review": true,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "verify"
-      ]
+      "artifact_parseable": true,
+      "target_present": true,
+      "uses_playwright": true,
+      "routes_covered": true,
+      "assertions_present": true,
+      "evidence_configured": true
     }
   },
   {
-    "id": "g4-e2e-playwright-29",
-    "desc": "Testes E2E de UI caso 29: risco low, ready",
-    "request": "Executar Testes E2E de UI para cenário sintético 29",
+    "id": "g4-e2e-playwright-vie-24",
+    "desc": "suíte Playwright positiva com assert extra (activation-billing)",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 24",
     "artifact_type": "e2e_playwright.artifact",
-    "risk": "low",
-    "blocked": false,
-    "requires_human_review": false,
     "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "remediate",
-      "plan"
-    ],
-    "signals": {
-      "blocked": false,
-      "case_index": 29
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('activation-billing', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/activation-billing.png', fullPage: true });\n  await expect(page).toHaveURL(/dashboard/);\n  // fluxo activation-billing mantém trace e screenshot\n});\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
     },
     "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "ready",
-      "risk": "low",
-      "requires_human_review": false,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "remediate"
-      ]
+      "handler_kind": "spec_executor",
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "status": "verified_static",
+      "requires_human_review": false
     }
   },
   {
-    "id": "g4-e2e-playwright-30",
-    "desc": "Testes E2E de UI caso 30: risco medium, bloqueio",
-    "request": "Executar Testes E2E de UI para cenário sintético 30",
+    "id": "g4-e2e-playwright-vie-25",
+    "desc": "suíte Playwright positiva com assert extra (activation-admin)",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 25",
     "artifact_type": "e2e_playwright.artifact",
-    "risk": "medium",
-    "blocked": true,
-    "requires_human_review": false,
     "routed_to": "g4-e2e-playwright",
-    "capabilities": [
-      "plan",
-      "build"
-    ],
-    "signals": {
-      "blocked": true,
-      "case_index": 30
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('activation-admin', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/activation-admin.png', fullPage: true });\n  await expect(page).toHaveURL(/dashboard/);\n  // fluxo activation-admin mantém trace e screenshot\n});\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
     },
     "expected": {
-      "agent_id": "g4-e2e-playwright",
-      "handler_kind": "spec_driven",
-      "artifact_type": "e2e_playwright.artifact",
-      "status": "blocked",
-      "risk": "medium",
-      "requires_human_review": false,
-      "routed_to": "g4-e2e-playwright",
-      "capabilities_any": [
-        "plan"
-      ]
+      "handler_kind": "spec_executor",
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "status": "verified_static",
+      "requires_human_review": false
+    }
+  },
+  {
+    "id": "g4-e2e-playwright-vie-26",
+    "desc": "suíte Playwright positiva com assert extra (activation-collab)",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 26",
+    "artifact_type": "e2e_playwright.artifact",
+    "routed_to": "g4-e2e-playwright",
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('activation-collab', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/activation-collab.png', fullPage: true });\n  await expect(page).toHaveURL(/dashboard/);\n  // fluxo activation-collab mantém trace e screenshot\n});\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
+    },
+    "expected": {
+      "handler_kind": "spec_executor",
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "status": "verified_static",
+      "requires_human_review": false
+    }
+  },
+  {
+    "id": "g4-e2e-playwright-vie-27",
+    "desc": "suíte Playwright positiva com assert extra (activation-invite)",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 27",
+    "artifact_type": "e2e_playwright.artifact",
+    "routed_to": "g4-e2e-playwright",
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('activation-invite', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/activation-invite.png', fullPage: true });\n  await expect(page).toHaveURL(/dashboard/);\n  // fluxo activation-invite mantém trace e screenshot\n});\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
+    },
+    "expected": {
+      "handler_kind": "spec_executor",
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "status": "verified_static",
+      "requires_human_review": false
+    }
+  },
+  {
+    "id": "g4-e2e-playwright-vie-28",
+    "desc": "suíte Playwright positiva com assert extra (activation-csv)",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 28",
+    "artifact_type": "e2e_playwright.artifact",
+    "routed_to": "g4-e2e-playwright",
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('activation-csv', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/activation-csv.png', fullPage: true });\n  await expect(page).toHaveURL(/dashboard/);\n  // fluxo activation-csv mantém trace e screenshot\n});\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
+    },
+    "expected": {
+      "handler_kind": "spec_executor",
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "status": "verified_static",
+      "requires_human_review": false
+    }
+  },
+  {
+    "id": "g4-e2e-playwright-vie-29",
+    "desc": "suíte Playwright positiva com assert extra (activation-empty-state)",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 29",
+    "artifact_type": "e2e_playwright.artifact",
+    "routed_to": "g4-e2e-playwright",
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('activation-empty-state', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/activation-empty-state.png', fullPage: true });\n  await expect(page).toHaveURL(/dashboard/);\n  // fluxo activation-empty-state mantém trace e screenshot\n});\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
+    },
+    "expected": {
+      "handler_kind": "spec_executor",
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "status": "verified_static",
+      "requires_human_review": false
+    }
+  },
+  {
+    "id": "g4-e2e-playwright-vie-30",
+    "desc": "suíte Playwright positiva com assert extra (activation-a11y)",
+    "request": "Verificar suíte Playwright de ativação self-serve — cenário 30",
+    "artifact_type": "e2e_playwright.artifact",
+    "routed_to": "g4-e2e-playwright",
+    "artifact": {
+      "files": {
+        "tests/onboarding.spec.ts": "import { test, expect } from '@playwright/test';\n\ntest('activation-a11y', async ({ page }) => {\n  await page.goto('/signup');\n  await expect(page.getByText('Bem-vindo')).toBeVisible();\n  await page.getByRole('button', { name: 'Começar' }).click();\n  await page.goto('/dashboard');\n  await expect(page.locator('[data-testid=activation-complete]')).toBeVisible();\n  await page.screenshot({ path: 'artifacts/activation-a11y.png', fullPage: true });\n  await expect(page).toHaveURL(/dashboard/);\n  // fluxo activation-a11y mantém trace e screenshot\n});\n",
+        "playwright.config.ts": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({\n  use: { trace: 'on', screenshot: 'on', video: 'retain-on-failure' },\n});\n"
+      }
+    },
+    "oracle": {
+      "browser": {
+        "target": "tests/onboarding.spec.ts",
+        "required_routes": [
+          "/signup",
+          "/dashboard"
+        ],
+        "required_assertions": [
+          "Bem-vindo",
+          "data-testid=activation-complete"
+        ],
+        "evidence": [
+          "trace",
+          "screenshot"
+        ]
+      }
+    },
+    "expected": {
+      "handler_kind": "spec_executor",
+      "static_ok": true,
+      "delivered_ok": false,
+      "first_fail": null,
+      "status": "verified_static",
+      "requires_human_review": false
     }
   }
 ]

@@ -14,6 +14,14 @@ venv/
 .mypy_cache/
 .ruff_cache/
 
+# Node / front (lixo de instalação — não versionar)
+node_modules/
+package-lock.json
+
+# Gravações da demo
+videos/
+*.webm
+
 # SO / editor
 .DS_Store
 Thumbs.db

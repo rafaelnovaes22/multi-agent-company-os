@@ -3,7 +3,9 @@ langgraph>=0.2
 langchain-core>=0.3
 pydantic>=2
 PyYAML>=6
-# Opcional — LLM real (C7). Sem isto, roda offline com FakeLLMProvider (SHADOW).
+# LLM real via Vertex AI (demo Railway). Inerte sem LLM_PROVIDER setado — segue offline (C7).
+google-genai>=1.0
+# Opcional — outros providers de LLM real (C7). Sem isto, roda offline com FakeLLMProvider (SHADOW).
 # Provider real é opt-in via LLM_PROVIDER; modelo via LLM_MODEL/GEMINI_MODEL/ANTHROPIC_MODEL.
 #   Claude:  pip install anthropic      + LLM_PROVIDER=anthropic ANTHROPIC_API_KEY=...
 #   Gemini:  pip install google-genai   + LLM_PROVIDER=google    GEMINI_API_KEY=...

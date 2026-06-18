@@ -1,0 +1,11 @@
+node_modules
+videos
+.venv
+venv
+**/.brain
+**/.brain-*
+**/__pycache__
+*.pyc
+.pytest_cache
+**/.pytest_cache
+*.webm

@@ -38,6 +38,23 @@ GUILD_NAMES = {
     "G12": "Jurídico", "G13": "Governança", "G14": "Model & AI-Ops",
 }
 
+def _bootstrap_gcp_adc() -> None:
+    """Railway/containers não têm ADC do gcloud. Se a service account vier como JSON
+    inteiro em GOOGLE_CREDENTIALS_JSON, materializa em arquivo e aponta
+    GOOGLE_APPLICATION_CREDENTIALS para ele — o google-genai (Vertex) usa daí."""
+    raw = os.environ.get("GOOGLE_CREDENTIALS_JSON", "").strip()
+    if raw and not os.environ.get("GOOGLE_APPLICATION_CREDENTIALS"):
+        path = Path(os.environ.get("TMPDIR", "/tmp")) / "gcp-sa.json"
+        try:
+            path.write_text(raw, encoding="utf-8")
+            os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = str(path)
+            print(f"ADC: credencial Vertex materializada de GOOGLE_CREDENTIALS_JSON -> {path}")
+        except OSError as exc:
+            print(f"ADC: falha ao materializar credencial ({exc}); seguindo sem ela")
+
+
+_bootstrap_gcp_adc()
+
 print("Materializando a empresa-OS (164 agentes)...")
 BRAIN_DIR = FRONT / ".brain-web"
 brain = Brain(str(BRAIN_DIR / "events"))

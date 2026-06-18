@@ -40,6 +40,8 @@ jobs:
         run: python -m unittest tests.test_generative_prompt
       - name: Oráculo VERIFY-IN-EVAL F0 (verify_code + spec_executor)
         run: python -m unittest tests.test_verify_code
+      - name: Relatório VERIFY-IN-EVAL F5 (contrato JSON + crédito de execução)
+        run: python -m unittest tests.test_exec_report
       - name: Seam de execução VERIFY-IN-EVAL F1 (ExecutionProvider inerte)
         run: python -m unittest tests.test_execution
       - name: VERIFY-IN-EVAL naturezas held-out (build backend/frontend + ops terraform/incident/browser)

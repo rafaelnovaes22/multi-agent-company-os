@@ -18,6 +18,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import subprocess
 import sys
 import uuid
 
@@ -34,8 +35,18 @@ except Exception:
     pass
 
 
+def _git_commit() -> str:
+    try:
+        r = subprocess.run(["git", "rev-parse", "--short=12", "HEAD"], capture_output=True,
+                           text=True, timeout=5)
+        if r.returncode == 0:
+            return r.stdout.strip()
+    except Exception:  # noqa: BLE001 — metadado opcional
+        pass
+    return "unknown"
+
+
 def run(spec_dir: str) -> dict:
-    import glob
     import json
     spec = load_spec(spec_dir)
     llm = get_llm("worker")
@@ -51,23 +62,38 @@ def run(spec_dir: str) -> dict:
         state = {"task": {"agent_id": spec["id"], "guild": spec["guild"], "statement": "exec", **payload},
                  "mode": "SHADOW", "ledger": spec.get("ledger"), "run_id": rid, "verbose": False}
         out = agent.invoke(state, config={"configurable": {"thread_id": rid}}).get("output") or {}
+        oracle = c.get("oracle") or {}
         rows.append({"id": c.get("id"), "desc": c.get("desc"),
                      "static_ok": bool(out.get("static_ok")),
                      "delivered_ok": bool(out.get("delivered_ok")),
-                     "tests_pass": out.get("tests_pass"), "first_fail": out.get("first_fail")})
+                     "tests_pass": out.get("tests_pass"), "first_fail": out.get("first_fail"),
+                     "runtime": oracle.get("runtime") or "python",
+                     "test_cmd": oracle.get("test_cmd") or "pytest -q",
+                     "heldout_files": sorted((oracle.get("heldout_files") or {}).keys())})
 
     n = len(rows)
     static_pass = sum(1 for r in rows if r["static_ok"])
     delivered = sum(1 for r in rows if r["delivered_ok"])
     # o discriminante da F2: passou o estático MAS não entregou (execução reprovou)
     caught_by_exec = [r for r in rows if r["static_ok"] and not r["delivered_ok"]]
-    return {"id": spec["id"], "n": n, "static_pass": static_pass, "delivered": delivered,
+    return {"id": spec["id"], "spec_dir": spec_dir, "commit": _git_commit(),
+            "n": n, "static_pass": static_pass, "delivered": delivered,
             "caught_by_exec": caught_by_exec, "rows": rows}
 
 
 def _rate(passed: int, total: int) -> dict:
     percent = round((100 * passed / total), 2) if total else 0.0
     return {"passed": passed, "total": total, "percent": percent}
+
+
+def _row_credit(row: dict) -> str:
+    if not row.get("static_ok"):
+        return "not_static_ok"
+    if row.get("delivered_ok") is True and row.get("tests_pass") is True:
+        return "credited"
+    if row.get("tests_pass") is False:
+        return "blocked_by_execution_failure"
+    return "unverified"
 
 
 def summarize(rep: dict, *, executor_name: str, executor_available: bool) -> dict:
@@ -81,20 +107,48 @@ def summarize(rep: dict, *, executor_name: str, executor_available: bool) -> dic
     delivered = int(rep.get("delivered") or 0)
     caught = list(rep.get("caught_by_exec") or [])
     static_without_delivery = max(static_pass - delivered, 0)
+    rows = []
+    for row in rep.get("rows") or []:
+        item = dict(row)
+        item["execution_credit"] = _row_credit(item)
+        rows.append(item)
+    executed_count = sum(1 for r in rows if isinstance(r.get("tests_pass"), bool))
+    tests_passed_count = sum(1 for r in rows if r.get("tests_pass") is True)
+    tests_failed_count = sum(1 for r in rows if r.get("tests_pass") is False)
+    if not executor_available:
+        reason = "executor_unavailable"
+    elif delivered > 0:
+        reason = "execution_validated"
+    elif static_without_delivery > 0:
+        reason = "no_delivery_credited"
+    else:
+        reason = "no_static_candidates"
     return {
         "agent_id": rep.get("id"),
+        "spec_dir": rep.get("spec_dir"),
+        "commit": rep.get("commit"),
         "executor": {"name": executor_name, "available": bool(executor_available)},
         "total": total,
         "static_pass_rate": _rate(static_pass, total),
         "delivered_rate": _rate(delivered, total),
+        "executed_count": executed_count,
+        "tests_passed_count": tests_passed_count,
+        "tests_failed_count": tests_failed_count,
         "static_without_delivery_count": static_without_delivery,
+        "static_sem_delivery": static_without_delivery,
+        "execution_credit": {
+            "can_credit_delivery": bool(executor_available and delivered > 0),
+            "credited_deliveries": delivered,
+            "blocked_static_without_delivery": static_without_delivery,
+            "reason": reason,
+        },
         "caught_by_exec_count": len(caught),
         "caught_by_exec": [
             {"id": r.get("id"), "desc": r.get("desc"), "tests_pass": r.get("tests_pass"),
              "first_fail": r.get("first_fail")}
             for r in caught
         ],
-        "rows": rep.get("rows") or [],
+        "rows": rows,
     }
 
 
@@ -109,7 +163,11 @@ def render_text(summary: dict) -> str:
         "",
         f"  static_pass_rate = {static_rate['passed']}/{total}  ({static_rate['percent']:.0f}%)  ← F0 move",
         f"  delivered_rate   = {delivered_rate['passed']}/{total}  ({delivered_rate['percent']:.0f}%)  ← só execução real move",
+        f"  executed_count   = {summary['executed_count']}/{total}",
+        f"  tests_passed     = {summary['tests_passed_count']}/{total}",
         f"  static_sem_delivery = {summary['static_without_delivery_count']}/{total}  ← gap a maturar",
+        f"  execution_credit = {summary['execution_credit']['credited_deliveries']}/{total} "
+        f"({summary['execution_credit']['reason']})",
     ]
     if not summary["executor"]["available"]:
         lines.append("\n  (executor inerte/indisponível — delivered_rate=0 é honesto: não executou)")

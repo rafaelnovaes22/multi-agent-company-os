@@ -56,6 +56,44 @@ class ExecReportSummary(unittest.TestCase):
         self.assertIn("static_sem_delivery = 1/3", text)
         self.assertIn("caught: plausível mas errado", text)
 
+    def test_summarize_expoe_credito_de_execucao_auditavel(self):
+        rep = {"id": "g3-build-error-resolver", "n": 3, "static_pass": 2,
+               "delivered": 1, "caught_by_exec": [ROWS[1]], "rows": ROWS,
+               "commit": "abc123", "spec_dir": "nucleo/guilds/g03_engenharia/g3-build-error-resolver"}
+
+        summary = exec_report.summarize(rep, executor_name="DockerExecutor/nucleo-exec:latest",
+                                        executor_available=True)
+
+        self.assertEqual(summary["execution_credit"], {
+            "can_credit_delivery": True,
+            "credited_deliveries": 1,
+            "blocked_static_without_delivery": 1,
+            "reason": "execution_validated",
+        })
+        self.assertEqual(summary["executed_count"], 2)
+        self.assertEqual(summary["tests_passed_count"], 1)
+        self.assertEqual(summary["tests_failed_count"], 1)
+        self.assertEqual(summary["static_sem_delivery"], 1)
+        self.assertEqual(summary["commit"], "abc123")
+        self.assertEqual(summary["rows"][0]["execution_credit"], "credited")
+        self.assertEqual(summary["rows"][1]["execution_credit"], "blocked_by_execution_failure")
+        self.assertEqual(summary["rows"][2]["execution_credit"], "not_static_ok")
+
+    def test_summarize_bloqueia_credito_quando_executor_inerte(self):
+        rep = {"id": "agent", "n": 1, "static_pass": 1, "delivered": 0,
+               "caught_by_exec": [{"id": "offline", "desc": "sem executor", "static_ok": True,
+                                    "delivered_ok": False, "tests_pass": "UNVERIFIED",
+                                    "first_fail": None}],
+               "rows": [{"id": "offline", "desc": "sem executor", "static_ok": True,
+                         "delivered_ok": False, "tests_pass": "UNVERIFIED", "first_fail": None}]}
+
+        summary = exec_report.summarize(rep, executor_name="InertExecutor", executor_available=False)
+
+        self.assertEqual(summary["executed_count"], 0)
+        self.assertEqual(summary["execution_credit"]["can_credit_delivery"], False)
+        self.assertEqual(summary["execution_credit"]["reason"], "executor_unavailable")
+        self.assertEqual(summary["rows"][0]["execution_credit"], "unverified")
+
     def test_main_json_emit_machine_readable_sem_texto_extra(self):
         fake = {"id": "agent", "n": 3, "static_pass": 2, "delivered": 1,
                 "caught_by_exec": [ROWS[1]], "rows": ROWS}

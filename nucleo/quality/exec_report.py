@@ -152,6 +152,27 @@ def summarize(rep: dict, *, executor_name: str, executor_available: bool) -> dic
     }
 
 
+def mark_audit_only(summary: dict, reason: str) -> dict:
+    """Marca um relatório como artifact de auditoria, sem crédito de entrega.
+
+    Usado para naturezas recém-instrumentadas ou estáticas que devem ser publicadas no
+    nightly, mas ainda não fazem parte do gate estrito de crédito real.
+    """
+    audited = dict(summary)
+    audited["rows"] = [dict(row) for row in summary.get("rows") or []]
+    audited["audit_only"] = True
+    audited["audit_reason"] = reason
+    audited["execution_credit"] = dict(summary.get("execution_credit") or {})
+    audited["execution_credit"].update({
+        "can_credit_delivery": False,
+        "credited_deliveries": 0,
+        "reason": f"audit_only:{reason}",
+    })
+    for row in audited["rows"]:
+        row["execution_credit"] = "audit_only"
+    return audited
+
+
 def render_text(summary: dict) -> str:
     """Renderiza o relatório humano; o JSON vem de `summarize`."""
     static_rate = summary["static_pass_rate"]
@@ -187,6 +208,10 @@ def _parse(argv):
     parser.add_argument("spec_dir", nargs="?", default="nucleo/guilds/g03_engenharia/g3-build-error-resolver")
     parser.add_argument("--json", action="store_true", help="emite somente JSON machine-readable")
     parser.add_argument("--json-output", help="também grava o resumo JSON neste caminho")
+    parser.add_argument("--audit-only", action="store_true",
+                        help="publica o relatório como auditoria sem crédito de entrega")
+    parser.add_argument("--audit-reason", default="not_in_strict_execution_gate",
+                        help="motivo usado quando --audit-only bloqueia crédito")
     return parser.parse_args(argv)
 
 
@@ -196,6 +221,8 @@ def main(argv):
     available = ex.available
     rep = run(args.spec_dir)
     summary = summarize(rep, executor_name=ex.name, executor_available=available)
+    if args.audit_only:
+        summary = mark_audit_only(summary, args.audit_reason)
     json_text = json.dumps(summary, ensure_ascii=False, indent=2, sort_keys=True)
     if args.json_output:
         with open(args.json_output, "w", encoding="utf-8") as f:

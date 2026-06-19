@@ -49,7 +49,19 @@ jobs:
       - name: Relatório de execução do g3-infra-devops (F4a, terraform)
         run: |
           python -m nucleo.quality.exec_report --json-output exec_report_infra.json nucleo/guilds/g03_engenharia/g3-infra-devops | tee exec_report_infra.txt
-      - name: Gate F6 dos artifacts de execução real
+      - name: Relatório opcional do g4-e2e-playwright (F4c, browser/static oracle)
+        continue-on-error: true
+        run: |
+          python -m nucleo.quality.exec_report --audit-only --audit-reason browser_static_oracle --json-output exec_report_browser.json nucleo/guilds/g04_qualidade_eval/g4-e2e-playwright | tee exec_report_browser.txt
+      - name: Relatório opcional do g3-mobile-builder (F4d, mobile/Node held-out)
+        continue-on-error: true
+        run: |
+          python -m nucleo.quality.exec_report --audit-only --audit-reason mobile_not_in_strict_gate --json-output exec_report_mobile.json nucleo/guilds/g03_engenharia/g3-mobile-builder | tee exec_report_mobile.txt
+      - name: Relatório opcional do g3-incident-responder (F4b, structural postmortem oracle)
+        continue-on-error: true
+        run: |
+          python -m nucleo.quality.exec_report --audit-only --audit-reason incident_structural_oracle --json-output exec_report_incident.json nucleo/guilds/g03_engenharia/g3-incident-responder | tee exec_report_incident.txt
+      - name: Gate F6 dos artifacts de execução real creditáveis
         run: |
           python -m nucleo.quality.exec_artifact_gate \
             exec_report.json \
@@ -70,3 +82,9 @@ jobs:
             exec_report_frontend.json
             exec_report_infra.txt
             exec_report_infra.json
+            exec_report_browser.txt
+            exec_report_browser.json
+            exec_report_mobile.txt
+            exec_report_mobile.json
+            exec_report_incident.txt
+            exec_report_incident.json

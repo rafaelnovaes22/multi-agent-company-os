@@ -128,6 +128,44 @@ class ExecReportSummary(unittest.TestCase):
         written = "".join(call.args[0] for call in handle.write.call_args_list)
         self.assertEqual(json.loads(written)["agent_id"], "agent")
 
+    def test_audit_only_bloqueia_credito_mesmo_com_execucao_verde(self):
+        summary = exec_report.summarize(
+            {"id": "agent", "n": 1, "static_pass": 1, "delivered": 1,
+             "caught_by_exec": [], "rows": [ROWS[0]]},
+            executor_name="DockerExecutor/nucleo-exec:latest",
+            executor_available=True,
+        )
+
+        audited = exec_report.mark_audit_only(summary, "browser_static_oracle")
+
+        self.assertTrue(audited["audit_only"])
+        self.assertEqual(audited["audit_reason"], "browser_static_oracle")
+        self.assertEqual(audited["execution_credit"]["can_credit_delivery"], False)
+        self.assertEqual(audited["execution_credit"]["credited_deliveries"], 0)
+        self.assertEqual(audited["execution_credit"]["reason"], "audit_only:browser_static_oracle")
+        self.assertEqual(audited["rows"][0]["execution_credit"], "audit_only")
+
+    def test_main_audit_only_grava_json_sem_mascarar_credito(self):
+        fake = {"id": "agent", "n": 1, "static_pass": 1, "delivered": 1,
+                "caught_by_exec": [], "rows": [ROWS[0]]}
+        with mock.patch.object(exec_report, "run", return_value=fake), \
+             mock.patch.object(exec_report, "get_executor") as get_ex, \
+             mock.patch.object(exec_report, "open", mock.mock_open(), create=True) as mocked_open:
+            get_ex.return_value.name = "DockerExecutor/nucleo-exec:latest"
+            get_ex.return_value.available = True
+            buf = io.StringIO()
+            with redirect_stdout(buf):
+                code = exec_report.main([
+                    "--audit-only", "--audit-reason", "mobile_not_strict_gate",
+                    "--json-output", "exec_report_mobile.json", "nucleo/guilds/x",
+                ])
+
+        self.assertEqual(code, 0)
+        written = "".join(call.args[0] for call in mocked_open().write.call_args_list)
+        parsed = json.loads(written)
+        self.assertTrue(parsed["audit_only"])
+        self.assertEqual(parsed["execution_credit"]["reason"], "audit_only:mobile_not_strict_gate")
+
 
 if __name__ == "__main__":
     unittest.main()

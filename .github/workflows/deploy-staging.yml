@@ -1,0 +1,78 @@
+name: deploy-staging
+
+# Deploy do ambiente de STAGING no Railway (environment dedicado 'staging').
+# Gatilho: push no branch `staging` (promoção explícita feature -> staging -> main/prod)
+# + dispatch manual. Roda o gate de qualidade ANTES de publicar — staging só recebe
+# código verde. LLM real (Vertex/Gemini) é injetado pelas variáveis do environment de
+# staging no Railway (NÃO ficam no repo); ver demo/live/STAGING.md.
+
+on:
+  push:
+    branches: [staging]
+  workflow_dispatch:
+
+# Um deploy de staging por vez; cancela o anterior se um novo push chegar.
+concurrency:
+  group: deploy-staging
+  cancel-in-progress: true
+
+jobs:
+  gate:
+    name: Gate de qualidade (antes de publicar)
+    runs-on: ubuntu-latest
+    env:
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # pre_pr_gate compara vs origin/main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Compile
+        run: python -m compileall -q nucleo
+      - name: Pre-PR gate (proveniência + prova independente — HARD-FAIL)
+        run: python -m nucleo.quality.pre_pr_gate
+      - name: Forge check (definition-of-done, ratchet)
+        run: python -m nucleo.quality.forge_check
+      - name: Suíte de testes
+        run: python -m unittest discover -s tests
+
+  deploy:
+    name: Deploy Railway (environment staging)
+    needs: gate
+    runs-on: ubuntu-latest
+    # Protege o deploy com o GitHub Environment 'staging' (regras/approvals/secrets próprios).
+    environment:
+      name: staging
+      url: ${{ vars.STAGING_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Railway CLI
+        run: npm i -g @railway/cli
+      - name: Deploy to Railway staging
+        # RAILWAY_TOKEN = project token DO ENVIRONMENT staging (escopa o deploy ao staging).
+        # RAILWAY_STAGING_SERVICE = nome do serviço no projeto (repo variable).
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_STAGING_TOKEN }}
+        run: |
+          if [ -z "$RAILWAY_TOKEN" ]; then
+            echo "::error::secret RAILWAY_STAGING_TOKEN ausente — configure-o (ver demo/live/STAGING.md)."
+            exit 1
+          fi
+          railway up --ci --service "${{ vars.RAILWAY_STAGING_SERVICE }}"
+      - name: Health check do staging
+        if: ${{ vars.STAGING_URL != '' }}
+        run: |
+          echo "Aguardando healthcheck em ${{ vars.STAGING_URL }}/api/health ..."
+          for i in $(seq 1 30); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "${{ vars.STAGING_URL }}/api/health" || echo 000)
+            if [ "$code" = "200" ]; then echo "staging OK (200)"; exit 0; fi
+            echo "  tentativa $i: HTTP $code — aguardando 10s"; sleep 10
+          done
+          echo "::error::staging não respondeu 200 em /api/health a tempo."
+          exit 1

@@ -17,6 +17,17 @@
 3. **Materializar é TRADUZIR o catálogo, não inventar.** O gabarito é `catalogo/G00–G14.md`
    (missão, tier, ledger, modo-alvo, responsabilidades, C7, gatilhos, cláusula C2, guardians, KPIs).
    Não invente conteúdo fora do catálogo; não achate guardians/tools para um set genérico.
+4. **Fechar catraca NÃO é prova de valor — e isto é HARD-FAIL, sem grandfather** (lição #30/#31/#32:
+   evals tautológicos passaram em todos os gates verdes). Todo handler determinístico exige PROVA
+   INDEPENDENTE, autorada FORA do próprio handler:
+   - **Proveniência obrigatória:** todo eval-case declara `provenance` ∈ `{catalog, human, independent}`.
+     `replay`/`handler`/`derived`/ausente é proibido — é o sinal do `expected` = eco do handler.
+   - **Critério por natureza:** build/ops/browser → critério **held-out** em `oracle`
+     (`heldout_files`/`structure`/`browser`/`bug_markers`) que o agente nunca vê; cálculo/decisão →
+     **≥1 caso `human`/`independent`** (valor de referência que não sai do handler).
+   - **Baseline só encolhe:** `forge_baseline.json` nunca cresce; toda alteração exige
+     `nucleo/quality/BASELINE-CHANGE.md` justificando (PR que "fecha métrica" = auditável).
+   Gate executável: `python -m nucleo.quality.pre_pr_gate` (§3). Reprovou → **não abra PR**.
 
 ## 1. Definition of Done de um agente
 
@@ -39,7 +50,9 @@ Um agente só está "pronto" quando TUDO abaixo é verdade (o `forge_check` chec
 - **Eval de DOMÍNIO, não theater:** os casos (`evals/cases.json`) devem testar o resultado de
   domínio (campos calculados em `expected`), não só `risk/status/routed_to`. `≥30` casos é o alvo;
   use cenários variados (limites, bordas, bloqueios). NUNCA ponha `delivered`/`billing_amount` em
-  `expected` (em SHADOW o gate força `delivered=False`).
+  `expected` (em SHADOW o gate força `delivered=False`). **Cada caso declara `provenance`**
+  (`catalog`/`human`/`independent`) e o agente carrega prova independente da natureza — ver regra
+  de ouro #4; o `pre_pr_gate` reprova (hard-fail) quem não tiver.
 
 ## 2. Arquitetura de handlers (1 template + N specs, mas capacidade real)
 
@@ -60,11 +73,18 @@ Um agente só está "pronto" quando TUDO abaixo é verdade (o `forge_check` chec
 ```bash
 rm -rf nucleo/.brain* .brain*                       # estado regenerável (demos não são idempotentes)
 python -m compileall -q nucleo
+python -m nucleo.quality.pre_pr_gate                # HARD-FAIL (regra de ouro #4): proveniência +
+                                                    #   prova independente nos agentes que você tocou
 python -m nucleo.quality.forge_check                # DEFINITION OF DONE (ratchet)
 python -m nucleo.demo_eval                           # C4 — eval-harness da frota
 python -m nucleo.demo_agentshield                    # C8 — sem violação HIGH
-python -m unittest tests.test_icp_segments           # guarda de ICP
+python -m unittest discover -s tests                 # suíte completa (NÃO uma lista parcial)
 ```
+
+> O `pre_pr_gate` é HARD-FAIL e escopado ao que o seu branch mudou vs `origin/main` — ele
+> reprova se você fechou capacidade sem proveniência/prova independente. Rode
+> `python -m nucleo.quality.pre_pr_gate --fleet` para ver o backlog de retrofit da frota
+> (débito atual a zerar; **não** é grandfatherizado).
 
 - **Ratchet:** o `forge_check` congela o débito atual em `nucleo/quality/forge_baseline.json` e
   reprova só violações NOVAS. Agente novo/alterado tem de bater a barra completa. Se você MELHORAR

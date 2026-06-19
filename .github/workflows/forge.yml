@@ -15,6 +15,8 @@ jobs:
       PYTHONUTF8: "1"
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # pre_pr_gate compara o branch vs origin/main (precisa do histórico)
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
@@ -24,6 +26,11 @@ jobs:
           pip install -r requirements.txt
       - name: Compile
         run: python -m compileall -q nucleo
+      - name: Pre-PR gate (proveniência + prova independente — HARD-FAIL, escopado ao diff)
+        # Reprova o PR que fecha capacidade sem prova independente (regra de ouro #4, AGENTS.md).
+        # Escopado aos agentes mudados vs origin/main — NÃO --fleet (o backlog da frota
+        # queima PR a PR; --fleet no PR travaria todo merge, inclusive os de retrofit).
+        run: python -m nucleo.quality.pre_pr_gate
       - name: Forge check (definition-of-done, ratchet)
         run: python -m nucleo.quality.forge_check
       - name: Eval-harness da frota (C4)

@@ -371,3 +371,98 @@ def pipeline_run_review(state, *, llm, store, spec):
         "contract_passed": contract_passed, "status": status, "load_blocked": load_blocked,
         "run_clean": run_clean, "requires_human_review": load_blocked,
     }, f"Voce e {spec['id']}: run {status}, load {'bloqueado' if load_blocked else 'ok'}.", llm)
+
+
+# ---------------------------------------------------------------------------
+# Burn-down PR61 — g6-nl2sql: plano determinístico NL→SQL sobre camada semântica.
+# ---------------------------------------------------------------------------
+_NL2SQL_METRICS = {
+    "north_star": {"table": "events", "expr": "SUM(value)", "time_col": "event_date"},
+    "revenue": {"table": "invoices", "expr": "SUM(amount)", "time_col": "issued_at"},
+    "activation_rate": {"table": "product_events", "expr": "AVG(activated)", "time_col": "event_date"},
+    "churn_rate": {"table": "subscriptions", "expr": "AVG(churned)", "time_col": "period_start"},
+}
+_NL2SQL_PII_FIELDS = {"email", "phone", "cpf", "name"}
+_NL2SQL_INJECTION_MARKERS = (
+    "ignore previous", "ignore as instrucoes", "ignore as instruções", "drop table",
+    "delete from", "password", "secret", "segredo", "admin token", "system prompt",
+)
+
+
+def _nl2sql_has_injection(question):
+    q = (question or "").lower()
+    return any(marker in q for marker in _NL2SQL_INJECTION_MARKERS)
+
+
+@register("nl2sql_query_plan")
+def nl2sql_query_plan(state, *, llm, store, spec):
+    """g6-nl2sql — traduz intenção de negócio em plano SQL auditável e seguro.
+
+    Input: state['task']['query_request'] = {
+      question, metric, requested_fields, allowed_fields, role, filters, group_by,
+      time_window_days, source_refs, repeated_by_dris
+    }
+
+    O handler não executa SQL nem inventa métrica: só emite query quando a métrica existe
+    na camada semântica, os campos solicitados estão permitidos e a resposta terá fonte.
+    PII fora de escopo e prompt-injection bloqueiam a emissão.
+    """
+    req = state["task"].get("query_request", {}) or {}
+    metric = str(req.get("metric") or "")
+    meta = _NL2SQL_METRICS.get(metric)
+    question = req.get("question", "") or ""
+    requested = set(req.get("requested_fields", []) or [])
+    allowed = set(req.get("allowed_fields", []) or [])
+    role = req.get("role", "") or ""
+    filters = req.get("filters", {}) or {}
+    group_by = req.get("group_by")
+    days = int(req.get("time_window_days", 30) or 30)
+    source_refs = req.get("source_refs", []) or []
+
+    injection_blocked = _nl2sql_has_injection(question)
+    forbidden_fields = sorted(requested - allowed)
+    pii_requested = sorted(requested & _NL2SQL_PII_FIELDS)
+    pii_blocked = bool(pii_requested) and role not in {"privacy_analyst", "legal_privacy"}
+    metric_canonical = meta is not None
+    source_cited = bool(source_refs)
+    access_granted = not forbidden_fields and not pii_blocked
+
+    if injection_blocked:
+        status = "blocked_injection"
+    elif not metric_canonical:
+        status = "needs_metric_mapping"
+    elif not access_granted:
+        status = "blocked_access"
+    elif not source_cited:
+        status = "needs_source_citation"
+    else:
+        status = "ready"
+
+    sql = None
+    selected_table = meta["table"] if meta else None
+    if status == "ready" and meta is not None:
+        select_parts = []
+        if group_by:
+            select_parts.append(group_by)
+        select_parts.append(f"{meta['expr']} AS {metric}")
+        where = [f"{meta['time_col']} >= CURRENT_DATE - INTERVAL '{days} days'"]
+        for key in sorted(filters):
+            where.append(f"{key} = :{key}")
+        sql = "SELECT " + ", ".join(select_parts) + f" FROM {selected_table} WHERE " + " AND ".join(where)
+        if group_by:
+            sql += f" GROUP BY {group_by}"
+
+    sql_ready = status == "ready"
+    requires_human_review = status in {"needs_metric_mapping", "needs_source_citation"}
+    risk = "high" if status.startswith("blocked") else ("medium" if requires_human_review else "low")
+    suggests_dashboard = bool(req.get("repeated_by_dris", 0) and req.get("repeated_by_dris", 0) >= 3)
+
+    return _out(spec, state, {
+        "agent_id": spec["id"], "handler_kind": "nl2sql_query_plan",
+        "selected_metric": metric, "selected_table": selected_table,
+        "metric_canonical": metric_canonical, "source_cited": source_cited,
+        "access_granted": access_granted, "pii_blocked": pii_blocked,
+        "injection_blocked": injection_blocked, "forbidden_fields": forbidden_fields,
+        "sql_ready": sql_ready, "sql": sql, "status": status, "risk": risk,
+        "requires_human_review": requires_human_review, "suggests_dashboard": suggests_dashboard,
+    }, f"Voce e {spec['id']}: metrica {metric}, status {status}, SQL pronto={sql_ready}.", llm)

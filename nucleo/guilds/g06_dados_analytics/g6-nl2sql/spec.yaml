@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: AUTONOMOUS
-act_handler: spec_driven
+act_handler: nl2sql_query_plan
 outcome_clause:
   statement: 'Tradutor Linguagem Natural → Query (Empresa Queryable) entrega nl2sql.artifact
     verificável para: permitir que qualquer humano ou agente "pergunte à empresa"

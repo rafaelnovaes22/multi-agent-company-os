@@ -1,54 +1,59 @@
 # Ambiente de STAGING (Railway)
 
 Staging é um **serviço separado** (`nucleo-staging`) no **mesmo projeto/environment** do Railway
-que produção, com **deploy nativo do Railway** (GitHub auto-deploy) a partir do branch `staging`.
-URL: `https://nucleo-staging-production.up.railway.app`.
+que produção. URL: `https://nucleo-staging-production.up.railway.app`.
+
+O deploy é **gated por GitHub Actions** ([.github/workflows/deploy-staging.yml](../../.github/workflows/deploy-staging.yml)):
+no push ao branch `staging`, o gate de qualidade (`pre_pr_gate` + `forge_check` + suíte) roda
+**antes** de publicar — só então o Railway recebe o deploy. É a "proteção do branch" por baixo
+(o GitHub free não permite branch protection em repo privado): mesmo um push direto ao `staging`
+passa pelo gate antes de virar deploy.
 
 ```
-feature/*  --PR (forge-gate roda)-->  staging  --(Railway auto-deploy)-->  nucleo-staging
-                                          │  valida em Vertex real
-                                          └--PR-->  main  -->  produção (nucleo-demo)
+feature/*  --PR (forge-gate)-->  staging  --push--> [Actions: gate -> railway up] -->  nucleo-staging
+                                    │  valida em Vertex real
+                                    └--PR-->  main  -->  produção (nucleo-demo)
 ```
 
 Como é serviço no mesmo environment de prod, ele **herda as variáveis compartilhadas do
-environment** — inclusive o `GOOGLE_CREDENTIALS_JSON`. Por isso o staging já fala com **Vertex
-real** sem credencial setada por serviço (confirmado: `/api/health` →
-`GoogleProvider/...vertex:acme-multiagentes/us-central1`). A imagem é a de produção
+environment** — inclusive o `GOOGLE_CREDENTIALS_JSON`. Por isso o staging fala com **Vertex
+real** sem credencial por serviço (confirmado: `/api/health` →
+`GoogleProvider/...vertex:acme-multiagentes/us-central1`). Imagem = a de produção
 (`demo/live/Dockerfile`, healthcheck `/api/health`).
 
-## Setup
+## Setup único
 
-### 1. Branch `staging`
-Depois que o gate (#62) entrar no `main`:
+### 1. Railway — DESLIGAR o auto-deploy nativo do serviço `nucleo-staging`
+**Settings → Source →** desconecte o branch de deploy automático (ou desative o auto-deploy).
+O deploy passa a ser feito **só** pelo GitHub Actions — senão há deploy duplicado.
 
-```bash
-git fetch origin
-git switch -c staging origin/main
-git push -u origin staging
-```
+### 2. Railway — gerar o token de deploy
+**Project Settings → Tokens →** gere um **token do projeto** com acesso ao environment onde o
+`nucleo-staging` vive. O Actions seleciona o serviço por nome (`railway up --service nucleo-staging`).
 
-### 2. Railway — apontar o serviço para o branch `staging`
-No dashboard: **serviço `nucleo-staging` → Settings → Source →** branch de deploy = **`staging`**
-(hoje ele provavelmente aponta para `main`). A partir daí, **todo push/merge em `staging`
-dispara o deploy** automaticamente pelo Railway — **sem token nem GitHub Actions**.
+### 3. GitHub — secret e variables
+No repositório (**Settings → Secrets and variables → Actions**):
 
-### 3. Variáveis (já resolvidas)
-- LLM real (Vertex): `LLM_PROVIDER=vertex`, `GOOGLE_GENAI_USE_VERTEXAI=true`,
-  `GOOGLE_CLOUD_PROJECT=acme-multiagentes`, `GOOGLE_CLOUD_LOCATION=us-central1` no serviço;
-  `GOOGLE_CREDENTIALS_JSON` herdado do environment. Nada a fazer no repo.
+- **Secret** `RAILWAY_STAGING_TOKEN` = o token do passo 2. **← pendente** (cole via
+  `gh secret set RAILWAY_STAGING_TOKEN` ou pela UI; nunca commitado).
+- **Variable** `RAILWAY_STAGING_SERVICE` = `nucleo-staging`. ✅ definida.
+- **Variable** `STAGING_URL` = `https://nucleo-staging-production.up.railway.app`. ✅ definida
+  (usada no healthcheck pós-deploy).
 
-## Fluxo de promoção e gate
+### 4. Branch `staging`
+Já existe. A partir do merge deste fluxo, **todo push/merge em `staging` dispara o deploy gated**.
 
-- O gate de qualidade roda como **check de PR** (`forge-gate` em [.github/workflows/forge.yml](../../.github/workflows/forge.yml),
-  já com `pre_pr_gate` + `forge_check` + suíte). Ele controla o que pode **entrar** no `staging`.
-- **Sempre promova via PR para `staging`** (não dê push direto): push direto pula o gate, pois o
-  Railway deploya na hora. Proteja o branch `staging` exigindo PR + check verde se quiser travar isso.
+## Fluxo de promoção
+
+- Promova via **PR para `staging`** (o `forge-gate` roda como check de PR); ao mergear, o
+  `deploy-staging` roda o gate de novo e publica. Push direto também é gated (gate antes do deploy).
 - Validado em staging (Vertex real, mesma imagem de prod), promova o mesmo commit via PR para
   `main` → produção (`nucleo-demo`).
 
 ## Operação
 
-- **Logs / rollback / redeploy:** dashboard Railway, serviço `nucleo-staging`.
-- **Healthcheck:** `GET https://nucleo-staging-production.up.railway.app/api/health` deve
-  responder `200`; o campo `llm` mostra o provider ativo (`GoogleProvider/...vertex` = real;
-  `FakeLLMProvider` = caiu offline, credencial não pegou).
+- **Deploy manual:** Actions → *deploy-staging* → *Run workflow* (`workflow_dispatch`).
+- **Logs / rollback:** dashboard Railway, serviço `nucleo-staging`.
+- **Healthcheck:** `GET {STAGING_URL}/api/health` → `200`; o campo `llm` mostra o provider
+  (`GoogleProvider/...vertex` = real; `FakeLLMProvider` = caiu offline, credencial não pegou).
+- O deploy **falha cedo** se faltar `RAILWAY_STAGING_TOKEN` ou se o gate reprovar.

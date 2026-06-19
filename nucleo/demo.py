@@ -86,9 +86,9 @@ def main():
 
     print("\n=== Company Brain (event store) ===")
     for ev in brain.events():
-        print(f"  [{ev['ts']}] {ev['actor']} {ev['action']} "
-              f"delivered={ev['delivered']} billing={ev['billing_amount']} "
-              f"custo={ev['cost_tokens']} run={ev['run_id']}")
+        print(f"  [{ev.get('ts')}] {ev.get('actor')} {ev.get('action')} "
+              f"delivered={ev.get('delivered', '-')} billing={ev.get('billing_amount', '-')} "
+              f"custo={ev.get('cost_tokens', '-')} run={ev.get('run_id', '-')}")
 
     print(f"\nEvent store : {brain.events_path}")
     print(f"Snapshots   : {os.path.join(BRAIN_DIR, 'store', 'snapshots', spec['id'])}")

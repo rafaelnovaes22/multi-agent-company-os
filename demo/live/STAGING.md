@@ -1,8 +1,9 @@
 # Ambiente de STAGING (Railway)
 
-Staging é um **environment dedicado** no mesmo projeto Railway que produção, com URL
-estável, deploy automático no **push ao branch `staging`** e **LLM real (Vertex/Gemini)** —
-um espelho de produção para validar antes de promover ao `main`.
+Staging é um **serviço separado** (`nucleo-staging`) no mesmo projeto/environment do Railway
+que produção, com URL estável (`https://nucleo-staging-production.up.railway.app`), deploy
+automático no **push ao branch `staging`** e **LLM real (Vertex/Gemini)** — um espelho de
+produção para validar antes de promover ao `main`.
 
 ```
 feature/*  --PR-->  main (produção)
@@ -17,12 +18,13 @@ do environment** — nada de segredo no repo.
 
 ## Setup único (uma vez)
 
-### 1. Railway — criar o environment `staging`
-No dashboard do projeto Railway: **Settings → Environments → New** (ou duplicar `production`),
-nome **`staging`**. Ele herda o serviço que usa `demo/live/Dockerfile` (healthcheck `/api/health`).
+### 1. Railway — serviço `nucleo-staging` (mesmo environment de produção)
+Já criado: um **serviço separado** no mesmo projeto/environment, apontando para
+`demo/live/Dockerfile` (healthcheck `/api/health`). URL pública:
+`https://nucleo-staging-production.up.railway.app`.
 
-### 2. Railway — variáveis do environment `staging` (LLM real via Vertex)
-No serviço, dentro do environment `staging`, defina:
+### 2. Railway — variáveis do serviço `nucleo-staging` (LLM real via Vertex)
+No serviço `nucleo-staging`, defina:
 
 | Variável | Valor | Observação |
 |---|---|---|
@@ -39,16 +41,18 @@ No serviço, dentro do environment `staging`, defina:
 > Considere uma cota/budget separada para não misturar custo de staging com produção.
 
 ### 3. Railway — gerar o token de deploy
-**Project Settings → Tokens →** gere um **token escopado ao environment `staging`**. Esse token
-é o que escolhe o environment no deploy via CLI.
+**Project Settings → Tokens →** gere um **token do projeto** com acesso ao environment onde o
+`nucleo-staging` vive. O deploy seleciona o serviço por **nome** (`railway up --service
+nucleo-staging`), então o token só precisa alcançar o projeto/environment.
 
 ### 4. GitHub — secret, variables e environment
 No repositório (**Settings → Secrets and variables → Actions**):
 
-- **Secret** `RAILWAY_STAGING_TOKEN` = o token do passo 3.
-- **Variable** `RAILWAY_STAGING_SERVICE` = nome do serviço no Railway (o que builda o Dockerfile).
-- **Variable** `STAGING_URL` = URL pública do staging (ex. `https://nucleo-staging.up.railway.app`).
-  Usada só para o healthcheck pós-deploy; pode preencher depois do 1º deploy.
+- **Secret** `RAILWAY_STAGING_TOKEN` = o token do passo 3. **← único pendente** (cole via
+  `gh secret set RAILWAY_STAGING_TOKEN` ou pela UI; nunca commitado).
+- **Variable** `RAILWAY_STAGING_SERVICE` = `nucleo-staging`. ✅ já definida.
+- **Variable** `STAGING_URL` = `https://nucleo-staging-production.up.railway.app`. ✅ já definida
+  (usada no healthcheck pós-deploy).
 
 Crie também o **GitHub Environment** `staging` (**Settings → Environments → New**) — o job de
 deploy é protegido por ele, então você pode exigir aprovação manual ou restringir branches.

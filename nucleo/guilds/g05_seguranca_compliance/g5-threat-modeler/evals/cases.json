@@ -1,7 +1,7 @@
 [
   {
     "id": "g5-threat-modeler-domain-01",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "superfície interna mínima; auth=sim; dependência medium; controles auth+rate_limit+audit_log; faltantes 0; risco 10 low",
     "threat_model": {
       "feature_id": "feat-01",
       "internet_exposed": false,
@@ -27,7 +27,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-02",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "internet; auth=sim; dependência high; controles auth+rate_limit+encryption; faltantes 0; risco 45 medium",
     "threat_model": {
       "feature_id": "feat-02",
       "internet_exposed": true,
@@ -53,7 +53,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-03",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "superfície interna mínima; auth=não; dependência low; controles audit_log; faltantes 0; risco 20 low",
     "threat_model": {
       "feature_id": "feat-03",
       "internet_exposed": false,
@@ -77,7 +77,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-04",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "internet+PII; auth=sim; dependência medium; controles auth+encryption; faltantes 1; risco 60 high",
     "threat_model": {
       "feature_id": "feat-04",
       "internet_exposed": true,
@@ -102,7 +102,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-05",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "pagamentos; auth=sim; dependência high; controles auth+rate_limit; faltantes 2; risco 60 high",
     "threat_model": {
       "feature_id": "feat-05",
       "internet_exposed": false,
@@ -127,7 +127,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-06",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "internet+admin; auth=não; dependência low; controles rate_limit+audit_log; faltantes 0; risco 60 high",
     "threat_model": {
       "feature_id": "feat-06",
       "internet_exposed": true,
@@ -152,7 +152,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-07",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "superfície interna mínima; auth=sim; dependência medium; controles auth; faltantes 0; risco 10 low",
     "threat_model": {
       "feature_id": "feat-07",
       "internet_exposed": false,
@@ -176,7 +176,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-08",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "internet+PII; auth=sim; dependência high; controles auth+audit_log+encryption; faltantes 1; risco 70 high",
     "threat_model": {
       "feature_id": "feat-08",
       "internet_exposed": true,
@@ -202,7 +202,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-09",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "superfície interna mínima; auth=não; dependência low; controles rate_limit; faltantes 0; risco 20 low",
     "threat_model": {
       "feature_id": "feat-09",
       "internet_exposed": false,
@@ -226,7 +226,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-10",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "internet+pagamentos; auth=sim; dependência medium; controles auth+rate_limit+encryption; faltantes 1; risco 65 high",
     "threat_model": {
       "feature_id": "feat-10",
       "internet_exposed": true,
@@ -252,7 +252,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-11",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "superfície interna mínima; auth=sim; dependência high; controles auth+audit_log; faltantes 0; risco 20 low",
     "threat_model": {
       "feature_id": "feat-11",
       "internet_exposed": false,
@@ -277,7 +277,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-12",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "internet+PII+admin; auth=não; dependência low; controles sem mitigação; faltantes 3; risco 100 critical",
     "threat_model": {
       "feature_id": "feat-12",
       "internet_exposed": true,
@@ -299,7 +299,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-13",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "superfície interna mínima; auth=sim; dependência medium; controles auth+rate_limit+audit_log; faltantes 0; risco 10 low",
     "threat_model": {
       "feature_id": "feat-13",
       "internet_exposed": false,
@@ -325,7 +325,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-14",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "internet; auth=sim; dependência high; controles auth+rate_limit+encryption; faltantes 0; risco 45 medium",
     "threat_model": {
       "feature_id": "feat-14",
       "internet_exposed": true,
@@ -351,7 +351,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-15",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "pagamentos; auth=não; dependência low; controles sem mitigação; faltantes 2; risco 60 high",
     "threat_model": {
       "feature_id": "feat-15",
       "internet_exposed": false,
@@ -373,7 +373,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-16",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "internet+PII; auth=sim; dependência medium; controles auth+audit_log+encryption; faltantes 1; risco 60 high",
     "threat_model": {
       "feature_id": "feat-16",
       "internet_exposed": true,
@@ -399,7 +399,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-17",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "superfície interna mínima; auth=sim; dependência high; controles auth+rate_limit; faltantes 0; risco 20 low",
     "threat_model": {
       "feature_id": "feat-17",
       "internet_exposed": false,
@@ -424,7 +424,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-18",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "internet+admin; auth=não; dependência low; controles rate_limit+audit_log; faltantes 0; risco 60 high",
     "threat_model": {
       "feature_id": "feat-18",
       "internet_exposed": true,
@@ -449,7 +449,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-19",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "superfície interna mínima; auth=sim; dependência medium; controles auth; faltantes 0; risco 10 low",
     "threat_model": {
       "feature_id": "feat-19",
       "internet_exposed": false,
@@ -473,7 +473,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-20",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "internet+PII+pagamentos; auth=sim; dependência high; controles auth+encryption; faltantes 2; risco 100 critical",
     "threat_model": {
       "feature_id": "feat-20",
       "internet_exposed": true,
@@ -498,7 +498,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-21",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "superfície interna mínima; auth=não; dependência low; controles rate_limit+audit_log; faltantes 0; risco 20 low",
     "threat_model": {
       "feature_id": "feat-21",
       "internet_exposed": false,
@@ -523,7 +523,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-22",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "internet; auth=sim; dependência medium; controles auth+rate_limit+encryption; faltantes 0; risco 35 medium",
     "threat_model": {
       "feature_id": "feat-22",
       "internet_exposed": true,
@@ -549,7 +549,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-23",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "superfície interna mínima; auth=sim; dependência high; controles auth+audit_log; faltantes 0; risco 20 low",
     "threat_model": {
       "feature_id": "feat-23",
       "internet_exposed": false,
@@ -574,7 +574,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-24",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "internet+PII+admin; auth=não; dependência low; controles sem mitigação; faltantes 3; risco 100 critical",
     "threat_model": {
       "feature_id": "feat-24",
       "internet_exposed": true,
@@ -596,7 +596,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-25",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "pagamentos; auth=sim; dependência medium; controles auth+rate_limit; faltantes 2; risco 50 medium",
     "threat_model": {
       "feature_id": "feat-25",
       "internet_exposed": false,
@@ -621,7 +621,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-26",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "internet; auth=sim; dependência high; controles auth+rate_limit+audit_log+encryption; faltantes 0; risco 45 medium",
     "threat_model": {
       "feature_id": "feat-26",
       "internet_exposed": true,
@@ -648,7 +648,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-27",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "superfície interna mínima; auth=não; dependência low; controles sem mitigação; faltantes 0; risco 20 low",
     "threat_model": {
       "feature_id": "feat-27",
       "internet_exposed": false,
@@ -670,7 +670,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-28",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "internet+PII; auth=sim; dependência medium; controles auth+audit_log+encryption; faltantes 1; risco 60 high",
     "threat_model": {
       "feature_id": "feat-28",
       "internet_exposed": true,
@@ -696,7 +696,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-29",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "superfície interna mínima; auth=sim; dependência high; controles auth+rate_limit; faltantes 0; risco 20 low",
     "threat_model": {
       "feature_id": "feat-29",
       "internet_exposed": false,
@@ -721,7 +721,7 @@
   },
   {
     "id": "g5-threat-modeler-domain-30",
-    "desc": "Threat model deterministic domain eval",
+    "desc": "internet+pagamentos+admin; auth=não; dependência low; controles rate_limit; faltantes 2; risco 100 critical",
     "threat_model": {
       "feature_id": "feat-30",
       "internet_exposed": true,

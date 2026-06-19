@@ -1,7 +1,7 @@
 [
   {
     "id": "g5-lgpd-privacy-domain-01",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII contact; base consent; consentimento presente; retenção 180d; sem transferência internacional com salvaguarda; DSAR 7d; approved score 100",
     "privacy_review": {
       "artifact_id": "art-01",
       "pii_categories": [
@@ -27,7 +27,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-02",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII contact+financial; base contract; consentimento presente; retenção 366d; sem transferência internacional com salvaguarda; DSAR 16d; remediate score 75",
     "privacy_review": {
       "artifact_id": "art-02",
       "pii_categories": [
@@ -54,7 +54,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-03",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII health; base legitimate_interest; consentimento presente; retenção 730d; transferência internacional sem salvaguarda; DSAR 30d; blocked score 50",
     "privacy_review": {
       "artifact_id": "art-03",
       "pii_categories": [
@@ -80,7 +80,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-04",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII biometric; base legal_obligation; sem consentimento; retenção 30d; sem transferência internacional sem salvaguarda; DSAR 2d; blocked score 70",
     "privacy_review": {
       "artifact_id": "art-04",
       "pii_categories": [
@@ -106,7 +106,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-05",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII sem-pii; base None; consentimento presente; retenção 90d; sem transferência internacional com salvaguarda; DSAR 0d; approved score 100",
     "privacy_review": {
       "artifact_id": "art-05",
       "pii_categories": [],
@@ -130,7 +130,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-06",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII contact; base consent; consentimento presente; retenção 180d; transferência internacional com salvaguarda; DSAR 7d; remediate score 85",
     "privacy_review": {
       "artifact_id": "art-06",
       "pii_categories": [
@@ -156,7 +156,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-07",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII contact+financial; base contract; consentimento presente; retenção 366d; sem transferência internacional sem salvaguarda; DSAR 16d; remediate score 75",
     "privacy_review": {
       "artifact_id": "art-07",
       "pii_categories": [
@@ -183,7 +183,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-08",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII health; base legitimate_interest; sem consentimento; retenção 730d; sem transferência internacional sem salvaguarda; DSAR 30d; blocked score 45",
     "privacy_review": {
       "artifact_id": "art-08",
       "pii_categories": [
@@ -209,7 +209,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-09",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII biometric; base legal_obligation; consentimento presente; retenção 30d; transferência internacional com salvaguarda; DSAR 2d; approved score 100",
     "privacy_review": {
       "artifact_id": "art-09",
       "pii_categories": [
@@ -235,7 +235,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-10",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII sem-pii; base None; consentimento presente; retenção 90d; sem transferência internacional com salvaguarda; DSAR 0d; approved score 100",
     "privacy_review": {
       "artifact_id": "art-10",
       "pii_categories": [],
@@ -259,7 +259,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-11",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII contact; base consent; consentimento presente; retenção 180d; sem transferência internacional sem salvaguarda; DSAR 7d; approved score 100",
     "privacy_review": {
       "artifact_id": "art-11",
       "pii_categories": [
@@ -285,7 +285,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-12",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII contact+financial; base contract; sem consentimento; retenção 366d; transferência internacional sem salvaguarda; DSAR 16d; blocked score 35",
     "privacy_review": {
       "artifact_id": "art-12",
       "pii_categories": [
@@ -312,7 +312,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-13",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII health; base legitimate_interest; consentimento presente; retenção 730d; sem transferência internacional com salvaguarda; DSAR 30d; remediate score 75",
     "privacy_review": {
       "artifact_id": "art-13",
       "pii_categories": [
@@ -338,7 +338,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-14",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII biometric; base legal_obligation; consentimento presente; retenção 30d; sem transferência internacional com salvaguarda; DSAR 2d; approved score 100",
     "privacy_review": {
       "artifact_id": "art-14",
       "pii_categories": [
@@ -364,7 +364,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-15",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII sem-pii; base None; consentimento presente; retenção 90d; transferência internacional sem salvaguarda; DSAR 0d; blocked score 75",
     "privacy_review": {
       "artifact_id": "art-15",
       "pii_categories": [],
@@ -388,7 +388,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-16",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII contact; base consent; sem consentimento; retenção 180d; sem transferência internacional sem salvaguarda; DSAR 7d; approved score 100",
     "privacy_review": {
       "artifact_id": "art-16",
       "pii_categories": [
@@ -414,7 +414,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-17",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII contact+financial; base contract; consentimento presente; retenção 366d; sem transferência internacional com salvaguarda; DSAR 16d; remediate score 75",
     "privacy_review": {
       "artifact_id": "art-17",
       "pii_categories": [
@@ -441,7 +441,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-18",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII health; base legitimate_interest; consentimento presente; retenção 730d; transferência internacional com salvaguarda; DSAR 30d; remediate score 60",
     "privacy_review": {
       "artifact_id": "art-18",
       "pii_categories": [
@@ -467,7 +467,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-19",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII biometric; base legal_obligation; consentimento presente; retenção 30d; sem transferência internacional sem salvaguarda; DSAR 2d; approved score 100",
     "privacy_review": {
       "artifact_id": "art-19",
       "pii_categories": [
@@ -493,7 +493,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-20",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII sem-pii; base None; sem consentimento; retenção 90d; sem transferência internacional sem salvaguarda; DSAR 0d; approved score 100",
     "privacy_review": {
       "artifact_id": "art-20",
       "pii_categories": [],
@@ -517,7 +517,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-21",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII contact; base consent; consentimento presente; retenção 180d; transferência internacional com salvaguarda; DSAR 7d; approved score 100",
     "privacy_review": {
       "artifact_id": "art-21",
       "pii_categories": [
@@ -543,7 +543,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-22",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII contact+financial; base contract; consentimento presente; retenção 366d; sem transferência internacional com salvaguarda; DSAR 16d; remediate score 75",
     "privacy_review": {
       "artifact_id": "art-22",
       "pii_categories": [
@@ -570,7 +570,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-23",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII health; base legitimate_interest; consentimento presente; retenção 730d; sem transferência internacional sem salvaguarda; DSAR 30d; remediate score 75",
     "privacy_review": {
       "artifact_id": "art-23",
       "pii_categories": [
@@ -596,7 +596,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-24",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII biometric; base legal_obligation; sem consentimento; retenção 30d; transferência internacional sem salvaguarda; DSAR 2d; blocked score 30",
     "privacy_review": {
       "artifact_id": "art-24",
       "pii_categories": [
@@ -622,7 +622,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-25",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII sem-pii; base None; consentimento presente; retenção 90d; sem transferência internacional com salvaguarda; DSAR 0d; approved score 100",
     "privacy_review": {
       "artifact_id": "art-25",
       "pii_categories": [],
@@ -646,7 +646,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-26",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII contact; base consent; consentimento presente; retenção 180d; sem transferência internacional com salvaguarda; DSAR 7d; approved score 100",
     "privacy_review": {
       "artifact_id": "art-26",
       "pii_categories": [
@@ -672,7 +672,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-27",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII contact+financial; base contract; consentimento presente; retenção 366d; transferência internacional sem salvaguarda; DSAR 16d; blocked score 50",
     "privacy_review": {
       "artifact_id": "art-27",
       "pii_categories": [
@@ -699,7 +699,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-28",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII health; base legitimate_interest; sem consentimento; retenção 730d; sem transferência internacional sem salvaguarda; DSAR 30d; blocked score 45",
     "privacy_review": {
       "artifact_id": "art-28",
       "pii_categories": [
@@ -725,7 +725,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-29",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII biometric; base legal_obligation; consentimento presente; retenção 30d; sem transferência internacional com salvaguarda; DSAR 2d; approved score 100",
     "privacy_review": {
       "artifact_id": "art-29",
       "pii_categories": [
@@ -751,7 +751,7 @@
   },
   {
     "id": "g5-lgpd-privacy-domain-30",
-    "desc": "LGPD privacy deterministic domain eval",
+    "desc": "PII sem-pii; base None; consentimento presente; retenção 90d; transferência internacional com salvaguarda; DSAR 0d; remediate score 85",
     "privacy_review": {
       "artifact_id": "art-30",
       "pii_categories": [],

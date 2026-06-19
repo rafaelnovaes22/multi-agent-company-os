@@ -1,7 +1,7 @@
 [
   {
     "id": "g12-regulatory-monitor-domain-01",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "ANPD none para empresa=não; sem prazo; dono sem dono; falsos positivos 0; status monitor_only",
     "regulatory_change": {
       "source": "ANPD",
       "applies_to_company": false,
@@ -28,7 +28,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-02",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "BACEN low para empresa=sim; prazo 45d; dono Legal DRI; falsos positivos 1; status needs_action_plan",
     "regulatory_change": {
       "source": "BACEN",
       "applies_to_company": true,
@@ -55,7 +55,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-03",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "ANPD medium para empresa=sim; prazo 20d; dono Legal DRI; falsos positivos 0; status action_required",
     "regulatory_change": {
       "source": "ANPD",
       "applies_to_company": true,
@@ -82,7 +82,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-04",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "ANPD high para empresa=sim; prazo 20d; dono Legal DRI; falsos positivos 1; status action_required",
     "regulatory_change": {
       "source": "ANPD",
       "applies_to_company": true,
@@ -109,7 +109,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-05",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "regulador_setorial none para empresa=não; prazo 90d; dono Legal DRI; falsos positivos 3; status noise_suppressed",
     "regulatory_change": {
       "source": "regulador_setorial",
       "applies_to_company": false,
@@ -136,7 +136,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-06",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "blog_aleatorio low para empresa=sim; sem prazo; dono Legal DRI; falsos positivos 1; status untrusted_source",
     "regulatory_change": {
       "source": "blog_aleatorio",
       "applies_to_company": true,
@@ -163,7 +163,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-07",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "ANPD medium para empresa=sim; prazo 45d; dono sem dono; falsos positivos 0; status needs_action_plan",
     "regulatory_change": {
       "source": "ANPD",
       "applies_to_company": true,
@@ -190,7 +190,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-08",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "BACEN high para empresa=sim; prazo 7d; dono Legal DRI; falsos positivos 1; status needs_action_plan",
     "regulatory_change": {
       "source": "BACEN",
       "applies_to_company": true,
@@ -217,7 +217,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-09",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "CVM none para empresa=não; prazo -1d; dono Legal DRI; falsos positivos 3; status noise_suppressed",
     "regulatory_change": {
       "source": "CVM",
       "applies_to_company": false,
@@ -244,7 +244,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-10",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "ANPD high para empresa=sim; prazo 20d; dono Legal DRI; falsos positivos 1; status action_required",
     "regulatory_change": {
       "source": "ANPD",
       "applies_to_company": true,
@@ -271,7 +271,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-11",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "regulador_setorial medium para empresa=sim; sem prazo; dono Legal DRI; falsos positivos 0; status action_required",
     "regulatory_change": {
       "source": "regulador_setorial",
       "applies_to_company": true,
@@ -298,7 +298,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-12",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "ANPD high para empresa=sim; prazo 20d; dono Legal DRI; falsos positivos 1; status action_required",
     "regulatory_change": {
       "source": "ANPD",
       "applies_to_company": true,
@@ -325,7 +325,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-13",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "ANPD none para empresa=não; prazo 7d; dono sem dono; falsos positivos 0; status monitor_only",
     "regulatory_change": {
       "source": "ANPD",
       "applies_to_company": false,
@@ -352,7 +352,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-14",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "BACEN low para empresa=sim; prazo -1d; dono Legal DRI; falsos positivos 1; status overdue",
     "regulatory_change": {
       "source": "BACEN",
       "applies_to_company": true,
@@ -379,7 +379,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-15",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "CVM medium para empresa=sim; prazo 90d; dono Legal DRI; falsos positivos 3; status needs_action_plan",
     "regulatory_change": {
       "source": "CVM",
       "applies_to_company": true,
@@ -406,7 +406,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-16",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "SENACON high para empresa=sim; sem prazo; dono sem dono; falsos positivos 1; status needs_action_plan",
     "regulatory_change": {
       "source": "SENACON",
       "applies_to_company": true,
@@ -433,7 +433,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-17",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "regulador_setorial none para empresa=não; prazo 45d; dono Legal DRI; falsos positivos 0; status monitor_only",
     "regulatory_change": {
       "source": "regulador_setorial",
       "applies_to_company": false,
@@ -460,7 +460,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-18",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "ANPD high para empresa=sim; prazo 20d; dono Legal DRI; falsos positivos 1; status action_required",
     "regulatory_change": {
       "source": "ANPD",
       "applies_to_company": true,
@@ -487,7 +487,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-19",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "ANPD medium para empresa=sim; prazo -1d; dono sem dono; falsos positivos 3; status overdue",
     "regulatory_change": {
       "source": "ANPD",
       "applies_to_company": true,
@@ -514,7 +514,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-20",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "BACEN high para empresa=sim; prazo 90d; dono Legal DRI; falsos positivos 1; status action_required",
     "regulatory_change": {
       "source": "BACEN",
       "applies_to_company": true,
@@ -541,7 +541,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-21",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "CVM none para empresa=não; sem prazo; dono Legal DRI; falsos positivos 0; status monitor_only",
     "regulatory_change": {
       "source": "CVM",
       "applies_to_company": false,
@@ -568,7 +568,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-22",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "ANPD high para empresa=sim; prazo 20d; dono Legal DRI; falsos positivos 1; status action_required",
     "regulatory_change": {
       "source": "ANPD",
       "applies_to_company": true,
@@ -595,7 +595,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-23",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "regulador_setorial medium para empresa=sim; prazo 7d; dono Legal DRI; falsos positivos 0; status action_required",
     "regulatory_change": {
       "source": "regulador_setorial",
       "applies_to_company": true,
@@ -622,7 +622,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-24",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "ANPD high para empresa=sim; prazo 20d; dono Legal DRI; falsos positivos 1; status action_required",
     "regulatory_change": {
       "source": "ANPD",
       "applies_to_company": true,
@@ -649,7 +649,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-25",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "ANPD none para empresa=não; prazo 90d; dono sem dono; falsos positivos 3; status noise_suppressed",
     "regulatory_change": {
       "source": "ANPD",
       "applies_to_company": false,
@@ -676,7 +676,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-26",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "BACEN low para empresa=sim; sem prazo; dono Legal DRI; falsos positivos 1; status needs_action_plan",
     "regulatory_change": {
       "source": "BACEN",
       "applies_to_company": true,
@@ -703,7 +703,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-27",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "CVM medium para empresa=sim; prazo 45d; dono Legal DRI; falsos positivos 0; status action_required",
     "regulatory_change": {
       "source": "CVM",
       "applies_to_company": true,
@@ -730,7 +730,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-28",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "ANPD high para empresa=sim; prazo 20d; dono Legal DRI; falsos positivos 1; status action_required",
     "regulatory_change": {
       "source": "ANPD",
       "applies_to_company": true,
@@ -757,7 +757,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-29",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "regulador_setorial none para empresa=não; prazo -1d; dono Legal DRI; falsos positivos 3; status noise_suppressed",
     "regulatory_change": {
       "source": "regulador_setorial",
       "applies_to_company": false,
@@ -784,7 +784,7 @@
   },
   {
     "id": "g12-regulatory-monitor-domain-30",
-    "desc": "regulatory monitor varied domain eval",
+    "desc": "blog_aleatorio low para empresa=sim; prazo 90d; dono Legal DRI; falsos positivos 1; status untrusted_source",
     "regulatory_change": {
       "source": "blog_aleatorio",
       "applies_to_company": true,

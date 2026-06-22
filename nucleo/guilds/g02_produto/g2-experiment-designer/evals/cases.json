@@ -19,7 +19,8 @@
       "can_start": true,
       "decision": "pre_registrado",
       "duration_days": 4
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-02",
@@ -39,7 +40,8 @@
       "fits_window": true,
       "can_start": false,
       "decision": "bloqueado_sem_guardrail"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-03",
@@ -62,7 +64,8 @@
       "can_start": false,
       "decision": "bloqueado_subdimensionado",
       "duration_days": 8
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-04",
@@ -85,7 +88,8 @@
       "can_start": true,
       "decision": "pre_registrado",
       "duration_days": 2
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-05",
@@ -108,7 +112,8 @@
       "can_start": true,
       "decision": "pre_registrado",
       "duration_days": 2
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-06",
@@ -128,7 +133,8 @@
       "fits_window": true,
       "can_start": false,
       "decision": "bloqueado_sem_guardrail"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-07",
@@ -151,7 +157,8 @@
       "can_start": false,
       "decision": "bloqueado_subdimensionado",
       "duration_days": 251
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-08",
@@ -174,7 +181,8 @@
       "can_start": true,
       "decision": "pre_registrado",
       "duration_days": 8
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-09",
@@ -197,7 +205,8 @@
       "can_start": false,
       "decision": "bloqueado_subdimensionado",
       "duration_days": 8
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-10",
@@ -219,7 +228,8 @@
       "can_start": true,
       "decision": "pre_registrado",
       "duration_days": 16
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-11",
@@ -241,7 +251,8 @@
       "can_start": true,
       "decision": "pre_registrado",
       "duration_days": 1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-12",
@@ -264,7 +275,8 @@
       "can_start": true,
       "decision": "pre_registrado",
       "duration_days": 4
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-13",
@@ -286,7 +298,8 @@
       "can_start": true,
       "decision": "pre_registrado",
       "duration_days": 1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-14",
@@ -309,7 +322,8 @@
       "can_start": true,
       "decision": "pre_registrado",
       "duration_days": 1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-15",
@@ -330,7 +344,8 @@
       "fits_window": false,
       "can_start": false,
       "decision": "bloqueado_sem_guardrail"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-16",
@@ -353,7 +368,8 @@
       "can_start": true,
       "decision": "pre_registrado",
       "duration_days": 1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-17",
@@ -375,7 +391,8 @@
       "can_start": false,
       "decision": "bloqueado",
       "duration_days": 0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-18",
@@ -398,7 +415,8 @@
       "can_start": true,
       "decision": "pre_registrado",
       "duration_days": 1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-19",
@@ -421,7 +439,8 @@
       "can_start": true,
       "decision": "pre_registrado",
       "duration_days": 1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-20",
@@ -444,7 +463,8 @@
       "can_start": true,
       "decision": "pre_registrado",
       "duration_days": 2
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-21",
@@ -465,7 +485,8 @@
       "fits_window": true,
       "can_start": false,
       "decision": "bloqueado_sem_guardrail"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-22",
@@ -488,7 +509,8 @@
       "can_start": true,
       "decision": "pre_registrado",
       "duration_days": 1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-23",
@@ -511,7 +533,8 @@
       "can_start": true,
       "decision": "pre_registrado",
       "duration_days": 2
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-24",
@@ -534,7 +557,8 @@
       "can_start": false,
       "decision": "bloqueado_subdimensionado",
       "duration_days": 37
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-25",
@@ -557,7 +581,8 @@
       "can_start": true,
       "decision": "pre_registrado",
       "duration_days": 1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-26",
@@ -577,7 +602,8 @@
       "fits_window": true,
       "can_start": false,
       "decision": "bloqueado_sem_guardrail"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-27",
@@ -599,7 +625,8 @@
       "can_start": true,
       "decision": "pre_registrado",
       "duration_days": 1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-28",
@@ -622,7 +649,8 @@
       "can_start": true,
       "decision": "pre_registrado",
       "duration_days": 29
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-29",
@@ -645,7 +673,8 @@
       "can_start": true,
       "decision": "pre_registrado",
       "duration_days": 1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-30",
@@ -668,7 +697,8 @@
       "can_start": false,
       "decision": "bloqueado_subdimensionado",
       "duration_days": 1568
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-31",
@@ -691,7 +721,8 @@
       "can_start": true,
       "decision": "pre_registrado",
       "duration_days": 1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "exp-32",
@@ -714,6 +745,7 @@
       "can_start": true,
       "decision": "pre_registrado",
       "duration_days": 2
-    }
+    },
+    "provenance": "independent"
   }
 ]

@@ -16,7 +16,8 @@
       "failed_criteria": [],
       "lovability": 8,
       "bypass_used": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-02",
@@ -37,7 +38,8 @@
       ],
       "lovability": 5,
       "bypass_used": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-03",
@@ -58,7 +60,8 @@
         "e2e"
       ],
       "bypass_used": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-04",
@@ -79,7 +82,8 @@
         "coverage"
       ],
       "bypass_used": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-05",
@@ -99,7 +103,8 @@
         "pass_rate"
       ],
       "bypass_used": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-06",
@@ -116,7 +121,8 @@
       "decision": "PASS",
       "valid": true,
       "failed_criteria": []
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-07",
@@ -135,7 +141,8 @@
       "failed_criteria": [
         "coverage"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-08",
@@ -152,7 +159,8 @@
       "decision": "PASS",
       "valid": true,
       "failed_criteria": []
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-09",
@@ -171,7 +179,8 @@
       "failed_criteria": [
         "e2e"
       ]
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "qg-10",
@@ -190,7 +199,8 @@
       "failed_criteria": [
         "no_regression"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-11",
@@ -209,7 +219,8 @@
       "failed_criteria": [
         "load_sla"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-12",
@@ -229,7 +240,8 @@
         "lovability"
       ],
       "lovability": 6
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-13",
@@ -247,7 +259,8 @@
       "valid": true,
       "failed_criteria": [],
       "lovability": 7
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-14",
@@ -268,7 +281,8 @@
         "coverage",
         "e2e"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-15",
@@ -293,7 +307,8 @@
         "lovability"
       ],
       "bypass_used": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-16",
@@ -312,7 +327,8 @@
       "valid": true,
       "failed_criteria": [],
       "bypass_used": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-17",
@@ -333,7 +349,8 @@
         "e2e"
       ],
       "bypass_used": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-18",
@@ -353,7 +370,8 @@
         "e2e"
       ],
       "bypass_used": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-19",
@@ -375,7 +393,8 @@
         "lovability"
       ],
       "bypass_used": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-20",
@@ -396,7 +415,8 @@
         "load_sla"
       ],
       "bypass_used": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-21",
@@ -416,7 +436,8 @@
         "lovability"
       ],
       "lovability": 5
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-22",
@@ -435,7 +456,8 @@
       "failed_criteria": [
         "pass_rate"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-23",
@@ -454,7 +476,8 @@
       "failed_criteria": [
         "coverage"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-24",
@@ -472,7 +495,8 @@
       "valid": true,
       "failed_criteria": [],
       "lovability": 10
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-25",
@@ -491,7 +515,8 @@
       "failed_criteria": [
         "lovability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-26",
@@ -510,7 +535,8 @@
       "failed_criteria": [
         "no_regression"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-27",
@@ -536,7 +562,8 @@
         "load_sla",
         "lovability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-28",
@@ -557,7 +584,8 @@
       ],
       "lovability": 3,
       "bypass_used": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-29",
@@ -577,7 +605,8 @@
         "coverage",
         "lovability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-30",
@@ -597,7 +626,8 @@
         "pass_rate",
         "load_sla"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-31",
@@ -616,7 +646,8 @@
       "failed_criteria": [],
       "lovability": 7,
       "bypass_used": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "qg-32",
@@ -635,6 +666,7 @@
       "valid": true,
       "bypass_used": false,
       "failed_criteria": []
-    }
+    },
+    "provenance": "catalog"
   }
 ]

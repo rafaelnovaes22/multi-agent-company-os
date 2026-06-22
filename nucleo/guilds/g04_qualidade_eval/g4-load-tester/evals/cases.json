@@ -30,7 +30,8 @@
       "sla_ok": true,
       "c3_ok": true,
       "sla_verdict": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-02",
@@ -57,7 +58,8 @@
       "error_rate_pct": 0.4,
       "sla_ok": false,
       "sla_verdict": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-03",
@@ -87,7 +89,8 @@
       "c3_ok": false,
       "cost_ratio": 0.5,
       "sla_verdict": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-04",
@@ -117,7 +120,8 @@
       "cost_ratio": 0.2,
       "sla_ok": true,
       "sla_verdict": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-05",
@@ -149,7 +153,8 @@
       "error_rate_pct": 0.0,
       "sla_ok": true,
       "sla_verdict": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-06",
@@ -175,7 +180,8 @@
       "error_rate_pct": 1.0,
       "sla_ok": true,
       "sla_verdict": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-07",
@@ -201,7 +207,8 @@
       "error_rate_pct": 1.1,
       "sla_ok": false,
       "sla_verdict": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-08",
@@ -233,7 +240,8 @@
       "error_rate_pct": 0.0,
       "sla_ok": true,
       "sla_verdict": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-09",
@@ -259,7 +267,8 @@
       "error_rate_pct": 5.0,
       "sla_ok": false,
       "sla_verdict": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-10",
@@ -291,7 +300,8 @@
       "error_rate_pct": 0.0,
       "sla_ok": false,
       "sla_verdict": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-11",
@@ -321,7 +331,8 @@
       "c3_ok": true,
       "sla_ok": true,
       "sla_verdict": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-12",
@@ -351,7 +362,8 @@
       "c3_ok": false,
       "sla_ok": true,
       "sla_verdict": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-13",
@@ -382,7 +394,8 @@
       "c3_ok": false,
       "cost_ratio": 0.8,
       "sla_verdict": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-14",
@@ -410,7 +423,8 @@
       "cost_ratio": null,
       "sla_ok": true,
       "sla_verdict": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-15",
@@ -437,7 +451,8 @@
       "error_rate_pct": 0.0,
       "sla_ok": true,
       "sla_verdict": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-16",
@@ -471,7 +486,8 @@
       "error_rate_pct": 0.22,
       "sla_ok": true,
       "sla_verdict": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-17",
@@ -497,7 +513,8 @@
       "error_rate_pct": 0.4,
       "sla_ok": true,
       "sla_verdict": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-18",
@@ -523,7 +540,8 @@
       "error_rate_pct": 0.6,
       "sla_ok": false,
       "sla_verdict": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-19",
@@ -548,7 +566,8 @@
       "error_rate_pct": 0.0,
       "sla_ok": true,
       "sla_verdict": "PASS"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "lt-20",
@@ -574,7 +593,8 @@
       "error_rate_pct": 0.0,
       "sla_ok": true,
       "sla_verdict": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-21",
@@ -600,7 +620,8 @@
       "error_rate_pct": 0.0,
       "sla_ok": false,
       "sla_verdict": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-22",
@@ -630,7 +651,8 @@
       "c3_ok": true,
       "sla_ok": true,
       "sla_verdict": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-23",
@@ -660,7 +682,8 @@
       "c3_ok": false,
       "sla_ok": true,
       "sla_verdict": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-24",
@@ -702,7 +725,8 @@
       "error_rate_pct": 0.0,
       "sla_ok": true,
       "sla_verdict": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-25",
@@ -727,7 +751,8 @@
       "error_rate_pct": 10.0,
       "sla_ok": false,
       "sla_verdict": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-26",
@@ -757,7 +782,8 @@
       "c3_ok": false,
       "sla_ok": true,
       "sla_verdict": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-27",
@@ -791,7 +817,8 @@
       "error_rate_pct": 0.0,
       "sla_ok": true,
       "sla_verdict": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-28",
@@ -818,7 +845,8 @@
       "error_rate_pct": 0.2,
       "sla_ok": true,
       "sla_verdict": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-29",
@@ -848,7 +876,8 @@
       "c3_ok": true,
       "sla_ok": false,
       "sla_verdict": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-30",
@@ -884,7 +913,8 @@
       "c3_ok": true,
       "sla_ok": true,
       "sla_verdict": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-31",
@@ -909,7 +939,8 @@
       "error_rate_pct": 0.0,
       "sla_ok": true,
       "sla_verdict": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-32",
@@ -939,6 +970,7 @@
       "c3_ok": true,
       "sla_ok": true,
       "sla_verdict": "PASS"
-    }
+    },
+    "provenance": "catalog"
   }
 ]

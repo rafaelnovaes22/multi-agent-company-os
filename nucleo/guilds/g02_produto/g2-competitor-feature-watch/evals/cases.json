@@ -15,7 +15,8 @@
       "routed": true,
       "signal_committed": true,
       "requires_human_review": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-02",
@@ -31,7 +32,8 @@
       "status": "classificado",
       "recommendation": "responder",
       "routed": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-03",
@@ -47,7 +49,8 @@
       "status": "classificado",
       "recommendation": "observar",
       "routed": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-04",
@@ -63,7 +66,8 @@
       "status": "classificado",
       "recommendation": "observar",
       "routed": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-05",
@@ -80,7 +84,8 @@
       "recommendation": "ignorar",
       "routed": false,
       "signal_committed": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-06",
@@ -97,7 +102,8 @@
       "recommendation": "ignorar",
       "routed": false,
       "signal_committed": false
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-07",
@@ -113,7 +119,8 @@
       "routed": false,
       "source_public": false,
       "signal_committed": false
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-08",
@@ -130,7 +137,8 @@
       "routed": false,
       "source_public": false,
       "requires_human_review": false
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-09",
@@ -147,7 +155,8 @@
       "is_duplicate": true,
       "routed": false,
       "signal_committed": false
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-10",
@@ -160,7 +169,8 @@
     "expected": {
       "status": "rejeitado_fonte",
       "source_public": false
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-11",
@@ -174,7 +184,8 @@
     "expected": {
       "status": "duplicado",
       "is_duplicate": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-12",
@@ -189,7 +200,8 @@
     "expected": {
       "status": "ruido",
       "routed": false
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-13",
@@ -206,7 +218,8 @@
       "recommendation": "responder",
       "routed": true,
       "requires_human_review": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-14",
@@ -221,7 +234,8 @@
     "expected": {
       "recommendation": "observar",
       "routed": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-15",
@@ -237,7 +251,8 @@
       "recommendation": "ignorar",
       "routed": false,
       "status": "classificado"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-16",
@@ -250,7 +265,8 @@
       "status": "classificado",
       "recommendation": "ignorar",
       "routed": false
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-17",
@@ -264,7 +280,8 @@
     "expected": {
       "has_substance": true,
       "recommendation": "responder"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-18",
@@ -278,7 +295,8 @@
     "expected": {
       "recommendation": "observar",
       "requires_human_review": false
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-19",
@@ -292,7 +310,8 @@
     "expected": {
       "recommendation": "responder",
       "requires_human_review": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-20",
@@ -307,7 +326,8 @@
     "expected": {
       "signal_committed": true,
       "status": "classificado"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-21",
@@ -320,7 +340,8 @@
     "expected": {
       "signal_committed": false,
       "status": "ruido"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-22",
@@ -335,7 +356,8 @@
     "expected": {
       "recommendation": "responder",
       "routed": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-23",
@@ -350,7 +372,8 @@
     "expected": {
       "recommendation": "responder",
       "routed": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-24",
@@ -364,7 +387,8 @@
     },
     "expected": {
       "recommendation": "observar"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-25",
@@ -379,7 +403,8 @@
     "expected": {
       "recommendation": "observar",
       "routed": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-26",
@@ -393,7 +418,8 @@
     "expected": {
       "status": "rejeitado_fonte",
       "source_public": false
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-27",
@@ -406,7 +432,8 @@
     },
     "expected": {
       "routed": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-28",
@@ -420,7 +447,8 @@
     },
     "expected": {
       "routed": false
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-29",
@@ -434,7 +462,8 @@
     "expected": {
       "is_duplicate": false,
       "recommendation": "observar"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-30",
@@ -449,7 +478,8 @@
     "expected": {
       "status": "duplicado",
       "routed": false
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-31",
@@ -464,7 +494,8 @@
     "expected": {
       "status": "ruido",
       "recommendation": "ignorar"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "g2-competitor-feature-watch-32",
@@ -478,6 +509,7 @@
     "expected": {
       "source_public": true,
       "status": "classificado"
-    }
+    },
+    "provenance": "independent"
   }
 ]

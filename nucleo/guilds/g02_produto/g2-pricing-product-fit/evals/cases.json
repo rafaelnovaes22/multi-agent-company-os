@@ -22,7 +22,8 @@
       "status": "viola_c3",
       "c3_ratio": 0.2667,
       "min_price_c3": 32.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-02",
@@ -47,7 +48,8 @@
       "status": "aprovado",
       "c3_ratio": 0.2,
       "min_price_c3": 40.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-03",
@@ -71,7 +73,8 @@
       "blocked": true,
       "status": "sem_wtp",
       "c3_ratio": 0.1333
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-04",
@@ -96,7 +99,8 @@
       "status": "aprovado",
       "c3_ratio": 0.2,
       "min_price_c3": 48.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-05",
@@ -121,7 +125,8 @@
       "status": "aprovado",
       "c3_ratio": 0.2,
       "min_price_c3": 160.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-06",
@@ -145,7 +150,8 @@
       "blocked": false,
       "status": "aprovado",
       "c3_ratio": 0.75
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-07",
@@ -170,7 +176,8 @@
       "status": "sem_wtp",
       "c3_ratio": 0.1,
       "min_price_c3": 40.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-08",
@@ -195,7 +202,8 @@
       "status": "aprovado",
       "c3_ratio": 0.25,
       "min_price_c3": 50.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-09",
@@ -220,7 +228,8 @@
       "status": "viola_c3",
       "c3_ratio": 0.251,
       "min_price_c3": 50.2
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-10",
@@ -245,7 +254,8 @@
       "status": "sem_wtp",
       "c3_ratio": 3.3333,
       "min_price_c3": 200.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-11",
@@ -270,7 +280,8 @@
       "status": "aprovado",
       "c3_ratio": 0.0,
       "min_price_c3": 0.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-12",
@@ -295,7 +306,8 @@
       "status": "aprovado",
       "c3_ratio": 0.1667,
       "min_price_c3": 20.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-13",
@@ -320,7 +332,8 @@
       "status": "aprovado",
       "c3_ratio": 0.2,
       "min_price_c3": 16.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-14",
@@ -345,7 +358,8 @@
       "status": "viola_c3",
       "c3_ratio": 0.8,
       "min_price_c3": 240.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-15",
@@ -369,7 +383,8 @@
       "blocked": false,
       "status": "aprovado",
       "c3_ratio": 5.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-16",
@@ -394,7 +409,8 @@
       "status": "aprovado",
       "c3_ratio": 0.125,
       "min_price_c3": 200.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-17",
@@ -419,7 +435,8 @@
       "status": "aprovado",
       "c3_ratio": 0.25,
       "min_price_c3": 40.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-18",
@@ -444,7 +461,8 @@
       "status": "aprovado",
       "c3_ratio": 0.2,
       "min_price_c3": 40.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-19",
@@ -467,7 +485,8 @@
       "tier": "assinatura",
       "blocked": true,
       "status": "sem_wtp"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-20",
@@ -491,7 +510,8 @@
       "blocked": true,
       "status": "sem_wtp",
       "min_price_c3": 0.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-21",
@@ -516,7 +536,8 @@
       "status": "aprovado",
       "c3_ratio": 0.2,
       "min_price_c3": 800.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-22",
@@ -541,7 +562,8 @@
       "status": "aprovado",
       "c3_ratio": 0.25,
       "min_price_c3": 50.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-23",
@@ -566,7 +588,8 @@
       "status": "viola_c3",
       "c3_ratio": 0.26,
       "min_price_c3": 104.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-24",
@@ -591,7 +614,8 @@
       "status": "aprovado",
       "c3_ratio": 0.2,
       "min_price_c3": 80.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-25",
@@ -616,7 +640,8 @@
       "status": "aprovado",
       "c3_ratio": 0.2,
       "min_price_c3": 120.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-26",
@@ -640,7 +665,8 @@
       "blocked": false,
       "status": "aprovado",
       "c3_ratio": 0.1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-27",
@@ -665,7 +691,8 @@
       "status": "viola_c3",
       "c3_ratio": 0.3,
       "min_price_c3": 120.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-28",
@@ -690,7 +717,8 @@
       "status": "aprovado",
       "c3_ratio": 0.2,
       "min_price_c3": 160.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-29",
@@ -715,7 +743,8 @@
       "status": "viola_c3",
       "c3_ratio": 0.375,
       "min_price_c3": 60.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-30",
@@ -740,7 +769,8 @@
       "status": "viola_c3",
       "c3_ratio": 1.0,
       "min_price_c3": 200.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-31",
@@ -765,7 +795,8 @@
       "status": "aprovado",
       "c3_ratio": 0.2,
       "min_price_c3": 8.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "wtp-32",
@@ -789,6 +820,7 @@
       "blocked": false,
       "status": "aprovado",
       "c3_ratio": 0.3
-    }
+    },
+    "provenance": "independent"
   }
 ]

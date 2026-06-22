@@ -13,7 +13,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-02",
@@ -29,7 +30,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-03",
@@ -44,7 +46,8 @@
     "expected": {
       "som_le_sam": true,
       "sam_le_tam": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-04",
@@ -59,7 +62,8 @@
     "expected": {
       "som_le_sam": true,
       "sam_le_tam": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-05",
@@ -74,7 +78,8 @@
     "expected": {
       "som_le_sam": true,
       "sam_le_tam": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-06",
@@ -90,7 +95,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-07",
@@ -106,7 +112,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-08",
@@ -122,7 +129,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-09",
@@ -138,7 +146,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-10",
@@ -154,7 +163,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-11",
@@ -170,7 +180,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-12",
@@ -186,7 +197,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-13",
@@ -202,7 +214,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-14",
@@ -218,7 +231,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-15",
@@ -234,7 +248,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-16",
@@ -250,7 +265,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-17",
@@ -266,7 +282,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-18",
@@ -282,7 +299,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-19",
@@ -298,7 +316,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-20",
@@ -314,7 +333,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-21",
@@ -330,7 +350,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-22",
@@ -346,7 +367,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-23",
@@ -362,7 +384,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-24",
@@ -378,7 +401,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-25",
@@ -394,7 +418,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-26",
@@ -410,7 +435,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-27",
@@ -426,7 +452,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-28",
@@ -442,7 +469,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-29",
@@ -458,7 +486,8 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "os-30",
@@ -474,6 +503,7 @@
       "som_le_sam": true,
       "sam_le_tam": true,
       "som_gt_0": true
-    }
+    },
+    "provenance": "independent"
   }
 ]

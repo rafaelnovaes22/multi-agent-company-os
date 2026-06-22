@@ -26,7 +26,8 @@
       "low_confidence": false,
       "needs_experiment": false,
       "status": "auditavel"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-02",
@@ -53,7 +54,8 @@
       "low_confidence": true,
       "needs_experiment": true,
       "status": "rebaixado_experimento"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-03",
@@ -76,7 +78,8 @@
       "low_confidence": false,
       "needs_experiment": false,
       "status": "sem_fonte"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-04",
@@ -105,7 +108,8 @@
       "low_confidence": false,
       "needs_experiment": false,
       "status": "auditavel"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-05",
@@ -134,7 +138,8 @@
       "low_confidence": false,
       "needs_experiment": false,
       "status": "auditavel"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-06",
@@ -163,7 +168,8 @@
       "low_confidence": true,
       "needs_experiment": true,
       "status": "rebaixado_experimento"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-07",
@@ -192,7 +198,8 @@
       "low_confidence": true,
       "needs_experiment": true,
       "status": "rebaixado_experimento"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-08",
@@ -215,7 +222,8 @@
       "low_confidence": true,
       "needs_experiment": true,
       "status": "rebaixado_experimento"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-09",
@@ -244,7 +252,8 @@
       "low_confidence": false,
       "needs_experiment": false,
       "status": "auditavel"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-10",
@@ -273,7 +282,8 @@
       "low_confidence": false,
       "needs_experiment": false,
       "status": "auditavel"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-11",
@@ -302,7 +312,8 @@
       "low_confidence": false,
       "needs_experiment": false,
       "status": "auditavel"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-12",
@@ -330,7 +341,8 @@
       "low_confidence": false,
       "needs_experiment": false,
       "status": "sem_fonte"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-13",
@@ -356,7 +368,8 @@
       "low_confidence": false,
       "needs_experiment": false,
       "status": "sem_fonte"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-14",
@@ -385,7 +398,8 @@
       "low_confidence": false,
       "needs_experiment": false,
       "status": "auditavel"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-15",
@@ -408,7 +422,8 @@
       "low_confidence": true,
       "needs_experiment": true,
       "status": "rebaixado_experimento"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-16",
@@ -437,7 +452,8 @@
       "low_confidence": false,
       "needs_experiment": false,
       "status": "auditavel"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-17",
@@ -460,7 +476,8 @@
       "low_confidence": false,
       "needs_experiment": false,
       "status": "sem_fonte"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-18",
@@ -489,7 +506,8 @@
       "low_confidence": false,
       "needs_experiment": false,
       "status": "auditavel"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-19",
@@ -516,7 +534,8 @@
       "low_confidence": false,
       "needs_experiment": false,
       "status": "sem_fonte"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-20",
@@ -545,7 +564,8 @@
       "low_confidence": true,
       "needs_experiment": true,
       "status": "rebaixado_experimento"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-21",
@@ -574,7 +594,8 @@
       "low_confidence": false,
       "needs_experiment": false,
       "status": "auditavel"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-22",
@@ -603,7 +624,8 @@
       "low_confidence": false,
       "needs_experiment": false,
       "status": "auditavel"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-23",
@@ -626,7 +648,8 @@
       "low_confidence": false,
       "needs_experiment": false,
       "status": "sem_fonte"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-24",
@@ -655,7 +678,8 @@
       "low_confidence": false,
       "needs_experiment": false,
       "status": "auditavel"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-25",
@@ -684,7 +708,8 @@
       "low_confidence": true,
       "needs_experiment": true,
       "status": "rebaixado_experimento"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-26",
@@ -713,7 +738,8 @@
       "low_confidence": false,
       "needs_experiment": false,
       "status": "auditavel"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-27",
@@ -736,7 +762,8 @@
       "low_confidence": false,
       "needs_experiment": false,
       "status": "sem_fonte"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-28",
@@ -764,7 +791,8 @@
       "low_confidence": false,
       "needs_experiment": false,
       "status": "sem_fonte"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-29",
@@ -793,7 +821,8 @@
       "low_confidence": true,
       "needs_experiment": true,
       "status": "rebaixado_experimento"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-30",
@@ -822,7 +851,8 @@
       "low_confidence": false,
       "needs_experiment": false,
       "status": "auditavel"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-31",
@@ -851,7 +881,8 @@
       "low_confidence": false,
       "needs_experiment": false,
       "status": "auditavel"
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rice-32",
@@ -880,6 +911,7 @@
       "low_confidence": false,
       "needs_experiment": false,
       "status": "auditavel"
-    }
+    },
+    "provenance": "independent"
   }
 ]

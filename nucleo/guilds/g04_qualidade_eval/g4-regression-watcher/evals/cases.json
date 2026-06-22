@@ -15,7 +15,8 @@
       "severity": "P2",
       "quality_drift": false,
       "regression_confirmed": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-02",
@@ -33,7 +34,8 @@
       "severity": "P1",
       "quality_drift": true,
       "regression_confirmed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-03",
@@ -52,7 +54,8 @@
       "quality_drift": false,
       "cost_drift": true,
       "regression_confirmed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-04",
@@ -69,7 +72,8 @@
       "severity": "P0",
       "quality_drift": true,
       "regression_confirmed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-05",
@@ -86,7 +90,8 @@
       "quality_drift": true,
       "drift": "WARN",
       "regression_confirmed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-06",
@@ -103,7 +108,8 @@
       "quality_drift": false,
       "drift": "OK",
       "regression_confirmed": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-07",
@@ -120,7 +126,8 @@
       "quality_drift": true,
       "drift": "FAIL",
       "regression_confirmed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-08",
@@ -137,7 +144,8 @@
       "quality_drift": true,
       "drift": "WARN",
       "regression_confirmed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-09",
@@ -154,7 +162,8 @@
       "drift": "OK",
       "severity": "P2",
       "regression_confirmed": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-10",
@@ -170,7 +179,8 @@
       "cost_drift": true,
       "drift": "WARN",
       "regression_confirmed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-11",
@@ -188,7 +198,8 @@
       "severity": "P2",
       "quality_drift": false,
       "regression_confirmed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-12",
@@ -205,7 +216,8 @@
       "quality_drift": false,
       "drift": "OK",
       "regression_confirmed": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-13",
@@ -222,7 +234,8 @@
       "drift": "OK",
       "regression_confirmed": false,
       "severity": "P2"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-14",
@@ -241,7 +254,8 @@
       "quality_drift": true,
       "cost_drift": true,
       "regression_confirmed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-15",
@@ -260,7 +274,8 @@
       "quality_drift": true,
       "cost_drift": true,
       "regression_confirmed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-16",
@@ -279,7 +294,8 @@
       "cost_drift": true,
       "drift": "WARN",
       "regression_confirmed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-17",
@@ -295,7 +311,8 @@
       "cost_drift": false,
       "drift": "OK",
       "regression_confirmed": false
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "rw-18",
@@ -314,7 +331,8 @@
       "quality_drift": true,
       "cost_drift": false,
       "regression_confirmed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-19",
@@ -331,7 +349,8 @@
       "quality_drift": false,
       "drift": "OK",
       "regression_confirmed": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-20",
@@ -348,7 +367,8 @@
       "quality_drift": true,
       "drift": "WARN",
       "regression_confirmed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-21",
@@ -364,7 +384,8 @@
       "severity": "P0",
       "drift": "FAIL",
       "regression_confirmed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-22",
@@ -382,7 +403,8 @@
       "quality_drift": false,
       "drift": "OK",
       "regression_confirmed": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-23",
@@ -400,7 +422,8 @@
       "cost_drift": false,
       "drift": "WARN",
       "regression_confirmed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-24",
@@ -416,7 +439,8 @@
       "severity": "P2",
       "drift": "OK",
       "regression_confirmed": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-25",
@@ -433,7 +457,8 @@
       "quality_drift": true,
       "drift": "WARN",
       "regression_confirmed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-26",
@@ -449,7 +474,8 @@
       "cost_drift": true,
       "drift": "WARN",
       "regression_confirmed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-27",
@@ -465,7 +491,8 @@
       "severity": "P0",
       "drift": "FAIL",
       "regression_confirmed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-28",
@@ -482,7 +509,8 @@
       "cost_drift": false,
       "drift": "OK",
       "regression_confirmed": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-29",
@@ -501,7 +529,8 @@
       "severity": "P2",
       "drift": "WARN",
       "regression_confirmed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-30",
@@ -519,7 +548,8 @@
       "severity": "P0",
       "drift": "FAIL",
       "regression_confirmed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-31",
@@ -536,7 +566,8 @@
       "quality_drift": true,
       "drift": "WARN",
       "regression_confirmed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rw-32",
@@ -554,6 +585,7 @@
       "cost_drift": false,
       "drift": "OK",
       "regression_confirmed": false
-    }
+    },
+    "provenance": "catalog"
   }
 ]

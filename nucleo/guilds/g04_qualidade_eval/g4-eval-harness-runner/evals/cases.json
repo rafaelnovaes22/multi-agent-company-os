@@ -40,7 +40,8 @@
         "adversarial": 66.7
       },
       "avg_cost_per_case": 0.15
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-02",
@@ -106,7 +107,8 @@
         "smoke": 87.5
       },
       "avg_cost_per_case": 0.05
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-03",
@@ -136,7 +138,8 @@
         "recusa": 50.0
       },
       "avg_cost_per_case": 0.3
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-04",
@@ -166,7 +169,8 @@
         "happy": 66.7
       },
       "avg_cost_per_case": 0.1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-05",
@@ -196,7 +200,8 @@
         "adversarial": 0.0
       },
       "avg_cost_per_case": 0.2
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-06",
@@ -220,7 +225,8 @@
         "flaky": 33.3
       },
       "avg_cost_per_case": 0.15
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-07",
@@ -430,7 +436,8 @@
         "c": 87.5
       },
       "avg_cost_per_case": 0.1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-08",
@@ -480,7 +487,8 @@
         "C": 0.0
       },
       "avg_cost_per_case": 0.1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-09",
@@ -510,7 +518,8 @@
         "x": 100.0
       },
       "avg_cost_per_case": 0.2
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-10",
@@ -546,7 +555,8 @@
         "y": 46.7
       },
       "avg_cost_per_case": 0.5
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-11",
@@ -574,7 +584,8 @@
         "z": 25.0
       },
       "avg_cost_per_case": 0.1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-12",
@@ -598,7 +609,8 @@
         "solo": 100.0
       },
       "avg_cost_per_case": 0.4
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-13",
@@ -641,7 +653,8 @@
         "ruim": 25.0
       },
       "avg_cost_per_case": 0.1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-14",
@@ -677,7 +690,8 @@
         "a": 50.0
       },
       "avg_cost_per_case": 0.4
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-15",
@@ -729,7 +743,8 @@
         "cat4": 100.0
       },
       "avg_cost_per_case": 0.1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-16",
@@ -771,7 +786,8 @@
         "m": 33.3
       },
       "avg_cost_per_case": 0.1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-17",
@@ -801,7 +817,8 @@
         "caro": 50.0
       },
       "avg_cost_per_case": 2.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-18",
@@ -831,7 +848,8 @@
         "free": 75.0
       },
       "avg_cost_per_case": 0.0
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-19",
@@ -909,7 +927,8 @@
         "g": 46.7
       },
       "avg_cost_per_case": 0.1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-20",
@@ -939,7 +958,8 @@
         "h": 50.0
       },
       "avg_cost_per_case": 0.1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-21",
@@ -982,7 +1002,8 @@
         "adversarial": 0.0
       },
       "avg_cost_per_case": 0.1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-22",
@@ -1096,7 +1117,8 @@
         "v": 100.0
       },
       "avg_cost_per_case": 0.05
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-23",
@@ -1120,7 +1142,8 @@
         "raro": 10.0
       },
       "avg_cost_per_case": 0.3
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-24",
@@ -1163,7 +1186,8 @@
         "classificacao": 0.0
       },
       "avg_cost_per_case": 0.1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-25",
@@ -1191,7 +1215,8 @@
         "geral": 75.0
       },
       "avg_cost_per_case": 0.1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-26",
@@ -1233,7 +1258,8 @@
         "q": 25.0
       },
       "avg_cost_per_case": 0.1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-27",
@@ -1269,7 +1295,8 @@
         "r": 55.6
       },
       "avg_cost_per_case": 0.1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-28",
@@ -1299,7 +1326,8 @@
         "baixa": 25.0
       },
       "avg_cost_per_case": 0.2
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-29",
@@ -1377,7 +1405,8 @@
         "big": 100.0
       },
       "avg_cost_per_case": 0.1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-30",
@@ -1455,7 +1484,8 @@
         "p": 60.0
       },
       "avg_cost_per_case": 0.1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-31",
@@ -1500,7 +1530,8 @@
         "d": 100.0
       },
       "avg_cost_per_case": 0.25
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "hr-32",
@@ -1550,6 +1581,7 @@
         "C": 100.0
       },
       "avg_cost_per_case": 0.1
-    }
+    },
+    "provenance": "independent"
   }
 ]

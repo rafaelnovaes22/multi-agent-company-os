@@ -25,7 +25,8 @@
       "top_driver": "empresas",
       "spread_pct": 60.0,
       "tripwire_count": 2
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-02",
@@ -57,7 +58,8 @@
       "driver_count": 3,
       "top_driver": "conversao",
       "tripwire_count": 3
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-03",
@@ -80,7 +82,8 @@
       "top_driver": "alcance",
       "spread_pct": 53.3,
       "tripwire_count": 1
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sp-04",
@@ -113,7 +116,8 @@
       "top_driver": "tam_empresas",
       "spread_pct": 110.9,
       "tripwire_count": 3
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-05",
@@ -141,7 +145,8 @@
       "top_driver": "arpu",
       "spread_pct": 90.0,
       "tripwire_count": 2
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-06",
@@ -169,7 +174,8 @@
       "top_driver": "a",
       "spread_pct": 80.0,
       "tripwire_count": 2
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-07",
@@ -197,7 +203,8 @@
       "top_driver": "pequena_alta_var",
       "spread_pct": 130.0,
       "tripwire_count": 2
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-08",
@@ -235,7 +242,8 @@
       "top_driver": "conversao",
       "spread_pct": 165.4,
       "tripwire_count": 4
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-09",
@@ -258,7 +266,8 @@
       "top_driver": "x",
       "spread_pct": 100.0,
       "tripwire_count": 1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-10",
@@ -286,7 +295,8 @@
       "top_driver": "fixo",
       "spread_pct": 0.0,
       "tripwire_count": 2
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-11",
@@ -309,7 +319,8 @@
       "top_driver": "som_base",
       "spread_pct": 20.0,
       "tripwire_count": 1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-12",
@@ -337,7 +348,8 @@
       "top_driver": "conv",
       "spread_pct": 100.0,
       "tripwire_count": 2
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-13",
@@ -365,7 +377,8 @@
       "top_driver": "driver_um",
       "spread_pct": 120.0,
       "tripwire_count": 2
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-14",
@@ -408,7 +421,8 @@
       "top_driver": "v3",
       "spread_pct": 188.3,
       "tripwire_count": 5
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-15",
@@ -436,7 +450,8 @@
       "top_driver": "a",
       "spread_pct": 200.0,
       "tripwire_count": 2
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-16",
@@ -464,7 +479,8 @@
       "top_driver": "conversao",
       "spread_pct": 80.0,
       "tripwire_count": 2
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-17",
@@ -497,7 +513,8 @@
       "top_driver": "c",
       "spread_pct": 121.2,
       "tripwire_count": 3
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-18",
@@ -520,7 +537,8 @@
       "top_driver": "unico",
       "spread_pct": 50.0,
       "tripwire_count": 1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-19",
@@ -553,7 +571,8 @@
       "top_driver": "win_rate",
       "spread_pct": 121.2,
       "tripwire_count": 3
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-20",
@@ -586,7 +605,8 @@
       "top_driver": "x",
       "spread_pct": 90.7,
       "tripwire_count": 3
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-21",
@@ -614,7 +634,8 @@
       "top_driver": "a",
       "spread_pct": 160.0,
       "tripwire_count": 2
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-22",
@@ -637,7 +658,8 @@
       "top_driver": "base",
       "spread_pct": 2.0,
       "tripwire_count": 1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-23",
@@ -665,7 +687,8 @@
       "top_driver": "segundo",
       "spread_pct": 110.0,
       "tripwire_count": 2
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-24",
@@ -703,7 +726,8 @@
       "top_driver": "a",
       "spread_pct": 166.4,
       "tripwire_count": 4
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-25",
@@ -726,7 +750,8 @@
       "top_driver": "metr",
       "spread_pct": 50.0,
       "tripwire_count": 1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-26",
@@ -754,7 +779,8 @@
       "top_driver": "conv",
       "spread_pct": 120.0,
       "tripwire_count": 2
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-27",
@@ -787,7 +813,8 @@
       "top_driver": "b",
       "spread_pct": 161.2,
       "tripwire_count": 3
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-28",
@@ -815,7 +842,8 @@
       "top_driver": "a",
       "spread_pct": 360.0,
       "tripwire_count": 2
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-29",
@@ -853,7 +881,8 @@
       "top_driver": "close_rate",
       "spread_pct": 198.9,
       "tripwire_count": 4
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-30",
@@ -876,7 +905,8 @@
       "top_driver": "som",
       "spread_pct": 40.0,
       "tripwire_count": 1
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-31",
@@ -909,7 +939,8 @@
       "top_driver": "a",
       "spread_pct": 141.8,
       "tripwire_count": 3
-    }
+    },
+    "provenance": "independent"
   },
   {
     "id": "sp-32",
@@ -942,6 +973,7 @@
       "top_driver": "b",
       "spread_pct": 182.4,
       "tripwire_count": 3
-    }
+    },
+    "provenance": "independent"
   }
 ]

@@ -84,7 +84,9 @@ python -m unittest discover -s tests                 # suíte completa (NÃO uma
 > O `pre_pr_gate` é HARD-FAIL e escopado ao que o seu branch mudou vs `origin/main` — ele
 > reprova se você fechou capacidade sem proveniência/prova independente. Rode
 > `python -m nucleo.quality.pre_pr_gate --fleet` para ver o backlog de retrofit da frota
-> (débito atual a zerar; **não** é grandfatherizado).
+> (débito atual a zerar; **não** é grandfatherizado). Plano de burn-down em
+> [docs/BACKLOG-proveniencia-hermes.md](docs/BACKLOG-proveniencia-hermes.md) — **leia antes** de
+> mexer em proveniência (tem regras de integridade que, se violadas, derrubam o `demo_eval`).
 
 - **Ratchet:** o `forge_check` congela o débito atual em `nucleo/quality/forge_baseline.json` e
   reprova só violações NOVAS. Agente novo/alterado tem de bater a barra completa. Se você MELHORAR

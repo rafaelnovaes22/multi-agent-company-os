@@ -98,6 +98,10 @@ python -m unittest discover -s tests                 # suíte completa (NÃO uma
 
 - Mensagem clara; descreva o que mudou e cole a saída dos gates acima.
 - **Não faça merge** — o merge é o gate humano (CEO/founder). Aguarde revisão.
-- Burn-down contínuo: a cada PR, prefira **reduzir** o baseline (handlers reais, target_mode, KPIs,
-  casos de domínio) a só adicionar. O norte é zerar `handler_generico`/`sem_target_mode` onde o
-  catálogo pede capacidade real.
+- O norte é **entregar capacidade real e verificável**, não mover um número. As métricas do baseline
+  (`handler_generico`, `sem_target_mode`) e o `pre_pr_gate --fleet` são **diagnóstico do humano,
+  jamais alvo dado ao agente**: minimizar a métrica sem entregar capacidade é Goodhart (lições
+  #30-32 e proveniência #66-80). Melhorar de fato é bem-vindo (genérico→determinístico com prova
+  INDEPENDENTE da natureza, `target_mode`, KPIs, casos de domínio); "zerar o baseline" como objetivo
+  em si, não. Onde a prova só puder ser auto-declarada pelo próprio agente, **não feche a métrica:
+  registre o limite** (regra de ouro #4). Ver [docs/PLANO-AJUSTE-ROTA.md](docs/PLANO-AJUSTE-ROTA.md).

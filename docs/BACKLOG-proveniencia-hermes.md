@@ -1,14 +1,25 @@
 # Backlog do Hermes — proveniência dos eval-cases (burn-down do `pre_pr_gate`)
 
+> **STATUS (2026-06-26): CONGELADO** pelo [PLANO-AJUSTE-ROTA.md](PLANO-AJUSTE-ROTA.md) (§3, "Parar").
+> A burn-down de proveniência por **rótulo auto-declarado está SUSPENSA**: `provenance:"independent"`
+> escrito pelo próprio Hermes não é prova (o `pre_pr_gate` só confere a string; um caso com
+> `rice_score=999999` rotulado `independent` passa). NÃO acionar o Hermes para carimbar `provenance`
+> em massa. Prova válida = held-out build/ops/browser (oráculo de fora) OU ratificação humana com
+> assinatura/credencial distinta do agente. O `--fleet` é **diagnóstico do humano, não alvo**.
+> Retrofit pendente: rebaixar a `catalog` os 380 `independent` não-recomputáveis de fonte externa.
+
 > Tarefa para o **hermes-agent** (loop normal: ramifica de `origin/main`, abre PR, **não** mergeia).
 > Origem: o `pre_pr_gate` (regra de ouro #4 do [AGENTS.md](../AGENTS.md)) passou a exigir
 > proveniência + prova independente. A frota nasceu sem isso → há um backlog a queimar **PR a PR**.
 
-## Objetivo
+## Objetivo (revisado — ver STATUS acima)
 
-Zerar o `python -m nucleo.quality.pre_pr_gate --fleet` (hoje: **111 handlers determinísticos**
-sem `provenance`; 99 calc, 7 build c/ oracle, 5 build s/ oracle). Cada agente, quando regularizado,
-sai da lista. **Trabalhe por guilda, em PRs pequenos** (1 guilda ou poucos agentes por PR).
+O objetivo **não** é "zerar o `pre_pr_gate --fleet`" (isso é Goodhart: o gate só checa a string
+`provenance`, então zerar o número não prova capacidade). O objetivo é **dar prova INDEPENDENTE real**
+onde ela é possível: held-out para build/ops/browser; ratificação humana para os agentes calc de alto
+risco (`g8-outbound-sdr`, `g5-threat-modeler`, `g1-scenario-planner`). Onde a prova só puder ser
+auto-declarada pelo agente, o caso fica `catalog` (replay honesto) ou a tarefa não vai ao Hermes.
+O `--fleet` permanece como diagnóstico do humano. O método abaixo é mantido para referência.
 
 ## O que fazer em cada agente determinístico
 

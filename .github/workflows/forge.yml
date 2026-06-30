@@ -31,6 +31,12 @@ jobs:
         # Escopado aos agentes mudados vs origin/main — NÃO --fleet (o backlog da frota
         # queima PR a PR; --fleet no PR travaria todo merge, inclusive os de retrofit).
         run: python -m nucleo.quality.pre_pr_gate
+      - name: Tripwire de homogeneidade de diff (gaming em massa — ADVISORY, dispara revisão)
+        # NÃO bloqueia merge: é heurística sobre a forma do ataque histórico (#30-32, #66-80) e
+        # espera-se evasão por jitter (item 4 de docs/PLANO-AJUSTE-ROTA.md). Sai !=0 p/ anotar o
+        # PR e levar um humano a olhar; continue-on-error mantém o gate de mérito no pre_pr_gate.
+        continue-on-error: true
+        run: python -m nucleo.quality.diff_homogeneity
       - name: Forge check (definition-of-done, ratchet)
         run: python -m nucleo.quality.forge_check
       - name: Eval-harness da frota (C4)
@@ -62,6 +68,8 @@ jobs:
         run: python -m unittest tests.test_demotion_killswitch
       - name: Least-privilege de tools (ToolBox observe/enforce)
         run: python -m unittest tests.test_toolbox
+      - name: Tripwire de homogeneidade (sinais A/B pegam carimbo em massa e casos-clone)
+        run: python -m unittest tests.test_diff_homogeneity
       - name: Suite SECURITY da frota (red-team como regressão; 100% obrigatório)
         run: |
           python -m nucleo.quality.security_eval

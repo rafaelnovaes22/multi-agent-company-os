@@ -86,8 +86,11 @@ proibindo a tarefa em vez de inventar um recompute auto-referente.
    produz artefato que só o humano gera. Para os agentes cálculo/decisão sem fonte de referência
    publicada externa, **não prometer recompute genérico** (re-derivar a lógica de ~157 handlers
    à mão não escala; se a fórmula vier do próprio agente, é o episódio #30 reembalado).
-4. **Construir o detector de homogeneidade de diff** como alarme barato e mecânico (N diffs
-   mecânicos idênticos disparam revisão). Rebaixá-lo explicitamente a tripwire (espera-se evasão
+4. ~~**Construir o detector de homogeneidade de diff**~~ **[FEITO]** alarme barato e mecânico
+   (N diffs mecânicos idênticos disparam revisão). Entregue em `nucleo/quality/diff_homogeneity.py`
+   (+ `tests/test_diff_homogeneity.py`): sinal A pega carimbo em massa de um campo (#66-80), sinal B
+   pega casos-clone tautológicos (#30-32). Plugado no `forge.yml` como passo **advisory**
+   (`continue-on-error`), não bloqueia merge. Rebaixado explicitamente a tripwire (espera-se evasão
    por jitter), não a matador-de-raiz.
 5. **Auditar o retrofit dos 380 `independent`:** rebaixar a `catalog` os não-recomputáveis de
    fonte externa (todo `g2-competitor-feature-watch`; `spread_pct` de `g1-scenario-planner`;
@@ -152,6 +155,7 @@ proibindo a tarefa em vez de inventar um recompute auto-referente.
   existir canal de ratificação que produza artefato que só o humano gera.
 - **Alarme de homogeneidade** (tripwire, não guardrail estrutural): detector de N diffs
   mecânicos idênticos. Heurística sobre a forma do ataque atual; espera-se evasão por jitter.
+  **[FEITO]** `nucleo/quality/diff_homogeneity.py`, advisory no `forge.yml`.
 
 ## 6. Decisões do CEO (não delegáveis)
 

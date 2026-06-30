@@ -66,6 +66,8 @@ jobs:
           python -m unittest tests.test_verify_browser
       - name: Resiliência operacional (demoção sem gate + kill-switch de frota)
         run: python -m unittest tests.test_demotion_killswitch
+      - name: SLA de entrega na promoção (G7 — delivered_rate>=95%, fail-closed sem executor)
+        run: python -m unittest tests.test_promote_delivery_sla
       - name: Least-privilege de tools (ToolBox observe/enforce)
         run: python -m unittest tests.test_toolbox
       - name: Tripwire de homogeneidade (sinais A/B pegam carimbo em massa e casos-clone)

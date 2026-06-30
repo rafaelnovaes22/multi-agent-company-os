@@ -5,8 +5,12 @@ Gate 4. SHADOW -> PILOT -> ASSISTED -> AUTONOMOUS. Promoção registrada append-
 no Brain + store. É o mecanismo de "evoluir ganhando autonomia". Mercado-agnóstico.
 
 Gates: G1 C2(outcome clause) · G2 C3(economics, billable) · G3 C4(SLA assinado) ·
-G4 eval-suite passing · G5 cross-approval (po != promotion_officer) · G6 CI/CD.
-AUTONOMOUS exige ainda assinatura do security-privacy-guardian.
+G4 eval-suite passing (estático+security) · G5 cross-approval (po != promotion_officer) ·
+G6 CI/CD · G7 SLA de ENTREGA (delivered_rate do oráculo executável >= 95%, decisão CEO
+2026-06-30). G7 vale para ->ASSISTED e ->AUTONOMOUS (os modos que entregam/cobram) e é
+FAIL-CLOSED: sem executor real (delivered_rate não medível) não promove — a diferença de G4
+(estático, gameável ~100%) para G7 (execução real, hoje 27%/0%) é exatamente o ponto da
+decisão. AUTONOMOUS exige ainda assinatura do security-privacy-guardian.
 
 DESCER nunca tem gate (resiliência operacional, NIST "sobreviver ao inevitável"):
 `demote()` derruba qualquer modo -> SHADOW sem pré-condições, e
@@ -20,17 +24,32 @@ import hashlib
 import json
 
 from ..factory.factory import load_spec
+from ..kernel.execution import get_executor
 from ..kernel.gates import KILL_SWITCH_NS, KILL_SWITCH_KEY
 from ..kernel.guardians import validate_outcome_clause
+from ..quality import exec_report
 from ..quality.eval_harness import run_evals, run_security_evals
 
 MODES = ["SHADOW", "PILOT", "ASSISTED", "AUTONOMOUS"]
 REQUIRED = {
     ("SHADOW", "PILOT"): ["G1", "G2", "G4", "G5"],
-    ("PILOT", "ASSISTED"): ["G1", "G2", "G3", "G4", "G5"],
-    ("ASSISTED", "AUTONOMOUS"): ["G1", "G2", "G3", "G4", "G5", "G6"],
+    ("PILOT", "ASSISTED"): ["G1", "G2", "G3", "G4", "G5", "G7"],
+    ("ASSISTED", "AUTONOMOUS"): ["G1", "G2", "G3", "G4", "G5", "G6", "G7"],
 }
 EVAL_THRESHOLD = 0.9
+DELIVERED_THRESHOLD = 0.95   # SLA de entrega (decisão CEO 2026-06-30): >=95% por agente
+
+
+def _delivered_summary(spec_dir):
+    """Resumo do oráculo executável (exec_report) com o delivered_rate REAL.
+
+    Seam de injeção: testes fazem monkeypatch desta função para não rodar Docker.
+    Em produção roda o agente pela execução real; sem executor (InertExecutor) o
+    delivered_rate volta 0 e o G7 reprova — fail-closed por construção.
+    """
+    ex = get_executor()
+    rep = exec_report.run(spec_dir)
+    return exec_report.summarize(rep, executor_name=ex.name, executor_available=ex.available)
 
 
 def current_mode(store, aid: str) -> str:
@@ -67,6 +86,21 @@ def _gate(g, spec, spec_dir, req, deps):
         return ok, f"po={po} promotion_officer={pr} distintos={ok}"
     if g == "G6":  # CI/CD ativo (assisted->autonomous)
         return bool(req.get("cicd_active")), f"cicd_active={bool(req.get('cicd_active'))}"
+    if g == "G7":  # SLA de ENTREGA — delivered_rate do oráculo executável >= 95% (CEO 2026-06-30)
+        s = _delivered_summary(spec_dir)
+        ex = s.get("executor") or {}
+        dr = s.get("delivered_rate") or {}
+        passed, total, pct = dr.get("passed") or 0, dr.get("total") or 0, dr.get("percent") or 0.0
+        if not ex.get("available"):
+            # FAIL-CLOSED: sem execução real não há prova de entrega — não promove.
+            return False, (f"SLA entrega: executor '{ex.get('name')}' indisponível — delivered_rate "
+                           f"não medível (sem prova executável). Promoção bloqueada (fail-closed).")
+        rate = pct / 100.0
+        not_delivered = max(total - passed, 0)   # os <=5%: runtime force delivered=False/billing=0
+        ok = rate >= DELIVERED_THRESHOLD
+        return ok, (f"SLA entrega: delivered_rate {passed}/{total} ({pct:.0f}%) "
+                    f"thr={DELIVERED_THRESHOLD*100:.0f}% · {not_delivered} não-entregue(s) caem no "
+                    f"fail-safe do runtime (delivered=False/billing=0, sem resposta-errada-silenciosa)")
     return False, "gate desconhecido"
 
 

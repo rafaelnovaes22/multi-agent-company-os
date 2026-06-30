@@ -140,8 +140,12 @@ proibindo a tarefa em vez de inventar um recompute auto-referente.
      domínio + restrição de escopo a agentes com oráculo executável/tool-backed**; agentes
      puramente generativos de cálculo/decisão provavelmente NÃO atingem 95% e não devem ser
      promovidos a AUTONOMOUS. O número-alvo é, na prática, também uma decisão de escopo da frota.
-   *Pronto quando:* o `G4`/promoção exige `delivered_rate>=0.95` (não o estático 0.9) e o
+   *Pronto quando:* o gate de promoção exige `delivered_rate>=0.95` (não o estático 0.9) e o
    fail-safe dos 5% é invariante verificada; ainda pendente decidir código-vs-mercado dado o gap.
+   **[WIRADO, commit a seguir]** novo gate **G7** em `promote.py` (transições ->ASSISTED e
+   ->AUTONOMOUS): exige `delivered_rate` do oráculo executável (`exec_report`) >= 95%, **fail-closed**
+   (sem executor real = sem prova = não promove). G4 (estático ~100%) segue separado; a distância
+   G4↔G7 É a decisão. Testado em `tests/test_promote_delivery_sla.py` + passo no `forge.yml`.
 5. **Guardrail que escala + retrofit.** Detector de homogeneidade + auditoria dos 380
    `independent`. *Pronto quando:* o detector dispara revisão em lote mecânico, o `--fleet` sobe
    (violação reaberta) e isso é assumido como correto, não "consertado" recarimbando.

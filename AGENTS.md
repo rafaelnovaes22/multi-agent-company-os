@@ -70,6 +70,14 @@ Um agente só está "pronto" quando TUDO abaixo é verdade (o `forge_check` chec
   `expected` (em SHADOW o gate força `delivered=False`). **Cada caso declara `provenance`**
   (`catalog`/`human`/`independent`) e o agente carrega prova independente da natureza — ver regra
   de ouro #4; o `pre_pr_gate` reprova (hard-fail) quem não tiver.
+- **SLA de entrega (promoção, decisão CEO 2026-06-30):** um agente só promove a ASSISTED/AUTONOMOUS
+  quando o **`delivered_rate` do oráculo executável** (`run_evals`+VERIFY-IN-EVAL, NÃO o `rate`
+  estático do contrato-grader) for **>= 95%**, medido por agente. Os **<=5% restantes** têm de cair
+  num **fail-safe declarado** — escalar a humano ou retornar não-entrega explícita com motivo —
+  **nunca** resposta errada silenciosa (resposta errada não-detectada nos 5% é HARD-FAIL). Meta =
+  100% de comportamento não-danoso (95% entrega + 5% fail-safe). Consequência assumida: o teto
+  generativo medido (N=5, não cede a prompt) faz 95% só alcançável com tooling + fonte-certa-por-
+  domínio; agente puramente generativo de cálculo/decisão que não bate 95% **fica em SHADOW/PILOT**.
 
 ## 2. Arquitetura de handlers (1 template + N specs, mas capacidade real)
 

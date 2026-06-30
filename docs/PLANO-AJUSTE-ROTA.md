@@ -81,8 +81,8 @@ proibindo a tarefa em vez de inventar um recompute auto-referente.
    observado com o `expected` (negativo-intencional e plausível-mas-errado não são regressão).
    Tira o nightly do falso-RED sem mascarar capacidade.
 2. **Publicar o `delivered_rate` como o número honesto da fábrica técnica e elevá-lo a decisão
-   de produto** (8/30 e 0/30). Definir o teto de design aceitável antes de qualquer conserto,
-   senão "consertar forge-exec" vira trabalho infinito.
+   de produto** (8/30 e 0/30). **[teto DEFINIDO: >=95% por agente + fail-safe nos 5%, ver §4.4]**
+   Conserto agora tem critério de parada; falta só fechar código-vs-mercado.
 3. **Restringir prova externa às duas formas infalsificáveis e generalizar a primeira:**
    (a) held-out build/ops/browser (`pre_pr_gate.py:117-123`, 7 agentes `spec_executor`), onde
    o oráculo é o compilador/Docker que o agente nunca vê; (b) ratificação humana com canal que
@@ -127,9 +127,21 @@ proibindo a tarefa em vez de inventar um recompute auto-referente.
    `provenance` auto-declarado como prova.
 3. **Recalibrar o gate de crédito.** *Pronto quando:* o RED do nightly some por motivo legítimo
    e o `delivered_rate` real (8-27%) fica publicado, não mascarado.
-4. **Decisão de produto sobre `delivered_rate`.** *Pronto quando:* existe um número-alvo de
-   `delivered_rate` que define sucesso e uma decisão explícita sobre a próxima ação ser de
-   código ou de mercado.
+4. **[DECIDIDO] SLA de entrega = `delivered_rate >= 95%` por agente, + tratamento previsto para
+   os <=5% restantes.** Decisão CEO 2026-06-30. Definição precisa:
+   - **95% entrega:** `delivered_rate` (oráculo executável: `run_evals`+VERIFY-IN-EVAL, NÃO o
+     `rate` estático do contrato-grader) >= 0,95, medido por agente.
+   - **5% com tratamento previsto:** a fração não-entregue (<=5%) tem de cair num **fail-safe
+     declarado** (escalar a humano, ou retornar não-entrega explícita com motivo) — **nunca**
+     resposta errada silenciosa. Resposta errada não-detectada dentro dos 5% é HARD-FAIL, não
+     "perda aceitável". Em suma: 100% do comportamento é não-danoso (95% entrega + 5% fail-safe).
+   - **Consequência honesta:** hoje é 27% (melhor) / 0% (demais). O teto generativo medido (N=5,
+     não cede a prompt/grounding) implica que 95% só se alcança com **tooling + fonte-certa-por-
+     domínio + restrição de escopo a agentes com oráculo executável/tool-backed**; agentes
+     puramente generativos de cálculo/decisão provavelmente NÃO atingem 95% e não devem ser
+     promovidos a AUTONOMOUS. O número-alvo é, na prática, também uma decisão de escopo da frota.
+   *Pronto quando:* o `G4`/promoção exige `delivered_rate>=0.95` (não o estático 0.9) e o
+   fail-safe dos 5% é invariante verificada; ainda pendente decidir código-vs-mercado dado o gap.
 5. **Guardrail que escala + retrofit.** Detector de homogeneidade + auditoria dos 380
    `independent`. *Pronto quando:* o detector dispara revisão em lote mecânico, o `--fleet` sobe
    (violação reaberta) e isso é assumido como correto, não "consertado" recarimbando.
@@ -162,14 +174,14 @@ proibindo a tarefa em vez de inventar um recompute auto-referente.
 
 ## 6. Decisões do CEO (não delegáveis)
 
-1. Reescrever `AGENTS.md §4` (linhas 101-103): "entregar capacidade" no lugar de "zerar".
-   É política, não código, e é a maior alavanca.
-2. Pausar o acionamento do Hermes para autoria cálculo/decisão, mantendo-o em curadoria +
-   build/ops/browser.
-3. Definir o teto de `delivered_rate` aceitável e decidir, dado o número honesto de 8-27%, se a
-   próxima ação é de **código** (mais capacidade) ou de **mercado** (provar valor com cliente).
-   Esta decisão estava ausente de todas as auditorias (4 dos 5 auditores são técnicos: viés de ação).
-4. Decidir o destino de `FABRICA-DE-AGENTES.md` (commitar como canônico ou declarar rascunho).
+1. ~~Reescrever `AGENTS.md §4`~~ **[FEITO, commit 0318bf6]** "entregar capacidade" no lugar de "zerar".
+2. ~~Pausar o acionamento do Hermes~~ **[DECIDIDO — forma forte, commit 9b0b7c1]** o Hermes vira
+   AUDITOR, não autor (não materializa/altera agente nem faz merge). `AGENTS.md §0.5`.
+3. **[DECIDIDO]** SLA = `delivered_rate >= 95%` por agente + fail-safe declarado para os <=5%
+   restantes (ver §4.4). Pendente apenas o braço **código-vs-mercado**: dado que hoje é 27%/0% e o
+   teto generativo não cede a prompt, decidir se o próximo passo é construir capacidade (tooling +
+   fonte-certa) ou ir a mercado provar valor no patamar atual com escopo restrito.
+4. ~~Decidir o destino de `FABRICA-DE-AGENTES.md`~~ **[FEITO, commit 187f560]** commitado como canônico.
 5. Ratificar pessoalmente (`provenance=human`, nunca o Hermes) os casos dos agentes de cálculo de
    alto risco: `g8-outbound-sdr`, `g5-threat-modeler`, `g1-scenario-planner`. Dimensionar quantos
    casos cada.

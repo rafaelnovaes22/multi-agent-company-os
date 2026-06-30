@@ -57,9 +57,12 @@ proibindo a tarefa em vez de inventar um recompute auto-referente.
    `handler_generico`/`sem_target_mode`" e do BACKLOG "Zerar o `pre_pr_gate --fleet`".
    Substituir o alvo por capacidade entregue. É a mudança de maior alavancagem do plano,
    custa um commit de texto, e não é falsificável porque remove um incentivo, não adiciona um teste.
-2. **Parar de acionar o Hermes (via Telegram) para autoria de casos de natureza
-   cálculo/decisão**, até existir prova externa. Manter o Hermes ativo apenas em curadoria
-   determinística de memória e nos 7 agentes com oráculo-de-fora (build/ops/browser).
+2. **[DECIDIDO — forma forte] O Hermes vira AUDITOR, não autor.** Supera a versão original
+   ("pausar autoria de cálculo/decisão"): o Hermes **não materializa/altera nenhum agente nem faz
+   merge**, em tarefa alguma. Seu papel único é auditar a entrega via oráculo executável, com
+   veredito ancorado em execução (nunca opinião de juiz) e proibição de auto-atestar proveniência.
+   Codificado em `AGENTS.md §0.5`. Gerar o oráculo held-out a partir do contrato segue permitido
+   como **instrumento de auditoria** (não é autoria de agente — ver `CONTRATO-NUCLEO-HERMES-ORACULO`).
 3. **Parar de aceitar `provenance:"independent"` auto-declarado como prova.** Congelar a
    burn-down de proveniência (380 carimbados, 0 `human`, autor git indistinguível do Hermes).
 4. **Parar de tratar `g0-agent-smith` / case-factory como prioridade.** Frota já materializada,

@@ -28,6 +28,23 @@
    - **Baseline só encolhe:** `forge_baseline.json` nunca cresce; toda alteração exige
      `nucleo/quality/BASELINE-CHANGE.md` justificando (PR que "fecha métrica" = auditável).
    Gate executável: `python -m nucleo.quality.pre_pr_gate` (§3). Reprovou → **não abra PR**.
+5. **O `hermes-agent` é AUDITOR, não autor — e isto vale para QUALQUER tarefa dada a ele.**
+   O Hermes **nunca** materializa nem altera agentes da frota (`spec`/`soul`/`memory`/`handler`)
+   e **nunca faz merge**. Autoria de agente é tarefa de humano/Claude Code. O papel único do Hermes
+   é **auditar**: rodar o oráculo executável e reportar se a frota/projeto entrega o que promete.
+   Por que: o vetor de gaming que derrubou os gates (#30-32, #66-80) é **o mesmo ator autorar o
+   artefato E atestar a própria prova**. Tirar a autoria do auditor fecha o vetor por construção,
+   não por disciplina.
+   - **Veredito ancorado em EXECUÇÃO, jamais em opinião.** Uma auditoria só "passa" pelo oráculo
+     executável (`delivered_rate`, exit-code de `pre_pr_gate`/`forge_check`/`diff_homogeneity`,
+     VERIFY-IN-EVAL), nunca por nota de LLM-juiz ("parece bom"). O juiz (gpt-5, família OpenAI)
+     mede qualidade generativa e é **opinião que informa, não decide** — e por ser mesma família
+     do Codex do Hermes, concordância entre eles **não é independência** (`CONTRATO §8.3`).
+   - **Proibido auto-atestar.** O Hermes não carimba `provenance:"independent"` na própria saída
+     nem rotula a própria prova; quem prova tem credencial diferente de quem foi auditado (G-PERÍMETRO).
+   - **Limite do "auditor de rota":** gerar o **oráculo held-out a partir do contrato** (Schema A,
+     sem ver `handler`/`soul`/`memory`) é **instrumento de auditoria, não autoria de agente** — é
+     produzir a régua independente, não o objeto medido. Continua permitido sob o `CONTRATO-NUCLEO-HERMES-ORACULO`.
 
 ## 1. Definition of Done de um agente
 

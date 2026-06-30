@@ -6,6 +6,8 @@
 
 A Fábrica fabrica o agente; **o teste do agente é fabricado por outra parte**. O NÚCLEO gera `spec`+`soul`+`memory`+handler (provider Gemini/Vertex). Os eval-cases (o oráculo) são gerados pelo **Codex via Hermes no Telegram**. Como gerador-do-agente e gerador-do-teste são processos, modelos e canais distintos, a independência do oráculo passa a ser **estrutural, não disciplinar**. Esse é o ativo: separa "entreguei" de "disse que entreguei".
 
+> **Papel do Hermes (AGENTS.md §0.5):** o Hermes é **AUDITOR, não autor** — nunca materializa/altera agentes nem faz merge. Gerar o oráculo held-out a partir do contrato (este documento) é **instrumento de auditoria**, não autoria de agente: produz a régua independente, jamais o objeto medido. O veredito de entrega é do **oráculo executável**, nunca da opinião do juiz.
+
 **Linha vermelha (held-out):** o NÚCLEO envia ao Hermes apenas o **contrato do que o agente promete** (outcome-clause, schema de saída, contexto de domínio). **Nunca** envia o `handler`, o `soul` nem o `memory` (a implementação). Se o gerador de testes vê a implementação, escreve o teste para a resposta e a independência vaza (histórico: "270/270 casos tautológicos").
 
 ## 2. Visão do fluxo

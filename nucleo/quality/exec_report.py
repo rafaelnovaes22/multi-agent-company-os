@@ -63,8 +63,10 @@ def run(spec_dir: str) -> dict:
                  "mode": "SHADOW", "ledger": spec.get("ledger"), "run_id": rid, "verbose": False}
         out = agent.invoke(state, config={"configurable": {"thread_id": rid}}).get("output") or {}
         oracle = c.get("oracle") or {}
+        exp = c.get("expected") or {}
         rows.append({"id": c.get("id"), "desc": c.get("desc"),
                      "static_ok": bool(out.get("static_ok")),
+                     "expected_static_ok": exp.get("static_ok"),
                      "delivered_ok": bool(out.get("delivered_ok")),
                      "tests_pass": out.get("tests_pass"), "first_fail": out.get("first_fail"),
                      "runtime": oracle.get("runtime") or "python",
@@ -111,7 +113,14 @@ def summarize(rep: dict, *, executor_name: str, executor_available: bool) -> dic
     for row in rep.get("rows") or []:
         item = dict(row)
         item["execution_credit"] = _row_credit(item)
+        # oracle_correct: o estático OBSERVADO bate o `expected.static_ok` do caso.
+        # É o discriminante honesto da suíte (positivos passam, negativos/adversariais
+        # são barrados). None quando o caso não declara expected.static_ok.
+        exp_static = item.get("expected_static_ok")
+        item["oracle_correct"] = (bool(item.get("static_ok")) == exp_static) if isinstance(exp_static, bool) else None
         rows.append(item)
+    oracle_evaluated_count = sum(1 for r in rows if r.get("oracle_correct") is not None)
+    oracle_correct_count = sum(1 for r in rows if r.get("oracle_correct") is True)
     executed_count = sum(1 for r in rows if isinstance(r.get("tests_pass"), bool))
     tests_passed_count = sum(1 for r in rows if r.get("tests_pass") is True)
     tests_failed_count = sum(1 for r in rows if r.get("tests_pass") is False)
@@ -134,6 +143,8 @@ def summarize(rep: dict, *, executor_name: str, executor_available: bool) -> dic
         "executed_count": executed_count,
         "tests_passed_count": tests_passed_count,
         "tests_failed_count": tests_failed_count,
+        "oracle_evaluated_count": oracle_evaluated_count,
+        "oracle_correct_count": oracle_correct_count,
         "static_without_delivery_count": static_without_delivery,
         "static_sem_delivery": static_without_delivery,
         "execution_credit": {

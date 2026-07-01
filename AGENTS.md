@@ -28,6 +28,23 @@
    - **Baseline só encolhe:** `forge_baseline.json` nunca cresce; toda alteração exige
      `nucleo/quality/BASELINE-CHANGE.md` justificando (PR que "fecha métrica" = auditável).
    Gate executável: `python -m nucleo.quality.pre_pr_gate` (§3). Reprovou → **não abra PR**.
+5. **O `hermes-agent` é AUDITOR, não autor — e isto vale para QUALQUER tarefa dada a ele.**
+   O Hermes **nunca** materializa nem altera agentes da frota (`spec`/`soul`/`memory`/`handler`)
+   e **nunca faz merge**. Autoria de agente é tarefa de humano/Claude Code. O papel único do Hermes
+   é **auditar**: rodar o oráculo executável e reportar se a frota/projeto entrega o que promete.
+   Por que: o vetor de gaming que derrubou os gates (#30-32, #66-80) é **o mesmo ator autorar o
+   artefato E atestar a própria prova**. Tirar a autoria do auditor fecha o vetor por construção,
+   não por disciplina.
+   - **Veredito ancorado em EXECUÇÃO, jamais em opinião.** Uma auditoria só "passa" pelo oráculo
+     executável (`delivered_rate`, exit-code de `pre_pr_gate`/`forge_check`/`diff_homogeneity`,
+     VERIFY-IN-EVAL), nunca por nota de LLM-juiz ("parece bom"). O juiz (gpt-5, família OpenAI)
+     mede qualidade generativa e é **opinião que informa, não decide** — e por ser mesma família
+     do Codex do Hermes, concordância entre eles **não é independência** (`CONTRATO §8.3`).
+   - **Proibido auto-atestar.** O Hermes não carimba `provenance:"independent"` na própria saída
+     nem rotula a própria prova; quem prova tem credencial diferente de quem foi auditado (G-PERÍMETRO).
+   - **Limite do "auditor de rota":** gerar o **oráculo held-out a partir do contrato** (Schema A,
+     sem ver `handler`/`soul`/`memory`) é **instrumento de auditoria, não autoria de agente** — é
+     produzir a régua independente, não o objeto medido. Continua permitido sob o `CONTRATO-NUCLEO-HERMES-ORACULO`.
 
 ## 1. Definition of Done de um agente
 
@@ -53,6 +70,14 @@ Um agente só está "pronto" quando TUDO abaixo é verdade (o `forge_check` chec
   `expected` (em SHADOW o gate força `delivered=False`). **Cada caso declara `provenance`**
   (`catalog`/`human`/`independent`) e o agente carrega prova independente da natureza — ver regra
   de ouro #4; o `pre_pr_gate` reprova (hard-fail) quem não tiver.
+- **SLA de entrega (promoção, decisão CEO 2026-06-30):** um agente só promove a ASSISTED/AUTONOMOUS
+  quando o **`delivered_rate` do oráculo executável** (`run_evals`+VERIFY-IN-EVAL, NÃO o `rate`
+  estático do contrato-grader) for **>= 95%**, medido por agente. Os **<=5% restantes** têm de cair
+  num **fail-safe declarado** — escalar a humano ou retornar não-entrega explícita com motivo —
+  **nunca** resposta errada silenciosa (resposta errada não-detectada nos 5% é HARD-FAIL). Meta =
+  100% de comportamento não-danoso (95% entrega + 5% fail-safe). Consequência assumida: o teto
+  generativo medido (N=5, não cede a prompt) faz 95% só alcançável com tooling + fonte-certa-por-
+  domínio; agente puramente generativo de cálculo/decisão que não bate 95% **fica em SHADOW/PILOT**.
 
 ## 2. Arquitetura de handlers (1 template + N specs, mas capacidade real)
 
@@ -98,6 +123,10 @@ python -m unittest discover -s tests                 # suíte completa (NÃO uma
 
 - Mensagem clara; descreva o que mudou e cole a saída dos gates acima.
 - **Não faça merge** — o merge é o gate humano (CEO/founder). Aguarde revisão.
-- Burn-down contínuo: a cada PR, prefira **reduzir** o baseline (handlers reais, target_mode, KPIs,
-  casos de domínio) a só adicionar. O norte é zerar `handler_generico`/`sem_target_mode` onde o
-  catálogo pede capacidade real.
+- O norte é **entregar capacidade real e verificável**, não mover um número. As métricas do baseline
+  (`handler_generico`, `sem_target_mode`) e o `pre_pr_gate --fleet` são **diagnóstico do humano,
+  jamais alvo dado ao agente**: minimizar a métrica sem entregar capacidade é Goodhart (lições
+  #30-32 e proveniência #66-80). Melhorar de fato é bem-vindo (genérico→determinístico com prova
+  INDEPENDENTE da natureza, `target_mode`, KPIs, casos de domínio); "zerar o baseline" como objetivo
+  em si, não. Onde a prova só puder ser auto-declarada pelo próprio agente, **não feche a métrica:
+  registre o limite** (regra de ouro #4). Ver [docs/PLANO-AJUSTE-ROTA.md](docs/PLANO-AJUSTE-ROTA.md).

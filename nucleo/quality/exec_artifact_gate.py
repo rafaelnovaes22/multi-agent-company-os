@@ -52,8 +52,6 @@ def _artifact_failures(path: str | Path, data: dict) -> list[str]:
     credited = int(credit.get("credited_deliveries") or 0)
     reason = credit.get("reason") or "unknown"
     total = int(data.get("total") or 0)
-    executed = int(data.get("executed_count") or 0)
-    failed = int(data.get("tests_failed_count") or 0)
 
     rows = data.get("rows")
     if not isinstance(rows, list):
@@ -63,6 +61,13 @@ def _artifact_failures(path: str | Path, data: dict) -> list[str]:
     executor = data.get("executor") or {}
     executor_available = executor.get("available") is True
 
+    # A suíte de eval-cases é DISCRIMINANTE: tem casos positivos (devem entregar) E
+    # negativos por design (plausível-mas-errado, adversariais, rejeitados no estático),
+    # que NÃO entregam de propósito. Por isso o gate NÃO exige `credited == total` nem
+    # `tests_failed_count == 0` (era a miscalibração que deixava o nightly em falso-RED).
+    # Ele exige: a execução RODOU, CREDITOU entregas legítimas (>0), o oráculo
+    # classificou cada caso conforme o `expected` (oracle_correct), e NENHUM caso que o
+    # expected manda rejeitar foi creditado (sem falso-positivo).
     if total <= 0:
         failures.append(f"{label}: total=0")
     if not executor_available:
@@ -71,20 +76,19 @@ def _artifact_failures(path: str | Path, data: dict) -> list[str]:
         failures.append(f"{label}: can_credit_delivery=false reason={reason}")
     if credited <= 0:
         failures.append(f"{label}: credited_deliveries=0 reason={reason}")
-    if total > 0 and credited != total:
-        failures.append(f"{label}: credited_deliveries={credited}/{total}")
-    if total > 0 and executed != total:
-        failures.append(f"{label}: executed_count={executed}/{total} reason={reason}")
     if total > 0 and rows_count != total:
         failures.append(f"{label}: rows_count={rows_count}/{total}")
-    if failed > 0:
-        failures.append(f"{label}: tests_failed_count={failed}")
 
     for row in rows:
-        status = row.get("execution_credit")
-        if status != "credited":
-            row_id = row.get("id") or "unknown-row"
-            failures.append(f"{label}: row {row_id}: {status or 'missing_execution_credit'}")
+        row_id = row.get("id") or "unknown-row"
+        # Regressão real do oráculo: o estático OBSERVADO diverge do expected do caso.
+        if row.get("oracle_correct") is False:
+            failures.append(
+                f"{label}: row {row_id}: oracle_incorrect "
+                f"(static_ok={row.get('static_ok')} != expected {row.get('expected_static_ok')})")
+        # Falso-positivo grave: caso que o expected manda rejeitar no estático foi creditado.
+        if row.get("expected_static_ok") is False and row.get("execution_credit") == "credited":
+            failures.append(f"{label}: row {row_id}: credited_but_should_reject")
     return failures
 
 

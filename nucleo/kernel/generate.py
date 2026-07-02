@@ -66,13 +66,20 @@ def _extract_files(text: str):
     return None
 
 
-def _prompt(request: str, seed: dict, attempt: int, feedback: str | None) -> str:
+def _prompt(request: str, seed: dict, attempt: int, feedback: str | None,
+            untouchable: list[str] | None = None) -> str:
     """Monta o prompt do gerador. SÓ pedido + semente + feedback da execução anterior —
-    nada do oráculo (bug_markers/protected/held-out) entra aqui."""
+    nada do oráculo (bug_markers/held-out) entra aqui. `untouchable` são os paths
+    protegidos que EXISTEM na semente (visíveis por definição): nomeá-los é o que um
+    ticket real faria, e evita queimar budget em patch que a verificação recusaria."""
     parts = [
         "Você é um engenheiro de software. Corrija/implemente o pedido abaixo no repositório dado.",
         "Regras: NÃO modifique arquivos de teste; devolva o conteúdo COMPLETO de cada arquivo alterado.",
         'Responda SOMENTE com JSON válido no formato {"files": {"caminho/arquivo": "conteúdo completo"}}.',
+    ]
+    if untouchable:
+        parts.append("Arquivos que você NÃO pode incluir/modificar: " + ", ".join(untouchable) + ".")
+    parts += [
         "",
         f"## Pedido\n{request}",
         "## Repositório (semente)",
@@ -112,8 +119,9 @@ def generate_red_green(request: str, seed: dict, oracle: dict, llm, executor,
     feedback = None
     loop_green = False
 
+    untouchable = sorted((protected_paths | heldout_paths) & set(seed))
     for attempt in range(1, max_iters + 1):
-        text = llm.complete(_prompt(request, seed, attempt, feedback), max_tokens=4096)
+        text = llm.complete(_prompt(request, seed, attempt, feedback, untouchable), max_tokens=4096)
         files = _extract_files(text)
         if files is None:
             history.append({"attempt": attempt, "parsed": False, "tests_pass": None})
@@ -141,7 +149,11 @@ def generate_red_green(request: str, seed: dict, oracle: dict, llm, executor,
                             "static_ok": probe["static_ok"], "first_fail": probe["first_fail"]})
             if probe["static_ok"]:
                 break   # estático limpo: sem teste visível não há mais o que iterar
-            feedback = (f"verificação estática reprovou no critério '{probe['first_fail']}' — "
+            detail = ""
+            if probe["first_fail"] == "protected_unmodified":
+                offending = sorted(p for p in files if p in protected_paths)
+                detail = f" (você incluiu arquivo protegido: {', '.join(offending)} — remova-o do JSON)"
+            feedback = (f"verificação estática reprovou no critério '{probe['first_fail']}'{detail} — "
                         "revise o patch (não altere arquivos protegidos/de teste) e reenvie o JSON")
             continue
         merged = dict(seed)
@@ -155,20 +167,32 @@ def generate_red_green(request: str, seed: dict, oracle: dict, llm, executor,
             merged[p] = seed[p]
         detail = executor.run_tests_detail(merged, test_cmd=test_cmd, runtime=runtime)
         verdict = detail.get("passed")
+        # green executável NÃO basta: a verificação final também exige o estático (ex.:
+        # terraform validate passa com o marcador TODO ainda no arquivo). Sonda estática
+        # (sem executar, sem vazar markers) fecha o gap antes de aceitar o green.
+        probe = None
+        if verdict is True and not touched_protected:
+            from .verification import verify_code
+            probe = verify_code({"files": files}, seed, oracle, executor=None)
         history.append({"attempt": attempt, "parsed": True, "tests_pass": verdict,
                         "dropped_heldout_paths": dropped,
-                        "touched_protected_paths": touched_protected})
-        if verdict is True and not touched_protected:
+                        "touched_protected_paths": touched_protected,
+                        "static_ok": probe["static_ok"] if probe else None})
+        if verdict is True and not touched_protected and probe["static_ok"]:
             loop_green = True
             break
         if verdict is None:
             break   # erro de infra: iterar às cegas não é sinal, é ruído
-        if verdict is True:
+        if verdict is True and touched_protected:
             # o código passa nos testes da semente, mas o patch reescreve arquivo protegido
             # (teste/contrato) — a verificação final reprovaria; devolve o motivo exato.
             feedback = ("seus arquivos passam nos testes, MAS você modificou arquivo(s) "
                         f"protegido(s) de teste/contrato: {', '.join(touched_protected)}. "
                         "Reenvie o JSON sem incluir esses arquivos (não os altere).")
+            continue
+        if verdict is True:
+            feedback = (f"os testes passam, MAS a verificação estática reprovou no critério "
+                        f"'{probe['first_fail']}' — revise o patch e reenvie o JSON")
             continue
         feedback = detail.get("output") or "os testes visíveis falharam (sem saída capturada)"
 

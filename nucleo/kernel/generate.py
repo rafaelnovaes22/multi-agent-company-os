@@ -75,6 +75,8 @@ def _prompt(request: str, seed: dict, attempt: int, feedback: str | None,
     parts = [
         "Você é um engenheiro de software. Corrija/implemente o pedido abaixo no repositório dado.",
         "Regras: NÃO modifique arquivos de teste; devolva o conteúdo COMPLETO de cada arquivo alterado.",
+        "Se o pedido trouxer critérios de aceite com trechos de código exatos, reproduza-os "
+        "LITERALMENTE (mesmas aspas/espaços) — não os 'melhore'.",
         'Responda SOMENTE com JSON válido no formato {"files": {"caminho/arquivo": "conteúdo completo"}}.',
     ]
     if untouchable:

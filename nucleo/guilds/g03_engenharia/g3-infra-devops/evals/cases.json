@@ -46,7 +46,8 @@
       "handler_kind": "spec_executor",
       "exec_delivered": true
     },
-    "provenance": "independent"
+    "provenance": "independent",
+    "request": "naming: correto. Edite `main.tf` implementando o contrato descrito no doc em docs/. Critérios de aceite: o arquivo deve conter: `resource_name`; remover TODO(s): `TODO_IMPLEMENT`."
   },
   {
     "id": "g3-infra-devops-02",
@@ -95,7 +96,8 @@
       "handler_kind": "spec_executor",
       "exec_delivered": true
     },
-    "provenance": "independent"
+    "provenance": "independent",
+    "request": "naming: correto (forma alternativa). Edite `main.tf` implementando o contrato descrito no doc em docs/. Critérios de aceite: o arquivo deve conter: `resource_name`; remover TODO(s): `TODO_IMPLEMENT`."
   },
   {
     "id": "g3-infra-devops-03",
@@ -144,7 +146,8 @@
       "handler_kind": "spec_executor",
       "exec_delivered": true
     },
-    "provenance": "independent"
+    "provenance": "independent",
+    "request": "cidr: correto. Edite `main.tf` implementando o contrato descrito no doc em docs/. Critérios de aceite: o arquivo deve conter: `subnet_cidr`; remover TODO(s): `TODO_IMPLEMENT`."
   },
   {
     "id": "g3-infra-devops-04",
@@ -193,7 +196,8 @@
       "handler_kind": "spec_executor",
       "exec_delivered": true
     },
-    "provenance": "independent"
+    "provenance": "independent",
+    "request": "cidr: correto (forma alternativa). Edite `main.tf` implementando o contrato descrito no doc em docs/. Critérios de aceite: o arquivo deve conter: `subnet_cidr`; remover TODO(s): `TODO_IMPLEMENT`."
   },
   {
     "id": "g3-infra-devops-05",
@@ -242,7 +246,8 @@
       "handler_kind": "spec_executor",
       "exec_delivered": true
     },
-    "provenance": "independent"
+    "provenance": "independent",
+    "request": "tags: correto. Edite `main.tf` implementando o contrato descrito no doc em docs/. Critérios de aceite: o arquivo deve conter: `tags`; remover TODO(s): `TODO_IMPLEMENT`."
   },
   {
     "id": "g3-infra-devops-06",
@@ -291,7 +296,8 @@
       "handler_kind": "spec_executor",
       "exec_delivered": true
     },
-    "provenance": "independent"
+    "provenance": "independent",
+    "request": "tags: correto (forma alternativa). Edite `main.tf` implementando o contrato descrito no doc em docs/. Critérios de aceite: o arquivo deve conter: `tags`; remover TODO(s): `TODO_IMPLEMENT`."
   },
   {
     "id": "g3-infra-devops-07",
@@ -340,7 +346,8 @@
       "handler_kind": "spec_executor",
       "exec_delivered": true
     },
-    "provenance": "independent"
+    "provenance": "independent",
+    "request": "replicas: correto. Edite `main.tf` implementando o contrato descrito no doc em docs/. Critérios de aceite: o arquivo deve conter: `replica_count`; remover TODO(s): `TODO_IMPLEMENT`."
   },
   {
     "id": "g3-infra-devops-08",
@@ -389,7 +396,8 @@
       "handler_kind": "spec_executor",
       "exec_delivered": true
     },
-    "provenance": "independent"
+    "provenance": "independent",
+    "request": "replicas: correto (forma alternativa). Edite `main.tf` implementando o contrato descrito no doc em docs/. Critérios de aceite: o arquivo deve conter: `replica_count`; remover TODO(s): `TODO_IMPLEMENT`."
   },
   {
     "id": "g3-infra-devops-09",

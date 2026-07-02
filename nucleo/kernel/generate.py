@@ -25,6 +25,16 @@ import os
 import re
 
 _FENCE_RE = re.compile(r"```(?:json)?\s*(\{.*?\})\s*```", re.DOTALL)
+_TEST_PATH_RE = re.compile(r"(^|/)(tests?[_/]|test_|__tests__/)|\.(test|spec)\.[a-z]+$|_test\.[a-z]+$")
+
+
+def _has_visible_tests(seed: dict, runtime: str) -> bool:
+    """O loop EXECUTÁVEL só faz sentido se a semente tem teste visível para iterar
+    (o held-out é oculto por design). Terraform é exceção: `validate` é feedback
+    executável significativo mesmo sem arquivos de teste."""
+    if runtime == "terraform":
+        return True
+    return any(_TEST_PATH_RE.search(path) for path in seed)
 
 
 def _max_iters() -> int:
@@ -91,7 +101,11 @@ def generate_red_green(request: str, seed: dict, oracle: dict, llm, executor,
     protected_paths = set(oracle.get("protected_files") or {})
     test_cmd = oracle.get("test_cmd") or "pytest -q"
     runtime = oracle.get("runtime") or "python"
-    can_loop = executor is not None and getattr(executor, "available", False)
+    visible_tests = _has_visible_tests(seed, runtime)
+    # Loop EXECUTÁVEL exige executor real E teste visível na semente; sem teste visível
+    # (held-out é oculto por design) o feedback vem da SONDA ESTÁTICA: só o NOME do
+    # critério que falhou (first_fail) — nunca os markers/conteúdo do oráculo.
+    can_loop = executor is not None and getattr(executor, "available", False) and visible_tests
 
     history: list[dict] = []
     artifact_files: dict | None = None
@@ -111,10 +125,25 @@ def generate_red_green(request: str, seed: dict, oracle: dict, llm, executor,
             files.pop(p)   # autor != provador: o agente não escreve o próprio critério
         artifact_files = files
         if not can_loop:
-            # sem executor real não há red→green: one-shot honesto, delivered fica com o caller
+            if visible_tests:
+                # executor indisponível: one-shot honesto, delivered fica com o caller
+                history.append({"attempt": attempt, "parsed": True, "tests_pass": None,
+                                "dropped_heldout_paths": dropped, "no_executor": True})
+                break
+            # SONDA ESTÁTICA (semente sem teste visível): itera contra os critérios
+            # estáticos do verify_code SEM executar. Vaza só o nome do critério reprovado
+            # (o mesmo que o CI publicaria) — jamais bug_markers/held-out. O held-out
+            # continua decidindo `delivered` na verificação final do caller.
+            from .verification import verify_code
+            probe = verify_code({"files": files}, seed, oracle, executor=None)
             history.append({"attempt": attempt, "parsed": True, "tests_pass": None,
-                            "dropped_heldout_paths": dropped, "no_executor": True})
-            break
+                            "dropped_heldout_paths": dropped, "static_probe": True,
+                            "static_ok": probe["static_ok"], "first_fail": probe["first_fail"]})
+            if probe["static_ok"]:
+                break   # estático limpo: sem teste visível não há mais o que iterar
+            feedback = (f"verificação estática reprovou no critério '{probe['first_fail']}' — "
+                        "revise o patch (não altere arquivos protegidos/de teste) e reenvie o JSON")
+            continue
         merged = dict(seed)
         merged.update(files)
         # arquivos PROTEGIDOS rodam SEMPRE na versão da semente (mesma disciplina da

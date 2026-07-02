@@ -145,6 +145,31 @@ class RedGreenLoopTest(unittest.TestCase):
         self.assertFalse(r["loop_green"])
         self.assertEqual(r["attempts"], 1)   # parou no None, não gastou budget às cegas
 
+    def test_semente_sem_teste_visivel_usa_sonda_estatica_sem_executar(self):
+        # backend/frontend/mobile: o único teste é o held-out (oculto). O loop não pode
+        # executar (rodaria vazio) nem ver o held-out: itera contra a SONDA ESTÁTICA e
+        # vaza só o NOME do critério reprovado. O executor não é chamado no loop.
+        seed = {"api/orders.py": "def total(items):\n    return 0  # TODO-BUG\n"}
+        oracle = {"bug_file": "api/orders.py", "runtime": "python",
+                  "test_cmd": "pytest -q",
+                  "bug_markers": {"must_remove": ["TODO-BUG"], "must_contain": []},
+                  "heldout_files": {"test_orders.py": f"# {SECRET}\n"}}
+        still_bad = json.dumps({"files": {"api/orders.py":
+                                          "def total(items):\n    # ajuste\n    return 0  # TODO-BUG\n"}})
+        good = json.dumps({"files": {"api/orders.py":
+                                     "def total(items):\n    return sum(i['price'] * i['qty'] for i in items)\n"}})
+        llm = ScriptedLLM([still_bad, good])
+        ex = ScriptedExecutor([True] * 5)
+        r = generate_red_green("some o carrinho", seed, oracle, llm, ex)
+        self.assertEqual(r["attempts"], 2)
+        self.assertTrue(r["history"][0]["static_probe"])
+        self.assertEqual(r["history"][0]["first_fail"], "bug_addressed")
+        self.assertTrue(r["history"][1]["static_ok"])
+        self.assertEqual(ex.executed_files, [])          # loop não executou nada
+        self.assertIn("bug_addressed", llm.prompts[1])   # feedback = só o nome do critério
+        for p in llm.prompts:
+            self.assertNotIn(SECRET, p)                  # held-out continua fora
+
     def test_extract_files_aceita_json_cercado(self):
         text = "Aqui está:\n```json\n" + GOOD + "\n```\nEspero que ajude!"
         self.assertEqual(_extract_files(text),

@@ -75,7 +75,7 @@ jobs:
         with:
           workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
           service_account: ${{ secrets.GCP_SA_EMAIL }}
-      - name: Relatório GENERATIVO do piloto (red→green com LLM real; auditoria)
+      - name: Relatórios GENERATIVOS dos 5 exec-backed (red→green com LLM real; auditoria)
         if: steps.gcp-auth.outcome == 'success'
         continue-on-error: true
         env:
@@ -83,8 +83,18 @@ jobs:
           GOOGLE_GENAI_USE_VERTEXAI: "true"
           GOOGLE_CLOUD_PROJECT: acme-multiagentes
           GOOGLE_CLOUD_LOCATION: us-central1
+        # Piloto (teste visível na semente = loop executável); backend/frontend/mobile iteram
+        # via sonda estática (semente sem teste visível — held-out oculto decide no final);
+        # infra itera via terraform validate. Cada agente publica seu artifact separado.
         run: |
-          python -m nucleo.quality.exec_report --generative --require-real-llm --json-output exec_report_gen.json nucleo/guilds/g03_engenharia/g3-build-error-resolver | tee exec_report_gen.txt
+          fail=0
+          for agent in g3-build-error-resolver:gen g3-backend-builder:gen_backend g3-frontend-builder:gen_frontend g3-infra-devops:gen_infra g3-mobile-builder:gen_mobile; do
+            dir="nucleo/guilds/g03_engenharia/${agent%%:*}"; suffix="${agent##*:}"
+            python -m nucleo.quality.exec_report --generative --require-real-llm \
+              --json-output "exec_report_${suffix}.json" "$dir" | tee "exec_report_${suffix}.txt" \
+              || { echo "::warning::generativo falhou p/ ${agent%%:*} (auditoria segue)"; fail=1; }
+          done
+          exit $fail
       - name: Gate F6 dos artifacts de execução real creditáveis
         run: |
           python -m nucleo.quality.exec_artifact_gate \
@@ -115,3 +125,11 @@ jobs:
             exec_report_incident.json
             exec_report_gen.txt
             exec_report_gen.json
+            exec_report_gen_backend.txt
+            exec_report_gen_backend.json
+            exec_report_gen_frontend.txt
+            exec_report_gen_frontend.json
+            exec_report_gen_infra.txt
+            exec_report_gen_infra.json
+            exec_report_gen_mobile.txt
+            exec_report_gen_mobile.json

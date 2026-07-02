@@ -145,6 +145,23 @@ class RedGreenLoopTest(unittest.TestCase):
         self.assertFalse(r["loop_green"])
         self.assertEqual(r["attempts"], 1)   # parou no None, não gastou budget às cegas
 
+    def test_green_executavel_com_estatico_vermelho_nao_fecha_o_loop(self):
+        # infra real: terraform validate passa com o marcador TODO ainda no arquivo — o
+        # green executável NÃO basta; a sonda estática tem de aprovar antes do loop fechar.
+        oracle = dict(ORACLE)
+        oracle["bug_markers"] = {"must_remove": ["TODO-MARK"], "must_contain": []}
+        seed = dict(SEED)
+        seed["app.py"] = "def soma(a, b):\n    return a - b  # TODO-MARK\n"
+        marker_left = json.dumps({"files": {"app.py": "def soma(a, b):\n    return a + b  # TODO-MARK\n"}})
+        clean = json.dumps({"files": {"app.py": "def soma(a, b):\n    return a + b\n"}})
+        llm = ScriptedLLM([marker_left, clean])
+        ex = ScriptedExecutor([True, True])   # executável green nas duas
+        r = generate_red_green("corrija soma", seed, oracle, llm, ex)
+        self.assertTrue(r["loop_green"])
+        self.assertEqual(r["attempts"], 2)
+        self.assertIs(r["history"][0]["static_ok"], False)
+        self.assertIn("bug_addressed", llm.prompts[1])   # feedback nomeou o critério
+
     def test_semente_sem_teste_visivel_usa_sonda_estatica_sem_executar(self):
         # backend/frontend/mobile: o único teste é o held-out (oculto). O loop não pode
         # executar (rodaria vazio) nem ver o held-out: itera contra a SONDA ESTÁTICA e

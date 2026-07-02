@@ -2,7 +2,7 @@
   {
     "id": "g3-mobile-builder-verify-01",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 01: OnboardingScreen",
-    "request": "Entregar patch mobile verificável para OnboardingScreen no cenário onboarding-01",
+    "request": "Entregar patch mobile verificável para OnboardingScreen no cenário onboarding-01 Critérios de aceite: o código deve conter exatamente: `accessibilityLabel: \"Começar diagnóstico\"`; remover o(s) marcador(es): `TODO_ACCESSIBLE_LABEL`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -52,7 +52,7 @@
   {
     "id": "g3-mobile-builder-verify-02",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 02: PaywallScreen",
-    "request": "Entregar patch mobile verificável para PaywallScreen no cenário paywall-02",
+    "request": "Entregar patch mobile verificável para PaywallScreen no cenário paywall-02 Critérios de aceite: o código deve conter exatamente: `priceCopy: \"Plano operacional com fair use\"`; remover o(s) marcador(es): `TODO_PRICE_COPY`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -102,7 +102,7 @@
   {
     "id": "g3-mobile-builder-verify-03",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 03: LeadCaptureForm",
-    "request": "Entregar patch mobile verificável para LeadCaptureForm no cenário lead-03",
+    "request": "Entregar patch mobile verificável para LeadCaptureForm no cenário lead-03 Critérios de aceite: o código deve conter exatamente: `emailValid: email.includes(\"@\")`; remover o(s) marcador(es): `TODO_EMAIL_VALIDATION`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -152,7 +152,7 @@
   {
     "id": "g3-mobile-builder-verify-04",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 04: OfflineSync",
-    "request": "Entregar patch mobile verificável para OfflineSync no cenário offline-04",
+    "request": "Entregar patch mobile verificável para OfflineSync no cenário offline-04 Critérios de aceite: o código deve conter exatamente: `retryPolicy: \"exponential-backoff\"`; remover o(s) marcador(es): `TODO_RETRY_POLICY`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -202,7 +202,7 @@
   {
     "id": "g3-mobile-builder-verify-05",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 05: PushConsent",
-    "request": "Entregar patch mobile verificável para PushConsent no cenário push-05",
+    "request": "Entregar patch mobile verificável para PushConsent no cenário push-05 Critérios de aceite: o código deve conter exatamente: `consentCopy: \"Receber alertas operacionais\"`; remover o(s) marcador(es): `TODO_CONSENT_COPY`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -252,7 +252,7 @@
   {
     "id": "g3-mobile-builder-verify-06",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 06: OnboardingScreen",
-    "request": "Entregar patch mobile verificável para OnboardingScreen no cenário onboarding-06",
+    "request": "Entregar patch mobile verificável para OnboardingScreen no cenário onboarding-06 Critérios de aceite: o código deve conter exatamente: `accessibilityLabel: \"Começar diagnóstico\"`; remover o(s) marcador(es): `TODO_ACCESSIBLE_LABEL`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -302,7 +302,7 @@
   {
     "id": "g3-mobile-builder-verify-07",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 07: PaywallScreen",
-    "request": "Entregar patch mobile verificável para PaywallScreen no cenário paywall-07",
+    "request": "Entregar patch mobile verificável para PaywallScreen no cenário paywall-07 Critérios de aceite: o código deve conter exatamente: `priceCopy: \"Plano operacional com fair use\"`; remover o(s) marcador(es): `TODO_PRICE_COPY`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -352,7 +352,7 @@
   {
     "id": "g3-mobile-builder-verify-08",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 08: LeadCaptureForm",
-    "request": "Entregar patch mobile verificável para LeadCaptureForm no cenário lead-08",
+    "request": "Entregar patch mobile verificável para LeadCaptureForm no cenário lead-08 Critérios de aceite: o código deve conter exatamente: `emailValid: email.includes(\"@\")`; remover o(s) marcador(es): `TODO_EMAIL_VALIDATION`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -402,7 +402,7 @@
   {
     "id": "g3-mobile-builder-verify-09",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 09: OfflineSync",
-    "request": "Entregar patch mobile verificável para OfflineSync no cenário offline-09",
+    "request": "Entregar patch mobile verificável para OfflineSync no cenário offline-09 Critérios de aceite: o código deve conter exatamente: `retryPolicy: \"exponential-backoff\"`; remover o(s) marcador(es): `TODO_RETRY_POLICY`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -452,7 +452,7 @@
   {
     "id": "g3-mobile-builder-verify-10",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 10: PushConsent",
-    "request": "Entregar patch mobile verificável para PushConsent no cenário push-10",
+    "request": "Entregar patch mobile verificável para PushConsent no cenário push-10 Critérios de aceite: o código deve conter exatamente: `consentCopy: \"Receber alertas operacionais\"`; remover o(s) marcador(es): `TODO_CONSENT_COPY`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -502,7 +502,7 @@
   {
     "id": "g3-mobile-builder-verify-11",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 11: OnboardingScreen",
-    "request": "Entregar patch mobile verificável para OnboardingScreen no cenário onboarding-11",
+    "request": "Entregar patch mobile verificável para OnboardingScreen no cenário onboarding-11 Critérios de aceite: o código deve conter exatamente: `accessibilityLabel: \"Começar diagnóstico\"`; remover o(s) marcador(es): `TODO_ACCESSIBLE_LABEL`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -552,7 +552,7 @@
   {
     "id": "g3-mobile-builder-verify-12",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 12: PaywallScreen",
-    "request": "Entregar patch mobile verificável para PaywallScreen no cenário paywall-12",
+    "request": "Entregar patch mobile verificável para PaywallScreen no cenário paywall-12 Critérios de aceite: o código deve conter exatamente: `priceCopy: \"Plano operacional com fair use\"`; remover o(s) marcador(es): `TODO_PRICE_COPY`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -602,7 +602,7 @@
   {
     "id": "g3-mobile-builder-verify-13",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 13: LeadCaptureForm",
-    "request": "Entregar patch mobile verificável para LeadCaptureForm no cenário lead-13",
+    "request": "Entregar patch mobile verificável para LeadCaptureForm no cenário lead-13 Critérios de aceite: o código deve conter exatamente: `emailValid: email.includes(\"@\")`; remover o(s) marcador(es): `TODO_EMAIL_VALIDATION`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -652,7 +652,7 @@
   {
     "id": "g3-mobile-builder-verify-14",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 14: OfflineSync",
-    "request": "Entregar patch mobile verificável para OfflineSync no cenário offline-14",
+    "request": "Entregar patch mobile verificável para OfflineSync no cenário offline-14 Critérios de aceite: o código deve conter exatamente: `retryPolicy: \"exponential-backoff\"`; remover o(s) marcador(es): `TODO_RETRY_POLICY`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -702,7 +702,7 @@
   {
     "id": "g3-mobile-builder-verify-15",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 15: PushConsent",
-    "request": "Entregar patch mobile verificável para PushConsent no cenário push-15",
+    "request": "Entregar patch mobile verificável para PushConsent no cenário push-15 Critérios de aceite: o código deve conter exatamente: `consentCopy: \"Receber alertas operacionais\"`; remover o(s) marcador(es): `TODO_CONSENT_COPY`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -752,7 +752,7 @@
   {
     "id": "g3-mobile-builder-verify-16",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 16: OnboardingScreen",
-    "request": "Entregar patch mobile verificável para OnboardingScreen no cenário onboarding-16",
+    "request": "Entregar patch mobile verificável para OnboardingScreen no cenário onboarding-16 Critérios de aceite: o código deve conter exatamente: `accessibilityLabel: \"Começar diagnóstico\"`; remover o(s) marcador(es): `TODO_ACCESSIBLE_LABEL`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -802,7 +802,7 @@
   {
     "id": "g3-mobile-builder-verify-17",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 17: PaywallScreen",
-    "request": "Entregar patch mobile verificável para PaywallScreen no cenário paywall-17",
+    "request": "Entregar patch mobile verificável para PaywallScreen no cenário paywall-17 Critérios de aceite: o código deve conter exatamente: `priceCopy: \"Plano operacional com fair use\"`; remover o(s) marcador(es): `TODO_PRICE_COPY`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -852,7 +852,7 @@
   {
     "id": "g3-mobile-builder-verify-18",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 18: LeadCaptureForm",
-    "request": "Entregar patch mobile verificável para LeadCaptureForm no cenário lead-18",
+    "request": "Entregar patch mobile verificável para LeadCaptureForm no cenário lead-18 Critérios de aceite: o código deve conter exatamente: `emailValid: email.includes(\"@\")`; remover o(s) marcador(es): `TODO_EMAIL_VALIDATION`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -902,7 +902,7 @@
   {
     "id": "g3-mobile-builder-verify-19",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 19: OfflineSync",
-    "request": "Entregar patch mobile verificável para OfflineSync no cenário offline-19",
+    "request": "Entregar patch mobile verificável para OfflineSync no cenário offline-19 Critérios de aceite: o código deve conter exatamente: `retryPolicy: \"exponential-backoff\"`; remover o(s) marcador(es): `TODO_RETRY_POLICY`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -952,7 +952,7 @@
   {
     "id": "g3-mobile-builder-verify-20",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 20: PushConsent",
-    "request": "Entregar patch mobile verificável para PushConsent no cenário push-20",
+    "request": "Entregar patch mobile verificável para PushConsent no cenário push-20 Critérios de aceite: o código deve conter exatamente: `consentCopy: \"Receber alertas operacionais\"`; remover o(s) marcador(es): `TODO_CONSENT_COPY`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -1002,7 +1002,7 @@
   {
     "id": "g3-mobile-builder-verify-21",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 21: OnboardingScreen",
-    "request": "Entregar patch mobile verificável para OnboardingScreen no cenário onboarding-21",
+    "request": "Entregar patch mobile verificável para OnboardingScreen no cenário onboarding-21 Critérios de aceite: o código deve conter exatamente: `accessibilityLabel: \"Começar diagnóstico\"`; remover o(s) marcador(es): `TODO_ACCESSIBLE_LABEL`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -1052,7 +1052,7 @@
   {
     "id": "g3-mobile-builder-verify-22",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 22: PaywallScreen",
-    "request": "Entregar patch mobile verificável para PaywallScreen no cenário paywall-22",
+    "request": "Entregar patch mobile verificável para PaywallScreen no cenário paywall-22 Critérios de aceite: o código deve conter exatamente: `priceCopy: \"Plano operacional com fair use\"`; remover o(s) marcador(es): `TODO_PRICE_COPY`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -1102,7 +1102,7 @@
   {
     "id": "g3-mobile-builder-verify-23",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 23: LeadCaptureForm",
-    "request": "Entregar patch mobile verificável para LeadCaptureForm no cenário lead-23",
+    "request": "Entregar patch mobile verificável para LeadCaptureForm no cenário lead-23 Critérios de aceite: o código deve conter exatamente: `emailValid: email.includes(\"@\")`; remover o(s) marcador(es): `TODO_EMAIL_VALIDATION`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -1152,7 +1152,7 @@
   {
     "id": "g3-mobile-builder-verify-24",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 24: OfflineSync",
-    "request": "Entregar patch mobile verificável para OfflineSync no cenário offline-24",
+    "request": "Entregar patch mobile verificável para OfflineSync no cenário offline-24 Critérios de aceite: o código deve conter exatamente: `retryPolicy: \"exponential-backoff\"`; remover o(s) marcador(es): `TODO_RETRY_POLICY`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -1202,7 +1202,7 @@
   {
     "id": "g3-mobile-builder-verify-25",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 25: PushConsent",
-    "request": "Entregar patch mobile verificável para PushConsent no cenário push-25",
+    "request": "Entregar patch mobile verificável para PushConsent no cenário push-25 Critérios de aceite: o código deve conter exatamente: `consentCopy: \"Receber alertas operacionais\"`; remover o(s) marcador(es): `TODO_CONSENT_COPY`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -1252,7 +1252,7 @@
   {
     "id": "g3-mobile-builder-verify-26",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 26: OnboardingScreen",
-    "request": "Entregar patch mobile verificável para OnboardingScreen no cenário onboarding-26",
+    "request": "Entregar patch mobile verificável para OnboardingScreen no cenário onboarding-26 Critérios de aceite: o código deve conter exatamente: `accessibilityLabel: \"Começar diagnóstico\"`; remover o(s) marcador(es): `TODO_ACCESSIBLE_LABEL`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -1302,7 +1302,7 @@
   {
     "id": "g3-mobile-builder-verify-27",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 27: PaywallScreen",
-    "request": "Entregar patch mobile verificável para PaywallScreen no cenário paywall-27",
+    "request": "Entregar patch mobile verificável para PaywallScreen no cenário paywall-27 Critérios de aceite: o código deve conter exatamente: `priceCopy: \"Plano operacional com fair use\"`; remover o(s) marcador(es): `TODO_PRICE_COPY`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -1352,7 +1352,7 @@
   {
     "id": "g3-mobile-builder-verify-28",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 28: LeadCaptureForm",
-    "request": "Entregar patch mobile verificável para LeadCaptureForm no cenário lead-28",
+    "request": "Entregar patch mobile verificável para LeadCaptureForm no cenário lead-28 Critérios de aceite: o código deve conter exatamente: `emailValid: email.includes(\"@\")`; remover o(s) marcador(es): `TODO_EMAIL_VALIDATION`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -1402,7 +1402,7 @@
   {
     "id": "g3-mobile-builder-verify-29",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 29: OfflineSync",
-    "request": "Entregar patch mobile verificável para OfflineSync no cenário offline-29",
+    "request": "Entregar patch mobile verificável para OfflineSync no cenário offline-29 Critérios de aceite: o código deve conter exatamente: `retryPolicy: \"exponential-backoff\"`; remover o(s) marcador(es): `TODO_RETRY_POLICY`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {
@@ -1452,7 +1452,7 @@
   {
     "id": "g3-mobile-builder-verify-30",
     "desc": "VERIFY-IN-EVAL F4d mobile held-out 30: PushConsent",
-    "request": "Entregar patch mobile verificável para PushConsent no cenário push-30",
+    "request": "Entregar patch mobile verificável para PushConsent no cenário push-30 Critérios de aceite: o código deve conter exatamente: `consentCopy: \"Receber alertas operacionais\"`; remover o(s) marcador(es): `TODO_CONSENT_COPY`.",
     "artifact_type": "mobile_builder.artifact",
     "artifact": {
       "files": {

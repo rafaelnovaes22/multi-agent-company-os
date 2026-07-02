@@ -151,6 +151,15 @@ proibindo a tarefa em vez de inventar um recompute auto-referente.
    (violação reaberta) e isso é assumido como correto, não "consertado" recarimbando.
 6. **Reavaliar o gerador (provavelmente não).** *Pronto quando:* só construir `g0-agent-smith`
    se surgir fila real de agentes novos (vertical/tenant novo); default = adiado.
+7. **Épico red→green (capacidade generativa medida de verdade).** Hoje o `delivered_eligible_rate`
+   mede a qualidade das fixtures commitadas (o artefato vem baked no eval-case;
+   `skills_exec.py` só verifica). Para o 95% significar capacidade do AGENTE: (a) handler
+   `spec_executor` ganha modo gerador — sem `artifact` no caso, o LLM real gera o patch a
+   partir de `seed`+`request`, itera contra o executor com os testes VISÍVEIS (nunca o
+   held-out), até verde ou budget; (b) o held-out segue decidindo `delivered` (oráculo que o
+   agente nunca vê); (c) nightly ganha `LLM_PROVIDER=vertex` via WIF (mesmo padrão do
+   redteam.yml). *Pronto quando:* existe um `delivered_eligible_rate` GENERATIVO publicado por
+   agente, separado do replay de fixtures, e o G7 usa o generativo p/ promover.
 
 ## 5. Guardrails anti-Goodhart
 
@@ -182,9 +191,22 @@ proibindo a tarefa em vez de inventar um recompute auto-referente.
 2. ~~Pausar o acionamento do Hermes~~ **[DECIDIDO — forma forte, commit 9b0b7c1]** o Hermes vira
    AUDITOR, não autor (não materializa/altera agente nem faz merge). `AGENTS.md §0.5`.
 3. **[DECIDIDO]** SLA = `delivered_rate >= 95%` por agente + fail-safe declarado para os <=5%
-   restantes (ver §4.4). Pendente apenas o braço **código-vs-mercado**: dado que hoje é 27%/0% e o
-   teto generativo não cede a prompt, decidir se o próximo passo é construir capacidade (tooling +
-   fonte-certa) ou ir a mercado provar valor no patamar atual com escopo restrito.
+   restantes (ver §4.4). ~~Pendente o braço código-vs-mercado~~ **[DECIDIDO — CÓDIGO, CEO
+   2026-07-01: "precisamos atingir os 95%"]**. Consequências imediatas executadas:
+   - **Denominador honesto do G7:** o diagnóstico do nightly (artifact 2026-07-01) mostrou que os
+     4 agentes estritos entregam **8/8 nos casos entregáveis-por-design** (os 22 restantes são
+     18 negativos-por-design + 4 plausível-mas-errado que a execução DEVE reprovar — e reprova
+     4/4). O "27%" era denominador errado, não capacidade. Novo campo `expected.exec_delivered`
+     (intenção de design SOB EXECUÇÃO REAL, autorado pelo humano; distinto do `delivered_ok`
+     offline do grader G4): G7 mede `delivered_eligible_rate` sobre os elegíveis, e negativo que
+     ENTREGA é falso-positivo grave = HARD-FAIL (o invariante fail-safe dos <=5% da D3).
+   - **g3-mobile-builder 0/30 era harness quebrado, não capacidade:** `test_cmd` jest
+     (`npm test -- --runInBand`) numa imagem vitest + held-outs sem import. Consertado
+     (vitest run + import explícito); validado com execução Docker local.
+   - **Fronteira que segue real:** capacidade GENERATIVA continua não-medida (o `spec_executor`
+     verifica artefato baked no caso, não gera). O caminho p/ 95% generativo é o épico
+     red→green (handler gera com LLM real, itera contra o executor, held-out decide) — próxima
+     frente, ver §4.7.
 4. ~~Decidir o destino de `FABRICA-DE-AGENTES.md`~~ **[FEITO, commit 187f560]** commitado como canônico.
 5. Ratificar pessoalmente (`provenance=human`, nunca o Hermes) os casos dos agentes de cálculo de
    alto risco: `g8-outbound-sdr`, `g5-threat-modeler`, `g1-scenario-planner`. Dimensionar quantos

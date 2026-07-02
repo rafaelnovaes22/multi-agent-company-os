@@ -25,9 +25,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/onboarding-01.test.ts": "import { renderOnboarding } from \"../src/screens/OnboardingScreen.ts\";\n\ntest(\"OnboardingScreen satisfies held-out mobile contract 01\", () => {\n  const out = renderOnboarding({ tenant: \"t-01\", plan: \"operational\", email: \"ops1@example.com\" });\n  expect(out.scenario).toBe(\"onboarding-01\");\n  expect(JSON.stringify(out)).toContain(\"accessibilityLabel\");\n});\n"
+        "__tests__/onboarding-01.test.ts": "import { test, expect } from \"vitest\";\n\nimport { renderOnboarding } from \"../src/screens/OnboardingScreen.ts\";\n\ntest(\"OnboardingScreen satisfies held-out mobile contract 01\", () => {\n  const out = renderOnboarding({ tenant: \"t-01\", plan: \"operational\", email: \"ops1@example.com\" });\n  expect(out.scenario).toBe(\"onboarding-01\");\n  expect(JSON.stringify(out)).toContain(\"accessibilityLabel\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -44,8 +44,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-02",
@@ -73,9 +75,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/paywall-02.test.ts": "import { renderPaywall } from \"../src/screens/PaywallScreen.ts\";\n\ntest(\"PaywallScreen satisfies held-out mobile contract 02\", () => {\n  const out = renderPaywall({ tenant: \"t-02\", plan: \"operational\", email: \"ops2@example.com\" });\n  expect(out.scenario).toBe(\"paywall-02\");\n  expect(JSON.stringify(out)).toContain(\"priceCopy\");\n});\n"
+        "__tests__/paywall-02.test.ts": "import { test, expect } from \"vitest\";\n\nimport { renderPaywall } from \"../src/screens/PaywallScreen.ts\";\n\ntest(\"PaywallScreen satisfies held-out mobile contract 02\", () => {\n  const out = renderPaywall({ tenant: \"t-02\", plan: \"operational\", email: \"ops2@example.com\" });\n  expect(out.scenario).toBe(\"paywall-02\");\n  expect(JSON.stringify(out)).toContain(\"priceCopy\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -92,8 +94,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-03",
@@ -121,9 +125,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/lead-03.test.ts": "import { validateLeadForm } from \"../src/components/LeadCaptureForm.ts\";\n\ntest(\"LeadCaptureForm satisfies held-out mobile contract 03\", () => {\n  const out = validateLeadForm({ tenant: \"t-03\", plan: \"operational\", email: \"ops3@example.com\" });\n  expect(out.scenario).toBe(\"lead-03\");\n  expect(JSON.stringify(out)).toContain(\"emailValid\");\n});\n"
+        "__tests__/lead-03.test.ts": "import { test, expect } from \"vitest\";\n\nimport { validateLeadForm } from \"../src/components/LeadCaptureForm.ts\";\n\ntest(\"LeadCaptureForm satisfies held-out mobile contract 03\", () => {\n  const out = validateLeadForm({ tenant: \"t-03\", plan: \"operational\", email: \"ops3@example.com\" });\n  expect(out.scenario).toBe(\"lead-03\");\n  expect(JSON.stringify(out)).toContain(\"emailValid\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -140,8 +144,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-04",
@@ -169,9 +175,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/offline-04.test.ts": "import { syncOfflineQueue } from \"../src/services/offlineSync.ts\";\n\ntest(\"OfflineSync satisfies held-out mobile contract 04\", () => {\n  const out = syncOfflineQueue({ tenant: \"t-04\", plan: \"operational\", email: \"ops4@example.com\" });\n  expect(out.scenario).toBe(\"offline-04\");\n  expect(JSON.stringify(out)).toContain(\"retryPolicy\");\n});\n"
+        "__tests__/offline-04.test.ts": "import { test, expect } from \"vitest\";\n\nimport { syncOfflineQueue } from \"../src/services/offlineSync.ts\";\n\ntest(\"OfflineSync satisfies held-out mobile contract 04\", () => {\n  const out = syncOfflineQueue({ tenant: \"t-04\", plan: \"operational\", email: \"ops4@example.com\" });\n  expect(out.scenario).toBe(\"offline-04\");\n  expect(JSON.stringify(out)).toContain(\"retryPolicy\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -188,8 +194,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-05",
@@ -217,9 +225,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/push-05.test.ts": "import { buildPushConsent } from \"../src/services/pushConsent.ts\";\n\ntest(\"PushConsent satisfies held-out mobile contract 05\", () => {\n  const out = buildPushConsent({ tenant: \"t-05\", plan: \"operational\", email: \"ops5@example.com\" });\n  expect(out.scenario).toBe(\"push-05\");\n  expect(JSON.stringify(out)).toContain(\"consentCopy\");\n});\n"
+        "__tests__/push-05.test.ts": "import { test, expect } from \"vitest\";\n\nimport { buildPushConsent } from \"../src/services/pushConsent.ts\";\n\ntest(\"PushConsent satisfies held-out mobile contract 05\", () => {\n  const out = buildPushConsent({ tenant: \"t-05\", plan: \"operational\", email: \"ops5@example.com\" });\n  expect(out.scenario).toBe(\"push-05\");\n  expect(JSON.stringify(out)).toContain(\"consentCopy\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -236,8 +244,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-06",
@@ -265,9 +275,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/onboarding-06.test.ts": "import { renderOnboarding } from \"../src/screens/OnboardingScreen.ts\";\n\ntest(\"OnboardingScreen satisfies held-out mobile contract 06\", () => {\n  const out = renderOnboarding({ tenant: \"t-06\", plan: \"operational\", email: \"ops6@example.com\" });\n  expect(out.scenario).toBe(\"onboarding-06\");\n  expect(JSON.stringify(out)).toContain(\"accessibilityLabel\");\n});\n"
+        "__tests__/onboarding-06.test.ts": "import { test, expect } from \"vitest\";\n\nimport { renderOnboarding } from \"../src/screens/OnboardingScreen.ts\";\n\ntest(\"OnboardingScreen satisfies held-out mobile contract 06\", () => {\n  const out = renderOnboarding({ tenant: \"t-06\", plan: \"operational\", email: \"ops6@example.com\" });\n  expect(out.scenario).toBe(\"onboarding-06\");\n  expect(JSON.stringify(out)).toContain(\"accessibilityLabel\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -284,8 +294,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-07",
@@ -313,9 +325,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/paywall-07.test.ts": "import { renderPaywall } from \"../src/screens/PaywallScreen.ts\";\n\ntest(\"PaywallScreen satisfies held-out mobile contract 07\", () => {\n  const out = renderPaywall({ tenant: \"t-07\", plan: \"operational\", email: \"ops7@example.com\" });\n  expect(out.scenario).toBe(\"paywall-07\");\n  expect(JSON.stringify(out)).toContain(\"priceCopy\");\n});\n"
+        "__tests__/paywall-07.test.ts": "import { test, expect } from \"vitest\";\n\nimport { renderPaywall } from \"../src/screens/PaywallScreen.ts\";\n\ntest(\"PaywallScreen satisfies held-out mobile contract 07\", () => {\n  const out = renderPaywall({ tenant: \"t-07\", plan: \"operational\", email: \"ops7@example.com\" });\n  expect(out.scenario).toBe(\"paywall-07\");\n  expect(JSON.stringify(out)).toContain(\"priceCopy\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -332,8 +344,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-08",
@@ -361,9 +375,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/lead-08.test.ts": "import { validateLeadForm } from \"../src/components/LeadCaptureForm.ts\";\n\ntest(\"LeadCaptureForm satisfies held-out mobile contract 08\", () => {\n  const out = validateLeadForm({ tenant: \"t-08\", plan: \"operational\", email: \"ops8@example.com\" });\n  expect(out.scenario).toBe(\"lead-08\");\n  expect(JSON.stringify(out)).toContain(\"emailValid\");\n});\n"
+        "__tests__/lead-08.test.ts": "import { test, expect } from \"vitest\";\n\nimport { validateLeadForm } from \"../src/components/LeadCaptureForm.ts\";\n\ntest(\"LeadCaptureForm satisfies held-out mobile contract 08\", () => {\n  const out = validateLeadForm({ tenant: \"t-08\", plan: \"operational\", email: \"ops8@example.com\" });\n  expect(out.scenario).toBe(\"lead-08\");\n  expect(JSON.stringify(out)).toContain(\"emailValid\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -380,8 +394,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-09",
@@ -409,9 +425,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/offline-09.test.ts": "import { syncOfflineQueue } from \"../src/services/offlineSync.ts\";\n\ntest(\"OfflineSync satisfies held-out mobile contract 09\", () => {\n  const out = syncOfflineQueue({ tenant: \"t-09\", plan: \"operational\", email: \"ops9@example.com\" });\n  expect(out.scenario).toBe(\"offline-09\");\n  expect(JSON.stringify(out)).toContain(\"retryPolicy\");\n});\n"
+        "__tests__/offline-09.test.ts": "import { test, expect } from \"vitest\";\n\nimport { syncOfflineQueue } from \"../src/services/offlineSync.ts\";\n\ntest(\"OfflineSync satisfies held-out mobile contract 09\", () => {\n  const out = syncOfflineQueue({ tenant: \"t-09\", plan: \"operational\", email: \"ops9@example.com\" });\n  expect(out.scenario).toBe(\"offline-09\");\n  expect(JSON.stringify(out)).toContain(\"retryPolicy\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -428,8 +444,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-10",
@@ -457,9 +475,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/push-10.test.ts": "import { buildPushConsent } from \"../src/services/pushConsent.ts\";\n\ntest(\"PushConsent satisfies held-out mobile contract 10\", () => {\n  const out = buildPushConsent({ tenant: \"t-10\", plan: \"operational\", email: \"ops10@example.com\" });\n  expect(out.scenario).toBe(\"push-10\");\n  expect(JSON.stringify(out)).toContain(\"consentCopy\");\n});\n"
+        "__tests__/push-10.test.ts": "import { test, expect } from \"vitest\";\n\nimport { buildPushConsent } from \"../src/services/pushConsent.ts\";\n\ntest(\"PushConsent satisfies held-out mobile contract 10\", () => {\n  const out = buildPushConsent({ tenant: \"t-10\", plan: \"operational\", email: \"ops10@example.com\" });\n  expect(out.scenario).toBe(\"push-10\");\n  expect(JSON.stringify(out)).toContain(\"consentCopy\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -476,8 +494,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-11",
@@ -505,9 +525,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/onboarding-11.test.ts": "import { renderOnboarding } from \"../src/screens/OnboardingScreen.ts\";\n\ntest(\"OnboardingScreen satisfies held-out mobile contract 11\", () => {\n  const out = renderOnboarding({ tenant: \"t-11\", plan: \"operational\", email: \"ops11@example.com\" });\n  expect(out.scenario).toBe(\"onboarding-11\");\n  expect(JSON.stringify(out)).toContain(\"accessibilityLabel\");\n});\n"
+        "__tests__/onboarding-11.test.ts": "import { test, expect } from \"vitest\";\n\nimport { renderOnboarding } from \"../src/screens/OnboardingScreen.ts\";\n\ntest(\"OnboardingScreen satisfies held-out mobile contract 11\", () => {\n  const out = renderOnboarding({ tenant: \"t-11\", plan: \"operational\", email: \"ops11@example.com\" });\n  expect(out.scenario).toBe(\"onboarding-11\");\n  expect(JSON.stringify(out)).toContain(\"accessibilityLabel\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -524,8 +544,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-12",
@@ -553,9 +575,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/paywall-12.test.ts": "import { renderPaywall } from \"../src/screens/PaywallScreen.ts\";\n\ntest(\"PaywallScreen satisfies held-out mobile contract 12\", () => {\n  const out = renderPaywall({ tenant: \"t-12\", plan: \"operational\", email: \"ops12@example.com\" });\n  expect(out.scenario).toBe(\"paywall-12\");\n  expect(JSON.stringify(out)).toContain(\"priceCopy\");\n});\n"
+        "__tests__/paywall-12.test.ts": "import { test, expect } from \"vitest\";\n\nimport { renderPaywall } from \"../src/screens/PaywallScreen.ts\";\n\ntest(\"PaywallScreen satisfies held-out mobile contract 12\", () => {\n  const out = renderPaywall({ tenant: \"t-12\", plan: \"operational\", email: \"ops12@example.com\" });\n  expect(out.scenario).toBe(\"paywall-12\");\n  expect(JSON.stringify(out)).toContain(\"priceCopy\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -572,8 +594,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-13",
@@ -601,9 +625,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/lead-13.test.ts": "import { validateLeadForm } from \"../src/components/LeadCaptureForm.ts\";\n\ntest(\"LeadCaptureForm satisfies held-out mobile contract 13\", () => {\n  const out = validateLeadForm({ tenant: \"t-13\", plan: \"operational\", email: \"ops13@example.com\" });\n  expect(out.scenario).toBe(\"lead-13\");\n  expect(JSON.stringify(out)).toContain(\"emailValid\");\n});\n"
+        "__tests__/lead-13.test.ts": "import { test, expect } from \"vitest\";\n\nimport { validateLeadForm } from \"../src/components/LeadCaptureForm.ts\";\n\ntest(\"LeadCaptureForm satisfies held-out mobile contract 13\", () => {\n  const out = validateLeadForm({ tenant: \"t-13\", plan: \"operational\", email: \"ops13@example.com\" });\n  expect(out.scenario).toBe(\"lead-13\");\n  expect(JSON.stringify(out)).toContain(\"emailValid\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -620,8 +644,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-14",
@@ -649,9 +675,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/offline-14.test.ts": "import { syncOfflineQueue } from \"../src/services/offlineSync.ts\";\n\ntest(\"OfflineSync satisfies held-out mobile contract 14\", () => {\n  const out = syncOfflineQueue({ tenant: \"t-14\", plan: \"operational\", email: \"ops14@example.com\" });\n  expect(out.scenario).toBe(\"offline-14\");\n  expect(JSON.stringify(out)).toContain(\"retryPolicy\");\n});\n"
+        "__tests__/offline-14.test.ts": "import { test, expect } from \"vitest\";\n\nimport { syncOfflineQueue } from \"../src/services/offlineSync.ts\";\n\ntest(\"OfflineSync satisfies held-out mobile contract 14\", () => {\n  const out = syncOfflineQueue({ tenant: \"t-14\", plan: \"operational\", email: \"ops14@example.com\" });\n  expect(out.scenario).toBe(\"offline-14\");\n  expect(JSON.stringify(out)).toContain(\"retryPolicy\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -668,8 +694,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-15",
@@ -697,9 +725,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/push-15.test.ts": "import { buildPushConsent } from \"../src/services/pushConsent.ts\";\n\ntest(\"PushConsent satisfies held-out mobile contract 15\", () => {\n  const out = buildPushConsent({ tenant: \"t-15\", plan: \"operational\", email: \"ops15@example.com\" });\n  expect(out.scenario).toBe(\"push-15\");\n  expect(JSON.stringify(out)).toContain(\"consentCopy\");\n});\n"
+        "__tests__/push-15.test.ts": "import { test, expect } from \"vitest\";\n\nimport { buildPushConsent } from \"../src/services/pushConsent.ts\";\n\ntest(\"PushConsent satisfies held-out mobile contract 15\", () => {\n  const out = buildPushConsent({ tenant: \"t-15\", plan: \"operational\", email: \"ops15@example.com\" });\n  expect(out.scenario).toBe(\"push-15\");\n  expect(JSON.stringify(out)).toContain(\"consentCopy\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -716,8 +744,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-16",
@@ -745,9 +775,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/onboarding-16.test.ts": "import { renderOnboarding } from \"../src/screens/OnboardingScreen.ts\";\n\ntest(\"OnboardingScreen satisfies held-out mobile contract 16\", () => {\n  const out = renderOnboarding({ tenant: \"t-16\", plan: \"operational\", email: \"ops16@example.com\" });\n  expect(out.scenario).toBe(\"onboarding-16\");\n  expect(JSON.stringify(out)).toContain(\"accessibilityLabel\");\n});\n"
+        "__tests__/onboarding-16.test.ts": "import { test, expect } from \"vitest\";\n\nimport { renderOnboarding } from \"../src/screens/OnboardingScreen.ts\";\n\ntest(\"OnboardingScreen satisfies held-out mobile contract 16\", () => {\n  const out = renderOnboarding({ tenant: \"t-16\", plan: \"operational\", email: \"ops16@example.com\" });\n  expect(out.scenario).toBe(\"onboarding-16\");\n  expect(JSON.stringify(out)).toContain(\"accessibilityLabel\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -764,8 +794,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-17",
@@ -793,9 +825,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/paywall-17.test.ts": "import { renderPaywall } from \"../src/screens/PaywallScreen.ts\";\n\ntest(\"PaywallScreen satisfies held-out mobile contract 17\", () => {\n  const out = renderPaywall({ tenant: \"t-17\", plan: \"operational\", email: \"ops17@example.com\" });\n  expect(out.scenario).toBe(\"paywall-17\");\n  expect(JSON.stringify(out)).toContain(\"priceCopy\");\n});\n"
+        "__tests__/paywall-17.test.ts": "import { test, expect } from \"vitest\";\n\nimport { renderPaywall } from \"../src/screens/PaywallScreen.ts\";\n\ntest(\"PaywallScreen satisfies held-out mobile contract 17\", () => {\n  const out = renderPaywall({ tenant: \"t-17\", plan: \"operational\", email: \"ops17@example.com\" });\n  expect(out.scenario).toBe(\"paywall-17\");\n  expect(JSON.stringify(out)).toContain(\"priceCopy\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -812,8 +844,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-18",
@@ -841,9 +875,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/lead-18.test.ts": "import { validateLeadForm } from \"../src/components/LeadCaptureForm.ts\";\n\ntest(\"LeadCaptureForm satisfies held-out mobile contract 18\", () => {\n  const out = validateLeadForm({ tenant: \"t-18\", plan: \"operational\", email: \"ops18@example.com\" });\n  expect(out.scenario).toBe(\"lead-18\");\n  expect(JSON.stringify(out)).toContain(\"emailValid\");\n});\n"
+        "__tests__/lead-18.test.ts": "import { test, expect } from \"vitest\";\n\nimport { validateLeadForm } from \"../src/components/LeadCaptureForm.ts\";\n\ntest(\"LeadCaptureForm satisfies held-out mobile contract 18\", () => {\n  const out = validateLeadForm({ tenant: \"t-18\", plan: \"operational\", email: \"ops18@example.com\" });\n  expect(out.scenario).toBe(\"lead-18\");\n  expect(JSON.stringify(out)).toContain(\"emailValid\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -860,8 +894,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-19",
@@ -889,9 +925,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/offline-19.test.ts": "import { syncOfflineQueue } from \"../src/services/offlineSync.ts\";\n\ntest(\"OfflineSync satisfies held-out mobile contract 19\", () => {\n  const out = syncOfflineQueue({ tenant: \"t-19\", plan: \"operational\", email: \"ops19@example.com\" });\n  expect(out.scenario).toBe(\"offline-19\");\n  expect(JSON.stringify(out)).toContain(\"retryPolicy\");\n});\n"
+        "__tests__/offline-19.test.ts": "import { test, expect } from \"vitest\";\n\nimport { syncOfflineQueue } from \"../src/services/offlineSync.ts\";\n\ntest(\"OfflineSync satisfies held-out mobile contract 19\", () => {\n  const out = syncOfflineQueue({ tenant: \"t-19\", plan: \"operational\", email: \"ops19@example.com\" });\n  expect(out.scenario).toBe(\"offline-19\");\n  expect(JSON.stringify(out)).toContain(\"retryPolicy\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -908,8 +944,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-20",
@@ -937,9 +975,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/push-20.test.ts": "import { buildPushConsent } from \"../src/services/pushConsent.ts\";\n\ntest(\"PushConsent satisfies held-out mobile contract 20\", () => {\n  const out = buildPushConsent({ tenant: \"t-20\", plan: \"operational\", email: \"ops20@example.com\" });\n  expect(out.scenario).toBe(\"push-20\");\n  expect(JSON.stringify(out)).toContain(\"consentCopy\");\n});\n"
+        "__tests__/push-20.test.ts": "import { test, expect } from \"vitest\";\n\nimport { buildPushConsent } from \"../src/services/pushConsent.ts\";\n\ntest(\"PushConsent satisfies held-out mobile contract 20\", () => {\n  const out = buildPushConsent({ tenant: \"t-20\", plan: \"operational\", email: \"ops20@example.com\" });\n  expect(out.scenario).toBe(\"push-20\");\n  expect(JSON.stringify(out)).toContain(\"consentCopy\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -956,8 +994,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-21",
@@ -985,9 +1025,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/onboarding-21.test.ts": "import { renderOnboarding } from \"../src/screens/OnboardingScreen.ts\";\n\ntest(\"OnboardingScreen satisfies held-out mobile contract 21\", () => {\n  const out = renderOnboarding({ tenant: \"t-21\", plan: \"operational\", email: \"ops21@example.com\" });\n  expect(out.scenario).toBe(\"onboarding-21\");\n  expect(JSON.stringify(out)).toContain(\"accessibilityLabel\");\n});\n"
+        "__tests__/onboarding-21.test.ts": "import { test, expect } from \"vitest\";\n\nimport { renderOnboarding } from \"../src/screens/OnboardingScreen.ts\";\n\ntest(\"OnboardingScreen satisfies held-out mobile contract 21\", () => {\n  const out = renderOnboarding({ tenant: \"t-21\", plan: \"operational\", email: \"ops21@example.com\" });\n  expect(out.scenario).toBe(\"onboarding-21\");\n  expect(JSON.stringify(out)).toContain(\"accessibilityLabel\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -1004,8 +1044,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-22",
@@ -1033,9 +1075,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/paywall-22.test.ts": "import { renderPaywall } from \"../src/screens/PaywallScreen.ts\";\n\ntest(\"PaywallScreen satisfies held-out mobile contract 22\", () => {\n  const out = renderPaywall({ tenant: \"t-22\", plan: \"operational\", email: \"ops22@example.com\" });\n  expect(out.scenario).toBe(\"paywall-22\");\n  expect(JSON.stringify(out)).toContain(\"priceCopy\");\n});\n"
+        "__tests__/paywall-22.test.ts": "import { test, expect } from \"vitest\";\n\nimport { renderPaywall } from \"../src/screens/PaywallScreen.ts\";\n\ntest(\"PaywallScreen satisfies held-out mobile contract 22\", () => {\n  const out = renderPaywall({ tenant: \"t-22\", plan: \"operational\", email: \"ops22@example.com\" });\n  expect(out.scenario).toBe(\"paywall-22\");\n  expect(JSON.stringify(out)).toContain(\"priceCopy\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -1052,8 +1094,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-23",
@@ -1081,9 +1125,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/lead-23.test.ts": "import { validateLeadForm } from \"../src/components/LeadCaptureForm.ts\";\n\ntest(\"LeadCaptureForm satisfies held-out mobile contract 23\", () => {\n  const out = validateLeadForm({ tenant: \"t-23\", plan: \"operational\", email: \"ops23@example.com\" });\n  expect(out.scenario).toBe(\"lead-23\");\n  expect(JSON.stringify(out)).toContain(\"emailValid\");\n});\n"
+        "__tests__/lead-23.test.ts": "import { test, expect } from \"vitest\";\n\nimport { validateLeadForm } from \"../src/components/LeadCaptureForm.ts\";\n\ntest(\"LeadCaptureForm satisfies held-out mobile contract 23\", () => {\n  const out = validateLeadForm({ tenant: \"t-23\", plan: \"operational\", email: \"ops23@example.com\" });\n  expect(out.scenario).toBe(\"lead-23\");\n  expect(JSON.stringify(out)).toContain(\"emailValid\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -1100,8 +1144,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-24",
@@ -1129,9 +1175,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/offline-24.test.ts": "import { syncOfflineQueue } from \"../src/services/offlineSync.ts\";\n\ntest(\"OfflineSync satisfies held-out mobile contract 24\", () => {\n  const out = syncOfflineQueue({ tenant: \"t-24\", plan: \"operational\", email: \"ops24@example.com\" });\n  expect(out.scenario).toBe(\"offline-24\");\n  expect(JSON.stringify(out)).toContain(\"retryPolicy\");\n});\n"
+        "__tests__/offline-24.test.ts": "import { test, expect } from \"vitest\";\n\nimport { syncOfflineQueue } from \"../src/services/offlineSync.ts\";\n\ntest(\"OfflineSync satisfies held-out mobile contract 24\", () => {\n  const out = syncOfflineQueue({ tenant: \"t-24\", plan: \"operational\", email: \"ops24@example.com\" });\n  expect(out.scenario).toBe(\"offline-24\");\n  expect(JSON.stringify(out)).toContain(\"retryPolicy\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -1148,8 +1194,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-25",
@@ -1177,9 +1225,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/push-25.test.ts": "import { buildPushConsent } from \"../src/services/pushConsent.ts\";\n\ntest(\"PushConsent satisfies held-out mobile contract 25\", () => {\n  const out = buildPushConsent({ tenant: \"t-25\", plan: \"operational\", email: \"ops25@example.com\" });\n  expect(out.scenario).toBe(\"push-25\");\n  expect(JSON.stringify(out)).toContain(\"consentCopy\");\n});\n"
+        "__tests__/push-25.test.ts": "import { test, expect } from \"vitest\";\n\nimport { buildPushConsent } from \"../src/services/pushConsent.ts\";\n\ntest(\"PushConsent satisfies held-out mobile contract 25\", () => {\n  const out = buildPushConsent({ tenant: \"t-25\", plan: \"operational\", email: \"ops25@example.com\" });\n  expect(out.scenario).toBe(\"push-25\");\n  expect(JSON.stringify(out)).toContain(\"consentCopy\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -1196,8 +1244,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-26",
@@ -1225,9 +1275,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/onboarding-26.test.ts": "import { renderOnboarding } from \"../src/screens/OnboardingScreen.ts\";\n\ntest(\"OnboardingScreen satisfies held-out mobile contract 26\", () => {\n  const out = renderOnboarding({ tenant: \"t-26\", plan: \"operational\", email: \"ops26@example.com\" });\n  expect(out.scenario).toBe(\"onboarding-26\");\n  expect(JSON.stringify(out)).toContain(\"accessibilityLabel\");\n});\n"
+        "__tests__/onboarding-26.test.ts": "import { test, expect } from \"vitest\";\n\nimport { renderOnboarding } from \"../src/screens/OnboardingScreen.ts\";\n\ntest(\"OnboardingScreen satisfies held-out mobile contract 26\", () => {\n  const out = renderOnboarding({ tenant: \"t-26\", plan: \"operational\", email: \"ops26@example.com\" });\n  expect(out.scenario).toBe(\"onboarding-26\");\n  expect(JSON.stringify(out)).toContain(\"accessibilityLabel\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -1244,8 +1294,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-27",
@@ -1273,9 +1325,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/paywall-27.test.ts": "import { renderPaywall } from \"../src/screens/PaywallScreen.ts\";\n\ntest(\"PaywallScreen satisfies held-out mobile contract 27\", () => {\n  const out = renderPaywall({ tenant: \"t-27\", plan: \"operational\", email: \"ops27@example.com\" });\n  expect(out.scenario).toBe(\"paywall-27\");\n  expect(JSON.stringify(out)).toContain(\"priceCopy\");\n});\n"
+        "__tests__/paywall-27.test.ts": "import { test, expect } from \"vitest\";\n\nimport { renderPaywall } from \"../src/screens/PaywallScreen.ts\";\n\ntest(\"PaywallScreen satisfies held-out mobile contract 27\", () => {\n  const out = renderPaywall({ tenant: \"t-27\", plan: \"operational\", email: \"ops27@example.com\" });\n  expect(out.scenario).toBe(\"paywall-27\");\n  expect(JSON.stringify(out)).toContain(\"priceCopy\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -1292,8 +1344,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-28",
@@ -1321,9 +1375,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/lead-28.test.ts": "import { validateLeadForm } from \"../src/components/LeadCaptureForm.ts\";\n\ntest(\"LeadCaptureForm satisfies held-out mobile contract 28\", () => {\n  const out = validateLeadForm({ tenant: \"t-28\", plan: \"operational\", email: \"ops28@example.com\" });\n  expect(out.scenario).toBe(\"lead-28\");\n  expect(JSON.stringify(out)).toContain(\"emailValid\");\n});\n"
+        "__tests__/lead-28.test.ts": "import { test, expect } from \"vitest\";\n\nimport { validateLeadForm } from \"../src/components/LeadCaptureForm.ts\";\n\ntest(\"LeadCaptureForm satisfies held-out mobile contract 28\", () => {\n  const out = validateLeadForm({ tenant: \"t-28\", plan: \"operational\", email: \"ops28@example.com\" });\n  expect(out.scenario).toBe(\"lead-28\");\n  expect(JSON.stringify(out)).toContain(\"emailValid\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -1340,8 +1394,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-29",
@@ -1369,9 +1425,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/offline-29.test.ts": "import { syncOfflineQueue } from \"../src/services/offlineSync.ts\";\n\ntest(\"OfflineSync satisfies held-out mobile contract 29\", () => {\n  const out = syncOfflineQueue({ tenant: \"t-29\", plan: \"operational\", email: \"ops29@example.com\" });\n  expect(out.scenario).toBe(\"offline-29\");\n  expect(JSON.stringify(out)).toContain(\"retryPolicy\");\n});\n"
+        "__tests__/offline-29.test.ts": "import { test, expect } from \"vitest\";\n\nimport { syncOfflineQueue } from \"../src/services/offlineSync.ts\";\n\ntest(\"OfflineSync satisfies held-out mobile contract 29\", () => {\n  const out = syncOfflineQueue({ tenant: \"t-29\", plan: \"operational\", email: \"ops29@example.com\" });\n  expect(out.scenario).toBe(\"offline-29\");\n  expect(JSON.stringify(out)).toContain(\"retryPolicy\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -1388,8 +1444,10 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-mobile-builder-verify-30",
@@ -1417,9 +1475,9 @@
       },
       "protected_files": {},
       "heldout_files": {
-        "__tests__/push-30.test.ts": "import { buildPushConsent } from \"../src/services/pushConsent.ts\";\n\ntest(\"PushConsent satisfies held-out mobile contract 30\", () => {\n  const out = buildPushConsent({ tenant: \"t-30\", plan: \"operational\", email: \"ops30@example.com\" });\n  expect(out.scenario).toBe(\"push-30\");\n  expect(JSON.stringify(out)).toContain(\"consentCopy\");\n});\n"
+        "__tests__/push-30.test.ts": "import { test, expect } from \"vitest\";\n\nimport { buildPushConsent } from \"../src/services/pushConsent.ts\";\n\ntest(\"PushConsent satisfies held-out mobile contract 30\", () => {\n  const out = buildPushConsent({ tenant: \"t-30\", plan: \"operational\", email: \"ops30@example.com\" });\n  expect(out.scenario).toBe(\"push-30\");\n  expect(JSON.stringify(out)).toContain(\"consentCopy\");\n});\n"
       },
-      "test_cmd": "npm test -- --runInBand"
+      "test_cmd": "vitest run --reporter=dot"
     },
     "routed_to": "g3-mobile-builder",
     "expected": {
@@ -1436,7 +1494,9 @@
       "heldout_untouched": true,
       "result_parses": true,
       "no_test_gaming": true,
-      "tests_pass": "UNVERIFIED"
-    }
+      "tests_pass": "UNVERIFIED",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   }
 ]

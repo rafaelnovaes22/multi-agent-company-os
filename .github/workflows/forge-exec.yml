@@ -53,10 +53,11 @@ jobs:
         continue-on-error: true
         run: |
           python -m nucleo.quality.exec_report --audit-only --audit-reason browser_static_oracle --json-output exec_report_browser.json nucleo/guilds/g04_qualidade_eval/g4-e2e-playwright | tee exec_report_browser.txt
-      - name: Relatório opcional do g3-mobile-builder (F4d, mobile/Node held-out)
-        continue-on-error: true
+      - name: Relatório de execução do g3-mobile-builder (F4d, mobile/Node held-out)
+        # Promovido ao gate estrito em 2026-07-01: o 0/30 era harness quebrado (test_cmd jest
+        # numa imagem vitest + held-outs sem import); consertado, entrega 30/30 validado local.
         run: |
-          python -m nucleo.quality.exec_report --audit-only --audit-reason mobile_not_in_strict_gate --json-output exec_report_mobile.json nucleo/guilds/g03_engenharia/g3-mobile-builder | tee exec_report_mobile.txt
+          python -m nucleo.quality.exec_report --json-output exec_report_mobile.json nucleo/guilds/g03_engenharia/g3-mobile-builder | tee exec_report_mobile.txt
       - name: Relatório opcional do g3-incident-responder (F4b, structural postmortem oracle)
         continue-on-error: true
         run: |
@@ -67,7 +68,8 @@ jobs:
             exec_report.json \
             exec_report_backend.json \
             exec_report_frontend.json \
-            exec_report_infra.json
+            exec_report_infra.json \
+            exec_report_mobile.json
       - name: Publicar artefatos do relatório VERIFY-IN-EVAL
         if: always()
         uses: actions/upload-artifact@v4

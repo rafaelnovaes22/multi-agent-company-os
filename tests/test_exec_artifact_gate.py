@@ -113,6 +113,20 @@ class ExecArtifactGateTest(unittest.TestCase):
         self.assertIn("row falso-positivo: oracle_incorrect", rendered)  # static_ok=True != expected False
         self.assertIn("row falso-positivo: credited_but_should_reject", rendered)
 
+    def test_falha_quando_negativo_por_design_entrega(self):
+        # fail-safe violado (D3): caso com expected.exec_delivered=False que ENTREGOU —
+        # plausível-mas-errado passando o held-out é resposta errada silenciosa.
+        rows = _healthy_rows()
+        row = _row("neg-entregou", static_ok=True, expected_static_ok=True,
+                   credit="credited", tests_pass=True)
+        row.update({"expected_exec_delivered": False, "delivered_ok": True})
+        rows.append(row)
+        bad = _summary(total=4, credited=2, rows=rows)
+        with tempfile.TemporaryDirectory() as td:
+            result = exec_artifact_gate.evaluate_paths([_write(td, "exec_report.json", bad)])
+        self.assertFalse(result.ok)
+        self.assertIn("row neg-entregou: delivered_but_designed_negative", result.render())
+
     def test_falha_quando_linhas_inconsistentes_com_total(self):
         bad = _summary(total=5)  # 3 rows, total=5
         with tempfile.TemporaryDirectory() as td:

@@ -5,6 +5,11 @@ ExecutionProvider corrente) e reporta os DOIS números da tese:
 
   static_pass_rate  — fração de artefatos que passam o oráculo ESTÁTICO (F0 move, de 0).
   delivered_rate    — fração com delivered_ok=True (SÓ a execução real move; 0 sob InertExecutor).
+  delivered_eligible_rate — entrega sobre os casos ELEGÍVEIS (expected.exec_delivered=True, a
+      intenção de design SOB EXECUÇÃO REAL declarada no eval-case). É o número do SLA G7
+      (>=95%): a suíte é discriminante (negativos-por-design NÃO entram no denominador;
+      entregar num negativo é falso-positivo grave, contado em false_positive_delivery_count
+      e HARD-FAIL no gate).
 
 Valor central da F2: os artefatos "plausível-mas-logicamente-errado" passam o ESTÁTICO e
 FALHAM a EXECUÇÃO — delivered_ok=False. É o que o F0 não consegue pegar e só o runner pega.
@@ -67,6 +72,7 @@ def run(spec_dir: str) -> dict:
         rows.append({"id": c.get("id"), "desc": c.get("desc"),
                      "static_ok": bool(out.get("static_ok")),
                      "expected_static_ok": exp.get("static_ok"),
+                     "expected_exec_delivered": exp.get("exec_delivered"),
                      "delivered_ok": bool(out.get("delivered_ok")),
                      "tests_pass": out.get("tests_pass"), "first_fail": out.get("first_fail"),
                      "runtime": oracle.get("runtime") or "python",
@@ -121,6 +127,17 @@ def summarize(rep: dict, *, executor_name: str, executor_available: bool) -> dic
         rows.append(item)
     oracle_evaluated_count = sum(1 for r in rows if r.get("oracle_correct") is not None)
     oracle_correct_count = sum(1 for r in rows if r.get("oracle_correct") is True)
+    # A suíte é DISCRIMINANTE: só os casos com `expected.exec_delivered=True` (intenção de
+    # design SOB EXECUÇÃO REAL, declarada pelo humano no eval-case; não confundir com
+    # `expected.delivered_ok`, que é o sinal offline do grader G4) contam no denominador do
+    # SLA de entrega. Negativos-por-design (adversarial/plausível-mas-errado) medem o
+    # FAIL-SAFE, não a entrega: um deles entregar é falso-positivo grave (resposta errada
+    # silenciosa).
+    eligible = [r for r in rows if r.get("expected_exec_delivered") is True]
+    delivered_eligible = sum(1 for r in eligible if r.get("delivered_ok"))
+    false_positive_deliveries = [
+        r for r in rows if r.get("expected_exec_delivered") is False and r.get("delivered_ok")
+    ]
     executed_count = sum(1 for r in rows if isinstance(r.get("tests_pass"), bool))
     tests_passed_count = sum(1 for r in rows if r.get("tests_pass") is True)
     tests_failed_count = sum(1 for r in rows if r.get("tests_pass") is False)
@@ -140,6 +157,12 @@ def summarize(rep: dict, *, executor_name: str, executor_available: bool) -> dic
         "total": total,
         "static_pass_rate": _rate(static_pass, total),
         "delivered_rate": _rate(delivered, total),
+        # SLA de entrega (G7): entrega sobre os casos ELEGÍVEIS (expected.exec_delivered=True).
+        "delivered_eligible_rate": _rate(delivered_eligible, len(eligible)),
+        "false_positive_delivery_count": len(false_positive_deliveries),
+        "false_positive_deliveries": [
+            {"id": r.get("id"), "desc": r.get("desc")} for r in false_positive_deliveries
+        ],
         "executed_count": executed_count,
         "tests_passed_count": tests_passed_count,
         "tests_failed_count": tests_failed_count,
@@ -195,6 +218,10 @@ def render_text(summary: dict) -> str:
         "",
         f"  static_pass_rate = {static_rate['passed']}/{total}  ({static_rate['percent']:.0f}%)  ← F0 move",
         f"  delivered_rate   = {delivered_rate['passed']}/{total}  ({delivered_rate['percent']:.0f}%)  ← só execução real move",
+        f"  delivered_eligible_rate = {summary['delivered_eligible_rate']['passed']}"
+        f"/{summary['delivered_eligible_rate']['total']}  "
+        f"({summary['delivered_eligible_rate']['percent']:.0f}%)  ← SLA G7 (só casos expected.exec_delivered=True)",
+        f"  false_positive_deliveries = {summary['false_positive_delivery_count']}  ← fail-safe (tem de ser 0)",
         f"  executed_count   = {summary['executed_count']}/{total}",
         f"  tests_passed     = {summary['tests_passed_count']}/{total}",
         f"  static_sem_delivery = {summary['static_without_delivery_count']}/{total}  ← gap a maturar",

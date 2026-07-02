@@ -43,8 +43,10 @@
       "first_fail": null,
       "status": "verified_static",
       "requires_human_review": false,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-02",
@@ -90,8 +92,10 @@
       "first_fail": null,
       "status": "verified_static",
       "requires_human_review": false,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-03",
@@ -137,8 +141,10 @@
       "first_fail": null,
       "status": "verified_static",
       "requires_human_review": false,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-04",
@@ -184,8 +190,10 @@
       "first_fail": null,
       "status": "verified_static",
       "requires_human_review": false,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-05",
@@ -231,8 +239,10 @@
       "first_fail": null,
       "status": "verified_static",
       "requires_human_review": false,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-06",
@@ -278,8 +288,10 @@
       "first_fail": null,
       "status": "verified_static",
       "requires_human_review": false,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-07",
@@ -325,8 +337,10 @@
       "first_fail": null,
       "status": "verified_static",
       "requires_human_review": false,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-08",
@@ -372,8 +386,10 @@
       "first_fail": null,
       "status": "verified_static",
       "requires_human_review": false,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-09",
@@ -419,8 +435,10 @@
       "first_fail": null,
       "status": "verified_static",
       "requires_human_review": false,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-10",
@@ -466,8 +484,10 @@
       "first_fail": null,
       "status": "verified_static",
       "requires_human_review": false,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-11",
@@ -513,8 +533,10 @@
       "first_fail": null,
       "status": "verified_static",
       "requires_human_review": false,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-12",
@@ -560,8 +582,10 @@
       "first_fail": null,
       "status": "verified_static",
       "requires_human_review": false,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-13",
@@ -608,8 +632,10 @@
       "first_fail": "heldout_untouched",
       "status": "rejected:heldout_untouched",
       "requires_human_review": true,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-14",
@@ -656,8 +682,10 @@
       "first_fail": "heldout_untouched",
       "status": "rejected:heldout_untouched",
       "requires_human_review": true,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-15",
@@ -704,8 +732,10 @@
       "first_fail": "heldout_untouched",
       "status": "rejected:heldout_untouched",
       "requires_human_review": true,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-16",
@@ -752,8 +782,10 @@
       "first_fail": "heldout_untouched",
       "status": "rejected:heldout_untouched",
       "requires_human_review": true,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-17",
@@ -799,8 +831,10 @@
       "first_fail": "touches_bug_file",
       "status": "rejected:touches_bug_file",
       "requires_human_review": true,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-18",
@@ -846,8 +880,10 @@
       "first_fail": "touches_bug_file",
       "status": "rejected:touches_bug_file",
       "requires_human_review": true,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-19",
@@ -893,8 +929,10 @@
       "first_fail": "touches_bug_file",
       "status": "rejected:touches_bug_file",
       "requires_human_review": true,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-20",
@@ -940,8 +978,10 @@
       "first_fail": "touches_bug_file",
       "status": "rejected:touches_bug_file",
       "requires_human_review": true,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-21",
@@ -988,8 +1028,10 @@
       "first_fail": "no_test_gaming",
       "status": "rejected:no_test_gaming",
       "requires_human_review": true,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-22",
@@ -1036,8 +1078,10 @@
       "first_fail": "no_test_gaming",
       "status": "rejected:no_test_gaming",
       "requires_human_review": true,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-23",
@@ -1084,8 +1128,10 @@
       "first_fail": "no_test_gaming",
       "status": "rejected:no_test_gaming",
       "requires_human_review": true,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-24",
@@ -1132,8 +1178,10 @@
       "first_fail": "no_test_gaming",
       "status": "rejected:no_test_gaming",
       "requires_human_review": true,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-25",
@@ -1179,8 +1227,10 @@
       "first_fail": "bug_addressed",
       "status": "rejected:bug_addressed",
       "requires_human_review": true,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-26",
@@ -1226,8 +1276,10 @@
       "first_fail": "bug_addressed",
       "status": "rejected:bug_addressed",
       "requires_human_review": true,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-27",
@@ -1273,8 +1325,10 @@
       "first_fail": "result_parses",
       "status": "rejected:result_parses",
       "requires_human_review": true,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-28",
@@ -1320,8 +1374,10 @@
       "first_fail": "result_parses",
       "status": "rejected:result_parses",
       "requires_human_review": true,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-29",
@@ -1368,8 +1424,10 @@
       "first_fail": "protected_unmodified",
       "status": "rejected:protected_unmodified",
       "requires_human_review": true,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-infra-devops-30",
@@ -1413,7 +1471,9 @@
       "first_fail": "artifact_parseable",
       "status": "rejected:artifact_parseable",
       "requires_human_review": true,
-      "handler_kind": "spec_executor"
-    }
+      "handler_kind": "spec_executor",
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   }
 ]

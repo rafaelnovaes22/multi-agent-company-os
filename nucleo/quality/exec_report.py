@@ -89,6 +89,50 @@ def run(spec_dir: str) -> dict:
             "caught_by_exec": caught_by_exec, "rows": rows}
 
 
+def run_generative(spec_dir: str, llm=None, executor=None) -> dict:
+    """Variante GERADORA (épico red→green, plano §4.7): roda SÓ os casos elegíveis
+    (expected.exec_delivered=True) SEM o artifact baked — o agente gera com LLM real,
+    itera contra o executor nos testes visíveis e o held-out decide `delivered` na
+    verificação final. O número resultante mede o AGENTE, não as fixtures; é publicado
+    separado do replay e nunca somado a ele."""
+    from ..kernel.generate import generate_red_green
+    from ..kernel.verification import verify_code
+    spec = load_spec(spec_dir)
+    llm = llm if llm is not None else get_llm("worker")
+    executor = executor if executor is not None else get_executor()
+    cases = json.load(open(os.path.join(spec_dir, "evals", "cases.json"), encoding="utf-8"))
+    eligible = [c for c in cases if (c.get("expected") or {}).get("exec_delivered") is True]
+
+    rows = []
+    for c in eligible:
+        seed = c.get("seed") or {}
+        oracle = c.get("oracle") or {}
+        request = c.get("request") or c.get("desc") or ""
+        gen = generate_red_green(request, seed, oracle, llm, executor)
+        v = verify_code(gen["artifact"], seed, oracle, executor=executor)
+        rows.append({"id": c.get("id"), "desc": c.get("desc"),
+                     "static_ok": bool(v.get("static_ok")),
+                     # generativo: o estático observado não é asserção do caso (o agente
+                     # pode falhar honestamente) — não entra no oracle_correct.
+                     "expected_static_ok": None,
+                     "expected_exec_delivered": True,
+                     "delivered_ok": bool(v.get("delivered_ok")),
+                     "tests_pass": v.get("tests_pass"), "first_fail": v.get("first_fail"),
+                     "attempts": gen["attempts"], "loop_green": gen["loop_green"],
+                     "runtime": oracle.get("runtime") or "python",
+                     "test_cmd": oracle.get("test_cmd") or "pytest -q",
+                     "heldout_files": sorted((oracle.get("heldout_files") or {}).keys())})
+
+    n = len(rows)
+    static_pass = sum(1 for r in rows if r["static_ok"])
+    delivered = sum(1 for r in rows if r["delivered_ok"])
+    caught_by_exec = [r for r in rows if r["static_ok"] and not r["delivered_ok"]]
+    return {"id": spec["id"], "spec_dir": spec_dir, "commit": _git_commit(),
+            "generative": True, "llm": getattr(llm, "name", "unknown"),
+            "n": n, "static_pass": static_pass, "delivered": delivered,
+            "caught_by_exec": caught_by_exec, "rows": rows}
+
+
 def _rate(passed: int, total: int) -> dict:
     percent = round((100 * passed / total), 2) if total else 0.0
     return {"passed": passed, "total": total, "percent": percent}
@@ -212,9 +256,11 @@ def render_text(summary: dict) -> str:
     static_rate = summary["static_pass_rate"]
     delivered_rate = summary["delivered_rate"]
     total = summary["total"]
+    mode = "GENERATIVO (red→green)" if summary.get("generative") else "replay de fixtures"
     lines = [
-        f"exec_report — {summary['agent_id']}  | executor={summary['executor']['name']} "
-        f"available={summary['executor']['available']}",
+        f"exec_report — {summary['agent_id']}  | modo={mode} | executor={summary['executor']['name']} "
+        f"available={summary['executor']['available']}"
+        + (f" | llm={summary['llm']}" if summary.get("generative") else ""),
         "",
         f"  static_pass_rate = {static_rate['passed']}/{total}  ({static_rate['percent']:.0f}%)  ← F0 move",
         f"  delivered_rate   = {delivered_rate['passed']}/{total}  ({delivered_rate['percent']:.0f}%)  ← só execução real move",
@@ -250,6 +296,12 @@ def _parse(argv):
                         help="publica o relatório como auditoria sem crédito de entrega")
     parser.add_argument("--audit-reason", default="not_in_strict_execution_gate",
                         help="motivo usado quando --audit-only bloqueia crédito")
+    parser.add_argument("--generative", action="store_true",
+                        help="modo GERADOR (red→green): o agente gera o artefato com LLM real "
+                             "nos casos elegíveis; mede o agente, não as fixtures")
+    parser.add_argument("--require-real-llm", action="store_true",
+                        help="falha se o provider for FakeLLMProvider (evita publicar um "
+                             "'0%% generativo' medido com LLM fake — sinal falso)")
     return parser.parse_args(argv)
 
 
@@ -257,8 +309,21 @@ def main(argv):
     args = _parse(argv)
     ex = get_executor()
     available = ex.available
-    rep = run(args.spec_dir)
+    if args.generative:
+        llm = get_llm("worker")
+        if args.require_real_llm:
+            from ..kernel.providers.llm import FakeLLMProvider
+            if isinstance(llm, FakeLLMProvider):
+                print("exec_report --generative: LLM_PROVIDER ausente/fake — geração exige LLM "
+                      "real (--require-real-llm). Nada foi medido.", file=sys.stderr)
+                return 2
+        rep = run_generative(args.spec_dir, llm=llm, executor=ex)
+    else:
+        rep = run(args.spec_dir)
     summary = summarize(rep, executor_name=ex.name, executor_available=available)
+    if rep.get("generative"):
+        summary["generative"] = True
+        summary["llm"] = rep.get("llm")
     if args.audit_only:
         summary = mark_audit_only(summary, args.audit_reason)
     json_text = json.dumps(summary, ensure_ascii=False, indent=2, sort_keys=True)

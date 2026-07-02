@@ -10,6 +10,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write              # OIDC p/ Workload Identity Federation (geração red→green, Vertex)
 
 jobs:
   forge-exec:
@@ -29,6 +30,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install google-genai
       - name: Build imagem de execução Python (com rede; os runs depois são --network none)
         run: docker build -t nucleo-exec:latest -f nucleo/quality/exec.Dockerfile nucleo/quality
       - name: Build imagem de execução Node/vitest (build do frontend, F3a-2)
@@ -62,6 +64,27 @@ jobs:
         continue-on-error: true
         run: |
           python -m nucleo.quality.exec_report --audit-only --audit-reason incident_structural_oracle --json-output exec_report_incident.json nucleo/guilds/g03_engenharia/g3-incident-responder | tee exec_report_incident.txt
+      # ---- fase GERADORA (épico red→green, plano §4.7) — AUDITORIA, não gate ----
+      # Mede o AGENTE (LLM real gera o artefato e itera contra o executor; held-out decide
+      # delivered) — número separado do replay de fixtures acima. Vira gate (G7 generativo)
+      # só quando estiver medido e verde; até lá continue-on-error preserva o nightly.
+      - name: Auth GCP (Vertex p/ geração red→green)
+        id: gcp-auth
+        continue-on-error: true
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
+          service_account: ${{ secrets.GCP_SA_EMAIL }}
+      - name: Relatório GENERATIVO do piloto (red→green com LLM real; auditoria)
+        if: steps.gcp-auth.outcome == 'success'
+        continue-on-error: true
+        env:
+          LLM_PROVIDER: vertex
+          GOOGLE_GENAI_USE_VERTEXAI: "true"
+          GOOGLE_CLOUD_PROJECT: acme-multiagentes
+          GOOGLE_CLOUD_LOCATION: us-central1
+        run: |
+          python -m nucleo.quality.exec_report --generative --require-real-llm --json-output exec_report_gen.json nucleo/guilds/g03_engenharia/g3-build-error-resolver | tee exec_report_gen.txt
       - name: Gate F6 dos artifacts de execução real creditáveis
         run: |
           python -m nucleo.quality.exec_artifact_gate \
@@ -90,3 +113,5 @@ jobs:
             exec_report_mobile.json
             exec_report_incident.txt
             exec_report_incident.json
+            exec_report_gen.txt
+            exec_report_gen.json

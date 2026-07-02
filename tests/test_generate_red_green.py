@@ -94,6 +94,27 @@ class RedGreenLoopTest(unittest.TestCase):
         # e o held-out não entrou na execução VISÍVEL do loop
         self.assertNotIn("test_held.py", ex.executed_files[0])
 
+    def test_reescrever_teste_protegido_nao_vira_green_e_roda_na_versao_da_semente(self):
+        # gaming clássico: "conserta" reescrevendo o teste-alvo. O loop tem de (a) executar
+        # com a versão da SEMENTE do arquivo protegido, (b) não aceitar green com protegido
+        # tocado, (c) devolver feedback nomeando o arquivo. Na 2ª tentativa limpa, green.
+        oracle = dict(ORACLE)
+        oracle["protected_files"] = {"test_app.py": "sha-qualquer"}
+        gaming = json.dumps({"files": {
+            "app.py": "def soma(a, b):\n    return a + b\n",
+            "test_app.py": "def test_soma():\n    assert True\n"}})
+        llm = ScriptedLLM([gaming, GOOD])
+        ex = ScriptedExecutor([True, True])
+        r = generate_red_green("corrija soma", SEED, oracle, llm, ex)
+        self.assertTrue(r["loop_green"])
+        self.assertEqual(r["attempts"], 2)
+        self.assertEqual(r["history"][0]["touched_protected_paths"], ["test_app.py"])
+        # (a) a execução da 1ª tentativa usou o teste da SEMENTE, não o reescrito
+        self.assertEqual(ex.executed_files[0]["test_app.py"], SEED["test_app.py"])
+        # (c) o feedback nomeou o arquivo protegido
+        self.assertIn("test_app.py", llm.prompts[1])
+        self.assertIn("protegido", llm.prompts[1])
+
     def test_budget_para_no_max_iters_tudo_red(self):
         llm = ScriptedLLM([BAD] * 10)
         ex = ScriptedExecutor([False] * 10)

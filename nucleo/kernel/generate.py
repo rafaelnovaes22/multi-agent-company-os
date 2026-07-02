@@ -88,6 +88,7 @@ def generate_red_green(request: str, seed: dict, oracle: dict, llm, executor,
     oracle = oracle or {}
     max_iters = max_iters or _max_iters()
     heldout_paths = set(oracle.get("heldout_files") or {})
+    protected_paths = set(oracle.get("protected_files") or {})
     test_cmd = oracle.get("test_cmd") or "pytest -q"
     runtime = oracle.get("runtime") or "python"
     can_loop = executor is not None and getattr(executor, "available", False)
@@ -116,15 +117,30 @@ def generate_red_green(request: str, seed: dict, oracle: dict, llm, executor,
             break
         merged = dict(seed)
         merged.update(files)
+        # arquivos PROTEGIDOS rodam SEMPRE na versão da semente (mesma disciplina da
+        # injeção de held-out no verify_code): green obtido reescrevendo o teste-alvo é
+        # green vazio — o loop não pode aceitá-lo nem deixar o agente "testar" a burla.
+        touched_protected = sorted(p for p in files
+                                   if p in protected_paths and p in seed and files[p] != seed[p])
+        for p in protected_paths & seed.keys():
+            merged[p] = seed[p]
         detail = executor.run_tests_detail(merged, test_cmd=test_cmd, runtime=runtime)
         verdict = detail.get("passed")
         history.append({"attempt": attempt, "parsed": True, "tests_pass": verdict,
-                        "dropped_heldout_paths": dropped})
-        if verdict is True:
+                        "dropped_heldout_paths": dropped,
+                        "touched_protected_paths": touched_protected})
+        if verdict is True and not touched_protected:
             loop_green = True
             break
         if verdict is None:
             break   # erro de infra: iterar às cegas não é sinal, é ruído
+        if verdict is True:
+            # o código passa nos testes da semente, mas o patch reescreve arquivo protegido
+            # (teste/contrato) — a verificação final reprovaria; devolve o motivo exato.
+            feedback = ("seus arquivos passam nos testes, MAS você modificou arquivo(s) "
+                        f"protegido(s) de teste/contrato: {', '.join(touched_protected)}. "
+                        "Reenvie o JSON sem incluir esses arquivos (não os altere).")
+            continue
         feedback = detail.get("output") or "os testes visíveis falharam (sem saída capturada)"
 
     return {"artifact": {"files": artifact_files or {}},

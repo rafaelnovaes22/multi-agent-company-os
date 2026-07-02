@@ -53,8 +53,12 @@ class InertIsDefault(unittest.TestCase):
         self._saved = os.environ.pop("EXEC_PROVIDER", None)
 
     def tearDown(self):
+        # restaura SEMPRE: sem o pop, o "docker" setado num teste vaza p/ o resto da
+        # sessão e liga execução real nos testes offline (falha se houver daemon local).
         if self._saved is not None:
             os.environ["EXEC_PROVIDER"] = self._saved
+        else:
+            os.environ.pop("EXEC_PROVIDER", None)
 
     def test_get_executor_default_inerte(self):
         ex = get_executor()

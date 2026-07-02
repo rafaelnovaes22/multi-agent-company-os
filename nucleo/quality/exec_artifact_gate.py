@@ -89,6 +89,10 @@ def _artifact_failures(path: str | Path, data: dict) -> list[str]:
         # Falso-positivo grave: caso que o expected manda rejeitar no estático foi creditado.
         if row.get("expected_static_ok") is False and row.get("execution_credit") == "credited":
             failures.append(f"{label}: row {row_id}: credited_but_should_reject")
+        # Fail-safe violado: negativo-por-design (expected.exec_delivered=False) ENTREGOU —
+        # resposta errada silenciosa, o invariante dos <=5% da decisão D3. HARD-FAIL.
+        if row.get("expected_exec_delivered") is False and row.get("delivered_ok") is True:
+            failures.append(f"{label}: row {row_id}: delivered_but_designed_negative")
     return failures
 
 

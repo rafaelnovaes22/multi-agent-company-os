@@ -47,8 +47,10 @@
       "durations_valid": true,
       "rollback_documented": true,
       "followups_actionable": true,
-      "no_placeholder_gaming": true
-    }
+      "no_placeholder_gaming": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-02",
@@ -98,8 +100,10 @@
       "durations_valid": true,
       "rollback_documented": true,
       "followups_actionable": true,
-      "no_placeholder_gaming": true
-    }
+      "no_placeholder_gaming": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-03",
@@ -149,8 +153,10 @@
       "durations_valid": true,
       "rollback_documented": true,
       "followups_actionable": true,
-      "no_placeholder_gaming": true
-    }
+      "no_placeholder_gaming": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-04",
@@ -200,8 +206,10 @@
       "durations_valid": true,
       "rollback_documented": true,
       "followups_actionable": true,
-      "no_placeholder_gaming": true
-    }
+      "no_placeholder_gaming": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-05",
@@ -251,8 +259,10 @@
       "durations_valid": true,
       "rollback_documented": true,
       "followups_actionable": true,
-      "no_placeholder_gaming": true
-    }
+      "no_placeholder_gaming": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-06",
@@ -302,8 +312,10 @@
       "durations_valid": true,
       "rollback_documented": true,
       "followups_actionable": true,
-      "no_placeholder_gaming": true
-    }
+      "no_placeholder_gaming": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-07",
@@ -353,8 +365,10 @@
       "durations_valid": true,
       "rollback_documented": true,
       "followups_actionable": true,
-      "no_placeholder_gaming": true
-    }
+      "no_placeholder_gaming": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-08",
@@ -404,8 +418,10 @@
       "durations_valid": true,
       "rollback_documented": true,
       "followups_actionable": true,
-      "no_placeholder_gaming": true
-    }
+      "no_placeholder_gaming": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-09",
@@ -453,8 +469,10 @@
       "durations_valid": false,
       "rollback_documented": false,
       "followups_actionable": false,
-      "no_placeholder_gaming": false
-    }
+      "no_placeholder_gaming": false,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-10",
@@ -503,8 +521,10 @@
       "durations_valid": false,
       "rollback_documented": false,
       "followups_actionable": false,
-      "no_placeholder_gaming": false
-    }
+      "no_placeholder_gaming": false,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-11",
@@ -554,8 +574,10 @@
       "durations_valid": false,
       "rollback_documented": false,
       "followups_actionable": false,
-      "no_placeholder_gaming": false
-    }
+      "no_placeholder_gaming": false,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-12",
@@ -605,8 +627,10 @@
       "durations_valid": false,
       "rollback_documented": false,
       "followups_actionable": false,
-      "no_placeholder_gaming": false
-    }
+      "no_placeholder_gaming": false,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-13",
@@ -656,8 +680,10 @@
       "durations_valid": false,
       "rollback_documented": false,
       "followups_actionable": false,
-      "no_placeholder_gaming": false
-    }
+      "no_placeholder_gaming": false,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-14",
@@ -707,8 +733,10 @@
       "durations_valid": false,
       "rollback_documented": false,
       "followups_actionable": false,
-      "no_placeholder_gaming": false
-    }
+      "no_placeholder_gaming": false,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-15",
@@ -758,8 +786,10 @@
       "durations_valid": false,
       "rollback_documented": false,
       "followups_actionable": false,
-      "no_placeholder_gaming": false
-    }
+      "no_placeholder_gaming": false,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-16",
@@ -809,8 +839,10 @@
       "durations_valid": true,
       "rollback_documented": true,
       "followups_actionable": true,
-      "no_placeholder_gaming": true
-    }
+      "no_placeholder_gaming": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-17",
@@ -860,8 +892,10 @@
       "durations_valid": true,
       "rollback_documented": true,
       "followups_actionable": true,
-      "no_placeholder_gaming": true
-    }
+      "no_placeholder_gaming": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-18",
@@ -911,8 +945,10 @@
       "durations_valid": true,
       "rollback_documented": true,
       "followups_actionable": true,
-      "no_placeholder_gaming": true
-    }
+      "no_placeholder_gaming": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-19",
@@ -962,8 +998,10 @@
       "durations_valid": true,
       "rollback_documented": true,
       "followups_actionable": true,
-      "no_placeholder_gaming": true
-    }
+      "no_placeholder_gaming": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-20",
@@ -1013,8 +1051,10 @@
       "durations_valid": true,
       "rollback_documented": true,
       "followups_actionable": true,
-      "no_placeholder_gaming": true
-    }
+      "no_placeholder_gaming": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-21",
@@ -1064,8 +1104,10 @@
       "durations_valid": true,
       "rollback_documented": true,
       "followups_actionable": true,
-      "no_placeholder_gaming": true
-    }
+      "no_placeholder_gaming": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-22",
@@ -1115,8 +1157,10 @@
       "durations_valid": true,
       "rollback_documented": true,
       "followups_actionable": true,
-      "no_placeholder_gaming": true
-    }
+      "no_placeholder_gaming": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-23",
@@ -1166,8 +1210,10 @@
       "durations_valid": false,
       "rollback_documented": true,
       "followups_actionable": true,
-      "no_placeholder_gaming": true
-    }
+      "no_placeholder_gaming": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-24",
@@ -1217,8 +1263,10 @@
       "durations_valid": false,
       "rollback_documented": true,
       "followups_actionable": true,
-      "no_placeholder_gaming": true
-    }
+      "no_placeholder_gaming": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-25",
@@ -1268,8 +1316,10 @@
       "durations_valid": false,
       "rollback_documented": true,
       "followups_actionable": true,
-      "no_placeholder_gaming": true
-    }
+      "no_placeholder_gaming": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-26",
@@ -1319,8 +1369,10 @@
       "durations_valid": true,
       "rollback_documented": false,
       "followups_actionable": true,
-      "no_placeholder_gaming": true
-    }
+      "no_placeholder_gaming": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-27",
@@ -1370,8 +1422,10 @@
       "durations_valid": true,
       "rollback_documented": false,
       "followups_actionable": true,
-      "no_placeholder_gaming": true
-    }
+      "no_placeholder_gaming": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-28",
@@ -1421,8 +1475,10 @@
       "durations_valid": true,
       "rollback_documented": true,
       "followups_actionable": false,
-      "no_placeholder_gaming": true
-    }
+      "no_placeholder_gaming": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-29",
@@ -1472,8 +1528,10 @@
       "durations_valid": true,
       "rollback_documented": true,
       "followups_actionable": false,
-      "no_placeholder_gaming": true
-    }
+      "no_placeholder_gaming": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-incident-responder-30",
@@ -1523,7 +1581,9 @@
       "durations_valid": true,
       "rollback_documented": true,
       "followups_actionable": true,
-      "no_placeholder_gaming": false
-    }
+      "no_placeholder_gaming": false,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   }
 ]

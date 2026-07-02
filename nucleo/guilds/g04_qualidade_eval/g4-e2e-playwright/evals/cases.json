@@ -34,8 +34,10 @@
       "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-02",
@@ -72,8 +74,10 @@
       "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-03",
@@ -110,8 +114,10 @@
       "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-04",
@@ -148,8 +154,10 @@
       "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-05",
@@ -186,8 +194,10 @@
       "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-06",
@@ -224,8 +234,10 @@
       "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-07",
@@ -262,8 +274,10 @@
       "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-08",
@@ -300,8 +314,10 @@
       "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-09",
@@ -335,8 +351,10 @@
       "delivered_ok": false,
       "first_fail": "artifact_parseable",
       "status": "rejected:artifact_parseable",
-      "requires_human_review": true
-    }
+      "requires_human_review": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-10",
@@ -374,8 +392,10 @@
       "first_fail": "target_present",
       "status": "rejected:target_present",
       "requires_human_review": true,
-      "artifact_parseable": true
-    }
+      "artifact_parseable": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-11",
@@ -414,8 +434,10 @@
       "status": "rejected:uses_playwright",
       "requires_human_review": true,
       "artifact_parseable": true,
-      "target_present": true
-    }
+      "target_present": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-12",
@@ -454,8 +476,10 @@
       "status": "rejected:uses_playwright",
       "requires_human_review": true,
       "artifact_parseable": true,
-      "target_present": true
-    }
+      "target_present": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-13",
@@ -495,8 +519,10 @@
       "requires_human_review": true,
       "artifact_parseable": true,
       "target_present": true,
-      "uses_playwright": true
-    }
+      "uses_playwright": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-14",
@@ -536,8 +562,10 @@
       "requires_human_review": true,
       "artifact_parseable": true,
       "target_present": true,
-      "uses_playwright": true
-    }
+      "uses_playwright": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-15",
@@ -578,8 +606,10 @@
       "artifact_parseable": true,
       "target_present": true,
       "uses_playwright": true,
-      "routes_covered": true
-    }
+      "routes_covered": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-16",
@@ -620,8 +650,10 @@
       "artifact_parseable": true,
       "target_present": true,
       "uses_playwright": true,
-      "routes_covered": true
-    }
+      "routes_covered": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-17",
@@ -662,8 +694,10 @@
       "target_present": true,
       "uses_playwright": true,
       "routes_covered": true,
-      "assertions_present": true
-    }
+      "assertions_present": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-18",
@@ -705,8 +739,10 @@
       "target_present": true,
       "uses_playwright": true,
       "routes_covered": true,
-      "assertions_present": true
-    }
+      "assertions_present": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-19",
@@ -749,8 +785,10 @@
       "uses_playwright": true,
       "routes_covered": true,
       "assertions_present": true,
-      "evidence_configured": true
-    }
+      "evidence_configured": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-20",
@@ -793,8 +831,10 @@
       "uses_playwright": true,
       "routes_covered": true,
       "assertions_present": true,
-      "evidence_configured": true
-    }
+      "evidence_configured": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-21",
@@ -837,8 +877,10 @@
       "uses_playwright": true,
       "routes_covered": true,
       "assertions_present": true,
-      "evidence_configured": true
-    }
+      "evidence_configured": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-22",
@@ -881,8 +923,10 @@
       "uses_playwright": true,
       "routes_covered": true,
       "assertions_present": true,
-      "evidence_configured": true
-    }
+      "evidence_configured": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-23",
@@ -925,8 +969,10 @@
       "uses_playwright": true,
       "routes_covered": true,
       "assertions_present": true,
-      "evidence_configured": true
-    }
+      "evidence_configured": true,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-24",
@@ -963,8 +1009,10 @@
       "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-25",
@@ -1001,8 +1049,10 @@
       "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-26",
@@ -1039,8 +1089,10 @@
       "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-27",
@@ -1077,8 +1129,10 @@
       "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-28",
@@ -1115,8 +1169,10 @@
       "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-29",
@@ -1153,8 +1209,10 @@
       "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g4-e2e-playwright-vie-30",
@@ -1191,7 +1249,9 @@
       "delivered_ok": false,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": false
+    },
+    "provenance": "catalog"
   }
 ]

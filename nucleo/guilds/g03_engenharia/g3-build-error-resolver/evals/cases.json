@@ -38,8 +38,10 @@
       "static_ok": true,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-02",
@@ -80,8 +82,10 @@
       "static_ok": true,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-03",
@@ -122,8 +126,10 @@
       "static_ok": true,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-04",
@@ -164,8 +170,10 @@
       "static_ok": true,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-05",
@@ -204,8 +212,10 @@
       "static_ok": true,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-06",
@@ -244,8 +254,10 @@
       "static_ok": true,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-07",
@@ -286,8 +298,10 @@
       "static_ok": true,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-08",
@@ -328,8 +342,10 @@
       "static_ok": true,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": true
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-09",
@@ -370,8 +386,10 @@
       "static_ok": true,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-10",
@@ -412,8 +430,10 @@
       "static_ok": true,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-11",
@@ -452,8 +472,10 @@
       "static_ok": true,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-12",
@@ -494,8 +516,10 @@
       "static_ok": true,
       "first_fail": null,
       "status": "verified_static",
-      "requires_human_review": false
-    }
+      "requires_human_review": false,
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-13",
@@ -534,8 +558,10 @@
       "requires_human_review": true,
       "touches_bug_file": true,
       "bug_addressed": true,
-      "protected_unmodified": false
-    }
+      "protected_unmodified": false,
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-14",
@@ -574,8 +600,10 @@
       "requires_human_review": true,
       "touches_bug_file": true,
       "bug_addressed": true,
-      "protected_unmodified": false
-    }
+      "protected_unmodified": false,
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-15",
@@ -612,8 +640,10 @@
       "requires_human_review": true,
       "touches_bug_file": true,
       "bug_addressed": true,
-      "protected_unmodified": false
-    }
+      "protected_unmodified": false,
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-16",
@@ -652,8 +682,10 @@
       "requires_human_review": true,
       "touches_bug_file": true,
       "bug_addressed": true,
-      "protected_unmodified": false
-    }
+      "protected_unmodified": false,
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-17",
@@ -689,8 +721,10 @@
       "first_fail": "touches_bug_file",
       "status": "rejected:touches_bug_file",
       "requires_human_review": true,
-      "touches_bug_file": false
-    }
+      "touches_bug_file": false,
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-18",
@@ -726,8 +760,10 @@
       "first_fail": "touches_bug_file",
       "status": "rejected:touches_bug_file",
       "requires_human_review": true,
-      "touches_bug_file": false
-    }
+      "touches_bug_file": false,
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-19",
@@ -761,8 +797,10 @@
       "first_fail": "touches_bug_file",
       "status": "rejected:touches_bug_file",
       "requires_human_review": true,
-      "touches_bug_file": false
-    }
+      "touches_bug_file": false,
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-20",
@@ -798,8 +836,10 @@
       "first_fail": "touches_bug_file",
       "status": "rejected:touches_bug_file",
       "requires_human_review": true,
-      "touches_bug_file": false
-    }
+      "touches_bug_file": false,
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-21",
@@ -836,8 +876,10 @@
       "status": "rejected:bug_addressed",
       "requires_human_review": true,
       "touches_bug_file": true,
-      "bug_addressed": false
-    }
+      "bug_addressed": false,
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-22",
@@ -874,8 +916,10 @@
       "status": "rejected:bug_addressed",
       "requires_human_review": true,
       "touches_bug_file": true,
-      "bug_addressed": false
-    }
+      "bug_addressed": false,
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-23",
@@ -913,8 +957,10 @@
       "requires_human_review": true,
       "bug_addressed": true,
       "protected_unmodified": true,
-      "no_test_gaming": false
-    }
+      "no_test_gaming": false,
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-24",
@@ -952,8 +998,10 @@
       "requires_human_review": true,
       "bug_addressed": true,
       "protected_unmodified": true,
-      "no_test_gaming": false
-    }
+      "no_test_gaming": false,
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-25",
@@ -991,8 +1039,10 @@
       "requires_human_review": true,
       "bug_addressed": true,
       "protected_unmodified": true,
-      "no_test_gaming": false
-    }
+      "no_test_gaming": false,
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-26",
@@ -1030,8 +1080,10 @@
       "requires_human_review": true,
       "bug_addressed": true,
       "protected_unmodified": true,
-      "no_test_gaming": false
-    }
+      "no_test_gaming": false,
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-27",
@@ -1068,8 +1120,10 @@
       "status": "rejected:result_parses",
       "requires_human_review": true,
       "bug_addressed": true,
-      "result_parses": false
-    }
+      "result_parses": false,
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-28",
@@ -1106,8 +1160,10 @@
       "status": "rejected:result_parses",
       "requires_human_review": true,
       "bug_addressed": true,
-      "result_parses": false
-    }
+      "result_parses": false,
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-29",
@@ -1142,8 +1198,10 @@
       "status": "rejected:result_parses",
       "requires_human_review": true,
       "bug_addressed": true,
-      "result_parses": false
-    }
+      "result_parses": false,
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   },
   {
     "id": "g3-build-error-resolver-30",
@@ -1179,7 +1237,9 @@
       "first_fail": "artifact_parseable",
       "status": "rejected:artifact_parseable",
       "requires_human_review": true,
-      "artifact_parseable": false
-    }
+      "artifact_parseable": false,
+      "exec_delivered": false
+    },
+    "provenance": "independent"
   }
 ]

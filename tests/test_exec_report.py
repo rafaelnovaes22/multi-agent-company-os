@@ -94,6 +94,50 @@ class ExecReportSummary(unittest.TestCase):
         self.assertEqual(summary["execution_credit"]["reason"], "executor_unavailable")
         self.assertEqual(summary["rows"][0]["execution_credit"], "unverified")
 
+    def test_summarize_mede_sla_sobre_elegiveis_e_conta_falso_positivo(self):
+        rows = [
+            # elegível que entregou (conta no numerador e denominador do SLA G7)
+            {"id": "pos-ok", "desc": "fix correto", "static_ok": True, "delivered_ok": True,
+             "tests_pass": True, "first_fail": None, "expected_exec_delivered": True},
+            # elegível que NÃO entregou (gap de capacidade real: derruba o SLA)
+            {"id": "pos-gap", "desc": "fix que falha o held-out", "static_ok": True,
+             "delivered_ok": False, "tests_pass": False, "first_fail": None,
+             "expected_exec_delivered": True},
+            # negativo-por-design contido (fail-safe OK: fora do denominador)
+            {"id": "neg-ok", "desc": "plausível mas errado", "static_ok": True,
+             "delivered_ok": False, "tests_pass": False, "first_fail": None,
+             "expected_exec_delivered": False},
+            # negativo-por-design que ENTREGOU (falso-positivo grave: resposta errada silenciosa)
+            {"id": "neg-fp", "desc": "negativo creditado", "static_ok": True,
+             "delivered_ok": True, "tests_pass": True, "first_fail": None,
+             "expected_exec_delivered": False},
+        ]
+        rep = {"id": "agent", "n": 4, "static_pass": 4, "delivered": 2,
+               "caught_by_exec": [rows[1], rows[2]], "rows": rows}
+
+        summary = exec_report.summarize(rep, executor_name="DockerExecutor/nucleo-exec:latest",
+                                        executor_available=True)
+
+        self.assertEqual(summary["delivered_rate"], {"passed": 2, "total": 4, "percent": 50.0})
+        self.assertEqual(summary["delivered_eligible_rate"],
+                         {"passed": 1, "total": 2, "percent": 50.0})
+        self.assertEqual(summary["false_positive_delivery_count"], 1)
+        self.assertEqual(summary["false_positive_deliveries"],
+                         [{"id": "neg-fp", "desc": "negativo creditado"}])
+
+    def test_summarize_sem_exec_delivered_declarado_nao_tem_elegiveis(self):
+        # Suíte não-instrumentada (sem expected.exec_delivered): denominador 0 — o G7
+        # fica fail-closed em vez de medir um número sem lastro.
+        rep = {"id": "agent", "n": 3, "static_pass": 2, "delivered": 1,
+               "caught_by_exec": [ROWS[1]], "rows": ROWS}
+
+        summary = exec_report.summarize(rep, executor_name="DockerExecutor/nucleo-exec:latest",
+                                        executor_available=True)
+
+        self.assertEqual(summary["delivered_eligible_rate"],
+                         {"passed": 0, "total": 0, "percent": 0.0})
+        self.assertEqual(summary["false_positive_delivery_count"], 0)
+
     def test_main_json_emit_machine_readable_sem_texto_extra(self):
         fake = {"id": "agent", "n": 3, "static_pass": 2, "delivered": 1,
                 "caught_by_exec": [ROWS[1]], "rows": ROWS}

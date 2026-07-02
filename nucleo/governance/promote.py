@@ -6,11 +6,14 @@ no Brain + store. É o mecanismo de "evoluir ganhando autonomia". Mercado-agnós
 
 Gates: G1 C2(outcome clause) · G2 C3(economics, billable) · G3 C4(SLA assinado) ·
 G4 eval-suite passing (estático+security) · G5 cross-approval (po != promotion_officer) ·
-G6 CI/CD · G7 SLA de ENTREGA (delivered_rate do oráculo executável >= 95%, decisão CEO
-2026-06-30). G7 vale para ->ASSISTED e ->AUTONOMOUS (os modos que entregam/cobram) e é
-FAIL-CLOSED: sem executor real (delivered_rate não medível) não promove — a diferença de G4
-(estático, gameável ~100%) para G7 (execução real, hoje 27%/0%) é exatamente o ponto da
-decisão. AUTONOMOUS exige ainda assinatura do security-privacy-guardian.
+G6 CI/CD · G7 SLA de ENTREGA (delivered_eligible_rate do oráculo executável >= 95%, decisão
+CEO 2026-06-30). O denominador do G7 são os casos ELEGÍVEIS (expected.exec_delivered=True — a
+suíte é discriminante: negativos-por-design medem o fail-safe, não a entrega); um negativo
+que ENTREGA é falso-positivo grave e HARD-FAIL independente da taxa. G7 vale para ->ASSISTED
+e ->AUTONOMOUS (os modos que entregam/cobram) e é FAIL-CLOSED em dobro: sem executor real OU
+sem casos elegíveis declarados (natureza sem oráculo executável) não promove — a diferença de
+G4 (estático, gameável ~100%) para G7 (execução real) é exatamente o ponto da decisão.
+AUTONOMOUS exige ainda assinatura do security-privacy-guardian.
 
 DESCER nunca tem gate (resiliência operacional, NIST "sobreviver ao inevitável"):
 `demote()` derruba qualquer modo -> SHADOW sem pré-condições, e
@@ -86,20 +89,34 @@ def _gate(g, spec, spec_dir, req, deps):
         return ok, f"po={po} promotion_officer={pr} distintos={ok}"
     if g == "G6":  # CI/CD ativo (assisted->autonomous)
         return bool(req.get("cicd_active")), f"cicd_active={bool(req.get('cicd_active'))}"
-    if g == "G7":  # SLA de ENTREGA — delivered_rate do oráculo executável >= 95% (CEO 2026-06-30)
+    if g == "G7":  # SLA de ENTREGA — delivered_eligible_rate do oráculo executável >= 95% (CEO 2026-06-30)
         s = _delivered_summary(spec_dir)
         ex = s.get("executor") or {}
-        dr = s.get("delivered_rate") or {}
+        dr = s.get("delivered_eligible_rate") or {}
         passed, total, pct = dr.get("passed") or 0, dr.get("total") or 0, dr.get("percent") or 0.0
+        fp = int(s.get("false_positive_delivery_count") or 0)
         if not ex.get("available"):
             # FAIL-CLOSED: sem execução real não há prova de entrega — não promove.
             return False, (f"SLA entrega: executor '{ex.get('name')}' indisponível — delivered_rate "
                            f"não medível (sem prova executável). Promoção bloqueada (fail-closed).")
+        if total <= 0:
+            # FAIL-CLOSED: a suíte não declara nenhum caso elegível (expected.exec_delivered=True)
+            # — natureza sem oráculo executável de entrega (estrutural/browser) ou suíte
+            # não-instrumentada. Sem denominador não há SLA medível, logo não promove.
+            return False, ("SLA entrega: 0 casos elegíveis (expected.delivered_ok=True) na suíte — "
+                           "entrega não medível para esta natureza. Promoção bloqueada (fail-closed).")
+        if fp > 0:
+            # HARD-FAIL do fail-safe: um negativo-por-design ENTREGOU = resposta errada
+            # silenciosa. Viola o invariante dos <=5% (decisão D3), independe da taxa.
+            return False, (f"SLA entrega: {fp} falso-positivo(s) de entrega (negativo-por-design "
+                           f"creditado) — fail-safe violado (resposta errada silenciosa). HARD-FAIL.")
         rate = pct / 100.0
         not_delivered = max(total - passed, 0)   # os <=5%: runtime force delivered=False/billing=0
         ok = rate >= DELIVERED_THRESHOLD
-        return ok, (f"SLA entrega: delivered_rate {passed}/{total} ({pct:.0f}%) "
-                    f"thr={DELIVERED_THRESHOLD*100:.0f}% · {not_delivered} não-entregue(s) caem no "
+        raw = s.get("delivered_rate") or {}
+        return ok, (f"SLA entrega: delivered_eligible_rate {passed}/{total} ({pct:.0f}%) "
+                    f"thr={DELIVERED_THRESHOLD*100:.0f}% · bruto {raw.get('passed')}/{raw.get('total')} · "
+                    f"falso-positivo=0 · {not_delivered} não-entregue(s) caem no "
                     f"fail-safe do runtime (delivered=False/billing=0, sem resposta-errada-silenciosa)")
     return False, "gate desconhecido"
 

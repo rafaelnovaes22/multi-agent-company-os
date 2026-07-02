@@ -151,7 +151,18 @@ proibindo a tarefa em vez de inventar um recompute auto-referente.
    (violação reaberta) e isso é assumido como correto, não "consertado" recarimbando.
 6. **Reavaliar o gerador (provavelmente não).** *Pronto quando:* só construir `g0-agent-smith`
    se surgir fila real de agentes novos (vertical/tenant novo); default = adiado.
-7. **Épico red→green (capacidade generativa medida de verdade).** Hoje o `delivered_eligible_rate`
+7. **[WIRADO — fase auditoria] Épico red→green (capacidade generativa medida de verdade).**
+   Entregue: `nucleo/kernel/generate.py` (loop LLM×executor; held-out NUNCA no prompt nem no
+   loop — decide `delivered` só no verify_code final; patch em path held-out descartado;
+   budget GEN_MAX_ITERS; erro de infra não itera às cegas), `exec_report --generative
+   --require-real-llm` (mede SÓ elegíveis; publica taxa generativa SEPARADA do replay; Fake
+   LLM = exit 2, nunca "0% falso"), `run_tests_detail` no executor (veredito + cauda do erro
+   p/ o feedback), passo GENERATIVO no forge-exec.yml (Vertex via WIF, auditoria
+   continue-on-error, piloto build-error-resolver). Validado: 9 testes offline (inclusive
+   anti-vazamento de held-out) + integração local com Docker real (red na 1ª com stderr no
+   prompt → green na 2ª → delivered final True). Falta p/ fechar o épico: nightly publicar o
+   generativo real N noites, expandir do piloto aos 5 exec-backed, e SÓ ENTÃO G7 passar a
+   promover pelo número generativo. Hoje o `delivered_eligible_rate`
    mede a qualidade das fixtures commitadas (o artefato vem baked no eval-case;
    `skills_exec.py` só verifica). Para o 95% significar capacidade do AGENTE: (a) handler
    `spec_executor` ganha modo gerador — sem `artifact` no caso, o LLM real gera o patch a

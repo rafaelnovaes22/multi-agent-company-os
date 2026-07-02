@@ -46,6 +46,14 @@ class ExecutionProvider(abc.ABC):
         workspace, dropar rede/caps e NUNCA expor segredos do host."""
         ...
 
+    def run_tests_detail(self, files: dict, *, test_cmd: str, runtime: str = "python",
+                         timeout_s: float = 60.0) -> dict:
+        """Como `run_tests`, mas com diagnóstico p/ o loop red→green do gerador:
+        {"passed": True|False|None, "output": cauda do stdout/stderr}. Default honesto:
+        só o veredito, sem saída (implementações reais sobrescrevem p/ dar o erro ao LLM)."""
+        return {"passed": self.run_tests(files, test_cmd=test_cmd, runtime=runtime,
+                                         timeout_s=timeout_s), "output": ""}
+
     @property
     def name(self) -> str:
         return self.__class__.__name__
@@ -158,12 +166,22 @@ class DockerExecutor(ExecutionProvider):
 
     def run_tests(self, files: dict, *, test_cmd: str, runtime: str = "python",
                   timeout_s: float = None):
+        return self._execute(files, test_cmd=test_cmd, runtime=runtime, timeout_s=timeout_s)[0]
+
+    def run_tests_detail(self, files: dict, *, test_cmd: str, runtime: str = "python",
+                         timeout_s: float = None) -> dict:
+        verdict, output = self._execute(files, test_cmd=test_cmd, runtime=runtime,
+                                        timeout_s=timeout_s)
+        return {"passed": verdict, "output": output}
+
+    def _execute(self, files: dict, *, test_cmd: str, runtime: str = "python",
+                 timeout_s: float = None):
         if not self.available:
-            return None
+            return None, ""
         safe = _safe_files(files)
         if safe is None:
             _log.warning("DockerExecutor: artefato com paths inseguros — não executa.")
-            return None
+            return None, ""
         image = self._image_for(runtime)
         lim = _RESOURCE_LIMITS.get(runtime or "python", _RESOURCE_LIMITS["python"])
         timeout_s = timeout_s or self._timeout
@@ -189,18 +207,23 @@ class DockerExecutor(ExecutionProvider):
                 r = subprocess.run(cmd, capture_output=True, timeout=timeout_s + 20)
             except subprocess.TimeoutExpired:
                 _log.warning("DockerExecutor: timeout em %ss — trata como FALHA.", timeout_s)
-                return False
+                return False, f"timeout: testes excederam {timeout_s}s"
             except Exception as exc:  # noqa: BLE001
                 _log.warning("DockerExecutor: erro de infra: %s", exc)
-                return None
+                return None, ""
+            # cauda de stdout+stderr p/ o feedback do loop red→green (limitada: o LLM só
+            # precisa do erro, não do log inteiro; e a saída é canal não-confiável).
+            out = r.stdout if isinstance(r.stdout, bytes) else b""
+            err = r.stderr if isinstance(r.stderr, bytes) else b""
+            tail = (out + b"\n" + err).decode("utf-8", "replace")[-2000:]
             if r.returncode == 0:
-                return True
+                return True, tail
             # 125 (docker run), 126/127 (exec/cmd não encontrado) = erro de infra, não de teste.
             if r.returncode in (125, 126, 127):
                 _log.warning("DockerExecutor: erro de container (rc=%s): %s",
                              r.returncode, (r.stderr or b"").decode("utf-8", "replace")[:200])
-                return None
-            return False
+                return None, ""
+            return False, tail
 
 
 def get_executor() -> ExecutionProvider:

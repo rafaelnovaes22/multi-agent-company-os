@@ -148,10 +148,10 @@
     },
     "expected": {
       "handler_kind": "threat_model_review",
-      "risk_score": 60,
-      "risk_level": "high",
+      "risk_score": 85,
+      "risk_level": "critical",
       "missing_control_count": 0,
-      "status": "needs_controls",
+      "status": "blocked",
       "requires_human_review": true
     },
     "provenance": "catalog"
@@ -378,10 +378,10 @@
     },
     "expected": {
       "handler_kind": "threat_model_review",
-      "risk_score": 60,
-      "risk_level": "high",
+      "risk_score": 85,
+      "risk_level": "critical",
       "missing_control_count": 2,
-      "status": "needs_controls",
+      "status": "blocked",
       "requires_human_review": true
     },
     "provenance": "catalog"
@@ -457,10 +457,10 @@
     },
     "expected": {
       "handler_kind": "threat_model_review",
-      "risk_score": 60,
-      "risk_level": "high",
+      "risk_score": 85,
+      "risk_level": "critical",
       "missing_control_count": 0,
-      "status": "needs_controls",
+      "status": "blocked",
       "requires_human_review": true
     },
     "provenance": "catalog"

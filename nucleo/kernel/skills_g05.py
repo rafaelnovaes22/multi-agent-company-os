@@ -402,6 +402,12 @@ def threat_model_review(state, *, llm, store, spec):
     score += 20 if payments else 0
     score += 15 if admin_surface else 0
     score += {"low": 0, "medium": 10, "high": 20}.get(dependency_risk, 0)
+    # Combos críticos (auditoria 2026-07-03): sem-auth JUNTO de PII/payments/admin é
+    # qualitativamente pior que a soma — superfície interna sem autenticação com dado
+    # sensível ficava subestimada (podia sair approved). +25 por combo garante que
+    # sem-auth+PII sozinho (20+15+25=60) já cai em needs_controls/human review.
+    if not auth_required:
+        score += 25 * sum(1 for flag in (handles_pii, payments, admin_surface) if flag)
 
     missing_controls = []
     if exposed and "rate_limit" not in mitigations:

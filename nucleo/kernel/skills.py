@@ -100,6 +100,18 @@ def outbound_sdr(state, *, llm, store, spec):
     icp = load_icp()                                   # C5 — ancora a mensagem nas dores do ICP
     lead = state["task"].get("lead", {}) or {}
     qual = state["task"].get("qualification", {}) or {}
+    if qual.get("decision") == "disqualified":
+        # respeita a qualificação (auditoria 2026-07-03, decisão §6.7): lead desqualificado
+        # NÃO recebe sequência de prospecção — bloqueio explícito, nunca outreach silencioso.
+        reason = ("lead disqualified na qualificação — prospecção bloqueada "
+                  "(respeita qualification.decision)")
+        return {
+            "output": {"account_id": lead.get("id"), "sequence": [], "blocked": True,
+                       "reason": reason, "consent_required": True,
+                       "requires_human_review": True, "rationale": reason, "by": spec["id"]},
+            "cost_tokens": 0,
+            "citations": ["icp:/nucleo/company/icp.md", "lead:" + str(lead.get("id", "?"))],
+        }
     pains = [k for k, v in (qual.get("icp_fit_signals") or {}).items() if v]
     skus = (state["task"].get("diagnostic") or {}).get("sku_candidates", [])   # pitch vindo do diagnóstico
     sequence = [

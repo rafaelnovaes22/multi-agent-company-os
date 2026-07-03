@@ -76,10 +76,10 @@ def scenario_sensitivity(state, *, llm, store, spec):
     s = state["task"].get("sizing", {}) or {}
     variables = s.get("variables", []) or []
 
-    base_value = 1.0
+    raw_base = 1.0
     for v in variables:
-        base_value *= (v.get("value", 0) or 0)
-    base_value = round(base_value, 2)
+        raw_base *= (v.get("value", 0) or 0)
+    base_value = round(raw_base, 2)
 
     drivers = []
     tripwires = []
@@ -111,7 +111,10 @@ def scenario_sensitivity(state, *, llm, store, spec):
         "upside": round(up, 2),
         "downside": round(down, 2),
     }
-    spread_pct = round((scenarios["upside"] - scenarios["downside"]) / base_value * 100, 1) if base_value else 0.0
+    # spread calculado nos valores CRUS: arredondar endpoint antes da divisão distorce a
+    # conta (sp-03: 0.375/0.225 arredondados davam 53.3% em vez de 50.0% — auditoria
+    # 2026-07-03). Arredondamento é apresentação, nunca insumo de cálculo.
+    spread_pct = round((up - down) / raw_base * 100, 1) if raw_base else 0.0
     return _out(spec, state, {
         "base_value": base_value, "driver_count": len(drivers), "top_driver": top_driver,
         "drivers": drivers, "scenarios": scenarios, "spread_pct": spread_pct,

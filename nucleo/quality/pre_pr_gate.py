@@ -9,14 +9,21 @@ Hermes em BLOQUEIO executável: o loop não abre PR se reprovar aqui.
 Difere do forge_check: o forge_check é o ratchet da frota (congela débito no baseline).
 Este gate NÃO grandfatheriza nada — é HARD-FAIL. Os pontos enforçados:
 
-  P1  Fechar catraca não é prova de valor: todo handler determinístico precisa de PROVA
-      INDEPENDENTE adequada à sua natureza —
-        · natureza build/ops/browser (held-out-capaz)  -> critério held-out em `oracle`
-          (heldout_files/structure/browser/bug_markers) que o agente nunca vê;
-        · natureza cálculo/decisão                      -> ≥1 caso de proveniência
-          `human`/`independent` (existe um valor de referência autorado de FORA do handler).
+  P1  Fechar catraca não é prova de valor: natureza build/ops/browser (held-out-capaz)
+      -> critério held-out em `oracle` (heldout_files/structure/browser/bug_markers) que
+      o agente nunca vê.
+      Para cálculo/decisão o gate NÃO EXIGE mais ≥1 `human`/`independent`: essa exigência
+      era o combustível do episódio #66-80 (converteu "0 independent honesto" em 380
+      carimbados — o mesmo mecanismo que o guardrail "não exigir `human`" já previa).
+      `catalog` (replay honesto) é o rótulo default aceitável. Retrofit + decisão CEO §6.6,
+      2026-07-03.
   P1b Proveniência obrigatória: TODO eval-case de handler determinístico declara
       `provenance` ∈ {catalog, human, independent}. Ausente ou replay/handler/derived = reprova.
+  P1c Alegação é VALIDADA, não confiada (G-FONTE-EXTERNA): caso rotulado `independent`
+      exige lastro verificável — `source` externo versionado declarado no caso (URL/commit/
+      norma FORA do controle do agente) OU critério held-out executável no próprio `oracle`
+      do caso. Caso rotulado `human` exige `ratified_by` (artefato de ratificação humana).
+      Rótulo sem lastro reprova: é o carimbo do #66-80 reembalado.
   P2  Baseline só encolhe: se `forge_baseline.json` mudou no diff, o total não pode CRESCER
       e exige `nucleo/quality/BASELINE-CHANGE.md` justificando (auditoria do PR que "fecha métrica").
 
@@ -113,7 +120,9 @@ def _audit_agent(spec_path):
         viol.append(f"{aid}: {len(sem_prov)} caso(s) sem `provenance` válido "
                     f"(use catalog|human|independent; replay/ausente é proibido) -> {sem_prov[:6]}")
 
-    # P1 — prova independente adequada à natureza
+    # P1 — natureza build/ops/browser exige o held-out (prova-de-fora executável).
+    # Cálculo/decisão NÃO tem mais exigência de rótulo (ver docstring: exigir `independent`
+    # fabricou os 380 do #66-80; catalog é o estado honesto até existir fonte externa real).
     if _is_held_out_capable(spec, cases):
         has_heldout = any(
             isinstance(c.get("oracle"), dict) and any(c["oracle"].get(k) for k in HELDOUT_CRITERION_KEYS)
@@ -121,12 +130,26 @@ def _audit_agent(spec_path):
         if not has_heldout:
             viol.append(f"{aid}: natureza build/ops/browser exige critério held-out em "
                         f"`oracle` ({'/'.join(HELDOUT_CRITERION_KEYS)}) — nenhum caso o declara")
-    else:
-        has_independent = any(c.get("provenance") in PROVENANCE_INDEPENDENT for c in cases)
-        if not has_independent:
-            viol.append(f"{aid}: natureza cálculo/decisão exige ≥1 caso com proveniência "
-                        f"human|independent (valor de referência autorado FORA do handler); "
-                        f"todos os casos seriam replayáveis pelo próprio handler")
+
+    # P1c — alegação de proveniência é VALIDADA, não confiada (G-FONTE-EXTERNA)
+    def _case_has_external_proof(c):
+        src = c.get("source")
+        if isinstance(src, str) and src.strip():
+            return True
+        oracle = c.get("oracle")
+        return isinstance(oracle, dict) and any(oracle.get(k) for k in HELDOUT_CRITERION_KEYS)
+
+    indep_sem_lastro = [c.get("id", "?") for c in cases
+                        if c.get("provenance") == "independent" and not _case_has_external_proof(c)]
+    if indep_sem_lastro:
+        viol.append(f"{aid}: {len(indep_sem_lastro)} caso(s) rotulado(s) `independent` SEM lastro "
+                    f"verificável (exige `source` externo versionado OU held-out executável no "
+                    f"`oracle`; carimbo sem prova = #66-80) -> {indep_sem_lastro[:6]}")
+    human_sem_lastro = [c.get("id", "?") for c in cases
+                        if c.get("provenance") == "human" and not str(c.get("ratified_by") or "").strip()]
+    if human_sem_lastro:
+        viol.append(f"{aid}: {len(human_sem_lastro)} caso(s) rotulado(s) `human` sem `ratified_by` "
+                    f"(artefato de ratificação) -> {human_sem_lastro[:6]}")
     return viol
 
 
@@ -181,11 +204,31 @@ def main(argv):
         for v in violations:
             print(f"  • {v}")
         print("\nNão abra PR. Para cada handler determinístico: dê proveniência aos casos "
-              "(provenance) e prova independente da natureza (held-out em `oracle` p/ build/ops; "
-              "≥1 caso human|independent p/ cálculo). Ver AGENTS.md §0/§3.")
+              "(provenance ∈ catalog|human|independent), held-out em `oracle` p/ build/ops, e "
+              "NUNCA rotule independent/human sem lastro (source externo / ratified_by). "
+              "Ver AGENTS.md §0/§3.")
         return 1
 
-    print(f"\n✅ PRE-PR GATE OK — {len(specs)} agente(s) com proveniência + prova independente. "
+    # Diagnóstico do HUMANO (jamais alvo do agente — G-INCENTIVO): quantos agentes têm
+    # prova externa real vs catalog-only. Informativo, não violação.
+    if fleet:
+        with_proof = catalog_only = 0
+        for sp in specs:
+            try:
+                cases = json.load(open(os.path.join(_agent_dir(sp), "evals", "cases.json"),
+                                       encoding="utf-8"))
+            except OSError:
+                continue
+            if any(c.get("provenance") in PROVENANCE_INDEPENDENT for c in cases) or \
+               any(isinstance(c.get("oracle"), dict) and any(c["oracle"].get(k) for k in HELDOUT_CRITERION_KEYS)
+                   for c in cases):
+                with_proof += 1
+            else:
+                catalog_only += 1
+        print(f"\n  diagnóstico (informativo): {with_proof} agente(s) com prova externa "
+              f"(held-out/fonte/ratificação) · {catalog_only} catalog-only (replay honesto)")
+
+    print(f"\n✅ PRE-PR GATE OK — {len(specs)} agente(s) com proveniência validada. "
           "Pode abrir PR (forge_check/CI continuam valendo).")
     return 0
 

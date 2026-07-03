@@ -27,7 +27,7 @@
       "needs_experiment": false,
       "status": "auditavel"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-02",
@@ -55,7 +55,7 @@
       "needs_experiment": true,
       "status": "rebaixado_experimento"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-03",
@@ -79,7 +79,7 @@
       "needs_experiment": false,
       "status": "sem_fonte"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-04",
@@ -109,7 +109,7 @@
       "needs_experiment": false,
       "status": "auditavel"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-05",
@@ -139,7 +139,7 @@
       "needs_experiment": false,
       "status": "auditavel"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-06",
@@ -169,7 +169,7 @@
       "needs_experiment": true,
       "status": "rebaixado_experimento"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-07",
@@ -199,7 +199,7 @@
       "needs_experiment": true,
       "status": "rebaixado_experimento"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-08",
@@ -223,7 +223,7 @@
       "needs_experiment": true,
       "status": "rebaixado_experimento"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-09",
@@ -253,7 +253,7 @@
       "needs_experiment": false,
       "status": "auditavel"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-10",
@@ -283,7 +283,7 @@
       "needs_experiment": false,
       "status": "auditavel"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-11",
@@ -313,7 +313,7 @@
       "needs_experiment": false,
       "status": "auditavel"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-12",
@@ -342,7 +342,7 @@
       "needs_experiment": false,
       "status": "sem_fonte"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-13",
@@ -369,7 +369,7 @@
       "needs_experiment": false,
       "status": "sem_fonte"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-14",
@@ -399,7 +399,7 @@
       "needs_experiment": false,
       "status": "auditavel"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-15",
@@ -423,7 +423,7 @@
       "needs_experiment": true,
       "status": "rebaixado_experimento"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-16",
@@ -453,7 +453,7 @@
       "needs_experiment": false,
       "status": "auditavel"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-17",
@@ -477,7 +477,7 @@
       "needs_experiment": false,
       "status": "sem_fonte"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-18",
@@ -507,7 +507,7 @@
       "needs_experiment": false,
       "status": "auditavel"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-19",
@@ -535,7 +535,7 @@
       "needs_experiment": false,
       "status": "sem_fonte"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-20",
@@ -565,7 +565,7 @@
       "needs_experiment": true,
       "status": "rebaixado_experimento"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-21",
@@ -595,7 +595,7 @@
       "needs_experiment": false,
       "status": "auditavel"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-22",
@@ -625,7 +625,7 @@
       "needs_experiment": false,
       "status": "auditavel"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-23",
@@ -649,7 +649,7 @@
       "needs_experiment": false,
       "status": "sem_fonte"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-24",
@@ -679,7 +679,7 @@
       "needs_experiment": false,
       "status": "auditavel"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-25",
@@ -709,7 +709,7 @@
       "needs_experiment": true,
       "status": "rebaixado_experimento"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-26",
@@ -739,7 +739,7 @@
       "needs_experiment": false,
       "status": "auditavel"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-27",
@@ -763,7 +763,7 @@
       "needs_experiment": false,
       "status": "sem_fonte"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-28",
@@ -792,7 +792,7 @@
       "needs_experiment": false,
       "status": "sem_fonte"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-29",
@@ -822,7 +822,7 @@
       "needs_experiment": true,
       "status": "rebaixado_experimento"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-30",
@@ -852,7 +852,7 @@
       "needs_experiment": false,
       "status": "auditavel"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-31",
@@ -882,7 +882,7 @@
       "needs_experiment": false,
       "status": "auditavel"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rice-32",
@@ -912,6 +912,6 @@
       "needs_experiment": false,
       "status": "auditavel"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   }
 ]

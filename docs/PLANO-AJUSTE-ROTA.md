@@ -100,11 +100,12 @@ proibindo a tarefa em vez de inventar um recompute auto-referente.
    `wtp-20` já confirmado falso-positivo). Reconhecer que isso reabre violação por construção
    (`pre_pr_gate.py:124-129` exige >=1 `independent`/`human`): o `--fleet` sobe e a frota fica
    formalmente vermelha numa janela até haver casos `human`.
-6. **Resolver a tensão juiz x oráculo:** `nucleo/quality/judge_eval.py:170` filtra só
-   `act_handler=='spec_driven'`, logo converter os 6-7 técnicos para `spec_executor` os removeu
-   da amostra do juiz (a métrica melhorou por exclusão). Decidir: incluir `spec_executor` no
-   `_targets()` avaliando o artefato, ou declarar que o oráculo substitui o juiz com
-   `delivered_rate` real publicado como prova.
+6. ~~**Resolver a tensão juiz x oráculo:**~~ **[DECIDIDO 2026-07-03 — oráculo substitui o
+   juiz p/ `spec_executor`]** Formalizado em `judge_eval.py::_targets`: o veredito dos
+   técnicos é o `delivered_eligible_rate` do exec_report (replay + GENERATIVO red→green),
+   publicado todo nightly com fail-safe verificado — troca de instrumento por um mais forte
+   (execução real > opinião de LLM; coerente com AGENTS.md §0.5), não exclusão de amostra.
+   O juiz segue sendo o instrumento único dos `spec_driven` (sem oráculo executável).
 
 ### Continuar
 
@@ -146,9 +147,16 @@ proibindo a tarefa em vez de inventar um recompute auto-referente.
    ->AUTONOMOUS): exige `delivered_rate` do oráculo executável (`exec_report`) >= 95%, **fail-closed**
    (sem executor real = sem prova = não promove). G4 (estático ~100%) segue separado; a distância
    G4↔G7 É a decisão. Testado em `tests/test_promote_delivery_sla.py` + passo no `forge.yml`.
-5. **Guardrail que escala + retrofit.** Detector de homogeneidade + auditoria dos 380
-   `independent`. *Pronto quando:* o detector dispara revisão em lote mecânico, o `--fleet` sobe
-   (violação reaberta) e isso é assumido como correto, não "consertado" recarimbando.
+5. ~~**Guardrail que escala + retrofit.**~~ **[FEITO 2026-07-03]** Detector de homogeneidade
+   entregue antes (advisory). Retrofit executado: **380 rebaixados a `catalog`** (todos os
+   `independent` sem `source` externo nem held-out executável — exatamente os #66-80,
+   declarados sem-lastro retroativamente). Ajuste de desenho sobre o plano original: em vez
+   de o `--fleet` "subir e ficar vermelho numa janela", a EXIGÊNCIA de `>=1 independent|human`
+   p/ cálculo foi REMOVIDA do gate (era o combustível do carimbo — mesma lógica do guardrail
+   "não exigir `human`"; G-INCENTIVO aplicado à raiz) e substituída por VALIDAÇÃO de alegação
+   (P1c/G-FONTE-EXTERNA: `independent` exige `source` externo OU held-out executável;
+   `human` exige `ratified_by`). Catalog-only é o estado honesto declarado, não violação;
+   o `--fleet` ganhou diagnóstico informativo "prova externa × catalog-only" p/ o humano.
 6. **Reavaliar o gerador (provavelmente não).** *Pronto quando:* só construir `g0-agent-smith`
    se surgir fila real de agentes novos (vertical/tenant novo); default = adiado.
 7. **[WIRADO — fase auditoria] Épico red→green (capacidade generativa medida de verdade).**

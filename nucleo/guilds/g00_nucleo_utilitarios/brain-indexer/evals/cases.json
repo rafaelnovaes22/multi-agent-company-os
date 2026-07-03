@@ -33,7 +33,7 @@
       "schema_invalid_count": 0,
       "schema_valid": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-02",
@@ -61,7 +61,7 @@
       "coverage_pct": 100.0,
       "uncountable_runs": 0
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-03",
@@ -95,7 +95,7 @@
       "uncountable_runs": 1,
       "coverage_pct": 66.7
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-04",
@@ -126,7 +126,7 @@
       "schema_invalid_count": 1,
       "schema_valid": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-05",
@@ -147,7 +147,7 @@
       "reconciled": true,
       "status": "pass"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-06",
@@ -168,7 +168,7 @@
       "reconciled": false,
       "status": "fail"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-07",
@@ -189,7 +189,7 @@
       "reconciled": false,
       "status": "fail"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-08",
@@ -210,7 +210,7 @@
       "reconciled": true,
       "status": "pass"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-09",
@@ -227,7 +227,7 @@
       "status": "pass",
       "reconciled": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-10",
@@ -258,7 +258,7 @@
       "uncountable_runs": 3,
       "coverage_pct": 0.0
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-11",
@@ -289,7 +289,7 @@
       "schema_valid": false,
       "uncountable_runs": 1
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-12",
@@ -325,7 +325,7 @@
       "uncountable_runs": 1,
       "coverage_pct": 75.0
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-13",
@@ -346,7 +346,7 @@
       "reconciled": true,
       "status": "pass"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-14",
@@ -372,7 +372,7 @@
       "schema_valid": true,
       "coverage_pct": 100.0
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-15",
@@ -399,7 +399,7 @@
       "uncountable_runs": 1,
       "coverage_pct": 50.0
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-16",
@@ -420,7 +420,7 @@
       "reconciled": false,
       "status": "fail"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-17",
@@ -445,7 +445,7 @@
       "schema_invalid_count": 1,
       "schema_valid": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-18",
@@ -465,7 +465,7 @@
       "schema_valid": true,
       "coverage_pct": 100.0
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-19",
@@ -486,7 +486,7 @@
       "reconciled": true,
       "status": "pass"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-20",
@@ -527,7 +527,7 @@
       "uncountable_runs": 2,
       "coverage_pct": 60.0
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-21",
@@ -548,7 +548,7 @@
       "deviation_pct": 0.0,
       "status": "pass"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-22",
@@ -575,7 +575,7 @@
       "status": "fail",
       "coverage_pct": 100.0
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-23",
@@ -611,7 +611,7 @@
       "schema_invalid_count": 2,
       "schema_valid": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-24",
@@ -632,7 +632,7 @@
       "reconciled": true,
       "status": "pass"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-25",
@@ -653,7 +653,7 @@
       "uncountable_runs": 1,
       "coverage_pct": 0.0
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-26",
@@ -691,7 +691,7 @@
       "coverage_pct": 75.0,
       "status": "pass"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-27",
@@ -712,7 +712,7 @@
       "reconciled": true,
       "status": "pass"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-28",
@@ -733,7 +733,7 @@
       "reconciled": true,
       "status": "pass"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-29",
@@ -760,7 +760,7 @@
       "coverage_pct": 50.0,
       "uncountable_runs": 1
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-30",
@@ -799,7 +799,7 @@
       "uncountable_runs": 0,
       "schema_valid": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-31",
@@ -830,7 +830,7 @@
       "schema_valid": false,
       "coverage_pct": 100.0
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "bi-32",
@@ -851,6 +851,6 @@
       "reconciled": false,
       "status": "fail"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   }
 ]

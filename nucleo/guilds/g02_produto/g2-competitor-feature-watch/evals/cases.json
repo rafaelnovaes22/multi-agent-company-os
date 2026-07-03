@@ -16,7 +16,7 @@
       "signal_committed": true,
       "requires_human_review": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-02",
@@ -33,7 +33,7 @@
       "recommendation": "responder",
       "routed": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-03",
@@ -50,7 +50,7 @@
       "recommendation": "observar",
       "routed": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-04",
@@ -67,7 +67,7 @@
       "recommendation": "observar",
       "routed": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-05",
@@ -85,7 +85,7 @@
       "routed": false,
       "signal_committed": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-06",
@@ -103,7 +103,7 @@
       "routed": false,
       "signal_committed": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-07",
@@ -120,7 +120,7 @@
       "source_public": false,
       "signal_committed": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-08",
@@ -138,7 +138,7 @@
       "source_public": false,
       "requires_human_review": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-09",
@@ -156,7 +156,7 @@
       "routed": false,
       "signal_committed": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-10",
@@ -170,7 +170,7 @@
       "status": "rejeitado_fonte",
       "source_public": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-11",
@@ -185,7 +185,7 @@
       "status": "duplicado",
       "is_duplicate": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-12",
@@ -201,7 +201,7 @@
       "status": "ruido",
       "routed": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-13",
@@ -219,7 +219,7 @@
       "routed": true,
       "requires_human_review": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-14",
@@ -235,7 +235,7 @@
       "recommendation": "observar",
       "routed": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-15",
@@ -252,7 +252,7 @@
       "routed": false,
       "status": "classificado"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-16",
@@ -266,7 +266,7 @@
       "recommendation": "ignorar",
       "routed": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-17",
@@ -281,7 +281,7 @@
       "has_substance": true,
       "recommendation": "responder"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-18",
@@ -296,7 +296,7 @@
       "recommendation": "observar",
       "requires_human_review": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-19",
@@ -311,7 +311,7 @@
       "recommendation": "responder",
       "requires_human_review": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-20",
@@ -327,7 +327,7 @@
       "signal_committed": true,
       "status": "classificado"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-21",
@@ -341,7 +341,7 @@
       "signal_committed": false,
       "status": "ruido"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-22",
@@ -357,7 +357,7 @@
       "recommendation": "responder",
       "routed": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-23",
@@ -373,7 +373,7 @@
       "recommendation": "responder",
       "routed": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-24",
@@ -388,7 +388,7 @@
     "expected": {
       "recommendation": "observar"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-25",
@@ -404,7 +404,7 @@
       "recommendation": "observar",
       "routed": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-26",
@@ -419,7 +419,7 @@
       "status": "rejeitado_fonte",
       "source_public": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-27",
@@ -433,7 +433,7 @@
     "expected": {
       "routed": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-28",
@@ -448,7 +448,7 @@
     "expected": {
       "routed": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-29",
@@ -463,7 +463,7 @@
       "is_duplicate": false,
       "recommendation": "observar"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-30",
@@ -479,7 +479,7 @@
       "status": "duplicado",
       "routed": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-31",
@@ -495,7 +495,7 @@
       "status": "ruido",
       "recommendation": "ignorar"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "g2-competitor-feature-watch-32",
@@ -510,6 +510,6 @@
       "source_public": true,
       "status": "classificado"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   }
 ]

@@ -24,7 +24,8 @@
       "requires_human_review": false,
       "pii_map_complete": true,
       "up_down_validated": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-02",
@@ -38,7 +39,8 @@
       "status": "ok",
       "safe_to_merge": true,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-03",
@@ -53,7 +55,8 @@
       "status": "ok",
       "safe_to_merge": true,
       "pii_map_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-04",
@@ -82,7 +85,8 @@
       "safe_to_merge": true,
       "pii_unclassified_count": 0,
       "pii_map_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-05",
@@ -98,7 +102,8 @@
       "requires_human_review": true,
       "has_rollback": false,
       "up_down_validated": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-06",
@@ -117,7 +122,8 @@
     "expected": {
       "status": "sem_rollback",
       "safe_to_merge": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-07",
@@ -129,7 +135,8 @@
       "status": "sem_rollback",
       "safe_to_merge": false,
       "has_rollback": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-08",
@@ -141,7 +148,8 @@
     "expected": {
       "status": "sem_rollback",
       "safe_to_merge": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-09",
@@ -158,7 +166,8 @@
       "requires_human_review": true,
       "compatible": false,
       "up_down_validated": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-10",
@@ -172,7 +181,8 @@
       "status": "quebra_contrato",
       "safe_to_merge": false,
       "compatible": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-11",
@@ -185,7 +195,8 @@
     "expected": {
       "status": "quebra_contrato",
       "safe_to_merge": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-12",
@@ -204,7 +215,8 @@
       "status": "quebra_contrato",
       "safe_to_merge": false,
       "compatible": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-13",
@@ -221,7 +233,8 @@
       "requires_human_review": true,
       "backward_compatible": false,
       "up_down_validated": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-14",
@@ -235,7 +248,8 @@
       "status": "incompativel",
       "safe_to_merge": false,
       "backward_compatible": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-15",
@@ -253,7 +267,8 @@
     "expected": {
       "status": "incompativel",
       "safe_to_merge": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-16",
@@ -266,7 +281,8 @@
     "expected": {
       "status": "incompativel",
       "safe_to_merge": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-17",
@@ -288,7 +304,8 @@
       "requires_human_review": true,
       "pii_unclassified_count": 1,
       "pii_map_complete": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-18",
@@ -313,7 +330,8 @@
       "safe_to_merge": false,
       "pii_unclassified_count": 1,
       "pii_map_complete": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-19",
@@ -341,7 +359,8 @@
       "status": "pii_nao_classificada",
       "safe_to_merge": false,
       "pii_unclassified_count": 2
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-20",
@@ -360,7 +379,8 @@
     "expected": {
       "status": "pii_nao_classificada",
       "safe_to_merge": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-21",
@@ -376,7 +396,8 @@
       "safe_to_merge": false,
       "requires_human_review": true,
       "referential_integrity_ok": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-22",
@@ -396,7 +417,8 @@
       "status": "integridade_violada",
       "safe_to_merge": false,
       "referential_integrity_ok": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-23",
@@ -428,7 +450,8 @@
       "status": "ok",
       "safe_to_merge": true,
       "pii_unclassified_count": 0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-24",
@@ -442,7 +465,8 @@
       "status": "ok",
       "pii_map_complete": true,
       "pii_unclassified_count": 0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-25",
@@ -455,7 +479,8 @@
     "expected": {
       "status": "incompativel",
       "up_down_validated": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-26",
@@ -470,7 +495,8 @@
       "status": "ok",
       "up_down_validated": true,
       "safe_to_merge": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-27",
@@ -510,7 +536,8 @@
       "status": "ok",
       "pii_unclassified_count": 0,
       "pii_map_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-28",
@@ -534,7 +561,8 @@
       "status": "pii_nao_classificada",
       "pii_unclassified_count": 2,
       "safe_to_merge": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-29",
@@ -551,7 +579,8 @@
     "expected": {
       "status": "sem_rollback",
       "safe_to_merge": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-30",
@@ -566,7 +595,8 @@
       "status": "ok",
       "compatible": true,
       "safe_to_merge": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-31",
@@ -578,7 +608,8 @@
     "expected": {
       "status": "integridade_violada",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-db-schema-32",
@@ -591,6 +622,7 @@
     "expected": {
       "status": "ok",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   }
 ]

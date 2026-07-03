@@ -30,7 +30,8 @@
       "recommended_bump": "patch",
       "compatible": true,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-02",
@@ -69,7 +70,8 @@
       "recommended_bump": "major",
       "compatible": false,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-03",
@@ -108,7 +110,8 @@
       "recommended_bump": "minor",
       "compatible": true,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-04",
@@ -143,7 +146,8 @@
       "recommended_bump": "major",
       "compatible": false,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-05",
@@ -178,7 +182,8 @@
       "recommended_bump": "minor",
       "compatible": true,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-06",
@@ -211,7 +216,8 @@
       "recommended_bump": "major",
       "compatible": false,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-07",
@@ -244,7 +250,8 @@
       "recommended_bump": "major",
       "compatible": false,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-08",
@@ -285,7 +292,8 @@
       "recommended_bump": "major",
       "compatible": false,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-09",
@@ -330,7 +338,8 @@
       "recommended_bump": "patch",
       "compatible": true,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-10",
@@ -375,7 +384,8 @@
       "recommended_bump": "minor",
       "compatible": true,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-11",
@@ -408,7 +418,8 @@
       "recommended_bump": "patch",
       "compatible": true,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-12",
@@ -453,7 +464,8 @@
       "recommended_bump": "major",
       "compatible": false,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-13",
@@ -472,7 +484,8 @@
       "recommended_bump": "patch",
       "compatible": true,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-14",
@@ -498,7 +511,8 @@
       "recommended_bump": "minor",
       "compatible": true,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-15",
@@ -524,7 +538,8 @@
       "recommended_bump": "major",
       "compatible": false,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-16",
@@ -560,7 +575,8 @@
       "recommended_bump": "major",
       "compatible": false,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-17",
@@ -597,7 +613,8 @@
       "recommended_bump": "major",
       "compatible": false,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-18",
@@ -630,7 +647,8 @@
       "recommended_bump": "major",
       "compatible": false,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-19",
@@ -669,7 +687,8 @@
       "recommended_bump": "minor",
       "compatible": true,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-20",
@@ -726,7 +745,8 @@
       "recommended_bump": "major",
       "compatible": false,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-21",
@@ -763,7 +783,8 @@
       "recommended_bump": "patch",
       "compatible": true,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-22",
@@ -816,7 +837,8 @@
       "recommended_bump": "minor",
       "compatible": true,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-23",
@@ -863,7 +885,8 @@
       "recommended_bump": "major",
       "compatible": false,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-24",
@@ -902,7 +925,8 @@
       "recommended_bump": "minor",
       "compatible": true,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-25",
@@ -935,7 +959,8 @@
       "recommended_bump": "patch",
       "compatible": true,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-26",
@@ -988,7 +1013,8 @@
       "recommended_bump": "major",
       "compatible": false,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-27",
@@ -1033,7 +1059,8 @@
       "recommended_bump": "major",
       "compatible": false,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-28",
@@ -1068,7 +1095,8 @@
       "recommended_bump": "minor",
       "compatible": true,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-29",
@@ -1121,7 +1149,8 @@
       "recommended_bump": "minor",
       "compatible": true,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-api-contract-30",
@@ -1166,6 +1195,7 @@
       "recommended_bump": "major",
       "compatible": false,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   }
 ]

@@ -134,10 +134,15 @@ class GoogleProvider(LLMProvider):
 
     def complete(self, prompt: str, **kwargs) -> str:
         from google.genai import types
-        cfg = types.GenerateContentConfig(
+        cfg_kwargs = dict(
             max_output_tokens=kwargs.get("max_tokens", 512),
             thinking_config=types.ThinkingConfig(thinking_budget=0),
         )
+        # temperature=0.0 é opt-in do caller (ex.: gerador red→green, que quer variância
+        # mínima entre noites p/ o painel ser comparável); ausente = default do modelo.
+        if kwargs.get("temperature") is not None:
+            cfg_kwargs["temperature"] = kwargs["temperature"]
+        cfg = types.GenerateContentConfig(**cfg_kwargs)
 
         def _call():
             r = self._client.models.generate_content(model=self.model, contents=prompt, config=cfg)

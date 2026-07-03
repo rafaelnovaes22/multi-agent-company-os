@@ -67,7 +67,7 @@ def _extract_files(text: str):
 
 
 def _prompt(request: str, seed: dict, attempt: int, feedback: str | None,
-            untouchable: list[str] | None = None) -> str:
+            untouchable: list[str] | None = None, selftest_hint: str | None = None) -> str:
     """Monta o prompt do gerador. SÓ pedido + semente + feedback da execução anterior —
     nada do oráculo (bug_markers/held-out) entra aqui. `untouchable` são os paths
     protegidos que EXISTEM na semente (visíveis por definição): nomeá-los é o que um
@@ -81,6 +81,10 @@ def _prompt(request: str, seed: dict, attempt: int, feedback: str | None,
     ]
     if untouchable:
         parts.append("Arquivos que você NÃO pode incluir/modificar: " + ", ".join(untouchable) + ".")
+    if selftest_hint:
+        parts.append(f"Inclua também um arquivo de teste SEU (ex.: \"{selftest_hint}\") derivado do "
+                     "pedido/contrato, cobrindo os comportamentos exigidos: ele roda no seu loop de "
+                     "verificação, mas NÃO fará parte da entrega.")
     parts += [
         "",
         f"## Pedido\n{request}",
@@ -111,10 +115,13 @@ def generate_red_green(request: str, seed: dict, oracle: dict, llm, executor,
     test_cmd = oracle.get("test_cmd") or "pytest -q"
     runtime = oracle.get("runtime") or "python"
     visible_tests = _has_visible_tests(seed, runtime)
+    exec_avail = executor is not None and getattr(executor, "available", False)
     # Loop EXECUTÁVEL exige executor real E teste visível na semente; sem teste visível
-    # (held-out é oculto por design) o feedback vem da SONDA ESTÁTICA: só o NOME do
-    # critério que falhou (first_fail) — nunca os markers/conteúdo do oráculo.
-    can_loop = executor is not None and getattr(executor, "available", False) and visible_tests
+    # (held-out é oculto por design) o agente escreve os PRÓPRIOS testes a partir do
+    # contrato visível (SELF-TEST: instrumento de iteração, jamais entregável nem prova)
+    # e, na falta deles, o feedback vem da SONDA ESTÁTICA: só o NOME do critério que
+    # falhou (first_fail) — nunca os markers/conteúdo do oráculo.
+    can_loop = exec_avail and visible_tests
 
     history: list[dict] = []
     artifact_files: dict | None = None
@@ -122,8 +129,14 @@ def generate_red_green(request: str, seed: dict, oracle: dict, llm, executor,
     loop_green = False
 
     untouchable = sorted((protected_paths | heldout_paths) & set(seed))
+    # sem teste visível, o agente é instruído a escrever o próprio teste (nome no padrão
+    # de descoberta do runner) — instrumento de loop, removido da entrega antes do veredito.
+    selftest_hint = None
+    if exec_avail and not visible_tests:
+        selftest_hint = {"python": "test_selfcheck.py", "node": "selfcheck.test.ts"}.get(runtime)
     for attempt in range(1, max_iters + 1):
-        text = llm.complete(_prompt(request, seed, attempt, feedback, untouchable), max_tokens=4096)
+        text = llm.complete(_prompt(request, seed, attempt, feedback, untouchable, selftest_hint),
+                            max_tokens=4096)
         files = _extract_files(text)
         if files is None:
             history.append({"attempt": attempt, "parsed": False, "tests_pass": None})
@@ -133,6 +146,11 @@ def generate_red_green(request: str, seed: dict, oracle: dict, llm, executor,
         dropped = sorted(p for p in files if p in heldout_paths)
         for p in dropped:
             files.pop(p)   # autor != provador: o agente não escreve o próprio critério
+        # SELF-TESTS: todo arquivo de teste autorado pelo agente (não existe na semente)
+        # roda no loop como instrumento de iteração, mas NUNCA integra a entrega — teste
+        # de agente não é prova (a prova é o held-out, do caso).
+        selftests = {p: files.pop(p) for p in list(files)
+                     if p not in seed and _TEST_PATH_RE.search(p)}
         artifact_files = files
         if not can_loop:
             if visible_tests:
@@ -146,20 +164,47 @@ def generate_red_green(request: str, seed: dict, oracle: dict, llm, executor,
             # continua decidindo `delivered` na verificação final do caller.
             from .verification import verify_code
             probe = verify_code({"files": files}, seed, oracle, executor=None)
-            history.append({"attempt": attempt, "parsed": True, "tests_pass": None,
+            if not probe["static_ok"]:
+                history.append({"attempt": attempt, "parsed": True, "tests_pass": None,
+                                "dropped_heldout_paths": dropped, "static_probe": True,
+                                "static_ok": False, "first_fail": probe["first_fail"]})
+                detail = ""
+                if probe["first_fail"] == "protected_unmodified":
+                    offending = sorted(p for p in files if p in protected_paths)
+                    detail = f" (você incluiu arquivo protegido: {', '.join(offending)} — remova-o do JSON)"
+                feedback = (f"verificação estática reprovou no critério '{probe['first_fail']}'{detail} — "
+                            "revise o patch (não altere arquivos protegidos/de teste) e reenvie o JSON")
+                continue
+            if not (exec_avail and selftests):
+                history.append({"attempt": attempt, "parsed": True, "tests_pass": None,
+                                "dropped_heldout_paths": dropped, "static_probe": True,
+                                "static_ok": True, "first_fail": None})
+                break   # estático limpo e sem self-test executável: não há mais o que iterar
+            # roda os SELF-TESTS do agente (semente + patch + testes dele, protegidos na
+            # versão da semente). Green aqui é autoconsistência, não prova — delivered
+            # continua sendo decidido pelo held-out na verificação final.
+            merged = dict(seed)
+            merged.update(files)
+            merged.update(selftests)
+            for p in protected_paths & seed.keys():
+                merged[p] = seed[p]
+            detail = executor.run_tests_detail(merged, test_cmd=test_cmd, runtime=runtime)
+            verdict = detail.get("passed")
+            history.append({"attempt": attempt, "parsed": True, "tests_pass": verdict,
                             "dropped_heldout_paths": dropped, "static_probe": True,
-                            "static_ok": probe["static_ok"], "first_fail": probe["first_fail"]})
-            if probe["static_ok"]:
-                break   # estático limpo: sem teste visível não há mais o que iterar
-            detail = ""
-            if probe["first_fail"] == "protected_unmodified":
-                offending = sorted(p for p in files if p in protected_paths)
-                detail = f" (você incluiu arquivo protegido: {', '.join(offending)} — remova-o do JSON)"
-            feedback = (f"verificação estática reprovou no critério '{probe['first_fail']}'{detail} — "
-                        "revise o patch (não altere arquivos protegidos/de teste) e reenvie o JSON")
+                            "static_ok": True, "first_fail": None,
+                            "selftest_paths": sorted(selftests)})
+            if verdict is True:
+                loop_green = True
+                break
+            if verdict is None:
+                break   # erro de infra: iterar às cegas não é sinal, é ruído
+            feedback = ("seus PRÓPRIOS testes falharam:\n"
+                        + (detail.get("output") or "(sem saída capturada)"))
             continue
         merged = dict(seed)
         merged.update(files)
+        merged.update(selftests)
         # arquivos PROTEGIDOS rodam SEMPRE na versão da semente (mesma disciplina da
         # injeção de held-out no verify_code): green obtido reescrevendo o teste-alvo é
         # green vazio — o loop não pode aceitá-lo nem deixar o agente "testar" a burla.

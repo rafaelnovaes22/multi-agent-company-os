@@ -83,9 +83,11 @@ def _prompt(request: str, seed: dict, attempt: int, feedback: str | None,
         parts.append("Arquivos que você NÃO pode incluir/modificar: " + ", ".join(untouchable) + ".")
     if selftest_hint:
         parts.append(f"Inclua também um arquivo de teste SEU (ex.: \"{selftest_hint}\") derivado do "
-                     "pedido/contrato, cobrindo os comportamentos exigidos: ele roda no seu loop de "
-                     "verificação, mas NÃO fará parte da entrega. O teste NÃO substitui os critérios "
-                     "de aceite do pedido: trechos exatos continuam obrigatórios LITERALMENTE no código.")
+                     "pedido/contrato, cobrindo os comportamentos exigidos — INCLUSIVE os casos "
+                     "NEGATIVOS que o contrato implica (entrada inválida/forjada rejeitada, estado "
+                     "não mutado, chave removida etc.): ele roda no seu loop de verificação, mas NÃO "
+                     "fará parte da entrega. O teste NÃO substitui os critérios de aceite do pedido: "
+                     "trechos exatos continuam obrigatórios LITERALMENTE no código.")
     parts += [
         "",
         f"## Pedido\n{request}",
@@ -185,6 +187,12 @@ def generate_red_green(request: str, seed: dict, oracle: dict, llm, executor,
                 if probe["first_fail"] == "protected_unmodified":
                     offending = sorted(p for p in files if p in protected_paths)
                     detail = f" (você incluiu arquivo protegido: {', '.join(offending)} — remova-o do JSON)"
+                elif probe["first_fail"] == "bug_addressed":
+                    # sem vazar o oráculo: os trechos exatos JÁ estão no pedido (critérios
+                    # de aceite); o modelo tende a "melhorá-los" — aponte de volta p/ eles.
+                    detail = (" (releia os critérios de aceite do PEDIDO: cada trecho entre "
+                              "crases deve aparecer LITERALMENTE, sem alterar aspas/espaços, "
+                              "no arquivo-alvo, e os marcadores TODO devem ser removidos)")
                 feedback = (f"verificação estática reprovou no critério '{probe['first_fail']}'{detail} — "
                             "revise o patch (não altere arquivos protegidos/de teste) e reenvie o JSON")
                 continue

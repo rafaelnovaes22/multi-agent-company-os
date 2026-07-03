@@ -33,7 +33,9 @@ def _retries() -> int:
 
 def _with_retry(call, *, label: str):
     """Executa `call()` com retry e backoff exponencial em erros transientes. Re-lança a
-    última exceção se todas as tentativas falharem (o caller decide o fallback)."""
+    última exceção se todas as tentativas falharem (o caller decide o fallback).
+    429/RESOURCE_EXHAUSTED é quota, não blip: backoff curto (0.5s) só queima tentativa —
+    usa espera longa (15s·2^i), que é o que dá à janela de quota tempo de renovar."""
     attempts = _retries() + 1
     last = None
     for i in range(attempts):
@@ -42,7 +44,8 @@ def _with_retry(call, *, label: str):
         except Exception as exc:  # noqa: BLE001 — best-effort; transitório vs permanente é opaco no SDK
             last = exc
             if i + 1 < attempts:
-                delay = 0.5 * (2 ** i)
+                quota = "429" in str(exc) or "RESOURCE_EXHAUSTED" in str(exc)
+                delay = (15.0 if quota else 0.5) * (2 ** i)
                 _log.warning("LLM %s falhou (tentativa %d/%d): %s — retry em %.1fs",
                              label, i + 1, attempts, exc, delay)
                 time.sleep(delay)

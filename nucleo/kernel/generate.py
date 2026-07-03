@@ -84,7 +84,8 @@ def _prompt(request: str, seed: dict, attempt: int, feedback: str | None,
     if selftest_hint:
         parts.append(f"Inclua também um arquivo de teste SEU (ex.: \"{selftest_hint}\") derivado do "
                      "pedido/contrato, cobrindo os comportamentos exigidos: ele roda no seu loop de "
-                     "verificação, mas NÃO fará parte da entrega.")
+                     "verificação, mas NÃO fará parte da entrega. O teste NÃO substitui os critérios "
+                     "de aceite do pedido: trechos exatos continuam obrigatórios LITERALMENTE no código.")
     parts += [
         "",
         f"## Pedido\n{request}",
@@ -135,8 +136,10 @@ def generate_red_green(request: str, seed: dict, oracle: dict, llm, executor,
     if exec_avail and not visible_tests:
         selftest_hint = {"python": "test_selfcheck.py", "node": "selfcheck.test.ts"}.get(runtime)
     for attempt in range(1, max_iters + 1):
+        # 16k: patch + self-test num único JSON estoura 4k e truncava a resposta no meio
+        # (falso artifact_parseable=False observado no painel 6, backend-03/04).
         text = llm.complete(_prompt(request, seed, attempt, feedback, untouchable, selftest_hint),
-                            max_tokens=4096)
+                            max_tokens=16384)
         files = _extract_files(text)
         if files is None:
             history.append({"attempt": attempt, "parsed": False, "tests_pass": None})
@@ -151,6 +154,14 @@ def generate_red_green(request: str, seed: dict, oracle: dict, llm, executor,
         # de agente não é prova (a prova é o held-out, do caso).
         selftests = {p: files.pop(p) for p in list(files)
                      if p not in seed and _TEST_PATH_RE.search(p)}
+        if not files:
+            # o agente mandou SÓ teste: sem patch não há entrega — feedback explícito em
+            # vez de morrer adiante num falso artifact_parseable.
+            history.append({"attempt": attempt, "parsed": True, "tests_pass": None,
+                            "only_selftest": True})
+            feedback = ("sua resposta só trouxe arquivo de teste — inclua também os arquivos "
+                        "de código da entrega no mesmo JSON")
+            continue
         artifact_files = files
         if not can_loop:
             if visible_tests:

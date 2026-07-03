@@ -78,8 +78,9 @@ class PrePrGateAuditTest(unittest.TestCase):
         self.assertTrue(any("ratified_by" in v for v in viol))
 
     def test_build_sem_heldout_reprova(self):
+        # natureza build = handler spec_executor (executa artefato); sem held-out reprova.
         cases = [{"id": "b1", "provenance": "catalog", "expected": {"status": "pass"}}]
-        sp = _mk_agent(self.tmp, "g3-build", "build_handler", "G03-engenharia", cases)
+        sp = _mk_agent(self.tmp, "g3-build", "spec_executor", "G03-engenharia", cases)
         viol = pre_pr_gate._audit_agent(sp)
         self.assertTrue(any("held-out" in v for v in viol))
 
@@ -87,7 +88,15 @@ class PrePrGateAuditTest(unittest.TestCase):
         cases = [{"id": "b1", "provenance": "catalog",
                   "oracle": {"heldout_files": {"test_x.py": "assert True"}},
                   "expected": {"status": "pass"}}]
-        sp = _mk_agent(self.tmp, "g3-build-ok", "build_handler", "G03-engenharia", cases)
+        sp = _mk_agent(self.tmp, "g3-build-ok", "spec_executor", "G03-engenharia", cases)
+        self.assertEqual(pre_pr_gate._audit_agent(sp), [])
+
+    def test_decisao_em_guilda_de_engenharia_nao_exige_heldout(self):
+        # a heurística por guilda classificava errado os handlers de DECISÃO da G03:
+        # exigir held-out de quem não produz artefato executável fabrica recompute
+        # forjado. Natureza vem do handler; catalog-only é honesto p/ decisão.
+        cases = [{"id": "d1", "provenance": "catalog", "expected": {"compatible": True}}]
+        sp = _mk_agent(self.tmp, "g3-decisao", "api_contract_diff", "G03-engenharia", cases)
         self.assertEqual(pre_pr_gate._audit_agent(sp), [])
 
 

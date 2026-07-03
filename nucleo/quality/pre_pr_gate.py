@@ -91,10 +91,17 @@ def _agent_dir(spec_path):
 
 
 def _is_held_out_capable(spec, cases):
-    """build/ops/browser/structure: já tem oracle, ou é guilda de engenharia (G03)."""
+    """Natureza build/ops/browser/structure = tem ARTEFATO a executar contra oráculo:
+    casos com `oracle`, ou handler `spec_executor` (o único que executa artefato).
+
+    A heurística antiga ("guilda G03 ⇒ build") classificava errado os 5 handlers de
+    DECISÃO da engenharia (api_contract_diff, schema_change_review, dependency_bump_review,
+    feature_flag_rollout, perf_benchmark_delta): exigir held-out de quem não produz
+    artefato executável só fabricaria recompute forjado (#30 reembalado). A natureza vem
+    do HANDLER; a conversão desses 5 a exec-backed é roadmap (PLANO §4.8), não rótulo."""
     if any(c.get("oracle") for c in cases):
         return True
-    return str(spec.get("guild", "")).upper().startswith("G03")
+    return spec.get("act_handler") == "spec_executor"
 
 
 def _audit_agent(spec_path):

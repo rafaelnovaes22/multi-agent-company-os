@@ -187,6 +187,20 @@ proibindo a tarefa em vez de inventar um recompute auto-referente.
    agente nunca vê); (c) nightly ganha `LLM_PROVIDER=vertex` via WIF (mesmo padrão do
    redteam.yml). *Pronto quando:* existe um `delivered_eligible_rate` GENERATIVO publicado por
    agente, separado do replay de fixtures, e o G7 usa o generativo p/ promover.
+8. **Fila de conversão exec-backed (prova executável por domínio).** Os 5 handlers de
+   DECISÃO da G03 (reclassificados em 2026-07-03: natureza vem do handler, não da guilda —
+   exigir held-out deles fabricaria recompute forjado) têm cada um um oráculo executável
+   NATURAL, a construir um por vez, no padrão dos 5 exec-backed:
+   - `g3-db-schema` → rodar a migration up/down num container SQL (o mais barato: já
+     existe DockerExecutor; runtime novo = imagem postgres/sqlite);
+   - `g3-api-contract` → diff de OpenAPI com ferramenta externa (oasdiff) no container;
+   - `g3-dependency-warden` → fonte EXTERNA de CVE/licença versionada (`source` no caso —
+     vira `independent` legítimo por G-FONTE-EXTERNA, sem executar);
+   - `g3-perf-optimizer` → rodar o benchmark real no container (medição, não fixture);
+   - `g3-feature-flagger` → simulação determinística de rollout (estrutural; candidato
+     mais fraco — pode permanecer catalog).
+   *Pronto quando:* cada agente convertido publica `delivered_eligible_rate` no nightly
+   como os 5 atuais. Ordem sugerida: db-schema → api-contract → dependency-warden.
 
 ## 5. Guardrails anti-Goodhart
 

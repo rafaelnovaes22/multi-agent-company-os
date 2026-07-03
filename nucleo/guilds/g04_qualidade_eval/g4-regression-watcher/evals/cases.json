@@ -312,7 +312,7 @@
       "drift": "OK",
       "regression_confirmed": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "rw-18",

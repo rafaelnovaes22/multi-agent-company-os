@@ -19,7 +19,7 @@
       "recommendation": "go",
       "baseline_gt": 0
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-02",
@@ -35,7 +35,7 @@
     "expected": {
       "recommendation": "no-go"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-03",
@@ -49,7 +49,7 @@
     "expected": {
       "recommendation": "no-go"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-04",
@@ -70,7 +70,7 @@
     "expected": {
       "recommendation": "no-go"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-05",
@@ -91,7 +91,7 @@
     "expected": {
       "recommendation": "no-go"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-06",
@@ -113,7 +113,7 @@
     "expected": {
       "recommendation": "no-go"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-07",
@@ -135,7 +135,7 @@
       "recommendation": "go",
       "baseline_gt": 0
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-08",
@@ -157,7 +157,7 @@
       "recommendation": "go",
       "baseline_gt": 0
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-09",
@@ -179,7 +179,7 @@
     "expected": {
       "recommendation": "no-go"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-10",
@@ -200,7 +200,7 @@
     "expected": {
       "recommendation": "no-go"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-11",
@@ -221,7 +221,7 @@
     "expected": {
       "recommendation": "go"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-12",
@@ -242,7 +242,7 @@
     "expected": {
       "recommendation": "no-go"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-13",
@@ -264,7 +264,7 @@
       "recommendation": "go",
       "baseline_gt": 0
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-14",
@@ -287,7 +287,7 @@
       "recommendation": "go",
       "baseline_gt": 0
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-15",
@@ -308,7 +308,7 @@
     "expected": {
       "recommendation": "no-go"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-16",
@@ -329,7 +329,7 @@
     "expected": {
       "recommendation": "no-go"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-17",
@@ -351,7 +351,7 @@
       "recommendation": "go",
       "baseline_gt": 0
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-18",
@@ -373,7 +373,7 @@
     "expected": {
       "recommendation": "no-go"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-19",
@@ -395,7 +395,7 @@
       "recommendation": "go",
       "baseline_gt": 0
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-20",
@@ -416,7 +416,7 @@
     "expected": {
       "recommendation": "no-go"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-21",
@@ -438,7 +438,7 @@
       "recommendation": "go",
       "baseline_gt": 0
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-22",
@@ -461,7 +461,7 @@
       "recommendation": "go",
       "baseline_gt": 0
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-23",
@@ -483,7 +483,7 @@
       "recommendation": "go",
       "baseline_gt": 0
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-24",
@@ -504,7 +504,7 @@
     "expected": {
       "recommendation": "no-go"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-25",
@@ -525,7 +525,7 @@
     "expected": {
       "recommendation": "no-go"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-26",
@@ -547,7 +547,7 @@
       "recommendation": "go",
       "baseline_gt": 0
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-27",
@@ -569,7 +569,7 @@
     "expected": {
       "recommendation": "no-go"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-28",
@@ -591,7 +591,7 @@
       "recommendation": "go",
       "baseline_gt": 0
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-29",
@@ -613,7 +613,7 @@
       "recommendation": "go",
       "baseline_gt": 0
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "dg-30",
@@ -634,6 +634,6 @@
     "expected": {
       "recommendation": "no-go"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   }
 ]

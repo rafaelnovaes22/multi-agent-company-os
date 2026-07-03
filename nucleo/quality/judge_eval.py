@@ -163,7 +163,15 @@ def _realistic_task(spec: dict):
 
 
 def _targets():
-    """Agentes generativos (spec_driven) — é o conteúdo que o juiz consegue avaliar."""
+    """Agentes generativos (spec_driven) — é o conteúdo que o juiz consegue avaliar.
+
+    DECISÃO (tensão juiz×oráculo, plano §3-Começar-6, 2026-07-03): para `spec_executor`
+    o ORÁCULO EXECUTÁVEL SUBSTITUI o juiz — o veredito deles é `delivered_eligible_rate`
+    do exec_report (replay + GENERATIVO red→green), publicado todo nightly com fail-safe
+    verificado. Não é "métrica melhorou por exclusão da amostra": é troca de instrumento
+    por um mais forte (execução real > opinião de LLM), coerente com AGENTS.md §0.5
+    ("veredito ancorado em execução, jamais em opinião"). O juiz segue sendo o único
+    instrumento dos `spec_driven`, que não têm oráculo executável."""
     out = []
     for f in sorted(glob.glob(os.path.join(ROOT, "nucleo", "guilds", "**", "spec.yaml"), recursive=True)):
         sp = load_spec(os.path.dirname(f))

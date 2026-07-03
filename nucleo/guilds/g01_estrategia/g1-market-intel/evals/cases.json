@@ -16,7 +16,7 @@
     "expected": {
       "passes_hard_filters": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-02",
@@ -34,7 +34,7 @@
     "expected": {
       "passes_hard_filters": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-03",
@@ -50,7 +50,7 @@
     "expected": {
       "passes_hard_filters": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-04",
@@ -68,7 +68,7 @@
     "expected": {
       "passes_hard_filters": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-05",
@@ -86,7 +86,7 @@
     "expected": {
       "passes_hard_filters": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-06",
@@ -104,7 +104,7 @@
     "expected": {
       "passes_hard_filters": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-07",
@@ -120,7 +120,7 @@
     "expected": {
       "passes_hard_filters": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-08",
@@ -138,7 +138,7 @@
     "expected": {
       "passes_hard_filters": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-09",
@@ -156,7 +156,7 @@
     "expected": {
       "passes_hard_filters": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-10",
@@ -174,7 +174,7 @@
     "expected": {
       "passes_hard_filters": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-11",
@@ -192,7 +192,7 @@
     "expected": {
       "passes_hard_filters": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-12",
@@ -208,7 +208,7 @@
     "expected": {
       "passes_hard_filters": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-13",
@@ -226,7 +226,7 @@
     "expected": {
       "passes_hard_filters": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-14",
@@ -244,7 +244,7 @@
     "expected": {
       "passes_hard_filters": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-15",
@@ -262,7 +262,7 @@
     "expected": {
       "passes_hard_filters": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-16",
@@ -280,7 +280,7 @@
     "expected": {
       "passes_hard_filters": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-17",
@@ -298,7 +298,7 @@
     "expected": {
       "passes_hard_filters": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-18",
@@ -316,7 +316,7 @@
     "expected": {
       "passes_hard_filters": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-19",
@@ -332,7 +332,7 @@
     "expected": {
       "passes_hard_filters": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-20",
@@ -350,7 +350,7 @@
     "expected": {
       "passes_hard_filters": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-21",
@@ -368,7 +368,7 @@
     "expected": {
       "passes_hard_filters": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-22",
@@ -386,7 +386,7 @@
     "expected": {
       "passes_hard_filters": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-23",
@@ -404,7 +404,7 @@
     "expected": {
       "passes_hard_filters": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-24",
@@ -422,7 +422,7 @@
     "expected": {
       "passes_hard_filters": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-25",
@@ -438,7 +438,7 @@
     "expected": {
       "passes_hard_filters": false
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-26",
@@ -456,7 +456,7 @@
     "expected": {
       "passes_hard_filters": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-27",
@@ -474,7 +474,7 @@
     "expected": {
       "passes_hard_filters": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-28",
@@ -492,7 +492,7 @@
     "expected": {
       "passes_hard_filters": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-29",
@@ -510,7 +510,7 @@
     "expected": {
       "passes_hard_filters": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "mi-30",
@@ -528,6 +528,6 @@
     "expected": {
       "passes_hard_filters": true
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   }
 ]

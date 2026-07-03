@@ -567,7 +567,7 @@
       "sla_ok": true,
       "sla_verdict": "PASS"
     },
-    "provenance": "independent"
+    "provenance": "catalog"
   },
   {
     "id": "lt-20",

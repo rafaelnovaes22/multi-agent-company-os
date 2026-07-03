@@ -40,13 +40,42 @@ class PrePrGateAuditTest(unittest.TestCase):
         sp = _mk_agent(self.tmp, "g8-calc", "billing_calc", "G08-vendas-receita", cases)
         viol = pre_pr_gate._audit_agent(sp)
         self.assertTrue(any("sem `provenance`" in v for v in viol))
-        self.assertTrue(any("human|independent" in v for v in viol))
 
-    def test_calculo_com_proveniencia_independente_passa(self):
-        cases = [{"id": "c1", "provenance": "human", "expected": {"cost_ratio": 0.2}},
+    def test_calculo_catalog_only_passa_sem_exigir_independent(self):
+        # A exigência de >=1 independent fabricou os 380 do #66-80 (mesmo mecanismo do
+        # guardrail 'não exigir human'): catalog-only é o estado HONESTO de cálculo/decisão
+        # até existir fonte externa real — não reprova.
+        cases = [{"id": "c1", "provenance": "catalog", "expected": {"cost_ratio": 0.2}},
                  {"id": "c2", "provenance": "catalog", "expected": {"cost_ratio": 0.3}}]
         sp = _mk_agent(self.tmp, "g8-calc-ok", "billing_calc", "G08-vendas-receita", cases)
         self.assertEqual(pre_pr_gate._audit_agent(sp), [])
+
+    def test_independent_sem_lastro_reprova(self):
+        # P1c: o carimbo do #66-80 — rótulo `independent` sem source externo nem held-out.
+        cases = [{"id": "c1", "provenance": "independent", "expected": {"cost_ratio": 0.2}}]
+        sp = _mk_agent(self.tmp, "g8-carimbo", "billing_calc", "G08-vendas-receita", cases)
+        viol = pre_pr_gate._audit_agent(sp)
+        self.assertTrue(any("SEM lastro" in v for v in viol))
+
+    def test_independent_com_source_externo_passa(self):
+        cases = [{"id": "c1", "provenance": "independent",
+                  "source": "https://exemplo.gov/tabela-2026#v3",
+                  "expected": {"cost_ratio": 0.2}}]
+        sp = _mk_agent(self.tmp, "g8-fonte", "billing_calc", "G08-vendas-receita", cases)
+        self.assertEqual(pre_pr_gate._audit_agent(sp), [])
+
+    def test_independent_com_heldout_executavel_passa(self):
+        cases = [{"id": "b1", "provenance": "independent",
+                  "oracle": {"heldout_files": {"test_x.py": "assert True"}},
+                  "expected": {"status": "pass"}}]
+        sp = _mk_agent(self.tmp, "g3-exec-ok", "build_handler", "G03-engenharia", cases)
+        self.assertEqual(pre_pr_gate._audit_agent(sp), [])
+
+    def test_human_sem_ratified_by_reprova(self):
+        cases = [{"id": "c1", "provenance": "human", "expected": {"cost_ratio": 0.2}}]
+        sp = _mk_agent(self.tmp, "g8-human-forjado", "billing_calc", "G08-vendas-receita", cases)
+        viol = pre_pr_gate._audit_agent(sp)
+        self.assertTrue(any("ratified_by" in v for v in viol))
 
     def test_build_sem_heldout_reprova(self):
         cases = [{"id": "b1", "provenance": "catalog", "expected": {"status": "pass"}}]

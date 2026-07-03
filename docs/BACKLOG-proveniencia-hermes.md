@@ -1,6 +1,15 @@
 # Backlog do Hermes — proveniência dos eval-cases (burn-down do `pre_pr_gate`)
 
-> **STATUS (2026-06-26): CONGELADO** pelo [PLANO-AJUSTE-ROTA.md](PLANO-AJUSTE-ROTA.md) (§3, "Parar").
+> **STATUS (2026-07-03): RETROFIT EXECUTADO — backlog ENCERRADO.** Os **380** casos
+> `independent` sem lastro (carimbados nos PRs #66-80, **declarados sem-lastro
+> retroativamente** — decisão CEO §6.6) foram rebaixados a `catalog`. O `pre_pr_gate`
+> mudou de desenho: **não exige mais** `>=1 independent|human` p/ cálculo (a exigência era
+> o combustível do carimbo) e passou a **VALIDAR alegações** (P1c: `independent` exige
+> `source` externo OU held-out executável; `human` exige `ratified_by`). Ficam `independent`
+> só os 150 exec-backed (5 agentes com oráculo executável validado por execução real).
+> Este backlog não deve ser reaberto por rótulo: prova nova = fonte externa ou ratificação.
+
+> **STATUS anterior (2026-06-26): CONGELADO** pelo [PLANO-AJUSTE-ROTA.md](PLANO-AJUSTE-ROTA.md) (§3, "Parar").
 > A burn-down de proveniência por **rótulo auto-declarado está SUSPENSA**: `provenance:"independent"`
 > escrito pelo próprio Hermes não é prova (o `pre_pr_gate` só confere a string; um caso com
 > `rice_score=999999` rotulado `independent` passa). NÃO acionar o Hermes para carimbar `provenance`

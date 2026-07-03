@@ -22,7 +22,8 @@
       "blocked": true,
       "delivered_event": "secrets.finding_opened",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-02",
@@ -43,7 +44,8 @@
       "blocked": true,
       "delivered_event": "secrets.finding_opened",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-03",
@@ -71,7 +73,8 @@
       "blocked": false,
       "delivered_event": "secrets.scan_completed",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-04",
@@ -87,7 +90,8 @@
       "blocked": false,
       "delivered_event": "secrets.scan_completed",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-05",
@@ -108,7 +112,8 @@
       "blocked": true,
       "delivered_event": "secrets.finding_opened",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-06",
@@ -129,7 +134,8 @@
       "blocked": true,
       "delivered_event": "secrets.finding_opened",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-07",
@@ -150,7 +156,8 @@
       "blocked": true,
       "delivered_event": "secrets.finding_opened",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-08",
@@ -171,7 +178,8 @@
       "blocked": true,
       "delivered_event": "secrets.finding_opened",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-09",
@@ -191,7 +199,8 @@
       "high_confidence_count": 1,
       "blocked": true,
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-10",
@@ -211,7 +220,8 @@
       "high_confidence_count": 1,
       "blocked": true,
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-11",
@@ -232,7 +242,8 @@
       "blocked": true,
       "delivered_event": "secrets.finding_opened",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-12",
@@ -253,7 +264,8 @@
       "blocked": false,
       "delivered_event": "secrets.scan_completed",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-13",
@@ -274,7 +286,8 @@
       "blocked": false,
       "delivered_event": "secrets.scan_completed",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-14",
@@ -295,7 +308,8 @@
       "blocked": true,
       "delivered_event": "secrets.finding_opened",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-15",
@@ -316,7 +330,8 @@
       "blocked": false,
       "delivered_event": "secrets.scan_completed",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-16",
@@ -337,7 +352,8 @@
       "blocked": false,
       "delivered_event": "secrets.scan_completed",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-17",
@@ -361,7 +377,8 @@
       "blocked": false,
       "delivered_event": "secrets.scan_completed",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-18",
@@ -389,7 +406,8 @@
       "blocked": true,
       "delivered_event": "secrets.finding_opened",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-19",
@@ -412,7 +430,8 @@
       "high_confidence_count": 1,
       "blocked": true,
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-20",
@@ -437,7 +456,8 @@
       "blocked": true,
       "delivered_event": "secrets.finding_opened",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-21",
@@ -462,7 +482,8 @@
       "blocked": true,
       "delivered_event": "secrets.finding_opened",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-22",
@@ -491,7 +512,8 @@
       "blocked": true,
       "delivered_event": "secrets.finding_opened",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-23",
@@ -511,7 +533,8 @@
       "high_confidence_count": 1,
       "blocked": true,
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-24",
@@ -540,7 +563,8 @@
       "blocked": true,
       "delivered_event": "secrets.finding_opened",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-25",
@@ -569,7 +593,8 @@
       "blocked": false,
       "delivered_event": "secrets.scan_completed",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-26",
@@ -590,7 +615,8 @@
       "blocked": false,
       "delivered_event": "secrets.scan_completed",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-27",
@@ -614,7 +640,8 @@
       "high_confidence_count": 1,
       "blocked": true,
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-28",
@@ -635,7 +662,8 @@
       "blocked": true,
       "delivered_event": "secrets.finding_opened",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-29",
@@ -664,7 +692,8 @@
       "blocked": false,
       "delivered_event": "secrets.scan_completed",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-30",
@@ -688,7 +717,8 @@
       "blocked": false,
       "delivered_event": "secrets.scan_completed",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-31",
@@ -709,7 +739,8 @@
       "blocked": true,
       "delivered_event": "secrets.finding_opened",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sc-32",
@@ -730,6 +761,7 @@
       "blocked": true,
       "delivered_event": "secrets.finding_opened",
       "by": "g5-secrets-scanner"
-    }
+    },
+    "provenance": "catalog"
   }
 ]

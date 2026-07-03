@@ -19,7 +19,8 @@
       "demote_mode": true,
       "target_mode": "ASSISTED",
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-02",
@@ -40,7 +41,8 @@
       "drift_count": 1,
       "demote_mode": true,
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-03",
@@ -60,7 +62,8 @@
       "demote_mode": false,
       "target_mode": "AUTONOMOUS",
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-04",
@@ -83,7 +86,8 @@
       "drift_confirmed": true,
       "drift_count": 1,
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-05",
@@ -105,7 +109,8 @@
       "drift_count": 0,
       "target_mode": "AUTONOMOUS",
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-06",
@@ -129,7 +134,8 @@
       "drift_count": 1,
       "demote_mode": true,
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-07",
@@ -152,7 +158,8 @@
       "drift_confirmed": true,
       "drift_count": 1,
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-08",
@@ -172,7 +179,8 @@
       "drifted_dimensions": [],
       "drift_confirmed": false,
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-09",
@@ -195,7 +203,8 @@
       "drift_confirmed": true,
       "drift_count": 1,
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-10",
@@ -218,7 +227,8 @@
       "drift_confirmed": true,
       "drift_count": 1,
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-11",
@@ -238,7 +248,8 @@
       "drifted_dimensions": [],
       "drift_confirmed": false,
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-12",
@@ -258,7 +269,8 @@
       "drifted_dimensions": [],
       "drift_confirmed": false,
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-13",
@@ -279,7 +291,8 @@
       "drift_confirmed": false,
       "target_mode": "AUTONOMOUS",
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-14",
@@ -299,7 +312,8 @@
       "drifted_dimensions": [],
       "drift_confirmed": false,
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-15",
@@ -321,7 +335,8 @@
       "drift_count": 2,
       "demote_mode": true,
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-16",
@@ -346,7 +361,8 @@
       "demote_mode": true,
       "target_mode": "ASSISTED",
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-17",
@@ -367,7 +383,8 @@
       "drift_confirmed": true,
       "drift_count": 2,
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-18",
@@ -381,7 +398,8 @@
       "demote_mode": false,
       "target_mode": "AUTONOMOUS",
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-19",
@@ -401,7 +419,8 @@
       "drift_count": 1,
       "drift_confirmed": true,
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-20",
@@ -425,7 +444,8 @@
       "drift_count": 1,
       "demote_mode": true,
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-21",
@@ -443,7 +463,8 @@
       "drift_confirmed": false,
       "target_mode": "AUTONOMOUS",
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-22",
@@ -466,7 +487,8 @@
       "drift_count": 1,
       "demote_mode": true,
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-23",
@@ -488,7 +510,8 @@
       "drift_confirmed": true,
       "target_mode": "ASSISTED",
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-24",
@@ -509,7 +532,8 @@
       "drift_count": 2,
       "demote_mode": true,
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-25",
@@ -532,7 +556,8 @@
       ],
       "drift_count": 1,
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-26",
@@ -550,7 +575,8 @@
       "drift_confirmed": false,
       "demote_mode": false,
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-27",
@@ -575,7 +601,8 @@
       ],
       "drift_count": 1,
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-28",
@@ -599,7 +626,8 @@
       "demote_mode": true,
       "target_mode": "ASSISTED",
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-29",
@@ -620,7 +648,8 @@
       "drift_count": 2,
       "drift_confirmed": true,
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-30",
@@ -643,7 +672,8 @@
       ],
       "drift_count": 1,
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-31",
@@ -665,7 +695,8 @@
       "drift_count": 3,
       "demote_mode": true,
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dr-32",
@@ -690,6 +721,7 @@
       "drift_confirmed": true,
       "demote_mode": true,
       "by": "g6-drift-detector"
-    }
+    },
+    "provenance": "catalog"
   }
 ]

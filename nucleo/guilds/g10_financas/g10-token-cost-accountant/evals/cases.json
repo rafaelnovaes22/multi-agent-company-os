@@ -30,7 +30,8 @@
       "over_budget_guilds": [],
       "throttle_required": false,
       "allocation_complete": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-02",
@@ -63,7 +64,8 @@
       "over_budget_guilds": [],
       "throttle_required": false,
       "allocation_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-03",
@@ -96,7 +98,8 @@
       "over_budget_guilds": [],
       "throttle_required": false,
       "allocation_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-04",
@@ -131,7 +134,8 @@
       ],
       "throttle_required": true,
       "allocation_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-05",
@@ -164,7 +168,8 @@
       "over_budget_guilds": [],
       "throttle_required": false,
       "allocation_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-06",
@@ -197,7 +202,8 @@
       "over_budget_guilds": [],
       "throttle_required": false,
       "allocation_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-07",
@@ -230,7 +236,8 @@
       "over_budget_guilds": [],
       "throttle_required": false,
       "allocation_complete": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-08",
@@ -265,7 +272,8 @@
       ],
       "throttle_required": true,
       "allocation_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-09",
@@ -298,7 +306,8 @@
       "over_budget_guilds": [],
       "throttle_required": false,
       "allocation_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-10",
@@ -331,7 +340,8 @@
       "over_budget_guilds": [],
       "throttle_required": false,
       "allocation_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-11",
@@ -364,7 +374,8 @@
       "over_budget_guilds": [],
       "throttle_required": false,
       "allocation_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-12",
@@ -399,7 +410,8 @@
       ],
       "throttle_required": true,
       "allocation_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-13",
@@ -432,7 +444,8 @@
       "over_budget_guilds": [],
       "throttle_required": false,
       "allocation_complete": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-14",
@@ -465,7 +478,8 @@
       "over_budget_guilds": [],
       "throttle_required": false,
       "allocation_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-15",
@@ -498,7 +512,8 @@
       "over_budget_guilds": [],
       "throttle_required": false,
       "allocation_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-16",
@@ -533,7 +548,8 @@
       ],
       "throttle_required": true,
       "allocation_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-17",
@@ -568,7 +584,8 @@
       ],
       "throttle_required": true,
       "allocation_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-18",
@@ -603,7 +620,8 @@
       ],
       "throttle_required": true,
       "allocation_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-19",
@@ -638,7 +656,8 @@
       ],
       "throttle_required": true,
       "allocation_complete": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-20",
@@ -674,7 +693,8 @@
       ],
       "throttle_required": true,
       "allocation_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-21",
@@ -709,7 +729,8 @@
       ],
       "throttle_required": true,
       "allocation_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-22",
@@ -744,7 +765,8 @@
       ],
       "throttle_required": true,
       "allocation_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-23",
@@ -779,7 +801,8 @@
       ],
       "throttle_required": true,
       "allocation_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-24",
@@ -815,7 +838,8 @@
       ],
       "throttle_required": true,
       "allocation_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-25",
@@ -850,7 +874,8 @@
       ],
       "throttle_required": true,
       "allocation_complete": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-26",
@@ -885,7 +910,8 @@
       ],
       "throttle_required": true,
       "allocation_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-27",
@@ -920,7 +946,8 @@
       ],
       "throttle_required": true,
       "allocation_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-28",
@@ -956,7 +983,8 @@
       ],
       "throttle_required": true,
       "allocation_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-29",
@@ -991,7 +1019,8 @@
       ],
       "throttle_required": true,
       "allocation_complete": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-token-cost-accountant-30",
@@ -1026,6 +1055,7 @@
       ],
       "throttle_required": true,
       "allocation_complete": true
-    }
+    },
+    "provenance": "catalog"
   }
 ]

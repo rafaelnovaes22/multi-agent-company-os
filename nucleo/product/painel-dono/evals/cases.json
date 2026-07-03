@@ -11,7 +11,8 @@
     },
     "expected": {
       "semaforo": "vermelho"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-02",
@@ -25,7 +26,8 @@
     },
     "expected": {
       "semaforo": "amarelo"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-03",
@@ -41,7 +43,8 @@
     },
     "expected": {
       "semaforo": "verde"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-04",
@@ -58,7 +61,8 @@
     "expected": {
       "semaforo": "amarelo",
       "alert_count": 2
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-05",
@@ -75,7 +79,8 @@
     "expected": {
       "semaforo": "vermelho",
       "alert_count": 4
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-06",
@@ -92,7 +97,8 @@
     "expected": {
       "semaforo": "vermelho",
       "alert_count": 2
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-07",
@@ -109,7 +115,8 @@
     "expected": {
       "semaforo": "amarelo",
       "alert_count": 4
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-08",
@@ -126,7 +133,8 @@
     "expected": {
       "semaforo": "amarelo",
       "alert_count": 2
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-09",
@@ -143,7 +151,8 @@
     "expected": {
       "semaforo": "amarelo",
       "alert_count": 1
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-10",
@@ -160,7 +169,8 @@
     "expected": {
       "semaforo": "vermelho",
       "alert_count": 3
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-11",
@@ -177,7 +187,8 @@
     "expected": {
       "semaforo": "vermelho",
       "alert_count": 5
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-12",
@@ -194,7 +205,8 @@
     "expected": {
       "semaforo": "amarelo",
       "alert_count": 1
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-13",
@@ -211,7 +223,8 @@
     "expected": {
       "semaforo": "amarelo",
       "alert_count": 3
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-14",
@@ -228,7 +241,8 @@
     "expected": {
       "semaforo": "amarelo",
       "alert_count": 2
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-15",
@@ -245,7 +259,8 @@
     "expected": {
       "semaforo": "vermelho",
       "alert_count": 2
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-16",
@@ -262,7 +277,8 @@
     "expected": {
       "semaforo": "vermelho",
       "alert_count": 4
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-17",
@@ -279,7 +295,8 @@
     "expected": {
       "semaforo": "amarelo",
       "alert_count": 4
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-18",
@@ -296,7 +313,8 @@
     "expected": {
       "semaforo": "verde",
       "alert_count": 0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-19",
@@ -313,7 +331,8 @@
     "expected": {
       "semaforo": "amarelo",
       "alert_count": 3
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-20",
@@ -330,7 +349,8 @@
     "expected": {
       "semaforo": "vermelho",
       "alert_count": 3
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-21",
@@ -347,7 +367,8 @@
     "expected": {
       "semaforo": "vermelho",
       "alert_count": 3
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-22",
@@ -364,7 +385,8 @@
     "expected": {
       "semaforo": "amarelo",
       "alert_count": 3
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-23",
@@ -381,7 +403,8 @@
     "expected": {
       "semaforo": "amarelo",
       "alert_count": 3
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-24",
@@ -398,7 +421,8 @@
     "expected": {
       "semaforo": "verde",
       "alert_count": 0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-25",
@@ -415,7 +439,8 @@
     "expected": {
       "semaforo": "vermelho",
       "alert_count": 4
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-26",
@@ -432,7 +457,8 @@
     "expected": {
       "semaforo": "vermelho",
       "alert_count": 4
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-27",
@@ -449,7 +475,8 @@
     "expected": {
       "semaforo": "amarelo",
       "alert_count": 2
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-28",
@@ -466,7 +493,8 @@
     "expected": {
       "semaforo": "amarelo",
       "alert_count": 2
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-29",
@@ -483,7 +511,8 @@
     "expected": {
       "semaforo": "amarelo",
       "alert_count": 3
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "pd-30",
@@ -500,6 +529,7 @@
     "expected": {
       "semaforo": "vermelho",
       "alert_count": 1
-    }
+    },
+    "provenance": "catalog"
   }
 ]

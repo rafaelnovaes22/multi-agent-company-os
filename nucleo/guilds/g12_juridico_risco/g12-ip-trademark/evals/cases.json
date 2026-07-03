@@ -27,7 +27,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-02",
@@ -57,7 +58,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-03",
@@ -87,7 +89,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-04",
@@ -117,7 +120,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-05",
@@ -147,7 +151,8 @@
       "capabilities_any": [
         "legal_review"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-06",
@@ -177,7 +182,8 @@
       "capabilities_any": [
         "risk_register"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-07",
@@ -207,7 +213,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-08",
@@ -237,7 +244,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-09",
@@ -267,7 +275,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-10",
@@ -297,7 +306,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-11",
@@ -327,7 +337,8 @@
       "capabilities_any": [
         "legal_review"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-12",
@@ -357,7 +368,8 @@
       "capabilities_any": [
         "risk_register"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-13",
@@ -387,7 +399,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-14",
@@ -417,7 +430,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-15",
@@ -447,7 +461,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-16",
@@ -477,7 +492,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-17",
@@ -507,7 +523,8 @@
       "capabilities_any": [
         "legal_review"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-18",
@@ -537,7 +554,8 @@
       "capabilities_any": [
         "risk_register"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-19",
@@ -567,7 +585,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-20",
@@ -597,7 +616,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-21",
@@ -627,7 +647,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-22",
@@ -657,7 +678,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-23",
@@ -687,7 +709,8 @@
       "capabilities_any": [
         "legal_review"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-24",
@@ -717,7 +740,8 @@
       "capabilities_any": [
         "risk_register"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-25",
@@ -747,7 +771,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-26",
@@ -777,7 +802,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-27",
@@ -807,7 +833,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-28",
@@ -837,7 +864,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-29",
@@ -867,7 +895,8 @@
       "capabilities_any": [
         "legal_review"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-ip-trademark-30",
@@ -897,6 +926,7 @@
       "capabilities_any": [
         "risk_register"
       ]
-    }
+    },
+    "provenance": "catalog"
   }
 ]

@@ -22,7 +22,8 @@
       "alert_board": true,
       "blocked": false,
       "delivered_event": "risk.registered && risk.owner_assigned && risk.scored"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-02",
@@ -43,7 +44,8 @@
       "has_owner": false,
       "alert_board": false,
       "escalate": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-03",
@@ -66,7 +68,8 @@
       "has_owner": true,
       "alert_board": false,
       "delivered_event": "risk.registered && risk.owner_assigned && risk.scored"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-04",
@@ -85,7 +88,8 @@
       "blocked": true,
       "escalate": true,
       "delivered_event": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-05",
@@ -105,7 +109,8 @@
       "escalate": true,
       "has_owner": true,
       "delivered_event": "risk.registered && risk.owner_assigned && risk.scored"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-06",
@@ -122,7 +127,8 @@
       "heatmap_cell": "P2I4",
       "alert_board": false,
       "escalate": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-07",
@@ -138,7 +144,8 @@
       "level": "verde",
       "heatmap_cell": "P1I5",
       "escalate": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-08",
@@ -153,7 +160,8 @@
       "level": "verde",
       "escalate": false,
       "alert_board": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-09",
@@ -172,7 +180,8 @@
       "escalate": true,
       "has_owner": true,
       "delivered_event": "risk.registered && risk.owner_assigned && risk.scored"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-10",
@@ -189,7 +198,8 @@
       "heatmap_cell": "P4I3",
       "alert_board": false,
       "escalate": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-11",
@@ -205,7 +215,8 @@
       "level": "vermelho",
       "heatmap_cell": "P5I3",
       "escalate": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-12",
@@ -223,7 +234,8 @@
       "heatmap_cell": "P4I4",
       "blocked": false,
       "delivered_event": "risk.registered && risk.owner_assigned && risk.scored"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-13",
@@ -239,7 +251,8 @@
       "weighted_score": 8.0,
       "level": "amarelo",
       "category": "operacional"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-14",
@@ -255,7 +268,8 @@
       "weighted_score": 9.0,
       "level": "amarelo",
       "category": "financeiro"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-15",
@@ -271,7 +285,8 @@
       "weighted_score": 10.0,
       "level": "amarelo",
       "category": "regulatorio"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-16",
@@ -287,7 +302,8 @@
       "weighted_score": 9.0,
       "level": "amarelo",
       "category": "ia"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-17",
@@ -303,7 +319,8 @@
       "weighted_score": 8.0,
       "level": "amarelo",
       "category": "seguranca"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-18",
@@ -318,7 +335,8 @@
       "weighted_score": 4.0,
       "level": "verde",
       "category": "legal"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-19",
@@ -333,7 +351,8 @@
       "score": 10,
       "weighted_score": 8.0,
       "level": "amarelo"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-20",
@@ -348,7 +367,8 @@
       "weighted_score": 8.0,
       "category": "operacional",
       "level": "amarelo"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-21",
@@ -363,7 +383,8 @@
       "has_owner": true,
       "delivered_event": null,
       "level": "verde"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-22",
@@ -378,7 +399,8 @@
       "has_owner": false,
       "delivered_event": null,
       "level": "verde"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-23",
@@ -394,7 +416,8 @@
       "has_owner": true,
       "level": "verde",
       "delivered_event": "risk.registered && risk.owner_assigned && risk.scored"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-24",
@@ -406,7 +429,8 @@
       "score": 0,
       "has_owner": false,
       "delivered_event": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-25",
@@ -422,7 +446,8 @@
       "has_mitigation": false,
       "score": 9,
       "level": "amarelo"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-26",
@@ -438,7 +463,8 @@
       "has_owner": true,
       "has_mitigation": true,
       "delivered_event": "risk.registered && risk.owner_assigned && risk.scored"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-27",
@@ -454,7 +480,8 @@
       "level": "vermelho",
       "escalate": true,
       "alert_board": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-28",
@@ -470,7 +497,8 @@
       "level": "vermelho",
       "escalate": true,
       "alert_board": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-29",
@@ -486,7 +514,8 @@
       "level": "verde",
       "escalate": false,
       "alert_board": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-30",
@@ -503,7 +532,8 @@
       "level": "verde",
       "heatmap_cell": "P1I1",
       "escalate": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-31",
@@ -520,7 +550,8 @@
       "blocked": true,
       "has_owner": false,
       "delivered_event": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rr-32",
@@ -541,6 +572,7 @@
       "escalate": true,
       "blocked": false,
       "delivered_event": "risk.registered && risk.owner_assigned && risk.scored"
-    }
+    },
+    "provenance": "catalog"
   }
 ]

@@ -27,7 +27,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-02",
@@ -57,7 +58,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-03",
@@ -87,7 +89,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-04",
@@ -117,7 +120,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-05",
@@ -147,7 +151,8 @@
       "capabilities_any": [
         "discovery_traceability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-06",
@@ -177,7 +182,8 @@
       "capabilities_any": [
         "lovability_gate"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-07",
@@ -207,7 +213,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-08",
@@ -237,7 +244,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-09",
@@ -267,7 +275,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-10",
@@ -297,7 +306,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-11",
@@ -327,7 +337,8 @@
       "capabilities_any": [
         "discovery_traceability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-12",
@@ -357,7 +368,8 @@
       "capabilities_any": [
         "lovability_gate"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-13",
@@ -387,7 +399,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-14",
@@ -417,7 +430,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-15",
@@ -447,7 +461,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-16",
@@ -477,7 +492,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-17",
@@ -507,7 +523,8 @@
       "capabilities_any": [
         "discovery_traceability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-18",
@@ -537,7 +554,8 @@
       "capabilities_any": [
         "lovability_gate"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-19",
@@ -567,7 +585,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-20",
@@ -597,7 +616,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-21",
@@ -627,7 +647,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-22",
@@ -657,7 +678,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-23",
@@ -687,7 +709,8 @@
       "capabilities_any": [
         "discovery_traceability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-24",
@@ -717,7 +740,8 @@
       "capabilities_any": [
         "lovability_gate"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-25",
@@ -747,7 +771,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-26",
@@ -777,7 +802,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-27",
@@ -807,7 +833,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-28",
@@ -837,7 +864,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-29",
@@ -867,7 +895,8 @@
       "capabilities_any": [
         "discovery_traceability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g2-user-interview-synth-30",
@@ -897,6 +926,7 @@
       "capabilities_any": [
         "lovability_gate"
       ]
-    }
+    },
+    "provenance": "catalog"
   }
 ]

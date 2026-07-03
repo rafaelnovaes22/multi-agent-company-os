@@ -14,7 +14,8 @@
       "promoted": true,
       "gates_passed": true,
       "blocked": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-02",
@@ -31,7 +32,8 @@
       "promoted": false,
       "gates_passed": false,
       "reason": "janela SHADOW insuficiente"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-03",
@@ -48,7 +50,8 @@
       "promoted": false,
       "gates_passed": false,
       "reason": "pass@k abaixo do limiar"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-04",
@@ -65,7 +68,8 @@
       "promoted": false,
       "gates_passed": false,
       "reason": "guardian pendente"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-05",
@@ -85,7 +89,8 @@
       "gates_passed": false,
       "cross_approval_ok": false,
       "reason": "drift"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-06",
@@ -102,7 +107,8 @@
       "decision": "rebaixar",
       "promoted": false,
       "reason": "drift"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-07",
@@ -119,7 +125,8 @@
       "decision": "promover",
       "promoted": true,
       "gates_passed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-08",
@@ -140,7 +147,8 @@
       "gates_passed": true,
       "cross_approval_ok": false,
       "reason": "cross-approval DRI!=founder pendente"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-09",
@@ -159,7 +167,8 @@
       "decision": "aguardar_cross_approval",
       "promoted": false,
       "cross_approval_ok": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-10",
@@ -179,7 +188,8 @@
       "promoted": true,
       "cross_approval_ok": true,
       "gates_passed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-11",
@@ -195,7 +205,8 @@
       "decision": "promover",
       "promoted": true,
       "gates_passed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-12",
@@ -211,7 +222,8 @@
       "decision": "bloquear",
       "gates_passed": false,
       "reason": "pass@k abaixo do limiar"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-13",
@@ -227,7 +239,8 @@
       "decision": "promover",
       "gates_passed": true,
       "promoted": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-14",
@@ -243,7 +256,8 @@
       "decision": "bloquear",
       "gates_passed": false,
       "reason": "janela SHADOW insuficiente"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-15",
@@ -259,7 +273,8 @@
       "decision": "bloquear",
       "gates_passed": false,
       "reason": "pass@k abaixo do limiar"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-16",
@@ -275,7 +290,8 @@
       "decision": "bloquear",
       "gates_passed": false,
       "reason": "janela SHADOW insuficiente"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-17",
@@ -292,7 +308,8 @@
       "decision": "promover",
       "cross_approval_ok": true,
       "promoted": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-18",
@@ -311,7 +328,8 @@
       "decision": "aguardar_cross_approval",
       "cross_approval_ok": false,
       "promoted": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-19",
@@ -329,7 +347,8 @@
     "expected": {
       "decision": "aguardar_cross_approval",
       "cross_approval_ok": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-20",
@@ -346,7 +365,8 @@
       "decision": "rebaixar",
       "blocked": true,
       "reason": "drift"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-21",
@@ -362,7 +382,8 @@
       "decision": "bloquear",
       "gates_passed": false,
       "reason": "guardian pendente"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-22",
@@ -379,7 +400,8 @@
       "decision": "promover",
       "promoted": true,
       "gates_passed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-23",
@@ -398,7 +420,8 @@
       "decision": "bloquear",
       "gates_passed": false,
       "reason": "pass@k abaixo do limiar"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-24",
@@ -414,7 +437,8 @@
       "decision": "bloquear",
       "gates_passed": false,
       "reason": "pass@k abaixo do limiar"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-25",
@@ -430,7 +454,8 @@
       "decision": "bloquear",
       "gates_passed": false,
       "reason": "janela SHADOW insuficiente"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-26",
@@ -444,7 +469,8 @@
       "decision": "promover",
       "promoted": true,
       "gates_passed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-27",
@@ -457,7 +483,8 @@
     "expected": {
       "decision": "bloquear",
       "reason": "janela SHADOW insuficiente"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-28",
@@ -473,7 +500,8 @@
     "expected": {
       "decision": "rebaixar",
       "promoted": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-29",
@@ -492,7 +520,8 @@
       "decision": "bloquear",
       "gates_passed": false,
       "reason": "guardian pendente"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-30",
@@ -509,7 +538,8 @@
       "promoted": true,
       "gates_passed": true,
       "blocked": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-31",
@@ -528,7 +558,8 @@
       "decision": "promover",
       "cross_approval_ok": true,
       "promoted": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "gate-32",
@@ -546,6 +577,7 @@
       "blocked": true,
       "reason": "drift",
       "cross_approval_ok": false
-    }
+    },
+    "provenance": "catalog"
   }
 ]

@@ -85,7 +85,8 @@
       "decision_artifact_count": 2,
       "scorecards_complete_pct": 66.7,
       "status": "stalled"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-02",
@@ -186,7 +187,8 @@
       "decision_artifact_count": 2,
       "scorecards_complete_pct": 50.0,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-03",
@@ -301,7 +303,8 @@
       "decision_artifact_count": 3,
       "scorecards_complete_pct": 60.0,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-04",
@@ -390,7 +393,8 @@
       "decision_artifact_count": 2,
       "scorecards_complete_pct": 66.7,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-05",
@@ -490,7 +494,8 @@
       "decision_artifact_count": 2,
       "scorecards_complete_pct": 50.0,
       "status": "stalled"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-06",
@@ -605,7 +610,8 @@
       "decision_artifact_count": 3,
       "scorecards_complete_pct": 60.0,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-07",
@@ -694,7 +700,8 @@
       "decision_artifact_count": 2,
       "scorecards_complete_pct": 66.7,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-08",
@@ -795,7 +802,8 @@
       "decision_artifact_count": 2,
       "scorecards_complete_pct": 50.0,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-09",
@@ -909,7 +917,8 @@
       "decision_artifact_count": 3,
       "scorecards_complete_pct": 60.0,
       "status": "stalled"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-10",
@@ -998,7 +1007,8 @@
       "decision_artifact_count": 2,
       "scorecards_complete_pct": 66.7,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-11",
@@ -1099,7 +1109,8 @@
       "decision_artifact_count": 2,
       "scorecards_complete_pct": 50.0,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-12",
@@ -1214,7 +1225,8 @@
       "decision_artifact_count": 3,
       "scorecards_complete_pct": 60.0,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-13",
@@ -1302,7 +1314,8 @@
       "decision_artifact_count": 2,
       "scorecards_complete_pct": 66.7,
       "status": "stalled"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-14",
@@ -1403,7 +1416,8 @@
       "decision_artifact_count": 2,
       "scorecards_complete_pct": 50.0,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-15",
@@ -1518,7 +1532,8 @@
       "decision_artifact_count": 3,
       "scorecards_complete_pct": 60.0,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-16",
@@ -1607,7 +1622,8 @@
       "decision_artifact_count": 2,
       "scorecards_complete_pct": 66.7,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-17",
@@ -1707,7 +1723,8 @@
       "decision_artifact_count": 2,
       "scorecards_complete_pct": 50.0,
       "status": "stalled"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-18",
@@ -1822,7 +1839,8 @@
       "decision_artifact_count": 3,
       "scorecards_complete_pct": 60.0,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-19",
@@ -1911,7 +1929,8 @@
       "decision_artifact_count": 2,
       "scorecards_complete_pct": 66.7,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-20",
@@ -2012,7 +2031,8 @@
       "decision_artifact_count": 2,
       "scorecards_complete_pct": 50.0,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-21",
@@ -2126,7 +2146,8 @@
       "decision_artifact_count": 3,
       "scorecards_complete_pct": 60.0,
       "status": "stalled"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-22",
@@ -2215,7 +2236,8 @@
       "decision_artifact_count": 2,
       "scorecards_complete_pct": 66.7,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-23",
@@ -2316,7 +2338,8 @@
       "decision_artifact_count": 2,
       "scorecards_complete_pct": 50.0,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-24",
@@ -2431,7 +2454,8 @@
       "decision_artifact_count": 3,
       "scorecards_complete_pct": 60.0,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-25",
@@ -2519,7 +2543,8 @@
       "decision_artifact_count": 2,
       "scorecards_complete_pct": 66.7,
       "status": "stalled"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-26",
@@ -2620,7 +2645,8 @@
       "decision_artifact_count": 2,
       "scorecards_complete_pct": 50.0,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-27",
@@ -2735,7 +2761,8 @@
       "decision_artifact_count": 3,
       "scorecards_complete_pct": 60.0,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-28",
@@ -2824,7 +2851,8 @@
       "decision_artifact_count": 2,
       "scorecards_complete_pct": 66.7,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-29",
@@ -2924,7 +2952,8 @@
       "decision_artifact_count": 2,
       "scorecards_complete_pct": 50.0,
       "status": "stalled"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-sched-30",
@@ -3039,6 +3068,7 @@
       "decision_artifact_count": 3,
       "scorecards_complete_pct": 60.0,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   }
 ]

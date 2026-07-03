@@ -18,7 +18,8 @@
       "requires_dpa": false,
       "blocking_clauses": [],
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-02",
@@ -41,7 +42,8 @@
         "indemnity_unlimited"
       ],
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-03",
@@ -64,7 +66,8 @@
         "no_liability_cap"
       ],
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-04",
@@ -87,7 +90,8 @@
         "foreign_governing_law"
       ],
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-05",
@@ -108,7 +112,8 @@
       "requires_dpa": false,
       "blocking_clauses": [],
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-06",
@@ -128,7 +133,8 @@
       "requires_dpa": false,
       "blocking_clauses": [],
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-07",
@@ -150,7 +156,8 @@
       "requires_dpa": true,
       "blocking_clauses": [],
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-08",
@@ -173,7 +180,8 @@
       "requires_dpa": false,
       "blocking_clauses": [],
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-09",
@@ -196,7 +204,8 @@
         "indemnity_unlimited"
       ],
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-10",
@@ -220,7 +229,8 @@
         "no_liability_cap"
       ],
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-11",
@@ -245,7 +255,8 @@
         "foreign_governing_law"
       ],
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-12",
@@ -266,7 +277,8 @@
       "requires_dpa": false,
       "blocking_clauses": [],
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-13",
@@ -287,7 +299,8 @@
       "requires_dpa": false,
       "blocking_clauses": [],
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-14",
@@ -308,7 +321,8 @@
       "requires_dpa": false,
       "blocking_clauses": [],
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-15",
@@ -329,7 +343,8 @@
       "requires_dpa": false,
       "blocking_clauses": [],
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-16",
@@ -353,7 +368,8 @@
         "no_liability_cap"
       ],
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-17",
@@ -373,7 +389,8 @@
       "requires_dpa": false,
       "blocking_clauses": [],
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-18",
@@ -395,7 +412,8 @@
       "requires_dpa": true,
       "blocking_clauses": [],
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-19",
@@ -417,7 +435,8 @@
         "no_liability_cap"
       ],
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-20",
@@ -438,7 +457,8 @@
       "requires_dpa": false,
       "blocking_clauses": [],
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-21",
@@ -458,7 +478,8 @@
       "requires_dpa": false,
       "blocking_clauses": [],
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-22",
@@ -479,7 +500,8 @@
       "requires_dpa": false,
       "blocking_clauses": [],
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-23",
@@ -501,7 +523,8 @@
       "requires_dpa": false,
       "blocking_clauses": [],
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-24",
@@ -525,7 +548,8 @@
         "foreign_governing_law"
       ],
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-25",
@@ -550,7 +574,8 @@
         "foreign_governing_law"
       ],
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-26",
@@ -571,7 +596,8 @@
       "requires_dpa": false,
       "blocking_clauses": [],
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-27",
@@ -591,7 +617,8 @@
       "requires_dpa": false,
       "blocking_clauses": [],
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-28",
@@ -614,7 +641,8 @@
       "requires_dpa": false,
       "blocking_clauses": [],
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-29",
@@ -639,7 +667,8 @@
         "indemnity_unlimited"
       ],
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-contract-reviewer-30",
@@ -660,6 +689,7 @@
       "requires_dpa": false,
       "blocking_clauses": [],
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   }
 ]

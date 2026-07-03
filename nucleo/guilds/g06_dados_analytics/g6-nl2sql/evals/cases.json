@@ -49,7 +49,8 @@
       "risk": "low",
       "requires_human_review": false,
       "suggests_dashboard": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-02",
@@ -100,7 +101,8 @@
       "risk": "low",
       "requires_human_review": false,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-03",
@@ -151,7 +153,8 @@
       "risk": "low",
       "requires_human_review": false,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-04",
@@ -202,7 +205,8 @@
       "risk": "low",
       "requires_human_review": false,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-05",
@@ -250,7 +254,8 @@
       "risk": "low",
       "requires_human_review": false,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-06",
@@ -301,7 +306,8 @@
       "risk": "low",
       "requires_human_review": false,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-07",
@@ -352,7 +358,8 @@
       "risk": "high",
       "requires_human_review": false,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-08",
@@ -402,7 +409,8 @@
       "risk": "low",
       "requires_human_review": false,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-09",
@@ -453,7 +461,8 @@
       "risk": "high",
       "requires_human_review": false,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-10",
@@ -501,7 +510,8 @@
       "risk": "high",
       "requires_human_review": false,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-11",
@@ -549,7 +559,8 @@
       "risk": "high",
       "requires_human_review": false,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-12",
@@ -597,7 +608,8 @@
       "risk": "medium",
       "requires_human_review": true,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-13",
@@ -646,7 +658,8 @@
       "risk": "medium",
       "requires_human_review": true,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-14",
@@ -696,7 +709,8 @@
       "risk": "low",
       "requires_human_review": false,
       "suggests_dashboard": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-15",
@@ -745,7 +759,8 @@
       "risk": "low",
       "requires_human_review": false,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-16",
@@ -798,7 +813,8 @@
       "risk": "low",
       "requires_human_review": false,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-17",
@@ -849,7 +865,8 @@
       "risk": "low",
       "requires_human_review": false,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-18",
@@ -900,7 +917,8 @@
       "risk": "low",
       "requires_human_review": false,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-19",
@@ -951,7 +969,8 @@
       "risk": "low",
       "requires_human_review": false,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-20",
@@ -1001,7 +1020,8 @@
       "risk": "high",
       "requires_human_review": false,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-21",
@@ -1051,7 +1071,8 @@
       "risk": "low",
       "requires_human_review": false,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-22",
@@ -1101,7 +1122,8 @@
       "risk": "high",
       "requires_human_review": false,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-23",
@@ -1149,7 +1171,8 @@
       "risk": "high",
       "requires_human_review": false,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-24",
@@ -1196,7 +1219,8 @@
       "risk": "medium",
       "requires_human_review": true,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-25",
@@ -1247,7 +1271,8 @@
       "risk": "low",
       "requires_human_review": false,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-26",
@@ -1299,7 +1324,8 @@
       "risk": "low",
       "requires_human_review": false,
       "suggests_dashboard": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-27",
@@ -1350,7 +1376,8 @@
       "risk": "low",
       "requires_human_review": false,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-28",
@@ -1400,7 +1427,8 @@
       "risk": "high",
       "requires_human_review": false,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-29",
@@ -1450,7 +1478,8 @@
       "risk": "medium",
       "requires_human_review": true,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-nl2sql-domain-30",
@@ -1499,6 +1528,7 @@
       "risk": "low",
       "requires_human_review": false,
       "suggests_dashboard": false
-    }
+    },
+    "provenance": "catalog"
   }
 ]

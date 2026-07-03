@@ -27,7 +27,8 @@
       "viral": true,
       "propensity_score": 74.5,
       "status": "viral"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-02",
@@ -55,7 +56,8 @@
       "viral": false,
       "propensity_score": 52.0,
       "status": "abaixo_viral"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-03",
@@ -80,7 +82,8 @@
       "fraud_rate_pct": 10.0,
       "viral": true,
       "status": "fraude_alta"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-04",
@@ -103,7 +106,8 @@
       "by": "g7-referral-designer",
       "budget_ok": false,
       "status": "estoura_orcamento"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-05",
@@ -127,7 +131,8 @@
       "k_factor": 1.0,
       "viral": true,
       "status": "viral"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-06",
@@ -150,7 +155,8 @@
       "by": "g7-referral-designer",
       "viral": false,
       "status": "abaixo_viral"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-07",
@@ -175,7 +181,8 @@
       "viral": true,
       "status": "viral",
       "propensity_score": 92.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-08",
@@ -198,7 +205,8 @@
       "by": "g7-referral-designer",
       "fraud_rate_pct": 5.0,
       "status": "abaixo_viral"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-09",
@@ -221,7 +229,8 @@
       "by": "g7-referral-designer",
       "fraud_rate_pct": 5.05,
       "status": "fraude_alta"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-10",
@@ -245,7 +254,8 @@
       "fraud_rate_pct": 15.0,
       "budget_ok": false,
       "status": "fraude_alta"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-11",
@@ -270,7 +280,8 @@
       "viral": true,
       "fraud_rate_pct": 20.0,
       "status": "fraude_alta"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-12",
@@ -295,7 +306,8 @@
       "viral": true,
       "budget_ok": false,
       "status": "estoura_orcamento"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-13",
@@ -318,7 +330,8 @@
       "by": "g7-referral-designer",
       "budget_ok": true,
       "status": "abaixo_viral"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-14",
@@ -341,7 +354,8 @@
       "by": "g7-referral-designer",
       "budget_ok": false,
       "status": "estoura_orcamento"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-15",
@@ -364,7 +378,8 @@
       "by": "g7-referral-designer",
       "budget_ok": false,
       "status": "estoura_orcamento"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-16",
@@ -386,7 +401,8 @@
     "expected": {
       "by": "g7-referral-designer",
       "propensity_score": 100.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-17",
@@ -408,7 +424,8 @@
     "expected": {
       "by": "g7-referral-designer",
       "propensity_score": 100.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-18",
@@ -430,7 +447,8 @@
     "expected": {
       "by": "g7-referral-designer",
       "propensity_score": 0.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-19",
@@ -452,7 +470,8 @@
     "expected": {
       "by": "g7-referral-designer",
       "propensity_score": 48.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-20",
@@ -470,7 +489,8 @@
       "by": "g7-referral-designer",
       "propensity_score": 15.0,
       "viral": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-21",
@@ -490,7 +510,8 @@
       "k_factor": 0.0,
       "viral": false,
       "status": "abaixo_viral"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-22",
@@ -510,7 +531,8 @@
       "k_factor": 0.0,
       "fraud_rate_pct": 0.0,
       "status": "abaixo_viral"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-23",
@@ -529,7 +551,8 @@
       "cost_per_conversion": 0.0,
       "k_factor": 0.0,
       "status": "abaixo_viral"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-24",
@@ -541,7 +564,8 @@
       "k_factor": 0.0,
       "budget_ok": false,
       "status": "estoura_orcamento"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-25",
@@ -566,7 +590,8 @@
       "invite_conv_rate": 0.25,
       "k_factor": 0.5,
       "status": "abaixo_viral"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-26",
@@ -593,7 +618,8 @@
       "fraud_rate_pct": 1.0,
       "status": "viral",
       "propensity_score": 85.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-27",
@@ -616,7 +642,8 @@
       "by": "g7-referral-designer",
       "viral": true,
       "status": "viral"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-28",
@@ -639,7 +666,8 @@
       "by": "g7-referral-designer",
       "invites_per_user": 3.333,
       "status": "abaixo_viral"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-29",
@@ -663,7 +691,8 @@
       "fraud_rate_pct": 8.0,
       "viral": false,
       "status": "fraude_alta"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-30",
@@ -689,7 +718,8 @@
       "fraud_rate_pct": 1.0,
       "viral": false,
       "status": "abaixo_viral"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-31",
@@ -714,7 +744,8 @@
       "budget_ok": false,
       "viral": false,
       "status": "fraude_alta"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rd-32",
@@ -739,6 +770,7 @@
       "viral": true,
       "status": "viral",
       "propensity_score": 17.5
-    }
+    },
+    "provenance": "catalog"
   }
 ]

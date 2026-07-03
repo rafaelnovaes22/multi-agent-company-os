@@ -15,7 +15,8 @@
     "expected": {
       "reply_queue_count": 1,
       "overdue_replies": 0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-02",
@@ -38,7 +39,8 @@
     "expected": {
       "reply_queue_count": 2,
       "overdue_replies": 1
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-03",
@@ -66,7 +68,8 @@
     "expected": {
       "reply_queue_count": 3,
       "overdue_replies": 3
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-04",
@@ -99,7 +102,8 @@
     "expected": {
       "reply_queue_count": 4,
       "overdue_replies": 2
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-05",
@@ -137,7 +141,8 @@
     "expected": {
       "reply_queue_count": 5,
       "overdue_replies": 3
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-06",
@@ -155,7 +160,8 @@
     "expected": {
       "reply_queue_count": 1,
       "overdue_replies": 0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-07",
@@ -178,7 +184,8 @@
     "expected": {
       "reply_queue_count": 2,
       "overdue_replies": 1
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-08",
@@ -206,7 +213,8 @@
     "expected": {
       "reply_queue_count": 3,
       "overdue_replies": 3
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-09",
@@ -239,7 +247,8 @@
     "expected": {
       "reply_queue_count": 4,
       "overdue_replies": 2
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-10",
@@ -277,7 +286,8 @@
     "expected": {
       "reply_queue_count": 5,
       "overdue_replies": 3
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-11",
@@ -295,7 +305,8 @@
     "expected": {
       "reply_queue_count": 1,
       "overdue_replies": 0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-12",
@@ -318,7 +329,8 @@
     "expected": {
       "reply_queue_count": 2,
       "overdue_replies": 1
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-13",
@@ -346,7 +358,8 @@
     "expected": {
       "reply_queue_count": 3,
       "overdue_replies": 3
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-14",
@@ -379,7 +392,8 @@
     "expected": {
       "reply_queue_count": 4,
       "overdue_replies": 2
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-15",
@@ -417,7 +431,8 @@
     "expected": {
       "reply_queue_count": 5,
       "overdue_replies": 3
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-16",
@@ -435,7 +450,8 @@
     "expected": {
       "reply_queue_count": 1,
       "overdue_replies": 0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-17",
@@ -458,7 +474,8 @@
     "expected": {
       "reply_queue_count": 2,
       "overdue_replies": 1
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-18",
@@ -486,7 +503,8 @@
     "expected": {
       "reply_queue_count": 3,
       "overdue_replies": 3
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-19",
@@ -519,7 +537,8 @@
     "expected": {
       "reply_queue_count": 4,
       "overdue_replies": 2
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-20",
@@ -557,7 +576,8 @@
     "expected": {
       "reply_queue_count": 5,
       "overdue_replies": 3
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-21",
@@ -575,7 +595,8 @@
     "expected": {
       "reply_queue_count": 1,
       "overdue_replies": 0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-22",
@@ -598,7 +619,8 @@
     "expected": {
       "reply_queue_count": 2,
       "overdue_replies": 1
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-23",
@@ -626,7 +648,8 @@
     "expected": {
       "reply_queue_count": 3,
       "overdue_replies": 3
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-24",
@@ -659,7 +682,8 @@
     "expected": {
       "reply_queue_count": 4,
       "overdue_replies": 2
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-25",
@@ -697,7 +721,8 @@
     "expected": {
       "reply_queue_count": 5,
       "overdue_replies": 3
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-26",
@@ -715,7 +740,8 @@
     "expected": {
       "reply_queue_count": 1,
       "overdue_replies": 0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-27",
@@ -738,7 +764,8 @@
     "expected": {
       "reply_queue_count": 2,
       "overdue_replies": 1
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-28",
@@ -766,7 +793,8 @@
     "expected": {
       "reply_queue_count": 3,
       "overdue_replies": 3
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-29",
@@ -799,7 +827,8 @@
     "expected": {
       "reply_queue_count": 4,
       "overdue_replies": 2
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g9-tier1-resolver-30",
@@ -837,6 +866,7 @@
     "expected": {
       "reply_queue_count": 5,
       "overdue_replies": 3
-    }
+    },
+    "provenance": "catalog"
   }
 ]

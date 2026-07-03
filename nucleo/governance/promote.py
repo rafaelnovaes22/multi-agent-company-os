@@ -90,7 +90,22 @@ def _gate(g, spec, spec_dir, req, deps):
     if g == "G6":  # CI/CD ativo (assisted->autonomous)
         return bool(req.get("cicd_active")), f"cicd_active={bool(req.get('cicd_active'))}"
     if g == "G7":  # SLA de ENTREGA — delivered_eligible_rate do oráculo executável >= 95% (CEO 2026-06-30)
-        s = _delivered_summary(spec_dir)
+        proof_note = "execução local ao vivo (sem perímetro de credencial)"
+        if req.get("delivery_proof") == "ci-perimeter":
+            # G-PERÍMETRO: a prova vem do artefato do nightly em main (identidade do CI,
+            # distinta do promotor), buscada via API — FAIL-CLOSED se não houver.
+            from . import perimeter
+            got = perimeter.fetch_perimeter_summary(spec["id"])
+            if not got:
+                return False, ("SLA entrega: prova de PERÍMETRO indisponível (sem nightly "
+                               "forge-exec verde recente em main com este agente). Promoção "
+                               "bloqueada (fail-closed) — G-PERÍMETRO não degrada p/ prova local.")
+            s = got["summary"]
+            p = got["proof"]
+            proof_note = (f"perímetro CI: run {p['run_id']} @ {str(p['commit'])[:12]} "
+                          f"({p['workflow']}, {p['artifact']})")
+        else:
+            s = _delivered_summary(spec_dir)
         ex = s.get("executor") or {}
         dr = s.get("delivered_eligible_rate") or {}
         passed, total, pct = dr.get("passed") or 0, dr.get("total") or 0, dr.get("percent") or 0.0
@@ -117,7 +132,8 @@ def _gate(g, spec, spec_dir, req, deps):
         return ok, (f"SLA entrega: delivered_eligible_rate {passed}/{total} ({pct:.0f}%) "
                     f"thr={DELIVERED_THRESHOLD*100:.0f}% · bruto {raw.get('passed')}/{raw.get('total')} · "
                     f"falso-positivo=0 · {not_delivered} não-entregue(s) caem no "
-                    f"fail-safe do runtime (delivered=False/billing=0, sem resposta-errada-silenciosa)")
+                    f"fail-safe do runtime (delivered=False/billing=0, sem resposta-errada-silenciosa) "
+                    f"· prova: {proof_note}")
     return False, "gate desconhecido"
 
 

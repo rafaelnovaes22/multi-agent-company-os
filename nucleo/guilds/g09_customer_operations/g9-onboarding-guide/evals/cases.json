@@ -14,7 +14,8 @@
       "activated": true,
       "activation_pct": 100.0,
       "on_time": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-02",
@@ -31,7 +32,8 @@
       "activated": false,
       "activation_pct": 40.0,
       "on_time": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-03",
@@ -47,7 +49,8 @@
     "expected": {
       "activated": true,
       "on_time": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-04",
@@ -64,7 +67,8 @@
       "activated": true,
       "status": "ativado",
       "on_time": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-05",
@@ -81,7 +85,8 @@
       "activated": true,
       "status": "ativado",
       "on_time": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-06",
@@ -98,7 +103,8 @@
       "activated": true,
       "status": "ativado",
       "activation_pct": 30.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-07",
@@ -116,7 +122,8 @@
       "status": "em_andamento",
       "on_time": true,
       "activation_pct": 60.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-08",
@@ -134,7 +141,8 @@
       "status": "em_risco",
       "on_time": false,
       "activation_pct": 20.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-09",
@@ -151,7 +159,8 @@
       "on_time": true,
       "status": "em_andamento",
       "activated": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-10",
@@ -168,7 +177,8 @@
       "on_time": false,
       "status": "em_risco",
       "activated": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-11",
@@ -183,7 +193,8 @@
     "expected": {
       "on_time": true,
       "status": "em_andamento"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-12",
@@ -198,7 +209,8 @@
     "expected": {
       "on_time": false,
       "status": "em_risco"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-13",
@@ -214,7 +226,8 @@
     "expected": {
       "on_time": true,
       "status": "em_andamento"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-14",
@@ -230,7 +243,8 @@
     "expected": {
       "on_time": false,
       "status": "em_risco"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-15",
@@ -247,7 +261,8 @@
       "activation_pct": 0.0,
       "status": "em_andamento",
       "activated": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-16",
@@ -262,7 +277,8 @@
     },
     "expected": {
       "activation_pct": 50.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-17",
@@ -279,7 +295,8 @@
       "activation_pct": 100.0,
       "activated": false,
       "status": "em_andamento"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-18",
@@ -294,7 +311,8 @@
     },
     "expected": {
       "activation_pct": 33.3
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-19",
@@ -309,7 +327,8 @@
     },
     "expected": {
       "activation_pct": 66.7
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-20",
@@ -324,7 +343,8 @@
     },
     "expected": {
       "activation_pct": 12.5
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-21",
@@ -340,7 +360,8 @@
     "expected": {
       "activation_pct": 0.0,
       "status": "em_andamento"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-22",
@@ -352,7 +373,8 @@
       "activation_pct": 0.0,
       "on_time": true,
       "status": "em_andamento"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-23",
@@ -369,7 +391,8 @@
       "time_to_value_days": 5,
       "activated": true,
       "status": "ativado"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-24",
@@ -387,7 +410,8 @@
       "activated": true,
       "status": "ativado",
       "on_time": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-25",
@@ -403,7 +427,8 @@
     "expected": {
       "activated": false,
       "status": "em_andamento"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-26",
@@ -421,7 +446,8 @@
       "on_time": false,
       "status": "em_risco",
       "activation_pct": 0.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-27",
@@ -436,7 +462,8 @@
     "expected": {
       "activated": false,
       "status": "em_andamento"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-28",
@@ -452,7 +479,8 @@
     "expected": {
       "activated": false,
       "status": "em_andamento"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-29",
@@ -469,7 +497,8 @@
       "activated": true,
       "status": "ativado",
       "on_time": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-30",
@@ -486,7 +515,8 @@
       "activated": true,
       "status": "ativado",
       "on_time": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-31",
@@ -503,7 +533,8 @@
       "activated": false,
       "on_time": true,
       "status": "em_andamento"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "og-32",
@@ -520,6 +551,7 @@
       "activated": false,
       "on_time": false,
       "status": "em_risco"
-    }
+    },
+    "provenance": "catalog"
   }
 ]

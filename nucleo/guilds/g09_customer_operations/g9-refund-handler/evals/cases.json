@@ -13,7 +13,8 @@
       "eligible": true,
       "decision": "aprovar_com_gate",
       "requires_human_gate": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-02",
@@ -28,7 +29,8 @@
     "expected": {
       "eligible": false,
       "decision": "flag_fraude"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-03",
@@ -43,7 +45,8 @@
     "expected": {
       "eligible": false,
       "decision": "negar_fora_politica"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-04",
@@ -58,7 +61,8 @@
       "eligible": true,
       "decision": "aprovar_com_gate",
       "requires_human_gate": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-05",
@@ -73,7 +77,8 @@
       "eligible": false,
       "decision": "negar_fora_politica",
       "requires_human_gate": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-06",
@@ -88,7 +93,8 @@
       "eligible": false,
       "decision": "flag_fraude",
       "requires_human_gate": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-07",
@@ -102,7 +108,8 @@
     "expected": {
       "eligible": true,
       "decision": "aprovar_com_gate"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-08",
@@ -116,7 +123,8 @@
     "expected": {
       "eligible": false,
       "decision": "negar_fora_politica"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-09",
@@ -130,7 +138,8 @@
     "expected": {
       "eligible": true,
       "decision": "aprovar_com_gate"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-10",
@@ -143,7 +152,8 @@
     "expected": {
       "eligible": true,
       "decision": "aprovar_com_gate"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-11",
@@ -156,7 +166,8 @@
     "expected": {
       "eligible": true,
       "decision": "aprovar_com_gate"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-12",
@@ -169,7 +180,8 @@
     "expected": {
       "eligible": false,
       "decision": "negar_fora_politica"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-13",
@@ -183,7 +195,8 @@
     "expected": {
       "eligible": true,
       "decision": "aprovar_com_gate"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-14",
@@ -197,7 +210,8 @@
     "expected": {
       "eligible": false,
       "decision": "negar_fora_politica"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-15",
@@ -211,7 +225,8 @@
     "expected": {
       "eligible": true,
       "decision": "aprovar_com_gate"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-16",
@@ -225,7 +240,8 @@
     "expected": {
       "eligible": true,
       "decision": "aprovar_com_gate"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-17",
@@ -239,7 +255,8 @@
     "expected": {
       "eligible": false,
       "decision": "negar_fora_politica"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-18",
@@ -253,7 +270,8 @@
     "expected": {
       "eligible": false,
       "decision": "flag_fraude"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-19",
@@ -267,7 +285,8 @@
     "expected": {
       "eligible": false,
       "decision": "flag_fraude"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-20",
@@ -281,7 +300,8 @@
     "expected": {
       "eligible": false,
       "decision": "flag_fraude"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-21",
@@ -295,7 +315,8 @@
     "expected": {
       "eligible": false,
       "decision": "flag_fraude"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-22",
@@ -308,7 +329,8 @@
     "expected": {
       "eligible": true,
       "decision": "aprovar_com_gate"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-23",
@@ -322,7 +344,8 @@
     "expected": {
       "eligible": false,
       "decision": "negar_fora_politica"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-24",
@@ -336,7 +359,8 @@
     "expected": {
       "eligible": true,
       "decision": "aprovar_com_gate"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-25",
@@ -350,7 +374,8 @@
     "expected": {
       "eligible": false,
       "decision": "negar_fora_politica"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-26",
@@ -364,7 +389,8 @@
     "expected": {
       "eligible": false,
       "decision": "flag_fraude"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-27",
@@ -375,7 +401,8 @@
       "eligible": true,
       "decision": "aprovar_com_gate",
       "requires_human_gate": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-28",
@@ -387,7 +414,8 @@
     "expected": {
       "eligible": false,
       "decision": "flag_fraude"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-29",
@@ -401,7 +429,8 @@
     "expected": {
       "eligible": true,
       "decision": "aprovar_com_gate"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-30",
@@ -415,7 +444,8 @@
     "expected": {
       "eligible": true,
       "decision": "aprovar_com_gate"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-31",
@@ -430,7 +460,8 @@
       "eligible": true,
       "decision": "aprovar_com_gate",
       "requires_human_gate": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rf-32",
@@ -445,6 +476,7 @@
       "eligible": false,
       "decision": "negar_fora_politica",
       "requires_human_gate": true
-    }
+    },
+    "provenance": "catalog"
   }
 ]

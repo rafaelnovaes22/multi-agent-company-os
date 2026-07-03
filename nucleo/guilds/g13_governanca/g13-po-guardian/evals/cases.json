@@ -20,7 +20,8 @@
     },
     "expected": {
       "valid": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-02",
@@ -43,7 +44,8 @@
     },
     "expected": {
       "valid": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-03",
@@ -64,7 +66,8 @@
     },
     "expected": {
       "valid": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-04",
@@ -87,7 +90,8 @@
     },
     "expected": {
       "valid": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-05",
@@ -106,7 +110,8 @@
     },
     "expected": {
       "valid": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-06",
@@ -128,7 +133,8 @@
     },
     "expected": {
       "valid": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-07",
@@ -150,7 +156,8 @@
     },
     "expected": {
       "valid": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-08",
@@ -175,7 +182,8 @@
     },
     "expected": {
       "valid": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-09",
@@ -199,7 +207,8 @@
     },
     "expected": {
       "valid": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-10",
@@ -223,7 +232,8 @@
     },
     "expected": {
       "valid": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-11",
@@ -249,7 +259,8 @@
     },
     "expected": {
       "valid": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-12",
@@ -271,7 +282,8 @@
     },
     "expected": {
       "valid": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-13",
@@ -296,7 +308,8 @@
     },
     "expected": {
       "valid": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-14",
@@ -319,7 +332,8 @@
     },
     "expected": {
       "valid": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-15",
@@ -343,7 +357,8 @@
     },
     "expected": {
       "valid": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-16",
@@ -367,7 +382,8 @@
     },
     "expected": {
       "valid": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-17",
@@ -393,7 +409,8 @@
     },
     "expected": {
       "valid": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-18",
@@ -415,7 +432,8 @@
     },
     "expected": {
       "valid": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-19",
@@ -440,7 +458,8 @@
     },
     "expected": {
       "valid": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-20",
@@ -465,7 +484,8 @@
     },
     "expected": {
       "valid": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-21",
@@ -486,7 +506,8 @@
     },
     "expected": {
       "valid": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-22",
@@ -510,7 +531,8 @@
     },
     "expected": {
       "valid": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-23",
@@ -536,7 +558,8 @@
     },
     "expected": {
       "valid": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-24",
@@ -558,7 +581,8 @@
     },
     "expected": {
       "valid": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-25",
@@ -583,7 +607,8 @@
     },
     "expected": {
       "valid": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-26",
@@ -608,7 +633,8 @@
     },
     "expected": {
       "valid": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-27",
@@ -632,7 +658,8 @@
     },
     "expected": {
       "valid": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-28",
@@ -654,7 +681,8 @@
     },
     "expected": {
       "valid": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-29",
@@ -680,7 +708,8 @@
     },
     "expected": {
       "valid": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ev-30",
@@ -702,6 +731,7 @@
     },
     "expected": {
       "valid": false
-    }
+    },
+    "provenance": "catalog"
   }
 ]

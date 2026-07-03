@@ -20,7 +20,8 @@
       "min_viable_price_brl": 40.0,
       "status": "blocked",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-02",
@@ -43,7 +44,8 @@
       "min_viable_price_brl": 92.4,
       "status": "ready",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-03",
@@ -66,7 +68,8 @@
       "min_viable_price_brl": 123.2,
       "status": "ready",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-04",
@@ -89,7 +92,8 @@
       "min_viable_price_brl": 276.0,
       "status": "blocked",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-05",
@@ -112,7 +116,8 @@
       "min_viable_price_brl": 440.0,
       "status": "ready",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-06",
@@ -135,7 +140,8 @@
       "min_viable_price_brl": 80.0,
       "status": "ready",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-07",
@@ -158,7 +164,8 @@
       "min_viable_price_brl": 312.0,
       "status": "blocked",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-08",
@@ -181,7 +188,8 @@
       "min_viable_price_brl": 151.2,
       "status": "ready",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-09",
@@ -204,7 +212,8 @@
       "min_viable_price_brl": 480.0,
       "status": "ready",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-10",
@@ -227,7 +236,8 @@
       "min_viable_price_brl": 348.0,
       "status": "blocked",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-11",
@@ -250,7 +260,8 @@
       "min_viable_price_brl": 80.0,
       "status": "blocked",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-12",
@@ -273,7 +284,8 @@
       "min_viable_price_brl": 136.4,
       "status": "ready",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-13",
@@ -296,7 +308,8 @@
       "min_viable_price_brl": 520.0,
       "status": "ready",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-14",
@@ -319,7 +332,8 @@
       "min_viable_price_brl": 224.4,
       "status": "ready",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-15",
@@ -342,7 +356,8 @@
       "min_viable_price_brl": 272.0,
       "status": "ready",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-16",
@@ -365,7 +380,8 @@
       "min_viable_price_brl": 420.0,
       "status": "blocked",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-17",
@@ -388,7 +404,8 @@
       "min_viable_price_brl": 560.0,
       "status": "ready",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-18",
@@ -411,7 +428,8 @@
       "min_viable_price_brl": 207.2,
       "status": "ready",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-19",
@@ -434,7 +452,8 @@
       "min_viable_price_brl": 456.0,
       "status": "blocked",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-20",
@@ -457,7 +476,8 @@
       "min_viable_price_brl": 312.0,
       "status": "ready",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-21",
@@ -480,7 +500,8 @@
       "min_viable_price_brl": 120.0,
       "status": "blocked",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-22",
@@ -503,7 +524,8 @@
       "min_viable_price_brl": 492.0,
       "status": "blocked",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-23",
@@ -526,7 +548,8 @@
       "min_viable_price_brl": 235.2,
       "status": "ready",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-24",
@@ -549,7 +572,8 @@
       "min_viable_price_brl": 292.4,
       "status": "ready",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-25",
@@ -572,7 +596,8 @@
       "min_viable_price_brl": 640.0,
       "status": "ready",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-26",
@@ -595,7 +620,8 @@
       "min_viable_price_brl": 144.0,
       "status": "ready",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-27",
@@ -618,7 +644,8 @@
       "min_viable_price_brl": 202.4,
       "status": "ready",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-28",
@@ -641,7 +668,8 @@
       "min_viable_price_brl": 564.0,
       "status": "blocked",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-29",
@@ -664,7 +692,8 @@
       "min_viable_price_brl": 680.0,
       "status": "ready",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-contract-closer-c3-30",
@@ -687,6 +716,7 @@
       "min_viable_price_brl": 392.0,
       "status": "ready",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   }
 ]

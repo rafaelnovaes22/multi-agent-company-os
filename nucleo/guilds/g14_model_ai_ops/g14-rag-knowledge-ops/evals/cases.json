@@ -27,7 +27,8 @@
       "stale": false,
       "passed": true,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-02",
@@ -55,7 +56,8 @@
       "f1": 0.25,
       "passed": false,
       "status": "abaixo_limiar"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-03",
@@ -78,7 +80,8 @@
       "stale": true,
       "passed": false,
       "status": "stale"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-04",
@@ -102,7 +105,8 @@
       "tier_leak": true,
       "passed": false,
       "status": "tier_leak"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-05",
@@ -126,7 +130,8 @@
       "stale": true,
       "passed": false,
       "status": "tier_leak"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-06",
@@ -149,7 +154,8 @@
       "stale": true,
       "passed": false,
       "status": "stale"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-07",
@@ -175,7 +181,8 @@
       "f1": 1.0,
       "passed": true,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-08",
@@ -197,7 +204,8 @@
       "stale": false,
       "passed": true,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-09",
@@ -219,7 +227,8 @@
       "stale": true,
       "passed": false,
       "status": "stale"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-10",
@@ -245,7 +254,8 @@
       "f1": 0.75,
       "passed": true,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-11",
@@ -271,7 +281,8 @@
       "f1": 0.75,
       "passed": false,
       "status": "abaixo_limiar"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-12",
@@ -301,7 +312,8 @@
       "f1": 0.4,
       "passed": false,
       "status": "abaixo_limiar"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-13",
@@ -331,7 +343,8 @@
       "f1": 0.4,
       "passed": false,
       "status": "abaixo_limiar"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-14",
@@ -352,7 +365,8 @@
       "f1": 0.0,
       "passed": false,
       "status": "abaixo_limiar"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-15",
@@ -372,7 +386,8 @@
       "f1": 0.0,
       "passed": false,
       "status": "abaixo_limiar"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-16",
@@ -395,7 +410,8 @@
       "tier_leak": true,
       "passed": false,
       "status": "tier_leak"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-17",
@@ -419,7 +435,8 @@
       "f1": 0.571,
       "passed": false,
       "status": "abaixo_limiar"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-18",
@@ -438,7 +455,8 @@
       "stale": true,
       "passed": false,
       "status": "stale"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-19",
@@ -468,7 +486,8 @@
       "tier_leak": true,
       "passed": false,
       "status": "tier_leak"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-20",
@@ -496,7 +515,8 @@
       "f1": 0.8,
       "passed": false,
       "status": "abaixo_limiar"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-21",
@@ -523,7 +543,8 @@
       "f1": 0.571,
       "passed": true,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-22",
@@ -549,7 +570,8 @@
       "f1": 0.667,
       "passed": false,
       "status": "abaixo_limiar"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-23",
@@ -578,7 +600,8 @@
       "f1": 0.667,
       "passed": false,
       "status": "abaixo_limiar"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-24",
@@ -601,7 +624,8 @@
       "passed": true,
       "status": "ok",
       "f1": 1.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-25",
@@ -621,7 +645,8 @@
       "stale": true,
       "passed": false,
       "status": "stale"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-26",
@@ -643,7 +668,8 @@
       "tier_leak": true,
       "passed": false,
       "status": "tier_leak"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-27",
@@ -670,7 +696,8 @@
       "f1": 0.857,
       "passed": true,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-28",
@@ -694,7 +721,8 @@
       "f1": 0.5,
       "passed": false,
       "status": "abaixo_limiar"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-29",
@@ -722,7 +750,8 @@
       "tier_leak": false,
       "passed": true,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-30",
@@ -751,7 +780,8 @@
       "stale": true,
       "passed": false,
       "status": "stale"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-31",
@@ -791,7 +821,8 @@
       "f1": 0.9,
       "passed": true,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "rk-32",
@@ -821,6 +852,7 @@
       "stale": false,
       "passed": true,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   }
 ]

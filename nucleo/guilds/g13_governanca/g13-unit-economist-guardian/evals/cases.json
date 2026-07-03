@@ -14,7 +14,8 @@
       "valid": true,
       "blocked": false,
       "verdict": "pass"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-02",
@@ -30,7 +31,8 @@
       "valid": false,
       "blocked": true,
       "verdict": "veto_economico"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-03",
@@ -46,7 +48,8 @@
       "valid": true,
       "blocked": false,
       "verdict": "liberado_operating"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-04",
@@ -61,7 +64,8 @@
       "ledger": "operating",
       "valid": false,
       "verdict": "rever_roi"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-05",
@@ -77,7 +81,8 @@
       "valid": true,
       "verdict": "pass",
       "blocked": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-06",
@@ -93,7 +98,8 @@
       "valid": false,
       "blocked": true,
       "verdict": "veto_economico"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-07",
@@ -109,7 +115,8 @@
       "valid": true,
       "verdict": "pass",
       "needs_recalc": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-08",
@@ -123,7 +130,8 @@
       "verdict": "liberado_operating",
       "valid": true,
       "needs_recalc": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-09",
@@ -137,7 +145,8 @@
       "cost_ratio": 0.1,
       "valid": true,
       "verdict": "pass"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-10",
@@ -152,7 +161,8 @@
       "cost_ratio": 0.3,
       "valid": false,
       "verdict": "veto_economico"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-11",
@@ -168,7 +178,8 @@
       "cost_ratio": 0.3,
       "valid": true,
       "verdict": "pass"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-12",
@@ -184,7 +195,8 @@
       "valid": true,
       "verdict": "liberado_operating",
       "blocked": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-13",
@@ -196,7 +208,8 @@
     "expected": {
       "verdict": "liberado_operating",
       "valid": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-14",
@@ -211,7 +224,8 @@
       "valid": false,
       "verdict": "veto_economico",
       "blocked": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-15",
@@ -224,7 +238,8 @@
       "blocked": false,
       "verdict": "rever_roi",
       "valid": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-16",
@@ -239,7 +254,8 @@
       "cost_ratio": 0.05,
       "valid": true,
       "verdict": "pass"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-17",
@@ -254,7 +270,8 @@
       "cost_ratio": 0.249,
       "valid": true,
       "verdict": "pass"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-18",
@@ -267,7 +284,8 @@
       "verdict": "liberado_operating",
       "valid": true,
       "blocked": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-19",
@@ -280,7 +298,8 @@
     "expected": {
       "needs_recalc": false,
       "valid": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-20",
@@ -296,7 +315,8 @@
       "valid": false,
       "blocked": true,
       "verdict": "veto_economico"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-21",
@@ -312,7 +332,8 @@
       "ledger": "operating",
       "valid": true,
       "verdict": "liberado_operating"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-22",
@@ -329,7 +350,8 @@
       "valid": false,
       "verdict": "veto_economico",
       "needs_recalc": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-23",
@@ -343,7 +365,8 @@
       "verdict": "rever_roi",
       "valid": false,
       "needs_recalc": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-24",
@@ -358,7 +381,8 @@
       "cost_ratio": 0.3333,
       "valid": false,
       "verdict": "veto_economico"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-25",
@@ -374,7 +398,8 @@
       "cost_ratio": 0.12,
       "valid": false,
       "verdict": "veto_economico"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-26",
@@ -388,7 +413,8 @@
     "expected": {
       "blocked": true,
       "valid": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-27",
@@ -402,7 +428,8 @@
     "expected": {
       "blocked": false,
       "valid": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-28",
@@ -416,7 +443,8 @@
       "verdict": "liberado_operating",
       "needs_recalc": false,
       "valid": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-29",
@@ -432,7 +460,8 @@
       "max_ratio": 0.3,
       "valid": true,
       "verdict": "pass"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-30",
@@ -447,7 +476,8 @@
       "cost_ratio": 0.301,
       "valid": false,
       "verdict": "veto_economico"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-31",
@@ -462,7 +492,8 @@
       "verdict": "rever_roi",
       "valid": false,
       "blocked": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c3-32",
@@ -479,6 +510,7 @@
       "blocked": false,
       "verdict": "pass",
       "needs_recalc": false
-    }
+    },
+    "provenance": "catalog"
   }
 ]

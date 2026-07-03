@@ -27,7 +27,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-02",
@@ -57,7 +58,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-03",
@@ -87,7 +89,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-04",
@@ -117,7 +120,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-05",
@@ -147,7 +151,8 @@
       "capabilities_any": [
         "policy_check"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-06",
@@ -177,7 +182,8 @@
       "capabilities_any": [
         "human_escalation"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-07",
@@ -207,7 +213,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-08",
@@ -237,7 +244,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-09",
@@ -267,7 +275,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-10",
@@ -297,7 +306,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-11",
@@ -327,7 +337,8 @@
       "capabilities_any": [
         "policy_check"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-12",
@@ -357,7 +368,8 @@
       "capabilities_any": [
         "human_escalation"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-13",
@@ -387,7 +399,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-14",
@@ -417,7 +430,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-15",
@@ -447,7 +461,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-16",
@@ -477,7 +492,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-17",
@@ -507,7 +523,8 @@
       "capabilities_any": [
         "policy_check"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-18",
@@ -537,7 +554,8 @@
       "capabilities_any": [
         "human_escalation"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-19",
@@ -567,7 +585,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-20",
@@ -597,7 +616,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-21",
@@ -627,7 +647,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-22",
@@ -657,7 +678,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-23",
@@ -687,7 +709,8 @@
       "capabilities_any": [
         "policy_check"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-24",
@@ -717,7 +740,8 @@
       "capabilities_any": [
         "human_escalation"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-25",
@@ -747,7 +771,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-26",
@@ -777,7 +802,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-27",
@@ -807,7 +833,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-28",
@@ -837,7 +864,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-29",
@@ -867,7 +895,8 @@
       "capabilities_any": [
         "policy_check"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g13-security-privacy-guardian-30",
@@ -897,6 +926,7 @@
       "capabilities_any": [
         "human_escalation"
       ]
-    }
+    },
+    "provenance": "catalog"
   }
 ]

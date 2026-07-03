@@ -27,7 +27,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-02",
@@ -57,7 +58,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-03",
@@ -87,7 +89,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-04",
@@ -117,7 +120,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-05",
@@ -147,7 +151,8 @@
       "capabilities_any": [
         "strategy_lineage"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-06",
@@ -177,7 +182,8 @@
       "capabilities_any": [
         "market_agnostic"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-07",
@@ -207,7 +213,8 @@
       "capabilities_any": [
         "provider_abstraction"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-08",
@@ -237,7 +244,8 @@
       "capabilities_any": [
         "company_brain"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-09",
@@ -267,7 +275,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-10",
@@ -297,7 +306,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-11",
@@ -327,7 +337,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-12",
@@ -357,7 +368,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-13",
@@ -387,7 +399,8 @@
       "capabilities_any": [
         "strategy_lineage"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-14",
@@ -417,7 +430,8 @@
       "capabilities_any": [
         "market_agnostic"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-15",
@@ -447,7 +461,8 @@
       "capabilities_any": [
         "provider_abstraction"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-16",
@@ -477,7 +492,8 @@
       "capabilities_any": [
         "company_brain"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-17",
@@ -507,7 +523,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-18",
@@ -537,7 +554,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-19",
@@ -567,7 +585,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-20",
@@ -597,7 +616,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-21",
@@ -627,7 +647,8 @@
       "capabilities_any": [
         "strategy_lineage"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-22",
@@ -657,7 +678,8 @@
       "capabilities_any": [
         "market_agnostic"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-23",
@@ -687,7 +709,8 @@
       "capabilities_any": [
         "provider_abstraction"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-24",
@@ -717,7 +740,8 @@
       "capabilities_any": [
         "company_brain"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-25",
@@ -747,7 +771,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-26",
@@ -777,7 +802,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-27",
@@ -807,7 +833,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-28",
@@ -837,7 +864,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-29",
@@ -867,7 +895,8 @@
       "capabilities_any": [
         "strategy_lineage"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g1-board-deck-author-30",
@@ -897,6 +926,7 @@
       "capabilities_any": [
         "market_agnostic"
       ]
-    }
+    },
+    "provenance": "catalog"
   }
 ]

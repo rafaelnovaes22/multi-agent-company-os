@@ -18,7 +18,8 @@
       "direction": "queda",
       "alert_routed": true,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-02",
@@ -38,7 +39,8 @@
       "severity": "normal",
       "direction": "estavel",
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-03",
@@ -58,7 +60,8 @@
       "direction": "pico",
       "alert_routed": true,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-04",
@@ -78,7 +81,8 @@
       "direction": "pico",
       "alert_routed": true,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-05",
@@ -98,7 +102,8 @@
       "direction": "queda",
       "alert_routed": true,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-06",
@@ -118,7 +123,8 @@
       "direction": "pico",
       "alert_routed": false,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-07",
@@ -138,7 +144,8 @@
       "direction": "pico",
       "alert_routed": true,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-08",
@@ -158,7 +165,8 @@
       "direction": "pico",
       "alert_routed": true,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-09",
@@ -178,7 +186,8 @@
       "direction": "queda",
       "alert_routed": true,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-10",
@@ -198,7 +207,8 @@
       "direction": "pico",
       "alert_routed": false,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-11",
@@ -218,7 +228,8 @@
       "direction": "pico",
       "alert_routed": false,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-12",
@@ -237,7 +248,8 @@
       "severity": "medio",
       "direction": "queda",
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-13",
@@ -257,7 +269,8 @@
       "direction": "estavel",
       "alert_routed": false,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-14",
@@ -277,7 +290,8 @@
       "severity": "normal",
       "direction": "estavel",
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-15",
@@ -298,7 +312,8 @@
       "direction": "queda",
       "alert_routed": true,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-16",
@@ -318,7 +333,8 @@
       "severity": "normal",
       "direction": "estavel",
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-17",
@@ -339,7 +355,8 @@
       "direction": "pico",
       "alert_routed": true,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-18",
@@ -359,7 +376,8 @@
       "direction": "pico",
       "alert_routed": true,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-19",
@@ -378,7 +396,8 @@
       "severity": "normal",
       "alert_routed": false,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-20",
@@ -398,7 +417,8 @@
       "direction": "pico",
       "alert_routed": true,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-21",
@@ -418,7 +438,8 @@
       "direction": "queda",
       "alert_routed": true,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-22",
@@ -438,7 +459,8 @@
       "direction": "pico",
       "alert_routed": false,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-23",
@@ -457,7 +479,8 @@
       "severity": "normal",
       "direction": "queda",
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-24",
@@ -477,7 +500,8 @@
       "direction": "queda",
       "alert_routed": true,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-25",
@@ -497,7 +521,8 @@
       "direction": "pico",
       "alert_routed": false,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-26",
@@ -516,7 +541,8 @@
       "severity": "medio",
       "alert_routed": false,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-27",
@@ -535,7 +561,8 @@
       "severity": "alto",
       "alert_routed": true,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-28",
@@ -555,7 +582,8 @@
       "direction": "pico",
       "alert_routed": true,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-29",
@@ -576,7 +604,8 @@
       "direction": "queda",
       "alert_routed": true,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-30",
@@ -596,7 +625,8 @@
       "direction": "pico",
       "alert_routed": false,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-31",
@@ -616,7 +646,8 @@
       "direction": "pico",
       "alert_routed": true,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "an-32",
@@ -636,6 +667,7 @@
       "direction": "queda",
       "alert_routed": true,
       "by": "g6-anomaly-detector"
-    }
+    },
+    "provenance": "catalog"
   }
 ]

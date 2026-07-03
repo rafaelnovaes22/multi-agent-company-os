@@ -16,7 +16,8 @@
     "expected": {
       "min_steps": 3,
       "consent_required": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-02",
@@ -33,7 +34,8 @@
     },
     "expected": {
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-03",
@@ -50,7 +52,8 @@
     },
     "expected": {
       "consent_required": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-04",
@@ -73,7 +76,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-05",
@@ -93,7 +97,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-06",
@@ -116,7 +121,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-07",
@@ -135,7 +141,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-08",
@@ -158,7 +165,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-09",
@@ -178,7 +186,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-10",
@@ -201,7 +210,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-11",
@@ -221,7 +231,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-12",
@@ -244,7 +255,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-13",
@@ -263,7 +275,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-14",
@@ -286,7 +299,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-15",
@@ -306,7 +320,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-16",
@@ -329,7 +344,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-17",
@@ -349,7 +365,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-18",
@@ -372,7 +389,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-19",
@@ -391,7 +409,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-20",
@@ -414,7 +433,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-21",
@@ -434,7 +454,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-22",
@@ -457,7 +478,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-23",
@@ -477,7 +499,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-24",
@@ -500,7 +523,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-25",
@@ -519,7 +543,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-26",
@@ -542,7 +567,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-27",
@@ -562,7 +588,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-28",
@@ -585,7 +612,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-29",
@@ -605,7 +633,8 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ob-30",
@@ -628,6 +657,7 @@
       "min_steps": 3,
       "consent_required": true,
       "personalized": true
-    }
+    },
+    "provenance": "catalog"
   }
 ]

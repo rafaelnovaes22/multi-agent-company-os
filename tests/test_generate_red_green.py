@@ -219,6 +219,21 @@ class RedGreenLoopTest(unittest.TestCase):
         # o prompt instruiu o self-test (modo sem teste visível)
         self.assertIn("test_selfcheck.py", llm.prompts[0])
 
+    def test_resposta_so_com_teste_gera_feedback_pedindo_o_patch(self):
+        seed = {"api/orders.py": "def total(items):\n    return 0  # TODO-BUG\n"}
+        oracle = {"bug_file": "api/orders.py", "runtime": "python", "test_cmd": "pytest -q",
+                  "bug_markers": {"must_remove": ["TODO-BUG"], "must_contain": []},
+                  "heldout_files": {"test_orders.py": "# oculto\n"}}
+        only_test = json.dumps({"files": {"test_selfcheck.py": "def test_x():\n    assert True\n"}})
+        good = json.dumps({"files": {"api/orders.py": "def total(items):\n    return sum(i['price'] * i['qty'] for i in items)\n"}})
+        llm = ScriptedLLM([only_test, good])
+        ex = ScriptedExecutor([True] * 3)
+        r = generate_red_green("some o carrinho", seed, oracle, llm, ex)
+        self.assertEqual(r["attempts"], 2)
+        self.assertTrue(r["history"][0]["only_selftest"])
+        self.assertIn("só trouxe arquivo de teste", llm.prompts[1])
+        self.assertIn("api/orders.py", r["artifact"]["files"])
+
     def test_selftest_nao_e_instruido_quando_ha_teste_visivel(self):
         llm = ScriptedLLM([GOOD])
         ex = ScriptedExecutor([True])

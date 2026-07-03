@@ -20,7 +20,8 @@
       "sentiment_score": 0.533,
       "alert_raised": false,
       "status": "positivo"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-02",
@@ -43,7 +44,8 @@
       "sentiment_score": -0.533,
       "alert_raised": true,
       "status": "negativo"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-03",
@@ -66,7 +68,8 @@
       "sentiment_score": 0.0,
       "alert_raised": false,
       "status": "neutro"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-04",
@@ -92,7 +95,8 @@
       "sentiment_score": 0.838,
       "status": "positivo",
       "alert_raised": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-05",
@@ -115,7 +119,8 @@
       "sentiment_score": -0.9,
       "alert_raised": true,
       "status": "negativo"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-06",
@@ -138,7 +143,8 @@
       "sentiment_score": -0.2,
       "status": "neutro",
       "alert_raised": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-07",
@@ -160,7 +166,8 @@
     "expected": {
       "sentiment_score": -0.201,
       "status": "negativo"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-08",
@@ -183,7 +190,8 @@
       "sentiment_score": 0.2,
       "status": "neutro",
       "alert_raised": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-09",
@@ -205,7 +213,8 @@
     "expected": {
       "sentiment_score": 0.201,
       "status": "positivo"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-10",
@@ -224,7 +233,8 @@
     "expected": {
       "sentiment_score": -0.2,
       "alert_raised": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-11",
@@ -246,7 +256,8 @@
     "expected": {
       "sentiment_score": -0.217,
       "alert_raised": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-12",
@@ -267,7 +278,8 @@
       "sentiment_score": -0.3,
       "alert_raised": false,
       "status": "negativo"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-13",
@@ -288,7 +300,8 @@
       "sentiment_score": -0.3,
       "alert_raised": true,
       "status": "negativo"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-14",
@@ -309,7 +322,8 @@
       "sentiment_score": 0.4,
       "alert_raised": true,
       "status": "positivo"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-15",
@@ -329,7 +343,8 @@
     "expected": {
       "sentiment_score": 0.0,
       "alert_raised": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-16",
@@ -358,7 +373,8 @@
       "signal_count": 5,
       "sentiment_score": 0.3,
       "status": "positivo"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-17",
@@ -376,7 +392,8 @@
       "signal_count": 1,
       "alert_raised": true,
       "status": "negativo"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-18",
@@ -390,7 +407,8 @@
       "alert_raised": false,
       "status": "neutro",
       "signal_count": 0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-19",
@@ -401,7 +419,8 @@
       "alert_raised": false,
       "status": "neutro",
       "signal_count": 0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-20",
@@ -427,7 +446,8 @@
       "sentiment_score": 0.3,
       "alert_raised": false,
       "status": "positivo"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-21",
@@ -450,7 +470,8 @@
       "sentiment_score": -0.4,
       "alert_raised": true,
       "status": "negativo"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-22",
@@ -476,7 +497,8 @@
       "sentiment_score": 0.025,
       "alert_raised": false,
       "status": "neutro"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-23",
@@ -496,7 +518,8 @@
       "sentiment_score": -0.2,
       "status": "neutro",
       "alert_raised": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-24",
@@ -522,7 +545,8 @@
       "sentiment_score": -0.875,
       "alert_raised": true,
       "status": "negativo"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-25",
@@ -543,7 +567,8 @@
       "sentiment_score": 0.4,
       "signal_count": 3,
       "status": "positivo"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-26",
@@ -564,7 +589,8 @@
       "sentiment_score": 0.0,
       "alert_raised": true,
       "status": "neutro"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-27",
@@ -597,7 +623,8 @@
       "status": "positivo",
       "alert_raised": false,
       "signal_count": 6
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-28",
@@ -617,7 +644,8 @@
       "sentiment_score": -0.19,
       "status": "neutro",
       "alert_raised": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-29",
@@ -637,7 +665,8 @@
       "sentiment_score": 0.19,
       "status": "neutro",
       "alert_raised": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-30",
@@ -664,7 +693,8 @@
       "status": "neutro",
       "alert_raised": false,
       "signal_count": 4
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-31",
@@ -685,7 +715,8 @@
       "sentiment_score": 0.5,
       "alert_raised": true,
       "status": "positivo"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "sm-32",
@@ -706,6 +737,7 @@
       "sentiment_score": -0.9,
       "alert_raised": false,
       "status": "negativo"
-    }
+    },
+    "provenance": "catalog"
   }
 ]

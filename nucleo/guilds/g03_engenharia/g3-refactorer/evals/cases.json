@@ -27,7 +27,8 @@
       "capabilities_any": [
         "build"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-02",
@@ -57,7 +58,8 @@
       "capabilities_any": [
         "review"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-03",
@@ -87,7 +89,8 @@
       "capabilities_any": [
         "route"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-04",
@@ -117,7 +120,8 @@
       "capabilities_any": [
         "verify"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-05",
@@ -147,7 +151,8 @@
       "capabilities_any": [
         "remediate"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-06",
@@ -177,7 +182,8 @@
       "capabilities_any": [
         "plan"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-07",
@@ -207,7 +213,8 @@
       "capabilities_any": [
         "build"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-08",
@@ -237,7 +244,8 @@
       "capabilities_any": [
         "review"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-09",
@@ -267,7 +275,8 @@
       "capabilities_any": [
         "route"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-10",
@@ -297,7 +306,8 @@
       "capabilities_any": [
         "verify"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-11",
@@ -327,7 +337,8 @@
       "capabilities_any": [
         "remediate"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-12",
@@ -357,7 +368,8 @@
       "capabilities_any": [
         "plan"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-13",
@@ -387,7 +399,8 @@
       "capabilities_any": [
         "build"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-14",
@@ -417,7 +430,8 @@
       "capabilities_any": [
         "review"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-15",
@@ -447,7 +461,8 @@
       "capabilities_any": [
         "route"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-16",
@@ -477,7 +492,8 @@
       "capabilities_any": [
         "verify"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-17",
@@ -507,7 +523,8 @@
       "capabilities_any": [
         "remediate"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-18",
@@ -537,7 +554,8 @@
       "capabilities_any": [
         "plan"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-19",
@@ -567,7 +585,8 @@
       "capabilities_any": [
         "build"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-20",
@@ -597,7 +616,8 @@
       "capabilities_any": [
         "review"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-21",
@@ -627,7 +647,8 @@
       "capabilities_any": [
         "route"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-22",
@@ -657,7 +678,8 @@
       "capabilities_any": [
         "verify"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-23",
@@ -687,7 +709,8 @@
       "capabilities_any": [
         "remediate"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-24",
@@ -717,7 +740,8 @@
       "capabilities_any": [
         "plan"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-25",
@@ -747,7 +771,8 @@
       "capabilities_any": [
         "build"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-26",
@@ -777,7 +802,8 @@
       "capabilities_any": [
         "review"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-27",
@@ -807,7 +833,8 @@
       "capabilities_any": [
         "route"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-28",
@@ -837,7 +864,8 @@
       "capabilities_any": [
         "verify"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-29",
@@ -867,7 +895,8 @@
       "capabilities_any": [
         "remediate"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g3-refactorer-30",
@@ -897,6 +926,7 @@
       "capabilities_any": [
         "plan"
       ]
-    }
+    },
+    "provenance": "catalog"
   }
 ]

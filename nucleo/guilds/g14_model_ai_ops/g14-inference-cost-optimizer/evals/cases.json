@@ -17,7 +17,8 @@
       "quality_ok": true,
       "applied": true,
       "status": "applied"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-02",
@@ -37,7 +38,8 @@
       "quality_ok": false,
       "applied": false,
       "status": "quality_regression"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-03",
@@ -56,7 +58,8 @@
       "savings_pct": 0.0,
       "applied": false,
       "status": "no_savings"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-04",
@@ -73,7 +76,8 @@
       "savings_pct": 40.0,
       "applied": true,
       "status": "applied"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-05",
@@ -90,7 +94,8 @@
       "savings_pct": 30.0,
       "applied": true,
       "status": "applied"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-06",
@@ -109,7 +114,8 @@
       "savings_pct": 87.5,
       "applied": true,
       "status": "applied"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-07",
@@ -126,7 +132,8 @@
       "quality_ok": true,
       "applied": true,
       "status": "applied"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-08",
@@ -143,7 +150,8 @@
       "quality_ok": false,
       "applied": false,
       "status": "quality_regression"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-09",
@@ -163,7 +171,8 @@
       "quality_ok": false,
       "applied": false,
       "status": "quality_regression"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-10",
@@ -180,7 +189,8 @@
       "quality_ok": true,
       "applied": true,
       "status": "applied"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-11",
@@ -197,7 +207,8 @@
       "savings_pct": 100.0,
       "applied": true,
       "status": "applied"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-12",
@@ -214,7 +225,8 @@
       "quality_ok": false,
       "applied": false,
       "status": "quality_regression"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-13",
@@ -230,7 +242,8 @@
       "quality_ok": true,
       "applied": true,
       "status": "applied"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-14",
@@ -247,7 +260,8 @@
       "quality_ok": true,
       "applied": true,
       "status": "applied"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-15",
@@ -264,7 +278,8 @@
       "quality_ok": false,
       "applied": false,
       "status": "quality_regression"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-16",
@@ -281,7 +296,8 @@
       "savings_pct": 25.0,
       "applied": true,
       "status": "applied"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-17",
@@ -298,7 +314,8 @@
       "savings_pct": 0.0,
       "applied": false,
       "status": "no_savings"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-18",
@@ -316,7 +333,8 @@
       "savings_pct": 75.0,
       "applied": true,
       "status": "applied"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-19",
@@ -331,7 +349,8 @@
       "quality_ok": true,
       "applied": false,
       "status": "no_savings"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-20",
@@ -350,7 +369,8 @@
       "quality_ok": true,
       "applied": true,
       "status": "applied"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-21",
@@ -368,7 +388,8 @@
       "savings_pct": 90.0,
       "applied": true,
       "status": "applied"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-22",
@@ -386,7 +407,8 @@
       "quality_ok": true,
       "applied": false,
       "status": "no_savings"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-23",
@@ -403,7 +425,8 @@
       "savings_pct": 70.0,
       "applied": true,
       "status": "applied"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-24",
@@ -421,7 +444,8 @@
       "savings_pct": 70.0,
       "applied": true,
       "status": "applied"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-25",
@@ -438,7 +462,8 @@
       "quality_ok": false,
       "applied": false,
       "status": "quality_regression"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-26",
@@ -455,7 +480,8 @@
       "savings_pct": 10.0,
       "applied": true,
       "status": "applied"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-27",
@@ -471,7 +497,8 @@
       "quality_ok": true,
       "applied": true,
       "status": "applied"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-28",
@@ -488,7 +515,8 @@
       "savings_pct": 5.0,
       "applied": true,
       "status": "applied"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-29",
@@ -506,7 +534,8 @@
       "quality_ok": false,
       "applied": false,
       "status": "quality_regression"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-30",
@@ -525,7 +554,8 @@
       "savings_pct": 48.8,
       "applied": true,
       "status": "applied"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-31",
@@ -545,7 +575,8 @@
       "quality_ok": true,
       "applied": true,
       "status": "applied"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "co-32",
@@ -564,6 +595,7 @@
       "quality_ok": true,
       "applied": true,
       "status": "applied"
-    }
+    },
+    "provenance": "catalog"
   }
 ]

@@ -13,7 +13,8 @@
       "tax_amount": 600.0,
       "net_amount": 9400.0,
       "regime": "simples"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-02",
@@ -29,7 +30,8 @@
       "tax_amount": 1133.0,
       "net_amount": 8867.0,
       "regime": "presumido"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-03",
@@ -44,7 +46,8 @@
       "tax_rate": 0.1,
       "tax_amount": 500.0,
       "net_amount": 4500.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-04",
@@ -60,7 +63,8 @@
       "tax_amount": 1500.0,
       "net_amount": 8500.0,
       "regime": "real"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-05",
@@ -76,7 +80,8 @@
       "tax_amount": 1500.0,
       "net_amount": 23500.0,
       "regime": "simples"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-06",
@@ -93,7 +98,8 @@
       "tax_amount": 600.0,
       "net_amount": 9400.0,
       "regime": "presumido"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-07",
@@ -110,7 +116,8 @@
       "tax_amount": 2000.0,
       "net_amount": 8000.0,
       "regime": "real"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-08",
@@ -126,7 +133,8 @@
       "tax_amount": 6000.0,
       "net_amount": 94000.0,
       "regime": "simples"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-09",
@@ -142,7 +150,8 @@
       "tax_amount": 11330.0,
       "net_amount": 88670.0,
       "regime": "presumido"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-10",
@@ -158,7 +167,8 @@
       "tax_amount": 15000.0,
       "net_amount": 85000.0,
       "regime": "real"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-11",
@@ -174,7 +184,8 @@
       "tax_amount": 0.0,
       "net_amount": 0.0,
       "regime": "simples"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-12",
@@ -190,7 +201,8 @@
       "tax_amount": 0.0,
       "net_amount": 0.01,
       "regime": "simples"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-13",
@@ -206,7 +218,8 @@
       "tax_amount": 0.11,
       "net_amount": 0.89,
       "regime": "presumido"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-14",
@@ -222,7 +235,8 @@
       "tax_amount": 150000.0,
       "net_amount": 850000.0,
       "regime": "real"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-15",
@@ -237,7 +251,8 @@
       "tax_rate": 0.0,
       "tax_amount": 0.0,
       "net_amount": 50000.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-16",
@@ -252,7 +267,8 @@
       "tax_rate": 0.25,
       "tax_amount": 2000.0,
       "net_amount": 6000.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-17",
@@ -268,7 +284,8 @@
       "tax_amount": 200.0,
       "net_amount": 3133.33,
       "regime": "simples"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-18",
@@ -284,7 +301,8 @@
       "tax_amount": 5381.75,
       "net_amount": 42118.25,
       "regime": "presumido"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-19",
@@ -300,7 +318,8 @@
       "tax_amount": 9300.0,
       "net_amount": 52700.0,
       "regime": "real"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-20",
@@ -317,7 +336,8 @@
       "tax_amount": 125.0,
       "net_amount": 9875.0,
       "regime": "simples"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-21",
@@ -333,7 +353,8 @@
       "tax_amount": 1416.25,
       "net_amount": 11083.75,
       "regime": "presumido"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-22",
@@ -349,7 +370,8 @@
       "tax_amount": 15000.0,
       "net_amount": 235000.0,
       "regime": "simples"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-23",
@@ -365,7 +387,8 @@
       "tax_amount": 22.5,
       "net_amount": 127.5,
       "regime": "real"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-24",
@@ -381,7 +404,8 @@
       "tax_amount": 6798.0,
       "net_amount": 53202.0,
       "regime": "presumido"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-25",
@@ -396,7 +420,8 @@
       "tax_rate": 0.03,
       "tax_amount": 600.0,
       "net_amount": 19400.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-26",
@@ -411,7 +436,8 @@
       "tax_rate": 0.05,
       "tax_amount": 1000.0,
       "net_amount": 19000.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-27",
@@ -427,7 +453,8 @@
       "tax_amount": 1800.0,
       "net_amount": 28200.0,
       "regime": "simples"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-28",
@@ -443,7 +470,8 @@
       "tax_amount": 1500.0,
       "net_amount": 8499.99,
       "regime": "real"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-29",
@@ -459,7 +487,8 @@
       "tax_amount": 56650.0,
       "net_amount": 443350.0,
       "regime": "presumido"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-30",
@@ -474,7 +503,8 @@
       "tax_rate": 0.1133,
       "tax_amount": 1133.0,
       "net_amount": 8867.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-31",
@@ -490,7 +520,8 @@
       "tax_amount": 0.6,
       "net_amount": 9.4,
       "regime": "simples"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "in-32",
@@ -507,6 +538,7 @@
       "tax_amount": 600.0,
       "net_amount": 9400.0,
       "regime": "real"
-    }
+    },
+    "provenance": "catalog"
   }
 ]

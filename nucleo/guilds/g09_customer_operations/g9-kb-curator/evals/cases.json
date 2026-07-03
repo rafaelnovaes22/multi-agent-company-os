@@ -20,7 +20,8 @@
     "expected": {
       "deflection_rate": 66.7,
       "gap_count": 1
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-02",
@@ -43,7 +44,8 @@
     "expected": {
       "deflection_rate": 100.0,
       "gap_count": 0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-03",
@@ -61,7 +63,8 @@
     "expected": {
       "deflection_rate": 0.0,
       "gap_count": 1
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-04",
@@ -95,7 +98,8 @@
       "deflection_rate": 96.8,
       "coverage_pct": 25.0,
       "gap_count": 3
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-05",
@@ -132,7 +136,8 @@
       "gaps": [
         "hot"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-06",
@@ -156,7 +161,8 @@
       "deflection_rate": 50.0,
       "coverage_pct": 50.0,
       "gap_count": 1
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-07",
@@ -193,7 +199,8 @@
         "fatura",
         "api"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-08",
@@ -223,7 +230,8 @@
       "gaps": [],
       "coverage_pct": 100.0,
       "deflection_rate": 100.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-09",
@@ -251,7 +259,8 @@
         "a",
         "b"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-10",
@@ -275,7 +284,8 @@
       "deflection_rate": 100.0,
       "coverage_pct": 100.0,
       "gap_count": 0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-11",
@@ -299,7 +309,8 @@
       "deflection_rate": 0.0,
       "coverage_pct": 50.0,
       "gap_count": 1
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-12",
@@ -326,7 +337,8 @@
         "frio"
       ],
       "coverage_pct": 50.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-13",
@@ -340,7 +352,8 @@
       "coverage_pct": 0.0,
       "gap_count": 0,
       "gaps": []
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-14",
@@ -350,7 +363,8 @@
     "expected": {
       "deflection_rate": 0.0,
       "gap_count": 0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-15",
@@ -369,7 +383,8 @@
       "deflection_rate": 100.0,
       "coverage_pct": 100.0,
       "gap_count": 0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-16",
@@ -391,7 +406,8 @@
       "gaps": [
         "solo"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-17",
@@ -420,7 +436,8 @@
       "deflection_rate": 33.3,
       "coverage_pct": 33.3,
       "gap_count": 2
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-18",
@@ -449,7 +466,8 @@
       "deflection_rate": 66.7,
       "coverage_pct": 66.7,
       "gap_count": 1
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-19",
@@ -483,7 +501,8 @@
       "coverage_pct": 25.0,
       "deflection_rate": 70.0,
       "gap_count": 3
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-20",
@@ -537,7 +556,8 @@
       "coverage_pct": 87.5,
       "gap_count": 1,
       "deflection_rate": 87.5
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-21",
@@ -561,7 +581,8 @@
       "coverage_pct": 100.0,
       "deflection_rate": 100.0,
       "gap_count": 0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-22",
@@ -587,7 +608,8 @@
       ],
       "gap_count": 1,
       "deflection_rate": 14.3
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-23",
@@ -629,7 +651,8 @@
       "gaps": [
         "mega"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-24",
@@ -653,7 +676,8 @@
       "deflection_rate": 100.0,
       "coverage_pct": 50.0,
       "gap_count": 1
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-25",
@@ -696,7 +720,8 @@
         "d",
         "e"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-26",
@@ -720,7 +745,8 @@
       "deflection_rate": 90.9,
       "coverage_pct": 50.0,
       "gap_count": 1
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-27",
@@ -747,7 +773,8 @@
       "gaps": [
         "dominante"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-28",
@@ -791,7 +818,8 @@
       "deflection_rate": 66.7,
       "coverage_pct": 66.7,
       "gap_count": 2
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-29",
@@ -855,7 +883,8 @@
       "deflection_rate": 100.0,
       "coverage_pct": 100.0,
       "gap_count": 0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-30",
@@ -882,7 +911,8 @@
       "gaps": [
         "b"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-31",
@@ -909,7 +939,8 @@
       "gaps": [
         "b"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "kb-32",
@@ -947,6 +978,7 @@
         "g3"
       ],
       "coverage_pct": 25.0
-    }
+    },
+    "provenance": "catalog"
   }
 ]

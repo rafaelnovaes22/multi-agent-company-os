@@ -67,7 +67,8 @@
       "unreconciled_balance_brl": 0.0,
       "status": "reconciled",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-02",
@@ -142,7 +143,8 @@
       "unreconciled_balance_brl": 226.0,
       "status": "exceptions_opened",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-03",
@@ -232,7 +234,8 @@
       "unreconciled_balance_brl": -10.0,
       "status": "exceptions_opened",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-04",
@@ -337,7 +340,8 @@
       "unreconciled_balance_brl": -33.0,
       "status": "exceptions_opened",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-05",
@@ -407,7 +411,8 @@
       "unreconciled_balance_brl": 0.0,
       "status": "reconciled",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-06",
@@ -487,7 +492,8 @@
       "unreconciled_balance_brl": 0.0,
       "status": "reconciled",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-07",
@@ -572,7 +578,8 @@
       "unreconciled_balance_brl": 256.0,
       "status": "exceptions_opened",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-08",
@@ -672,7 +679,8 @@
       "unreconciled_balance_brl": -10.0,
       "status": "exceptions_opened",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-09",
@@ -747,7 +755,8 @@
       "unreconciled_balance_brl": -33.0,
       "status": "exceptions_opened",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-10",
@@ -827,7 +836,8 @@
       "unreconciled_balance_brl": 0.0,
       "status": "reconciled",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-11",
@@ -917,7 +927,8 @@
       "unreconciled_balance_brl": 0.0,
       "status": "reconciled",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-12",
@@ -1012,7 +1023,8 @@
       "unreconciled_balance_brl": 286.0,
       "status": "exceptions_opened",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-13",
@@ -1082,7 +1094,8 @@
       "unreconciled_balance_brl": -10.0,
       "status": "exceptions_opened",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-14",
@@ -1167,7 +1180,8 @@
       "unreconciled_balance_brl": -33.0,
       "status": "exceptions_opened",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-15",
@@ -1257,7 +1271,8 @@
       "unreconciled_balance_brl": 0.0,
       "status": "reconciled",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-16",
@@ -1357,7 +1372,8 @@
       "unreconciled_balance_brl": 0.0,
       "status": "reconciled",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-17",
@@ -1422,7 +1438,8 @@
       "unreconciled_balance_brl": 216.0,
       "status": "exceptions_opened",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-18",
@@ -1502,7 +1519,8 @@
       "unreconciled_balance_brl": -10.0,
       "status": "exceptions_opened",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-19",
@@ -1597,7 +1615,8 @@
       "unreconciled_balance_brl": -33.0,
       "status": "exceptions_opened",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-20",
@@ -1697,7 +1716,8 @@
       "unreconciled_balance_brl": 0.0,
       "status": "reconciled",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-21",
@@ -1767,7 +1787,8 @@
       "unreconciled_balance_brl": 0.0,
       "status": "reconciled",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-22",
@@ -1842,7 +1863,8 @@
       "unreconciled_balance_brl": 246.0,
       "status": "exceptions_opened",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-23",
@@ -1932,7 +1954,8 @@
       "unreconciled_balance_brl": -10.0,
       "status": "exceptions_opened",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-24",
@@ -2037,7 +2060,8 @@
       "unreconciled_balance_brl": -33.0,
       "status": "exceptions_opened",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-25",
@@ -2107,7 +2131,8 @@
       "unreconciled_balance_brl": 0.0,
       "status": "reconciled",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-26",
@@ -2187,7 +2212,8 @@
       "unreconciled_balance_brl": 0.0,
       "status": "reconciled",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-27",
@@ -2272,7 +2298,8 @@
       "unreconciled_balance_brl": 276.0,
       "status": "exceptions_opened",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-28",
@@ -2372,7 +2399,8 @@
       "unreconciled_balance_brl": -10.0,
       "status": "exceptions_opened",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-29",
@@ -2447,7 +2475,8 @@
       "unreconciled_balance_brl": -33.0,
       "status": "exceptions_opened",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-reconciliation-30",
@@ -2527,6 +2556,7 @@
       "unreconciled_balance_brl": 0.0,
       "status": "reconciled",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   }
 ]

@@ -20,7 +20,8 @@
       "reconciliation_delta_pct": 2.0,
       "reconciled": false,
       "status": "needs_reconciliation"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-02",
@@ -43,7 +44,8 @@
       "reconciliation_delta_pct": 0.8,
       "reconciled": true,
       "status": "published"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-03",
@@ -66,7 +68,8 @@
       "reconciliation_delta_pct": 0.0,
       "reconciled": true,
       "status": "published"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-04",
@@ -89,7 +92,8 @@
       "reconciliation_delta_pct": 0.0,
       "reconciled": true,
       "status": "published"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-05",
@@ -112,7 +116,8 @@
       "reconciliation_delta_pct": 0.0,
       "reconciled": true,
       "status": "published"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-06",
@@ -135,7 +140,8 @@
       "reconciliation_delta_pct": 0.0,
       "reconciled": true,
       "status": "published"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-07",
@@ -158,7 +164,8 @@
       "reconciliation_delta_pct": 2.0,
       "reconciled": false,
       "status": "needs_reconciliation"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-08",
@@ -181,7 +188,8 @@
       "reconciliation_delta_pct": 0.8,
       "reconciled": true,
       "status": "published"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-09",
@@ -204,7 +212,8 @@
       "reconciliation_delta_pct": 0.0,
       "reconciled": true,
       "status": "published"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-10",
@@ -227,7 +236,8 @@
       "reconciliation_delta_pct": 0.0,
       "reconciled": true,
       "status": "published"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-11",
@@ -250,7 +260,8 @@
       "reconciliation_delta_pct": 0.0,
       "reconciled": true,
       "status": "published"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-12",
@@ -273,7 +284,8 @@
       "reconciliation_delta_pct": 0.0,
       "reconciled": true,
       "status": "published"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-13",
@@ -296,7 +308,8 @@
       "reconciliation_delta_pct": 2.0,
       "reconciled": false,
       "status": "needs_reconciliation"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-14",
@@ -319,7 +332,8 @@
       "reconciliation_delta_pct": 0.8,
       "reconciled": true,
       "status": "published"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-15",
@@ -342,7 +356,8 @@
       "reconciliation_delta_pct": 0.0,
       "reconciled": true,
       "status": "published"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-16",
@@ -365,7 +380,8 @@
       "reconciliation_delta_pct": 0.0,
       "reconciled": true,
       "status": "published"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-17",
@@ -388,7 +404,8 @@
       "reconciliation_delta_pct": 0.0,
       "reconciled": true,
       "status": "published"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-18",
@@ -411,7 +428,8 @@
       "reconciliation_delta_pct": 0.0,
       "reconciled": true,
       "status": "published"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-19",
@@ -434,7 +452,8 @@
       "reconciliation_delta_pct": 2.0,
       "reconciled": false,
       "status": "needs_reconciliation"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-20",
@@ -457,7 +476,8 @@
       "reconciliation_delta_pct": 0.8,
       "reconciled": true,
       "status": "published"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-21",
@@ -480,7 +500,8 @@
       "reconciliation_delta_pct": 0.0,
       "reconciled": true,
       "status": "published"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-22",
@@ -503,7 +524,8 @@
       "reconciliation_delta_pct": 0.0,
       "reconciled": true,
       "status": "published"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-23",
@@ -526,7 +548,8 @@
       "reconciliation_delta_pct": 0.0,
       "reconciled": true,
       "status": "published"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-24",
@@ -549,7 +572,8 @@
       "reconciliation_delta_pct": 0.0,
       "reconciled": true,
       "status": "published"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-25",
@@ -572,7 +596,8 @@
       "reconciliation_delta_pct": 2.0,
       "reconciled": false,
       "status": "needs_reconciliation"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-26",
@@ -595,7 +620,8 @@
       "reconciliation_delta_pct": 0.8,
       "reconciled": true,
       "status": "published"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-27",
@@ -618,7 +644,8 @@
       "reconciliation_delta_pct": 0.0,
       "reconciled": true,
       "status": "published"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-28",
@@ -641,7 +668,8 @@
       "reconciliation_delta_pct": 0.0,
       "reconciled": true,
       "status": "published"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-29",
@@ -664,7 +692,8 @@
       "reconciliation_delta_pct": 0.0,
       "reconciled": true,
       "status": "published"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g8-revenue-reporter-30",
@@ -687,6 +716,7 @@
       "reconciliation_delta_pct": 0.0,
       "reconciled": true,
       "status": "published"
-    }
+    },
+    "provenance": "catalog"
   }
 ]

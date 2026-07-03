@@ -11,7 +11,8 @@
       "clean": true,
       "status": "PASS",
       "block_merge": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-02",
@@ -31,7 +32,8 @@
       "clean": false,
       "status": "FAIL",
       "block_merge": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-03",
@@ -50,7 +52,8 @@
       "clean": false,
       "status": "FAIL",
       "block_merge": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-04",
@@ -67,7 +70,8 @@
       "clean": false,
       "status": "FAIL",
       "block_merge": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-05",
@@ -83,7 +87,8 @@
       "hardcode_count": 1,
       "clean": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-06",
@@ -100,7 +105,8 @@
       "clean": false,
       "status": "FAIL",
       "block_merge": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-07",
@@ -121,7 +127,8 @@
       "pii_count": 1,
       "clean": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-08",
@@ -144,7 +151,8 @@
       "clean": false,
       "status": "FAIL",
       "block_merge": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-09",
@@ -162,7 +170,8 @@
       "clean": true,
       "status": "PASS",
       "block_merge": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-10",
@@ -183,7 +192,8 @@
       "hardcode_count": 0,
       "clean": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-11",
@@ -202,7 +212,8 @@
       "hardcode_count": 2,
       "clean": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-12",
@@ -219,7 +230,8 @@
       "clean": false,
       "block_merge": true,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-13",
@@ -243,7 +255,8 @@
       "pii_in_memory": true,
       "clean": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-14",
@@ -262,7 +275,8 @@
       "hardcode_count": 2,
       "clean": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-15",
@@ -286,7 +300,8 @@
       "clean": true,
       "status": "PASS",
       "block_merge": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-16",
@@ -302,7 +317,8 @@
       "hardcode_count": 1,
       "clean": false,
       "block_merge": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-17",
@@ -319,7 +335,8 @@
       "pii_in_memory": true,
       "clean": false,
       "block_merge": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-18",
@@ -347,7 +364,8 @@
       "hardcode_count": 5,
       "clean": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-19",
@@ -364,7 +382,8 @@
       "pii_in_memory": false,
       "clean": true,
       "status": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-20",
@@ -391,7 +410,8 @@
       "pii_in_memory": true,
       "clean": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-21",
@@ -406,7 +426,8 @@
       "pii_in_memory": false,
       "status": "PASS",
       "block_merge": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-22",
@@ -425,7 +446,8 @@
       "hardcode_count": 2,
       "clean": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-23",
@@ -444,7 +466,8 @@
       "hardcode_count": 2,
       "clean": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-24",
@@ -460,7 +483,8 @@
       "pii_count": 1,
       "hardcode_count": 0,
       "pii_in_memory": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-25",
@@ -475,7 +499,8 @@
     "expected": {
       "block_merge": true,
       "clean": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-26",
@@ -486,7 +511,8 @@
     "expected": {
       "block_merge": false,
       "clean": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-27",
@@ -513,7 +539,8 @@
       "pii_in_memory": true,
       "clean": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-28",
@@ -539,7 +566,8 @@
       "pii_in_memory": false,
       "clean": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-29",
@@ -558,7 +586,8 @@
       "hardcode_count": 0,
       "pii_count": 2,
       "clean": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-30",
@@ -572,7 +601,8 @@
       "clean": true,
       "status": "PASS",
       "block_merge": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-31",
@@ -603,7 +633,8 @@
       "hardcode_count": 6,
       "clean": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c8-32",
@@ -628,6 +659,7 @@
       "clean": false,
       "status": "FAIL",
       "block_merge": true
-    }
+    },
+    "provenance": "catalog"
   }
 ]

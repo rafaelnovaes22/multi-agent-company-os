@@ -22,7 +22,8 @@
       "regression": false,
       "recommendation": "adotar",
       "adopt": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-02",
@@ -44,7 +45,8 @@
       "regression": true,
       "recommendation": "reverter",
       "adopt": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-03",
@@ -66,7 +68,8 @@
       "regression": false,
       "recommendation": "revisar",
       "adopt": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-04",
@@ -88,7 +91,8 @@
       "regression": false,
       "recommendation": "adotar",
       "adopt": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-05",
@@ -110,7 +114,8 @@
       "regression": true,
       "recommendation": "reverter",
       "adopt": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-06",
@@ -133,7 +138,8 @@
       "regression": false,
       "recommendation": "adotar",
       "adopt": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-07",
@@ -156,7 +162,8 @@
       "recommendation": "adotar",
       "adopt": true,
       "monthly_savings": 0.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-08",
@@ -178,7 +185,8 @@
       "monthly_savings": 1000.0,
       "recommendation": "adotar",
       "adopt": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-09",
@@ -200,7 +208,8 @@
       "cost_savings_pct": -100.0,
       "recommendation": "revisar",
       "adopt": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-10",
@@ -222,7 +231,8 @@
       "regression": true,
       "recommendation": "reverter",
       "adopt": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-11",
@@ -244,7 +254,8 @@
       "monthly_savings": 10000.0,
       "recommendation": "adotar",
       "adopt": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-12",
@@ -266,7 +277,8 @@
       "cost_delta": 4.0,
       "recommendation": "revisar",
       "adopt": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-13",
@@ -287,7 +299,8 @@
       "regression": false,
       "recommendation": "adotar",
       "adopt": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-14",
@@ -309,7 +322,8 @@
       "regression": false,
       "recommendation": "adotar",
       "adopt": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-15",
@@ -331,7 +345,8 @@
       "regression": true,
       "recommendation": "reverter",
       "adopt": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-16",
@@ -353,7 +368,8 @@
       "cost_delta": 0.0,
       "recommendation": "adotar",
       "adopt": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-17",
@@ -376,7 +392,8 @@
       "cost_savings_pct": 60.0,
       "recommendation": "adotar",
       "adopt": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-18",
@@ -398,7 +415,8 @@
       "regression": true,
       "recommendation": "reverter",
       "adopt": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-19",
@@ -421,7 +439,8 @@
       "recommendation": "adotar",
       "adopt": true,
       "monthly_savings": 300.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-20",
@@ -443,7 +462,8 @@
       "monthly_savings": 0.0,
       "recommendation": "adotar",
       "adopt": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-21",
@@ -465,7 +485,8 @@
       "regression": false,
       "recommendation": "revisar",
       "adopt": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-22",
@@ -487,7 +508,8 @@
       "regression": true,
       "recommendation": "reverter",
       "adopt": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-23",
@@ -509,7 +531,8 @@
       "monthly_savings": 10000.0,
       "recommendation": "adotar",
       "adopt": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-24",
@@ -531,7 +554,8 @@
       "monthly_savings": 0.0,
       "recommendation": "adotar",
       "adopt": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-25",
@@ -554,7 +578,8 @@
       "cost_delta": 2.0,
       "recommendation": "revisar",
       "adopt": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-26",
@@ -576,7 +601,8 @@
       "cost_delta": 0.0,
       "recommendation": "adotar",
       "adopt": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-27",
@@ -597,7 +623,8 @@
       "cost_savings_pct": 75.0,
       "recommendation": "adotar",
       "adopt": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-28",
@@ -619,7 +646,8 @@
       "regression": true,
       "recommendation": "reverter",
       "adopt": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-29",
@@ -641,7 +669,8 @@
       "cost_delta": 3.0,
       "recommendation": "revisar",
       "adopt": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-30",
@@ -666,7 +695,8 @@
       "regression": false,
       "recommendation": "adotar",
       "adopt": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-31",
@@ -688,7 +718,8 @@
       "regression": true,
       "recommendation": "reverter",
       "adopt": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mb-32",
@@ -711,6 +742,7 @@
       "regression": false,
       "recommendation": "revisar",
       "adopt": false
-    }
+    },
+    "provenance": "catalog"
   }
 ]

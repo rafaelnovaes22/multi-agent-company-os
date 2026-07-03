@@ -22,7 +22,8 @@
       "block_load": false,
       "trigger_lgpd": false,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-02",
@@ -46,7 +47,8 @@
       "suite_passed": false,
       "block_load": true,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-03",
@@ -71,7 +73,8 @@
       "trigger_lgpd": true,
       "block_load": true,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-04",
@@ -96,7 +99,8 @@
       "block_load": true,
       "contract_certified": false,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-05",
@@ -120,7 +124,8 @@
       "block_load": true,
       "trigger_lgpd": false,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-06",
@@ -143,7 +148,8 @@
       "suite_passed": false,
       "block_load": true,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-07",
@@ -167,7 +173,8 @@
       "trigger_lgpd": true,
       "block_load": true,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-08",
@@ -191,7 +198,8 @@
       "suite_passed": false,
       "block_load": true,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-09",
@@ -215,7 +223,8 @@
       "suite_passed": true,
       "contract_certified": true,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-10",
@@ -241,7 +250,8 @@
       "failed_count": 1,
       "suite_passed": false,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-11",
@@ -263,7 +273,8 @@
       "failed_count": 0,
       "suite_passed": true,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-12",
@@ -288,7 +299,8 @@
       "failed_count": 1,
       "suite_passed": false,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-13",
@@ -310,7 +322,8 @@
       },
       "suite_passed": true,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-14",
@@ -335,7 +348,8 @@
       "failed_count": 1,
       "suite_passed": false,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-15",
@@ -360,7 +374,8 @@
       "failed_count": 1,
       "suite_passed": false,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-16",
@@ -380,7 +395,8 @@
       },
       "suite_passed": true,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-17",
@@ -408,7 +424,8 @@
       "block_load": true,
       "trigger_lgpd": false,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-18",
@@ -437,7 +454,8 @@
       "trigger_lgpd": true,
       "contract_certified": false,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-19",
@@ -462,7 +480,8 @@
       "suite_passed": false,
       "block_load": true,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-20",
@@ -484,7 +503,8 @@
       "suite_passed": true,
       "contract_certified": true,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-21",
@@ -507,7 +527,8 @@
       "failed_count": 1,
       "suite_passed": false,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-22",
@@ -529,7 +550,8 @@
       "contract_certified": true,
       "block_load": false,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-23",
@@ -551,7 +573,8 @@
       },
       "suite_passed": true,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-24",
@@ -573,7 +596,8 @@
       },
       "suite_passed": true,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-25",
@@ -599,7 +623,8 @@
       "trigger_lgpd": true,
       "block_load": true,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-26",
@@ -621,7 +646,8 @@
       "suite_passed": true,
       "contract_certified": true,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-27",
@@ -645,7 +671,8 @@
       "suite_passed": false,
       "block_load": true,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-28",
@@ -670,7 +697,8 @@
       "trigger_lgpd": false,
       "block_load": true,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-29",
@@ -694,7 +722,8 @@
       "suite_passed": false,
       "trigger_lgpd": false,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-30",
@@ -718,7 +747,8 @@
       "block_load": false,
       "trigger_lgpd": false,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-31",
@@ -739,7 +769,8 @@
       },
       "suite_passed": true,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "dq-32",
@@ -764,6 +795,7 @@
       "failed_count": 1,
       "suite_passed": false,
       "by": "g6-data-quality"
-    }
+    },
+    "provenance": "catalog"
   }
 ]

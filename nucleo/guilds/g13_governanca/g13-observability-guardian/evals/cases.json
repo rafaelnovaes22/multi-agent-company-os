@@ -15,7 +15,8 @@
       "telemetry_ok": true,
       "valid": true,
       "status": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-02",
@@ -33,7 +34,8 @@
       "within_threshold": false,
       "valid": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-03",
@@ -50,7 +52,8 @@
       "telemetry_ok": true,
       "valid": true,
       "status": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-04",
@@ -66,7 +69,8 @@
       "telemetry_ok": false,
       "valid": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-05",
@@ -84,7 +88,8 @@
       "within_threshold": true,
       "valid": true,
       "status": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-06",
@@ -102,7 +107,8 @@
       "within_threshold": false,
       "valid": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-07",
@@ -120,7 +126,8 @@
       "within_threshold": true,
       "valid": true,
       "status": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-08",
@@ -138,7 +145,8 @@
       "within_threshold": false,
       "valid": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-09",
@@ -155,7 +163,8 @@
       "within_threshold": false,
       "valid": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-10",
@@ -173,7 +182,8 @@
       "within_threshold": false,
       "valid": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-11",
@@ -189,7 +199,8 @@
       "telemetry_ok": true,
       "valid": true,
       "status": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-12",
@@ -206,7 +217,8 @@
       "telemetry_ok": false,
       "valid": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-13",
@@ -222,7 +234,8 @@
       "telemetry_ok": false,
       "valid": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-14",
@@ -239,7 +252,8 @@
       "telemetry_ok": false,
       "valid": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-15",
@@ -255,7 +269,8 @@
       "telemetry_ok": true,
       "valid": true,
       "status": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-16",
@@ -272,7 +287,8 @@
       "within_threshold": false,
       "valid": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-17",
@@ -290,7 +306,8 @@
       "telemetry_ok": true,
       "valid": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-18",
@@ -305,7 +322,8 @@
       "canonical_fields": true,
       "valid": true,
       "status": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-19",
@@ -322,7 +340,8 @@
       "telemetry_ok": true,
       "valid": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-20",
@@ -340,7 +359,8 @@
       "canonical_fields": true,
       "valid": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-21",
@@ -357,7 +377,8 @@
       "telemetry_ok": false,
       "canonical_fields": true,
       "valid": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-22",
@@ -374,7 +395,8 @@
       "telemetry_ok": true,
       "canonical_fields": false,
       "valid": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-23",
@@ -392,7 +414,8 @@
       "canonical_fields": false,
       "valid": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-24",
@@ -411,7 +434,8 @@
       "telemetry_ok": false,
       "valid": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-25",
@@ -429,7 +453,8 @@
       "telemetry_ok": false,
       "valid": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-26",
@@ -446,7 +471,8 @@
       "telemetry_ok": true,
       "valid": true,
       "status": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-27",
@@ -464,7 +490,8 @@
       "within_threshold": true,
       "valid": true,
       "status": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-28",
@@ -481,7 +508,8 @@
       "within_threshold": true,
       "valid": true,
       "status": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-29",
@@ -497,7 +525,8 @@
       "outcomes_traces_delta": 0.0196,
       "within_threshold": false,
       "valid": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-30",
@@ -515,7 +544,8 @@
       "telemetry_ok": true,
       "valid": true,
       "status": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-31",
@@ -534,7 +564,8 @@
       "telemetry_ok": true,
       "valid": false,
       "status": "FAIL"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "c6-32",
@@ -553,6 +584,7 @@
       "canonical_fields": true,
       "valid": true,
       "status": "PASS"
-    }
+    },
+    "provenance": "catalog"
   }
 ]

@@ -27,7 +27,8 @@
       "valid_readout": true,
       "decision": "ship",
       "learning_registered": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-02",
@@ -57,7 +58,8 @@
       "valid_readout": true,
       "decision": "kill",
       "learning_registered": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-03",
@@ -87,7 +89,8 @@
       "valid_readout": true,
       "decision": "iterate",
       "learning_registered": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-04",
@@ -117,7 +120,8 @@
       "valid_readout": false,
       "decision": "iterate",
       "learning_registered": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-05",
@@ -147,7 +151,8 @@
       "valid_readout": false,
       "decision": "iterate",
       "learning_registered": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-06",
@@ -177,7 +182,8 @@
       "valid_readout": true,
       "decision": "ship",
       "learning_registered": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-07",
@@ -207,7 +213,8 @@
       "valid_readout": true,
       "decision": "kill",
       "learning_registered": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-08",
@@ -237,7 +244,8 @@
       "valid_readout": true,
       "decision": "iterate",
       "learning_registered": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-09",
@@ -267,7 +275,8 @@
       "valid_readout": false,
       "decision": "iterate",
       "learning_registered": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-10",
@@ -297,7 +306,8 @@
       "valid_readout": false,
       "decision": "iterate",
       "learning_registered": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-11",
@@ -327,7 +337,8 @@
       "valid_readout": true,
       "decision": "ship",
       "learning_registered": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-12",
@@ -357,7 +368,8 @@
       "valid_readout": true,
       "decision": "kill",
       "learning_registered": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-13",
@@ -387,7 +399,8 @@
       "valid_readout": true,
       "decision": "iterate",
       "learning_registered": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-14",
@@ -417,7 +430,8 @@
       "valid_readout": false,
       "decision": "iterate",
       "learning_registered": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-15",
@@ -447,7 +461,8 @@
       "valid_readout": false,
       "decision": "iterate",
       "learning_registered": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-16",
@@ -477,7 +492,8 @@
       "valid_readout": true,
       "decision": "ship",
       "learning_registered": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-17",
@@ -507,7 +523,8 @@
       "valid_readout": true,
       "decision": "kill",
       "learning_registered": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-18",
@@ -537,7 +554,8 @@
       "valid_readout": true,
       "decision": "iterate",
       "learning_registered": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-19",
@@ -567,7 +585,8 @@
       "valid_readout": false,
       "decision": "iterate",
       "learning_registered": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-20",
@@ -597,7 +616,8 @@
       "valid_readout": false,
       "decision": "iterate",
       "learning_registered": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-21",
@@ -627,7 +647,8 @@
       "valid_readout": true,
       "decision": "ship",
       "learning_registered": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-22",
@@ -657,7 +678,8 @@
       "valid_readout": true,
       "decision": "kill",
       "learning_registered": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-23",
@@ -687,7 +709,8 @@
       "valid_readout": true,
       "decision": "iterate",
       "learning_registered": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-24",
@@ -717,7 +740,8 @@
       "valid_readout": false,
       "decision": "iterate",
       "learning_registered": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-25",
@@ -747,7 +771,8 @@
       "valid_readout": false,
       "decision": "iterate",
       "learning_registered": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-26",
@@ -777,7 +802,8 @@
       "valid_readout": true,
       "decision": "ship",
       "learning_registered": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-27",
@@ -807,7 +833,8 @@
       "valid_readout": true,
       "decision": "kill",
       "learning_registered": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-28",
@@ -837,7 +864,8 @@
       "valid_readout": true,
       "decision": "iterate",
       "learning_registered": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-29",
@@ -867,7 +895,8 @@
       "valid_readout": false,
       "decision": "iterate",
       "learning_registered": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-exp-30",
@@ -897,6 +926,7 @@
       "valid_readout": false,
       "decision": "iterate",
       "learning_registered": false
-    }
+    },
+    "provenance": "catalog"
   }
 ]

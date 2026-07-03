@@ -15,7 +15,8 @@
       "dedup_resolved": true,
       "access_applied": true,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-02",
@@ -29,7 +30,8 @@
     "expected": {
       "status": "curado",
       "indexable": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-03",
@@ -46,7 +48,8 @@
       "status": "curado",
       "access_applied": true,
       "indexable": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-04",
@@ -63,7 +66,8 @@
       "status": "curado",
       "dedup_resolved": true,
       "indexable": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-05",
@@ -81,7 +85,8 @@
       "access_applied": false,
       "indexable": false,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-06",
@@ -93,7 +98,8 @@
     "expected": {
       "status": "acesso_exposto",
       "access_applied": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-07",
@@ -107,7 +113,8 @@
     },
     "expected": {
       "status": "acesso_exposto"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-08",
@@ -123,7 +130,8 @@
     "expected": {
       "status": "acesso_exposto",
       "indexable": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-09",
@@ -138,7 +146,8 @@
       "classified": false,
       "indexable": false,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-10",
@@ -151,7 +160,8 @@
     "expected": {
       "status": "nao_classificado",
       "classified": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-11",
@@ -164,7 +174,8 @@
       "status": "nao_classificado",
       "classified": false,
       "indexable": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-12",
@@ -176,7 +187,8 @@
     "expected": {
       "status": "nao_classificado",
       "classified": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-13",
@@ -188,7 +200,8 @@
     },
     "expected": {
       "status": "nao_classificado"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-14",
@@ -206,7 +219,8 @@
       "dedup_resolved": false,
       "indexable": false,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-15",
@@ -222,7 +236,8 @@
     "expected": {
       "status": "duplicata_nao_resolvida",
       "dedup_resolved": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-16",
@@ -238,7 +253,8 @@
     "expected": {
       "status": "curado",
       "dedup_resolved": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-17",
@@ -254,7 +270,8 @@
       "stale": true,
       "flag_owner_review": true,
       "indexable": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-18",
@@ -269,7 +286,8 @@
       "status": "curado",
       "stale": false,
       "flag_owner_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-19",
@@ -283,7 +301,8 @@
     "expected": {
       "status": "curado",
       "stale": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-20",
@@ -297,7 +316,8 @@
     "expected": {
       "status": "vencido",
       "stale": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-21",
@@ -310,7 +330,8 @@
     "expected": {
       "status": "curado",
       "stale": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-22",
@@ -327,7 +348,8 @@
       "status": "vencido",
       "access_applied": true,
       "stale": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-23",
@@ -342,7 +364,8 @@
     "expected": {
       "status": "curado",
       "access_applied": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-24",
@@ -356,7 +379,8 @@
     "expected": {
       "indexable": true,
       "status": "curado"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-25",
@@ -370,7 +394,8 @@
     "expected": {
       "indexable": false,
       "status": "vencido"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-26",
@@ -384,7 +409,8 @@
     "expected": {
       "requires_human_review": true,
       "status": "duplicata_nao_resolvida"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-27",
@@ -398,7 +424,8 @@
     "expected": {
       "requires_human_review": false,
       "status": "vencido"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-28",
@@ -410,7 +437,8 @@
     "expected": {
       "requires_human_review": false,
       "status": "nao_classificado"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-29",
@@ -423,7 +451,8 @@
     },
     "expected": {
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-30",
@@ -439,7 +468,8 @@
       "status": "curado",
       "classified": true,
       "indexable": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-31",
@@ -452,7 +482,8 @@
     },
     "expected": {
       "dedup_resolved": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g11-km-curator-32",
@@ -467,6 +498,7 @@
       "classified": true,
       "stale": true,
       "status": "vencido"
-    }
+    },
+    "provenance": "catalog"
   }
 ]

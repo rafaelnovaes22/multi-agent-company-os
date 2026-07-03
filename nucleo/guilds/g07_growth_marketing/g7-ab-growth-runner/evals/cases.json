@@ -17,7 +17,8 @@
       "sample_reached": false,
       "decision": "desenho_pronto",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-02",
@@ -43,7 +44,8 @@
       "sample_reached": true,
       "decision": "promover_vencedor",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-03",
@@ -66,7 +68,8 @@
       "sample_reached": false,
       "decision": "continuar_coleta",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-04",
@@ -83,7 +86,8 @@
       "z_beta": 1.282,
       "decision": "desenho_pronto",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-05",
@@ -100,7 +104,8 @@
       "z_beta": 0.842,
       "decision": "desenho_pronto",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-06",
@@ -117,7 +122,8 @@
       "z_beta": 1.645,
       "decision": "desenho_pronto",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-07",
@@ -134,7 +140,8 @@
       "z_beta": 0.842,
       "decision": "desenho_pronto",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-08",
@@ -157,7 +164,8 @@
       "significant": false,
       "decision": "continuar_coleta",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-09",
@@ -179,7 +187,8 @@
       "sample_reached": false,
       "decision": "continuar_coleta",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-10",
@@ -202,7 +211,8 @@
       "significant": true,
       "decision": "manter_controle",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-11",
@@ -226,7 +236,8 @@
       "significant": true,
       "decision": "promover_vencedor",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-12",
@@ -249,7 +260,8 @@
       "sample_reached": false,
       "decision": "continuar_coleta",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-13",
@@ -271,7 +283,8 @@
       "sample_reached": false,
       "decision": "continuar_coleta",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-14",
@@ -288,7 +301,8 @@
       "z_beta": 0.842,
       "decision": "desenho_pronto",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-15",
@@ -304,7 +318,8 @@
       "decision": "desenho_pronto",
       "significant": false,
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-16",
@@ -320,7 +335,8 @@
       "sample_per_arm": 0,
       "decision": "desenho_pronto",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-17",
@@ -344,7 +360,8 @@
       "significant": true,
       "decision": "promover_vencedor",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-18",
@@ -368,7 +385,8 @@
       "sample_reached": true,
       "decision": "promover_vencedor",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-19",
@@ -386,7 +404,8 @@
       "sample_reached": false,
       "decision": "desenho_pronto",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-20",
@@ -410,7 +429,8 @@
       "sample_reached": true,
       "decision": "continuar_coleta",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-21",
@@ -434,7 +454,8 @@
       "significant": false,
       "decision": "continuar_coleta",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-22",
@@ -458,7 +479,8 @@
       "significant": true,
       "decision": "promover_vencedor",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-23",
@@ -481,7 +503,8 @@
       "sample_reached": true,
       "decision": "promover_vencedor",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-24",
@@ -505,7 +528,8 @@
       "sample_reached": true,
       "decision": "continuar_coleta",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-25",
@@ -521,7 +545,8 @@
       "z_beta": 1.282,
       "decision": "desenho_pronto",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-26",
@@ -543,7 +568,8 @@
       "sample_reached": false,
       "decision": "continuar_coleta",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-27",
@@ -567,7 +593,8 @@
       "sample_reached": true,
       "decision": "promover_vencedor",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-28",
@@ -583,7 +610,8 @@
       "z_alpha": 1.96,
       "decision": "desenho_pronto",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-29",
@@ -607,7 +635,8 @@
       "observed_uplift": -0.05,
       "decision": "manter_controle",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-30",
@@ -631,7 +660,8 @@
       "significant": true,
       "decision": "promover_vencedor",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-31",
@@ -647,7 +677,8 @@
       "sample_per_arm": 686,
       "decision": "desenho_pronto",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ab-32",
@@ -671,6 +702,7 @@
       "observed_uplift": 0.04,
       "decision": "promover_vencedor",
       "by": "g7-ab-growth-runner"
-    }
+    },
+    "provenance": "catalog"
   }
 ]

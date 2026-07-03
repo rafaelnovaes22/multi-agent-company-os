@@ -29,7 +29,8 @@
       "backtest_passed": true,
       "has_interval": true,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-02",
@@ -57,7 +58,8 @@
       "mape_pct": 15.0,
       "backtest_passed": true,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-03",
@@ -84,7 +86,8 @@
       "mape_pct": 50.0,
       "backtest_passed": false,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-04",
@@ -110,7 +113,8 @@
       "has_interval": true,
       "backtest_passed": true,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-05",
@@ -135,7 +139,8 @@
       "mape_pct": 15.0,
       "backtest_passed": true,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-06",
@@ -160,7 +165,8 @@
       "mape_pct": 16.0,
       "backtest_passed": false,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-07",
@@ -186,7 +192,8 @@
       "mape_pct": 12.0,
       "backtest_passed": false,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-08",
@@ -212,7 +219,8 @@
       "mape_pct": 18.0,
       "backtest_passed": true,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-09",
@@ -231,7 +239,8 @@
       "backtest_passed": true,
       "has_interval": true,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-10",
@@ -259,7 +268,8 @@
       "mape_pct": 0.0,
       "backtest_passed": true,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-11",
@@ -276,7 +286,8 @@
       "point_forecast": 500.0,
       "has_interval": true,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-12",
@@ -302,7 +313,8 @@
       "growth_rate": 0.2,
       "backtest_passed": true,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-13",
@@ -328,7 +340,8 @@
       "growth_rate": -0.25,
       "backtest_passed": true,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-14",
@@ -356,7 +369,8 @@
     "expected": {
       "backtest_passed": true,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-15",
@@ -384,7 +398,8 @@
     "expected": {
       "backtest_passed": false,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-16",
@@ -411,7 +426,8 @@
       "has_interval": true,
       "backtest_passed": true,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-17",
@@ -437,7 +453,8 @@
     "expected": {
       "has_interval": true,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-18",
@@ -464,7 +481,8 @@
       "mape_pct": 0.0,
       "backtest_passed": true,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-19",
@@ -490,7 +508,8 @@
       "backtest_passed": true,
       "has_interval": true,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-20",
@@ -515,7 +534,8 @@
     "expected": {
       "backtest_passed": true,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-21",
@@ -539,7 +559,8 @@
     "expected": {
       "backtest_passed": true,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-22",
@@ -563,7 +584,8 @@
     "expected": {
       "backtest_passed": false,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-23",
@@ -589,7 +611,8 @@
       "growth_rate": -0.25,
       "backtest_passed": false,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-24",
@@ -616,7 +639,8 @@
       "mape_pct": 5.0,
       "backtest_passed": true,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-25",
@@ -642,7 +666,8 @@
       "growth_rate": 0.5,
       "backtest_passed": true,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-26",
@@ -673,7 +698,8 @@
       "point_forecast": 100.0,
       "backtest_passed": true,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-27",
@@ -699,7 +725,8 @@
       "mape_pct": 8.0,
       "backtest_passed": false,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-28",
@@ -724,7 +751,8 @@
       "growth_rate": 0.1,
       "backtest_passed": true,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-29",
@@ -751,7 +779,8 @@
       "mape_pct": 100.0,
       "backtest_passed": false,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-30",
@@ -777,7 +806,8 @@
     "expected": {
       "backtest_passed": true,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-31",
@@ -796,7 +826,8 @@
       "has_interval": true,
       "backtest_passed": true,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "fc-32",
@@ -822,6 +853,7 @@
       "mape_pct": 15.0,
       "backtest_passed": true,
       "by": "g6-forecaster"
-    }
+    },
+    "provenance": "catalog"
   }
 ]

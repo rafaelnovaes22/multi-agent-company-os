@@ -13,7 +13,8 @@
       "blocked": false,
       "candidate_count": 2,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-02",
@@ -30,7 +31,8 @@
       "blocked": false,
       "candidate_count": 3,
       "status": "fallback"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-03",
@@ -45,7 +47,8 @@
       "fell_back": false,
       "candidate_count": 3,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-04",
@@ -59,7 +62,8 @@
       "cost": 10.0,
       "candidate_count": 1,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-05",
@@ -73,7 +77,8 @@
       "selected_model": "medio",
       "blocked": true,
       "status": "blocked"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-06",
@@ -88,7 +93,8 @@
       "blocked": true,
       "status": "blocked",
       "candidate_count": 1
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-07",
@@ -102,7 +108,8 @@
       "candidate_count": 0,
       "blocked": false,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-08",
@@ -116,7 +123,8 @@
       "cost": 1.0,
       "candidate_count": 3,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-09",
@@ -129,7 +137,8 @@
       "selected_model": "medio",
       "candidate_count": 2,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-10",
@@ -142,7 +151,8 @@
       "selected_model": "medio",
       "candidate_count": 2,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-11",
@@ -155,7 +165,8 @@
       "selected_model": "forte",
       "candidate_count": 1,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-12",
@@ -168,7 +179,8 @@
       "selected_model": "forte",
       "candidate_count": 1,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-13",
@@ -183,7 +195,8 @@
       "fell_back": false,
       "candidate_count": 1,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-14",
@@ -199,7 +212,8 @@
       "fell_back": true,
       "candidate_count": 2,
       "status": "fallback"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-15",
@@ -214,7 +228,8 @@
       "cost": 1.0,
       "blocked": false,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-16",
@@ -229,7 +244,8 @@
       "cost": 3.0,
       "blocked": false,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-17",
@@ -244,7 +260,8 @@
       "blocked": true,
       "status": "blocked",
       "candidate_count": 2
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-18",
@@ -259,7 +276,8 @@
       "cost": 10.0,
       "blocked": false,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-19",
@@ -270,7 +288,8 @@
       "cost": 3.0,
       "candidate_count": 2,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-20",
@@ -285,7 +304,8 @@
       "cost": 10.0,
       "blocked": false,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-21",
@@ -298,7 +318,8 @@
       "selected_model": "medio",
       "quality": 0.9,
       "latency_ms": 700
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-22",
@@ -311,7 +332,8 @@
       "selected_model": "barato",
       "latency_ms": 400,
       "quality": 0.8
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-23",
@@ -324,7 +346,8 @@
       "selected_model": "forte",
       "latency_ms": 1500,
       "quality": 0.97
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-24",
@@ -341,7 +364,8 @@
       "fell_back": true,
       "blocked": false,
       "status": "fallback"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-25",
@@ -358,7 +382,8 @@
       "blocked": false,
       "fell_back": true,
       "status": "fallback"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-26",
@@ -372,7 +397,8 @@
       "selected_model": null,
       "candidate_count": 0,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-27",
@@ -386,7 +412,8 @@
       "cost": 10.0,
       "blocked": false,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-28",
@@ -399,7 +426,8 @@
       "candidate_count": 3,
       "selected_model": "barato",
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-29",
@@ -414,7 +442,8 @@
       "cost": 10.0,
       "blocked": false,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-30",
@@ -428,7 +457,8 @@
       "selected_model": "medio",
       "blocked": true,
       "status": "blocked"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-31",
@@ -443,7 +473,8 @@
       "cost": 1.0,
       "blocked": false,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "mr-32",
@@ -458,6 +489,7 @@
       "fell_back": false,
       "blocked": false,
       "status": "ok"
-    }
+    },
+    "provenance": "catalog"
   }
 ]

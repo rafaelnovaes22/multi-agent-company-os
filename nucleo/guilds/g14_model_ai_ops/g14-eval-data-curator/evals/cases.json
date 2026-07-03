@@ -27,7 +27,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-02",
@@ -57,7 +58,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-03",
@@ -87,7 +89,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-04",
@@ -117,7 +120,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-05",
@@ -147,7 +151,8 @@
       "capabilities_any": [
         "policy_check"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-06",
@@ -177,7 +182,8 @@
       "capabilities_any": [
         "human_escalation"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-07",
@@ -207,7 +213,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-08",
@@ -237,7 +244,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-09",
@@ -267,7 +275,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-10",
@@ -297,7 +306,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-11",
@@ -327,7 +337,8 @@
       "capabilities_any": [
         "policy_check"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-12",
@@ -357,7 +368,8 @@
       "capabilities_any": [
         "human_escalation"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-13",
@@ -387,7 +399,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-14",
@@ -417,7 +430,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-15",
@@ -447,7 +461,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-16",
@@ -477,7 +492,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-17",
@@ -507,7 +523,8 @@
       "capabilities_any": [
         "policy_check"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-18",
@@ -537,7 +554,8 @@
       "capabilities_any": [
         "human_escalation"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-19",
@@ -567,7 +585,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-20",
@@ -597,7 +616,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-21",
@@ -627,7 +647,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-22",
@@ -657,7 +678,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-23",
@@ -687,7 +709,8 @@
       "capabilities_any": [
         "policy_check"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-24",
@@ -717,7 +740,8 @@
       "capabilities_any": [
         "human_escalation"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-25",
@@ -747,7 +771,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-26",
@@ -777,7 +802,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-27",
@@ -807,7 +833,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-28",
@@ -837,7 +864,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-29",
@@ -867,7 +895,8 @@
       "capabilities_any": [
         "policy_check"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g14-eval-data-curator-30",
@@ -897,6 +926,7 @@
       "capabilities_any": [
         "human_escalation"
       ]
-    }
+    },
+    "provenance": "catalog"
   }
 ]

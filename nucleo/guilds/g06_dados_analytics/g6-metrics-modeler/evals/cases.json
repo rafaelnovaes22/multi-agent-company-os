@@ -18,7 +18,8 @@
       "status": "accepted",
       "missing_fields": [],
       "duplicate_of": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-02",
@@ -40,7 +41,8 @@
         "formula"
       ],
       "duplicate_of": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-03",
@@ -62,7 +64,8 @@
         "grain"
       ],
       "duplicate_of": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-04",
@@ -84,7 +87,8 @@
         "window"
       ],
       "duplicate_of": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-05",
@@ -106,7 +110,8 @@
         "source"
       ],
       "duplicate_of": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-06",
@@ -128,7 +133,8 @@
         "name"
       ],
       "duplicate_of": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-07",
@@ -150,7 +156,8 @@
         "grain"
       ],
       "duplicate_of": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-08",
@@ -171,7 +178,8 @@
         "source"
       ],
       "duplicate_of": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-09",
@@ -196,7 +204,8 @@
       "status": "duplicate",
       "missing_fields": [],
       "duplicate_of": "dau"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-10",
@@ -223,7 +232,8 @@
       "status": "duplicate",
       "missing_fields": [],
       "duplicate_of": "old_dau"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-11",
@@ -250,7 +260,8 @@
       "status": "accepted",
       "missing_fields": [],
       "duplicate_of": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-12",
@@ -277,7 +288,8 @@
       "status": "accepted",
       "missing_fields": [],
       "duplicate_of": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-13",
@@ -298,7 +310,8 @@
       "status": "accepted",
       "missing_fields": [],
       "duplicate_of": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-14",
@@ -324,7 +337,8 @@
         "formula"
       ],
       "duplicate_of": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-15",
@@ -345,7 +359,8 @@
       "status": "accepted",
       "missing_fields": [],
       "duplicate_of": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-16",
@@ -370,7 +385,8 @@
       "status": "duplicate",
       "missing_fields": [],
       "duplicate_of": "dau"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-17",
@@ -392,7 +408,8 @@
         "window"
       ],
       "duplicate_of": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-18",
@@ -415,7 +432,8 @@
         "source"
       ],
       "duplicate_of": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-19",
@@ -443,7 +461,8 @@
       "status": "accepted",
       "missing_fields": [],
       "duplicate_of": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-20",
@@ -470,7 +489,8 @@
       "status": "duplicate",
       "missing_fields": [],
       "duplicate_of": "mrr"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-21",
@@ -497,7 +517,8 @@
         "grain"
       ],
       "duplicate_of": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-22",
@@ -518,7 +539,8 @@
       "status": "accepted",
       "missing_fields": [],
       "duplicate_of": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-23",
@@ -540,7 +562,8 @@
         "source"
       ],
       "duplicate_of": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-24",
@@ -566,7 +589,8 @@
         "source"
       ],
       "duplicate_of": "dau"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-25",
@@ -587,7 +611,8 @@
       "status": "accepted",
       "missing_fields": [],
       "duplicate_of": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-26",
@@ -613,7 +638,8 @@
       "status": "accepted",
       "missing_fields": [],
       "duplicate_of": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-27",
@@ -635,7 +661,8 @@
         "formula"
       ],
       "duplicate_of": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-28",
@@ -656,7 +683,8 @@
       "status": "accepted",
       "missing_fields": [],
       "duplicate_of": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-29",
@@ -683,7 +711,8 @@
       "status": "duplicate",
       "missing_fields": [],
       "duplicate_of": "lat"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g6-metrics-modeler-30",
@@ -708,6 +737,7 @@
       "status": "accepted",
       "missing_fields": [],
       "duplicate_of": null
-    }
+    },
+    "provenance": "catalog"
   }
 ]

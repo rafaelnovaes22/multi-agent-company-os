@@ -27,7 +27,8 @@
       "critical_gap_count": 0,
       "coverage_delta": 0.0,
       "rising_debt": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-02",
@@ -51,7 +52,8 @@
       "critical_gap_count": 0,
       "coverage_delta": -17.0,
       "rising_debt": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-03",
@@ -81,7 +83,8 @@
       "critical_gaps": [
         "pii_handler"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-04",
@@ -102,7 +105,8 @@
       "decision": "PASS",
       "passed": true,
       "critical_gap_count": 0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-05",
@@ -123,7 +127,8 @@
       "decision": "FAIL",
       "passed": false,
       "critical_gap_count": 0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-06",
@@ -144,7 +149,8 @@
       "decision": "PASS",
       "passed": true,
       "critical_gap_count": 0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-07",
@@ -167,7 +173,8 @@
       "passed": true,
       "coverage_delta": -7.0,
       "rising_debt": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-08",
@@ -189,7 +196,8 @@
       "coverage_delta": 5.0,
       "rising_debt": false,
       "decision": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-09",
@@ -210,7 +218,8 @@
       "coverage_delta": null,
       "rising_debt": false,
       "decision": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-10",
@@ -240,7 +249,8 @@
       "critical_gaps": [
         "error_path"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-11",
@@ -268,7 +278,8 @@
       "passed": true,
       "critical_gap_count": 0,
       "critical_gaps": []
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-12",
@@ -305,7 +316,8 @@
         "pii",
         "auth"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-13",
@@ -335,7 +347,8 @@
       "critical_gaps": [
         "pii"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-14",
@@ -356,7 +369,8 @@
       "threshold": 90.0,
       "decision": "FAIL",
       "passed": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-15",
@@ -377,7 +391,8 @@
       "threshold": 90.0,
       "decision": "PASS",
       "passed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-16",
@@ -398,7 +413,8 @@
       "decision": "PASS",
       "passed": true,
       "critical_gap_count": 0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-17",
@@ -430,7 +446,8 @@
       "coverage_pct": 85.0,
       "decision": "PASS",
       "passed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-18",
@@ -452,7 +469,8 @@
       "coverage_delta": -13.0,
       "rising_debt": true,
       "decision": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-19",
@@ -474,7 +492,8 @@
       "coverage_delta": 0.0,
       "rising_debt": false,
       "decision": "PASS"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-20",
@@ -504,7 +523,8 @@
       "critical_gap_count": 1,
       "coverage_delta": -12.0,
       "rising_debt": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-21",
@@ -531,7 +551,8 @@
       "decision": "PASS",
       "passed": true,
       "critical_gap_count": 0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-22",
@@ -558,7 +579,8 @@
       "decision": "FAIL",
       "passed": false,
       "critical_gap_count": 1
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-23",
@@ -578,7 +600,8 @@
       "coverage_pct": 40.0,
       "decision": "FAIL",
       "passed": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-24",
@@ -626,7 +649,8 @@
       "critical_gaps": [
         "sec"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-25",
@@ -646,7 +670,8 @@
       "coverage_pct": 83.5,
       "decision": "PASS",
       "passed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-26",
@@ -675,7 +700,8 @@
       "rising_debt": false,
       "decision": "FAIL",
       "critical_gap_count": 1
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-27",
@@ -704,7 +730,8 @@
       "rising_debt": false,
       "decision": "FAIL",
       "critical_gap_count": 1
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-28",
@@ -727,7 +754,8 @@
       "rising_debt": true,
       "decision": "PASS",
       "passed": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-29",
@@ -760,7 +788,8 @@
       "decision": "PASS",
       "passed": true,
       "critical_gap_count": 0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-30",
@@ -781,7 +810,8 @@
       "decision": "PASS",
       "passed": true,
       "coverage_delta": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-31",
@@ -808,7 +838,8 @@
       "decision": "FAIL",
       "passed": false,
       "critical_gap_count": 1
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cov-32",
@@ -838,6 +869,7 @@
       "critical_gaps": [
         "pii"
       ]
-    }
+    },
+    "provenance": "catalog"
   }
 ]

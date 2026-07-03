@@ -24,7 +24,8 @@
       "severity": "low",
       "status": "monitor_only",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-02",
@@ -51,7 +52,8 @@
       "severity": "low",
       "status": "needs_action_plan",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-03",
@@ -78,7 +80,8 @@
       "severity": "medium",
       "status": "action_required",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-04",
@@ -105,7 +108,8 @@
       "severity": "critical",
       "status": "action_required",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-05",
@@ -132,7 +136,8 @@
       "severity": "low",
       "status": "noise_suppressed",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-06",
@@ -159,7 +164,8 @@
       "severity": "low",
       "status": "untrusted_source",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-07",
@@ -186,7 +192,8 @@
       "severity": "medium",
       "status": "needs_action_plan",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-08",
@@ -213,7 +220,8 @@
       "severity": "critical",
       "status": "needs_action_plan",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-09",
@@ -240,7 +248,8 @@
       "severity": "low",
       "status": "noise_suppressed",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-10",
@@ -267,7 +276,8 @@
       "severity": "critical",
       "status": "action_required",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-11",
@@ -294,7 +304,8 @@
       "severity": "medium",
       "status": "action_required",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-12",
@@ -321,7 +332,8 @@
       "severity": "critical",
       "status": "action_required",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-13",
@@ -348,7 +360,8 @@
       "severity": "low",
       "status": "monitor_only",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-14",
@@ -375,7 +388,8 @@
       "severity": "critical",
       "status": "overdue",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-15",
@@ -402,7 +416,8 @@
       "severity": "medium",
       "status": "needs_action_plan",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-16",
@@ -429,7 +444,8 @@
       "severity": "critical",
       "status": "needs_action_plan",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-17",
@@ -456,7 +472,8 @@
       "severity": "low",
       "status": "monitor_only",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-18",
@@ -483,7 +500,8 @@
       "severity": "critical",
       "status": "action_required",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-19",
@@ -510,7 +528,8 @@
       "severity": "critical",
       "status": "overdue",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-20",
@@ -537,7 +556,8 @@
       "severity": "critical",
       "status": "action_required",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-21",
@@ -564,7 +584,8 @@
       "severity": "low",
       "status": "monitor_only",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-22",
@@ -591,7 +612,8 @@
       "severity": "critical",
       "status": "action_required",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-23",
@@ -618,7 +640,8 @@
       "severity": "medium",
       "status": "action_required",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-24",
@@ -645,7 +668,8 @@
       "severity": "critical",
       "status": "action_required",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-25",
@@ -672,7 +696,8 @@
       "severity": "low",
       "status": "noise_suppressed",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-26",
@@ -699,7 +724,8 @@
       "severity": "low",
       "status": "needs_action_plan",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-27",
@@ -726,7 +752,8 @@
       "severity": "medium",
       "status": "action_required",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-28",
@@ -753,7 +780,8 @@
       "severity": "critical",
       "status": "action_required",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-29",
@@ -780,7 +808,8 @@
       "severity": "low",
       "status": "noise_suppressed",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g12-regulatory-monitor-domain-30",
@@ -807,6 +836,7 @@
       "severity": "low",
       "status": "untrusted_source",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   }
 ]

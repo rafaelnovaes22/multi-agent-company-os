@@ -25,7 +25,8 @@
       "is_duplicate": true,
       "auto_merge": true,
       "survivor_id": "A1"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-02",
@@ -52,7 +53,8 @@
       "decision": "distinct",
       "is_duplicate": false,
       "auto_merge": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-03",
@@ -78,7 +80,8 @@
       "match_score": 0.75,
       "decision": "review",
       "is_duplicate": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-04",
@@ -104,7 +107,8 @@
       "decision": "merge",
       "is_duplicate": true,
       "survivor_id": "A4"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-05",
@@ -133,7 +137,8 @@
       "matched_fields": [
         "phone"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-06",
@@ -161,7 +166,8 @@
       "matched_fields": [
         "name"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-07",
@@ -189,7 +195,8 @@
       "matched_fields": [
         "company_domain"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-08",
@@ -217,7 +224,8 @@
       "matched_fields": [
         "email"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-09",
@@ -243,7 +251,8 @@
       "match_score": 0.6,
       "decision": "review",
       "is_duplicate": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-10",
@@ -268,7 +277,8 @@
     "expected": {
       "match_score": 0.65,
       "decision": "review"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-11",
@@ -293,7 +303,8 @@
     "expected": {
       "match_score": 0.5,
       "decision": "distinct"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-12",
@@ -320,7 +331,8 @@
       "decision": "merge",
       "is_duplicate": true,
       "auto_merge": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-13",
@@ -346,7 +358,8 @@
       "match_score": 0.75,
       "decision": "review",
       "is_duplicate": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-14",
@@ -372,7 +385,8 @@
       "decision": "merge",
       "is_duplicate": true,
       "survivor_id": "B14"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-15",
@@ -397,7 +411,8 @@
     "expected": {
       "decision": "merge",
       "survivor_id": "A15"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-16",
@@ -422,7 +437,8 @@
     "expected": {
       "decision": "merge",
       "survivor_id": "A16"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-17",
@@ -448,7 +464,8 @@
       "decision": "review",
       "survivor_id": null,
       "is_duplicate": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-18",
@@ -475,7 +492,8 @@
       "decision": "distinct",
       "survivor_id": null,
       "auto_merge": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-19",
@@ -501,7 +519,8 @@
       "match_score": 1.0,
       "decision": "merge",
       "is_duplicate": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-20",
@@ -527,7 +546,8 @@
       "match_score": 1.0,
       "decision": "merge",
       "is_duplicate": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-21",
@@ -556,7 +576,8 @@
         "phone",
         "name"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-22",
@@ -580,7 +601,8 @@
     "expected": {
       "match_score": 0.5,
       "decision": "distinct"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-23",
@@ -599,7 +621,8 @@
       "decision": "distinct",
       "matched_fields": [],
       "is_duplicate": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-24",
@@ -613,7 +636,8 @@
       "match_score": 0.0,
       "decision": "distinct",
       "survivor_id": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-25",
@@ -642,7 +666,8 @@
         "email",
         "phone"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-26",
@@ -673,7 +698,8 @@
         "company_domain"
       ],
       "decision": "merge"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-27",
@@ -698,7 +724,8 @@
       "decision": "merge",
       "is_duplicate": true,
       "survivor_id": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-28",
@@ -724,7 +751,8 @@
       "match_score": 0.9,
       "decision": "merge",
       "survivor_id": "B28"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-29",
@@ -750,7 +778,8 @@
       "match_score": 0.65,
       "decision": "review",
       "is_duplicate": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-30",
@@ -775,7 +804,8 @@
     "expected": {
       "match_score": 0.6,
       "decision": "review"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-31",
@@ -801,7 +831,8 @@
       "match_score": 0.9,
       "decision": "merge",
       "survivor_id": "A31"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "ch-32",
@@ -829,6 +860,7 @@
       "is_duplicate": true,
       "auto_merge": true,
       "survivor_id": "A32"
-    }
+    },
+    "provenance": "catalog"
   }
 ]

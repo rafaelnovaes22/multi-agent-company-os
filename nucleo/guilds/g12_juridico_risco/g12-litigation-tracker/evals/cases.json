@@ -19,7 +19,8 @@
       "deadline_alert": true,
       "deadlines_tracked": true,
       "delivered_event": "dispute.registered && dispute.deadlines_tracked"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-02",
@@ -38,7 +39,8 @@
       "exposure_level": "possivel",
       "deadline_status": "no_prazo",
       "deadline_alert": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-03",
@@ -58,7 +60,8 @@
       "deadline_status": "vencido",
       "deadline_alert": true,
       "delivered_event": "dispute.registered && dispute.deadlines_tracked"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-04",
@@ -73,7 +76,8 @@
       "exposure_level": "provavel",
       "provision": 70000.0,
       "deadline_status": "no_prazo"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-05",
@@ -88,7 +92,8 @@
       "exposure_level": "possivel",
       "provision": 69000.0,
       "deadline_status": "no_prazo"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-06",
@@ -102,7 +107,8 @@
     "expected": {
       "exposure_level": "possivel",
       "provision": 30000.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-07",
@@ -116,7 +122,8 @@
     "expected": {
       "exposure_level": "remota",
       "provision": 29000.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-08",
@@ -131,7 +138,8 @@
       "exposure_level": "provavel",
       "provision": 80000.0,
       "deadline_status": "no_prazo"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-09",
@@ -145,7 +153,8 @@
     "expected": {
       "exposure_level": "remota",
       "provision": 0.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-10",
@@ -160,7 +169,8 @@
       "deadline_status": "alerta",
       "deadline_alert": true,
       "exposure_level": "possivel"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-11",
@@ -174,7 +184,8 @@
     "expected": {
       "deadline_status": "no_prazo",
       "deadline_alert": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-12",
@@ -188,7 +199,8 @@
     "expected": {
       "deadline_status": "alerta",
       "deadline_alert": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-13",
@@ -202,7 +214,8 @@
     "expected": {
       "deadline_status": "vencido",
       "deadline_alert": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-14",
@@ -217,7 +230,8 @@
     "expected": {
       "deadline_status": "alerta",
       "deadline_alert": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-15",
@@ -232,7 +246,8 @@
     "expected": {
       "deadline_status": "no_prazo",
       "deadline_alert": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-16",
@@ -248,7 +263,8 @@
       "deadlines_tracked": true,
       "delivered_event": null,
       "exposure_level": "provavel"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-17",
@@ -263,7 +279,8 @@
       "deadline_alert": false,
       "deadline_status": "no_prazo",
       "delivered_event": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-18",
@@ -278,7 +295,8 @@
       "registered": true,
       "deadlines_tracked": true,
       "delivered_event": "dispute.registered && dispute.deadlines_tracked"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-19",
@@ -292,7 +310,8 @@
       "registered": false,
       "deadlines_tracked": false,
       "delivered_event": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-20",
@@ -306,7 +325,8 @@
       "registered": true,
       "deadlines_tracked": true,
       "delivered_event": "dispute.registered && dispute.deadlines_tracked"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-21",
@@ -320,7 +340,8 @@
     "expected": {
       "provision": 4110.89,
       "exposure_level": "possivel"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-22",
@@ -335,7 +356,8 @@
       "provision": 2250000.0,
       "exposure_level": "provavel",
       "deadline_status": "no_prazo"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-23",
@@ -349,7 +371,8 @@
       "provision": 0.0,
       "exposure_level": "provavel",
       "claim_amount": 0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-24",
@@ -366,7 +389,8 @@
       "deadline_status": "vencido",
       "deadline_alert": true,
       "delivered_event": "dispute.registered && dispute.deadlines_tracked"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-25",
@@ -380,7 +404,8 @@
     "expected": {
       "exposure_level": "possivel",
       "provision": 31000.0
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-26",
@@ -396,7 +421,8 @@
       "provision": 67500.0,
       "deadline_status": "alerta",
       "deadline_alert": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-27",
@@ -412,7 +438,8 @@
       "provision": 2250.0,
       "deadline_status": "no_prazo",
       "deadline_alert": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-28",
@@ -428,7 +455,8 @@
       "deadline_status": "no_prazo",
       "deadline_alert": false,
       "exposure_level": "possivel"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-29",
@@ -446,7 +474,8 @@
       "deadline_status": "alerta",
       "deadline_alert": true,
       "delivered_event": "dispute.registered && dispute.deadlines_tracked"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-30",
@@ -462,7 +491,8 @@
       "registered": false,
       "deadlines_tracked": false,
       "delivered_event": null
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-31",
@@ -478,7 +508,8 @@
       "provision": 36000.0,
       "deadline_status": "vencido",
       "deadline_alert": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "lt-32",
@@ -496,6 +527,7 @@
       "deadline_status": "alerta",
       "deadline_alert": true,
       "delivered_event": "dispute.registered && dispute.deadlines_tracked"
-    }
+    },
+    "provenance": "catalog"
   }
 ]

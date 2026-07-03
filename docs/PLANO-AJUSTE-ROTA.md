@@ -201,10 +201,14 @@ proibindo a tarefa em vez de inventar um recompute auto-referente.
   o gate validar a procedência, não só a aritmética. `oracle_expr` autorado pelo agente é
   proibido (seria #30 reembalado). Sem fonte externa, o caso é `catalog` (replay honesto) ou
   proibido, nunca `independent`.
-- **G-PERÍMETRO:** "autor != provador" não pode ser git-author (o Hermes assina como
-  `acme-startup`). Quem prova tem que ser processo com credencial diferente (job de CI com
-  identidade própria, ou assinatura humana), e o gate confia no artefato apenas se veio daquele
-  perímetro. Hoje esse artefato não existe; é mecanismo a construir, não promessa a listar.
+- **G-PERÍMETRO:** ~~mecanismo a construir~~ **[FEITO 2026-07-03]** "autor != provador" não
+  pode ser git-author (o Hermes assina como `acme-startup`). Construído em
+  `nucleo/governance/perimeter.py`: a prova de entrega é o artefato do nightly `forge-exec`
+  VERDE em `main` (identidade do CI — só quem tem merge em main o produz), buscado via API
+  do GitHub, com proof {run_id, commit, artifact}. No G7: `req["delivery_proof"]=
+  "ci-perimeter"` usa o perímetro e é FAIL-CLOSED (sem nightly verde recente = não promove;
+  jamais degrada para prova local). Eventos confiáveis: schedule/workflow_dispatch;
+  runs de PR não contam. Validado contra o GitHub real (run 28660315546).
 - **Não exigir a string `human` no gate** enquanto `pre_pr_gate.py:111` só checa pertencimento:
   exigir `human` agora converte "0 human honesto" em "N human forjado". Só exigir depois que
   existir canal de ratificação que produza artefato que só o humano gera.

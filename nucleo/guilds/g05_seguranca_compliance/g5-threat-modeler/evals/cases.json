@@ -23,7 +23,8 @@
       "missing_control_count": 0,
       "status": "approved",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-02",
@@ -49,7 +50,8 @@
       "missing_control_count": 0,
       "status": "approved",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-03",
@@ -73,7 +75,8 @@
       "missing_control_count": 0,
       "status": "approved",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-04",
@@ -98,7 +101,8 @@
       "missing_control_count": 1,
       "status": "needs_controls",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-05",
@@ -123,7 +127,8 @@
       "missing_control_count": 2,
       "status": "needs_controls",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-06",
@@ -148,7 +153,8 @@
       "missing_control_count": 0,
       "status": "needs_controls",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-07",
@@ -172,7 +178,8 @@
       "missing_control_count": 0,
       "status": "approved",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-08",
@@ -198,7 +205,8 @@
       "missing_control_count": 1,
       "status": "needs_controls",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-09",
@@ -222,7 +230,8 @@
       "missing_control_count": 0,
       "status": "approved",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-10",
@@ -248,7 +257,8 @@
       "missing_control_count": 1,
       "status": "needs_controls",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-11",
@@ -273,7 +283,8 @@
       "missing_control_count": 0,
       "status": "approved",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-12",
@@ -295,7 +306,8 @@
       "missing_control_count": 3,
       "status": "blocked",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-13",
@@ -321,7 +333,8 @@
       "missing_control_count": 0,
       "status": "approved",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-14",
@@ -347,7 +360,8 @@
       "missing_control_count": 0,
       "status": "approved",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-15",
@@ -369,7 +383,8 @@
       "missing_control_count": 2,
       "status": "needs_controls",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-16",
@@ -395,7 +410,8 @@
       "missing_control_count": 1,
       "status": "needs_controls",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-17",
@@ -420,7 +436,8 @@
       "missing_control_count": 0,
       "status": "approved",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-18",
@@ -445,7 +462,8 @@
       "missing_control_count": 0,
       "status": "needs_controls",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-19",
@@ -469,7 +487,8 @@
       "missing_control_count": 0,
       "status": "approved",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-20",
@@ -494,7 +513,8 @@
       "missing_control_count": 2,
       "status": "blocked",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-21",
@@ -519,7 +539,8 @@
       "missing_control_count": 0,
       "status": "approved",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-22",
@@ -545,7 +566,8 @@
       "missing_control_count": 0,
       "status": "approved",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-23",
@@ -570,7 +592,8 @@
       "missing_control_count": 0,
       "status": "approved",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-24",
@@ -592,7 +615,8 @@
       "missing_control_count": 3,
       "status": "blocked",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-25",
@@ -617,7 +641,8 @@
       "missing_control_count": 2,
       "status": "needs_controls",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-26",
@@ -644,7 +669,8 @@
       "missing_control_count": 0,
       "status": "approved",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-27",
@@ -666,7 +692,8 @@
       "missing_control_count": 0,
       "status": "approved",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-28",
@@ -692,7 +719,8 @@
       "missing_control_count": 1,
       "status": "needs_controls",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-29",
@@ -717,7 +745,8 @@
       "missing_control_count": 0,
       "status": "approved",
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-threat-modeler-domain-30",
@@ -741,6 +770,7 @@
       "missing_control_count": 2,
       "status": "blocked",
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   }
 ]

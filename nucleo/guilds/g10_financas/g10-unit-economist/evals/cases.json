@@ -17,7 +17,8 @@
       "min_price_brl": 80.0,
       "gate2_unlocked": true,
       "signature_hash": "c3-case-01"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-02",
@@ -37,7 +38,8 @@
       "min_price_brl": 100.0,
       "gate2_unlocked": true,
       "signature_hash": "c3-case-02"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-03",
@@ -57,7 +59,8 @@
       "min_price_brl": 104.0,
       "gate2_unlocked": false,
       "signature_hash": "c3-case-03"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-04",
@@ -77,7 +80,8 @@
       "min_price_brl": 40.0,
       "gate2_unlocked": false,
       "signature_hash": "c3-case-04"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-05",
@@ -97,7 +101,8 @@
       "min_price_brl": 120.0,
       "gate2_unlocked": true,
       "signature_hash": "c3-case-05"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-06",
@@ -117,7 +122,8 @@
       "min_price_brl": 80.0,
       "gate2_unlocked": true,
       "signature_hash": "c3-case-06"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-07",
@@ -137,7 +143,8 @@
       "min_price_brl": 100.0,
       "gate2_unlocked": true,
       "signature_hash": "c3-case-07"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-08",
@@ -157,7 +164,8 @@
       "min_price_brl": 104.0,
       "gate2_unlocked": false,
       "signature_hash": "c3-case-08"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-09",
@@ -177,7 +185,8 @@
       "min_price_brl": 40.0,
       "gate2_unlocked": false,
       "signature_hash": "c3-case-09"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-10",
@@ -197,7 +206,8 @@
       "min_price_brl": 120.0,
       "gate2_unlocked": true,
       "signature_hash": "c3-case-10"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-11",
@@ -217,7 +227,8 @@
       "min_price_brl": 80.0,
       "gate2_unlocked": true,
       "signature_hash": "c3-case-11"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-12",
@@ -237,7 +248,8 @@
       "min_price_brl": 100.0,
       "gate2_unlocked": true,
       "signature_hash": "c3-case-12"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-13",
@@ -257,7 +269,8 @@
       "min_price_brl": 104.0,
       "gate2_unlocked": false,
       "signature_hash": "c3-case-13"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-14",
@@ -277,7 +290,8 @@
       "min_price_brl": 40.0,
       "gate2_unlocked": false,
       "signature_hash": "c3-case-14"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-15",
@@ -297,7 +311,8 @@
       "min_price_brl": 120.0,
       "gate2_unlocked": true,
       "signature_hash": "c3-case-15"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-16",
@@ -317,7 +332,8 @@
       "min_price_brl": 80.0,
       "gate2_unlocked": true,
       "signature_hash": "c3-case-16"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-17",
@@ -337,7 +353,8 @@
       "min_price_brl": 100.0,
       "gate2_unlocked": true,
       "signature_hash": "c3-case-17"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-18",
@@ -357,7 +374,8 @@
       "min_price_brl": 104.0,
       "gate2_unlocked": false,
       "signature_hash": "c3-case-18"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-19",
@@ -377,7 +395,8 @@
       "min_price_brl": 40.0,
       "gate2_unlocked": false,
       "signature_hash": "c3-case-19"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-20",
@@ -397,7 +416,8 @@
       "min_price_brl": 120.0,
       "gate2_unlocked": true,
       "signature_hash": "c3-case-20"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-21",
@@ -417,7 +437,8 @@
       "min_price_brl": 80.0,
       "gate2_unlocked": true,
       "signature_hash": "c3-case-21"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-22",
@@ -437,7 +458,8 @@
       "min_price_brl": 100.0,
       "gate2_unlocked": true,
       "signature_hash": "c3-case-22"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-23",
@@ -457,7 +479,8 @@
       "min_price_brl": 104.0,
       "gate2_unlocked": false,
       "signature_hash": "c3-case-23"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-24",
@@ -477,7 +500,8 @@
       "min_price_brl": 40.0,
       "gate2_unlocked": false,
       "signature_hash": "c3-case-24"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-25",
@@ -497,7 +521,8 @@
       "min_price_brl": 120.0,
       "gate2_unlocked": true,
       "signature_hash": "c3-case-25"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-26",
@@ -517,7 +542,8 @@
       "min_price_brl": 80.0,
       "gate2_unlocked": true,
       "signature_hash": "c3-case-26"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-27",
@@ -537,7 +563,8 @@
       "min_price_brl": 100.0,
       "gate2_unlocked": true,
       "signature_hash": "c3-case-27"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-28",
@@ -557,7 +584,8 @@
       "min_price_brl": 104.0,
       "gate2_unlocked": false,
       "signature_hash": "c3-case-28"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-29",
@@ -577,7 +605,8 @@
       "min_price_brl": 40.0,
       "gate2_unlocked": false,
       "signature_hash": "c3-case-29"
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-unit-economist-30",
@@ -597,6 +626,7 @@
       "min_price_brl": 120.0,
       "gate2_unlocked": true,
       "signature_hash": "c3-case-30"
-    }
+    },
+    "provenance": "catalog"
   }
 ]

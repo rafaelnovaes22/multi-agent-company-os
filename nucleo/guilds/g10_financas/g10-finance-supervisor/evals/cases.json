@@ -27,7 +27,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-02",
@@ -57,7 +58,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-03",
@@ -87,7 +89,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-04",
@@ -117,7 +120,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-05",
@@ -147,7 +151,8 @@
       "capabilities_any": [
         "financial_traceability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-06",
@@ -177,7 +182,8 @@
       "capabilities_any": [
         "unit_economics"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-07",
@@ -207,7 +213,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-08",
@@ -237,7 +244,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-09",
@@ -267,7 +275,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-10",
@@ -297,7 +306,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-11",
@@ -327,7 +337,8 @@
       "capabilities_any": [
         "financial_traceability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-12",
@@ -357,7 +368,8 @@
       "capabilities_any": [
         "unit_economics"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-13",
@@ -387,7 +399,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-14",
@@ -417,7 +430,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-15",
@@ -447,7 +461,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-16",
@@ -477,7 +492,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-17",
@@ -507,7 +523,8 @@
       "capabilities_any": [
         "financial_traceability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-18",
@@ -537,7 +554,8 @@
       "capabilities_any": [
         "unit_economics"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-19",
@@ -567,7 +585,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-20",
@@ -597,7 +616,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-21",
@@ -627,7 +647,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-22",
@@ -657,7 +678,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-23",
@@ -687,7 +709,8 @@
       "capabilities_any": [
         "financial_traceability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-24",
@@ -717,7 +740,8 @@
       "capabilities_any": [
         "unit_economics"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-25",
@@ -747,7 +771,8 @@
       "capabilities_any": [
         "brain_trace"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-26",
@@ -777,7 +802,8 @@
       "capabilities_any": [
         "artifact_emission"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-27",
@@ -807,7 +833,8 @@
       "capabilities_any": [
         "sla_observability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-28",
@@ -837,7 +864,8 @@
       "capabilities_any": [
         "config_driven"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-29",
@@ -867,7 +895,8 @@
       "capabilities_any": [
         "financial_traceability"
       ]
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g10-finance-supervisor-30",
@@ -897,6 +926,7 @@
       "capabilities_any": [
         "unit_economics"
       ]
-    }
+    },
+    "provenance": "catalog"
   }
 ]

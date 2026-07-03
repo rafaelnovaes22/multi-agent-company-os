@@ -25,7 +25,8 @@
       "explainable": true,
       "c3_ratio": 0.02,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-02",
@@ -60,7 +61,8 @@
       "explainable": true,
       "c3_ratio": 0.05,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-03",
@@ -88,7 +90,8 @@
       "explainable": true,
       "c3_ratio": 0.5,
       "c3_ok": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-04",
@@ -116,7 +119,8 @@
       "explainable": true,
       "c3_ratio": 0.01,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-05",
@@ -142,7 +146,8 @@
       "explainable": true,
       "c3_ratio": 0.0,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-06",
@@ -168,7 +173,8 @@
       "explainable": true,
       "c3_ratio": 0.0,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-07",
@@ -194,7 +200,8 @@
       "explainable": true,
       "c3_ratio": 0.0,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-08",
@@ -220,7 +227,8 @@
       "explainable": true,
       "c3_ratio": 0.0,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-09",
@@ -246,7 +254,8 @@
       "explainable": true,
       "c3_ratio": 0.0,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-10",
@@ -272,7 +281,8 @@
       "explainable": true,
       "c3_ratio": 0.0,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-11",
@@ -298,7 +308,8 @@
       "explainable": true,
       "c3_ratio": 0.0,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-12",
@@ -324,7 +335,8 @@
       "explainable": true,
       "c3_ratio": 0.0,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-13",
@@ -350,7 +362,8 @@
       "explainable": true,
       "c3_ratio": 0.0,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-14",
@@ -376,7 +389,8 @@
       "explainable": true,
       "c3_ratio": 0.0,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-15",
@@ -402,7 +416,8 @@
       "explainable": true,
       "c3_ratio": 0.0,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-16",
@@ -428,7 +443,8 @@
       "explainable": true,
       "c3_ratio": 0.0,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-17",
@@ -454,7 +470,8 @@
       "explainable": true,
       "c3_ratio": 0.0,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-18",
@@ -480,7 +497,8 @@
       "explainable": true,
       "c3_ratio": 0.0,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-19",
@@ -506,7 +524,8 @@
       "explainable": true,
       "c3_ratio": 0.0,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-20",
@@ -532,7 +551,8 @@
       "explainable": true,
       "c3_ratio": 0.0,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-21",
@@ -558,7 +578,8 @@
       "explainable": true,
       "c3_ratio": 0.0,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-22",
@@ -586,7 +607,8 @@
       "explainable": true,
       "c3_ratio": 0.25,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-23",
@@ -614,7 +636,8 @@
       "explainable": true,
       "c3_ratio": 0.26,
       "c3_ok": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-24",
@@ -640,7 +663,8 @@
       "explainable": true,
       "c3_ratio": 0.0,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-25",
@@ -658,7 +682,8 @@
       "explainable": true,
       "c3_ratio": 0.0,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-26",
@@ -700,7 +725,8 @@
       "explainable": true,
       "c3_ratio": 0.03,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-27",
@@ -733,7 +759,8 @@
       "explainable": true,
       "c3_ratio": 0.0,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-28",
@@ -759,7 +786,8 @@
       "explainable": true,
       "c3_ratio": 0.0,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-29",
@@ -785,7 +813,8 @@
       "explainable": true,
       "c3_ratio": 0.0,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-30",
@@ -811,7 +840,8 @@
       "explainable": true,
       "c3_ratio": 0.0,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-31",
@@ -837,7 +867,8 @@
       "explainable": true,
       "c3_ratio": 0.0,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "cp-32",
@@ -872,6 +903,7 @@
       "explainable": true,
       "c3_ratio": 0.02,
       "c3_ok": true
-    }
+    },
+    "provenance": "catalog"
   }
 ]

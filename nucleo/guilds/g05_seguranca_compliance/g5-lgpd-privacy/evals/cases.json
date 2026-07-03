@@ -23,7 +23,8 @@
       "status": "approved",
       "blocked": false,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-02",
@@ -50,7 +51,8 @@
       "status": "remediate",
       "blocked": false,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-03",
@@ -76,7 +78,8 @@
       "status": "blocked",
       "blocked": true,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-04",
@@ -102,7 +105,8 @@
       "status": "blocked",
       "blocked": true,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-05",
@@ -126,7 +130,8 @@
       "status": "approved",
       "blocked": false,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-06",
@@ -152,7 +157,8 @@
       "status": "remediate",
       "blocked": false,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-07",
@@ -179,7 +185,8 @@
       "status": "remediate",
       "blocked": false,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-08",
@@ -205,7 +212,8 @@
       "status": "blocked",
       "blocked": true,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-09",
@@ -231,7 +239,8 @@
       "status": "approved",
       "blocked": false,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-10",
@@ -255,7 +264,8 @@
       "status": "approved",
       "blocked": false,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-11",
@@ -281,7 +291,8 @@
       "status": "approved",
       "blocked": false,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-12",
@@ -308,7 +319,8 @@
       "status": "blocked",
       "blocked": true,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-13",
@@ -334,7 +346,8 @@
       "status": "remediate",
       "blocked": false,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-14",
@@ -360,7 +373,8 @@
       "status": "approved",
       "blocked": false,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-15",
@@ -384,7 +398,8 @@
       "status": "blocked",
       "blocked": true,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-16",
@@ -410,7 +425,8 @@
       "status": "approved",
       "blocked": false,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-17",
@@ -437,7 +453,8 @@
       "status": "remediate",
       "blocked": false,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-18",
@@ -463,7 +480,8 @@
       "status": "remediate",
       "blocked": false,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-19",
@@ -489,7 +507,8 @@
       "status": "approved",
       "blocked": false,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-20",
@@ -513,7 +532,8 @@
       "status": "approved",
       "blocked": false,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-21",
@@ -539,7 +559,8 @@
       "status": "approved",
       "blocked": false,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-22",
@@ -566,7 +587,8 @@
       "status": "remediate",
       "blocked": false,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-23",
@@ -592,7 +614,8 @@
       "status": "remediate",
       "blocked": false,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-24",
@@ -618,7 +641,8 @@
       "status": "blocked",
       "blocked": true,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-25",
@@ -642,7 +666,8 @@
       "status": "approved",
       "blocked": false,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-26",
@@ -668,7 +693,8 @@
       "status": "approved",
       "blocked": false,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-27",
@@ -695,7 +721,8 @@
       "status": "blocked",
       "blocked": true,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-28",
@@ -721,7 +748,8 @@
       "status": "blocked",
       "blocked": true,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-29",
@@ -747,7 +775,8 @@
       "status": "approved",
       "blocked": false,
       "requires_human_review": true
-    }
+    },
+    "provenance": "catalog"
   },
   {
     "id": "g5-lgpd-privacy-domain-30",
@@ -771,6 +800,7 @@
       "status": "remediate",
       "blocked": false,
       "requires_human_review": false
-    }
+    },
+    "provenance": "catalog"
   }
 ]

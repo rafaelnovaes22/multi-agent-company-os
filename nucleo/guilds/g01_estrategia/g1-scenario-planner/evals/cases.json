@@ -80,7 +80,7 @@
       "base_value": 0.3,
       "driver_count": 1,
       "top_driver": "alcance",
-      "spread_pct": 53.3,
+      "spread_pct": 50.0,
       "tripwire_count": 1
     },
     "provenance": "catalog"

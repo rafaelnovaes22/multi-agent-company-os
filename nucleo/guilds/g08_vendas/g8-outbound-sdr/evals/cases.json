@@ -15,7 +15,8 @@
     },
     "expected": {
       "min_steps": 3,
-      "consent_required": true
+      "consent_required": true,
+      "personalized": true
     },
     "provenance": "catalog"
   },
@@ -33,6 +34,8 @@
       }
     },
     "expected": {
+      "min_steps": 3,
+      "consent_required": true,
       "personalized": true
     },
     "provenance": "catalog"
@@ -51,7 +54,9 @@
       }
     },
     "expected": {
-      "consent_required": true
+      "min_steps": 3,
+      "consent_required": true,
+      "personalized": true
     },
     "provenance": "catalog"
   },
@@ -81,7 +86,7 @@
   },
   {
     "id": "ob-05",
-    "desc": "variação outbound 5",
+    "desc": "variação outbound 5 — disqualified NÃO recebe outreach (auditoria 2026-07-03)",
     "lead": {
       "id": "L-ob-05",
       "company": "Conta 5"
@@ -94,9 +99,7 @@
       }
     },
     "expected": {
-      "min_steps": 3,
-      "consent_required": true,
-      "personalized": true
+      "blocked": true
     },
     "provenance": "catalog"
   },
@@ -191,7 +194,7 @@
   },
   {
     "id": "ob-10",
-    "desc": "variação outbound 10",
+    "desc": "variação outbound 10 — disqualified NÃO recebe outreach (auditoria 2026-07-03)",
     "lead": {
       "id": "L-ob-10",
       "company": "Conta 10"
@@ -207,9 +210,7 @@
       }
     },
     "expected": {
-      "min_steps": 3,
-      "consent_required": true,
-      "personalized": true
+      "blocked": true
     },
     "provenance": "catalog"
   },
@@ -304,7 +305,7 @@
   },
   {
     "id": "ob-15",
-    "desc": "variação outbound 15",
+    "desc": "variação outbound 15 — disqualified NÃO recebe outreach (auditoria 2026-07-03)",
     "lead": {
       "id": "L-ob-15",
       "company": "Conta 15"
@@ -317,9 +318,7 @@
       }
     },
     "expected": {
-      "min_steps": 3,
-      "consent_required": true,
-      "personalized": true
+      "blocked": true
     },
     "provenance": "catalog"
   },
@@ -414,7 +413,7 @@
   },
   {
     "id": "ob-20",
-    "desc": "variação outbound 20",
+    "desc": "variação outbound 20 — disqualified NÃO recebe outreach (auditoria 2026-07-03)",
     "lead": {
       "id": "L-ob-20",
       "company": "Conta 20"
@@ -430,9 +429,7 @@
       }
     },
     "expected": {
-      "min_steps": 3,
-      "consent_required": true,
-      "personalized": true
+      "blocked": true
     },
     "provenance": "catalog"
   },
@@ -528,7 +525,7 @@
   },
   {
     "id": "ob-25",
-    "desc": "variação outbound 25",
+    "desc": "variação outbound 25 — disqualified NÃO recebe outreach (auditoria 2026-07-03)",
     "lead": {
       "id": "L-ob-25",
       "company": "Conta 25"
@@ -540,9 +537,7 @@
       }
     },
     "expected": {
-      "min_steps": 3,
-      "consent_required": true,
-      "personalized": true
+      "blocked": true
     },
     "provenance": "catalog"
   },
@@ -638,7 +633,7 @@
   },
   {
     "id": "ob-30",
-    "desc": "variação outbound 30",
+    "desc": "variação outbound 30 — disqualified NÃO recebe outreach (auditoria 2026-07-03)",
     "lead": {
       "id": "L-ob-30",
       "company": "Conta 30"
@@ -654,9 +649,7 @@
       }
     },
     "expected": {
-      "min_steps": 3,
-      "consent_required": true,
-      "personalized": true
+      "blocked": true
     },
     "provenance": "catalog"
   }

@@ -102,6 +102,9 @@ def _g_ob(out, exp):
         return False
     seq = out.get("sequence", [])
     ok = True
+    if exp.get("blocked"):
+        # lead disqualified: bloqueio explícito E zero outreach (auditoria 2026-07-03, §6.7)
+        ok = ok and out.get("blocked") is True and not seq
     if exp.get("min_steps"):
         ok = ok and len(seq) >= exp["min_steps"]
     if exp.get("consent_required"):

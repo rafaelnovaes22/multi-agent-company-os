@@ -138,8 +138,10 @@ def generate_red_green(request: str, seed: dict, oracle: dict, llm, executor,
     for attempt in range(1, max_iters + 1):
         # 16k: patch + self-test num único JSON estoura 4k e truncava a resposta no meio
         # (falso artifact_parseable=False observado no painel 6, backend-03/04).
+        # temperature=0: o painel compara noites — variância de amostragem vira ruído de
+        # medição; determinismo aqui é instrumentação, não capacidade.
         text = llm.complete(_prompt(request, seed, attempt, feedback, untouchable, selftest_hint),
-                            max_tokens=16384)
+                            max_tokens=16384, temperature=0.0)
         files = _extract_files(text)
         if files is None:
             history.append({"attempt": attempt, "parsed": False, "tests_pass": None})

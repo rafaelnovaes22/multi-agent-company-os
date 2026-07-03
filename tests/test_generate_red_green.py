@@ -187,6 +187,44 @@ class RedGreenLoopTest(unittest.TestCase):
         for p in llm.prompts:
             self.assertNotIn(SECRET, p)                  # held-out continua fora
 
+    def test_selftest_do_agente_itera_no_loop_mas_nao_entra_na_entrega(self):
+        # fronteira real (backend-03/frontend-07): sem teste visível, one-shot perfeito era
+        # a única via. Agora o agente escreve o PRÓPRIO teste do contrato: roda no loop
+        # (red→feedback→green), mas é REMOVIDO da entrega — teste de agente não é prova.
+        seed = {"api/orders.py": "def total(items):\n    return 0  # TODO-BUG\n"}
+        oracle = {"bug_file": "api/orders.py", "runtime": "python", "test_cmd": "pytest -q",
+                  "bug_markers": {"must_remove": ["TODO-BUG"], "must_contain": []},
+                  "heldout_files": {"test_orders.py": f"# {SECRET}\n"}}
+        wrong = json.dumps({"files": {
+            "api/orders.py": "def total(items):\n    return sum(i['price'] for i in items)\n",
+            "test_selfcheck.py": "from api.orders import total\n\ndef test_qty():\n    assert total([{'price': 2, 'qty': 3}]) == 6\n"}})
+        right = json.dumps({"files": {
+            "api/orders.py": "def total(items):\n    return sum(i['price'] * i['qty'] for i in items)\n",
+            "test_selfcheck.py": "from api.orders import total\n\ndef test_qty():\n    assert total([{'price': 2, 'qty': 3}]) == 6\n"}})
+        llm = ScriptedLLM([wrong, right])
+        ex = ScriptedExecutor([False, True], outputs=["assert 2 == 6"])
+        r = generate_red_green("some price*qty", seed, oracle, llm, ex)
+        self.assertTrue(r["loop_green"])
+        self.assertEqual(r["attempts"], 2)
+        self.assertEqual(r["history"][0]["selftest_paths"], ["test_selfcheck.py"])
+        # o self-test rodou no loop...
+        self.assertIn("test_selfcheck.py", ex.executed_files[0])
+        # ...o feedback devolveu o erro dele...
+        self.assertIn("PRÓPRIOS testes", llm.prompts[1])
+        self.assertIn("assert 2 == 6", llm.prompts[1])
+        # ...mas NÃO integra a entrega, e o held-out nunca vazou
+        self.assertNotIn("test_selfcheck.py", r["artifact"]["files"])
+        for p in llm.prompts:
+            self.assertNotIn(SECRET, p)
+        # o prompt instruiu o self-test (modo sem teste visível)
+        self.assertIn("test_selfcheck.py", llm.prompts[0])
+
+    def test_selftest_nao_e_instruido_quando_ha_teste_visivel(self):
+        llm = ScriptedLLM([GOOD])
+        ex = ScriptedExecutor([True])
+        generate_red_green("corrija soma", SEED, ORACLE, llm, ex)   # SEED tem test_app.py
+        self.assertNotIn("test_selfcheck.py", llm.prompts[0])
+
     def test_extract_files_aceita_json_cercado(self):
         text = "Aqui está:\n```json\n" + GOOD + "\n```\nEspero que ajude!"
         self.assertEqual(_extract_files(text),

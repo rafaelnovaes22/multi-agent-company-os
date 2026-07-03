@@ -162,7 +162,15 @@ proibindo a tarefa em vez de inventar um recompute auto-referente.
    anti-vazamento de held-out) + integração local com Docker real (red na 1ª com stderr no
    prompt → green na 2ª → delivered final True). Falta p/ fechar o épico: nightly publicar o
    generativo real N noites, expandir do piloto aos 5 exec-backed, e SÓ ENTÃO G7 passar a
-   promover pelo número generativo. Hoje o `delivered_eligible_rate`
+   promover pelo número generativo.
+   **[MEDIÇÃO em curso]** 5 painéis generativos (2026-07-01→03, gemini-2.5-flash): agregado
+   27%→74%→87%→90%→90%; noites 4-5 (cron) IDÊNTICAS: piloto 8/8, infra 8/8, mobile 28/30,
+   backend 6/8, frontend 6/8 — fail-safe 0 falso-positivo em TODOS os painéis. Lição
+   estrutural: todo zero era harness/justiça-de-caso (ticket sem critério de aceite, marcador
+   em comentário, jest×vitest), nunca teto do modelo. Fronteira restante = "estático limpo,
+   held-out vermelho" com casos JUSTOS (contrato visível especifica o que o held-out cobra):
+   resposta = SELF-TEST red→green (agente escreve o próprio teste do contrato; roda no loop,
+   é REMOVIDO da entrega — teste de agente não é prova; held-out segue soberano). Hoje o `delivered_eligible_rate`
    mede a qualidade das fixtures commitadas (o artefato vem baked no eval-case;
    `skills_exec.py` só verifica). Para o 95% significar capacidade do AGENTE: (a) handler
    `spec_executor` ganha modo gerador — sem `artifact` no caso, o LLM real gera o patch a

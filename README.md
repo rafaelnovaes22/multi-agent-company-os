@@ -1,7 +1,7 @@
-# NÚCLEO — Company-OS Multi-Agente para a nova venture da ClientD
+# NÚCLEO — Company-OS Multi-Agente para ventures AI-native
 
 > **Status:** Plano de arquitetura → implementação (v1, 2026-05-29)
-> **Desafio:** criar/co-criar o sistema multi-agente de uma nova empresa da ClientD (linhagem BigMarket), com **150+ agentes operando antes do MVP**, sobre **LangGraph**, na estrutura **self-harness-agent**, com agentes que **evoluem aprendendo**, seguindo a doutrina **YC "How to build a company with AI"**.
+> **Desafio:** criar/co-criar o sistema multi-agente de uma nova venture AI-native, com **150+ agentes operando antes do MVP**, sobre **LangGraph**, na estrutura **self-harness-agent**, com agentes que **evoluem aprendendo**, seguindo a doutrina **YC "How to build a company with AI"**.
 
 ---
 
@@ -72,14 +72,14 @@ A Lovable é a **prova viva** da tese AI-native da YC: de **0 a ~US$400M ARR em 
 
 ---
 
-## A tensão central — "Token-max" (YC #7) × "Custo ≤ 25%" (C3 do forge)
+## A tensão central — "Token-max" (YC #7) × "Custo ≤ 25%" (C3 do foundry)
 
 A YC manda **rodar uma conta de API desconfortavelmente alta** para substituir headcount. O agent-governance-framework manda **custo de operar ≤ 25% do preço cobrado** (C3, hard gate). Parecem se contradizer. **Não se contradizem — operam em livros-razão diferentes:**
 
 | Livro-razão | O que é | Regra de governança | Comparação correta |
 |---|---|---|---|
 | **OPERATING (interno)** | Agentes fazendo o trabalho *da própria empresa* (engenharia, ops, growth, suporte interno) | **Token-max (YC #7)** — rode quente | Custo de tokens **vs. custo carregado do headcount que substitui**. Conta alta é vitória se o humano custaria 10×. |
-| **BILLABLE (externo)** | Agentes cujo output é **vendido** ao cliente final | **C3 do forge** — custo ≤ 25% do preço | Custo de inferência por outcome **vs. preço por outcome** |
+| **BILLABLE (externo)** | Agentes cujo output é **vendido** ao cliente final | **C3 do foundry** — custo ≤ 25% do preço | Custo de inferência por outcome **vs. preço por outcome** |
 
 > **Regra-mãe:** cada agente declara, na spec, a qual livro-razão pertence (`ledger: operating | billable`). O Unit-Economist (guarda C3) só **bloqueia promoção** de agentes `billable`. Agentes `operating` são governados por ROI-vs-headcount, não por C3. Isso preserva *as duas* doutrinas sem contradição.
 
@@ -102,3 +102,9 @@ A YC manda **rodar uma conta de API desconfortavelmente alta** para substituir h
 - **Executivo / banca do desafio:** este README + o mapa dos 8 princípios YC em [02](02-ARQUITETURA.md).
 - **Arquiteto/tech lead:** [02](02-ARQUITETURA.md) → [04](04-IMPLEMENTACAO.md) (código).
 - **Quem vai construir os agentes:** [03](03-CATALOGO-AGENTES.md) (catálogo + anatomia) → [04](04-IMPLEMENTACAO.md) (esqueletos).
+
+## Licença
+
+Copyright (c) 2026 Rafael Novaes.
+
+Licenciado sob [PolyForm Noncommercial License 1.0.0](./LICENSE.md) — leitura, estudo e uso não comercial permitidos; uso comercial requer autorização expressa do autor.

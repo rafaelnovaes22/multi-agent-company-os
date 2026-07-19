@@ -1,4 +1,4 @@
-"""Gate para artifacts JSON do `forge-exec` (VERIFY-IN-EVAL F6).
+"""Gate para artifacts JSON do `foundry-exec` (VERIFY-IN-EVAL F6).
 
 O `exec_report.json` é a fonte machine-readable para crédito de entrega real. Este
 módulo valida um ou mais artifacts e retorna exit code != 0 quando o nightly não
@@ -110,7 +110,7 @@ def evaluate_paths(paths: Iterable[str | Path]) -> GateResult:
 
 
 def _parse(argv: list[str] | None = None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Valida artifacts JSON do VERIFY-IN-EVAL forge-exec.")
+    parser = argparse.ArgumentParser(description="Valida artifacts JSON do VERIFY-IN-EVAL foundry-exec.")
     parser.add_argument("artifacts", nargs="+", help="Caminhos dos exec_report*.json")
     return parser.parse_args(argv)
 

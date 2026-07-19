@@ -16,7 +16,7 @@
   },
   {
     "id": "c8-02",
-    "desc": "if tenantId + pasta clients/acme -> 2 hardcodes, bloqueia",
+    "desc": "if tenantId + pasta clients/novais-digital -> 2 hardcodes, bloqueia",
     "lint": {
       "findings": [
         {
@@ -57,7 +57,7 @@
   },
   {
     "id": "c8-04",
-    "desc": "pasta clients/acme com override de código -> hardcode",
+    "desc": "pasta clients/novais-digital com override de código -> hardcode",
     "lint": {
       "findings": [
         {

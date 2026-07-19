@@ -15,7 +15,7 @@ O agent-governance-framework (v0.13.x) é um **framework de governança Claude C
 | **C7** Portability over lock-in | provider/modelo isolados em camada de abstração | trocar LLM sem reescrever 150 agentes |
 | **C8** Config over customization | cliente N = configuração, nunca `if (tenant === 'x')` | **escala sem explosão combinatória** de código |
 
-Acima dos princípios, o forge entrega:
+Acima dos princípios, o foundry entrega:
 
 - **10 Guardians** (subagents Opus/Sonnet) que validam cada princípio — PO-Guardian (C1/C2), Unit-Economist (C3), Promotion-Officer (C4), Tenant-Context-Curator (C8), Artifact-Architect (C5/C7), Eval-Engineer, Observability-Guardian (C6), Security-Privacy-Guardian, Code-Reviewers, Learning-Curator.
 - **15 slash commands** que orquestram o pipeline: `diagnose → spec → plan → implement → eval → pre-merge-check → promote` + `aios-*`, `audit-monthly`, `playbook-extract`.
@@ -37,14 +37,14 @@ Acima dos princípios, o forge entrega:
 
 | Lacuna | Detalhe | Quem preenche |
 |---|---|---|
-| **Runtime** | O forge é *build-time* — define skills/agents/commands em **Markdown no Claude Code**. Não é um **orquestrador de runtime** para 150 agentes vivos respondendo a eventos. | **LangGraph** (substrato de execução) |
+| **Runtime** | O foundry é *build-time* — define skills/agents/commands em **Markdown no Claude Code**. Não é um **orquestrador de runtime** para 150 agentes vivos respondendo a eventos. | **LangGraph** (substrato de execução) |
 | **Escala** | ~10 guardians + ~18 skills. Não há padrão comprovado para 150 agentes. | **ECC** (63 agentes / 243 skills → modelo de guildas) |
 | **Aprendizado pesado** | self-harness/Hermes é curado por humano via PR — robusto, mas de alta fricção para 150 agentes. | **ECC instincts** (auto-extração leve, confidence-score) |
 | **Topologia de orquestração** | Não há supervisor/router de runtime, nem fan-out paralelo, nem human-in-the-loop como primitiva. | **LangGraph** (supervisor, `Send`, `interrupt`) |
-| **Enquadramento** | É orientado a uma **agência/SaaS² (Acme)**: "cliente", "tenant", "subscription". Precisamos reenquadrar "tenant" como **função/guilda da própria empresa**. | reframe no NÚCLEO |
+| **Enquadramento** | É orientado a uma **agência/SaaS² (Novais Digital)**: "cliente", "tenant", "subscription". Precisamos reenquadrar "tenant" como **função/guilda da própria empresa**. | reframe no NÚCLEO |
 | **Single-harness** | Só Claude Code. | ECC é cross-harness; mas no runtime o substrato é o LangGraph de qualquer forma |
 
-> **Conclusão da Parte A:** o forge nos dá **o cérebro normativo** (constituição, economia, gates, self-harness). Falta o **corpo de execução em escala** (runtime + topologia + aprendizado leve). É aí que entram LangGraph e ECC.
+> **Conclusão da Parte A:** o foundry nos dá **o cérebro normativo** (constituição, economia, gates, self-harness). Falta o **corpo de execução em escala** (runtime + topologia + aprendizado leve). É aí que entram LangGraph e ECC.
 
 ---
 
@@ -52,7 +52,7 @@ Acima dos princípios, o forge entrega:
 
 ECC é um **sistema operador harness-native** (MIT) — "agent harness performance optimization system: skills, instincts, memory, security, research-first" — multi-harness (Claude Code, Codex, Cursor, OpenCode, Gemini, Zed, Copilot). Tem ~243 skills públicas e dezenas de subagents organizados por domínio, hooks por evento, rules por linguagem, MCP configs, e os **Hermes operator workflows** + dashboard.
 
-> **Nota de honestidade técnica:** o ECC é, ele próprio, um *operador de harness Claude-Code* (skills/hooks em Markdown), **não** um runtime LangGraph. Portanto **adotamos seus padrões e seu modelo de aprendizado** e **os portamos para o LangGraph**. Não importamos código de runtime dele. (Também: a linhagem **"Hermes"** que o self-harness do forge já cita vem dessa mesma família — os dois projetos conversam.)
+> **Nota de honestidade técnica:** o ECC é, ele próprio, um *operador de harness Claude-Code* (skills/hooks em Markdown), **não** um runtime LangGraph. Portanto **adotamos seus padrões e seu modelo de aprendizado** e **os portamos para o LangGraph**. Não importamos código de runtime dele. (Também: a linhagem **"Hermes"** que o self-harness do foundry já cita vem dessa mesma família — os dois projetos conversam.)
 
 ### O que portamos do ECC, concretamente
 
@@ -101,8 +101,8 @@ GOVERNANÇA                          APRENDIZADO+ESCALA                       EX
 
 **Onde os três se reforçam (não se duplicam):**
 
-- *Aprendizado:* self-harness (forge, curado/PR) **+** instincts (ECC, automático) **+** store/checkpointer (LangGraph, persistência) = um único loop de memória em 3 velocidades.
-- *Verificação:* eval-cases (forge C2/C4) **+** eval-harness/quality-gate (ECC) **+** gates com `interrupt` (LangGraph) = "software factory" YC #4 com governança.
-- *Evolução:* o ciclo C4 (forge) **é** o caminho de evolução, instrumentado pelos eval (ECC) e materializado por transições de estado no grafo (LangGraph).
+- *Aprendizado:* self-harness (foundry, curado/PR) **+** instincts (ECC, automático) **+** store/checkpointer (LangGraph, persistência) = um único loop de memória em 3 velocidades.
+- *Verificação:* eval-cases (foundry C2/C4) **+** eval-harness/quality-gate (ECC) **+** gates com `interrupt` (LangGraph) = "software factory" YC #4 com governança.
+- *Evolução:* o ciclo C4 (foundry) **é** o caminho de evolução, instrumentado pelos eval (ECC) e materializado por transições de estado no grafo (LangGraph).
 
 > Próximo: [02-ARQUITETURA.md](02-ARQUITETURA.md) — como isso vira camadas, topologia e código.

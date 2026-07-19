@@ -1,4 +1,4 @@
-name: forge-gate
+name: foundry-gate
 
 # Gate de QUALIDADE da Fábrica, não-bypassável: roda em todo PR e push para main.
 # Torna a "definition of done" (AGENTS.md) executável no CI — não depende de o agente lembrar.
@@ -9,7 +9,7 @@ on:
     branches: [main]
 
 jobs:
-  forge:
+  foundry:
     runs-on: ubuntu-latest
     env:
       PYTHONUTF8: "1"
@@ -37,8 +37,8 @@ jobs:
         # PR e levar um humano a olhar; continue-on-error mantém o gate de mérito no pre_pr_gate.
         continue-on-error: true
         run: python -m nucleo.quality.diff_homogeneity
-      - name: Forge check (definition-of-done, ratchet)
-        run: python -m nucleo.quality.forge_check
+      - name: Foundry check (definition-of-done, ratchet)
+        run: python -m nucleo.quality.foundry_check
       - name: Eval-harness da frota (C4)
         run: |
           rm -rf nucleo/.brain* .brain*

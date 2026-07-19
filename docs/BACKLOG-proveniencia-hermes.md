@@ -62,7 +62,7 @@ Tudo verde, na ordem do [AGENTS.md §3](../AGENTS.md):
 
 ```bash
 python -m nucleo.quality.pre_pr_gate     # escopado ao diff — os agentes do PR devem passar
-python -m nucleo.quality.forge_check     # ratchet intacto
+python -m nucleo.quality.foundry_check     # ratchet intacto
 rm -rf nucleo/.brain* .brain* && python -m nucleo.demo_eval   # DEVE seguir 5042/5042 (100%)
 python -m unittest discover -s tests
 ```

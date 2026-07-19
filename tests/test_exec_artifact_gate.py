@@ -1,4 +1,4 @@
-"""Gate dos artifacts JSON do forge-exec (VERIFY-IN-EVAL F6).
+"""Gate dos artifacts JSON do foundry-exec (VERIFY-IN-EVAL F6).
 
 A suíte de eval-cases é DISCRIMINANTE: tem casos positivos (devem entregar) e negativos
 por design (plausível-mas-errado, adversariais, rejeitados no estático), que não entregam

@@ -1,6 +1,6 @@
 # NÚCLEO — Deck para a CEO
 
-> Empresa AI-native (espírito BigMarket/ClientD + Lovable no **modelo operacional**, mercado nosso, **vertical a definir**). Não é slide: **roda**.
+> Empresa AI-native (espírito big-techs AI-first + Lovable no **modelo operacional**, mercado nosso, **vertical a definir**). Não é slide: **roda**.
 
 ---
 

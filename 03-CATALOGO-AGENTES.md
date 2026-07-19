@@ -18,7 +18,7 @@ Legenda das colunas: **Ledger** = `OP` (operating, governado por ROI-vs-headcoun
    │
    ├──────────┬──────────┬──────────┬──────────┬──────────┐
    ▼          ▼          ▼          ▼          ▼          ▼
- G8 Vendas  G9 CustOps G10 Finanç. G11 Pessoas G12 Juríd. G13 Governança(Forge)
+ G8 Vendas  G9 CustOps G10 Finanç. G11 Pessoas G12 Juríd. G13 Governança(Foundry)
 ```
 
 | Guilda | DRI (humano) | Foco | Ledger dominante | Nº agentes |
@@ -35,7 +35,7 @@ Legenda das colunas: **Ledger** = `OP` (operating, governado por ROI-vs-headcoun
 | G10 Finanças & Unit Economics | DRI Finanças | FP&A, conciliação, C3 (+procurement) | OP | 11 |
 | G11 Pessoas & Conhecimento | DRI Ops | recrutar camada humana, KM, notetaker | OP | 8 |
 | G12 Jurídico & Risco | DRI Legal | contratos, regulatório | OP | 8 |
-| G13 Governança (Forge Guild) | AI Founder | os Guardians + reviewer | OP | 11 |
+| G13 Governança (Foundry Guild) | AI Founder | os Guardians + reviewer | OP | 11 |
 | **G14 Model & AI-Ops** | DRI Eng/Dados | model-ops, prompt registry, eval-data, Responsible-AI | OP | 8 |
 | + Utilitários (root-supervisor, Hermes-loop, brain-indexer, 3 MCP gateways) | AI Founder | roteamento global + infra | OP | 6 |
 | **TOTAL** | | | | **169** |
@@ -60,7 +60,7 @@ Legenda das colunas: **Ledger** = `OP` (operating, governado por ROI-vs-headcoun
 | G10 Finanças & Unit Economics | [G10-financas.md](catalogo/G10-financas.md) |
 | G11 Pessoas & Conhecimento | [G11-pessoas-conhecimento.md](catalogo/G11-pessoas-conhecimento.md) |
 | G12 Jurídico & Risco | [G12-juridico-risco.md](catalogo/G12-juridico-risco.md) |
-| G13 Governança (Forge Guild) | [G13-governanca.md](catalogo/G13-governanca.md) |
+| G13 Governança (Foundry Guild) | [G13-governanca.md](catalogo/G13-governanca.md) |
 | **G14 Model & AI-Ops** (novo) | [G14-model-ai-ops.md](catalogo/G14-model-ai-ops.md) |
 
 ---
@@ -69,7 +69,7 @@ Legenda das colunas: **Ledger** = `OP` (operating, governado por ROI-vs-headcoun
 
 Todo agente — worker ou supervisor — é o **mesmo template** parametrizado por uma spec. É o que torna 150 agentes gerenciáveis (e satisfaz C8: variação é configuração, não código novo).
 
-### B.1 A spec (o contrato — derivada do template do forge)
+### B.1 A spec (o contrato — derivada do template do foundry)
 ```yaml
 id: g3-backend-builder
 guild: G3-engenharia
@@ -304,8 +304,8 @@ arquivos:  souls/{id}.md        ← identidade (SOUL)
 | g12-risk-register | registro/monitor de riscos corporativos | OP | L1 | ASSISTED |
 | g12-litigation-tracker | acompanha disputas | OP | L2 | ASSISTED |
 
-### G13 · Governança (Forge Guild) — 11 · *a meta-guilda que mantém as outras honestas*
-| Agente | Papel (Guardian do forge) | Ledger | Tier | Nasce |
+### G13 · Governança (Foundry Guild) — 11 · *a meta-guilda que mantém as outras honestas*
+| Agente | Papel (Guardian do foundry) | Ledger | Tier | Nasce |
 |---|---|---|---|---|
 | g13-governance-supervisor | orquestra governança/gates | OP | L0 | ASSISTED |
 | g13-po-guardian | valida C1/C2 (cláusula de outcome) | OP | L0 | ASSISTED |

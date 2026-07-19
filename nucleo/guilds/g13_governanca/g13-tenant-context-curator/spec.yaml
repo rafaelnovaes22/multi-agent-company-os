@@ -12,11 +12,11 @@ act_handler: tenant_hardcode_lint
 outcome_clause:
   statement: "Nenhum agente é mergeado/promovido com lógica hardcoded por tenant nem com PII/segredo de cliente em memória; variação é sempre config."
   positive_examples:
-    - "Barra um if tenantId === 'acme' e exige migração para config no contexto"
+    - "Barra um if tenantId === 'novais-digital' e exige migração para config no contexto"
     - "Aprova um agente cujo comportamento por instância vem 100% de dados de contexto"
     - "Detecta PII de tenant que vazou para um instinct e bloqueia o merge da memória"
   negative_examples:
-    - "Deixa passar uma pasta clients/acme/ com override de código"
+    - "Deixa passar uma pasta clients/novais-digital/ com override de código"
     - "Aceita spec que assume um vertical sem o marcador de configurabilidade"
     - "Ignora segredo de cliente colado num arquivo de SOUL"
   delivered_event: "c8.lint_emitted com hardcode_count e status PASS/FAIL"

@@ -23,10 +23,10 @@ Verificado:
 - `AGENTS.md:101-102` diz literalmente "O norte é zerar `handler_generico`/`sem_target_mode`".
 - A frota tem **380 casos `independent` / 94 `catalog` / zero `human`**; existe zero artefato
   de recompute e zero `oracle_expr` no repo.
-- O `git author` dominante dos `cases.json` é `acme-startup`, não "Hermes Agent", o que torna
+- O `git author` dominante dos `cases.json` é `novais-digital`, não "Hermes Agent", o que torna
   cego qualquer check de "autor distinto" baseado em git author.
 
-Sobre o `forge-exec` nightly (Docker, único lugar que mede capacidade real via
+Sobre o `foundry-exec` nightly (Docker, único lugar que mede capacidade real via
 `delivered_rate`): esteve RED em `main` por 8 noites seguidas. A causa, lida step-by-step:
 o passo "Gate F6" (`exec_artifact_gate.py`) hard-falha com `tests_failed_count=4`, mas os 120
 casos dos 4 agentes estritos têm todos `expected.tests_pass=None` (nenhum espera execução
@@ -92,7 +92,7 @@ proibindo a tarefa em vez de inventar um recompute auto-referente.
 4. ~~**Construir o detector de homogeneidade de diff**~~ **[FEITO]** alarme barato e mecânico
    (N diffs mecânicos idênticos disparam revisão). Entregue em `nucleo/quality/diff_homogeneity.py`
    (+ `tests/test_diff_homogeneity.py`): sinal A pega carimbo em massa de um campo (#66-80), sinal B
-   pega casos-clone tautológicos (#30-32). Plugado no `forge.yml` como passo **advisory**
+   pega casos-clone tautológicos (#30-32). Plugado no `foundry.yml` como passo **advisory**
    (`continue-on-error`), não bloqueia merge. Rebaixado explicitamente a tripwire (espera-se evasão
    por jitter), não a matador-de-raiz.
 5. **Auditar o retrofit dos 380 `independent`:** rebaixar a `catalog` os não-recomputáveis de
@@ -146,7 +146,7 @@ proibindo a tarefa em vez de inventar um recompute auto-referente.
    **[WIRADO, commit a seguir]** novo gate **G7** em `promote.py` (transições ->ASSISTED e
    ->AUTONOMOUS): exige `delivered_rate` do oráculo executável (`exec_report`) >= 95%, **fail-closed**
    (sem executor real = sem prova = não promove). G4 (estático ~100%) segue separado; a distância
-   G4↔G7 É a decisão. Testado em `tests/test_promote_delivery_sla.py` + passo no `forge.yml`.
+   G4↔G7 É a decisão. Testado em `tests/test_promote_delivery_sla.py` + passo no `foundry.yml`.
 5. ~~**Guardrail que escala + retrofit.**~~ **[FEITO 2026-07-03]** Detector de homogeneidade
    entregue antes (advisory). Retrofit executado: **380 rebaixados a `catalog`** (todos os
    `independent` sem `source` externo nem held-out executável — exatamente os #66-80,
@@ -165,7 +165,7 @@ proibindo a tarefa em vez de inventar um recompute auto-referente.
    budget GEN_MAX_ITERS; erro de infra não itera às cegas), `exec_report --generative
    --require-real-llm` (mede SÓ elegíveis; publica taxa generativa SEPARADA do replay; Fake
    LLM = exit 2, nunca "0% falso"), `run_tests_detail` no executor (veredito + cauda do erro
-   p/ o feedback), passo GENERATIVO no forge-exec.yml (Vertex via WIF, auditoria
+   p/ o feedback), passo GENERATIVO no foundry-exec.yml (Vertex via WIF, auditoria
    continue-on-error, piloto build-error-resolver). Validado: 9 testes offline (inclusive
    anti-vazamento de held-out) + integração local com Docker real (red na 1ª com stderr no
    prompt → green na 2ª → delivered final True). Falta p/ fechar o épico: nightly publicar o
@@ -216,8 +216,8 @@ proibindo a tarefa em vez de inventar um recompute auto-referente.
   proibido (seria #30 reembalado). Sem fonte externa, o caso é `catalog` (replay honesto) ou
   proibido, nunca `independent`.
 - **G-PERÍMETRO:** ~~mecanismo a construir~~ **[FEITO 2026-07-03]** "autor != provador" não
-  pode ser git-author (o Hermes assina como `acme-startup`). Construído em
-  `nucleo/governance/perimeter.py`: a prova de entrega é o artefato do nightly `forge-exec`
+  pode ser git-author (o Hermes assina como `novais-digital`). Construído em
+  `nucleo/governance/perimeter.py`: a prova de entrega é o artefato do nightly `foundry-exec`
   VERDE em `main` (identidade do CI — só quem tem merge em main o produz), buscado via API
   do GitHub, com proof {run_id, commit, artifact}. No G7: `req["delivery_proof"]=
   "ci-perimeter"` usa o perímetro e é FAIL-CLOSED (sem nightly verde recente = não promove;
@@ -228,7 +228,7 @@ proibindo a tarefa em vez de inventar um recompute auto-referente.
   existir canal de ratificação que produza artefato que só o humano gera.
 - **Alarme de homogeneidade** (tripwire, não guardrail estrutural): detector de N diffs
   mecânicos idênticos. Heurística sobre a forma do ataque atual; espera-se evasão por jitter.
-  **[FEITO]** `nucleo/quality/diff_homogeneity.py`, advisory no `forge.yml`.
+  **[FEITO]** `nucleo/quality/diff_homogeneity.py`, advisory no `foundry.yml`.
 
 ## 6. Decisões do CEO (não delegáveis)
 

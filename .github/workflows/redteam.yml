@@ -1,7 +1,7 @@
 name: redteam-periodico
 
 # Red-teaming constante (NIST PR4): busca ATIVA de bypass com LLM REAL (Vertex).
-# NÃO é gate de PR — roda agendado (semanal) e sob demanda. Diferente do forge-gate,
+# NÃO é gate de PR — roda agendado (semanal) e sob demanda. Diferente do foundry-gate,
 # que roda offline/determinístico em todo PR, aqui o objetivo é a diversidade
 # linguística que só um LLM real gera ("formas de esconder intenção são ilimitadas").
 # Job vermelho = bypass reproduzível → corrigir o agente e promover o caso à suite.
@@ -26,7 +26,7 @@ jobs:
       PYTHONUTF8: "1"
       LLM_PROVIDER: vertex
       GOOGLE_GENAI_USE_VERTEXAI: "true"
-      GOOGLE_CLOUD_PROJECT: acme-multiagentes
+      GOOGLE_CLOUD_PROJECT: novais-digital-multiagentes
       GOOGLE_CLOUD_LOCATION: us-central1
       REDTEAM_LLM_VARIANTS: ${{ github.event.inputs.k || '6' }}
     steps:

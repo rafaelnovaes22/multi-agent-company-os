@@ -9,6 +9,6 @@
 - Verifica que nenhuma PII de tenant nem segredo de cliente vazou para SOUL/MEMORY/instincts.
 
 **O que evita:**
-- Deixar passar pasta clients/acme/ com override de código.
+- Deixar passar pasta clients/novais-digital/ com override de código.
 - Aceitar spec que assume um vertical sem o marcador de configurabilidade.
 - Ignorar segredo de cliente colado num arquivo de SOUL.

@@ -1,7 +1,7 @@
-name: forge-exec (nightly)
+name: foundry-exec (nightly)
 
 # Execução REAL (VERIFY-IN-EVAL F2) — roda código dos eval-cases num contêiner hardened.
-# SEPARADO do gate forge.yml e fora de pull_request por SEGURANÇA: executa código só no main
+# SEPARADO do gate foundry.yml e fora de pull_request por SEGURANÇA: executa código só no main
 # já mergeado/revisado, em runner Linux+Docker. Disparo: nightly (cron) + manual (dispatch).
 on:
   schedule:
@@ -13,7 +13,7 @@ permissions:
   id-token: write              # OIDC p/ Workload Identity Federation (geração red→green, Vertex)
 
 jobs:
-  forge-exec:
+  foundry-exec:
     runs-on: ubuntu-latest
     env:
       PYTHONUTF8: "1"
@@ -81,7 +81,7 @@ jobs:
         env:
           LLM_PROVIDER: vertex
           GOOGLE_GENAI_USE_VERTEXAI: "true"
-          GOOGLE_CLOUD_PROJECT: acme-multiagentes
+          GOOGLE_CLOUD_PROJECT: novais-digital-multiagentes
           GOOGLE_CLOUD_LOCATION: us-central1
         # Piloto (teste visível na semente = loop executável); backend/frontend/mobile iteram
         # via sonda estática (semente sem teste visível — held-out oculto decide no final);

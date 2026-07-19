@@ -1,4 +1,4 @@
-# Demo viva Acme Multi-Agentes
+# Demo viva Novais Digital Multi-Agentes
 
 Front estático + servidor stdlib que materializa a frota real do NÚCLEO e expõe uma API mínima para a landing/demo.
 
@@ -34,7 +34,7 @@ Exemplo:
 curl -s http://127.0.0.1:8765/api/health
 curl -s -X POST http://127.0.0.1:8765/api/intent \
   -H 'Content-Type: application/json' \
-  -d '{"intent":"qualifique este lead","context":{"company":"Acme Limpeza","revenue_brl_year":3000000,"founder_led":true,"sells_well":true,"lacks_process":true,"firefighter":true}}'
+  -d '{"intent":"qualifique este lead","context":{"company":"Novais Digital Limpeza","revenue_brl_year":3000000,"founder_led":true,"sells_well":true,"lacks_process":true,"firefighter":true}}'
 ```
 
 ## Container / Cloud Run

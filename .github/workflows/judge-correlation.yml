@@ -1,7 +1,7 @@
 name: judge-correlation (F3b)
 
 # Relatório VIVO da correlação run_evals × juiz externo (VERIFY-IN-EVAL F3b).
-# Lê-se junto com forge-exec.yml (oráculo determinístico): run_evals dá ~100% aos técnicos
+# Lê-se junto com foundry-exec.yml (oráculo determinístico): run_evals dá ~100% aos técnicos
 # enquanto o juiz gpt-5 reprovava por "blueprint, não código" (descasamento de instrumento).
 # O oráculo fecha o gap de MEDIÇÃO; a nota do juiz só sobe com capacidade generativa+execução.
 # Versionar o juiz permite acompanhar essa subida no tempo, sem re-rodar ad-hoc.
@@ -42,7 +42,7 @@ jobs:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       LLM_PROVIDER: vertex
       GOOGLE_GENAI_USE_VERTEXAI: "true"
-      GOOGLE_CLOUD_PROJECT: acme-multiagentes
+      GOOGLE_CLOUD_PROJECT: novais-digital-multiagentes
       GOOGLE_CLOUD_LOCATION: us-central1
     steps:
       - uses: actions/checkout@v4

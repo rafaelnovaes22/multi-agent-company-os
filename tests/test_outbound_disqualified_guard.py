@@ -13,7 +13,7 @@ from nucleo.kernel.providers.llm import FakeLLMProvider
 
 def _run(decision, signals=None):
     handler = _HANDLERS["outbound_sdr"]
-    state = {"task": {"lead": {"id": "L-1", "company": "Acme"},
+    state = {"task": {"lead": {"id": "L-1", "company": "Novais Digital"},
                       "qualification": {"decision": decision,
                                         "icp_fit_signals": signals or {"sem_processo": True}}}}
     return handler(state, llm=FakeLLMProvider(), store=None,

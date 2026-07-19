@@ -1,4 +1,4 @@
-"""Servidor da demo viva Acme Multi-Agentes.
+"""Servidor da demo viva Novais Digital Multi-Agentes.
 
 Serve o front estático e executa a frota real do NÚCLEO. No startup materializa
 `build_company`; cada POST /api/intent roteia a intenção pelo CEO-OS real

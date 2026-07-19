@@ -9,13 +9,13 @@ A guilda que mantém o NÚCLEO seguro, conforme à LGPD e à prova de abuso: vig
 - **Missão:** orquestrar todo o trabalho de segurança e compliance, roteando tarefas aos workers e consolidando a postura de risco da empresa.
 - **Ledger:** OP · **Tier:** L1 · **Modo-alvo:** ASSISTED
 - **Responsabilidades:**
-  - Recebe pedidos de segurança (de outras guildas, de gates do forge ou de cron) e roteia para o worker correto via `Command(goto=...)`/`Send`, paralelizando scans independentes.
+  - Recebe pedidos de segurança (de outras guildas, de gates do foundry ou de cron) e roteia para o worker correto via `Command(goto=...)`/`Send`, paralelizando scans independentes.
   - Mantém o registro de risco vivo de segurança no Company Brain: agrega achados de todos os workers em uma postura única com severidade, owner e SLA de remediação.
   - Decide bloqueio vs. alerta: traduz achados em veredito de gate (passa/segura promoção C4) para o promotion-officer quando um agente tenta subir de modo.
   - Faz triagem de severidade e escala incidentes ativos para `g5-incident-forensics` e para `g3-incident-responder` (inter-guilda) quando há exploração em curso.
   - Prioriza fila de remediação por risco-vs-esforço (token-max no livro OP) e cobra fechamento dos achados das guildas donas do código.
   - Reporta KPIs de postura de segurança ao supervisor-raiz e ao DRI SecOps no ciclo de board.
-- **Entradas:** pedidos do supervisor-raiz e de gates do forge; achados emitidos pelos 10 workers da guilda; eventos de incidente; risco-registro de `g12-risk-register`.
+- **Entradas:** pedidos do supervisor-raiz e de gates do foundry; achados emitidos pelos 10 workers da guilda; eventos de incidente; risco-registro de `g12-risk-register`.
 - **Saídas (artefatos):** postura de segurança consolidada; veredito de gate de segurança; fila priorizada de remediação; relatório de risco ao board — todos no Brain (C6).
 - **Ferramentas (C7):** `brain.query`, `brain.write`, `subagent.dispatch`, `gate.signal`, `LLMProvider`.
 - **Gatilhos:** evento de pedido de segurança; cron diário de consolidação de postura; pedido do promotion-officer em gate de AUTONOMOUS; alerta de incidente.

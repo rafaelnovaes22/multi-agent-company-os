@@ -199,7 +199,7 @@ def get_llm(role: str = "worker") -> LLMProvider:
     """Resolve o LLMProvider por papel (C7). Provider real é OPT-IN EXPLÍCITO via
     LLM_PROVIDER — sem ele, a frota usa o provider offline (FakeLLMProvider). Isso mantém
     SHADOW/CI/eval determinísticos, sem rede, sem custo e sem reféns de uma chave perdida
-    no ambiente (o gate forge/eval depende dessa reprodutibilidade).
+    no ambiente (o gate foundry/eval depende dessa reprodutibilidade).
 
       LLM_PROVIDER=anthropic        -> Claude (ANTHROPIC_API_KEY)
       LLM_PROVIDER=google|gemini    -> Gemini Developer API (GEMINI_API_KEY/GOOGLE_API_KEY)

@@ -1,7 +1,7 @@
 name: deploy-staging
 
 # Deploy GATED do staging (Railway) — o gate de qualidade roda ANTES de publicar, então
-# nenhum código que não passa no pre_pr_gate/forge_check/suíte chega ao staging, mesmo em
+# nenhum código que não passa no pre_pr_gate/foundry_check/suíte chega ao staging, mesmo em
 # push direto ao branch `staging`. É a "proteção do branch" por baixo (o GitHub free não
 # permite branch protection em repo privado). PRÉ-REQUISITO: desligar o auto-deploy nativo
 # do serviço nucleo-staging no Railway, senão há deploy duplicado. Ver demo/live/STAGING.md.
@@ -36,8 +36,8 @@ jobs:
         run: python -m compileall -q nucleo
       - name: Pre-PR gate (proveniência + prova independente — HARD-FAIL)
         run: python -m nucleo.quality.pre_pr_gate
-      - name: Forge check (definition-of-done, ratchet)
-        run: python -m nucleo.quality.forge_check
+      - name: Foundry check (definition-of-done, ratchet)
+        run: python -m nucleo.quality.foundry_check
       - name: Suíte de testes
         run: python -m unittest discover -s tests
 

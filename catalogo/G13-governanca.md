@@ -1,4 +1,4 @@
-# Governança (Forge Guild) (G13)
+# Governança (Foundry Guild) (G13)
 > DRI: AI Founder · 11 agentes · Ledger dominante: OP (100% operating — governança não é vendável)
 
 A meta-guilda que mantém as outras 12 honestas. Cada agente é um **Guardian** da Constituição C1–C8 portada do agent-governance-framework: roda como nó validador nos 6 gates da Fábrica (L3) e nos modos C4, lê telemetria do Company Brain (C6) e tem poder de **vetar** promoções. É a única guilda cujo output é o *direito de outras guildas entregarem*. Não cobra, não vende — protege o trilho imutável (Constituição-runtime L-1) e o loop de aprendizado (L6). Princípio operacional: governança não é gargalo — gates só onde há entrega, cobrança ou autonomia; SHADOW é livre.
@@ -155,10 +155,10 @@ A meta-guilda que mantém as outras 12 honestas. Cada agente é um **Guardian** 
 - **Gatilhos:** `pre-merge` (gate G3), `spec.created`, snapshot do learning loop, scan periódico (cron).
 - **Colabora com:** g13-artifact-architect (C5/C7 vizinho), g13-learning-curator (curadoria de memória sem PII de tenant), g13-security-privacy-guardian, g5-lgpd-privacy.
 - **Cláusula de outcome (C2):** nenhum agente é mergeado/promovido com lógica hardcoded por tenant nem com PII/segredo de cliente em memória; variação é sempre config.
-  - ✅ Barra um `if tenantId === 'acme'` e exige migração para config no contexto.
+  - ✅ Barra um `if tenantId === 'novais-digital'` e exige migração para config no contexto.
   - ✅ Aprova um agente cujo comportamento por instância vem 100% de dados de contexto.
   - ✅ Detecta PII de tenant que vazou para um instinct e bloqueia o merge da memória.
-  - ❌ Deixa passar uma pasta `clients/acme/` com override de código.
+  - ❌ Deixa passar uma pasta `clients/novais-digital/` com override de código.
   - ❌ Aceita spec que assume um vertical sem o marcador de configurabilidade.
   - ❌ Ignora segredo de cliente colado num arquivo de SOUL.
   - 🚩 DELIVERED quando: `c8.lint_emitted` com `hardcode_count` e status PASS/FAIL.
@@ -282,8 +282,8 @@ A meta-guilda que mantém as outras 12 honestas. Cada agente é um **Guardian** 
   - Ingere o manifest, a Constituição vigente, 30 dias de outcomes (DB read-only) e os traces correspondentes, e roda os checks formais C1–C8 + coerência + qualidade (PASS/FAIL/WARN com evidência citada).
   - Re-classifica uma amostra aleatória de 5–10% dos outcomes por categoria e compara gabarito humano × agente × reviewer para flagrar divergência.
   - Detecta drift: queda de acurácia ≥5pp/mês (WARN), custo ≥+15%/mês, volume ±30%/mês, `prompt_hash` mudado sem recálculo de economia.
-  - Gera o relatório mensal markdown + JSON em `docs/forge/audits/` via PR (nunca direto na main) e abre issues acionáveis (P0/P1/P2) com owner sugerido.
-  - Lê e cita qualquer bypass auditado (`ACME_FORGE_BYPASS=incident`) e valida que mudanças na Constituição passaram por ADR + bump SemVer.
+  - Gera o relatório mensal markdown + JSON em `docs/foundry/audits/` via PR (nunca direto na main) e abre issues acionáveis (P0/P1/P2) com owner sugerido.
+  - Lê e cita qualquer bypass auditado (`NOVAIS_FOUNDRY_BYPASS=incident`) e valida que mudanças na Constituição passaram por ADR + bump SemVer.
 - **Entradas:** manifest.json, Constituição-runtime, tabela de outcomes (read-only), traces do LLM trace provider, eval-reports, bypass-log.
 - **Saídas (artefatos):** relatório mensal (`{YYYY-MM-DD}-monthly.md` + `.json`), issues acionáveis, sinal de drift, recomendações priorizadas para o AI Founder.
 - **Ferramentas (C7):** brain.query (read-only), TelemetryProvider (traces read-only), repo.read (manifest/specs/evals), LLMProvider (modelo independente, não-Claude), MessagingProvider (notifica founder+DRI).

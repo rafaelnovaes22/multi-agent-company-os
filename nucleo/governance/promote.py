@@ -98,7 +98,7 @@ def _gate(g, spec, spec_dir, req, deps):
             got = perimeter.fetch_perimeter_summary(spec["id"])
             if not got:
                 return False, ("SLA entrega: prova de PERÍMETRO indisponível (sem nightly "
-                               "forge-exec verde recente em main com este agente). Promoção "
+                               "foundry-exec verde recente em main com este agente). Promoção "
                                "bloqueada (fail-closed) — G-PERÍMETRO não degrada p/ prova local.")
             s = got["summary"]
             p = got["proof"]

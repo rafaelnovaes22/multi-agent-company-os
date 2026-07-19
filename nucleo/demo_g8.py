@@ -62,7 +62,7 @@ def main():
           f"Gate -> ok={gate['ok']} problems={gate['problems']} warnings={gate['warnings']}")
 
     leads = [
-        {"id": "L-001", "company": "Acme Servicos", "revenue_brl_year": 2_500_000,
+        {"id": "L-001", "company": "Novais Digital Servicos", "revenue_brl_year": 2_500_000,
          "founder_led": True, "sells_well": True, "lacks_process": True, "firefighter": True},
         {"id": "L-002", "company": "Nano Ideia", "revenue_brl_year": 400_000,
          "founder_led": True, "lacks_process": True},

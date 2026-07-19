@@ -6,17 +6,17 @@
     "dedupe": {
       "record_a": {
         "id": "A1",
-        "email": "joao@acme.com",
+        "email": "joao@novais-digital.com",
         "phone": "11999",
         "name": "Joao Silva",
-        "company_domain": "acme.com"
+        "company_domain": "novais-digital.com"
       },
       "record_b": {
         "id": "B1",
-        "email": "joao@acme.com",
+        "email": "joao@novais-digital.com",
         "phone": "11999",
         "name": "Joao Silva",
-        "company_domain": "acme.com"
+        "company_domain": "novais-digital.com"
       }
     },
     "expected": {
@@ -179,14 +179,14 @@
         "email": "a@a.com",
         "phone": "1",
         "name": "Joao",
-        "company_domain": "acme.com"
+        "company_domain": "novais-digital.com"
       },
       "record_b": {
         "id": "B7",
         "email": "b@b.com",
         "phone": "2",
         "name": "Maria",
-        "company_domain": "acme.com"
+        "company_domain": "novais-digital.com"
       }
     },
     "expected": {
@@ -234,17 +234,17 @@
     "dedupe": {
       "record_a": {
         "id": "A9",
-        "email": "j@acme.com",
+        "email": "j@novais-digital.com",
         "phone": "1",
         "name": "Joao",
-        "company_domain": "acme.com"
+        "company_domain": "novais-digital.com"
       },
       "record_b": {
         "id": "B9",
-        "email": "j@acme.com",
+        "email": "j@novais-digital.com",
         "phone": "2",
         "name": "Maria",
-        "company_domain": "acme.com"
+        "company_domain": "novais-digital.com"
       }
     },
     "expected": {
@@ -341,17 +341,17 @@
     "dedupe": {
       "record_a": {
         "id": "A13",
-        "email": "n@acme.com",
+        "email": "n@novais-digital.com",
         "phone": "1",
         "name": "Ana Lima",
-        "company_domain": "acme.com"
+        "company_domain": "novais-digital.com"
       },
       "record_b": {
         "id": "B13",
-        "email": "n@acme.com",
+        "email": "n@novais-digital.com",
         "phone": "2",
         "name": "Ana Lima",
-        "company_domain": "acme.com"
+        "company_domain": "novais-digital.com"
       }
     },
     "expected": {
@@ -502,17 +502,17 @@
     "dedupe": {
       "record_a": {
         "id": "A19",
-        "email": "  JOAO@ACME.COM  ",
+        "email": "  JOAO@NOVAIS DIGITAL.COM  ",
         "phone": "111",
         "name": "Joao",
-        "company_domain": "acme.com"
+        "company_domain": "novais-digital.com"
       },
       "record_b": {
         "id": "B19",
-        "email": "joao@acme.com",
+        "email": "joao@novais-digital.com",
         "phone": "111",
         "name": "joao",
-        "company_domain": "ACME.COM"
+        "company_domain": "NOVAIS DIGITAL.COM"
       }
     },
     "expected": {

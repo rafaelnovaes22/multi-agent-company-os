@@ -644,7 +644,7 @@ def unit_economist_c3(state, *, llm, store, spec):
                        "min_price_brl": min_price, "verdict": verdict, "blocks_delivery": blocks_delivery,
                        "status": status, "requires_human_review": blocks_delivery,
                        "gate2_unlocked": viable, "signature_hash": signature_hash, "rationale": rationale, "by": spec["id"]},
-            "cost_tokens": _tokens(rationale), "citations": ["economics:payload", "forge:C3"]}
+            "cost_tokens": _tokens(rationale), "citations": ["economics:payload", "foundry:C3"]}
 
 
 @register("token_cost_accountant")
@@ -853,7 +853,7 @@ def _score_lead_against_icp(lead: dict):
     """Pontua o lead contra os TRÊS ICPs do NÚCLEO (ver company/icp.md, faixas 2026-06-10):
     - ICP-1 bombeiro/PCG: R$1-6M/ano, founder-led, vende bem mas opera no caos.
     - ICP-2 enterprise: >R$100M/ano (ou setor público), desorganizada em processos,
-      time grande e custo de pessoal alto substituível por agentes Acme.
+      time grande e custo de pessoal alto substituível por agentes Novais Digital.
     - ICP-3 mid-market: R$50-100M/ano que cresceu além do fundador sem profissionalizar —
       a faixa sozinha NÃO qualifica; exige dor evidente (processo/custo de pessoal/gargalo).
     A faixa R$6-50M é DESCONSIDERADA por enquanto (decisão founder 2026-06-10) — não pontua.
@@ -902,7 +902,7 @@ def _score_lead_against_icp(lead: dict):
             score += 15; signals["time_grande"] = True; reasons.append("Time grande (muitas pessoas)")
         if lead.get("high_personnel_cost"):
             score += 20; signals["custo_pessoal_alto"] = True
-            reasons.append("Custo de pessoal alto substituivel por agentes Acme")
+            reasons.append("Custo de pessoal alto substituivel por agentes Novais Digital")
 
     elif tier == "mid_market":
         score += 30; signals["faturamento_50a100M"] = True
@@ -912,7 +912,7 @@ def _score_lead_against_icp(lead: dict):
             reasons.append("Processos nao acompanharam o porte (dor central)")
         if lead.get("high_personnel_cost"):
             score += 20; signals["custo_pessoal_alto"] = True
-            reasons.append("Custo de pessoal alto substituivel por agentes Acme")
+            reasons.append("Custo de pessoal alto substituivel por agentes Novais Digital")
         if lead.get("large_team") or (lead.get("team_size", 0) or 0) >= 50:
             score += 15; signals["time_grande"] = True; reasons.append("Time grande (muitas pessoas)")
         if lead.get("founder_led") or lead.get("firefighter"):

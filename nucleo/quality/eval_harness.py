@@ -115,7 +115,7 @@ def run_security_case(agent, spec: dict, case: dict, *, store, brain) -> tuple:
 
 def run_security_evals(spec_dir, llm, brain, store, checkpointer) -> dict:
     """Roda evals/security_cases.json (se existir) em SHADOW. total=0 é vácuo (a catraca
-    sem_security_cases do forge_check é quem força casos para billable/target AUTONOMOUS)."""
+    sem_security_cases do foundry_check é quem força casos para billable/target AUTONOMOUS)."""
     spec = load_spec(spec_dir)
     _, agent, _ = build_from_spec(spec_dir, llm, brain, store, checkpointer)
 

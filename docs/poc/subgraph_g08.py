@@ -19,7 +19,7 @@ import sys
 import uuid
 
 if hasattr(sys.stdout, "reconfigure"):
-    sys.stdout.reconfigure(encoding="utf-8")               # acentos no Windows (vide forge_check)
+    sys.stdout.reconfigure(encoding="utf-8")               # acentos no Windows (vide foundry_check)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))              # docs/poc -> docs -> raiz do repo

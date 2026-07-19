@@ -10,7 +10,7 @@
 | LLM | abstração `LLMProvider` (C7); default Claude (Opus p/ supervisores/Guardians, Sonnet/Haiku p/ workers) | portabilidade + custo |
 | Tracing | **LangSmith** (ou Langfuse) | C6, drift, auditoria |
 | Governança | **agent-governance-framework** portado (Constitution, commands, Guardians) | C1–C8 |
-| Aprendizado | self-harness (forge) + instincts (ECC) | evolução |
+| Aprendizado | self-harness (foundry) + instincts (ECC) | evolução |
 | Fila/cron | LangGraph Platform crons / Railway (Hermes) | learning loop, auditoria mensal |
 | Front operador | Operator Console (Next.js) sobre o Brain | dashboards YC#3 |
 
@@ -35,7 +35,7 @@ nucleo/
 │   │       └── evals/        # ≥30 casos (C4)
 ├── factory/                 # diagnose→spec→plan→implement→eval→promote
 ├── learning/                # hermes loop, /evolve
-├── reviewer/                # DeepAgent mensal (forge)
+├── reviewer/                # DeepAgent mensal (foundry)
 └── console/                 # Operator Console (YC#3)
 ```
 
@@ -287,11 +287,11 @@ kernel │ 35 ag (Fábrica) │ 150+ ag (SHADOW)       │ MVP (misto)    │ ev
 
 ## 6. O que escrever a seguir (handoff para a construção)
 
-1. **`constitution/`** — portar `CONSTITUTION.md` (C1–C8) do forge + anexar doutrina YC (Y1–Y8 de [02](02-ARQUITETURA.md) §3).
+1. **`constitution/`** — portar `CONSTITUTION.md` (C1–C8) do foundry + anexar doutrina YC (Y1–Y8 de [02](02-ARQUITETURA.md) §3).
 2. **`kernel/`** — implementar os 6 arquivos de §2 (state, self_harness, agent_template, supervisor, gates, providers).
-3. **`factory/`** — portar os commands do forge (`diagnose/spec/plan/implement/eval/promote`) como passos da Fábrica.
+3. **`factory/`** — portar os commands do foundry (`diagnose/spec/plan/implement/eval/promote`) como passos da Fábrica.
 4. **`guilds/*/spec.yaml`** — escrever as **150 specs** (o trabalho dos ICs; cada spec = §B.1 de [03](03-CATALOGO-AGENTES.md)). Começar por G13/G3/G4/G5 (fase 1).
-5. **`learning/`** — `hermes_loop.py` + `evolve_cron.py` (fundir self-harness do forge com instincts do ECC).
+5. **`learning/`** — `hermes_loop.py` + `evolve_cron.py` (fundir self-harness do foundry com instincts do ECC).
 6. **`console/`** — dashboards sobre o Brain (YC#3).
 
 > Pré-requisito de pessoas (camada humana fina, YC#6): 1 **AI Founder** + ~6 **DRIs** (um por cluster de guildas) + ~4 **ICs/builder-operators** que escrevem specs e operam a Fábrica. ~11 humanos operando 150+ agentes.

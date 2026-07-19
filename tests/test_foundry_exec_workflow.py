@@ -1,4 +1,4 @@
-"""Travas estáticas do workflow forge-exec ampliado (VERIFY-IN-EVAL F7).
+"""Travas estáticas do workflow foundry-exec ampliado (VERIFY-IN-EVAL F7).
 
 Os relatórios opcionais de naturezas novas devem ser publicados sem enfraquecer o
 gate F6: artifacts ainda não creditáveis aparecem para auditoria, mas não entram no
@@ -9,10 +9,10 @@ from __future__ import annotations
 import unittest
 from pathlib import Path
 
-WORKFLOW = Path(".github/workflows/forge-exec.yml")
+WORKFLOW = Path(".github/workflows/foundry-exec.yml")
 
 
-class ForgeExecExpandedReportsTest(unittest.TestCase):
+class FoundryExecExpandedReportsTest(unittest.TestCase):
     def test_workflow_publica_browser_incident_como_auditoria_e_mobile_estrito(self):
         text = WORKFLOW.read_text(encoding="utf-8")
 

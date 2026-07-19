@@ -2,7 +2,7 @@
 
 O guardrail (PLANO-AJUSTE-ROTA §5): "autor != provador" não pode ser git-author (forjável);
 quem prova tem de ser um processo com identidade própria, e o gate confia no artefato
-apenas se veio daquele perímetro. Aqui o perímetro é o job `forge-exec (nightly)` do
+apenas se veio daquele perímetro. Aqui o perímetro é o job `foundry-exec (nightly)` do
 GitHub Actions rodando em `main`: só quem tem merge em main consegue produzir esse
 artefato, e a consulta é feita à API do GitHub (via `gh`), não a um arquivo local que o
 promotor poderia escrever.
@@ -19,7 +19,7 @@ import os
 import subprocess
 import tempfile
 
-WORKFLOW = "forge-exec.yml"
+WORKFLOW = "foundry-exec.yml"
 MAX_AGE_DAYS = 7
 _TRUSTED_EVENTS = {"schedule", "workflow_dispatch"}
 

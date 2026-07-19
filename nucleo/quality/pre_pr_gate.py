@@ -6,7 +6,7 @@ e TODOS os gates verdes passaram. A regra "eval de domínio, não theater" exist
 texto no AGENTS.md — e texto é gameável. Este gate transforma os pontos da avaliação do
 Hermes em BLOQUEIO executável: o loop não abre PR se reprovar aqui.
 
-Difere do forge_check: o forge_check é o ratchet da frota (congela débito no baseline).
+Difere do foundry_check: o foundry_check é o ratchet da frota (congela débito no baseline).
 Este gate NÃO grandfatheriza nada — é HARD-FAIL. Os pontos enforçados:
 
   P1  Fechar catraca não é prova de valor: natureza build/ops/browser (held-out-capaz)
@@ -24,7 +24,7 @@ Este gate NÃO grandfatheriza nada — é HARD-FAIL. Os pontos enforçados:
       norma FORA do controle do agente) OU critério held-out executável no próprio `oracle`
       do caso. Caso rotulado `human` exige `ratified_by` (artefato de ratificação humana).
       Rótulo sem lastro reprova: é o carimbo do #66-80 reembalado.
-  P2  Baseline só encolhe: se `forge_baseline.json` mudou no diff, o total não pode CRESCER
+  P2  Baseline só encolhe: se `foundry_baseline.json` mudou no diff, o total não pode CRESCER
       e exige `nucleo/quality/BASELINE-CHANGE.md` justificando (auditoria do PR que "fecha métrica").
 
 Limite honesto (idem #33): proveniência "autorado vs replay" NÃO é 100% decidível
@@ -44,7 +44,7 @@ import sys
 
 import yaml
 
-from nucleo.quality.forge_check import GENERIC  # mesma definição de handler genérico
+from nucleo.quality.foundry_check import GENERIC  # mesma definição de handler genérico
 
 for _stream in (sys.stdout, sys.stderr):
     try:
@@ -55,7 +55,7 @@ for _stream in (sys.stdout, sys.stderr):
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 GUILDS = os.path.join(ROOT, "nucleo", "guilds")
 PRODUCT = os.path.join(ROOT, "nucleo", "product")
-BASELINE_PATH = os.path.join(ROOT, "nucleo", "quality", "forge_baseline.json")
+BASELINE_PATH = os.path.join(ROOT, "nucleo", "quality", "foundry_baseline.json")
 BASELINE_JUSTIFY = os.path.join(ROOT, "nucleo", "quality", "BASELINE-CHANGE.md")
 
 PROVENANCE_OK = {"catalog", "human", "independent"}
@@ -172,10 +172,10 @@ def _audit_baseline(changed):
     if old_raw is not None:
         old_total = sum(len(v) for v in json.loads(old_raw).values())
         if new_total > old_total:
-            viol.append(f"forge_baseline.json CRESCEU ({old_total} -> {new_total}): o baseline só "
+            viol.append(f"foundry_baseline.json CRESCEU ({old_total} -> {new_total}): o baseline só "
                         f"encolhe (burn-down). Regressão de qualidade escondida no baseline é proibida.")
     if not os.path.exists(BASELINE_JUSTIFY):
-        viol.append("forge_baseline.json mudou sem nucleo/quality/BASELINE-CHANGE.md justificando "
+        viol.append("foundry_baseline.json mudou sem nucleo/quality/BASELINE-CHANGE.md justificando "
                     "(toda alteração de baseline é PR que 'fecha métrica' e exige auditoria).")
     return viol
 
@@ -236,7 +236,7 @@ def main(argv):
               f"(held-out/fonte/ratificação) · {catalog_only} catalog-only (replay honesto)")
 
     print(f"\n✅ PRE-PR GATE OK — {len(specs)} agente(s) com proveniência validada. "
-          "Pode abrir PR (forge_check/CI continuam valendo).")
+          "Pode abrir PR (foundry_check/CI continuam valendo).")
     return 0
 
 

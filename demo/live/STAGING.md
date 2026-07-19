@@ -4,13 +4,13 @@ Staging é um **serviço separado** (`nucleo-staging`) no **mesmo projeto/enviro
 que produção. URL: `https://nucleo-staging-production.up.railway.app`.
 
 O deploy é **gated por GitHub Actions** ([.github/workflows/deploy-staging.yml](../../.github/workflows/deploy-staging.yml)):
-no push ao branch `staging`, o gate de qualidade (`pre_pr_gate` + `forge_check` + suíte) roda
+no push ao branch `staging`, o gate de qualidade (`pre_pr_gate` + `foundry_check` + suíte) roda
 **antes** de publicar — só então o Railway recebe o deploy. É a "proteção do branch" por baixo
 (o GitHub free não permite branch protection em repo privado): mesmo um push direto ao `staging`
 passa pelo gate antes de virar deploy.
 
 ```
-feature/*  --PR (forge-gate)-->  staging  --push--> [Actions: gate -> railway up] -->  nucleo-staging
+feature/*  --PR (foundry-gate)-->  staging  --push--> [Actions: gate -> railway up] -->  nucleo-staging
                                     │  valida em Vertex real
                                     └--PR-->  main  -->  produção (nucleo-demo)
 ```
@@ -18,7 +18,7 @@ feature/*  --PR (forge-gate)-->  staging  --push--> [Actions: gate -> railway up
 Como é serviço no mesmo environment de prod, ele **herda as variáveis compartilhadas do
 environment** — inclusive o `GOOGLE_CREDENTIALS_JSON`. Por isso o staging fala com **Vertex
 real** sem credencial por serviço (confirmado: `/api/health` →
-`GoogleProvider/...vertex:acme-multiagentes/us-central1`). Imagem = a de produção
+`GoogleProvider/...vertex:novais-digital-multiagentes/us-central1`). Imagem = a de produção
 (`demo/live/Dockerfile`, healthcheck `/api/health`).
 
 ## Setup único
@@ -45,7 +45,7 @@ Já existe. A partir do merge deste fluxo, **todo push/merge em `staging` dispar
 
 ## Fluxo de promoção
 
-- Promova via **PR para `staging`** (o `forge-gate` roda como check de PR); ao mergear, o
+- Promova via **PR para `staging`** (o `foundry-gate` roda como check de PR); ao mergear, o
   `deploy-staging` roda o gate de novo e publica. Push direto também é gated (gate antes do deploy).
 - Validado em staging (Vertex real, mesma imagem de prod), promova o mesmo commit via PR para
   `main` → produção (`nucleo-demo`).

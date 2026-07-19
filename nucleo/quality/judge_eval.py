@@ -19,7 +19,7 @@ acompanhar essa subida ao longo do tempo, em vez de re-rodar ad-hoc.
 
 Uso (CI, F3b):
     JUDGE=openai OPENAI_API_KEY=... LLM_PROVIDER=vertex GOOGLE_GENAI_USE_VERTEXAI=true \
-      GOOGLE_CLOUD_PROJECT=acme-multiagentes GOOGLE_CLOUD_LOCATION=us-central1 \
+      GOOGLE_CLOUD_PROJECT=novais-digital-multiagentes GOOGLE_CLOUD_LOCATION=us-central1 \
       python -m nucleo.quality.judge_eval --require-judge --json-output judge_report.json
 Sem chave do juiz (e sem --require-judge): sai inerte (0) — "pronto, aguardando o secret".
 """
@@ -88,7 +88,7 @@ def _make_judge(judge: str):
     from google import genai
     from google.genai import types
     client = genai.Client(vertexai=True,
-                          project=os.environ.get("GOOGLE_CLOUD_PROJECT", "acme-multiagentes"),
+                          project=os.environ.get("GOOGLE_CLOUD_PROJECT", "novais-digital-multiagentes"),
                           location=os.environ.get("GOOGLE_CLOUD_LOCATION", "us-central1"))
 
     def complete(prompt: str) -> str:

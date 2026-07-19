@@ -40,7 +40,7 @@ def _runner(runs=None, files=None):
 
 
 GREEN_RUN = {"databaseId": 123, "headSha": "abc123def456", "createdAt": _now_iso(),
-             "event": "schedule", "workflowName": "forge-exec (nightly)"}
+             "event": "schedule", "workflowName": "foundry-exec (nightly)"}
 REPLAY = {"agent_id": "g3-backend-builder", "generative": False,
           "delivered_eligible_rate": {"passed": 8, "total": 8, "percent": 100.0},
           "delivered_rate": {"passed": 8, "total": 30, "percent": 26.67},
@@ -101,7 +101,7 @@ class G7PerimeterTest(unittest.TestCase):
         ok, ev = self._gate({"delivery_proof": "ci-perimeter"},
                             {"summary": REPLAY, "proof": {"run_id": "123", "commit": "abc123def456",
                                                           "created_at": _now_iso(),
-                                                          "workflow": "forge-exec.yml",
+                                                          "workflow": "foundry-exec.yml",
                                                           "artifact": "exec_report_backend.json"}})
         self.assertTrue(ok)
         self.assertIn("perímetro CI: run 123", ev)

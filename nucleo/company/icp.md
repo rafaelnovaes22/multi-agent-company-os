@@ -15,7 +15,7 @@ loaded_by: nucleo.kernel.loaders.load_icp
 
 ## Resumo em uma frase
 
-São **três** perfis de comprador: **(ICP-1) fundadores R$ 1–6 milhões/ano** que **vendem bem mas operam no caos** (perfil "bombeiro"/TDAH, sem processo) — canal de distribuição = **PCG** (Programa de Crescimento Guiado da the CEO); **(ICP-2) organizações enterprise >R$ 100 milhões/ano** (inclui **setor público**), **desorganizadas em processos**, com **time grande e custo de pessoal alto substituível por agentes Acme**; e **(ICP-3) mid-market R$ 50–100 milhões/ano** que **cresceu além do fundador sem profissionalizar a operação** — dores híbridas dos dois extremos.
+São **três** perfis de comprador: **(ICP-1) fundadores R$ 1–6 milhões/ano** que **vendem bem mas operam no caos** (perfil "bombeiro"/TDAH, sem processo) — canal de distribuição = **PCG** (Programa de Crescimento Guiado da the CEO); **(ICP-2) organizações enterprise >R$ 100 milhões/ano** (inclui **setor público**), **desorganizadas em processos**, com **time grande e custo de pessoal alto substituível por agentes Novais Digital**; e **(ICP-3) mid-market R$ 50–100 milhões/ano** que **cresceu além do fundador sem profissionalizar a operação** — dores híbridas dos dois extremos.
 
 > **A faixa R$ 6–50M é DESCONSIDERADA por enquanto** (decisão founder 2026-06-10) — não pontua na qualificação, nem com dor evidente. Histórico das faixas: R$ 1–5M (2026-05-29) → R$ 1–20M (CEO 2026-05-30, dois extremos) → **R$ 1–6M + mid-market R$ 50–100M (founder 2026-06-10: "vamos ter esses clientes também", excluindo 6–50M)**. O produto é o mesmo; o **pitch e o motion de venda mudam** (PCG = canal quente, ciclo curto; mid-market = venda consultiva founder-led; enterprise/público = procurement/licitação, ciclo longo, narrativa de substituição de custo).
 
@@ -27,7 +27,7 @@ São **três** perfis de comprador: **(ICP-1) fundadores R$ 1–6 milhões/ano**
 - Faturamento: **R$ 1M a R$ 6M / ano** (já validou venda; não é ideação).
 - Estágio: pós-product-market-fit comercial, pré-maturidade operacional.
 - Decisor: o **próprio fundador/sócio** (compra é founder-led).
-- **Canal:** mentorados do **PCG** (audiência quente, pré-qualificada) — dispensa prospecção fria. Tese: *"PCG ensina o que fazer; Acme é o headcount que executa."*
+- **Canal:** mentorados do **PCG** (audiência quente, pré-qualificada) — dispensa prospecção fria. Tese: *"PCG ensina o que fazer; Novais Digital é o headcount que executa."*
 
 **Comportamental (o coração do ICP)**
 - Perfil **"bombeiro"**: apaga incêndios o dia todo, faz um monte de coisa ao mesmo tempo.
@@ -52,7 +52,7 @@ São **três** perfis de comprador: **(ICP-1) fundadores R$ 1–6 milhões/ano**
 
 **Situação / dores**
 - **Desorganizada em processos** apesar do porte.
-- Funções caras e repetitivas **substituíveis por soluções Acme** (redução de headcount/custo).
+- Funções caras e repetitivas **substituíveis por soluções Novais Digital** (redução de headcount/custo).
 - Setor público: desorganização estrutural = alvo de alto potencial.
 
 **Job-to-be-done (hipótese):** *"Cortar custo de folha e organizar processos sem um projeto de transformação de anos."* → narrativa de **substituição de custo** (não "dar braços", como no ICP-1).

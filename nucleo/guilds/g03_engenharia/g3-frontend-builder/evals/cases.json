@@ -224,7 +224,7 @@
         ]
       },
       "heldout_files": {
-        "src/validate.test.ts": "import { describe, it, expect } from 'vitest';\nimport { validateEmail } from './validate';\n\ndescribe('validateEmail', () => {\n  it('email valido', () => {\n    expect(validateEmail('user@acme.com.br')).toBe(true);\n  });\n  it('sem dominio', () => {\n    expect(validateEmail('user@')).toBe(false);\n  });\n  it('sem ponto no dominio', () => {\n    expect(validateEmail('a@b')).toBe(false);\n  });\n  it('sem arroba', () => {\n    expect(validateEmail('nope')).toBe(false);\n  });\n});\n"
+        "src/validate.test.ts": "import { describe, it, expect } from 'vitest';\nimport { validateEmail } from './validate';\n\ndescribe('validateEmail', () => {\n  it('email valido', () => {\n    expect(validateEmail('user@novais-digital.com.br')).toBe(true);\n  });\n  it('sem dominio', () => {\n    expect(validateEmail('user@')).toBe(false);\n  });\n  it('sem ponto no dominio', () => {\n    expect(validateEmail('a@b')).toBe(false);\n  });\n  it('sem arroba', () => {\n    expect(validateEmail('nope')).toBe(false);\n  });\n});\n"
       },
       "runtime": "node",
       "test_cmd": "vitest run --reporter=dot"
@@ -274,7 +274,7 @@
         ]
       },
       "heldout_files": {
-        "src/validate.test.ts": "import { describe, it, expect } from 'vitest';\nimport { validateEmail } from './validate';\n\ndescribe('validateEmail', () => {\n  it('email valido', () => {\n    expect(validateEmail('user@acme.com.br')).toBe(true);\n  });\n  it('sem dominio', () => {\n    expect(validateEmail('user@')).toBe(false);\n  });\n  it('sem ponto no dominio', () => {\n    expect(validateEmail('a@b')).toBe(false);\n  });\n  it('sem arroba', () => {\n    expect(validateEmail('nope')).toBe(false);\n  });\n});\n"
+        "src/validate.test.ts": "import { describe, it, expect } from 'vitest';\nimport { validateEmail } from './validate';\n\ndescribe('validateEmail', () => {\n  it('email valido', () => {\n    expect(validateEmail('user@novais-digital.com.br')).toBe(true);\n  });\n  it('sem dominio', () => {\n    expect(validateEmail('user@')).toBe(false);\n  });\n  it('sem ponto no dominio', () => {\n    expect(validateEmail('a@b')).toBe(false);\n  });\n  it('sem arroba', () => {\n    expect(validateEmail('nope')).toBe(false);\n  });\n});\n"
       },
       "runtime": "node",
       "test_cmd": "vitest run --reporter=dot"
@@ -526,7 +526,7 @@
         ]
       },
       "heldout_files": {
-        "src/validate.test.ts": "import { describe, it, expect } from 'vitest';\nimport { validateEmail } from './validate';\n\ndescribe('validateEmail', () => {\n  it('email valido', () => {\n    expect(validateEmail('user@acme.com.br')).toBe(true);\n  });\n  it('sem dominio', () => {\n    expect(validateEmail('user@')).toBe(false);\n  });\n  it('sem ponto no dominio', () => {\n    expect(validateEmail('a@b')).toBe(false);\n  });\n  it('sem arroba', () => {\n    expect(validateEmail('nope')).toBe(false);\n  });\n});\n"
+        "src/validate.test.ts": "import { describe, it, expect } from 'vitest';\nimport { validateEmail } from './validate';\n\ndescribe('validateEmail', () => {\n  it('email valido', () => {\n    expect(validateEmail('user@novais-digital.com.br')).toBe(true);\n  });\n  it('sem dominio', () => {\n    expect(validateEmail('user@')).toBe(false);\n  });\n  it('sem ponto no dominio', () => {\n    expect(validateEmail('a@b')).toBe(false);\n  });\n  it('sem arroba', () => {\n    expect(validateEmail('nope')).toBe(false);\n  });\n});\n"
       },
       "runtime": "node",
       "test_cmd": "vitest run --reporter=dot"
@@ -722,7 +722,7 @@
         ]
       },
       "heldout_files": {
-        "src/validate.test.ts": "import { describe, it, expect } from 'vitest';\nimport { validateEmail } from './validate';\n\ndescribe('validateEmail', () => {\n  it('email valido', () => {\n    expect(validateEmail('user@acme.com.br')).toBe(true);\n  });\n  it('sem dominio', () => {\n    expect(validateEmail('user@')).toBe(false);\n  });\n  it('sem ponto no dominio', () => {\n    expect(validateEmail('a@b')).toBe(false);\n  });\n  it('sem arroba', () => {\n    expect(validateEmail('nope')).toBe(false);\n  });\n});\n"
+        "src/validate.test.ts": "import { describe, it, expect } from 'vitest';\nimport { validateEmail } from './validate';\n\ndescribe('validateEmail', () => {\n  it('email valido', () => {\n    expect(validateEmail('user@novais-digital.com.br')).toBe(true);\n  });\n  it('sem dominio', () => {\n    expect(validateEmail('user@')).toBe(false);\n  });\n  it('sem ponto no dominio', () => {\n    expect(validateEmail('a@b')).toBe(false);\n  });\n  it('sem arroba', () => {\n    expect(validateEmail('nope')).toBe(false);\n  });\n});\n"
       },
       "runtime": "node",
       "test_cmd": "vitest run --reporter=dot"
@@ -906,7 +906,7 @@
         ]
       },
       "heldout_files": {
-        "src/validate.test.ts": "import { describe, it, expect } from 'vitest';\nimport { validateEmail } from './validate';\n\ndescribe('validateEmail', () => {\n  it('email valido', () => {\n    expect(validateEmail('user@acme.com.br')).toBe(true);\n  });\n  it('sem dominio', () => {\n    expect(validateEmail('user@')).toBe(false);\n  });\n  it('sem ponto no dominio', () => {\n    expect(validateEmail('a@b')).toBe(false);\n  });\n  it('sem arroba', () => {\n    expect(validateEmail('nope')).toBe(false);\n  });\n});\n"
+        "src/validate.test.ts": "import { describe, it, expect } from 'vitest';\nimport { validateEmail } from './validate';\n\ndescribe('validateEmail', () => {\n  it('email valido', () => {\n    expect(validateEmail('user@novais-digital.com.br')).toBe(true);\n  });\n  it('sem dominio', () => {\n    expect(validateEmail('user@')).toBe(false);\n  });\n  it('sem ponto no dominio', () => {\n    expect(validateEmail('a@b')).toBe(false);\n  });\n  it('sem arroba', () => {\n    expect(validateEmail('nope')).toBe(false);\n  });\n});\n"
       },
       "runtime": "node",
       "test_cmd": "vitest run --reporter=dot"
@@ -1182,7 +1182,7 @@
         ]
       },
       "heldout_files": {
-        "src/validate.test.ts": "import { describe, it, expect } from 'vitest';\nimport { validateEmail } from './validate';\n\ndescribe('validateEmail', () => {\n  it('email valido', () => {\n    expect(validateEmail('user@acme.com.br')).toBe(true);\n  });\n  it('sem dominio', () => {\n    expect(validateEmail('user@')).toBe(false);\n  });\n  it('sem ponto no dominio', () => {\n    expect(validateEmail('a@b')).toBe(false);\n  });\n  it('sem arroba', () => {\n    expect(validateEmail('nope')).toBe(false);\n  });\n});\n"
+        "src/validate.test.ts": "import { describe, it, expect } from 'vitest';\nimport { validateEmail } from './validate';\n\ndescribe('validateEmail', () => {\n  it('email valido', () => {\n    expect(validateEmail('user@novais-digital.com.br')).toBe(true);\n  });\n  it('sem dominio', () => {\n    expect(validateEmail('user@')).toBe(false);\n  });\n  it('sem ponto no dominio', () => {\n    expect(validateEmail('a@b')).toBe(false);\n  });\n  it('sem arroba', () => {\n    expect(validateEmail('nope')).toBe(false);\n  });\n});\n"
       },
       "runtime": "node",
       "test_cmd": "vitest run --reporter=dot"

@@ -11,11 +11,11 @@ Capacidades governadas (as únicas injetadas no handler hoje):
   store leitura (get/search/items/subdirs) -> exige brain.query | brain.read | store.read
   store escrita (put) -> exige brain.write | store.write | brain.emit
 
-Rollout em 2 fases (mesmo padrão ratchet do forge_check):
+Rollout em 2 fases (mesmo padrão ratchet do foundry_check):
   - observe (default): violação é AUDITADA no Brain (action=tool_denied,
     enforced=false) mas a chamada prossegue — popula telemetria sem quebrar a frota.
   - enforce (spec `tools_enforce: true`): violação levanta ToolDenied — agentes
-    novos nascem assim (catraca `tools_nao_enforcadas` no forge_check).
+    novos nascem assim (catraca `tools_nao_enforcadas` no foundry_check).
 
 Fora do escopo (deliberado): leituras L0 via funções de módulo (load_icp etc.)
 são código versionado, não capacidade injetada — entram quando virarem provider.

@@ -25,11 +25,11 @@ BRAIN = os.path.join(ROOT, ".brain-product")
 SPEC = os.path.join(ROOT, "product", "fin-caixa")
 
 TENANTS = {
-    "acme-limpeza": {"name": "Acme Limpeza", "segment": "serviços de limpeza B2B", "currency": "BRL"},
+    "novais-digital-limpeza": {"name": "Novais Digital Limpeza", "segment": "serviços de limpeza B2B", "currency": "BRL"},
     "bella-padaria": {"name": "Bella Padaria", "segment": "padaria / varejo alimentício", "currency": "BRL"},
 }
 FINANCE = {
-    "acme-limpeza": {"today": "2026-05-29", "balance": 18000,
+    "novais-digital-limpeza": {"today": "2026-05-29", "balance": 18000,
                      "receivables": [{"customer": "Cond. Atlas", "amount": 6000, "due_date": "2026-05-20", "status": "open"},
                                      {"customer": "Empresa Y", "amount": 3000, "due_date": "2026-06-10", "status": "open"}],
                      "payables": [{"supplier": "Insumos Z", "amount": 9000, "due_date": "2026-06-02"}],
@@ -70,12 +70,12 @@ def main():
     print(f"Produto: agente '{spec['id']}' (fleet={spec.get('fleet')}, multi_tenant={spec.get('multi_tenant')}) "
           f"| gate fábrica ok={gate['ok']}")
 
-    run_tenant(agent, spec, "acme-limpeza")
+    run_tenant(agent, spec, "novais-digital-limpeza")
     run_tenant(agent, spec, "bella-padaria")
 
     print("\n=== Isolamento multi-tenant ===")
     print("Tenants com dados no store:", store.subdirs(("tenant",)))
-    print("Snapshots Acme:", store.subdirs(("tenant", "acme-limpeza", "snapshots")))
+    print("Snapshots Novais Digital:", store.subdirs(("tenant", "novais-digital-limpeza", "snapshots")))
     print("Snapshots Bella:", store.subdirs(("tenant", "bella-padaria", "snapshots")))
 
     print("\n=== eval-harness (C4) do fin-caixa ===")

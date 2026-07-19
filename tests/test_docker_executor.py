@@ -1,6 +1,6 @@
 """Integração do DockerExecutor (VERIFY-IN-EVAL F2) — sandbox real.
 
-Roda SÓ onde há Docker + imagem nucleo-exec (job nightly forge-exec.yml, runner Linux).
+Roda SÓ onde há Docker + imagem nucleo-exec (job nightly foundry-exec.yml, runner Linux).
 Localmente (Windows/daemon down) os testes de execução PULAM; a sanitização de paths roda
 sempre (não precisa de Docker).
 
@@ -91,7 +91,7 @@ class _DockerIntegration(unittest.TestCase):
 
 class _DockerNodeIntegration(unittest.TestCase):
     """Natureza BUILD do frontend (F3a-2): execução real com vitest na imagem node.
-    Roda só no nightly (forge-exec.yml) com a imagem nucleo-exec-node; pula localmente
+    Roda só no nightly (foundry-exec.yml) com a imagem nucleo-exec-node; pula localmente
     sem Docker/imagem. Exige EXEC_IMAGE_NODE apontando p/ a imagem construída."""
 
     CART_HELDOUT = ("import { it, expect } from 'vitest';\n"
@@ -150,7 +150,7 @@ class _DockerNodeIntegration(unittest.TestCase):
 class _DockerTerraformIntegration(unittest.TestCase):
     """Natureza OPS/DRY-RUN (F4a): execução real com `terraform test` (command=plan) na imagem
     terraform. SEM providers de cloud ⇒ --network none não atrapalha. Roda só no nightly
-    (forge-exec.yml) com nucleo-exec-terraform; pula localmente sem Docker/imagem."""
+    (foundry-exec.yml) com nucleo-exec-terraform; pula localmente sem Docker/imagem."""
 
     HELDOUT = (
         'run "dev_api" {\n  command = plan\n  variables {\n    env = "DEV"\n    app = "API"\n  }\n'

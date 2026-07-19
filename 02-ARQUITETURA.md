@@ -34,7 +34,7 @@ O NÚCLEO é o sistema operacional da empresa (YC #1 — "AI as OS, not tool"). 
 ```
 
 ### L-1 · Constituição-runtime
-A `CONSTITUTION` do forge (C1–C8) portada para um objeto carregado pelo kernel e lido por todo Guardian em runtime. **Estendida** com a doutrina YC como princípios operacionais (Y1–Y8, ver §3). Mudança = ADR + bump SemVer + notificação ao reviewer.
+A `CONSTITUTION` do foundry (C1–C8) portada para um objeto carregado pelo kernel e lido por todo Guardian em runtime. **Estendida** com a doutrina YC como princípios operacionais (Y1–Y8, ver §3). Mudança = ADR + bump SemVer + notificação ao reviewer.
 
 ### L0 · Company Brain — a empresa queryable (YC #3)
 A fonte única de verdade que torna a empresa **legível para IA**. Três stores:
@@ -47,7 +47,7 @@ A fonte única de verdade que torna a empresa **legível para IA**. Três stores
 ### L1 · Orquestração — LangGraph (detalhe em §2)
 ### L2 · Self-harness wrapper (detalhe em §4)
 ### L3 · A Fábrica (detalhe em §5)
-### L4 · Guardians — os 10 do forge como **nós validadores** + AgentShield. Rodam nos gates (não só no build).
+### L4 · Guardians — os 10 do foundry como **nós validadores** + AgentShield. Rodam nos gates (não só no build).
 ### L5 · Telemetria & Operator Console (detalhe em §6)
 ### L6 · Auditoria & Evolução — reviewer mensal + drift + `/evolve` (detalhe em §7)
 
@@ -127,7 +127,7 @@ A camada humana é **fina e fixa**. Mapeia para os arquétipos da imagem (per Ja
 
 ## 4. O Self-harness wrapper — como agentes evoluem aprendendo
 
-Todo agente (worker e supervisor) é **embrulhado** pelo mesmo wrapper. Não é opcional. Implementa os 5 pilares do self-harness do forge + os instincts do ECC, sobre o `store` do LangGraph.
+Todo agente (worker e supervisor) é **embrulhado** pelo mesmo wrapper. Não é opcional. Implementa os 5 pilares do self-harness do foundry + os instincts do ECC, sobre o `store` do LangGraph.
 
 ```
                  ┌──────────────── ciclo de uma execução (run) ────────────────┐
@@ -149,15 +149,15 @@ Todo agente (worker e supervisor) é **embrulhado** pelo mesmo wrapper. Não é 
                               └────────────────────────────────────────────────────────┘
 ```
 
-**As três velocidades de memória (a fusão forge × ECC × LangGraph):**
+**As três velocidades de memória (a fusão foundry × ECC × LangGraph):**
 
 | Velocidade | Fonte | Mecanismo | Confiança |
 |---|---|---|---|
 | **Quente / automática** | **ECC instincts** | auto-extraídos por sessão, com confidence-score; baixa fricção | `local` |
-| **Curada / durável** | **forge self-harness** | snapshot → Hermes → assess_novelty → **PR de memória** | sobe com o modo: `shadow→assisted→autonomous` |
-| **Persistente / compartilhada** | **`/evolve` (ECC) + skills (forge)** | instincts recorrentes em vários agentes → **skill da guilda/empresa** (L0/L1) | promovida via gate |
+| **Curada / durável** | **foundry self-harness** | snapshot → Hermes → assess_novelty → **PR de memória** | sobe com o modo: `shadow→assisted→autonomous` |
+| **Persistente / compartilhada** | **`/evolve` (ECC) + skills (foundry)** | instincts recorrentes em vários agentes → **skill da guilda/empresa** (L0/L1) | promovida via gate |
 
-**Formato de fato (do forge, mantido):**
+**Formato de fato (do foundry, mantido):**
 ```
 § [confidence:{local|shadow|assisted|autonomous}] [YYYY-MM-DD] [run:{id}] {fato acionável}
 ```
@@ -171,7 +171,7 @@ Regras C1/C5/C6/C7/C8 preservadas: nada de PII, nada de hardcode de tenant, mark
 
 ## 5. A Fábrica (L3) — software factory com governança (YC #4)
 
-Pipeline que **fabrica e promove** agentes. Reusa os commands do forge + eval-harness do ECC. **Humanos escrevem spec + tests; agentes escrevem a implementação e iteram até passar** (definição YC de "software factory").
+Pipeline que **fabrica e promove** agentes. Reusa os commands do foundry + eval-harness do ECC. **Humanos escrevem spec + tests; agentes escrevem a implementação e iteram até passar** (definição YC de "software factory").
 
 ```
 /diagnose ─► /spec ─► /plan ─► /implement ─► /eval ─► /pre-merge ─► /promote
@@ -198,7 +198,7 @@ A fabricação em massa (fase 2 do roadmap) usa **isolamento por worktree** (pad
 
 ## 7. Auditoria & Evolução (L6) — o loop da empresa (YC #2)
 
-- **Reviewer mensal independente** (DeepAgent, do forge) audita C1–C8 + extensões, amostra 5–10% dos outcomes (traces vs DB), gera `docs/audits/{YYYY-MM}.md`.
+- **Reviewer mensal independente** (DeepAgent, do foundry) audita C1–C8 + extensões, amostra 5–10% dos outcomes (traces vs DB), gera `docs/audits/{YYYY-MM}.md`.
 - **Drift detection:** quality (acurácia ↓≥5pp/mês), cost (↑≥15%/mês), volume (±30%/mês), prompt (`prompt_hash` muda sem recalc de economia). Drift → rebaixa modo do agente automaticamente (AUTONOMOUS→ASSISTED) até reauditoria.
 - **`/evolve` (ECC):** roda periodicamente, agrupa instincts recorrentes em skills candidatas; skills passam por gate antes de entrar em L0/L1.
 

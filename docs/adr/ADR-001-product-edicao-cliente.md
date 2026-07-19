@@ -4,7 +4,7 @@
 Aceito
 
 ## Contexto
-Os agentes em `nucleo/product/` são a edição cliente multi-tenant do NÚCLEO: a superfície vendida para PMEs, com memória e contexto por tenant. Eles não devem virar uma segunda frota com lógica própria. Pela doutrina do Forge, especialmente C8 (config-over-code), a variação de cliente/segmento deve morar em spec, contexto de tenant e payloads; a execução deve reutilizar handlers canônicos.
+Os agentes em `nucleo/product/` são a edição cliente multi-tenant do NÚCLEO: a superfície vendida para PMEs, com memória e contexto por tenant. Eles não devem virar uma segunda frota com lógica própria. Pela doutrina do Foundry, especialmente C8 (config-over-code), a variação de cliente/segmento deve morar em spec, contexto de tenant e payloads; a execução deve reutilizar handlers canônicos.
 
 ## Decisão
 Manter `product/` como camada de empacotamento/comercialização e reconciliar cada agente com seu equivalente de catálogo via `reconciled_with` na spec. O `act_handler` permanece apontando para o handler canônico já usado pela frota; a spec de produto só especializa multi-tenant, ferramentas e outcome clause.

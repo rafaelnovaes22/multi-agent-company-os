@@ -1,19 +1,19 @@
-"""forge_check — o gate de QUALIDADE da Fábrica, versionado no repo (definition-of-done).
+"""foundry_check — o gate de QUALIDADE da Fábrica, versionado no repo (definition-of-done).
 
 Por que existe: o checker antigo (externo, /tmp) só validava C2/C3/C4 *estrutural* — era
 cego ao que de fato quebrou a frota: agentes "eco" genéricos que não executam a capacidade
 que prometem, eval theater (casos que só testam o contrato), C3 declarado mas não enforçado,
 e perda de target_mode/KPIs/guardians. Aqui esses eixos viram gate.
 
-Modelo RATCHET (catraca): o estado atual imperfeito é congelado em `forge_baseline.json`
+Modelo RATCHET (catraca): o estado atual imperfeito é congelado em `foundry_baseline.json`
 (grandfathered). Regras duras reprovam SEMPRE. Regras de catraca reprovam apenas
 violações NOVAS (fora do baseline) — então o main segue verde, mas nenhum agente novo/alterado
 pode regredir: tem de nascer com handler real, casos de domínio, target_mode etc. O baseline
 só encolhe (burn-down). Atualize-o intencionalmente com `--update-baseline`.
 
 Uso:
-    python -m nucleo.quality.forge_check                 # gate (exit 1 se houver violação nova)
-    python -m nucleo.quality.forge_check --update-baseline   # recongela o baseline (uso raro, deliberado)
+    python -m nucleo.quality.foundry_check                 # gate (exit 1 se houver violação nova)
+    python -m nucleo.quality.foundry_check --update-baseline   # recongela o baseline (uso raro, deliberado)
 """
 from __future__ import annotations
 import glob
@@ -35,7 +35,7 @@ for _stream in (sys.stdout, sys.stderr):
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 GUILDS = os.path.join(ROOT, "nucleo", "guilds")
 PRODUCT = os.path.join(ROOT, "nucleo", "product")
-BASELINE_PATH = os.path.join(ROOT, "nucleo", "quality", "forge_baseline.json")
+BASELINE_PATH = os.path.join(ROOT, "nucleo", "quality", "foundry_baseline.json")
 
 GENERIC = {"spec_driven", "guardian_check", "supervisor_route"}
 CONTRACT_KEYS = {"agent_id", "handler_kind", "artifact_type", "status", "risk",
@@ -168,7 +168,7 @@ def main(argv):
     if update:
         json.dump({k: sorted(v) for k, v in ratchet.items()},
                   open(BASELINE_PATH, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-        print(f"forge_baseline.json atualizado ({sum(len(v) for v in ratchet.values())} itens grandfathered).")
+        print(f"foundry_baseline.json atualizado ({sum(len(v) for v in ratchet.values())} itens grandfathered).")
         return 0
 
     baseline = {}
@@ -191,20 +191,20 @@ def main(argv):
             print(f"  burn-down: {name} reduziu em {len(fixed)} -> rode --update-baseline p/ travar o ganho: {sorted(fixed)[:8]}")
 
     total_agents = len(index)
-    print(f"\nforge_check — {total_agents} agentes varridos.")
+    print(f"\nfoundry_check — {total_agents} agentes varridos.")
     print("Resumo de catraca (atual / baseline):")
     for name in ratchet:
         print(f"  {name:22s} {len(ratchet[name]):3d} / {len(baseline.get(name, set())):3d}")
 
     if failures:
-        print("\n❌ FORGE CHECK REPROVADO — violações novas (fora do baseline):")
+        print("\n❌ FOUNDRY CHECK REPROVADO — violações novas (fora do baseline):")
         for label, ids in failures:
             print(f"  [{label}] {len(ids)}: {ids[:12]}{' ...' if len(ids) > 12 else ''}")
         print("\nCorrija (handler real / casos de domínio / target_mode / C2-C3) ou, se for intencional,")
-        print("rode `python -m nucleo.quality.forge_check --update-baseline` e justifique no PR.")
+        print("rode `python -m nucleo.quality.foundry_check --update-baseline` e justifique no PR.")
         return 1
 
-    print("\n✅ FORGE CHECK OK — sem violações novas; doutrina C2/C3/C4 + qualidade preservadas.")
+    print("\n✅ FOUNDRY CHECK OK — sem violações novas; doutrina C2/C3/C4 + qualidade preservadas.")
     return 0
 
 

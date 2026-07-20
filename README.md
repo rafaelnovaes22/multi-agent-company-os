@@ -107,4 +107,4 @@ A YC manda **rodar uma conta de API desconfortavelmente alta** para substituir h
 
 Copyright (c) 2026 Rafael Novaes.
 
-Licenciado sob [MIT License](./LICENSE) — © 2026 Rafael Novaes.
+Licenciado sob [PolyForm Noncommercial License 1.0.0](./LICENSE.md) — leitura, estudo e uso não comercial permitidos; uso comercial requer autorização expressa do autor.

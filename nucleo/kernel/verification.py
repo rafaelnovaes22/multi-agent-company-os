@@ -6,7 +6,7 @@ avaliado, no caminho de eval — não declaração do agente nem carimbo de gate
 O sinal é FUNÇÃO DO ARTEFATO (inspeção estática: ast/diff/sha contra o oráculo), NUNCA a
 leitura de um booleano de sucesso que o próprio caso declara.
 
-Distinção central (provada offline pelo protótipo c:/tmp/proto_verify_code.py):
+Distinção central (provada offline por protótipo descartável de verify_code):
 
   NECESSÁRIO (estático, offline, sempre computável, função do artefato):
     artifact_parseable   — o artefato tem o formato {files:{path:content}} (não prosa)

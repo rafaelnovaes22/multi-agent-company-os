@@ -1,7 +1,7 @@
 # Ambiente de STAGING (Railway)
 
 Staging é um **serviço separado** (`nucleo-staging`) no **mesmo projeto/environment** do Railway
-que produção. URL: `https://nucleo-staging-production.up.railway.app`.
+que produção. URL: `https://your-staging-service.up.railway.app`.
 
 O deploy é **gated por GitHub Actions** ([.github/workflows/deploy-staging.yml](../../.github/workflows/deploy-staging.yml)):
 no push ao branch `staging`, o gate de qualidade (`pre_pr_gate` + `foundry_check` + suíte) roda
@@ -18,7 +18,7 @@ feature/*  --PR (foundry-gate)-->  staging  --push--> [Actions: gate -> railway 
 Como é serviço no mesmo environment de prod, ele **herda as variáveis compartilhadas do
 environment** — inclusive o `GOOGLE_CREDENTIALS_JSON`. Por isso o staging fala com **Vertex
 real** sem credencial por serviço (confirmado: `/api/health` →
-`GoogleProvider/...vertex:novais-digital-multiagentes/us-central1`). Imagem = a de produção
+`GoogleProvider/...vertex:your-gcp-project/us-central1`). Imagem = a de produção
 (`demo/live/Dockerfile`, healthcheck `/api/health`).
 
 ## Setup único
@@ -37,7 +37,7 @@ No repositório (**Settings → Secrets and variables → Actions**):
 - **Secret** `RAILWAY_STAGING_TOKEN` = o token do passo 2. **← pendente** (cole via
   `gh secret set RAILWAY_STAGING_TOKEN` ou pela UI; nunca commitado).
 - **Variable** `RAILWAY_STAGING_SERVICE` = `nucleo-staging`. ✅ definida.
-- **Variable** `STAGING_URL` = `https://nucleo-staging-production.up.railway.app`. ✅ definida
+- **Variable** `STAGING_URL` = `https://your-staging-service.up.railway.app`. ✅ definida
   (usada no healthcheck pós-deploy).
 
 ### 4. Branch `staging`

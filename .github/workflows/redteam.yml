@@ -26,7 +26,7 @@ jobs:
       PYTHONUTF8: "1"
       LLM_PROVIDER: vertex
       GOOGLE_GENAI_USE_VERTEXAI: "true"
-      GOOGLE_CLOUD_PROJECT: novais-digital-multiagentes
+      GOOGLE_CLOUD_PROJECT: your-gcp-project
       GOOGLE_CLOUD_LOCATION: us-central1
       REDTEAM_LLM_VARIANTS: ${{ github.event.inputs.k || '6' }}
     steps:

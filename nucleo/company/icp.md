@@ -3,7 +3,7 @@ artifact: icp
 tier: L0
 version: "0.2.0"
 status: draft
-source: "Mensagem de voz (WhatsApp PTT) 2026-05-29 — transcrição em C:/tmp/ptt_2026-05-29_transcricao.txt"
+source: "Documento de exemplo (empresa fictícia) — insumo de discovery com o founder, 2026-05-29"
 date: 2026-05-29
 loaded_by: nucleo.kernel.loaders.load_icp
 ---
@@ -15,19 +15,19 @@ loaded_by: nucleo.kernel.loaders.load_icp
 
 ## Resumo em uma frase
 
-São **três** perfis de comprador: **(ICP-1) fundadores R$ 1–6 milhões/ano** que **vendem bem mas operam no caos** (perfil "bombeiro"/TDAH, sem processo) — canal de distribuição = **PCG** (Programa de Crescimento Guiado da the CEO); **(ICP-2) organizações enterprise >R$ 100 milhões/ano** (inclui **setor público**), **desorganizadas em processos**, com **time grande e custo de pessoal alto substituível por agentes Novais Digital**; e **(ICP-3) mid-market R$ 50–100 milhões/ano** que **cresceu além do fundador sem profissionalizar a operação** — dores híbridas dos dois extremos.
+São **três** perfis de comprador: **(ICP-1) fundadores R$ 1–6 milhões/ano** que **vendem bem mas operam no caos** (perfil "bombeiro"/TDAH, sem processo) — canal de distribuição = **PAF** (Programa de Aceleração de Fundadores, comunidade parceira fictícia); **(ICP-2) organizações enterprise >R$ 100 milhões/ano** (inclui **setor público**), **desorganizadas em processos**, com **time grande e custo de pessoal alto substituível por agentes Novais Digital**; e **(ICP-3) mid-market R$ 50–100 milhões/ano** que **cresceu além do fundador sem profissionalizar a operação** — dores híbridas dos dois extremos.
 
-> **A faixa R$ 6–50M é DESCONSIDERADA por enquanto** (decisão founder 2026-06-10) — não pontua na qualificação, nem com dor evidente. Histórico das faixas: R$ 1–5M (2026-05-29) → R$ 1–20M (CEO 2026-05-30, dois extremos) → **R$ 1–6M + mid-market R$ 50–100M (founder 2026-06-10: "vamos ter esses clientes também", excluindo 6–50M)**. O produto é o mesmo; o **pitch e o motion de venda mudam** (PCG = canal quente, ciclo curto; mid-market = venda consultiva founder-led; enterprise/público = procurement/licitação, ciclo longo, narrativa de substituição de custo).
+> **A faixa R$ 6–50M é DESCONSIDERADA por enquanto** (decisão founder 2026-06-10) — não pontua na qualificação, nem com dor evidente. Histórico das faixas: R$ 1–5M (2026-05-29) → R$ 1–20M (revisão 2026-05-30, dois extremos) → **R$ 1–6M + mid-market R$ 50–100M (founder 2026-06-10: "vamos ter esses clientes também", excluindo 6–50M)**. O produto é o mesmo; o **pitch e o motion de venda mudam** (PAF = canal quente, ciclo curto; mid-market = venda consultiva founder-led; enterprise/público = procurement/licitação, ciclo longo, narrativa de substituição de custo).
 
 ---
 
-## Tier 1 (ICP-1) — Bombeiro / PCG (quem compra)
+## Tier 1 (ICP-1) — Bombeiro / PAF (quem compra)
 
 **Firmográfico**
 - Faturamento: **R$ 1M a R$ 6M / ano** (já validou venda; não é ideação).
 - Estágio: pós-product-market-fit comercial, pré-maturidade operacional.
 - Decisor: o **próprio fundador/sócio** (compra é founder-led).
-- **Canal:** mentorados do **PCG** (audiência quente, pré-qualificada) — dispensa prospecção fria. Tese: *"PCG ensina o que fazer; Novais Digital é o headcount que executa."*
+- **Canal:** mentorados do **PAF** (audiência quente, pré-qualificada) — dispensa prospecção fria. Tese: *"PAF ensina o que fazer; Novais Digital é o headcount que executa."*
 
 **Comportamental (o coração do ICP)**
 - Perfil **"bombeiro"**: apaga incêndios o dia todo, faz um monte de coisa ao mesmo tempo.
@@ -57,7 +57,7 @@ São **três** perfis de comprador: **(ICP-1) fundadores R$ 1–6 milhões/ano**
 
 **Job-to-be-done (hipótese):** *"Cortar custo de folha e organizar processos sem um projeto de transformação de anos."* → narrativa de **substituição de custo** (não "dar braços", como no ICP-1).
 
-> **Motion distinto:** compliance pesado, procurement/licitação, ciclo de meses. O time e o material de venda **não** são os mesmos do PCG. Sequência recomendada: **PCG primeiro** (valida rápido e barato), **enterprise como segunda frente**.
+> **Motion distinto:** compliance pesado, procurement/licitação, ciclo de meses. O time e o material de venda **não** são os mesmos do PAF. Sequência recomendada: **PAF primeiro** (valida rápido e barato), **enterprise como segunda frente**.
 
 ---
 
@@ -66,7 +66,7 @@ São **três** perfis de comprador: **(ICP-1) fundadores R$ 1–6 milhões/ano**
 **Firmográfico**
 - Faturamento: **R$ 50M a R$ 100M / ano**.
 - Estágio: cresceu além da operação founder-led, **sem ter profissionalizado processos**.
-- Decisor: fundador/sócio ainda no comando, ou diretoria enxuta (ciclo médio — mais curto que enterprise, mais longo que PCG).
+- Decisor: fundador/sócio ainda no comando, ou diretoria enxuta (ciclo médio — mais curto que enterprise, mais longo que PAF).
 
 **Situação / dores (híbridas dos dois extremos)**
 - **Processos desorganizados** que não acompanharam o porte (dor do ICP-1, em escala maior).
@@ -97,7 +97,7 @@ São **três** perfis de comprador: **(ICP-1) fundadores R$ 1–6 milhões/ano**
 
 ## Sinais de qualificação / desqualificação
 
-**ICP-1 (bombeiro / PCG)**
+**ICP-1 (bombeiro / PAF)**
 
 | ✅ Qualifica | ❌ Desqualifica |
 |---|---|

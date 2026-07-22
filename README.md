@@ -1,7 +1,31 @@
-# NÚCLEO — Company-OS Multi-Agente para ventures AI-native
+# Multi-Agent Company OS — reference framework
 
-> **Status:** Plano de arquitetura → implementação (v1, 2026-05-29)
-> **Desafio:** criar/co-criar o sistema multi-agente de uma nova venture AI-native, com **150+ agentes operando antes do MVP**, sobre **LangGraph**, na estrutura **self-harness-agent**, com agentes que **evoluem aprendendo**, seguindo a doutrina **YC "How to build a company with AI"**.
+> **O que é:** um framework de referência (codinome **NÚCLEO**) para orquestrar uma empresa inteira como frota de agentes — **~169 agentes em 14 guildas** (vendas, marketing, financeiro, suporte, engenharia, dados, segurança…), sobre **LangGraph**, com governança executável (C1–C8) e promoção por gates nos modos **SHADOW → PILOT → ASSISTED → AUTONOMOUS**: todo agente nasce observando (sugere, não age) e só ganha autonomia provando concordância em gates auditáveis.
+> **Contexto:** o cenário de negócio usado nos documentos (venture "Orbita Labs", ICP, GTM) é **fictício** — serve de exemplo coerente para exercitar o framework. Nenhuma empresa, pessoa ou cliente real é referenciado.
+> **Status:** protótipo funcional (kernel + fábrica + guildas-piloto + demos offline), v1 2026-05-29.
+
+---
+
+## O achado central de engenharia: never let a system grade its own homework
+
+O resultado mais importante deste repositório não é a frota — é a medição de que **auto-avaliação mente em escala**:
+
+- O avaliador interno (`run_evals`, casos gerados no mesmo pipeline que gera os agentes) aprovava **~100%** da frota.
+- Um **juiz LLM externo e independente** (família de modelo distinta da geradora) aprovou **33%** dos mesmos agentes (N=24).
+- Causa-raiz, visível no cache de artefatos: os agentes produziam **prosa-em-JSON que *descreve* a capacidade, não o artefato/código real** — e os eval-cases, autorados pelo mesmo processo, eram **tautológicos** (o `expected` era replay do próprio handler; num episódio, 270/270 casos passaram assim por todos os gates verdes).
+
+A resposta virou a **arquitetura de verificação** do framework — independência estrutural, não disciplinar:
+
+| Mecanismo | O que fecha | Onde |
+|---|---|---|
+| **Proveniência obrigatória** de todo eval-case (`catalog` / `human` / `independent`; `replay` proibido) | `expected` como eco do handler | [AGENTS.md](AGENTS.md) §0.4, `nucleo/quality/pre_pr_gate.py` |
+| **Oráculo held-out** (VERIFY-IN-EVAL): critério que o agente nunca vê; veredito é função do artefato (ast/diff/sha), nunca booleano autodeclarado | agente que autora a própria prova | `nucleo/kernel/verification.py`, `tests/test_verify_*` |
+| **Juiz externo de família distinta** com relatório de correlação interno×externo em CI | gate interno inflado | `nucleo/quality/judge_eval.py`, `.github/workflows/judge-correlation.yml` |
+| **Anti-tautologia no red team**: um agente deliberadamente vulnerável TEM que reprovar | suíte de segurança decorativa | `nucleo/quality/` + `tests/test_redteam.py` |
+| **Detector de homogeneidade de diff** (blocos de casos clonados) + **baseline que só encolhe** | "fechar métrica" com casos-clone | `nucleo/quality/diff_homogeneity.py`, `foundry_baseline.json` |
+| **Separação autor × auditor**: quem gera o agente nunca gera o teste; o auditor nunca autora nem faz merge | o mesmo ator atestar a própria entrega | [AGENTS.md](AGENTS.md) §0.5, [docs/CONTRATO-NUCLEO-HERMES-ORACULO.md](docs/CONTRATO-NUCLEO-HERMES-ORACULO.md) |
+
+> Detalhe do episódio e das decisões: [FABRICA-DE-AGENTES.md](FABRICA-DE-AGENTES.md) e [docs/PLANO-AJUSTE-ROTA.md](docs/PLANO-AJUSTE-ROTA.md).
 
 ---
 

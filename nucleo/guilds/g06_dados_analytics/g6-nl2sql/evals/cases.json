@@ -566,8 +566,8 @@
     "id": "g6-nl2sql-domain-12",
     "desc": "exige mapeamento para métrica não canônica",
     "query_request": {
-      "question": "calcule felicidade líquida",
-      "metric": "happiness_score",
+      "question": "calcule satisfação líquida",
+      "metric": "satisfaction_score",
       "requested_fields": [
         "segment"
       ],
@@ -594,7 +594,7 @@
     "expected": {
       "agent_id": "g6-nl2sql",
       "handler_kind": "nl2sql_query_plan",
-      "selected_metric": "happiness_score",
+      "selected_metric": "satisfaction_score",
       "selected_table": null,
       "metric_canonical": false,
       "source_cited": true,

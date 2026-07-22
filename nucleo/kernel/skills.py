@@ -851,7 +851,7 @@ def painel_dono(state, *, llm, store, spec):
 
 def _score_lead_against_icp(lead: dict):
     """Pontua o lead contra os TRÊS ICPs do NÚCLEO (ver company/icp.md, faixas 2026-06-10):
-    - ICP-1 bombeiro/PCG: R$1-6M/ano, founder-led, vende bem mas opera no caos.
+    - ICP-1 bombeiro/PAF: R$1-6M/ano, founder-led, vende bem mas opera no caos.
     - ICP-2 enterprise: >R$100M/ano (ou setor público), desorganizada em processos,
       time grande e custo de pessoal alto substituível por agentes Novais Digital.
     - ICP-3 mid-market: R$50-100M/ano que cresceu além do fundador sem profissionalizar —
@@ -877,7 +877,7 @@ def _score_lead_against_icp(lead: dict):
 
     if tier == "bombeiro":
         score += 35; signals["faturamento_1a6M"] = True
-        reasons.append("Faturamento na faixa R$1-6M (ICP-1 bombeiro/PCG)")
+        reasons.append("Faturamento na faixa R$1-6M (ICP-1 bombeiro/PAF)")
         if lead.get("founder_led"):
             score += 20; signals["founder_led"] = True; reasons.append("Decisao founder-led")
         if lead.get("sells_well"):

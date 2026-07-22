@@ -1,4 +1,6 @@
-# NÚCLEO — Posição do projeto (para a CEO)
+# NÚCLEO — Posição do projeto (para a CEO — exemplo: Orbita Labs)
+
+> **Documento de exemplo.** Status report que o framework produz para a CEO de uma venture fictícia ("Orbita Labs"). Nenhuma empresa, pessoa ou cliente real é referenciado.
 
 > **Data:** 2026-05-29 · **Status:** protótipo funcional rodando (prova de conceito), pré-piloto.
 

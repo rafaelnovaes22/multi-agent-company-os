@@ -1,4 +1,6 @@
-# NÚCLEO — Deck para a CEO
+# NÚCLEO — Deck para a CEO (exemplo: Orbita Labs)
+
+> **Documento de exemplo.** Briefing executivo que o framework produz para a CEO de uma venture fictícia ("Orbita Labs"). Nenhuma empresa, pessoa ou cliente real é referenciado.
 
 > Empresa AI-native (espírito big-techs AI-first + Lovable no **modelo operacional**, mercado nosso, **vertical a definir**). Não é slide: **roda**.
 

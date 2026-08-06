@@ -6,25 +6,42 @@ cd "$ROOT"
 
 echo "==> bin/setup — NÚCLEO (idempotente)"
 
-# 1. pip — instala se ausente (Ubuntu WSL sem pip)
-if ! python3 -m pip --version >/dev/null 2>&1; then
+# 1. pip/uv — idempotente via uv (resolve readonly FS/cache), fallback para pip
+if command -v uv >/dev/null 2>&1; then
+  echo "  uv detectado — usando uv (UV_CACHE_DIR=/tmp/uv-cache)"
+  export UV_CACHE_DIR=/tmp/uv-cache
+  if [ -d .venv-uv ]; then
+    echo "  .venv-uv detectado — usando"
+    # uv já criou .venv-uv com pip
+  elif [ ! -d .venv-uv ]; then
+    echo "  criando .venv-uv via uv venv..."
+    uv venv .venv-uv 2>&1 | tail -n 2
+  fi
+  # instala no venv-uv se existir, senão no sistema
+  if [ -d .venv-uv ]; then
+    uv pip install --python .venv-uv/bin/python -r requirements.txt -q 2>&1 | tail -n 5 || uv pip install --python .venv-uv/bin/python -r requirements.txt
+    uv pip install --python .venv-uv/bin/python ruff black mypy pre-commit -q 2>&1 | tail -n 2 || true
+    echo "  deps instaladas em .venv-uv (use: source .venv-uv/bin/activate)"
+  else
+    echo "  uv sem venv — instalando no sistema (break-system-packages)"
+    uv pip install --system --break-system-packages -r requirements.txt -q 2>&1 | tail -n 5 || true
+  fi
+elif ! python3 -m pip --version >/dev/null 2>&1; then
   echo "  pip ausente — instalando via apt..."
-  sudo apt-get update -qq && sudo apt-get install -y -qq python3-pip python3-venv
-fi
-
-# 2. venv opcional — usa venv se .venv existe, senão sistema
-if [ -d .venv ]; then
-  echo "  venv .venv detectado — usando"
-  # shellcheck disable=SC1091
-  source .venv/bin/activate
+  sudo apt-get update -qq && sudo apt-get install -y -qq python3-pip python3-venv || echo "  pip indisponível (sem sudo) — instale uv: curl -LsSf https://astral.sh/uv/install.sh | sh"
 else
-  echo "  sem .venv — instalando no ambiente atual (use python3 -m venv .venv para isolar)"
+  # pip clássico quando uv não existe
+  if [ -d .venv ]; then
+    echo "  venv .venv detectado — usando"
+    # shellcheck disable=SC1091
+    source .venv/bin/activate
+  else
+    echo "  sem .venv — instalando no ambiente atual (use python3 -m venv .venv para isolar)"
+  fi
+  echo "  instalando requirements.txt..."
+  python3 -m pip install --upgrade pip -q 2>&1 | tail -n 1 || true
+  python3 -m pip install -r requirements.txt -q 2>&1 | tail -n 5 || python3 -m pip install -r requirements.txt
 fi
-
-# 3. deps — idempotente (reinstala só se necessário)
-echo "  instalando requirements.txt..."
-python3 -m pip install --upgrade pip -q 2>&1 | tail -n 1 || true
-python3 -m pip install -r requirements.txt -q 2>&1 | tail -n 5 || python3 -m pip install -r requirements.txt
 
 # 4. validação offline — sem credenciais, sem rede após deps
 echo "  compilando..."

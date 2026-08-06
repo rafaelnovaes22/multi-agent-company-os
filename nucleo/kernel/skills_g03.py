@@ -300,3 +300,196 @@ def dependency_bump_review(state, *, llm, store, spec):
         f"Voce e {spec['id']}: bump {bump} -> {decision}.",
         llm,
     )
+
+
+# ---------------------------------------------------------------------------
+# Burn-down G03 — g3-docs-lookup: busca determinística em docs com ranking.
+# Query vs corpus: score por overlap de palavras; detecta encontrado vs vazio.
+# C2: docs consultáveis e resposta rastreável (top doc + score + found).
+# ---------------------------------------------------------------------------
+@register("docs_lookup")
+def docs_lookup(state: dict, *, llm, store, spec: dict) -> dict:
+    t = state.get("task", {}) or {}
+    query = (t.get("query") or "").strip()
+    docs = t.get("docs", []) or []
+    q_words = set(query.lower().split()) if query else set()
+
+    def _score(doc: dict) -> int:
+        text = (doc.get("text") or "").lower()
+        words = set(text.split())
+        return len(q_words & words)
+
+    scored = [(d, _score(d)) for d in docs]
+    scored.sort(key=lambda x: x[1], reverse=True)
+    top = scored[0] if scored else (None, 0)
+    top_doc, top_score = top[0], top[1] if scored else 0
+    found = bool(query and top_score > 0)
+    ranked_ids = [d.get("id") for d, s in scored if s > 0]
+    status = "found" if found else ("empty_query" if not query else "not_found")
+    return _out(
+        spec,
+        state,
+        {
+            "agent_id": spec["id"],
+            "query": query,
+            "docs_count": len(docs),
+            "top_score": top_score,
+            "top_doc_id": top_doc.get("id") if top_doc else None,
+            "found": found,
+            "ranked_ids": ranked_ids,
+            "status": status,
+        },
+        f"Voce e {spec['id']}: query '{query}' -> {status} (top_score={top_score}).",
+        llm,
+    )
+
+
+# ---------------------------------------------------------------------------
+# Burn-down G03 — g3-planner: cobertura de requisitos e detecção de ciclo.
+# requirements vs phases[covers, depends_on]: cobertura 100% e grafo acíclico.
+# ---------------------------------------------------------------------------
+@register("planner")
+def planner(state: dict, *, llm, store, spec: dict) -> dict:
+    t = state.get("task", {}) or {}
+    reqs = t.get("requirements", []) or []
+    phases = t.get("phases", []) or []
+    req_ids = [r.get("id") if isinstance(r, dict) else str(r) for r in reqs]
+    covered: set[str] = set()
+    for p in phases:
+        for cid in p.get("covers", []) or []:
+            covered.add(str(cid))
+    total = len(req_ids)
+    covered_count = len([r for r in req_ids if r in covered])
+    missing = [r for r in req_ids if r not in covered]
+    coverage_pct = round(covered_count / total * 100, 1) if total else 100.0
+    # ciclo em depends_on
+    graph = {p.get("id"): set(p.get("depends_on", []) or []) for p in phases}
+    visiting: set[str] = set()
+    visited: set[str] = set()
+    has_cycle = False
+
+    def _dfs(n: str) -> bool:
+        if n in visiting:
+            return True
+        if n in visited:
+            return False
+        visiting.add(n)
+        for dep in graph.get(n, set()):
+            if _dfs(dep):
+                return True
+        visiting.remove(n)
+        visited.add(n)
+        return False
+
+    for nid in graph:
+        if _dfs(nid):
+            has_cycle = True
+            break
+    is_valid = not missing and not has_cycle and total > 0
+    status = "valid" if is_valid else ("cycle" if has_cycle else "missing_reqs" if missing else "empty")
+    return _out(
+        spec,
+        state,
+        {
+            "agent_id": spec["id"],
+            "total_requirements": total,
+            "covered_count": covered_count,
+            "coverage_pct": coverage_pct,
+            "missing_requirements": missing,
+            "has_cycle": has_cycle,
+            "is_valid": is_valid,
+            "status": status,
+        },
+        f"Voce e {spec['id']}: coverage {coverage_pct}% status {status}.",
+        llm,
+    )
+
+
+# ---------------------------------------------------------------------------
+# Burn-down G03 — g3-refactorer: análise de impacto e decisão de merge.
+# penaliza complexidade aumentada, falha de testes e impacto não mapeado.
+# ---------------------------------------------------------------------------
+@register("refactorer")
+def refactorer(state: dict, *, llm, store, spec: dict) -> dict:
+    t = state.get("task", {}) or {}
+    r = t.get("refactor", {}) or {}
+    target = r.get("target") or ""
+    files = r.get("impact_files", []) or []
+    tests_passed = bool(r.get("tests_passed", False))
+    before = r.get("complexity_before")
+    after = r.get("complexity_after")
+    delta = (after - before) if isinstance(before, (int, float)) and isinstance(after, (int, float)) else None
+    complexity_increased = delta is not None and delta > 0
+    impact_size = len(files)
+    if not target:
+        decision = "blocked_no_target"
+    elif not tests_passed:
+        decision = "blocked_tests_red"
+    elif complexity_increased:
+        decision = "blocked_complexity_up"
+    elif impact_size == 0:
+        decision = "blocked_no_impact"
+    else:
+        decision = "approve"
+    safe_to_merge = decision == "approve"
+    risk = "high" if complexity_increased or not tests_passed else ("medium" if impact_size > 5 else "low")
+    return _out(
+        spec,
+        state,
+        {
+            "agent_id": spec["id"],
+            "target": target,
+            "impact_size": impact_size,
+            "complexity_delta": delta,
+            "complexity_increased": complexity_increased,
+            "tests_passed": tests_passed,
+            "decision": decision,
+            "safe_to_merge": safe_to_merge,
+            "risk": risk,
+            "requires_human_review": not safe_to_merge,
+        },
+        f"Voce e {spec['id']}: refactor {target} -> {decision}.",
+        llm,
+    )
+
+
+# ---------------------------------------------------------------------------
+# Burn-down G03 — g3-integration-builder: conformidade C7 para integrações.
+# bloqueia SDK direto; exige interface abstraída e config-over-code.
+# ---------------------------------------------------------------------------
+@register("integration_builder")
+def integration_builder(state: dict, *, llm, store, spec: dict) -> dict:
+    t = state.get("task", {}) or {}
+    integ = t.get("integration", {}) or {}
+    provider = integ.get("provider") or ""
+    interface = integ.get("interface") or ""
+    direct_sdk = bool(integ.get("direct_sdk_call", False))
+    config_ok = bool(integ.get("config_over_code", True))
+    uses_abstraction = bool(interface and not direct_sdk)
+    c7_compliant = uses_abstraction and config_ok and bool(provider)
+    if direct_sdk:
+        status = "sdk_direto"
+    elif not interface:
+        status = "sem_interface"
+    elif not config_ok:
+        status = "hardcode"
+    elif not provider:
+        status = "sem_provider"
+    else:
+        status = "compliant"
+    return _out(
+        spec,
+        state,
+        {
+            "agent_id": spec["id"],
+            "provider": provider,
+            "interface": interface,
+            "uses_abstraction": uses_abstraction,
+            "config_compliant": config_ok,
+            "c7_compliant": c7_compliant,
+            "status": status,
+            "requires_human_review": not c7_compliant,
+        },
+        f"Voce e {spec['id']}: integration {provider}/{interface} -> {status}.",
+        llm,
+    )

@@ -1,9 +1,10 @@
-# BASELINE-CHANGE — 2026-08-06 — evolução G01+G02 (11 agentes)
+# BASELINE-CHANGE — 2026-08-06 — evolução G01+G02+G03 (15 agentes)
 
 ## Mudança
-- `handler_generico`: 58 → 47 (-11)
+- `handler_generico`: 58 → 43 (-15)
 - Lote G01 (4): `g1-board-deck-author` → `board_deck_author`, `competitive_teardown`, `investor_update`, `narrative_synthesizer`
 - Lote G02 (7): `g2-jobs-to-be-done` → `jobs_to_be_done`, `g2-prd-author` → `prd_author`, `g2-prototype-builder` → `prototype_builder`, `g2-release-notes` → `release_notes`, `g2-roadmap-keeper` → `roadmap_keeper`, `g2-usability-critic` → `usability_critic`, `g2-user-interview-synth` → `interview_synth`
+- Lote G03 (4): `g3-docs-lookup` → `docs_lookup`, `g3-planner` → `planner`, `g3-refactorer` → `refactorer`, `g3-integration-builder` → `integration_builder`
 
 ## Prova independente (AGENTS.md §0.4)
 - 2 casos `human` com `ratified_by: AI Founder — 2026-08-06 — human board-deck review (DRI G01)` e `board.metrics` com `lineage_ref`

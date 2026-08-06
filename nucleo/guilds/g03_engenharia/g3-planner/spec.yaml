@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: spec_driven
+act_handler: planner
 outcome_clause:
   statement: 'Planejador de Implementação entrega planner.artifact verificável para:
     transformar uma spec em um plano de implementação por fases, com dependências,

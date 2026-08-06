@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: AUTONOMOUS
-act_handler: spec_driven
+act_handler: refactorer
 outcome_clause:
   statement: 'Refatorador de Dívida Técnica entrega refactorer.artifact verificável
     para: reduzir dívida técnica preservando comportamento, sustentando a velocidade

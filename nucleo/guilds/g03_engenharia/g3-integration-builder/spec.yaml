@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: spec_driven
+act_handler: integration_builder
 outcome_clause:
   statement: 'Construtor de Integrações entrega integration_builder.artifact verificável
     para: construir conectores para serviços de terceiros exclusivamente atrás da

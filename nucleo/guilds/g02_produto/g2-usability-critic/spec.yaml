@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: guardian_check
+act_handler: usability_critic
 outcome_clause:
   statement: 'Crítico de Usabilidade (co-dono do gate de lovability) entrega usability-critic.verdict
     verificável para: Avaliar fluxos com heurísticas de usabilidade e co-guardar o

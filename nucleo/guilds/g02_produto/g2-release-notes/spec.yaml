@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: AUTONOMOUS
-act_handler: spec_driven
+act_handler: release_notes
 outcome_clause:
   statement: 'Gerador de Release Notes entrega release-notes.artifact verificável
     para: Transformar PRs entregues em release notes claras e narrativas, sustentando

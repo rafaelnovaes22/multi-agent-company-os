@@ -18,7 +18,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "low",
@@ -49,7 +49,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "medium",
@@ -80,7 +80,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "high",
@@ -111,7 +111,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "critical",
@@ -142,7 +142,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "low",
@@ -173,7 +173,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "medium",
@@ -204,7 +204,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "high",
@@ -235,7 +235,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "blocked",
       "risk": "critical",
@@ -266,7 +266,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "low",
@@ -297,7 +297,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "medium",
@@ -328,7 +328,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "high",
@@ -359,7 +359,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "critical",
@@ -390,7 +390,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "low",
@@ -421,7 +421,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "medium",
@@ -452,7 +452,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "blocked",
       "risk": "high",
@@ -483,7 +483,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "critical",
@@ -514,7 +514,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "low",
@@ -545,7 +545,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "medium",
@@ -576,7 +576,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "high",
@@ -607,7 +607,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "critical",
@@ -638,7 +638,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "low",
@@ -669,7 +669,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "blocked",
       "risk": "medium",
@@ -700,7 +700,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "high",
@@ -731,7 +731,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "critical",
@@ -762,7 +762,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "low",
@@ -793,7 +793,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "medium",
@@ -824,7 +824,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "high",
@@ -855,7 +855,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "critical",
@@ -886,7 +886,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "blocked",
       "risk": "low",
@@ -917,7 +917,7 @@
     },
     "expected": {
       "agent_id": "g2-roadmap-keeper",
-      "handler_kind": "guardian_check",
+      "handler_kind": "roadmap_keeper",
       "artifact_type": "roadmap-keeper.verdict",
       "status": "ready",
       "risk": "medium",
@@ -928,5 +928,50 @@
       ]
     },
     "provenance": "catalog"
+  },
+  {
+    "id": "g2-roadmap-keeper-human-01",
+    "desc": "Roadmap 3 items 2 alinhados",
+    "artifact_type": "roadmap.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "human"
+    },
+    "roadmap": {
+      "items": [
+        {
+          "okr_ref": "KR1",
+          "horizon": "now"
+        },
+        {
+          "okr_ref": null,
+          "horizon": "next"
+        },
+        {
+          "okr_ref": "KR2",
+          "horizon": "later"
+        }
+      ]
+    },
+    "expected": {
+      "agent_id": "g2-roadmap-keeper",
+      "handler_kind": "roadmap_keeper",
+      "artifact_type": "roadmap.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "item_count": 3,
+      "alignment": 66.7,
+      "horizon_ok": true
+    },
+    "provenance": "human",
+    "ratified_by": "AI Founder — 2026-08-06 — G02 human"
   }
 ]

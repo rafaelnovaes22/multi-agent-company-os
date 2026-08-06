@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: guardian_check
+act_handler: prototype_builder
 outcome_clause:
   statement: 'Construtor de Protótipo Clicável entrega prototype-builder.verdict verificável
     para: Gerar protótipos clicáveis a partir do PRD para que a decisão de produto

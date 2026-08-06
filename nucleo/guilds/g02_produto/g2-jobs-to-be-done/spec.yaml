@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: AUTONOMOUS
-act_handler: spec_driven
+act_handler: jobs_to_be_done
 outcome_clause:
   statement: 'Extrator de Jobs-To-Be-Done entrega jobs-to-be-done.artifact verificável
     para: Destilar de sinais de usuário os Jobs-To-Be-Done — o progresso que o usuário

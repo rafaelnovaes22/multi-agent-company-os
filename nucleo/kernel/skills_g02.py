@@ -229,3 +229,139 @@ def competitor_signal_triage(state, *, llm, store, spec):
         "routed": routed, "signal_committed": signal_committed,
         "requires_human_review": recommendation == "responder",
     }, f"Voce e {spec['id']}: sinal {status} -> {recommendation}.", llm)
+
+
+@register("jobs_to_be_done")
+def jobs_to_be_done(state, *, llm, store, spec):
+    """g2-jobs-to-be-done — JTBD com job statement e critérios de switch."""
+    jtbd = state["task"].get("jtbd", {}) or {}
+    job = jtbd.get("job") or "Quando ... quero ... para ..."
+    forces = jtbd.get("forces", {}) or {}
+    push = forces.get("push", 0) or 0
+    pull = forces.get("pull", 0) or 0
+    anxiety = forces.get("anxiety", 0) or 0
+    habit = forces.get("habit", 0) or 0
+    switch_score = round(push + pull - anxiety - habit, 2)
+    will_switch = switch_score > 0
+    return _out(spec, state, {
+        "job_statement": job, "switch_score": switch_score, "will_switch": will_switch,
+        "forces": forces, "artifact_type": state["task"].get("artifact_type") or "jobs-to-be-done.artifact",
+        "status": state["task"].get("status") or "ready", "risk": state["task"].get("risk") or "low",
+        "requires_human_review": False, "routed_to": state["task"].get("routed_to") or "human-review",
+        "handler_kind": "jobs_to_be_done",
+    }, f"Voce e {spec['id']}: JTBD switch {switch_score} -> {will_switch}.", llm)
+
+
+@register("prd_author")
+def prd_author(state, *, llm, store, spec):
+    """g2-prd-author — PRD com acceptance criteria verificáveis."""
+    task = state["task"] or {}
+    prd = task.get("prd", {}) or {}
+    ac = prd.get("acceptance_criteria", []) or []
+    coverage = round(len([c for c in ac if c.get("verifiable")]) / max(1, len(ac)) * 100, 1) if ac else 0.0
+    is_complete = coverage == 100.0 and len(ac) >= 3
+    return _out(spec, state, {
+        "ac_count": len(ac), "verifiable_count": len([c for c in ac if c.get("verifiable")]),
+        "coverage": coverage, "is_complete": is_complete,
+        "artifact_type": task.get("artifact_type") or "prd.artifact",
+        "status": task.get("status") or "ready", "risk": task.get("risk") or "low",
+        "requires_human_review": not is_complete, "routed_to": task.get("routed_to") or "human-review",
+        "handler_kind": "prd_author",
+    }, f"Voce e {spec['id']}: PRD {len(ac)} ACs, coverage {coverage}% -> {is_complete}.", llm)
+
+
+@register("prototype_builder")
+def prototype_builder(state, *, llm, store, spec):
+    """g2-prototype-builder — protótipo com escopo e risco técnico."""
+    task = state["task"] or {}
+    proto = task.get("prototype", {}) or {}
+    screens = proto.get("screens", []) or []
+    integrations = proto.get("integrations", []) or []
+    tech_risk = "high" if len(integrations) > 2 else ("medium" if screens else "low")
+    is_buildable = len(screens) > 0 and tech_risk != "high"
+    return _out(spec, state, {
+        "screen_count": len(screens), "integration_count": len(integrations),
+        "tech_risk": tech_risk, "is_buildable": is_buildable,
+        "artifact_type": task.get("artifact_type") or "prototype.artifact",
+        "status": task.get("status") or "ready", "risk": task.get("risk") or "low",
+        "requires_human_review": tech_risk == "high", "routed_to": task.get("routed_to") or "human-review",
+        "handler_kind": "prototype_builder",
+    }, f"Voce e {spec['id']}: {len(screens)} screens, risco {tech_risk}.", llm)
+
+
+@register("release_notes")
+def release_notes(state, *, llm, store, spec):
+    """g2-release-notes — notas de release com lineage de PRs."""
+    task = state["task"] or {}
+    rel = task.get("release", {}) or {}
+    prs = rel.get("prs", []) or []
+    with_notes = sum(1 for pr in prs if pr.get("notes"))
+    coverage = round(with_notes / max(1, len(prs)) * 100, 1) if prs else 100.0
+    is_ready = coverage == 100.0
+    return _out(spec, state, {
+        "pr_count": len(prs), "with_notes_count": with_notes, "coverage": coverage,
+        "is_ready": is_ready,
+        "artifact_type": task.get("artifact_type") or "release-notes.artifact",
+        "status": task.get("status") or "ready", "risk": task.get("risk") or "low",
+        "requires_human_review": not is_ready, "routed_to": task.get("routed_to") or "human-review",
+        "handler_kind": "release_notes",
+    }, f"Voce e {spec['id']}: {with_notes}/{len(prs)} PRs com notas ({coverage}%).", llm)
+
+
+@register("roadmap_keeper")
+def roadmap_keeper(state, *, llm, store, spec):
+    """g2-roadmap-keeper — roadmap com horizonte e OKR alignment."""
+    task = state["task"] or {}
+    roadmap = task.get("roadmap", {}) or {}
+    items = roadmap.get("items", []) or []
+    aligned = sum(1 for it in items if it.get("okr_ref"))
+    alignment = round(aligned / max(1, len(items)) * 100, 1) if items else 0.0
+    horizon_ok = all(it.get("horizon") in ("now", "next", "later") for it in items) if items else True
+    return _out(spec, state, {
+        "item_count": len(items), "aligned_count": aligned, "alignment": alignment,
+        "horizon_ok": horizon_ok,
+        "artifact_type": task.get("artifact_type") or "roadmap.artifact",
+        "status": task.get("status") or "ready", "risk": task.get("risk") or "low",
+        "requires_human_review": not horizon_ok, "routed_to": task.get("routed_to") or "human-review",
+        "handler_kind": "roadmap_keeper",
+    }, f"Voce e {spec['id']}: {aligned}/{len(items)} alinhados ({alignment}%).", llm)
+
+
+@register("usability_critic")
+def usability_critic(state, *, llm, store, spec):
+    """g2-usability-critic — heurísticas de Nielsen com severidade."""
+    task = state["task"] or {}
+    findings = task.get("findings", []) or []
+    critical = sum(1 for f in findings if f.get("severity") == "critical")
+    score = round(10 - critical * 2 - len(findings) * 0.5, 1)
+    score = max(0.0, min(10.0, score))
+    needs_rework = critical > 0 or score < 7
+    return _out(spec, state, {
+        "finding_count": len(findings), "critical_count": critical, "score": score,
+        "needs_rework": needs_rework,
+        "artifact_type": task.get("artifact_type") or "usability-critic.artifact",
+        "status": task.get("status") or "ready", "risk": task.get("risk") or "low",
+        "requires_human_review": needs_rework, "routed_to": task.get("routed_to") or "human-review",
+        "handler_kind": "usability_critic",
+    }, f"Voce e {spec['id']}: score {score}, critical {critical}.", llm)
+
+
+@register("interview_synth")
+def interview_synth(state, *, llm, store, spec):
+    """g2-user-interview-synth — síntese de entrevistas com temas e quotes."""
+    task = state["task"] or {}
+    interviews = task.get("interviews", []) or []
+    themes = {}
+    for iv in interviews:
+        for t in iv.get("themes", []) or []:
+            themes[t] = themes.get(t, 0) + 1
+    top_theme = max(themes, key=themes.get) if themes else None
+    quote_count = sum(len(iv.get("quotes", []) or []) for iv in interviews)
+    return _out(spec, state, {
+        "interview_count": len(interviews), "theme_count": len(themes), "top_theme": top_theme,
+        "quote_count": quote_count,
+        "artifact_type": task.get("artifact_type") or "interview-synth.artifact",
+        "status": task.get("status") or "ready", "risk": task.get("risk") or "low",
+        "requires_human_review": len(themes) == 0, "routed_to": task.get("routed_to") or "human-review",
+        "handler_kind": "interview_synth",
+    }, f"Voce e {spec['id']}: {len(interviews)} entrevistas, top {top_theme}.", llm)

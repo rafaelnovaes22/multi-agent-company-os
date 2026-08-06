@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: AUTONOMOUS
-act_handler: guardian_check
+act_handler: roadmap_keeper
 outcome_clause:
   statement: 'Guardião do Roadmap entrega roadmap-keeper.verdict verificável para:
     Manter um roadmap vivo, coerente e queryable no Brain, refletindo prioridades

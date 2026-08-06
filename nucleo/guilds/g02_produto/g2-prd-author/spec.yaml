@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: guardian_check
+act_handler: prd_author
 outcome_clause:
   statement: 'Autor de PRD entrega prd-author.verdict verificável para: Transformar
     diagnóstico e JTBD num PRD acionável, com cláusula de outcome contratual desde

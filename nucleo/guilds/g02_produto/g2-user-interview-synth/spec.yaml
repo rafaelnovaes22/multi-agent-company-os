@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: AUTONOMOUS
-act_handler: spec_driven
+act_handler: interview_synth
 outcome_clause:
   statement: 'Sintetizador de Entrevistas de Usuário entrega user-interview-synth.artifact
     verificável para: Converter entrevistas e transcrições brutas em insights estruturados,

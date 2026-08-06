@@ -7,7 +7,9 @@ Roda:  python -m nucleo.demo_company
 É a prova do reframe "fleet único": o cliente compra a empresa-OS inteira e fala
 com ela por intenção. Tudo em SHADOW (nada entregue/cobrado), offline (FakeLLM).
 """
+
 from __future__ import annotations
+
 import os
 import sys
 import uuid
@@ -44,8 +46,10 @@ def main():
         "Levante inteligência de mercado para um vertical",
     ]
     for it in intents:
-        out = root_graph.invoke({"intent": it, "payload": {}, "verbose": True},
-                                config={"configurable": {"thread_id": "co-" + uuid.uuid4().hex[:6]}})
+        out = root_graph.invoke(
+            {"intent": it, "payload": {}, "verbose": True},
+            config={"configurable": {"thread_id": "co-" + uuid.uuid4().hex[:6]}},
+        )
         res = out.get("result", {})
         ran = list((res.get("results") or {}).keys())
         print(f"    => guilda {res.get('guild')} | worker(s): {ran or '—'}\n")

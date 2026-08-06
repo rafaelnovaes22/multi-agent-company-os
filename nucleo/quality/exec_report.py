@@ -19,7 +19,9 @@ Uso (nightly, runner Linux+Docker):
         nucleo/guilds/g03_engenharia/g3-build-error-resolver
 Sem EXEC_PROVIDER (offline) reporta delivered_rate=0 — honesto, não executou.
 """
+
 from __future__ import annotations
+
 import argparse
 import json
 import os
@@ -29,10 +31,10 @@ import uuid
 
 from langgraph.checkpoint.memory import MemorySaver
 
-from ..factory.factory import load_spec, build_from_spec
+from ..factory.factory import build_from_spec, load_spec
 from ..kernel.brain import Brain, FileStore
-from ..kernel.providers.llm import get_llm
 from ..kernel.execution import get_executor
+from ..kernel.providers.llm import get_llm
 
 try:
     sys.stdout.reconfigure(encoding="utf-8")
@@ -42,8 +44,9 @@ except Exception:
 
 def _git_commit() -> str:
     try:
-        r = subprocess.run(["git", "rev-parse", "--short=12", "HEAD"], capture_output=True,
-                           text=True, timeout=5)
+        r = subprocess.run(
+            ["git", "rev-parse", "--short=12", "HEAD"], capture_output=True, text=True, timeout=5
+        )
         if r.returncode == 0:
             return r.stdout.strip()
     except Exception:  # noqa: BLE001 — metadado opcional
@@ -53,6 +56,7 @@ def _git_commit() -> str:
 
 def run(spec_dir: str) -> dict:
     import json
+
     spec = load_spec(spec_dir)
     llm = get_llm("worker")
     brain = Brain(os.path.join("c:\\tmp", ".brain-exec", "events"))
@@ -64,29 +68,52 @@ def run(spec_dir: str) -> dict:
     for c in cases:
         payload = {k: v for k, v in c.items() if k not in ("id", "desc", "expected")}
         rid = "ex-" + uuid.uuid4().hex[:8]
-        state = {"task": {"agent_id": spec["id"], "guild": spec["guild"], "statement": "exec", **payload},
-                 "mode": "SHADOW", "ledger": spec.get("ledger"), "run_id": rid, "verbose": False}
+        state = {
+            "task": {
+                "agent_id": spec["id"],
+                "guild": spec["guild"],
+                "statement": "exec",
+                **payload,
+            },
+            "mode": "SHADOW",
+            "ledger": spec.get("ledger"),
+            "run_id": rid,
+            "verbose": False,
+        }
         out = agent.invoke(state, config={"configurable": {"thread_id": rid}}).get("output") or {}
         oracle = c.get("oracle") or {}
         exp = c.get("expected") or {}
-        rows.append({"id": c.get("id"), "desc": c.get("desc"),
-                     "static_ok": bool(out.get("static_ok")),
-                     "expected_static_ok": exp.get("static_ok"),
-                     "expected_exec_delivered": exp.get("exec_delivered"),
-                     "delivered_ok": bool(out.get("delivered_ok")),
-                     "tests_pass": out.get("tests_pass"), "first_fail": out.get("first_fail"),
-                     "runtime": oracle.get("runtime") or "python",
-                     "test_cmd": oracle.get("test_cmd") or "pytest -q",
-                     "heldout_files": sorted((oracle.get("heldout_files") or {}).keys())})
+        rows.append(
+            {
+                "id": c.get("id"),
+                "desc": c.get("desc"),
+                "static_ok": bool(out.get("static_ok")),
+                "expected_static_ok": exp.get("static_ok"),
+                "expected_exec_delivered": exp.get("exec_delivered"),
+                "delivered_ok": bool(out.get("delivered_ok")),
+                "tests_pass": out.get("tests_pass"),
+                "first_fail": out.get("first_fail"),
+                "runtime": oracle.get("runtime") or "python",
+                "test_cmd": oracle.get("test_cmd") or "pytest -q",
+                "heldout_files": sorted((oracle.get("heldout_files") or {}).keys()),
+            }
+        )
 
     n = len(rows)
     static_pass = sum(1 for r in rows if r["static_ok"])
     delivered = sum(1 for r in rows if r["delivered_ok"])
     # o discriminante da F2: passou o estático MAS não entregou (execução reprovou)
     caught_by_exec = [r for r in rows if r["static_ok"] and not r["delivered_ok"]]
-    return {"id": spec["id"], "spec_dir": spec_dir, "commit": _git_commit(),
-            "n": n, "static_pass": static_pass, "delivered": delivered,
-            "caught_by_exec": caught_by_exec, "rows": rows}
+    return {
+        "id": spec["id"],
+        "spec_dir": spec_dir,
+        "commit": _git_commit(),
+        "n": n,
+        "static_pass": static_pass,
+        "delivered": delivered,
+        "caught_by_exec": caught_by_exec,
+        "rows": rows,
+    }
 
 
 def run_generative(spec_dir: str, llm=None, executor=None) -> dict:
@@ -97,6 +124,7 @@ def run_generative(spec_dir: str, llm=None, executor=None) -> dict:
     separado do replay e nunca somado a ele."""
     from ..kernel.generate import generate_red_green
     from ..kernel.verification import verify_code
+
     spec = load_spec(spec_dir)
     llm = llm if llm is not None else get_llm("worker")
     executor = executor if executor is not None else get_executor()
@@ -110,27 +138,42 @@ def run_generative(spec_dir: str, llm=None, executor=None) -> dict:
         request = c.get("request") or c.get("desc") or ""
         gen = generate_red_green(request, seed, oracle, llm, executor)
         v = verify_code(gen["artifact"], seed, oracle, executor=executor)
-        rows.append({"id": c.get("id"), "desc": c.get("desc"),
-                     "static_ok": bool(v.get("static_ok")),
-                     # generativo: o estático observado não é asserção do caso (o agente
-                     # pode falhar honestamente) — não entra no oracle_correct.
-                     "expected_static_ok": None,
-                     "expected_exec_delivered": True,
-                     "delivered_ok": bool(v.get("delivered_ok")),
-                     "tests_pass": v.get("tests_pass"), "first_fail": v.get("first_fail"),
-                     "attempts": gen["attempts"], "loop_green": gen["loop_green"],
-                     "runtime": oracle.get("runtime") or "python",
-                     "test_cmd": oracle.get("test_cmd") or "pytest -q",
-                     "heldout_files": sorted((oracle.get("heldout_files") or {}).keys())})
+        rows.append(
+            {
+                "id": c.get("id"),
+                "desc": c.get("desc"),
+                "static_ok": bool(v.get("static_ok")),
+                # generativo: o estático observado não é asserção do caso (o agente
+                # pode falhar honestamente) — não entra no oracle_correct.
+                "expected_static_ok": None,
+                "expected_exec_delivered": True,
+                "delivered_ok": bool(v.get("delivered_ok")),
+                "tests_pass": v.get("tests_pass"),
+                "first_fail": v.get("first_fail"),
+                "attempts": gen["attempts"],
+                "loop_green": gen["loop_green"],
+                "runtime": oracle.get("runtime") or "python",
+                "test_cmd": oracle.get("test_cmd") or "pytest -q",
+                "heldout_files": sorted((oracle.get("heldout_files") or {}).keys()),
+            }
+        )
 
     n = len(rows)
     static_pass = sum(1 for r in rows if r["static_ok"])
     delivered = sum(1 for r in rows if r["delivered_ok"])
     caught_by_exec = [r for r in rows if r["static_ok"] and not r["delivered_ok"]]
-    return {"id": spec["id"], "spec_dir": spec_dir, "commit": _git_commit(),
-            "generative": True, "llm": getattr(llm, "name", "unknown"),
-            "n": n, "static_pass": static_pass, "delivered": delivered,
-            "caught_by_exec": caught_by_exec, "rows": rows}
+    return {
+        "id": spec["id"],
+        "spec_dir": spec_dir,
+        "commit": _git_commit(),
+        "generative": True,
+        "llm": getattr(llm, "name", "unknown"),
+        "n": n,
+        "static_pass": static_pass,
+        "delivered": delivered,
+        "caught_by_exec": caught_by_exec,
+        "rows": rows,
+    }
 
 
 def _rate(passed: int, total: int) -> dict:
@@ -167,7 +210,9 @@ def summarize(rep: dict, *, executor_name: str, executor_available: bool) -> dic
         # É o discriminante honesto da suíte (positivos passam, negativos/adversariais
         # são barrados). None quando o caso não declara expected.static_ok.
         exp_static = item.get("expected_static_ok")
-        item["oracle_correct"] = (bool(item.get("static_ok")) == exp_static) if isinstance(exp_static, bool) else None
+        item["oracle_correct"] = (
+            (bool(item.get("static_ok")) == exp_static) if isinstance(exp_static, bool) else None
+        )
         rows.append(item)
     oracle_evaluated_count = sum(1 for r in rows if r.get("oracle_correct") is not None)
     oracle_correct_count = sum(1 for r in rows if r.get("oracle_correct") is True)
@@ -222,8 +267,12 @@ def summarize(rep: dict, *, executor_name: str, executor_available: bool) -> dic
         },
         "caught_by_exec_count": len(caught),
         "caught_by_exec": [
-            {"id": r.get("id"), "desc": r.get("desc"), "tests_pass": r.get("tests_pass"),
-             "first_fail": r.get("first_fail")}
+            {
+                "id": r.get("id"),
+                "desc": r.get("desc"),
+                "tests_pass": r.get("tests_pass"),
+                "first_fail": r.get("first_fail"),
+            }
             for r in caught
         ],
         "rows": rows,
@@ -241,11 +290,13 @@ def mark_audit_only(summary: dict, reason: str) -> dict:
     audited["audit_only"] = True
     audited["audit_reason"] = reason
     audited["execution_credit"] = dict(summary.get("execution_credit") or {})
-    audited["execution_credit"].update({
-        "can_credit_delivery": False,
-        "credited_deliveries": 0,
-        "reason": f"audit_only:{reason}",
-    })
+    audited["execution_credit"].update(
+        {
+            "can_credit_delivery": False,
+            "credited_deliveries": 0,
+            "reason": f"audit_only:{reason}",
+        }
+    )
     for row in audited["rows"]:
         row["execution_credit"] = "audit_only"
     return audited
@@ -275,7 +326,9 @@ def render_text(summary: dict) -> str:
         f"({summary['execution_credit']['reason']})",
     ]
     if not summary["executor"]["available"]:
-        lines.append("\n  (executor inerte/indisponível — delivered_rate=0 é honesto: não executou)")
+        lines.append(
+            "\n  (executor inerte/indisponível — delivered_rate=0 é honesto: não executou)"
+        )
     else:
         lines.append(
             f"\n  {summary['caught_by_exec_count']} artefato(s) passaram o ESTÁTICO mas a EXECUÇÃO reprovou "
@@ -288,20 +341,36 @@ def render_text(summary: dict) -> str:
 
 
 def _parse(argv):
-    parser = argparse.ArgumentParser(description="Relatório VERIFY-IN-EVAL: estático vs execução real.")
-    parser.add_argument("spec_dir", nargs="?", default="nucleo/guilds/g03_engenharia/g3-build-error-resolver")
+    parser = argparse.ArgumentParser(
+        description="Relatório VERIFY-IN-EVAL: estático vs execução real."
+    )
+    parser.add_argument(
+        "spec_dir", nargs="?", default="nucleo/guilds/g03_engenharia/g3-build-error-resolver"
+    )
     parser.add_argument("--json", action="store_true", help="emite somente JSON machine-readable")
     parser.add_argument("--json-output", help="também grava o resumo JSON neste caminho")
-    parser.add_argument("--audit-only", action="store_true",
-                        help="publica o relatório como auditoria sem crédito de entrega")
-    parser.add_argument("--audit-reason", default="not_in_strict_execution_gate",
-                        help="motivo usado quando --audit-only bloqueia crédito")
-    parser.add_argument("--generative", action="store_true",
-                        help="modo GERADOR (red→green): o agente gera o artefato com LLM real "
-                             "nos casos elegíveis; mede o agente, não as fixtures")
-    parser.add_argument("--require-real-llm", action="store_true",
-                        help="falha se o provider for FakeLLMProvider (evita publicar um "
-                             "'0%% generativo' medido com LLM fake — sinal falso)")
+    parser.add_argument(
+        "--audit-only",
+        action="store_true",
+        help="publica o relatório como auditoria sem crédito de entrega",
+    )
+    parser.add_argument(
+        "--audit-reason",
+        default="not_in_strict_execution_gate",
+        help="motivo usado quando --audit-only bloqueia crédito",
+    )
+    parser.add_argument(
+        "--generative",
+        action="store_true",
+        help="modo GERADOR (red→green): o agente gera o artefato com LLM real "
+        "nos casos elegíveis; mede o agente, não as fixtures",
+    )
+    parser.add_argument(
+        "--require-real-llm",
+        action="store_true",
+        help="falha se o provider for FakeLLMProvider (evita publicar um "
+        "'0%% generativo' medido com LLM fake — sinal falso)",
+    )
     return parser.parse_args(argv)
 
 
@@ -313,9 +382,13 @@ def main(argv):
         llm = get_llm("worker")
         if args.require_real_llm:
             from ..kernel.providers.llm import FakeLLMProvider
+
             if isinstance(llm, FakeLLMProvider):
-                print("exec_report --generative: LLM_PROVIDER ausente/fake — geração exige LLM "
-                      "real (--require-real-llm). Nada foi medido.", file=sys.stderr)
+                print(
+                    "exec_report --generative: LLM_PROVIDER ausente/fake — geração exige LLM "
+                    "real (--require-real-llm). Nada foi medido.",
+                    file=sys.stderr,
+                )
                 return 2
         rep = run_generative(args.spec_dir, llm=llm, executor=ex)
     else:

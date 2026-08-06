@@ -3,9 +3,10 @@ lógica de domínio aos agentes da Software Factory que a spec marcou como
 `needs_deterministic`. Mesmo padrão de skills_finance/skills_custops: campos no
 top-level do output; o grader genérico de contrato valida `expected` direto.
 """
+
 from __future__ import annotations
 
-from .skills import register, _tokens, _spec_citations
+from .skills import _spec_citations, _tokens, register
 
 
 def _out(spec, state, fields, rationale_prompt, llm):
@@ -14,7 +15,11 @@ def _out(spec, state, fields, rationale_prompt, llm):
     out["rationale"] = rationale
     out["by"] = spec["id"]
     out["tenant"] = state.get("task", {}).get("tenant_id")
-    return {"output": out, "cost_tokens": _tokens(rationale), "citations": _spec_citations(state, spec)}
+    return {
+        "output": out,
+        "cost_tokens": _tokens(rationale),
+        "citations": _spec_citations(state, spec),
+    }
 
 
 @register("perf_benchmark_delta")
@@ -42,8 +47,9 @@ def perf_benchmark_delta(state, *, llm, store, spec):
 
     # Delta de latência: positivo = melhora (queda de p95).
     latency_delta_pct = round((before - after) / before * 100, 1) if before else 0.0
-    cost_delta_pct = (round((cost_before - cost_after) / cost_before * 100, 1)
-                      if cost_before else None)
+    cost_delta_pct = (
+        round((cost_before - cost_after) / cost_before * 100, 1) if cost_before else None
+    )
 
     # Melhoria real exige: ganho de latência > 0, profiling que justifique e correção preservada.
     improved = latency_delta_pct > 0 and profiled and tests_passed
@@ -52,24 +58,30 @@ def perf_benchmark_delta(state, *, llm, store, spec):
     delivered = improved and correctness_preserved and slo_registered
 
     if not profiled:
-        status = "no_escuro"          # otimização sem profiling — rejeitada
+        status = "no_escuro"  # otimização sem profiling — rejeitada
     elif not tests_passed:
-        status = "regressao"          # ganho às custas de correção — rejeitada
+        status = "regressao"  # ganho às custas de correção — rejeitada
     elif latency_delta_pct <= 0:
-        status = "sem_ganho"          # não melhorou (ou regrediu) a métrica-alvo
+        status = "sem_ganho"  # não melhorou (ou regrediu) a métrica-alvo
     elif not slo_registered:
-        status = "melhorou_sem_slo"   # melhorou mas falta SLO p/ travar regressão
+        status = "melhorou_sem_slo"  # melhorou mas falta SLO p/ travar regressão
     else:
         status = "melhorou"
 
-    return _out(spec, state, {
-        "latency_delta_pct": latency_delta_pct,
-        "cost_delta_pct": cost_delta_pct,
-        "improved": improved,
-        "correctness_preserved": correctness_preserved,
-        "delivered": delivered,
-        "status": status,
-    }, f"Voce e {spec['id']}: p95 {before}->{after} ({latency_delta_pct}%), status {status}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "latency_delta_pct": latency_delta_pct,
+            "cost_delta_pct": cost_delta_pct,
+            "improved": improved,
+            "correctness_preserved": correctness_preserved,
+            "delivered": delivered,
+            "status": status,
+        },
+        f"Voce e {spec['id']}: p95 {before}->{after} ({latency_delta_pct}%), status {status}.",
+        llm,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -103,12 +115,25 @@ def feature_flag_rollout(state, *, llm, store, spec):
     else:
         decision, rollback_triggered = "proceed_ramp", False
         next_pct, requires_review = min(100.0, rollout + step), False
-    return _out(spec, state, {
-        "agent_id": spec["id"], "flag": flag.get("name"), "rollout_pct": rollout,
-        "guard_breached": guard_breached, "error_breach": err_breach, "latency_breach": lat_breach,
-        "decision": decision, "rollback_triggered": rollback_triggered, "next_rollout_pct": next_pct,
-        "obsolete": obsolete, "requires_human_review": requires_review,
-    }, f"Voce e {spec['id']}: flag {flag.get('name')} rollout {rollout}% -> {decision}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "agent_id": spec["id"],
+            "flag": flag.get("name"),
+            "rollout_pct": rollout,
+            "guard_breached": guard_breached,
+            "error_breach": err_breach,
+            "latency_breach": lat_breach,
+            "decision": decision,
+            "rollback_triggered": rollback_triggered,
+            "next_rollout_pct": next_pct,
+            "obsolete": obsolete,
+            "requires_human_review": requires_review,
+        },
+        f"Voce e {spec['id']}: flag {flag.get('name')} rollout {rollout}% -> {decision}.",
+        llm,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -118,14 +143,23 @@ def feature_flag_rollout(state, *, llm, store, spec):
 def api_contract_diff(state, *, llm, store, spec):
     t = state["task"]
     api = t.get("api", {}) or {}
-    old = {f"{e['path']}|{e.get('method', 'GET')}": e for e in (api.get("old", {}) or {}).get("endpoints", []) or []}
-    new = {f"{e['path']}|{e.get('method', 'GET')}": e for e in (api.get("new", {}) or {}).get("endpoints", []) or []}
+    old = {
+        f"{e['path']}|{e.get('method', 'GET')}": e
+        for e in (api.get("old", {}) or {}).get("endpoints", []) or []
+    }
+    new = {
+        f"{e['path']}|{e.get('method', 'GET')}": e
+        for e in (api.get("new", {}) or {}).get("endpoints", []) or []
+    }
     breaking, non_breaking = [], []
     for key, oe in old.items():
         if key not in new:
-            breaking.append({"endpoint": key, "change": "endpoint_removed"}); continue
+            breaking.append({"endpoint": key, "change": "endpoint_removed"})
+            continue
         ne = new[key]
-        old_req, new_req = set(oe.get("required_params", []) or []), set(ne.get("required_params", []) or [])
+        old_req, new_req = set(oe.get("required_params", []) or []), set(
+            ne.get("required_params", []) or []
+        )
         for p in sorted(new_req - old_req):
             breaking.append({"endpoint": key, "change": "required_param_added", "param": p})
         for p in sorted(old_req - new_req):
@@ -136,11 +170,21 @@ def api_contract_diff(state, *, llm, store, spec):
         non_breaking.append({"endpoint": key, "change": "endpoint_added"})
     compatible = not breaking
     bump = "major" if breaking else ("minor" if non_breaking else "patch")
-    return _out(spec, state, {
-        "agent_id": spec["id"], "breaking_count": len(breaking), "non_breaking_count": len(non_breaking),
-        "breaking_changes": breaking, "compatible": compatible, "recommended_bump": bump,
-        "requires_human_review": not compatible,
-    }, f"Voce e {spec['id']}: {len(breaking)} breaking change(s), bump {bump}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "agent_id": spec["id"],
+            "breaking_count": len(breaking),
+            "non_breaking_count": len(non_breaking),
+            "breaking_changes": breaking,
+            "compatible": compatible,
+            "recommended_bump": bump,
+            "requires_human_review": not compatible,
+        },
+        f"Voce e {spec['id']}: {len(breaking)} breaking change(s), bump {bump}.",
+        llm,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -177,14 +221,25 @@ def schema_change_review(state, *, llm, store, spec):
     safe_to_merge = status == "ok"
     # Espelha o trigger DELIVERED do catálogo sem usar a chave proibida 'delivered'.
     up_down_validated = has_rollback and backward_compatible and not breaks_api_unversioned
-    return _out(spec, state, {
-        "agent_id": spec["id"], "has_rollback": has_rollback,
-        "backward_compatible": backward_compatible, "compatible": not breaks_api_unversioned,
-        "pii_unclassified_count": len(pii_unclassified), "pii_map_complete": pii_map_complete,
-        "referential_integrity_ok": referential_ok, "status": status,
-        "up_down_validated": up_down_validated, "safe_to_merge": safe_to_merge,
-        "requires_human_review": not safe_to_merge,
-    }, f"Voce e {spec['id']}: migracao status {status}, merge {'ok' if safe_to_merge else 'bloqueado'}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "agent_id": spec["id"],
+            "has_rollback": has_rollback,
+            "backward_compatible": backward_compatible,
+            "compatible": not breaks_api_unversioned,
+            "pii_unclassified_count": len(pii_unclassified),
+            "pii_map_complete": pii_map_complete,
+            "referential_integrity_ok": referential_ok,
+            "status": status,
+            "up_down_validated": up_down_validated,
+            "safe_to_merge": safe_to_merge,
+            "requires_human_review": not safe_to_merge,
+        },
+        f"Voce e {spec['id']}: migracao status {status}, merge {'ok' if safe_to_merge else 'bloqueado'}.",
+        llm,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -200,8 +255,8 @@ _CVE_SLA_DAYS = {"critica": 2, "alta": 7, "media": 30, "baixa": 90}
 @register("dependency_bump_review")
 def dependency_bump_review(state, *, llm, store, spec):
     d = state["task"].get("dependency", {}) or {}
-    cve = d.get("cve_severity")                       # None | critica | alta | media | baixa
-    bump = (d.get("bump_type") or "patch").lower()    # patch | minor | major
+    cve = d.get("cve_severity")  # None | critica | alta | media | baixa
+    bump = (d.get("bump_type") or "patch").lower()  # patch | minor | major
     has_breaking = bool(d.get("has_breaking_changes", False))
     code_adjusted = bool(d.get("code_adjusted", False))
     has_plan = bool(d.get("has_migration_plan", False))
@@ -225,11 +280,23 @@ def dependency_bump_review(state, *, llm, store, spec):
 
     approved = decision == "approve_bump"
     auto_mergeable = approved and bump in ("patch", "minor")
-    cve_addressed = approved and cve is not None       # o bump aprovado limpa a CVE
-    requires_review = not auto_mergeable               # major/bloqueio/pendência -> humano
-    return _out(spec, state, {
-        "agent_id": spec["id"], "cve_severity": cve, "bump_type": bump, "decision": decision,
-        "license_ok": license_ok, "abandoned": abandoned, "auto_mergeable": auto_mergeable,
-        "cve_addressed": cve_addressed, "exposure_sla_days": _CVE_SLA_DAYS.get(cve),
-        "requires_human_review": requires_review,
-    }, f"Voce e {spec['id']}: bump {bump} -> {decision}.", llm)
+    cve_addressed = approved and cve is not None  # o bump aprovado limpa a CVE
+    requires_review = not auto_mergeable  # major/bloqueio/pendência -> humano
+    return _out(
+        spec,
+        state,
+        {
+            "agent_id": spec["id"],
+            "cve_severity": cve,
+            "bump_type": bump,
+            "decision": decision,
+            "license_ok": license_ok,
+            "abandoned": abandoned,
+            "auto_mergeable": auto_mergeable,
+            "cve_addressed": cve_addressed,
+            "exposure_sla_days": _CVE_SLA_DAYS.get(cve),
+            "requires_human_review": requires_review,
+        },
+        f"Voce e {spec['id']}: bump {bump} -> {decision}.",
+        llm,
+    )

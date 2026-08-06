@@ -3,7 +3,9 @@
 A maturação pós-F2 precisa de um contrato legível por humanos e máquinas: o nightly deve
 conseguir publicar JSON e destacar explicitamente o gap que só a execução real captura.
 """
+
 from __future__ import annotations
+
 import io
 import json
 import unittest
@@ -12,24 +14,48 @@ from unittest import mock
 
 from nucleo.quality import exec_report
 
-
 ROWS = [
-    {"id": "ok", "desc": "fix correto", "static_ok": True, "delivered_ok": True,
-     "tests_pass": True, "first_fail": None},
-    {"id": "caught", "desc": "plausível mas errado", "static_ok": True, "delivered_ok": False,
-     "tests_pass": False, "first_fail": None},
-    {"id": "static-fail", "desc": "nem parseia", "static_ok": False, "delivered_ok": False,
-     "tests_pass": "UNVERIFIED", "first_fail": "result_parses"},
+    {
+        "id": "ok",
+        "desc": "fix correto",
+        "static_ok": True,
+        "delivered_ok": True,
+        "tests_pass": True,
+        "first_fail": None,
+    },
+    {
+        "id": "caught",
+        "desc": "plausível mas errado",
+        "static_ok": True,
+        "delivered_ok": False,
+        "tests_pass": False,
+        "first_fail": None,
+    },
+    {
+        "id": "static-fail",
+        "desc": "nem parseia",
+        "static_ok": False,
+        "delivered_ok": False,
+        "tests_pass": "UNVERIFIED",
+        "first_fail": "result_parses",
+    },
 ]
 
 
 class ExecReportSummary(unittest.TestCase):
     def test_summarize_expoe_metricas_derivadas_para_json(self):
-        rep = {"id": "g3-build-error-resolver", "n": 3, "static_pass": 2,
-               "delivered": 1, "caught_by_exec": [ROWS[1]], "rows": ROWS}
+        rep = {
+            "id": "g3-build-error-resolver",
+            "n": 3,
+            "static_pass": 2,
+            "delivered": 1,
+            "caught_by_exec": [ROWS[1]],
+            "rows": ROWS,
+        }
 
-        summary = exec_report.summarize(rep, executor_name="DockerExecutor/nucleo-exec:latest",
-                                        executor_available=True)
+        summary = exec_report.summarize(
+            rep, executor_name="DockerExecutor/nucleo-exec:latest", executor_available=True
+        )
 
         self.assertEqual(summary["agent_id"], "g3-build-error-resolver")
         self.assertEqual(summary["total"], 3)
@@ -43,8 +69,14 @@ class ExecReportSummary(unittest.TestCase):
 
     def test_render_text_destaca_gap_static_sem_delivery(self):
         summary = exec_report.summarize(
-            {"id": "agent", "n": 3, "static_pass": 2, "delivered": 1,
-             "caught_by_exec": [ROWS[1]], "rows": ROWS},
+            {
+                "id": "agent",
+                "n": 3,
+                "static_pass": 2,
+                "delivered": 1,
+                "caught_by_exec": [ROWS[1]],
+                "rows": ROWS,
+            },
             executor_name="DockerExecutor/nucleo-exec:latest",
             executor_available=True,
         )
@@ -57,19 +89,30 @@ class ExecReportSummary(unittest.TestCase):
         self.assertIn("caught: plausível mas errado", text)
 
     def test_summarize_expoe_credito_de_execucao_auditavel(self):
-        rep = {"id": "g3-build-error-resolver", "n": 3, "static_pass": 2,
-               "delivered": 1, "caught_by_exec": [ROWS[1]], "rows": ROWS,
-               "commit": "abc123", "spec_dir": "nucleo/guilds/g03_engenharia/g3-build-error-resolver"}
+        rep = {
+            "id": "g3-build-error-resolver",
+            "n": 3,
+            "static_pass": 2,
+            "delivered": 1,
+            "caught_by_exec": [ROWS[1]],
+            "rows": ROWS,
+            "commit": "abc123",
+            "spec_dir": "nucleo/guilds/g03_engenharia/g3-build-error-resolver",
+        }
 
-        summary = exec_report.summarize(rep, executor_name="DockerExecutor/nucleo-exec:latest",
-                                        executor_available=True)
+        summary = exec_report.summarize(
+            rep, executor_name="DockerExecutor/nucleo-exec:latest", executor_available=True
+        )
 
-        self.assertEqual(summary["execution_credit"], {
-            "can_credit_delivery": True,
-            "credited_deliveries": 1,
-            "blocked_static_without_delivery": 1,
-            "reason": "execution_validated",
-        })
+        self.assertEqual(
+            summary["execution_credit"],
+            {
+                "can_credit_delivery": True,
+                "credited_deliveries": 1,
+                "blocked_static_without_delivery": 1,
+                "reason": "execution_validated",
+            },
+        )
         self.assertEqual(summary["executed_count"], 2)
         self.assertEqual(summary["tests_passed_count"], 1)
         self.assertEqual(summary["tests_failed_count"], 1)
@@ -80,14 +123,36 @@ class ExecReportSummary(unittest.TestCase):
         self.assertEqual(summary["rows"][2]["execution_credit"], "not_static_ok")
 
     def test_summarize_bloqueia_credito_quando_executor_inerte(self):
-        rep = {"id": "agent", "n": 1, "static_pass": 1, "delivered": 0,
-               "caught_by_exec": [{"id": "offline", "desc": "sem executor", "static_ok": True,
-                                    "delivered_ok": False, "tests_pass": "UNVERIFIED",
-                                    "first_fail": None}],
-               "rows": [{"id": "offline", "desc": "sem executor", "static_ok": True,
-                         "delivered_ok": False, "tests_pass": "UNVERIFIED", "first_fail": None}]}
+        rep = {
+            "id": "agent",
+            "n": 1,
+            "static_pass": 1,
+            "delivered": 0,
+            "caught_by_exec": [
+                {
+                    "id": "offline",
+                    "desc": "sem executor",
+                    "static_ok": True,
+                    "delivered_ok": False,
+                    "tests_pass": "UNVERIFIED",
+                    "first_fail": None,
+                }
+            ],
+            "rows": [
+                {
+                    "id": "offline",
+                    "desc": "sem executor",
+                    "static_ok": True,
+                    "delivered_ok": False,
+                    "tests_pass": "UNVERIFIED",
+                    "first_fail": None,
+                }
+            ],
+        }
 
-        summary = exec_report.summarize(rep, executor_name="InertExecutor", executor_available=False)
+        summary = exec_report.summarize(
+            rep, executor_name="InertExecutor", executor_available=False
+        )
 
         self.assertEqual(summary["executed_count"], 0)
         self.assertEqual(summary["execution_credit"]["can_credit_delivery"], False)
@@ -97,52 +162,102 @@ class ExecReportSummary(unittest.TestCase):
     def test_summarize_mede_sla_sobre_elegiveis_e_conta_falso_positivo(self):
         rows = [
             # elegível que entregou (conta no numerador e denominador do SLA G7)
-            {"id": "pos-ok", "desc": "fix correto", "static_ok": True, "delivered_ok": True,
-             "tests_pass": True, "first_fail": None, "expected_exec_delivered": True},
+            {
+                "id": "pos-ok",
+                "desc": "fix correto",
+                "static_ok": True,
+                "delivered_ok": True,
+                "tests_pass": True,
+                "first_fail": None,
+                "expected_exec_delivered": True,
+            },
             # elegível que NÃO entregou (gap de capacidade real: derruba o SLA)
-            {"id": "pos-gap", "desc": "fix que falha o held-out", "static_ok": True,
-             "delivered_ok": False, "tests_pass": False, "first_fail": None,
-             "expected_exec_delivered": True},
+            {
+                "id": "pos-gap",
+                "desc": "fix que falha o held-out",
+                "static_ok": True,
+                "delivered_ok": False,
+                "tests_pass": False,
+                "first_fail": None,
+                "expected_exec_delivered": True,
+            },
             # negativo-por-design contido (fail-safe OK: fora do denominador)
-            {"id": "neg-ok", "desc": "plausível mas errado", "static_ok": True,
-             "delivered_ok": False, "tests_pass": False, "first_fail": None,
-             "expected_exec_delivered": False},
+            {
+                "id": "neg-ok",
+                "desc": "plausível mas errado",
+                "static_ok": True,
+                "delivered_ok": False,
+                "tests_pass": False,
+                "first_fail": None,
+                "expected_exec_delivered": False,
+            },
             # negativo-por-design que ENTREGOU (falso-positivo grave: resposta errada silenciosa)
-            {"id": "neg-fp", "desc": "negativo creditado", "static_ok": True,
-             "delivered_ok": True, "tests_pass": True, "first_fail": None,
-             "expected_exec_delivered": False},
+            {
+                "id": "neg-fp",
+                "desc": "negativo creditado",
+                "static_ok": True,
+                "delivered_ok": True,
+                "tests_pass": True,
+                "first_fail": None,
+                "expected_exec_delivered": False,
+            },
         ]
-        rep = {"id": "agent", "n": 4, "static_pass": 4, "delivered": 2,
-               "caught_by_exec": [rows[1], rows[2]], "rows": rows}
+        rep = {
+            "id": "agent",
+            "n": 4,
+            "static_pass": 4,
+            "delivered": 2,
+            "caught_by_exec": [rows[1], rows[2]],
+            "rows": rows,
+        }
 
-        summary = exec_report.summarize(rep, executor_name="DockerExecutor/nucleo-exec:latest",
-                                        executor_available=True)
+        summary = exec_report.summarize(
+            rep, executor_name="DockerExecutor/nucleo-exec:latest", executor_available=True
+        )
 
         self.assertEqual(summary["delivered_rate"], {"passed": 2, "total": 4, "percent": 50.0})
-        self.assertEqual(summary["delivered_eligible_rate"],
-                         {"passed": 1, "total": 2, "percent": 50.0})
+        self.assertEqual(
+            summary["delivered_eligible_rate"], {"passed": 1, "total": 2, "percent": 50.0}
+        )
         self.assertEqual(summary["false_positive_delivery_count"], 1)
-        self.assertEqual(summary["false_positive_deliveries"],
-                         [{"id": "neg-fp", "desc": "negativo creditado"}])
+        self.assertEqual(
+            summary["false_positive_deliveries"], [{"id": "neg-fp", "desc": "negativo creditado"}]
+        )
 
     def test_summarize_sem_exec_delivered_declarado_nao_tem_elegiveis(self):
         # Suíte não-instrumentada (sem expected.exec_delivered): denominador 0 — o G7
         # fica fail-closed em vez de medir um número sem lastro.
-        rep = {"id": "agent", "n": 3, "static_pass": 2, "delivered": 1,
-               "caught_by_exec": [ROWS[1]], "rows": ROWS}
+        rep = {
+            "id": "agent",
+            "n": 3,
+            "static_pass": 2,
+            "delivered": 1,
+            "caught_by_exec": [ROWS[1]],
+            "rows": ROWS,
+        }
 
-        summary = exec_report.summarize(rep, executor_name="DockerExecutor/nucleo-exec:latest",
-                                        executor_available=True)
+        summary = exec_report.summarize(
+            rep, executor_name="DockerExecutor/nucleo-exec:latest", executor_available=True
+        )
 
-        self.assertEqual(summary["delivered_eligible_rate"],
-                         {"passed": 0, "total": 0, "percent": 0.0})
+        self.assertEqual(
+            summary["delivered_eligible_rate"], {"passed": 0, "total": 0, "percent": 0.0}
+        )
         self.assertEqual(summary["false_positive_delivery_count"], 0)
 
     def test_main_json_emit_machine_readable_sem_texto_extra(self):
-        fake = {"id": "agent", "n": 3, "static_pass": 2, "delivered": 1,
-                "caught_by_exec": [ROWS[1]], "rows": ROWS}
-        with mock.patch.object(exec_report, "run", return_value=fake), \
-             mock.patch.object(exec_report, "get_executor") as get_ex:
+        fake = {
+            "id": "agent",
+            "n": 3,
+            "static_pass": 2,
+            "delivered": 1,
+            "caught_by_exec": [ROWS[1]],
+            "rows": ROWS,
+        }
+        with (
+            mock.patch.object(exec_report, "run", return_value=fake),
+            mock.patch.object(exec_report, "get_executor") as get_ex,
+        ):
             get_ex.return_value.name = "InertExecutor"
             get_ex.return_value.available = False
             buf = io.StringIO()
@@ -153,12 +268,21 @@ class ExecReportSummary(unittest.TestCase):
         parsed = json.loads(buf.getvalue())
         self.assertEqual(parsed["agent_id"], "agent")
         self.assertEqual(parsed["executor"], {"name": "InertExecutor", "available": False})
+
     def test_main_text_pode_gravar_json_lateral(self):
-        fake = {"id": "agent", "n": 3, "static_pass": 2, "delivered": 1,
-                "caught_by_exec": [ROWS[1]], "rows": ROWS}
-        with mock.patch.object(exec_report, "run", return_value=fake), \
-             mock.patch.object(exec_report, "get_executor") as get_ex, \
-             mock.patch.object(exec_report, "open", mock.mock_open(), create=True) as mocked_open:
+        fake = {
+            "id": "agent",
+            "n": 3,
+            "static_pass": 2,
+            "delivered": 1,
+            "caught_by_exec": [ROWS[1]],
+            "rows": ROWS,
+        }
+        with (
+            mock.patch.object(exec_report, "run", return_value=fake),
+            mock.patch.object(exec_report, "get_executor") as get_ex,
+            mock.patch.object(exec_report, "open", mock.mock_open(), create=True) as mocked_open,
+        ):
             get_ex.return_value.name = "DockerExecutor/nucleo-exec:latest"
             get_ex.return_value.available = True
             buf = io.StringIO()
@@ -174,8 +298,14 @@ class ExecReportSummary(unittest.TestCase):
 
     def test_audit_only_bloqueia_credito_mesmo_com_execucao_verde(self):
         summary = exec_report.summarize(
-            {"id": "agent", "n": 1, "static_pass": 1, "delivered": 1,
-             "caught_by_exec": [], "rows": [ROWS[0]]},
+            {
+                "id": "agent",
+                "n": 1,
+                "static_pass": 1,
+                "delivered": 1,
+                "caught_by_exec": [],
+                "rows": [ROWS[0]],
+            },
             executor_name="DockerExecutor/nucleo-exec:latest",
             executor_available=True,
         )
@@ -190,19 +320,33 @@ class ExecReportSummary(unittest.TestCase):
         self.assertEqual(audited["rows"][0]["execution_credit"], "audit_only")
 
     def test_main_audit_only_grava_json_sem_mascarar_credito(self):
-        fake = {"id": "agent", "n": 1, "static_pass": 1, "delivered": 1,
-                "caught_by_exec": [], "rows": [ROWS[0]]}
-        with mock.patch.object(exec_report, "run", return_value=fake), \
-             mock.patch.object(exec_report, "get_executor") as get_ex, \
-             mock.patch.object(exec_report, "open", mock.mock_open(), create=True) as mocked_open:
+        fake = {
+            "id": "agent",
+            "n": 1,
+            "static_pass": 1,
+            "delivered": 1,
+            "caught_by_exec": [],
+            "rows": [ROWS[0]],
+        }
+        with (
+            mock.patch.object(exec_report, "run", return_value=fake),
+            mock.patch.object(exec_report, "get_executor") as get_ex,
+            mock.patch.object(exec_report, "open", mock.mock_open(), create=True) as mocked_open,
+        ):
             get_ex.return_value.name = "DockerExecutor/nucleo-exec:latest"
             get_ex.return_value.available = True
             buf = io.StringIO()
             with redirect_stdout(buf):
-                code = exec_report.main([
-                    "--audit-only", "--audit-reason", "mobile_not_strict_gate",
-                    "--json-output", "exec_report_mobile.json", "nucleo/guilds/x",
-                ])
+                code = exec_report.main(
+                    [
+                        "--audit-only",
+                        "--audit-reason",
+                        "mobile_not_strict_gate",
+                        "--json-output",
+                        "exec_report_mobile.json",
+                        "nucleo/guilds/x",
+                    ]
+                )
 
         self.assertEqual(code, 0)
         written = "".join(call.args[0] for call in mocked_open().write.call_args_list)

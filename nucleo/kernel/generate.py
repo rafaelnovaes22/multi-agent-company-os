@@ -18,6 +18,7 @@ Uso: `exec_report --generative` roda os casos ELEGÍVEIS (expected.exec_delivere
 sem o artifact baked e publica o `delivered_eligible_rate` GENERATIVO — número separado
 do replay de fixtures, nunca somado a ele.
 """
+
 from __future__ import annotations
 
 import json
@@ -25,7 +26,9 @@ import os
 import re
 
 _FENCE_RE = re.compile(r"```(?:json)?\s*(\{.*?\})\s*```", re.DOTALL)
-_TEST_PATH_RE = re.compile(r"(^|/)(tests?[_/]|test_|__tests__/)|\.(test|spec)\.[a-z]+$|_test\.[a-z]+$")
+_TEST_PATH_RE = re.compile(
+    r"(^|/)(tests?[_/]|test_|__tests__/)|\.(test|spec)\.[a-z]+$|_test\.[a-z]+$"
+)
 
 
 def _has_visible_tests(seed: dict, runtime: str) -> bool:
@@ -53,21 +56,30 @@ def _extract_files(text: str):
     candidates += [m.group(1) for m in _FENCE_RE.finditer(text)]
     start, end = text.find("{"), text.rfind("}")
     if 0 <= start < end:
-        candidates.append(text[start:end + 1])
+        candidates.append(text[start : end + 1])
     for cand in candidates:
         try:
             obj = json.loads(cand)
         except (ValueError, TypeError):
             continue
         files = obj.get("files") if isinstance(obj, dict) else None
-        if isinstance(files, dict) and files \
-                and all(isinstance(k, str) and isinstance(v, str) for k, v in files.items()):
+        if (
+            isinstance(files, dict)
+            and files
+            and all(isinstance(k, str) and isinstance(v, str) for k, v in files.items())
+        ):
             return files
     return None
 
 
-def _prompt(request: str, seed: dict, attempt: int, feedback: str | None,
-            untouchable: list[str] | None = None, selftest_hint: str | None = None) -> str:
+def _prompt(
+    request: str,
+    seed: dict,
+    attempt: int,
+    feedback: str | None,
+    untouchable: list[str] | None = None,
+    selftest_hint: str | None = None,
+) -> str:
     """Monta o prompt do gerador. SÓ pedido + semente + feedback da execução anterior —
     nada do oráculo (bug_markers/held-out) entra aqui. `untouchable` são os paths
     protegidos que EXISTEM na semente (visíveis por definição): nomeá-los é o que um
@@ -80,14 +92,18 @@ def _prompt(request: str, seed: dict, attempt: int, feedback: str | None,
         'Responda SOMENTE com JSON válido no formato {"files": {"caminho/arquivo": "conteúdo completo"}}.',
     ]
     if untouchable:
-        parts.append("Arquivos que você NÃO pode incluir/modificar: " + ", ".join(untouchable) + ".")
+        parts.append(
+            "Arquivos que você NÃO pode incluir/modificar: " + ", ".join(untouchable) + "."
+        )
     if selftest_hint:
-        parts.append(f"Inclua também um arquivo de teste SEU (ex.: \"{selftest_hint}\") derivado do "
-                     "pedido/contrato, cobrindo os comportamentos exigidos — INCLUSIVE os casos "
-                     "NEGATIVOS que o contrato implica (entrada inválida/forjada rejeitada, estado "
-                     "não mutado, chave removida etc.): ele roda no seu loop de verificação, mas NÃO "
-                     "fará parte da entrega. O teste NÃO substitui os critérios de aceite do pedido: "
-                     "trechos exatos continuam obrigatórios LITERALMENTE no código.")
+        parts.append(
+            f'Inclua também um arquivo de teste SEU (ex.: "{selftest_hint}") derivado do '
+            "pedido/contrato, cobrindo os comportamentos exigidos — INCLUSIVE os casos "
+            "NEGATIVOS que o contrato implica (entrada inválida/forjada rejeitada, estado "
+            "não mutado, chave removida etc.): ele roda no seu loop de verificação, mas NÃO "
+            "fará parte da entrega. O teste NÃO substitui os critérios de aceite do pedido: "
+            "trechos exatos continuam obrigatórios LITERALMENTE no código."
+        )
     parts += [
         "",
         f"## Pedido\n{request}",
@@ -96,13 +112,16 @@ def _prompt(request: str, seed: dict, attempt: int, feedback: str | None,
     for path in sorted(seed):
         parts.append(f"### {path}\n```\n{seed[path]}\n```")
     if feedback:
-        parts.append(f"## Resultado da sua tentativa anterior (nº {attempt - 1}) — corrija:\n"
-                     f"```\n{feedback}\n```")
+        parts.append(
+            f"## Resultado da sua tentativa anterior (nº {attempt - 1}) — corrija:\n"
+            f"```\n{feedback}\n```"
+        )
     return "\n".join(parts)
 
 
-def generate_red_green(request: str, seed: dict, oracle: dict, llm, executor,
-                       *, max_iters: int = None) -> dict:
+def generate_red_green(
+    request: str, seed: dict, oracle: dict, llm, executor, *, max_iters: int = None
+) -> dict:
     """Gera o artefato {files} iterando LLM×executor até verde nos testes VISÍVEIS.
 
     Do `oracle` este loop usa APENAS test_cmd/runtime (para executar a semente+patch) e
@@ -142,47 +161,72 @@ def generate_red_green(request: str, seed: dict, oracle: dict, llm, executor,
         # (falso artifact_parseable=False observado no painel 6, backend-03/04).
         # temperature=0: o painel compara noites — variância de amostragem vira ruído de
         # medição; determinismo aqui é instrumentação, não capacidade.
-        text = llm.complete(_prompt(request, seed, attempt, feedback, untouchable, selftest_hint),
-                            max_tokens=16384, temperature=0.0)
+        text = llm.complete(
+            _prompt(request, seed, attempt, feedback, untouchable, selftest_hint),
+            max_tokens=16384,
+            temperature=0.0,
+        )
         files = _extract_files(text)
         if files is None:
             history.append({"attempt": attempt, "parsed": False, "tests_pass": None})
-            feedback = ('sua resposta não era JSON válido no contrato '
-                        '{"files": {"caminho": "conteúdo"}} — responda apenas o JSON')
+            feedback = (
+                "sua resposta não era JSON válido no contrato "
+                '{"files": {"caminho": "conteúdo"}} — responda apenas o JSON'
+            )
             continue
         dropped = sorted(p for p in files if p in heldout_paths)
         for p in dropped:
-            files.pop(p)   # autor != provador: o agente não escreve o próprio critério
+            files.pop(p)  # autor != provador: o agente não escreve o próprio critério
         # SELF-TESTS: todo arquivo de teste autorado pelo agente (não existe na semente)
         # roda no loop como instrumento de iteração, mas NUNCA integra a entrega — teste
         # de agente não é prova (a prova é o held-out, do caso).
-        selftests = {p: files.pop(p) for p in list(files)
-                     if p not in seed and _TEST_PATH_RE.search(p)}
+        selftests = {
+            p: files.pop(p) for p in list(files) if p not in seed and _TEST_PATH_RE.search(p)
+        }
         if not files:
             # o agente mandou SÓ teste: sem patch não há entrega — feedback explícito em
             # vez de morrer adiante num falso artifact_parseable.
-            history.append({"attempt": attempt, "parsed": True, "tests_pass": None,
-                            "only_selftest": True})
-            feedback = ("sua resposta só trouxe arquivo de teste — inclua também os arquivos "
-                        "de código da entrega no mesmo JSON")
+            history.append(
+                {"attempt": attempt, "parsed": True, "tests_pass": None, "only_selftest": True}
+            )
+            feedback = (
+                "sua resposta só trouxe arquivo de teste — inclua também os arquivos "
+                "de código da entrega no mesmo JSON"
+            )
             continue
         artifact_files = files
         if not can_loop:
             if visible_tests:
                 # executor indisponível: one-shot honesto, delivered fica com o caller
-                history.append({"attempt": attempt, "parsed": True, "tests_pass": None,
-                                "dropped_heldout_paths": dropped, "no_executor": True})
+                history.append(
+                    {
+                        "attempt": attempt,
+                        "parsed": True,
+                        "tests_pass": None,
+                        "dropped_heldout_paths": dropped,
+                        "no_executor": True,
+                    }
+                )
                 break
             # SONDA ESTÁTICA (semente sem teste visível): itera contra os critérios
             # estáticos do verify_code SEM executar. Vaza só o nome do critério reprovado
             # (o mesmo que o CI publicaria) — jamais bug_markers/held-out. O held-out
             # continua decidindo `delivered` na verificação final do caller.
             from .verification import verify_code
+
             probe = verify_code({"files": files}, seed, oracle, executor=None)
             if not probe["static_ok"]:
-                history.append({"attempt": attempt, "parsed": True, "tests_pass": None,
-                                "dropped_heldout_paths": dropped, "static_probe": True,
-                                "static_ok": False, "first_fail": probe["first_fail"]})
+                history.append(
+                    {
+                        "attempt": attempt,
+                        "parsed": True,
+                        "tests_pass": None,
+                        "dropped_heldout_paths": dropped,
+                        "static_probe": True,
+                        "static_ok": False,
+                        "first_fail": probe["first_fail"],
+                    }
+                )
                 detail = ""
                 if probe["first_fail"] == "protected_unmodified":
                     offending = sorted(p for p in files if p in protected_paths)
@@ -190,17 +234,29 @@ def generate_red_green(request: str, seed: dict, oracle: dict, llm, executor,
                 elif probe["first_fail"] == "bug_addressed":
                     # sem vazar o oráculo: os trechos exatos JÁ estão no pedido (critérios
                     # de aceite); o modelo tende a "melhorá-los" — aponte de volta p/ eles.
-                    detail = (" (releia os critérios de aceite do PEDIDO: cada trecho entre "
-                              "crases deve aparecer LITERALMENTE, sem alterar aspas/espaços, "
-                              "no arquivo-alvo, e os marcadores TODO devem ser removidos)")
-                feedback = (f"verificação estática reprovou no critério '{probe['first_fail']}'{detail} — "
-                            "revise o patch (não altere arquivos protegidos/de teste) e reenvie o JSON")
+                    detail = (
+                        " (releia os critérios de aceite do PEDIDO: cada trecho entre "
+                        "crases deve aparecer LITERALMENTE, sem alterar aspas/espaços, "
+                        "no arquivo-alvo, e os marcadores TODO devem ser removidos)"
+                    )
+                feedback = (
+                    f"verificação estática reprovou no critério '{probe['first_fail']}'{detail} — "
+                    "revise o patch (não altere arquivos protegidos/de teste) e reenvie o JSON"
+                )
                 continue
             if not (exec_avail and selftests):
-                history.append({"attempt": attempt, "parsed": True, "tests_pass": None,
-                                "dropped_heldout_paths": dropped, "static_probe": True,
-                                "static_ok": True, "first_fail": None})
-                break   # estático limpo e sem self-test executável: não há mais o que iterar
+                history.append(
+                    {
+                        "attempt": attempt,
+                        "parsed": True,
+                        "tests_pass": None,
+                        "dropped_heldout_paths": dropped,
+                        "static_probe": True,
+                        "static_ok": True,
+                        "first_fail": None,
+                    }
+                )
+                break  # estático limpo e sem self-test executável: não há mais o que iterar
             # roda os SELF-TESTS do agente (semente + patch + testes dele, protegidos na
             # versão da semente). Green aqui é autoconsistência, não prova — delivered
             # continua sendo decidido pelo held-out na verificação final.
@@ -211,17 +267,26 @@ def generate_red_green(request: str, seed: dict, oracle: dict, llm, executor,
                 merged[p] = seed[p]
             detail = executor.run_tests_detail(merged, test_cmd=test_cmd, runtime=runtime)
             verdict = detail.get("passed")
-            history.append({"attempt": attempt, "parsed": True, "tests_pass": verdict,
-                            "dropped_heldout_paths": dropped, "static_probe": True,
-                            "static_ok": True, "first_fail": None,
-                            "selftest_paths": sorted(selftests)})
+            history.append(
+                {
+                    "attempt": attempt,
+                    "parsed": True,
+                    "tests_pass": verdict,
+                    "dropped_heldout_paths": dropped,
+                    "static_probe": True,
+                    "static_ok": True,
+                    "first_fail": None,
+                    "selftest_paths": sorted(selftests),
+                }
+            )
             if verdict is True:
                 loop_green = True
                 break
             if verdict is None:
-                break   # erro de infra: iterar às cegas não é sinal, é ruído
-            feedback = ("seus PRÓPRIOS testes falharam:\n"
-                        + (detail.get("output") or "(sem saída capturada)"))
+                break  # erro de infra: iterar às cegas não é sinal, é ruído
+            feedback = "seus PRÓPRIOS testes falharam:\n" + (
+                detail.get("output") or "(sem saída capturada)"
+            )
             continue
         merged = dict(seed)
         merged.update(files)
@@ -229,8 +294,9 @@ def generate_red_green(request: str, seed: dict, oracle: dict, llm, executor,
         # arquivos PROTEGIDOS rodam SEMPRE na versão da semente (mesma disciplina da
         # injeção de held-out no verify_code): green obtido reescrevendo o teste-alvo é
         # green vazio — o loop não pode aceitá-lo nem deixar o agente "testar" a burla.
-        touched_protected = sorted(p for p in files
-                                   if p in protected_paths and p in seed and files[p] != seed[p])
+        touched_protected = sorted(
+            p for p in files if p in protected_paths and p in seed and files[p] != seed[p]
+        )
         for p in protected_paths & seed.keys():
             merged[p] = seed[p]
         detail = executor.run_tests_detail(merged, test_cmd=test_cmd, runtime=runtime)
@@ -241,28 +307,43 @@ def generate_red_green(request: str, seed: dict, oracle: dict, llm, executor,
         probe = None
         if verdict is True and not touched_protected:
             from .verification import verify_code
+
             probe = verify_code({"files": files}, seed, oracle, executor=None)
-        history.append({"attempt": attempt, "parsed": True, "tests_pass": verdict,
-                        "dropped_heldout_paths": dropped,
-                        "touched_protected_paths": touched_protected,
-                        "static_ok": probe["static_ok"] if probe else None})
+        history.append(
+            {
+                "attempt": attempt,
+                "parsed": True,
+                "tests_pass": verdict,
+                "dropped_heldout_paths": dropped,
+                "touched_protected_paths": touched_protected,
+                "static_ok": probe["static_ok"] if probe else None,
+            }
+        )
         if verdict is True and not touched_protected and probe["static_ok"]:
             loop_green = True
             break
         if verdict is None:
-            break   # erro de infra: iterar às cegas não é sinal, é ruído
+            break  # erro de infra: iterar às cegas não é sinal, é ruído
         if verdict is True and touched_protected:
             # o código passa nos testes da semente, mas o patch reescreve arquivo protegido
             # (teste/contrato) — a verificação final reprovaria; devolve o motivo exato.
-            feedback = ("seus arquivos passam nos testes, MAS você modificou arquivo(s) "
-                        f"protegido(s) de teste/contrato: {', '.join(touched_protected)}. "
-                        "Reenvie o JSON sem incluir esses arquivos (não os altere).")
+            feedback = (
+                "seus arquivos passam nos testes, MAS você modificou arquivo(s) "
+                f"protegido(s) de teste/contrato: {', '.join(touched_protected)}. "
+                "Reenvie o JSON sem incluir esses arquivos (não os altere)."
+            )
             continue
         if verdict is True:
-            feedback = (f"os testes passam, MAS a verificação estática reprovou no critério "
-                        f"'{probe['first_fail']}' — revise o patch e reenvie o JSON")
+            feedback = (
+                f"os testes passam, MAS a verificação estática reprovou no critério "
+                f"'{probe['first_fail']}' — revise o patch e reenvie o JSON"
+            )
             continue
         feedback = detail.get("output") or "os testes visíveis falharam (sem saída capturada)"
 
-    return {"artifact": {"files": artifact_files or {}},
-            "attempts": len(history), "loop_green": loop_green, "history": history}
+    return {
+        "artifact": {"files": artifact_files or {}},
+        "attempts": len(history),
+        "loop_green": loop_green,
+        "history": history,
+    }

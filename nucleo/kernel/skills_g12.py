@@ -6,9 +6,10 @@ do output, grader genérico de contrato valida `expected` de domínio direto.
 Registrados via @register de kernel.skills; importado no fim de skills.py.
 A assinatura é a padrão: handler(state, *, llm, store, spec) -> {output, cost_tokens, citations}.
 """
+
 from __future__ import annotations
 
-from .skills import register, _tokens, _spec_citations
+from .skills import _spec_citations, _tokens, register
 
 
 def _out(spec, state, fields, rationale_prompt, llm):
@@ -17,7 +18,11 @@ def _out(spec, state, fields, rationale_prompt, llm):
     out["rationale"] = rationale
     out["by"] = spec["id"]
     out["tenant"] = state.get("task", {}).get("tenant_id")
-    return {"output": out, "cost_tokens": _tokens(rationale), "citations": _spec_citations(state, spec)}
+    return {
+        "output": out,
+        "cost_tokens": _tokens(rationale),
+        "citations": _spec_citations(state, spec),
+    }
 
 
 @register("provision_estimate")
@@ -44,11 +49,11 @@ def provision_estimate(state, *, llm, store, spec):
 
     # Nível de exposição (provisão como % do valor da causa, via probabilidade).
     if prob >= 0.7:
-        exposure_level = "provavel"      # provável (CPC art. 818): provisiona integral
+        exposure_level = "provavel"  # provável (CPC art. 818): provisiona integral
     elif prob >= 0.3:
-        exposure_level = "possivel"      # possível: divulga, provisiona o esperado
+        exposure_level = "possivel"  # possível: divulga, provisiona o esperado
     else:
-        exposure_level = "remota"        # remota: não provisiona contabilmente
+        exposure_level = "remota"  # remota: não provisiona contabilmente
 
     # Monitoramento de prazo: alerta quando dentro da janela ou já vencido.
     deadline_alert = days is not None and days <= window
@@ -63,24 +68,37 @@ def provision_estimate(state, *, llm, store, spec):
     deadlines_tracked = days is not None
     delivered = bool(registered and deadlines_tracked)
 
-    return _out(spec, state, {
-        "claim_amount": claim,
-        "loss_probability": prob,
-        "provision": provision,
-        "exposure_level": exposure_level,
-        "deadline_status": deadline_status,
-        "deadline_alert": deadline_alert,
-        "deadlines_tracked": deadlines_tracked,
-        "registered": registered,
-        "delivered_event": "dispute.registered && dispute.deadlines_tracked" if delivered else None,
-    }, f"Voce e {spec['id']}: provisao R$ {provision} (exposicao {exposure_level}), "
-       f"prazo {deadline_status}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "claim_amount": claim,
+            "loss_probability": prob,
+            "provision": provision,
+            "exposure_level": exposure_level,
+            "deadline_status": deadline_status,
+            "deadline_alert": deadline_alert,
+            "deadlines_tracked": deadlines_tracked,
+            "registered": registered,
+            "delivered_event": (
+                "dispute.registered && dispute.deadlines_tracked" if delivered else None
+            ),
+        },
+        f"Voce e {spec['id']}: provisao R$ {provision} (exposicao {exposure_level}), "
+        f"prazo {deadline_status}.",
+        llm,
+    )
 
 
 # Pesos por categoria de risco para ponderar a exposição agregada do heatmap.
 _RISK_CATEGORY_WEIGHT = {
-    "regulatorio": 1.0, "legal": 1.0, "seguranca": 1.0, "privacidade": 1.0,
-    "financeiro": 0.9, "operacional": 0.8, "ia": 1.0,
+    "regulatorio": 1.0,
+    "legal": 1.0,
+    "seguranca": 1.0,
+    "privacidade": 1.0,
+    "financeiro": 0.9,
+    "operacional": 0.8,
+    "ia": 1.0,
 }
 
 
@@ -125,27 +143,37 @@ def risk_score(state, *, llm, store, spec):
     has_mitigation = bool(mitigation)
 
     # Vermelho sem dono é um achado bloqueante (negative_example da spec).
-    escalate = level == "vermelho" or (prev_level is not None and prev_level != "vermelho" and level == "vermelho")
+    escalate = level == "vermelho" or (
+        prev_level is not None and prev_level != "vermelho" and level == "vermelho"
+    )
     alert_board = level == "vermelho"
     blocked = level == "vermelho" and not has_owner
 
     # delivered_event: registrado && dono atribuído && pontuado.
     delivered = bool(has_owner and score > 0)
 
-    return _out(spec, state, {
-        "score": score,
-        "weighted_score": weighted_score,
-        "level": level,
-        "heatmap_cell": heatmap_cell,
-        "category": category,
-        "has_owner": has_owner,
-        "has_mitigation": has_mitigation,
-        "escalate": escalate,
-        "alert_board": alert_board,
-        "blocked": blocked,
-        "delivered_event": "risk.registered && risk.owner_assigned && risk.scored" if delivered else None,
-    }, f"Voce e {spec['id']}: risco {level} (score {score}, {heatmap_cell}), "
-       f"dono={'sim' if has_owner else 'NAO'}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "score": score,
+            "weighted_score": weighted_score,
+            "level": level,
+            "heatmap_cell": heatmap_cell,
+            "category": category,
+            "has_owner": has_owner,
+            "has_mitigation": has_mitigation,
+            "escalate": escalate,
+            "alert_board": alert_board,
+            "blocked": blocked,
+            "delivered_event": (
+                "risk.registered && risk.owner_assigned && risk.scored" if delivered else None
+            ),
+        },
+        f"Voce e {spec['id']}: risco {level} (score {score}, {heatmap_cell}), "
+        f"dono={'sim' if has_owner else 'NAO'}.",
+        llm,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -176,11 +204,21 @@ def contract_risk_review(state, *, llm, store, spec):
         yellow.append("dpa_required")
     risk = "vermelho" if blocking else ("amarelo" if yellow else "verde")
     rec = "rejeitar" if blocking else ("negociar" if yellow else "assinar")
-    return _out(spec, state, {
-        "agent_id": spec["id"], "risk_level": risk, "blocking_clauses": blocking,
-        "flagged_clauses": blocking + yellow, "requires_dpa": requires_dpa,
-        "recommendation": rec, "requires_human_review": bool(blocking or requires_dpa),
-    }, f"Voce e {spec['id']}: risco {risk}, recomendacao {rec}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "agent_id": spec["id"],
+            "risk_level": risk,
+            "blocking_clauses": blocking,
+            "flagged_clauses": blocking + yellow,
+            "requires_dpa": requires_dpa,
+            "recommendation": rec,
+            "requires_human_review": bool(blocking or requires_dpa),
+        },
+        f"Voce e {spec['id']}: risco {risk}, recomendacao {rec}.",
+        llm,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -200,7 +238,13 @@ def regulatory_change_assessment(state, *, llm, store, spec):
     action_defined = bool(change.get("action"))
     false_positive_count = int(change.get("false_positive_count", 0) or 0)
     impact_assessed = source_trusted and impact in {"none", "low", "medium", "high"}
-    actionable = source_trusted and applies and impact in {"medium", "high"} and action_defined and action_owner
+    actionable = (
+        source_trusted
+        and applies
+        and impact in {"medium", "high"}
+        and action_defined
+        and action_owner
+    )
     overdue = days is not None and days < 0
 
     if not source_trusted:
@@ -226,11 +270,23 @@ def regulatory_change_assessment(state, *, llm, store, spec):
         severity = "low"
     creates_task = status == "action_required"
     requires_human_review = status in {"overdue", "needs_action_plan", "action_required"}
-    return _out(spec, state, {
-        "agent_id": spec["id"], "handler_kind": "regulatory_change_assessment",
-        "source_trusted": source_trusted, "applies_to_company": applies,
-        "impact": impact, "impact_assessed": impact_assessed,
-        "actionable": actionable, "creates_task": creates_task,
-        "overdue": overdue, "severity": severity, "status": status,
-        "requires_human_review": requires_human_review,
-    }, f"Voce e {spec['id']}: mudanca regulatoria {status}, severidade {severity}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "agent_id": spec["id"],
+            "handler_kind": "regulatory_change_assessment",
+            "source_trusted": source_trusted,
+            "applies_to_company": applies,
+            "impact": impact,
+            "impact_assessed": impact_assessed,
+            "actionable": actionable,
+            "creates_task": creates_task,
+            "overdue": overdue,
+            "severity": severity,
+            "status": status,
+            "requires_human_review": requires_human_review,
+        },
+        f"Voce e {spec['id']}: mudanca regulatoria {status}, severidade {severity}.",
+        llm,
+    )

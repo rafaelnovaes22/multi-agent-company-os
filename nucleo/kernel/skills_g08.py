@@ -8,9 +8,10 @@ medem números do tenant e devolvem campos no top-level do output; o grader gen�
 de contrato valida os `expected` de domínio direto. SEM aleatoriedade, SEM datas do
 sistema. Registrados via @register; importado no fim de skills.py por outro processo.
 """
+
 from __future__ import annotations
 
-from .skills import register, _tokens, _spec_citations
+from .skills import _spec_citations, _tokens, register
 
 # Alíquotas efetivas aproximadas por regime tributário BR (configurável por tenant).
 _REGIME_RATES = {"simples": 0.06, "presumido": 0.1133, "real": 0.15}
@@ -26,7 +27,11 @@ def _out(spec, state, fields, rationale_prompt, llm):
     out["rationale"] = rationale
     out["by"] = spec["id"]
     out["tenant"] = state.get("task", {}).get("tenant_id")
-    return {"output": out, "cost_tokens": _tokens(rationale), "citations": _spec_citations(state, spec)}
+    return {
+        "output": out,
+        "cost_tokens": _tokens(rationale),
+        "citations": _spec_citations(state, spec),
+    }
 
 
 @register("billing_invoice_calc")
@@ -65,13 +70,27 @@ def billing_invoice_calc(state, *, llm, store, spec):
     if outcome_total:
         tiers_billed.append("outcome")
 
-    return _out(spec, state, {
-        "gross_amount": gross, "tax_amount": tax, "net_amount": net,
-        "regime": regime, "tax_rate": rate, "outcome_total": outcome_total,
-        "pending_outcomes": pending_outcomes, "tiers_billed": tiers_billed,
-        "cost_ratio": cost_ratio, "c3_ok": c3_ok, "audit_logged": audit_logged,
-        "blocked": blocked, "status": status,
-    }, f"Voce e {spec['id']}: fatura bruta {gross} ({regime}), imposto {tax}, status {status}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "gross_amount": gross,
+            "tax_amount": tax,
+            "net_amount": net,
+            "regime": regime,
+            "tax_rate": rate,
+            "outcome_total": outcome_total,
+            "pending_outcomes": pending_outcomes,
+            "tiers_billed": tiers_billed,
+            "cost_ratio": cost_ratio,
+            "c3_ok": c3_ok,
+            "audit_logged": audit_logged,
+            "blocked": blocked,
+            "status": status,
+        },
+        f"Voce e {spec['id']}: fatura bruta {gross} ({regime}), imposto {tax}, status {status}.",
+        llm,
+    )
 
 
 @register("crm_dedupe_score")
@@ -109,11 +128,20 @@ def crm_dedupe_score(state, *, llm, store, spec):
         fb = sum(1 for k in weights if _norm(b.get(k)))
         survivor = a.get("id") if fa >= fb else b.get("id")
 
-    return _out(spec, state, {
-        "match_score": score, "decision": decision, "is_duplicate": is_duplicate,
-        "matched_fields": matched_fields, "survivor_id": survivor,
-        "auto_merge": is_duplicate,
-    }, f"Voce e {spec['id']}: match {score} entre registros, decisao {decision}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "match_score": score,
+            "decision": decision,
+            "is_duplicate": is_duplicate,
+            "matched_fields": matched_fields,
+            "survivor_id": survivor,
+            "auto_merge": is_duplicate,
+        },
+        f"Voce e {spec['id']}: match {score} entre registros, decisao {decision}.",
+        llm,
+    )
 
 
 @register("pricing_c3_margin")
@@ -140,21 +168,42 @@ def pricing_c3_margin(state, *, llm, store, spec):
             all_ok = False
         total_price += price
         total_cost += cost
-        tier_results.append({"name": name, "price": price, "cost_ratio": ratio,
-                             "c3_ok": ok, "min_price": min_price, "margin_pct": margin_pct})
+        tier_results.append(
+            {
+                "name": name,
+                "price": price,
+                "cost_ratio": ratio,
+                "c3_ok": ok,
+                "min_price": min_price,
+                "margin_pct": margin_pct,
+            }
+        )
 
     total_ratio = round(total_cost / total_price, 4) if total_price else 1.0
-    total_margin_pct = round((total_price - total_cost) / total_price * 100, 1) if total_price else 0.0
+    total_margin_pct = (
+        round((total_price - total_cost) / total_price * 100, 1) if total_price else 0.0
+    )
     c3_pass = all_ok and total_ratio <= _C3_MAX_RATIO
     blocked = not c3_pass
     violating_tiers = [t["name"] for t in tier_results if not t["c3_ok"]]
 
-    return _out(spec, state, {
-        "total_price": round(total_price, 2), "total_cost": round(total_cost, 2),
-        "total_cost_ratio": total_ratio, "total_margin_pct": total_margin_pct,
-        "c3_pass": c3_pass, "blocked": blocked, "tier_count": len(tiers),
-        "violating_tiers": violating_tiers, "tiers": tier_results,
-    }, f"Voce e {spec['id']}: ratio total {total_ratio} (C3={'ok' if c3_pass else 'viola'}), {len(violating_tiers)} camadas fora.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "total_price": round(total_price, 2),
+            "total_cost": round(total_cost, 2),
+            "total_cost_ratio": total_ratio,
+            "total_margin_pct": total_margin_pct,
+            "c3_pass": c3_pass,
+            "blocked": blocked,
+            "tier_count": len(tiers),
+            "violating_tiers": violating_tiers,
+            "tiers": tier_results,
+        },
+        f"Voce e {spec['id']}: ratio total {total_ratio} (C3={'ok' if c3_pass else 'viola'}), {len(violating_tiers)} camadas fora.",
+        llm,
+    )
 
 
 @register("revenue_metrics_calc")
@@ -185,12 +234,25 @@ def revenue_metrics_calc(state, *, llm, store, spec):
     reconciled = not drift
     status = "drift" if drift else "reconciliado"
 
-    return _out(spec, state, {
-        "mrr": mrr, "arr": arr, "nrr_pct": nrr, "new_mrr": new_mrr,
-        "expansion": expansion, "contraction": contraction, "churn": churn,
-        "reconciliation_delta_pct": delta_pct, "reconciled": reconciled,
-        "drift": drift, "status": status,
-    }, f"Voce e {spec['id']}: MRR {mrr}, NRR {nrr}%, delta reconciliacao {delta_pct}% ({status}).", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "mrr": mrr,
+            "arr": arr,
+            "nrr_pct": nrr,
+            "new_mrr": new_mrr,
+            "expansion": expansion,
+            "contraction": contraction,
+            "churn": churn,
+            "reconciliation_delta_pct": delta_pct,
+            "reconciled": reconciled,
+            "drift": drift,
+            "status": status,
+        },
+        f"Voce e {spec['id']}: MRR {mrr}, NRR {nrr}%, delta reconciliacao {delta_pct}% ({status}).",
+        llm,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -204,21 +266,45 @@ def _c3_payload(state):
 def _c3_out(spec, state, llm, handler_kind, artifact_type, domain_status="ready"):
     econ = _c3_payload(state)
     price = round(float(econ.get("price_brl", econ.get("published_price_brl", 0)) or 0), 2)
-    cost = round(float(econ.get("unit_cost_brl", econ.get("delivery_cost_brl", econ.get("inference_cost_brl", 0))) or 0), 2)
-    max_ratio = float(econ.get("max_ratio", (spec.get("economics") or {}).get("max_ratio", _C3_MAX_RATIO)) or _C3_MAX_RATIO)
+    cost = round(
+        float(
+            econ.get(
+                "unit_cost_brl", econ.get("delivery_cost_brl", econ.get("inference_cost_brl", 0))
+            )
+            or 0
+        ),
+        2,
+    )
+    max_ratio = float(
+        econ.get("max_ratio", (spec.get("economics") or {}).get("max_ratio", _C3_MAX_RATIO))
+        or _C3_MAX_RATIO
+    )
     cost_ratio = round(cost / price, 4) if price else 1.0
     c3_ok = cost_ratio <= max_ratio
     min_price = round(cost / max_ratio, 2) if max_ratio else 0.0
     status = "blocked" if not c3_ok else domain_status
     requires_review = bool((not c3_ok) or econ.get("requires_human_review", False))
-    return _out(spec, state, {
-        "agent_id": spec["id"], "handler_kind": handler_kind, "artifact_type": artifact_type,
-        "price_brl": price, "unit_cost_brl": cost, "cost_ratio": cost_ratio,
-        "max_ratio": max_ratio, "c3_ok": c3_ok, "min_viable_price_brl": min_price,
-        "status": status, "requires_human_review": requires_review,
-        "recommended_action": "deliver" if c3_ok else "raise_price_or_reduce_cost",
-        "_spec_citations": _spec_citations(state, spec),
-    }, f"Voce e {spec['id']}: C3 price={price}, cost={cost}, ratio={cost_ratio}, status={status}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "agent_id": spec["id"],
+            "handler_kind": handler_kind,
+            "artifact_type": artifact_type,
+            "price_brl": price,
+            "unit_cost_brl": cost,
+            "cost_ratio": cost_ratio,
+            "max_ratio": max_ratio,
+            "c3_ok": c3_ok,
+            "min_viable_price_brl": min_price,
+            "status": status,
+            "requires_human_review": requires_review,
+            "recommended_action": "deliver" if c3_ok else "raise_price_or_reduce_cost",
+            "_spec_citations": _spec_citations(state, spec),
+        },
+        f"Voce e {spec['id']}: C3 price={price}, cost={cost}, ratio={cost_ratio}, status={status}.",
+        llm,
+    )
 
 
 @register("contract_closer_c3")

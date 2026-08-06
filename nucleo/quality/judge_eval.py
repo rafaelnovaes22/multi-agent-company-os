@@ -23,7 +23,9 @@ Uso (CI, F3b):
       python -m nucleo.quality.judge_eval --require-judge --json-output judge_report.json
 Sem chave do juiz (e sem --require-judge): sai inerte (0) — "pronto, aguardando o secret".
 """
+
 from __future__ import annotations
+
 import argparse
 import glob
 import json
@@ -39,7 +41,7 @@ except Exception:
 
 from langgraph.checkpoint.memory import MemorySaver
 
-from ..factory.factory import load_spec, build_from_spec
+from ..factory.factory import build_from_spec, load_spec
 from ..kernel.brain import Brain, FileStore
 from ..kernel.providers.llm import get_llm
 
@@ -62,39 +64,50 @@ def _make_judge(judge: str):
     """Devolve (judge_name, complete_fn). Importa o SDK só do juiz escolhido (lazy)."""
     if judge == "sonnet":
         import anthropic
+
         client = anthropic.Anthropic()
 
         def complete(prompt: str) -> str:
-            msg = client.messages.create(model=SONNET_MODEL, max_tokens=1024,
-                                         messages=[{"role": "user", "content": prompt}])
+            msg = client.messages.create(
+                model=SONNET_MODEL, max_tokens=1024, messages=[{"role": "user", "content": prompt}]
+            )
             return "".join(b.text for b in msg.content if getattr(b, "type", "") == "text").strip()
+
         return f"Anthropic/{SONNET_MODEL}", complete
 
     if judge == "openai":
         import openai
+
         client = openai.OpenAI()  # lê OPENAI_API_KEY do ambiente (secret no CI)
 
         def complete(prompt: str) -> str:
             # gpt-5 é reasoning: max_completion_tokens (não max_tokens) com folga p/ reasoning+saída;
             # senão o reasoning consome tudo e content volta vazio. json_object exige "json" no prompt.
             r = client.chat.completions.create(
-                model=OPENAI_MODEL, max_completion_tokens=8000,
+                model=OPENAI_MODEL,
+                max_completion_tokens=8000,
                 reasoning_effort=os.environ.get("REASONING_EFFORT", "medium"),
                 response_format={"type": "json_object"},
-                messages=[{"role": "user", "content": prompt}])
+                messages=[{"role": "user", "content": prompt}],
+            )
             return (r.choices[0].message.content or "").strip()
+
         return f"OpenAI/{OPENAI_MODEL}", complete
 
     from google import genai
     from google.genai import types
-    client = genai.Client(vertexai=True,
-                          project=os.environ.get("GOOGLE_CLOUD_PROJECT", "your-gcp-project"),
-                          location=os.environ.get("GOOGLE_CLOUD_LOCATION", "us-central1"))
+
+    client = genai.Client(
+        vertexai=True,
+        project=os.environ.get("GOOGLE_CLOUD_PROJECT", "your-gcp-project"),
+        location=os.environ.get("GOOGLE_CLOUD_LOCATION", "us-central1"),
+    )
 
     def complete(prompt: str) -> str:
         cfg = types.GenerateContentConfig(max_output_tokens=4096)
         r = client.models.generate_content(model=GEMINI_JUDGE_MODEL, contents=prompt, config=cfg)
         return (r.text or "").strip()
+
     return f"GoogleProvider(direct)/{GEMINI_JUDGE_MODEL}/vertex", complete
 
 
@@ -104,7 +117,11 @@ def _judge_prompt(spec: dict, statement: str, content: str) -> str:
     sd = spec.get("_dir")
     if sd:
         try:
-            soul = open(os.path.join(sd, spec.get("soul_ref", "soul.md")), encoding="utf-8").read().strip()
+            soul = (
+                open(os.path.join(sd, spec.get("soul_ref", "soul.md")), encoding="utf-8")
+                .read()
+                .strip()
+            )
         except OSError:
             pass
     pos = "\n- ".join(map(str, oc.get("positive_examples", []))) or "(nenhum)"
@@ -173,7 +190,9 @@ def _targets():
     ("veredito ancorado em execução, jamais em opinião"). O juiz segue sendo o único
     instrumento dos `spec_driven`, que não têm oráculo executável."""
     out = []
-    for f in sorted(glob.glob(os.path.join(ROOT, "nucleo", "guilds", "**", "spec.yaml"), recursive=True)):
+    for f in sorted(
+        glob.glob(os.path.join(ROOT, "nucleo", "guilds", "**", "spec.yaml"), recursive=True)
+    ):
         sp = load_spec(os.path.dirname(f))
         if sp.get("act_handler") == "spec_driven":
             sp["_dir"] = os.path.dirname(f)
@@ -194,7 +213,9 @@ def run(judge: str, complete_fn, *, limit: int = 0, dump: bool = False, only=Non
     cp = MemorySaver()
 
     targets = _targets()
-    if only:  # re-teste barato de agentes específicos (ex.: validar um fix de leak) — aplicado antes de --limit
+    if (
+        only
+    ):  # re-teste barato de agentes específicos (ex.: validar um fix de leak) — aplicado antes de --limit
         wanted = {a.strip() for a in only if a.strip()}
         targets = [(sd, sp) for sd, sp in targets if sp["id"] in wanted]
     if limit:
@@ -205,11 +226,25 @@ def run(judge: str, complete_fn, *, limit: int = 0, dump: bool = False, only=Non
         statement, artifact = _realistic_task(spec)
         try:
             _, agent, _ = build_from_spec(sd, gen_llm, brain, store, cp)
-            state = {"task": {"agent_id": spec["id"], "guild": spec["guild"], "statement": statement,
-                              "artifact_type": artifact, "risk": "low"},
-                     "mode": "SHADOW", "ledger": spec.get("ledger"),
-                     "run_id": "q-" + spec["id"], "verbose": False}
-            out = agent.invoke(state, config={"configurable": {"thread_id": state["run_id"]}}).get("output") or {}
+            state = {
+                "task": {
+                    "agent_id": spec["id"],
+                    "guild": spec["guild"],
+                    "statement": statement,
+                    "artifact_type": artifact,
+                    "risk": "low",
+                },
+                "mode": "SHADOW",
+                "ledger": spec.get("ledger"),
+                "run_id": "q-" + spec["id"],
+                "verbose": False,
+            }
+            out = (
+                agent.invoke(state, config={"configurable": {"thread_id": state["run_id"]}}).get(
+                    "output"
+                )
+                or {}
+            )
             content = out.get("content", "") or ""
             v = _judge(complete_fn, spec, statement, content)
         except Exception as e:  # noqa: BLE001
@@ -217,14 +252,19 @@ def run(judge: str, complete_fn, *, limit: int = 0, dump: bool = False, only=Non
             v = {"error": f"run:{e}"}
         v.update({"_id": spec["id"], "_guild": spec["guild"], "_content_len": len(content)})
         if dump:
-            v["_artifact"] = content[:12000]  # diagnóstico: o que o agente gerou (p/ caçar leak/vagueza)
+            v["_artifact"] = content[
+                :12000
+            ]  # diagnóstico: o que o agente gerou (p/ caçar leak/vagueza)
         rows.append(v)
 
     ok = [r for r in rows if "error" not in r]
     npass = sum(1 for r in ok if r.get("overall_pass") is True)
     leak_fail = [r for r in ok if r.get("anti_leak") == "fail"]
-    dims = {"persona_fit": _avg(ok, "persona_fit"), "c2_fit": _avg(ok, "c2_fit"),
-            "utilidade": _avg(ok, "utilidade")}
+    dims = {
+        "persona_fit": _avg(ok, "persona_fit"),
+        "c2_fit": _avg(ok, "c2_fit"),
+        "utilidade": _avg(ok, "utilidade"),
+    }
     lowest_dim = min(dims, key=dims.get) if ok else None
     return {
         "generator": gen_llm.name,
@@ -232,10 +272,13 @@ def run(judge: str, complete_fn, *, limit: int = 0, dump: bool = False, only=Non
         "total": len(rows),
         "evaluated_ok": len(ok),
         "errors": [{"id": r.get("_id"), "error": r.get("error")} for r in rows if "error" in r],
-        "overall_pass": {"passed": npass, "total": len(ok),
-                         "percent": round(100 * npass / len(ok), 1) if ok else 0.0},
+        "overall_pass": {
+            "passed": npass,
+            "total": len(ok),
+            "percent": round(100 * npass / len(ok), 1) if ok else 0.0,
+        },
         "avg_dimensions": dims,
-        "lowest_dimension": lowest_dim,   # tese: c2_fit (verificabilidade) é o piso nos técnicos
+        "lowest_dimension": lowest_dim,  # tese: c2_fit (verificabilidade) é o piso nos técnicos
         "anti_leak_fail": [r["_id"] for r in leak_fail],
         "rows": rows,
     }
@@ -260,13 +303,24 @@ def render_text(rep: dict) -> str:
 
 def _parse(argv):
     p = argparse.ArgumentParser(description="LLM-as-judge da qualidade generativa (F3b).")
-    p.add_argument("--require-judge", action="store_true",
-                   help="exige credencial do juiz; sem ela, exit 1 (em vez de sair inerte).")
-    p.add_argument("--limit", type=int, default=0, help="avalia só os N primeiros agentes (debug/custo).")
-    p.add_argument("--dump-artifacts", action="store_true",
-                   help="inclui no JSON o artefato gerado por cada agente (campo _artifact) p/ diagnóstico.")
-    p.add_argument("--only", default="",
-                   help="avalia só estes ids (lista separada por vírgula) — re-teste barato de um fix pontual.")
+    p.add_argument(
+        "--require-judge",
+        action="store_true",
+        help="exige credencial do juiz; sem ela, exit 1 (em vez de sair inerte).",
+    )
+    p.add_argument(
+        "--limit", type=int, default=0, help="avalia só os N primeiros agentes (debug/custo)."
+    )
+    p.add_argument(
+        "--dump-artifacts",
+        action="store_true",
+        help="inclui no JSON o artefato gerado por cada agente (campo _artifact) p/ diagnóstico.",
+    )
+    p.add_argument(
+        "--only",
+        default="",
+        help="avalia só estes ids (lista separada por vírgula) — re-teste barato de um fix pontual.",
+    )
     p.add_argument("--json-output", help="grava o relatório JSON neste caminho.")
     return p.parse_args(argv)
 
@@ -275,8 +329,10 @@ def main(argv):
     args = _parse(argv)
     judge = os.environ.get("JUDGE", "openai").strip().lower()
     if not _judge_key_present(judge):
-        msg = (f"[judge_eval] credencial do juiz '{judge}' ausente — relatório F3b não roda "
-               f"(configure o secret e re-dispare).")
+        msg = (
+            f"[judge_eval] credencial do juiz '{judge}' ausente — relatório F3b não roda "
+            f"(configure o secret e re-dispare)."
+        )
         if args.require_judge:
             print(msg, file=sys.stderr)
             return 1
@@ -284,8 +340,13 @@ def main(argv):
         return 0
 
     judge_name, complete_fn = _make_judge(judge)
-    rep = run(judge, complete_fn, limit=args.limit, dump=args.dump_artifacts,
-              only=args.only.split(",") if args.only else None)
+    rep = run(
+        judge,
+        complete_fn,
+        limit=args.limit,
+        dump=args.dump_artifacts,
+        only=args.only.split(",") if args.only else None,
+    )
     rep["judge"] = judge_name
     text = render_text(rep)
     if args.json_output:

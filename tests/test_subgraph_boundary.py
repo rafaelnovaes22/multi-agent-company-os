@@ -11,20 +11,21 @@ Os toy-supervisores abaixo são auto-contidos (espelham o vício vs a correção
 testes test_real_* exercitam o build_g08_supervisor DE PRODUÇÃO. Demonstração
 executável correspondente: docs/poc/subgraph_g08.py.
 """
+
 from __future__ import annotations
 
 import os
 import uuid
 
-from typing_extensions import TypedDict
-from langgraph.graph import StateGraph, START, END
 from langgraph.checkpoint.memory import MemorySaver
+from langgraph.graph import END, START, StateGraph
 from langgraph.types import Command
+from typing_extensions import TypedDict
 
-from nucleo.kernel.brain import Brain, FileStore
-from nucleo.kernel.providers.llm import get_llm
 from nucleo.factory.factory import build_from_spec, load_spec
 from nucleo.kernel.agent_template import build_agent
+from nucleo.kernel.brain import Brain, FileStore
+from nucleo.kernel.providers.llm import get_llm
 from nucleo.kernel.supervisor import build_g08_supervisor
 
 _NUCLEO = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "nucleo")
@@ -32,8 +33,15 @@ _BRAIN = os.path.join(_NUCLEO, ".brain")
 _Q_SPEC = os.path.join(_NUCLEO, "guilds", "g08_vendas", "g8-lead-qualifier")
 _O_SPEC = os.path.join(_NUCLEO, "guilds", "g08_vendas", "g8-outbound-sdr")
 
-LEAD = {"id": "L-700", "company": "Decisao Humana", "revenue_brl_year": 2_500_000,
-        "founder_led": True, "sells_well": True, "lacks_process": True, "firefighter": True}
+LEAD = {
+    "id": "L-700",
+    "company": "Decisao Humana",
+    "revenue_brl_year": 2_500_000,
+    "founder_led": True,
+    "sells_well": True,
+    "lacks_process": True,
+    "firefighter": True,
+}
 
 
 class _GuildState(TypedDict, total=False):
@@ -52,20 +60,33 @@ def _mk_worker(checkpointer):
 
 
 def _worker_input(state):
-    return {"task": {"agent_id": "g8-lead-qualifier", "guild": "G08-vendas-receita",
-                     "statement": "Qualificar lead contra o ICP", "lead": state["lead"]},
-            "mode": state.get("mode", "ASSISTED"), "ledger": "billable",
-            "run_id": "w-" + uuid.uuid4().hex[:6], "verbose": False}
+    return {
+        "task": {
+            "agent_id": "g8-lead-qualifier",
+            "guild": "G08-vendas-receita",
+            "statement": "Qualificar lead contra o ICP",
+            "lead": state["lead"],
+        },
+        "mode": state.get("mode", "ASSISTED"),
+        "ledger": "billable",
+        "run_id": "w-" + uuid.uuid4().hex[:6],
+        "verbose": False,
+    }
 
 
 def _build_imperative(worker, checkpointer):
     """Vício antigo: thread_id ISOLADO em cada sub-invoke."""
+
     def qualify(state):
         rid = "iso-" + uuid.uuid4().hex[:8]
         res = worker.invoke(_worker_input(state), config={"configurable": {"thread_id": rid}})
         q = res.get("output") or {}
-        return {"qualification": q, "worker_paused": "__interrupt__" in res,
-                "route": "prospect" if q.get("decision") == "qualified" else "stop"}
+        return {
+            "qualification": q,
+            "worker_paused": "__interrupt__" in res,
+            "route": "prospect" if q.get("decision") == "qualified" else "stop",
+        }
+
     g = StateGraph(_GuildState)
     g.add_node("qualify", qualify)
     g.add_edge(START, "qualify")
@@ -75,11 +96,16 @@ def _build_imperative(worker, checkpointer):
 
 def _build_subgraph(worker, checkpointer):
     """Correção: o worker herda o config do PAI (subgrafo real)."""
+
     def qualify(state, config):
         res = worker.invoke(_worker_input(state), config)
         q = res.get("output") or {}
-        return {"qualification": q, "worker_paused": "__interrupt__" in res,
-                "route": "prospect" if q.get("decision") == "qualified" else "stop"}
+        return {
+            "qualification": q,
+            "worker_paused": "__interrupt__" in res,
+            "route": "prospect" if q.get("decision") == "qualified" else "stop",
+        }
+
     g = StateGraph(_GuildState)
     g.add_node("qualify", qualify)
     g.add_edge(START, "qualify")
@@ -135,7 +161,9 @@ def test_subgraph_dri_rejeita_descarta():
     assert "__interrupt__" in res
 
     res = sup.invoke(Command(resume={"approved": False}), config=cfg)
-    assert (res.get("qualification") or {}).get("delivered") is not True, "rejeição não pode entregar"
+    assert (res.get("qualification") or {}).get(
+        "delivered"
+    ) is not True, "rejeição não pode entregar"
 
 
 # ---------------------------------------------------------------------------

@@ -14,7 +14,9 @@ Cloud Run / containers:
 LLM real é opt-in via variáveis do NÚCLEO (`LLM_PROVIDER`, `GEMINI_API_KEY`,
 `GOOGLE_*`, etc.). Sem provider real, roda offline com FakeLLMProvider.
 """
+
 from __future__ import annotations
+
 import json
 import os
 import sys
@@ -27,16 +29,29 @@ REPO = FRONT.parents[1]
 sys.path.insert(0, str(REPO))
 
 from langgraph.checkpoint.memory import MemorySaver  # noqa: E402
+
 from nucleo.kernel.brain import Brain, FileStore  # noqa: E402
 from nucleo.kernel.providers.llm import get_llm  # noqa: E402
 from nucleo.kernel.registry import build_company  # noqa: E402
 
 GUILD_NAMES = {
-    "G00": "Núcleo", "G01": "Estratégia", "G02": "Produto", "G03": "Engenharia",
-    "G04": "Qualidade", "G05": "Segurança", "G06": "Dados", "G07": "Growth",
-    "G08": "Vendas", "G09": "Customer Ops", "G10": "Finanças", "G11": "Pessoas",
-    "G12": "Jurídico", "G13": "Governança", "G14": "Model & AI-Ops",
+    "G00": "Núcleo",
+    "G01": "Estratégia",
+    "G02": "Produto",
+    "G03": "Engenharia",
+    "G04": "Qualidade",
+    "G05": "Segurança",
+    "G06": "Dados",
+    "G07": "Growth",
+    "G08": "Vendas",
+    "G09": "Customer Ops",
+    "G10": "Finanças",
+    "G11": "Pessoas",
+    "G12": "Jurídico",
+    "G13": "Governança",
+    "G14": "Model & AI-Ops",
 }
+
 
 def _bootstrap_gcp_adc() -> None:
     """Railway/containers não têm ADC do gcloud. Se a service account vier como JSON
@@ -60,7 +75,9 @@ BRAIN_DIR = FRONT / ".brain-web"
 brain = Brain(str(BRAIN_DIR / "events"))
 store = FileStore(str(BRAIN_DIR / "store"))
 llm = get_llm("root")
-ROOT_GRAPH, GUILD_SUPS, FLEET = build_company(str(REPO / "nucleo"), llm, brain, store, MemorySaver())
+ROOT_GRAPH, GUILD_SUPS, FLEET = build_company(
+    str(REPO / "nucleo"), llm, brain, store, MemorySaver()
+)
 N_AGENTS = sum(len(ws) for ws in FLEET.values())
 print(f"pronto: {N_AGENTS} agentes | {len(FLEET)} guildas | LLM={llm.name}")
 
@@ -86,34 +103,51 @@ def run_intent(intent: str, context: dict) -> dict:
 
     # contexto do cliente -> lead (formato do ICP real) + perfil multi-tenant no store (C5)
     company = (context.get("company") or "").strip()
-    lead = {"id": "demo-" + uuid.uuid4().hex[:6], "company": company or "empresa do visitante",
-            "revenue_brl_year": int(context.get("revenue_brl_year") or 0),
-            "founder_led": bool(context.get("founder_led")),
-            "sells_well": bool(context.get("sells_well")),
-            "lacks_process": bool(context.get("lacks_process")),
-            "firefighter": bool(context.get("firefighter")),
-            "high_personnel_cost": bool(context.get("high_personnel_cost")),
-            "large_team": bool(context.get("large_team")),
-            "public_sector": bool(context.get("public_sector"))}
+    lead = {
+        "id": "demo-" + uuid.uuid4().hex[:6],
+        "company": company or "empresa do visitante",
+        "revenue_brl_year": int(context.get("revenue_brl_year") or 0),
+        "founder_led": bool(context.get("founder_led")),
+        "sells_well": bool(context.get("sells_well")),
+        "lacks_process": bool(context.get("lacks_process")),
+        "firefighter": bool(context.get("firefighter")),
+        "high_personnel_cost": bool(context.get("high_personnel_cost")),
+        "large_team": bool(context.get("large_team")),
+        "public_sector": bool(context.get("public_sector")),
+    }
     payload["lead"] = lead
     if company:
         tid = "t-" + "".join(c for c in company.lower() if c.isalnum())[:18]
-        store.put(("tenant", tid), "profile",
-                  {"name": company, "segment": context.get("segment") or "—",
-                   "pain": context.get("pain") or "—"})
+        store.put(
+            ("tenant", tid),
+            "profile",
+            {
+                "name": company,
+                "segment": context.get("segment") or "—",
+                "pain": context.get("pain") or "—",
+            },
+        )
         payload["tenant_id"] = tid
 
     out = ROOT_GRAPH.invoke(
         {"intent": intent, "payload": payload, "verbose": False},
-        config={"configurable": {"thread_id": "web-" + uuid.uuid4().hex[:6]}})
+        config={"configurable": {"thread_id": "web-" + uuid.uuid4().hex[:6]}},
+    )
     res = out.get("result", {}) or {}
     gk = res.get("guild")
-    workers = [{"id": wid, "output": _safe(o or {})}
-               for wid, o in (res.get("results") or {}).items()]
-    return {"intent": intent, "guild": gk, "guild_name": GUILD_NAMES.get(gk, gk),
-            "workers": workers, "llm": llm.name, "mode": "SHADOW",
-            "tenant": payload.get("tenant_id"),
-            "note": "modo sombra: proposta registrada no Brain — nada é entregue sem passar o gate C4"}
+    workers = [
+        {"id": wid, "output": _safe(o or {})} for wid, o in (res.get("results") or {}).items()
+    ]
+    return {
+        "intent": intent,
+        "guild": gk,
+        "guild_name": GUILD_NAMES.get(gk, gk),
+        "workers": workers,
+        "llm": llm.name,
+        "mode": "SHADOW",
+        "tenant": payload.get("tenant_id"),
+        "note": "modo sombra: proposta registrada no Brain — nada é entregue sem passar o gate C4",
+    }
 
 
 class Handler(SimpleHTTPRequestHandler):

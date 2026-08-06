@@ -9,18 +9,21 @@ Prova as garantias novas do g3-backend-builder sem quebrar o red→green do pilo
   - oráculo SEM heldout_files (red→green do piloto) segue intacto: heldout_untouched=True.
 Roda offline, stdlib pura (executor real só no nightly).
 """
+
 from __future__ import annotations
+
 import unittest
 
-from nucleo.kernel.verification import verify_code, sha
 from nucleo.kernel.execution import ExecutionProvider
+from nucleo.kernel.verification import sha, verify_code
 
-SKELETON = ("def quote(subtotal, coupon=None):\n"
-            "    raise NotImplementedError  # TODO\n")
+SKELETON = "def quote(subtotal, coupon=None):\n" "    raise NotImplementedError  # TODO\n"
 CONTRACT = "# Contrato: desconto percentual; cupom desconhecido -> KeyError.\n"
-HELDOUT_TEST = ("from pricing import quote\n\n"
-                "def test_cupom_percentual():\n"
-                "    assert quote(200.0, 'SAVE25') == 150.0\n")
+HELDOUT_TEST = (
+    "from pricing import quote\n\n"
+    "def test_cupom_percentual():\n"
+    "    assert quote(200.0, 'SAVE25') == 150.0\n"
+)
 SEED = {"pricing.py": SKELETON, "docs/pricing_contract.md": CONTRACT}
 ORACLE = {
     "bug_file": "pricing.py",
@@ -29,14 +32,23 @@ ORACLE = {
     "heldout_files": {"test_pricing.py": HELDOUT_TEST},
     "test_cmd": "python -m pytest -q",
 }
-IMPL_OK = {"files": {"pricing.py": (
-    "COUPONS = {'SAVE10': 10, 'SAVE25': 25}\n\n"
-    "def quote(subtotal, coupon=None):\n"
-    "    if coupon is None:\n"
-    "        return subtotal\n"
-    "    return subtotal - subtotal * COUPONS[coupon] / 100\n")}}
-AUTORA_PROVA = {"files": {"pricing.py": IMPL_OK["files"]["pricing.py"],
-                          "test_pricing.py": "def test_ok():\n    assert True\n"}}
+IMPL_OK = {
+    "files": {
+        "pricing.py": (
+            "COUPONS = {'SAVE10': 10, 'SAVE25': 25}\n\n"
+            "def quote(subtotal, coupon=None):\n"
+            "    if coupon is None:\n"
+            "        return subtotal\n"
+            "    return subtotal - subtotal * COUPONS[coupon] / 100\n"
+        )
+    }
+}
+AUTORA_PROVA = {
+    "files": {
+        "pricing.py": IMPL_OK["files"]["pricing.py"],
+        "test_pricing.py": "def test_ok():\n    assert True\n",
+    }
+}
 
 
 class _FakeExecutor(ExecutionProvider):

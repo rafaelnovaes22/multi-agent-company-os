@@ -4,7 +4,9 @@
 Mercado-agnóstico: valida a higiene dos agentes independentemente do vertical.
 Severidades: high (bloqueia promoção), med (corrigir), low (informativo/Sprint 0).
 """
+
 from __future__ import annotations
+
 import glob
 import json
 import os
@@ -17,7 +19,10 @@ from ..kernel.guardians import validate_outcome_clause
 SECRET_PATTERNS = [
     (r"sk-[A-Za-z0-9]{16,}", "chave estilo OpenAI"),
     (r"AKIA[0-9A-Z]{16}", "AWS access key"),
-    (r"(?i)(api[_-]?key|secret|password|senha|token)\s*[:=]\s*['\"][^'\"]{8,}", "credencial inline"),
+    (
+        r"(?i)(api[_-]?key|secret|password|senha|token)\s*[:=]\s*['\"][^'\"]{8,}",
+        "credencial inline",
+    ),
 ]
 EMAIL = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
 CPF = r"\d{3}\.\d{3}\.\d{3}-\d{2}"
@@ -31,7 +36,9 @@ def _read(p):
 def scan_agent(spec_dir):
     spec = yaml.safe_load(_read(os.path.join(spec_dir, "spec.yaml"))) or {}
     aid = spec.get("id", os.path.basename(spec_dir))
-    blob = " ".join([_read(os.path.join(spec_dir, f)) for f in ("spec.yaml", "soul.md", "memory.md")])
+    blob = " ".join(
+        [_read(os.path.join(spec_dir, f)) for f in ("spec.yaml", "soul.md", "memory.md")]
+    )
     f = []
 
     v = validate_outcome_clause(spec)
@@ -67,8 +74,10 @@ def scan_agent(spec_dir):
 
 
 def scan_fleet(guilds_root):
-    return [scan_agent(os.path.dirname(p))
-            for p in sorted(glob.glob(os.path.join(guilds_root, "**", "spec.yaml"), recursive=True))]
+    return [
+        scan_agent(os.path.dirname(p))
+        for p in sorted(glob.glob(os.path.join(guilds_root, "**", "spec.yaml"), recursive=True))
+    ]
 
 
 def scan_c8(code_root):

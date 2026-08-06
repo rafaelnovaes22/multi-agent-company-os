@@ -23,7 +23,9 @@ Uso:
     python -m nucleo.quality.diff_homogeneity            # escopo: cases.json mudados vs origin/main
     python -m nucleo.quality.diff_homogeneity --json     # saída estruturada p/ CI
 """
+
 from __future__ import annotations
+
 import argparse
 import json
 import os
@@ -41,9 +43,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 
 # Limiares default — calibrados para a escala dos ataques históricos (380 / 270), com folga
 # para não disparar num agente que legitimamente adiciona ~30 casos variados.
-LINE_THRESHOLD = 12       # linhas adicionadas idênticas a partir das quais é carimbo em massa
-CLONE_THRESHOLD = 10      # casos novos com mesma estrutura a partir dos quais é cluster suspeito
-DIVERSITY_FLOOR = 0.5     # razão de valores distintos abaixo da qual o cluster é "templado"
+LINE_THRESHOLD = 12  # linhas adicionadas idênticas a partir das quais é carimbo em massa
+CLONE_THRESHOLD = 10  # casos novos com mesma estrutura a partir dos quais é cluster suspeito
+DIVERSITY_FLOOR = 0.5  # razão de valores distintos abaixo da qual o cluster é "templado"
 
 # Punção estrutural pura (não carrega informação de gaming) — ignorada no sinal A.
 _STRUCTURAL_LINES = {"{", "}", "[", "]", "},", "],", "{,"}
@@ -54,8 +56,7 @@ DEFAULT_EXCLUDE_KEYS = ("id", "desc", "description", "name", "title")
 
 def _git(*args):
     try:
-        out = subprocess.run(["git", *args], cwd=ROOT, capture_output=True,
-                             text=True, timeout=30)
+        out = subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True, timeout=30)
         return out.stdout if out.returncode == 0 else None
     except (OSError, subprocess.SubprocessError):
         return None
@@ -74,8 +75,9 @@ def added_line_homogeneity(diff_text, threshold=LINE_THRESHOLD):
         if not line or line in _STRUCTURAL_LINES:
             continue
         counts[line] += 1
-    return sorted(((ln, n) for ln, n in counts.items() if n >= threshold),
-                  key=lambda t: t[1], reverse=True)
+    return sorted(
+        ((ln, n) for ln, n in counts.items() if n >= threshold), key=lambda t: t[1], reverse=True
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -91,7 +93,7 @@ def case_fingerprint(case, exclude_keys=DEFAULT_EXCLUDE_KEYS):
             return "{" + ",".join(parts) + "}"
         if isinstance(node, list):
             return "[" + ",".join(sorted(walk(x) for x in node)) + "]"
-        return type(node).__name__   # str/int/float/bool/NoneType — valor apagado
+        return type(node).__name__  # str/int/float/bool/NoneType — valor apagado
 
     return walk(case)
 
@@ -116,8 +118,12 @@ def value_signature(case, exclude_keys=DEFAULT_EXCLUDE_KEYS):
     return tuple(vals)
 
 
-def clone_clusters(cases, min_size=CLONE_THRESHOLD, diversity_floor=DIVERSITY_FLOOR,
-                   exclude_keys=DEFAULT_EXCLUDE_KEYS):
+def clone_clusters(
+    cases,
+    min_size=CLONE_THRESHOLD,
+    diversity_floor=DIVERSITY_FLOOR,
+    exclude_keys=DEFAULT_EXCLUDE_KEYS,
+):
     """Agrupa casos por estrutura; sinaliza clusters grandes com baixa diversidade de valor."""
     groups = defaultdict(list)
     for c in cases:
@@ -130,12 +136,14 @@ def clone_clusters(cases, min_size=CLONE_THRESHOLD, diversity_floor=DIVERSITY_FL
         distinct = len({value_signature(m, exclude_keys) for m in members})
         diversity = distinct / len(members)
         if diversity < diversity_floor:
-            flagged.append({
-                "size": len(members),
-                "distinct_values": distinct,
-                "diversity": round(diversity, 3),
-                "fingerprint": fp[:200],
-            })
+            flagged.append(
+                {
+                    "size": len(members),
+                    "distinct_values": distinct,
+                    "diversity": round(diversity, 3),
+                    "fingerprint": fp[:200],
+                }
+            )
     return sorted(flagged, key=lambda d: d["size"], reverse=True)
 
 
@@ -172,8 +180,9 @@ def _added_cases(path):
     return [c for c in new if c.get("id") not in old_ids]
 
 
-def scan(line_threshold=LINE_THRESHOLD, clone_threshold=CLONE_THRESHOLD,
-         diversity_floor=DIVERSITY_FLOOR):
+def scan(
+    line_threshold=LINE_THRESHOLD, clone_threshold=CLONE_THRESHOLD, diversity_floor=DIVERSITY_FLOOR
+):
     """Roda os dois sinais sobre o diff vs origin/main. Devolve dict de relatório."""
     paths = _changed_cases_paths()
     if paths is None:
@@ -206,28 +215,36 @@ def main(argv):
         return 1 if (rep["signal_a"] or rep["signal_b"]) else 0
 
     if not rep["git"]:
-        print("diff_homogeneity — git/origin/main indisponível; nada a comparar (tripwire é advisory).")
+        print(
+            "diff_homogeneity — git/origin/main indisponível; nada a comparar (tripwire é advisory)."
+        )
         return 0
 
     print(f"diff_homogeneity — {len(rep['paths'])} cases.json mudado(s) vs origin/main")
     tripped = bool(rep["signal_a"] or rep["signal_b"])
 
     if rep["signal_a"]:
-        print(f"\n⚠ Sinal A — carimbo em massa ({len(rep['signal_a'])} linha(s) repetida(s) "
-              f">= {args.line_threshold}x):")
+        print(
+            f"\n⚠ Sinal A — carimbo em massa ({len(rep['signal_a'])} linha(s) repetida(s) "
+            f">= {args.line_threshold}x):"
+        )
         for ln, n in rep["signal_a"][:10]:
             print(f"  {n:>4}x  {ln[:100]}")
 
     if rep["signal_b"]:
         print(f"\n⚠ Sinal B — casos-clone (estrutura igual, diversidade < {args.diversity_floor}):")
         for c in rep["signal_b"][:10]:
-            print(f"  {c['size']:>4} casos / {c['distinct_values']} valores distintos "
-                  f"(diversidade {c['diversity']}) em {c['path']}")
+            print(
+                f"  {c['size']:>4} casos / {c['distinct_values']} valores distintos "
+                f"(diversidade {c['diversity']}) em {c['path']}"
+            )
 
     if tripped:
-        print("\n⚠ TRIPWIRE DISPARADO — revisão humana recomendada. NÃO é prova de gaming nem hard-fail: "
-              "é a forma do ataque histórico (#30-32, #66-80). Confirme que a homogeneidade tem causa "
-              "legítima (mesmo gerador honesto) e não carimbo/clone em lote. Espera-se evasão por jitter.")
+        print(
+            "\n⚠ TRIPWIRE DISPARADO — revisão humana recomendada. NÃO é prova de gaming nem hard-fail: "
+            "é a forma do ataque histórico (#30-32, #66-80). Confirme que a homogeneidade tem causa "
+            "legítima (mesmo gerador honesto) e não carimbo/clone em lote. Espera-se evasão por jitter."
+        )
         return 1
 
     print("\n✅ Sem homogeneidade suspeita acima dos limiares.")

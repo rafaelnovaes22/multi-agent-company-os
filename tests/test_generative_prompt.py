@@ -14,6 +14,7 @@ fecha esse buraco: com um provider-espião que captura o prompt, prova que
 
 Roda offline, sem rede e sem SDK de LLM.
 """
+
 from __future__ import annotations
 
 import logging
@@ -21,16 +22,18 @@ import os
 import tempfile
 import unittest
 
-from nucleo.kernel.skills import _catalog_agent_output, _tokens, _SOUL_CACHE
 from nucleo.kernel.providers import llm as llm_mod
-from nucleo.kernel.providers.llm import FakeLLMProvider, get_llm, _with_retry
+from nucleo.kernel.providers.llm import FakeLLMProvider, _with_retry, get_llm
+from nucleo.kernel.skills import _SOUL_CACHE, _catalog_agent_output, _tokens
 
-
-SOUL_TEXT = "Persona: sou cética, exijo evidência. Princípio: não escrevo sem diagnóstico (viola C1)."
+SOUL_TEXT = (
+    "Persona: sou cética, exijo evidência. Princípio: não escrevo sem diagnóstico (viola C1)."
+)
 
 
 class _SpyProvider:
     """Captura o último prompt e kwargs; devolve um conteúdo fixo reconhecível."""
+
     def __init__(self, out="ARTEFATO-CONCRETO-123"):
         self.out = out
         self.prompt = None
@@ -62,10 +65,15 @@ def _spec(spec_dir):
 
 def _state():
     return {
-        "task": {"statement": "TASK_MARKER: escrever a política X.",
-                 "artifact_type": "policy.doc", "risk": "low"},
-        "context": {"tenant_profile": {"name": "PROFILE_MARKER Ltda"},
-                    "memory": ["MEMORY_MARKER decisão anterior"]},
+        "task": {
+            "statement": "TASK_MARKER: escrever a política X.",
+            "artifact_type": "policy.doc",
+            "risk": "low",
+        },
+        "context": {
+            "tenant_profile": {"name": "PROFILE_MARKER Ltda"},
+            "memory": ["MEMORY_MARKER decisão anterior"],
+        },
     }
 
 
@@ -109,13 +117,17 @@ class GenerativePromptWiring(unittest.TestCase):
         spy = _SpyProvider(out="x y z")
         out = _catalog_agent_output(_state(), llm=spy, spec=self.spec, handler_kind="spec_driven")
         esperado = _tokens(spy.prompt) + _tokens(spy.out)
-        self.assertEqual(out["cost_tokens"], esperado,
-                         "cost_tokens deve somar ENTRADA (prompt) + SAÍDA (content) — PR #27")
+        self.assertEqual(
+            out["cost_tokens"],
+            esperado,
+            "cost_tokens deve somar ENTRADA (prompt) + SAÍDA (content) — PR #27",
+        )
         # entrada não é desprezível: o prompt rico domina o custo
         self.assertGreater(_tokens(spy.prompt), _tokens(spy.out))
 
     def test_sem_soul_nao_quebra(self):
-        spec = dict(self.spec); spec.pop("_spec_dir")
+        spec = dict(self.spec)
+        spec.pop("_spec_dir")
         spy = _SpyProvider()
         out = _catalog_agent_output(_state(), llm=spy, spec=spec, handler_kind="spec_driven")
         self.assertEqual(out["output"]["content"], spy.out)
@@ -148,7 +160,9 @@ class ProviderSelection(unittest.TestCase):
         # NÃO deve propagar — cai no offline e AVISA (não mais 'except: pass' silencioso).
         os.environ["LLM_PROVIDER"] = "anthropic"
         orig = llm_mod.AnthropicProvider
-        llm_mod.AnthropicProvider = lambda _model: (_ for _ in ()).throw(RuntimeError("sem credencial"))
+        llm_mod.AnthropicProvider = lambda _model: (_ for _ in ()).throw(
+            RuntimeError("sem credencial")
+        )
         try:
             with self.assertLogs("nucleo.kernel.providers.llm", level="WARNING"):
                 self.assertIsInstance(get_llm(), FakeLLMProvider)
@@ -163,6 +177,7 @@ class ProviderSelection(unittest.TestCase):
         def _sempre_falha():
             calls["n"] += 1
             raise RuntimeError("boom")
+
         with self.assertRaises(RuntimeError):
             _with_retry(_sempre_falha, label="t")
         self.assertEqual(calls["n"], 3, "deveria tentar 1 original + 2 retries")
@@ -177,6 +192,7 @@ class ProviderSelection(unittest.TestCase):
             if calls["n"] < 2:
                 raise RuntimeError("transiente")
             return "ok"
+
         self.assertEqual(_with_retry(_falha_uma_vez, label="t"), "ok")
         self.assertEqual(calls["n"], 2)
 

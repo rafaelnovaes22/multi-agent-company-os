@@ -6,9 +6,10 @@ valida `expected` de domínio direto, sem grader específico por agente).
 Registrados via @register de kernel.skills; importado no fim de skills.py.
 A assinatura é a padrão: handler(state, *, llm, store, spec) -> {output, cost_tokens, citations}.
 """
+
 from __future__ import annotations
 
-from .skills import register, _tokens, _spec_citations
+from .skills import _spec_citations, _tokens, register
 
 # Alíquotas efetivas aproximadas por regime tributário BR (configurável por tenant).
 _REGIME_RATES = {"simples": 0.06, "presumido": 0.1133, "real": 0.15}
@@ -21,7 +22,11 @@ def _out(spec, state, fields, rationale_prompt, llm):
     out["rationale"] = rationale
     out["by"] = spec["id"]
     out["tenant"] = state.get("task", {}).get("tenant_id")
-    return {"output": out, "cost_tokens": _tokens(rationale), "citations": _spec_citations(state, spec)}
+    return {
+        "output": out,
+        "cost_tokens": _tokens(rationale),
+        "citations": _spec_citations(state, spec),
+    }
 
 
 @register("fin_runway")
@@ -36,10 +41,19 @@ def fin_runway(state, *, llm, store, spec):
     alerts = [f"runway abaixo de {threshold} meses"] if threshold else []
     status = "critico" if runway < 6 else ("atencao" if runway < 12 else "saudavel")
     variance_pct = round((burn - plan) / plan * 100, 1) if plan else None
-    return _out(spec, state, {
-        "runway_months": runway, "burn_rate": burn, "status": status,
-        "alerts": alerts, "variance_pct": variance_pct,
-    }, f"Voce e {spec['id']}: runway {runway} meses, status {status}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "runway_months": runway,
+            "burn_rate": burn,
+            "status": status,
+            "alerts": alerts,
+            "variance_pct": variance_pct,
+        },
+        f"Voce e {spec['id']}: runway {runway} meses, status {status}.",
+        llm,
+    )
 
 
 @register("fin_forecast")
@@ -55,9 +69,18 @@ def fin_forecast(state, *, llm, store, spec):
         "otimista": round(base * ((1 + g * 1.5) ** months), 2),
         "conservador": round(base * ((1 + g * 0.5) ** months), 2),
     }
-    return _out(spec, state, {
-        "base_revenue": base, "projected_revenue": proj, "months": months, "scenarios": scenarios,
-    }, f"Voce e {spec['id']}: receita projetada {proj} em {months} meses.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "base_revenue": base,
+            "projected_revenue": proj,
+            "months": months,
+            "scenarios": scenarios,
+        },
+        f"Voce e {spec['id']}: receita projetada {proj} em {months} meses.",
+        llm,
+    )
 
 
 @register("fin_margin_score")
@@ -75,9 +98,18 @@ def fin_margin_score(state, *, llm, store, spec):
         alerts.append(f"compressao de {round(prev - margin, 1)}pp")
         cause = "custo subiu ou preco caiu"
     status = "vermelho" if margin < 10 else ("amarelo" if alerts else "verde")
-    return _out(spec, state, {
-        "margin_pct": margin, "status": status, "alerts": alerts, "cause": cause,
-    }, f"Voce e {spec['id']}: margem {margin}%, status {status}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "margin_pct": margin,
+            "status": status,
+            "alerts": alerts,
+            "cause": cause,
+        },
+        f"Voce e {spec['id']}: margem {margin}%, status {status}.",
+        llm,
+    )
 
 
 @register("fin_reconcile")
@@ -95,14 +127,22 @@ def fin_reconcile(state, *, llm, store, spec):
             bk.remove(k)
         else:
             exceptions.append({"type": "sem_lancamento_no_banco", "amount": l.get("amount")})
-    for amount, date in bk:                       # sobrou no banco sem ledger
+    for amount, date in bk:  # sobrou no banco sem ledger
         exceptions.append({"type": "sem_lancamento_no_ledger", "amount": amount})
     total = len(ledger)
     rate = round(matched / total * 100, 1) if total else 100.0
-    return _out(spec, state, {
-        "matched_count": matched, "exception_count": len(exceptions),
-        "reconciliation_rate": rate, "exceptions": exceptions,
-    }, f"Voce e {spec['id']}: {matched}/{total} conciliados ({rate}%), {len(exceptions)} excecoes.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "matched_count": matched,
+            "exception_count": len(exceptions),
+            "reconciliation_rate": rate,
+            "exceptions": exceptions,
+        },
+        f"Voce e {spec['id']}: {matched}/{total} conciliados ({rate}%), {len(exceptions)} excecoes.",
+        llm,
+    )
 
 
 @register("fin_invoice_tax")
@@ -114,10 +154,19 @@ def fin_invoice_tax(state, *, llm, store, spec):
     rate = inv.get("tax_rate", _REGIME_RATES.get(regime, 0.06))
     tax = round(amount * rate, 2)
     net = round(amount - tax, 2)
-    return _out(spec, state, {
-        "gross_amount": amount, "regime": regime, "tax_rate": rate,
-        "tax_amount": tax, "net_amount": net,
-    }, f"Voce e {spec['id']}: NF de {amount} ({regime}) imposto {tax}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "gross_amount": amount,
+            "regime": regime,
+            "tax_rate": rate,
+            "tax_amount": tax,
+            "net_amount": net,
+        },
+        f"Voce e {spec['id']}: NF de {amount} ({regime}) imposto {tax}.",
+        llm,
+    )
 
 
 @register("fin_tax_assessment")
@@ -128,10 +177,19 @@ def fin_tax_assessment(state, *, llm, store, spec):
     regime = tx.get("regime", "simples")
     rate = tx.get("rate", _REGIME_RATES.get(regime, 0.06))
     total = round(revenue * rate, 2)
-    return _out(spec, state, {
-        "regime": regime, "effective_rate": rate, "total_tax": total,
-        "period": tx.get("period"), "revenue": revenue,
-    }, f"Voce e {spec['id']}: tributos {total} ({regime}) sobre {revenue}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "regime": regime,
+            "effective_rate": rate,
+            "total_tax": total,
+            "period": tx.get("period"),
+            "revenue": revenue,
+        },
+        f"Voce e {spec['id']}: tributos {total} ({regime}) sobre {revenue}.",
+        llm,
+    )
 
 
 @register("fin_token_cost_allocation")
@@ -149,9 +207,15 @@ def fin_token_cost_allocation(state, *, llm, store, spec):
         else:
             unattributed += cost
     total = round(sum(alloc.values()) + unattributed, 4)
-    return _out(spec, state, {
-        "total_cost": total, "allocation": alloc, "agent_count": len(alloc),
-        "unattributed_cost": round(unattributed, 4),
-    }, f"Voce e {spec['id']}: custo total {total} em {len(alloc)} agentes.", llm)
-
-
+    return _out(
+        spec,
+        state,
+        {
+            "total_cost": total,
+            "allocation": alloc,
+            "agent_count": len(alloc),
+            "unattributed_cost": round(unattributed, 4),
+        },
+        f"Voce e {spec['id']}: custo total {total} em {len(alloc)} agentes.",
+        llm,
+    )

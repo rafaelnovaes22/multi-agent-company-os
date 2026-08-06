@@ -4,6 +4,7 @@ Sprint 0 inclui:
 - `validate_outcome_clause` (C2): a verificação que o g13-po-guardian executa.
 - `run_guardians`: o passo de self-critique (closed loop YC#2) antes da entrega.
 """
+
 from __future__ import annotations
 
 

@@ -6,7 +6,9 @@ descrição objetiva e emite JSON pronto para injetar no `index.html`.
     python demo/live/gen_fleet.py            # imprime JSON no stdout
     python demo/live/gen_fleet.py --write    # reescreve o bloco FLEET no index.html
 """
+
 from __future__ import annotations
+
 import json
 import re
 import sys
@@ -37,15 +39,17 @@ def build() -> list[dict]:
     fleet = []
     for spec_path in GUILDS.glob("*/*/spec.yaml"):
         spec = yaml.safe_load(spec_path.read_text(encoding="utf-8")) or {}
-        clause = (spec.get("outcome_clause") or {})
-        fleet.append({
-            "id": spec.get("id") or spec_path.parent.name,
-            "guild": spec.get("guild") or "",
-            "tier": spec.get("tier") or "",
-            "handler": spec.get("act_handler") or "spec_driven",
-            "ledger": spec.get("ledger") or "operating",
-            "desc": short(clause.get("statement", "")),
-        })
+        clause = spec.get("outcome_clause") or {}
+        fleet.append(
+            {
+                "id": spec.get("id") or spec_path.parent.name,
+                "guild": spec.get("guild") or "",
+                "tier": spec.get("tier") or "",
+                "handler": spec.get("act_handler") or "spec_driven",
+                "ledger": spec.get("ledger") or "operating",
+                "desc": short(clause.get("statement", "")),
+            }
+        )
     fleet.sort(key=lambda a: (a["guild"], a["id"]))
     return fleet
 
@@ -56,9 +60,13 @@ def main() -> None:
     if "--write" in sys.argv:
         html_path = FRONT / "index.html"
         html = html_path.read_text(encoding="utf-8")
-        new = re.sub(r"const FLEET = \[.*?\];",
-                     "const FLEET = " + payload + ";",
-                     html, count=1, flags=re.DOTALL)
+        new = re.sub(
+            r"const FLEET = \[.*?\];",
+            "const FLEET = " + payload + ";",
+            html,
+            count=1,
+            flags=re.DOTALL,
+        )
         if new == html:
             sys.exit("bloco `const FLEET = [...]` não encontrado no index.html")
         html_path.write_text(new, encoding="utf-8")

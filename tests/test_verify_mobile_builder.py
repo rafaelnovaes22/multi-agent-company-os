@@ -4,6 +4,7 @@ O agente mobile não deve continuar como contrato genérico `spec_driven`: o eva
 forçar artefatos `{files}` com oráculo held-out, e o handler `spec_executor` deve re-derivar
 os sinais estáticos via `verify_code` sem creditar delivery offline.
 """
+
 from __future__ import annotations
 
 import json

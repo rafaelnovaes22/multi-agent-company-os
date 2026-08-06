@@ -4,6 +4,7 @@ Os relatórios opcionais de naturezas novas devem ser publicados sem enfraquecer
 gate F6: artifacts ainda não creditáveis aparecem para auditoria, mas não entram no
 gate estrito de crédito real até terem runtime seguro e verde.
 """
+
 from __future__ import annotations
 
 import unittest
@@ -40,7 +41,7 @@ class FoundryExecExpandedReportsTest(unittest.TestCase):
         self.assertIn("exec_report_backend.json", gate_block)
         self.assertIn("exec_report_frontend.json", gate_block)
         self.assertIn("exec_report_infra.json", gate_block)
-        self.assertIn("exec_report_mobile.json", gate_block)   # estrito desde 2026-07-01
+        self.assertIn("exec_report_mobile.json", gate_block)  # estrito desde 2026-07-01
         self.assertNotIn("exec_report_browser.json", gate_block)
         self.assertNotIn("exec_report_incident.json", gate_block)
 

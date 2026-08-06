@@ -6,13 +6,16 @@ Specs e agentes NUNCA importam um SDK de provider direto. Eles recebem um
 Default = FakeLLMProvider (offline, determinístico, custo zero) — é o que faz
 os agentes nascerem em SHADOW sem precisar de chave de API nem rede.
 """
+
 from __future__ import annotations
+
 import abc
 import logging
 import os
 import time
 
 _log = logging.getLogger(__name__)
+
 
 # Robustez do provider real (C7). Em produção (PILOT/AUTONOMOUS) uma chamada pendurada
 # travaria o nó do grafo, e um erro transiente (5xx/rede) derrubaria a entrega. Ambos são
@@ -41,13 +44,21 @@ def _with_retry(call, *, label: str):
     for i in range(attempts):
         try:
             return call()
-        except Exception as exc:  # noqa: BLE001 — best-effort; transitório vs permanente é opaco no SDK
+        except (
+            Exception
+        ) as exc:  # noqa: BLE001 — best-effort; transitório vs permanente é opaco no SDK
             last = exc
             if i + 1 < attempts:
                 quota = "429" in str(exc) or "RESOURCE_EXHAUSTED" in str(exc)
-                delay = (15.0 if quota else 0.5) * (2 ** i)
-                _log.warning("LLM %s falhou (tentativa %d/%d): %s — retry em %.1fs",
-                             label, i + 1, attempts, exc, delay)
+                delay = (15.0 if quota else 0.5) * (2**i)
+                _log.warning(
+                    "LLM %s falhou (tentativa %d/%d): %s — retry em %.1fs",
+                    label,
+                    i + 1,
+                    attempts,
+                    exc,
+                    delay,
+                )
                 time.sleep(delay)
     raise last
 
@@ -69,8 +80,10 @@ class FakeLLMProvider(LLMProvider):
 
     def complete(self, prompt: str, **kwargs) -> str:
         verd = "VÁLIDA" if "verdict=valid" in prompt else "INVÁLIDA"
-        return (f"[{self.name}/{self.model}] Parecer offline: cláusula de outcome {verd}. "
-                f"(defina LLM_PROVIDER=anthropic|google|vertex para usar um LLM real — C7)")
+        return (
+            f"[{self.name}/{self.model}] Parecer offline: cláusula de outcome {verd}. "
+            f"(defina LLM_PROVIDER=anthropic|google|vertex para usar um LLM real — C7)"
+        )
 
 
 class AnthropicProvider(LLMProvider):
@@ -78,6 +91,7 @@ class AnthropicProvider(LLMProvider):
 
     def __init__(self, model: str):
         import anthropic  # import tardio: dependência opcional
+
         self.model = model
         self._client = anthropic.Anthropic()
 
@@ -88,11 +102,13 @@ class AnthropicProvider(LLMProvider):
     def complete(self, prompt: str, **kwargs) -> str:
         def _call():
             msg = self._client.messages.create(
-                model=self.model, max_tokens=kwargs.get("max_tokens", 512),
+                model=self.model,
+                max_tokens=kwargs.get("max_tokens", 512),
                 messages=[{"role": "user", "content": prompt}],
                 timeout=_timeout_s(),
             )
             return "".join(b.text for b in msg.content if getattr(b, "type", "") == "text")
+
         return _with_retry(_call, label=self.name)
 
 
@@ -116,19 +132,24 @@ class GoogleProvider(LLMProvider):
     def __init__(self, model: str):
         from google import genai  # import tardio: dependência opcional
         from google.genai import types
+
         self.model = model
         # timeout em ms no http layer do google-genai (vale para todas as chamadas do client).
         http = types.HttpOptions(timeout=int(_timeout_s() * 1000))
         if _use_vertex():
             project = os.environ.get("GOOGLE_CLOUD_PROJECT")
             location = os.environ.get("GOOGLE_CLOUD_LOCATION", "us-central1")
-            self._client = genai.Client(vertexai=True, project=project, location=location,
-                                        http_options=http)
+            self._client = genai.Client(
+                vertexai=True, project=project, location=location, http_options=http
+            )
             self.backend = f"vertex:{project}/{location}"
         else:
             key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
-            self._client = (genai.Client(api_key=key, http_options=http) if key
-                            else genai.Client(http_options=http))
+            self._client = (
+                genai.Client(api_key=key, http_options=http)
+                if key
+                else genai.Client(http_options=http)
+            )
             self.backend = "developer-api"
 
     @property
@@ -137,6 +158,7 @@ class GoogleProvider(LLMProvider):
 
     def complete(self, prompt: str, **kwargs) -> str:
         from google.genai import types
+
         cfg_kwargs = dict(
             max_output_tokens=kwargs.get("max_tokens", 512),
             thinking_config=types.ThinkingConfig(thinking_budget=0),
@@ -150,6 +172,7 @@ class GoogleProvider(LLMProvider):
         def _call():
             r = self._client.models.generate_content(model=self.model, contents=prompt, config=cfg)
             return (r.text or "").strip()
+
         return _with_retry(_call, label=self.name)
 
 
@@ -180,10 +203,10 @@ _GOOGLE_ROLE_MODEL = {
 def _pick_model(env_prefix: str, role: str, role_map: dict, fallback: str) -> str:
     """Resolve o modelo preferido pelo usuário por env (mais específico vence)."""
     return (
-        os.environ.get(f"{env_prefix}_MODEL_{role.upper()}")   # por provider+papel
-        or os.environ.get(f"{env_prefix}_MODEL")               # por provider
-        or os.environ.get("LLM_MODEL")                         # global
-        or role_map.get(role, fallback)                        # default do papel
+        os.environ.get(f"{env_prefix}_MODEL_{role.upper()}")  # por provider+papel
+        or os.environ.get(f"{env_prefix}_MODEL")  # por provider
+        or os.environ.get("LLM_MODEL")  # global
+        or role_map.get(role, fallback)  # default do papel
     )
 
 
@@ -217,15 +240,22 @@ def get_llm(role: str = "worker") -> LLMProvider:
         try:
             return AnthropicProvider(_anthropic_model(role))
         except Exception as exc:  # noqa: BLE001
-            _log.warning("LLM_PROVIDER=anthropic indisponível (%s); usando FakeLLMProvider "
-                         "offline. A frota segue, mas SEM LLM real.", exc)
+            _log.warning(
+                "LLM_PROVIDER=anthropic indisponível (%s); usando FakeLLMProvider "
+                "offline. A frota segue, mas SEM LLM real.",
+                exc,
+            )
             return FakeLLMProvider()
     if provider in ("google", "gemini", "vertex"):
         try:
             return GoogleProvider(_google_model(role))
         except Exception as exc:  # noqa: BLE001
-            _log.warning("LLM_PROVIDER=%s indisponível (%s); usando FakeLLMProvider offline. "
-                         "A frota segue, mas SEM LLM real.", provider, exc)
+            _log.warning(
+                "LLM_PROVIDER=%s indisponível (%s); usando FakeLLMProvider offline. "
+                "A frota segue, mas SEM LLM real.",
+                provider,
+                exc,
+            )
             return FakeLLMProvider()
     _log.warning("LLM_PROVIDER=%r não reconhecido; usando FakeLLMProvider offline.", provider)
     return FakeLLMProvider()

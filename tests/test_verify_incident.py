@@ -8,7 +8,9 @@ Prova o oráculo `verify_structure` (documento, não código):
     (ASSISTED, garantia parcial — estrutura é necessária-não-suficiente; "mitigated" fica fora).
 Roda offline, stdlib pura (sem Docker).
 """
+
 from __future__ import annotations
+
 import copy
 import json
 import unittest
@@ -18,25 +20,35 @@ from nucleo.kernel.verification import verify_structure
 STRUCT = {
     "target": "postmortem.json",
     "required_fields": ["incident_id", "severity", "root_cause", "mitigation", "resolution"],
-    "severity_field": "severity", "valid_severities": ["sev1", "sev2", "sev3"],
-    "timeline_field": "timeline", "duration_fields": ["mtta_minutes", "mttr_minutes"],
-    "rollback_field": "rollback", "followups_field": "followups",
+    "severity_field": "severity",
+    "valid_severities": ["sev1", "sev2", "sev3"],
+    "timeline_field": "timeline",
+    "duration_fields": ["mtta_minutes", "mttr_minutes"],
+    "rollback_field": "rollback",
+    "followups_field": "followups",
 }
 ORACLE = {"structure": STRUCT}
 GOOD = {
-    "incident_id": "INC-2026-0042", "severity": "sev2",
+    "incident_id": "INC-2026-0042",
+    "severity": "sev2",
     "root_cause": "deploy introduziu regressao no endpoint de pedidos",
-    "mitigation": "rollback do deploy", "resolution": "servico normalizado",
-    "timeline": [{"ts": "2026-06-10T10:00:00Z", "event": "detection"},
-                 {"ts": "2026-06-10T10:35:00Z", "event": "resolution"}],
-    "mtta_minutes": 6, "mttr_minutes": 35,
+    "mitigation": "rollback do deploy",
+    "resolution": "servico normalizado",
+    "timeline": [
+        {"ts": "2026-06-10T10:00:00Z", "event": "detection"},
+        {"ts": "2026-06-10T10:35:00Z", "event": "resolution"},
+    ],
+    "mtta_minutes": 6,
+    "mttr_minutes": 35,
     "rollback": {"documented": True, "steps": ["reverter deploy"]},
     "followups": [{"action": "teste de regressao", "owner": "g3-backend-builder"}],
 }
 
 
 def run(doc):
-    return verify_structure({"files": {"postmortem.json": json.dumps(doc, ensure_ascii=False)}}, ORACLE)
+    return verify_structure(
+        {"files": {"postmortem.json": json.dumps(doc, ensure_ascii=False)}}, ORACLE
+    )
 
 
 def mutated(**changes):
@@ -60,8 +72,8 @@ class PostmortemCorreto(unittest.TestCase):
 
     def test_natureza_assisted_nunca_credita_delivered(self):
         r = run(GOOD)
-        self.assertEqual(r["tests_pass"], "N/A")     # não há execução
-        self.assertFalse(r["delivered_ok"])          # estrutura não credita entrega (ASSISTED)
+        self.assertEqual(r["tests_pass"], "N/A")  # não há execução
+        self.assertFalse(r["delivered_ok"])  # estrutura não credita entrega (ASSISTED)
 
 
 class InvariantesEstruturais(unittest.TestCase):
@@ -96,16 +108,20 @@ class InvariantesEstruturais(unittest.TestCase):
         self.assertEqual(run(mutated(mtta_minutes="rapido"))["first_fail"], "durations_valid")
 
     def test_rollback_sem_passos_reprova(self):
-        self.assertEqual(run(mutated(rollback={"documented": True, "steps": []}))["first_fail"],
-                         "rollback_documented")
+        self.assertEqual(
+            run(mutated(rollback={"documented": True, "steps": []}))["first_fail"],
+            "rollback_documented",
+        )
 
     def test_followup_sem_owner_reprova(self):
-        self.assertEqual(run(mutated(followups=[{"action": "x"}]))["first_fail"],
-                         "followups_actionable")
+        self.assertEqual(
+            run(mutated(followups=[{"action": "x"}]))["first_fail"], "followups_actionable"
+        )
 
     def test_placeholder_gaming_reprova(self):
-        self.assertEqual(run(mutated(root_cause="TODO: depois"))["first_fail"],
-                         "no_placeholder_gaming")
+        self.assertEqual(
+            run(mutated(root_cause="TODO: depois"))["first_fail"], "no_placeholder_gaming"
+        )
 
 
 if __name__ == "__main__":

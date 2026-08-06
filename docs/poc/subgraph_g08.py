@@ -13,34 +13,43 @@ A trava de regressão correspondente vive em tests/test_subgraph_boundary.py
 
 Rode:  python docs/poc/subgraph_g08.py
 """
+
 from __future__ import annotations
+
 import os
 import sys
 import uuid
 
 if hasattr(sys.stdout, "reconfigure"):
-    sys.stdout.reconfigure(encoding="utf-8")               # acentos no Windows (vide foundry_check)
+    sys.stdout.reconfigure(encoding="utf-8")  # acentos no Windows (vide foundry_check)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-REPO = os.path.dirname(os.path.dirname(HERE))              # docs/poc -> docs -> raiz do repo
+REPO = os.path.dirname(os.path.dirname(HERE))  # docs/poc -> docs -> raiz do repo
 sys.path.insert(0, REPO)
 
-from typing_extensions import TypedDict                    # noqa: E402
-from langgraph.graph import StateGraph, START, END         # noqa: E402
-from langgraph.checkpoint.memory import MemorySaver         # noqa: E402
-from langgraph.types import Command                         # noqa: E402
+from langgraph.checkpoint.memory import MemorySaver  # noqa: E402
+from langgraph.graph import END, START, StateGraph  # noqa: E402
+from langgraph.types import Command  # noqa: E402
+from typing_extensions import TypedDict  # noqa: E402
 
-from nucleo.kernel.brain import Brain, FileStore            # noqa: E402
-from nucleo.kernel.providers.llm import get_llm             # noqa: E402
-from nucleo.factory.factory import load_spec               # noqa: E402
-from nucleo.kernel.agent_template import build_agent        # noqa: E402
+from nucleo.factory.factory import load_spec  # noqa: E402
+from nucleo.kernel.agent_template import build_agent  # noqa: E402
+from nucleo.kernel.brain import Brain, FileStore  # noqa: E402
+from nucleo.kernel.providers.llm import get_llm  # noqa: E402
 
 NUCLEO = os.path.join(REPO, "nucleo")
 BRAIN_DIR = os.path.join(NUCLEO, ".brain")
 SPEC_DIR = os.path.join(NUCLEO, "guilds", "g08_vendas", "g8-lead-qualifier")
 
-LEAD = {"id": "L-700", "company": "Decisao Humana", "revenue_brl_year": 2_500_000,
-        "founder_led": True, "sells_well": True, "lacks_process": True, "firefighter": True}
+LEAD = {
+    "id": "L-700",
+    "company": "Decisao Humana",
+    "revenue_brl_year": 2_500_000,
+    "founder_led": True,
+    "sells_well": True,
+    "lacks_process": True,
+    "firefighter": True,
+}
 
 
 class GuildState(TypedDict, total=False):
@@ -48,17 +57,23 @@ class GuildState(TypedDict, total=False):
     mode: str
     qualification: dict
     route: str
-    worker_paused: bool        # o worker sinalizou interrupt() durante o qualify?
+    worker_paused: bool  # o worker sinalizou interrupt() durante o qualify?
 
 
 def _worker_input(state: dict) -> dict:
     """GuildState -> AgentState de entrada do worker (mapeamento manual, igual ao
     que os supervisores já fazem hoje)."""
     return {
-        "task": {"agent_id": "g8-lead-qualifier", "guild": "G08-vendas-receita",
-                 "statement": "Qualificar lead contra o ICP", "lead": state["lead"]},
-        "mode": state.get("mode", "ASSISTED"), "ledger": "billable",
-        "run_id": "w-" + uuid.uuid4().hex[:6], "verbose": False,
+        "task": {
+            "agent_id": "g8-lead-qualifier",
+            "guild": "G08-vendas-receita",
+            "statement": "Qualificar lead contra o ICP",
+            "lead": state["lead"],
+        },
+        "mode": state.get("mode", "ASSISTED"),
+        "ledger": "billable",
+        "run_id": "w-" + uuid.uuid4().hex[:6],
+        "verbose": False,
     }
 
 
@@ -67,11 +82,10 @@ def _worker_input(state: dict) -> dict:
 # ---------------------------------------------------------------------------
 def build_supervisor_imperative(worker, checkpointer):
     def qualify(state):
-        rid = "iso-" + uuid.uuid4().hex[:8]                 # <-- thread_id ISOLADO
-        res = worker.invoke(_worker_input(state),
-                            config={"configurable": {"thread_id": rid}})
-        paused = "__interrupt__" in res                      # o worker pausou...
-        q = res.get("output") or {}                          # ...mas o interrupt é descartado
+        rid = "iso-" + uuid.uuid4().hex[:8]  # <-- thread_id ISOLADO
+        res = worker.invoke(_worker_input(state), config={"configurable": {"thread_id": rid}})
+        paused = "__interrupt__" in res  # o worker pausou...
+        q = res.get("output") or {}  # ...mas o interrupt é descartado
         route = "prospect" if q.get("decision") == "qualified" else "stop"
         return {"qualification": q, "route": route, "worker_paused": paused}
 
@@ -86,8 +100,8 @@ def build_supervisor_imperative(worker, checkpointer):
 # Cenário B — SUBGRAFO REAL (a correção aplicada): o worker herda o config do PAI
 # ---------------------------------------------------------------------------
 def build_supervisor_subgraph(worker, checkpointer):
-    def qualify(state, config):                              # <-- recebe o config do PAI
-        res = worker.invoke(_worker_input(state), config)    # <-- herda thread + checkpoint_ns
+    def qualify(state, config):  # <-- recebe o config do PAI
+        res = worker.invoke(_worker_input(state), config)  # <-- herda thread + checkpoint_ns
         paused = "__interrupt__" in res
         q = res.get("output") or {}
         route = "prospect" if q.get("decision") == "qualified" else "stop"
@@ -145,16 +159,22 @@ def run_subgraph():
     if top_interrupt:
         payload = res["__interrupt__"][0].value
         prop = payload.get("proposed_output") or {}
-        print(f"  PAUSA propagou do worker -> topo: agente={payload.get('agent')} "
-              f"decision={prop.get('decision')} score={prop.get('score')}")
+        print(
+            f"  PAUSA propagou do worker -> topo: agente={payload.get('agent')} "
+            f"decision={prop.get('decision')} score={prop.get('score')}"
+        )
         res = sup.invoke(Command(resume={"approved": True}), config=cfg)
 
     q = res.get("qualification") or {}
     delivered = q.get("delivered") is True
-    print(f"  após resume(approved=True): output ENTREGUE? ..... {delivered} "
-          f"(delivered={q.get('delivered')})")
-    print(f"  decision/score/track ............................. "
-          f"{q.get('decision')}/{q.get('score')}/{q.get('track')}")
+    print(
+        f"  após resume(approved=True): output ENTREGUE? ..... {delivered} "
+        f"(delivered={q.get('delivered')})"
+    )
+    print(
+        f"  decision/score/track ............................. "
+        f"{q.get('decision')}/{q.get('score')}/{q.get('track')}"
+    )
     print(f"  rota decidida .................................... {res.get('route')}")
     print("  >> O interrupt SOBREVIVEU à fronteira: o DRI decidiu, o worker retomou")
     print("     no ponto exato e SÓ ENTÃO entregou. Human-in-the-loop PRESERVADO.")
@@ -167,13 +187,19 @@ def main():
     print("\n" + "=" * 72)
     print("VEREDITO")
     print("=" * 72)
-    print(f"  A (imperativo): DRI consultado? {a['top_interrupt']!s:5} | "
-          f"funil avançou p/ {a['route']!r} com aprovação? {a['delivered']}")
-    print(f"  B (subgrafo):   DRI consultado? {b['top_interrupt']!s:5} | "
-          f"entregou só após aprovação (delivered)? {b['delivered']}")
+    print(
+        f"  A (imperativo): DRI consultado? {a['top_interrupt']!s:5} | "
+        f"funil avançou p/ {a['route']!r} com aprovação? {a['delivered']}"
+    )
+    print(
+        f"  B (subgrafo):   DRI consultado? {b['top_interrupt']!s:5} | "
+        f"entregou só após aprovação (delivered)? {b['delivered']}"
+    )
     ok = (not a["top_interrupt"]) and (not a["delivered"]) and b["top_interrupt"] and b["delivered"]
-    print(f"\n  PoC {'CONFIRMA' if ok else 'NÃO confirmou'} a tese: subgrafo real preserva o gate C4 "
-          f"(entrega só após o DRI);\n  `.invoke()` isolado o fura (avança o funil sobre proposta pendente).")
+    print(
+        f"\n  PoC {'CONFIRMA' if ok else 'NÃO confirmou'} a tese: subgrafo real preserva o gate C4 "
+        f"(entrega só após o DRI);\n  `.invoke()` isolado o fura (avança o funil sobre proposta pendente)."
+    )
 
 
 if __name__ == "__main__":

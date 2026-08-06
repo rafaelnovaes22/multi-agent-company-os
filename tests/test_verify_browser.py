@@ -8,7 +8,9 @@ Prova o oráculo `verify_browser` para suítes Playwright geradas como artefato:
   - natureza atual é ASSISTED: sem browser real no gate offline ⇒ tests_pass="N/A" e
     delivered_ok=False. A execução real em browser fica para uma fase posterior.
 """
+
 from __future__ import annotations
+
 import unittest
 
 from nucleo.kernel.verification import verify_browser
@@ -70,7 +72,11 @@ class InvariantesBrowser(unittest.TestCase):
         self.assertEqual(r["first_fail"], "target_present")
 
     def test_sem_import_playwright_reprova(self):
-        r = run({"tests/onboarding.spec.ts": "test('x', async ({ page }) => { await page.goto('/signup'); });"})
+        r = run(
+            {
+                "tests/onboarding.spec.ts": "test('x', async ({ page }) => { await page.goto('/signup'); });"
+            }
+        )
         self.assertEqual(r["first_fail"], "uses_playwright")
 
     def test_sem_rota_obrigatoria_reprova(self):

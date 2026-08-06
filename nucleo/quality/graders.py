@@ -3,6 +3,7 @@
 Cada grader recebe (output_do_agente, expected_do_caso) e devolve True/False.
 Registrar um grader novo = suportar avaliar um agente novo. Mercado-agnóstico.
 """
+
 from __future__ import annotations
 
 _GRADERS: dict = {}
@@ -12,6 +13,7 @@ def register(name: str):
     def deco(fn):
         _GRADERS[name] = fn
         return fn
+
     return deco
 
 
@@ -27,11 +29,15 @@ def _compatible(got, want) -> bool:
     if isinstance(want, (int, float)) and isinstance(got, (int, float)):
         return abs(got - want) <= max(1e-9, abs(want) * 0.01)
     if isinstance(want, list):
-        return isinstance(got, list) and len(got) == len(want) \
+        return (
+            isinstance(got, list)
+            and len(got) == len(want)
             and all(_compatible(g, w) for g, w in zip(got, want))
+        )
     if isinstance(want, dict):
-        return isinstance(got, dict) \
-            and all(k in got and _compatible(got[k], v) for k, v in want.items())
+        return isinstance(got, dict) and all(
+            k in got and _compatible(got[k], v) for k, v in want.items()
+        )
     return got == want
 
 
@@ -72,7 +78,10 @@ def _g_dg(out, exp):
     exp_go = str(exp.get("recommendation", "")).startswith("go")
     ok = rec_go == exp_go
     if exp.get("baseline_gt") is not None:
-        ok = ok and (out.get("baseline") or {}).get("baseline_cost_brl_month", 0) > exp["baseline_gt"]
+        ok = (
+            ok
+            and (out.get("baseline") or {}).get("baseline_cost_brl_month", 0) > exp["baseline_gt"]
+        )
     return ok
 
 
@@ -145,43 +154,97 @@ def _check_expected_fields(out, exp, fields):
 
 @register("pricing_engine")
 def _g_pricing_engine(out, exp):
-    return _check_expected_fields(out, exp, (
-        "handler_kind", "published_price_brl", "delivery_cost_brl", "min_viable_price_brl",
-        "cost_ratio", "max_ratio", "c3_margin_check", "status", "requires_human_review",
-    ))
+    return _check_expected_fields(
+        out,
+        exp,
+        (
+            "handler_kind",
+            "published_price_brl",
+            "delivery_cost_brl",
+            "min_viable_price_brl",
+            "cost_ratio",
+            "max_ratio",
+            "c3_margin_check",
+            "status",
+            "requires_human_review",
+        ),
+    )
 
 
 @register("dunning_agent")
 def _g_dunning_agent(out, exp):
-    return _check_expected_fields(out, exp, (
-        "handler_kind", "invoice_count", "total_overdue_brl", "recovered_count",
-        "in_progress_count", "escalated_count", "recovery_status", "requires_human_review", "status",
-    ))
+    return _check_expected_fields(
+        out,
+        exp,
+        (
+            "handler_kind",
+            "invoice_count",
+            "total_overdue_brl",
+            "recovered_count",
+            "in_progress_count",
+            "escalated_count",
+            "recovery_status",
+            "requires_human_review",
+            "status",
+        ),
+    )
 
 
 @register("revenue_reporter")
 def _g_revenue_reporter(out, exp):
-    return _check_expected_fields(out, exp, (
-        "handler_kind", "mrr_brl", "nrr_pct", "grr_pct", "reconciliation_delta_brl",
-        "reconciliation_delta_pct", "reconciled", "status", "requires_human_review",
-    ))
+    return _check_expected_fields(
+        out,
+        exp,
+        (
+            "handler_kind",
+            "mrr_brl",
+            "nrr_pct",
+            "grr_pct",
+            "reconciliation_delta_brl",
+            "reconciliation_delta_pct",
+            "reconciled",
+            "status",
+            "requires_human_review",
+        ),
+    )
 
 
 @register("reconciliation")
 def _g_reconciliation(out, exp):
-    return _check_expected_fields(out, exp, (
-        "handler_kind", "matched_count", "exception_count", "match_rate",
-        "unreconciled_balance_brl", "status", "requires_human_review",
-    ))
+    return _check_expected_fields(
+        out,
+        exp,
+        (
+            "handler_kind",
+            "matched_count",
+            "exception_count",
+            "match_rate",
+            "unreconciled_balance_brl",
+            "status",
+            "requires_human_review",
+        ),
+    )
 
 
 @register("unit_economist_c3")
 def _g_unit_economist_c3(out, exp):
-    return _check_expected_fields(out, exp, (
-        "handler_kind", "billable", "price_brl", "inference_cost_brl", "cost_ratio",
-        "max_ratio", "min_viable_price_brl", "verdict", "blocks_delivery", "status",
-        "requires_human_review",
-    ))
+    return _check_expected_fields(
+        out,
+        exp,
+        (
+            "handler_kind",
+            "billable",
+            "price_brl",
+            "inference_cost_brl",
+            "cost_ratio",
+            "max_ratio",
+            "min_viable_price_brl",
+            "verdict",
+            "blocks_delivery",
+            "status",
+            "requires_human_review",
+        ),
+    )
 
 
 @register("fin_cashflow")
@@ -251,7 +314,15 @@ def _g_catalog_contract(out, exp):
     if not out:
         return False
     ok = True
-    for key in ("agent_id", "handler_kind", "artifact_type", "status", "risk", "requires_human_review", "routed_to"):
+    for key in (
+        "agent_id",
+        "handler_kind",
+        "artifact_type",
+        "status",
+        "risk",
+        "requires_human_review",
+        "routed_to",
+    ):
         if key in exp:
             ok = ok and out.get(key) == exp[key]
     if "capabilities_any" in exp:
@@ -283,9 +354,17 @@ register("supervisor_route")(_g_catalog_contract)
 register("guardian_check")(_g_catalog_contract)
 
 for _name in (
-    "pricing_engine", "billing_agent", "dunning_agent", "revenue_reporter", "reconciliation",
-    "csat_analyst", "fulfillment_tracker", "burn_monitor", "unit_economist_c3",
-    "token_cost_accountant", "margin_watch",
+    "pricing_engine",
+    "billing_agent",
+    "dunning_agent",
+    "revenue_reporter",
+    "reconciliation",
+    "csat_analyst",
+    "fulfillment_tracker",
+    "burn_monitor",
+    "unit_economist_c3",
+    "token_cost_accountant",
+    "margin_watch",
 ):
     register(_name)(_g_expected_fields)
 

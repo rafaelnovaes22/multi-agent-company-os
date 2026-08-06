@@ -8,14 +8,16 @@ subgrafo LangGraph COMPILADO. O grafo é IGUAL para todos os agentes:
 O miolo do `act` é plugável por `act_handler` na spec (ver kernel/skills.py) —
 é o que faz 1 template servir para os ~169 agentes (C8). Ver 03-CATALOGO §B.
 """
-from __future__ import annotations
-from langgraph.graph import StateGraph, START, END
 
-from .state import AgentState
+from __future__ import annotations
+
+from langgraph.graph import END, START, StateGraph
+
 from . import self_harness as sh
 from .gates import gate as gate_node
 from .guardians import run_guardians
 from .skills import get_handler
+from .state import AgentState
 from .toolbox import guarded
 
 
@@ -41,8 +43,7 @@ def build_agent(spec: dict, llm, brain, store, checkpointer):
     def act(state):
         # Least-privilege (toolbox): o handler só alcança o que spec.tools declara;
         # o kernel (load_context/gate/emit/snapshot) segue com brain/store crus.
-        g_llm, g_store = guarded(llm, store, spec=spec, brain=brain,
-                                 run_id=state.get("run_id"))
+        g_llm, g_store = guarded(llm, store, spec=spec, brain=brain, run_id=state.get("run_id"))
         res = handler(state, llm=g_llm, store=g_store, spec=spec)
         if state.get("verbose"):
             print(f"  -> act[{handler_name}]: {_brief(res.get('output'))} (llm={llm.name})")
@@ -79,8 +80,9 @@ def build_agent(spec: dict, llm, brain, store, checkpointer):
     g.add_edge("load_context", "act")
     g.add_edge("act", "self_critique")
     g.add_edge("self_critique", "gate")
-    g.add_conditional_edges("gate", lambda s: s.get("_gate", "proceed"),
-                            {"proceed": "emit_artifact", "halt": END})
+    g.add_conditional_edges(
+        "gate", lambda s: s.get("_gate", "proceed"), {"proceed": "emit_artifact", "halt": END}
+    )
     g.add_edge("emit_artifact", "snapshot")
     g.add_edge("snapshot", END)
 

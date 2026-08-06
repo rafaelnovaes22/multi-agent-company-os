@@ -10,12 +10,19 @@ OFFLINE (F0, hoje): computa `static_ok` (necessários estáticos) — já reprov
 adversarial "deleta o teste-alvo". `delivered_ok` é SEMPRE False offline (tests_pass=UNVERIFIED),
 porque sem executar não se afirma correção. F2 (runner Linux+Docker) adiciona a execução real.
 """
+
 from __future__ import annotations
 
-from .skills import register, _tokens, _spec_citations
-from .verification import (BROWSER_NECESSARIOS, NECESSARIOS, STRUCT_NECESSARIOS,
-                           verify_browser, verify_code, verify_structure)
 from .execution import get_executor
+from .skills import _spec_citations, _tokens, register
+from .verification import (
+    BROWSER_NECESSARIOS,
+    NECESSARIOS,
+    STRUCT_NECESSARIOS,
+    verify_browser,
+    verify_code,
+    verify_structure,
+)
 
 
 @register("spec_executor")
@@ -58,15 +65,16 @@ def spec_executor(state, *, llm, store, spec):
 
     rationale = llm.complete(
         f"Voce e {spec['id']}: verificacao OFFLINE do artefato — static_ok={static_ok}, "
-        f"first_fail={v['first_fail']}, delivered_ok={v['delivered_ok']} (tests_pass={v['tests_pass']}).")
+        f"first_fail={v['first_fail']}, delivered_ok={v['delivered_ok']} (tests_pass={v['tests_pass']})."
+    )
 
     out = {
         "agent_id": spec["id"],
         "handler_kind": "spec_executor",
         "artifact_type": artifact_type,
         "static_ok": static_ok,
-        "tests_pass": v["tests_pass"],       # "UNVERIFIED"/bool (code-exec) | "N/A" (estrutural)
-        "delivered_ok": v["delivered_ok"],   # offline/estrutural: SEMPRE False (honesto)
+        "tests_pass": v["tests_pass"],  # "UNVERIFIED"/bool (code-exec) | "N/A" (estrutural)
+        "delivered_ok": v["delivered_ok"],  # offline/estrutural: SEMPRE False (honesto)
         "first_fail": v["first_fail"],
         "status": status,
         "requires_human_review": requires_review,
@@ -78,4 +86,8 @@ def spec_executor(state, *, llm, store, spec):
     # sinais do oráculo (função do artefato) — achatados p/ o grader checar direto (ausente ⇒ False).
     for k in signal_keys:
         out[k] = v["signals"].get(k, False)
-    return {"output": out, "cost_tokens": _tokens(rationale), "citations": _spec_citations(state, spec)}
+    return {
+        "output": out,
+        "cost_tokens": _tokens(rationale),
+        "citations": _spec_citations(state, spec),
+    }

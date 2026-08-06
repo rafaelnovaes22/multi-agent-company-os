@@ -13,7 +13,9 @@ Regra de ouro (anti verde-por-fixture): `tests_pass` SÓ pode ser True vindo de 
 real do artefato — jamais de um booleano que o eval-case declara. O eval-case fornece o
 COMANDO/critério (test_cmd), nunca o veredito.
 """
+
 from __future__ import annotations
+
 import abc
 import logging
 import os
@@ -36,8 +38,9 @@ class ExecutionProvider(abc.ABC):
         return False
 
     @abc.abstractmethod
-    def run_tests(self, files: dict, *, test_cmd: str, runtime: str = "python",
-                  timeout_s: float = 60.0):
+    def run_tests(
+        self, files: dict, *, test_cmd: str, runtime: str = "python", timeout_s: float = 60.0
+    ):
         """Aplica `files` a um workspace efêmero e roda `test_cmd`. Retorna:
         True (exit 0) / False (exit != 0) / None (não executou). `runtime` seleciona o
         ambiente de execução ("python" = pytest, "node" = vitest — build do frontend,
@@ -46,13 +49,18 @@ class ExecutionProvider(abc.ABC):
         workspace, dropar rede/caps e NUNCA expor segredos do host."""
         ...
 
-    def run_tests_detail(self, files: dict, *, test_cmd: str, runtime: str = "python",
-                         timeout_s: float = 60.0) -> dict:
+    def run_tests_detail(
+        self, files: dict, *, test_cmd: str, runtime: str = "python", timeout_s: float = 60.0
+    ) -> dict:
         """Como `run_tests`, mas com diagnóstico p/ o loop red→green do gerador:
         {"passed": True|False|None, "output": cauda do stdout/stderr}. Default honesto:
         só o veredito, sem saída (implementações reais sobrescrevem p/ dar o erro ao LLM)."""
-        return {"passed": self.run_tests(files, test_cmd=test_cmd, runtime=runtime,
-                                         timeout_s=timeout_s), "output": ""}
+        return {
+            "passed": self.run_tests(
+                files, test_cmd=test_cmd, runtime=runtime, timeout_s=timeout_s
+            ),
+            "output": "",
+        }
 
     @property
     def name(self) -> str:
@@ -66,8 +74,9 @@ class InertExecutor(ExecutionProvider):
     def available(self) -> bool:
         return False
 
-    def run_tests(self, files: dict, *, test_cmd: str, runtime: str = "python",
-                  timeout_s: float = 60.0):
+    def run_tests(
+        self, files: dict, *, test_cmd: str, runtime: str = "python", timeout_s: float = 60.0
+    ):
         return None
 
 
@@ -158,24 +167,31 @@ class DockerExecutor(ExecutionProvider):
         if not shutil.which("docker"):
             return False
         try:
-            r = subprocess.run(["docker", "version", "--format", "{{.Server.Version}}"],
-                               capture_output=True, timeout=10)
+            r = subprocess.run(
+                ["docker", "version", "--format", "{{.Server.Version}}"],
+                capture_output=True,
+                timeout=10,
+            )
             return r.returncode == 0
         except Exception:  # noqa: BLE001
             return False
 
-    def run_tests(self, files: dict, *, test_cmd: str, runtime: str = "python",
-                  timeout_s: float = None):
+    def run_tests(
+        self, files: dict, *, test_cmd: str, runtime: str = "python", timeout_s: float = None
+    ):
         return self._execute(files, test_cmd=test_cmd, runtime=runtime, timeout_s=timeout_s)[0]
 
-    def run_tests_detail(self, files: dict, *, test_cmd: str, runtime: str = "python",
-                         timeout_s: float = None) -> dict:
-        verdict, output = self._execute(files, test_cmd=test_cmd, runtime=runtime,
-                                        timeout_s=timeout_s)
+    def run_tests_detail(
+        self, files: dict, *, test_cmd: str, runtime: str = "python", timeout_s: float = None
+    ) -> dict:
+        verdict, output = self._execute(
+            files, test_cmd=test_cmd, runtime=runtime, timeout_s=timeout_s
+        )
         return {"passed": verdict, "output": output}
 
-    def _execute(self, files: dict, *, test_cmd: str, runtime: str = "python",
-                 timeout_s: float = None):
+    def _execute(
+        self, files: dict, *, test_cmd: str, runtime: str = "python", timeout_s: float = None
+    ):
         if not self.available:
             return None, ""
         safe = _safe_files(files)
@@ -191,14 +207,30 @@ class DockerExecutor(ExecutionProvider):
                 os.makedirs(os.path.dirname(fp) or wd, exist_ok=True)
                 with open(fp, "w", encoding="utf-8") as f:
                     f.write(content)
-            cmd = ["docker", "run", "--rm",
-                   "--network", "none",
-                   "--cap-drop", "ALL",
-                   "--security-opt", "no-new-privileges",
-                   "--pids-limit", lim["pids"],
-                   "--memory", lim["memory"], "--cpus", lim["cpus"],
-                   "--read-only", "--tmpfs", f"/tmp:rw,size={lim['tmpfs']}",
-                   "-v", f"{wd}:/work:rw", "-w", "/work"]
+            cmd = [
+                "docker",
+                "run",
+                "--rm",
+                "--network",
+                "none",
+                "--cap-drop",
+                "ALL",
+                "--security-opt",
+                "no-new-privileges",
+                "--pids-limit",
+                lim["pids"],
+                "--memory",
+                lim["memory"],
+                "--cpus",
+                lim["cpus"],
+                "--read-only",
+                "--tmpfs",
+                f"/tmp:rw,size={lim['tmpfs']}",
+                "-v",
+                f"{wd}:/work:rw",
+                "-w",
+                "/work",
+            ]
             ug = _uid_gid()
             if ug:
                 cmd += ["--user", ug]
@@ -220,8 +252,11 @@ class DockerExecutor(ExecutionProvider):
                 return True, tail
             # 125 (docker run), 126/127 (exec/cmd não encontrado) = erro de infra, não de teste.
             if r.returncode in (125, 126, 127):
-                _log.warning("DockerExecutor: erro de container (rc=%s): %s",
-                             r.returncode, (r.stderr or b"").decode("utf-8", "replace")[:200])
+                _log.warning(
+                    "DockerExecutor: erro de container (rc=%s): %s",
+                    r.returncode,
+                    (r.stderr or b"").decode("utf-8", "replace")[:200],
+                )
                 return None, ""
             return False, tail
 

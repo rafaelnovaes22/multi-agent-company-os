@@ -7,9 +7,10 @@ direto, sem grader específico por agente).
 Mesmo padrão de skills_finance/skills_custops: assinatura
 handler(state, *, llm, store, spec) -> {output, cost_tokens, citations}.
 """
+
 from __future__ import annotations
 
-from .skills import register, _tokens, _spec_citations
+from .skills import _spec_citations, _tokens, register
 
 
 def _out(spec, state, fields, rationale_prompt, llm):
@@ -19,7 +20,11 @@ def _out(spec, state, fields, rationale_prompt, llm):
     out["rationale"] = rationale
     out["by"] = spec["id"]
     out["tenant"] = state.get("task", {}).get("tenant_id")
-    return {"output": out, "cost_tokens": _tokens(rationale), "citations": _spec_citations(state, spec)}
+    return {
+        "output": out,
+        "cost_tokens": _tokens(rationale),
+        "citations": _spec_citations(state, spec),
+    }
 
 
 @register("c3_cost_ratio")
@@ -45,10 +50,21 @@ def c3_cost_ratio(state, *, llm, store, spec):
         verdict = "pass" if valid else "veto_economico"
     # Drift de custo: prompt_hash mudou -> exige reauditoria antes de manter o modo.
     needs_recalc = prompt_changed
-    return _out(spec, state, {
-        "ledger": ledger, "cost_ratio": cost_ratio, "max_ratio": max_ratio,
-        "valid": valid, "blocked": blocked, "verdict": verdict, "needs_recalc": needs_recalc,
-    }, f"Voce e {spec['id']}: C3 {ledger} ratio {cost_ratio} (teto {max_ratio}), verdict={verdict}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "ledger": ledger,
+            "cost_ratio": cost_ratio,
+            "max_ratio": max_ratio,
+            "valid": valid,
+            "blocked": blocked,
+            "verdict": verdict,
+            "needs_recalc": needs_recalc,
+        },
+        f"Voce e {spec['id']}: C3 {ledger} ratio {cost_ratio} (teto {max_ratio}), verdict={verdict}.",
+        llm,
+    )
 
 
 @register("mode_gate_score")
@@ -68,13 +84,24 @@ def mode_gate_score(state, *, llm, store, spec):
 
     # Rebaixamento automático por drift de acurácia.
     if drift_pp <= -5:
-        return _out(spec, state, {
-            "decision": "rebaixar", "promoted": False, "blocked": True,
-            "pass_at_k": passk, "shadow_days": shadow_days,
-            "gates_passed": False, "cross_approval_ok": False, "reason": "drift",
-        }, f"Voce e {spec['id']}: drift {drift_pp}pp -> rebaixar.", llm)
+        return _out(
+            spec,
+            state,
+            {
+                "decision": "rebaixar",
+                "promoted": False,
+                "blocked": True,
+                "pass_at_k": passk,
+                "shadow_days": shadow_days,
+                "gates_passed": False,
+                "cross_approval_ok": False,
+                "reason": "drift",
+            },
+            f"Voce e {spec['id']}: drift {drift_pp}pp -> rebaixar.",
+            llm,
+        )
 
-    gates_passed = (passk >= passk_threshold and shadow_days >= min_days and guardians_pending == 0)
+    gates_passed = passk >= passk_threshold and shadow_days >= min_days and guardians_pending == 0
     cross_approval_ok = (not critical_path) or (bool(dri) and bool(founder) and dri != founder)
     promoted = gates_passed and cross_approval_ok
     if promoted:
@@ -89,11 +116,22 @@ def mode_gate_score(state, *, llm, store, spec):
         decision = "bloquear"
     else:
         decision, reason = "aguardar_cross_approval", "cross-approval DRI!=founder pendente"
-    return _out(spec, state, {
-        "decision": decision, "promoted": promoted, "blocked": decision == "bloquear",
-        "pass_at_k": passk, "shadow_days": shadow_days,
-        "gates_passed": gates_passed, "cross_approval_ok": cross_approval_ok, "reason": reason,
-    }, f"Voce e {spec['id']}: decision={decision}, gates_passed={gates_passed}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "decision": decision,
+            "promoted": promoted,
+            "blocked": decision == "bloquear",
+            "pass_at_k": passk,
+            "shadow_days": shadow_days,
+            "gates_passed": gates_passed,
+            "cross_approval_ok": cross_approval_ok,
+            "reason": reason,
+        },
+        f"Voce e {spec['id']}: decision={decision}, gates_passed={gates_passed}.",
+        llm,
+    )
 
 
 @register("eval_coverage_score")
@@ -126,11 +164,23 @@ def eval_coverage_score(state, *, llm, store, spec):
         coverage_pct = 100.0
     valid = has_min_cases and covers_clause and is_fresh and not leakage
     status = "PASS" if valid else "FAIL"
-    return _out(spec, state, {
-        "case_count": case_count, "coverage_pct": coverage_pct, "covers_clause": covers_clause,
-        "is_fresh": is_fresh, "leakage": leakage, "gap_count": len(gaps), "gaps": gaps,
-        "valid": valid, "status": status,
-    }, f"Voce e {spec['id']}: {case_count} casos, cobertura {coverage_pct}%, status {status}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "case_count": case_count,
+            "coverage_pct": coverage_pct,
+            "covers_clause": covers_clause,
+            "is_fresh": is_fresh,
+            "leakage": leakage,
+            "gap_count": len(gaps),
+            "gaps": gaps,
+            "valid": valid,
+            "status": status,
+        },
+        f"Voce e {spec['id']}: {case_count} casos, cobertura {coverage_pct}%, status {status}.",
+        llm,
+    )
 
 
 @register("tenant_hardcode_lint")
@@ -146,10 +196,20 @@ def tenant_hardcode_lint(state, *, llm, store, spec):
     clean = hardcode_count == 0 and not pii_in_memory
     status = "PASS" if clean else "FAIL"
     block_merge = not clean
-    return _out(spec, state, {
-        "hardcode_count": hardcode_count, "pii_in_memory": pii_in_memory, "pii_count": pii_count,
-        "clean": clean, "status": status, "block_merge": block_merge,
-    }, f"Voce e {spec['id']}: {hardcode_count} hardcodes, PII={pii_in_memory}, status {status}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "hardcode_count": hardcode_count,
+            "pii_in_memory": pii_in_memory,
+            "pii_count": pii_count,
+            "clean": clean,
+            "status": status,
+            "block_merge": block_merge,
+        },
+        f"Voce e {spec['id']}: {hardcode_count} hardcodes, PII={pii_in_memory}, status {status}.",
+        llm,
+    )
 
 
 @register("outcomes_traces_delta")
@@ -172,11 +232,21 @@ def outcomes_traces_delta(state, *, llm, store, spec):
     within_threshold = delta <= max_delta
     valid = within_threshold and telemetry_ok and canonical_fields
     status = "PASS" if valid else "FAIL"
-    return _out(spec, state, {
-        "outcomes_traces_delta": delta, "delta_pct": delta_pct, "within_threshold": within_threshold,
-        "telemetry_ok": telemetry_ok, "canonical_fields": canonical_fields,
-        "valid": valid, "status": status,
-    }, f"Voce e {spec['id']}: desvio {delta_pct}% (teto 1%), status {status}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "outcomes_traces_delta": delta,
+            "delta_pct": delta_pct,
+            "within_threshold": within_threshold,
+            "telemetry_ok": telemetry_ok,
+            "canonical_fields": canonical_fields,
+            "valid": valid,
+            "status": status,
+        },
+        f"Voce e {spec['id']}: desvio {delta_pct}% (teto 1%), status {status}.",
+        llm,
+    )
 
 
 @register("learning_novelty_score")
@@ -186,8 +256,8 @@ def learning_novelty_score(state, *, llm, store, spec):
     l = state["task"].get("learning", {}) or {}
     novelty = l.get("novelty", 0) or 0
     novelty_threshold = l.get("novelty_threshold", 0.3) or 0.3
-    confidence = (l.get("confidence", "local") or "local")
-    agent_mode = (l.get("agent_mode", "SHADOW") or "SHADOW")
+    confidence = l.get("confidence", "local") or "local"
+    agent_mode = l.get("agent_mode", "SHADOW") or "SHADOW"
     has_pii = bool(l.get("has_pii"))
     has_tenant_hardcode = bool(l.get("has_tenant_hardcode"))
     recurrence = l.get("recurrence", 0) or 0  # nº de agentes onde o instinct recorre
@@ -195,7 +265,12 @@ def learning_novelty_score(state, *, llm, store, spec):
 
     # Escada de confiança ligada ao modo: confiança não pode exceder o modo do agente.
     ladder = ["local", "shadow", "assisted", "autonomous"]
-    mode_to_conf = {"SHADOW": "shadow", "PILOT": "shadow", "ASSISTED": "assisted", "AUTONOMOUS": "autonomous"}
+    mode_to_conf = {
+        "SHADOW": "shadow",
+        "PILOT": "shadow",
+        "ASSISTED": "assisted",
+        "AUTONOMOUS": "autonomous",
+    }
     max_conf = mode_to_conf.get(agent_mode, "local")
     conf_rank = ladder.index(confidence) if confidence in ladder else 0
     max_rank = ladder.index(max_conf)
@@ -213,11 +288,21 @@ def learning_novelty_score(state, *, llm, store, spec):
         veto_reasons.append("confianca excede o modo")
     persist = len(veto_reasons) == 0
     promote_to_skill = persist and recurrence >= evolve_threshold
-    return _out(spec, state, {
-        "novelty": round(float(novelty), 4), "is_novel": is_novel, "confidence_ok": confidence_ok,
-        "persist": persist, "promote_to_skill": promote_to_skill,
-        "veto_count": len(veto_reasons), "veto_reasons": veto_reasons,
-    }, f"Voce e {spec['id']}: novidade {novelty}, persist={persist}, skill={promote_to_skill}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "novelty": round(float(novelty), 4),
+            "is_novel": is_novel,
+            "confidence_ok": confidence_ok,
+            "persist": persist,
+            "promote_to_skill": promote_to_skill,
+            "veto_count": len(veto_reasons),
+            "veto_reasons": veto_reasons,
+        },
+        f"Voce e {spec['id']}: novidade {novelty}, persist={persist}, skill={promote_to_skill}.",
+        llm,
+    )
 
 
 @register("audit_drift_score")
@@ -252,8 +337,19 @@ def audit_drift_score(state, *, llm, store, spec):
     else:
         severity = "OK"
     recommend_demotion = "drift_acuracia" in flags
-    return _out(spec, state, {
-        "sample_rate": sample_rate, "sample_ok": sample_ok, "divergence_rate": divergence_rate,
-        "drift_detected": drift_detected, "flag_count": len(flags), "flags": flags,
-        "severity": severity, "recommend_demotion": recommend_demotion,
-    }, f"Voce e {spec['id']}: amostra {sample_rate}%, drift={drift_detected}, severidade {severity}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "sample_rate": sample_rate,
+            "sample_ok": sample_ok,
+            "divergence_rate": divergence_rate,
+            "drift_detected": drift_detected,
+            "flag_count": len(flags),
+            "flags": flags,
+            "severity": severity,
+            "recommend_demotion": recommend_demotion,
+        },
+        f"Voce e {spec['id']}: amostra {sample_rate}%, drift={drift_detected}, severidade {severity}.",
+        llm,
+    )

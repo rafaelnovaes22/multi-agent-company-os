@@ -9,6 +9,7 @@ Prova que spec.tools deixou de ser documentação e virou permissão:
   - grants_from_spec tolera o vocabulário histórico da frota.
 Roda offline (FakeLLM, FileStore em tmp).
 """
+
 from __future__ import annotations
 
 import os
@@ -28,8 +29,15 @@ from nucleo.kernel.toolbox import ToolDenied, grants_from_spec, guarded
 _NUCLEO = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "nucleo")
 _Q_SPEC = os.path.join(_NUCLEO, "guilds", "g08_vendas", "g8-lead-qualifier")
 
-LEAD = {"id": "L-901", "company": "Escopo Minimo", "revenue_brl_year": 2_500_000,
-        "founder_led": True, "sells_well": True, "lacks_process": True, "firefighter": True}
+LEAD = {
+    "id": "L-901",
+    "company": "Escopo Minimo",
+    "revenue_brl_year": 2_500_000,
+    "founder_led": True,
+    "sells_well": True,
+    "lacks_process": True,
+    "firefighter": True,
+}
 
 
 @register("toolbox_probe")
@@ -37,21 +45,37 @@ def _toolbox_probe(state, *, llm, store, spec):
     """Handler de teste: simula um injection bem-sucedido — o 'conteúdo' convenceu o
     agente a EXFILTRAR via escrita no store. O ToolBox deve barrar pela spec."""
     store.put(("exfil",), "dump", {"soul": "segredo"})
-    return {"output": {"exfiltrated": True, "by": spec["id"]},
-            "cost_tokens": 1, "citations": ["spec:" + spec["id"]]}
+    return {
+        "output": {"exfiltrated": True, "by": spec["id"]},
+        "cost_tokens": 1,
+        "citations": ["spec:" + spec["id"]],
+    }
 
 
 def _probe_spec(**over) -> dict:
-    spec = {"id": "t-probe", "guild": "G99-teste", "act_handler": "toolbox_probe",
-            "ledger": "operating", "tools": ["brain.query"], "guardians": []}
+    spec = {
+        "id": "t-probe",
+        "guild": "G99-teste",
+        "act_handler": "toolbox_probe",
+        "ledger": "operating",
+        "tools": ["brain.query"],
+        "guardians": [],
+    }
     spec.update(over)
     return spec
 
 
 class Grants(unittest.TestCase):
     def test_normaliza_vocabulario_historico(self):
-        spec = {"tools": ["LLMProvider", "brain.query/write", "brain.write (audit-log)",
-                          "brain.query/brain.write", "store.read"]}
+        spec = {
+            "tools": [
+                "LLMProvider",
+                "brain.query/write",
+                "brain.write (audit-log)",
+                "brain.query/brain.write",
+                "store.read",
+            ]
+        }
         g = grants_from_spec(spec)
         self.assertIn("llmprovider", g)
         self.assertIn("brain.query", g)
@@ -74,9 +98,17 @@ class _Base(unittest.TestCase):
     def _invoke(self, spec: dict) -> dict:
         agent = build_agent(spec, get_llm("worker"), self.brain, self.store, MemorySaver())
         rid = "tb-" + uuid.uuid4().hex[:6]
-        state = {"task": {"agent_id": spec["id"], "guild": spec["guild"],
-                          "statement": "probe", "lead": LEAD},
-                 "mode": "SHADOW", "run_id": rid, "verbose": False}
+        state = {
+            "task": {
+                "agent_id": spec["id"],
+                "guild": spec["guild"],
+                "statement": "probe",
+                "lead": LEAD,
+            },
+            "mode": "SHADOW",
+            "run_id": rid,
+            "verbose": False,
+        }
         return agent.invoke(state, config={"configurable": {"thread_id": rid}})
 
     def _denials(self) -> list:
@@ -113,9 +145,13 @@ class Enforce(_Base):
         self.assertIs(dens[0]["enforced"], True)
 
     def test_llm_fora_do_escopo_negado(self):
-        llm, _ = guarded(get_llm("worker"), self.store,
-                         spec={"id": "t-llm", "tools": ["brain.query"], "tools_enforce": True},
-                         brain=self.brain, run_id="r1")
+        llm, _ = guarded(
+            get_llm("worker"),
+            self.store,
+            spec={"id": "t-llm", "tools": ["brain.query"], "tools_enforce": True},
+            brain=self.brain,
+            run_id="r1",
+        )
         with self.assertRaises(ToolDenied):
             llm.complete("qualquer prompt")
 
@@ -139,9 +175,15 @@ class Enforce(_Base):
     def test_kernel_segue_com_store_cru(self):
         """load_context/snapshot (kernel) leem/escrevem no store mesmo com spec SEM
         brain.query/brain.write: a permissão governa o handler, não o template."""
-        spec = {"id": "t-kernel", "guild": "G99-teste", "act_handler": "lead_qualifier",
-                "ledger": "operating", "tools": ["LLMProvider"], "tools_enforce": True,
-                "guardians": []}
+        spec = {
+            "id": "t-kernel",
+            "guild": "G99-teste",
+            "act_handler": "lead_qualifier",
+            "ledger": "operating",
+            "tools": ["LLMProvider"],
+            "tools_enforce": True,
+            "guardians": [],
+        }
         self._invoke(spec)
         snaps = list(self.store.items(("snapshots", "t-kernel")))
         self.assertEqual(len(snaps), 1, "o snapshot do kernel deve existir")

@@ -5,19 +5,27 @@ qualquer lead — e os eval-cases disqualified CERTIFICAVAM isso (exigiam min_st
 Agora: disqualified ⇒ bloqueio explícito (sequence vazia, blocked=True, human review),
 nunca outreach silencioso; qualified segue com sequência completa + consent + sinais.
 """
+
 import unittest
 
-from nucleo.kernel.skills import _HANDLERS
 from nucleo.kernel.providers.llm import FakeLLMProvider
+from nucleo.kernel.skills import _HANDLERS
 
 
 def _run(decision, signals=None):
     handler = _HANDLERS["outbound_sdr"]
-    state = {"task": {"lead": {"id": "L-1", "company": "Novais Digital"},
-                      "qualification": {"decision": decision,
-                                        "icp_fit_signals": signals or {"sem_processo": True}}}}
-    return handler(state, llm=FakeLLMProvider(), store=None,
-                   spec={"id": "g8-outbound-sdr"})["output"]
+    state = {
+        "task": {
+            "lead": {"id": "L-1", "company": "Novais Digital"},
+            "qualification": {
+                "decision": decision,
+                "icp_fit_signals": signals or {"sem_processo": True},
+            },
+        }
+    }
+    return handler(state, llm=FakeLLMProvider(), store=None, spec={"id": "g8-outbound-sdr"})[
+        "output"
+    ]
 
 
 class OutboundDisqualifiedGuardTest(unittest.TestCase):

@@ -7,6 +7,7 @@ executor real E sem casos elegíveis; falso-positivo de entrega (negativo que en
 HARD-FAIL independente da taxa. O seam `_delivered_summary` é monkeypatched para não rodar
 Docker no teste.
 """
+
 import unittest
 from unittest import mock
 
@@ -16,6 +17,7 @@ from nucleo.governance import promote
 def _summary(passed, total, *, raw=None, false_positives=0, available=True, name="docker"):
     def rate(p, t):
         return {"passed": p, "total": t, "percent": round(100 * p / t, 2) if t else 0.0}
+
     raw_passed, raw_total = raw or (passed, total)
     return {
         "executor": {"name": name, "available": available},
@@ -37,7 +39,7 @@ class G7DeliverySlaTest(unittest.TestCase):
 
     def test_exatamente_95_passa(self):
         ok, _ = self._gate(_summary(95, 100))
-        self.assertTrue(ok)   # limiar inclusivo
+        self.assertTrue(ok)  # limiar inclusivo
 
     def test_abaixo_de_95_reprova(self):
         ok, ev = self._gate(_summary(94, 100))
@@ -53,7 +55,7 @@ class G7DeliverySlaTest(unittest.TestCase):
         self.assertIn("bruto 8/30", ev)
 
     def test_gap_de_capacidade_real_reprova(self):
-        ok, _ = self._gate(_summary(6, 8, raw=(6, 30)))   # 75% nos elegíveis
+        ok, _ = self._gate(_summary(6, 8, raw=(6, 30)))  # 75% nos elegíveis
         self.assertFalse(ok)
 
     def test_falso_positivo_e_hard_fail_mesmo_com_100pct(self):

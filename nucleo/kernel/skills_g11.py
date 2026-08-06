@@ -4,9 +4,10 @@ campos no top-level do output, grader genérico valida `expected` de domínio di
 
 A assinatura é a padrão: handler(state, *, llm, store, spec) -> {output, cost_tokens, citations}.
 """
+
 from __future__ import annotations
 
-from .skills import register, _tokens, _spec_citations
+from .skills import _spec_citations, _tokens, register
 
 # Pesos do Slope Score (somam 1.0) — os 4 sinais de "slope" do catálogo G11:
 # autonomia demonstrada, taxa de aprendizado, breadth (generalista), evidência de shipping.
@@ -22,7 +23,11 @@ def _out(spec, state, fields, rationale_prompt, llm):
     out["rationale"] = rationale
     out["by"] = spec["id"]
     out["tenant"] = state.get("task", {}).get("tenant_id")
-    return {"output": out, "cost_tokens": _tokens(rationale), "citations": _spec_citations(state, spec)}
+    return {
+        "output": out,
+        "cost_tokens": _tokens(rationale),
+        "citations": _spec_citations(state, spec),
+    }
 
 
 def _slope(c):
@@ -48,38 +53,51 @@ def slope_score(state, *, llm, store, spec):
     ranked = []
     for c in candidates:
         sc = _slope(c)
-        has_source = bool(c.get("source"))                 # citação de fonte obrigatória
-        inbound = bool(c.get("inbound"))                   # via founder brand (sem custo pago)
+        has_source = bool(c.get("source"))  # citação de fonte obrigatória
+        inbound = bool(c.get("inbound"))  # via founder brand (sem custo pago)
         qualified = sc >= threshold and has_source
-        ranked.append({
-            "name": c.get("name"),
-            "slope_score": sc,
-            "qualified": qualified,
-            "has_source": has_source,
-            "inbound": inbound,
-        })
+        ranked.append(
+            {
+                "name": c.get("name"),
+                "slope_score": sc,
+                "qualified": qualified,
+                "has_source": has_source,
+                "inbound": inbound,
+            }
+        )
     ranked.sort(key=lambda x: -x["slope_score"])
 
     shortlist = [r for r in ranked if r["qualified"]]
     qualified_count = len(shortlist)
-    avg_slope = round(sum(r["slope_score"] for r in shortlist) / qualified_count, 1) if qualified_count else 0.0
+    avg_slope = (
+        round(sum(r["slope_score"] for r in shortlist) / qualified_count, 1)
+        if qualified_count
+        else 0.0
+    )
     inbound_count = sum(1 for r in shortlist if r["inbound"])
     inbound_ratio = round(inbound_count / qualified_count, 3) if qualified_count else 0.0
     meets_target = qualified_count >= target
     status = "publicavel" if meets_target else ("parcial" if qualified_count else "vazia")
 
-    return _out(spec, state, {
-        "candidate_count": len(candidates),
-        "qualified_count": qualified_count,
-        "target": target,
-        "meets_target": meets_target,
-        "avg_slope_score": avg_slope,
-        "inbound_ratio": inbound_ratio,
-        "top_candidate": shortlist[0]["name"] if shortlist else None,
-        "status": status,
-        "shortlist": shortlist,
-    }, f"Voce e {spec['id']}: {qualified_count}/{len(candidates)} qualificados (alvo {target}), "
-       f"slope medio {avg_slope}, status {status}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "candidate_count": len(candidates),
+            "qualified_count": qualified_count,
+            "target": target,
+            "meets_target": meets_target,
+            "avg_slope_score": avg_slope,
+            "inbound_ratio": inbound_ratio,
+            "top_candidate": shortlist[0]["name"] if shortlist else None,
+            "status": status,
+            "shortlist": shortlist,
+        },
+        f"Voce e {spec['id']}: {qualified_count}/{len(candidates)} qualificados (alvo {target}), "
+        f"slope medio {avg_slope}, status {status}.",
+        llm,
+    )
+
 
 # ---------------------------------------------------------------------------
 # Burn-down Track A — g11-interview-scheduler: agenda determinística de entrevistas.
@@ -115,13 +133,24 @@ def interview_schedule(state, *, llm, store, spec):
             decisions_ready += 1
     scheduled_pct = round(scheduled / len(candidates) * 100, 1) if candidates else 100.0
     status = "ok" if stalled == 0 else "stalled"
-    return _out(spec, state, {
-        "candidate_count": len(candidates), "scheduled_count": scheduled,
-        "stalled_count": stalled, "scheduled_pct": scheduled_pct,
-        "no_show_recovered_count": recovered, "decision_artifact_count": decisions_ready,
-        "scorecards_complete_pct": round(decisions_ready / len(candidates) * 100, 1) if candidates else 100.0,
-        "status": status,
-    }, f"Voce e {spec['id']}: {scheduled}/{len(candidates)} candidatos agendados, status {status}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "candidate_count": len(candidates),
+            "scheduled_count": scheduled,
+            "stalled_count": stalled,
+            "scheduled_pct": scheduled_pct,
+            "no_show_recovered_count": recovered,
+            "decision_artifact_count": decisions_ready,
+            "scorecards_complete_pct": (
+                round(decisions_ready / len(candidates) * 100, 1) if candidates else 100.0
+            ),
+            "status": status,
+        },
+        f"Voce e {spec['id']}: {scheduled}/{len(candidates)} candidatos agendados, status {status}.",
+        llm,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -159,9 +188,20 @@ def knowledge_curation(state, *, llm, store, spec):
         status = "curado"
 
     indexable = status == "curado"
-    return _out(spec, state, {
-        "agent_id": spec["id"], "classified": classified, "dedup_resolved": dedup_resolved,
-        "access_applied": access_applied, "stale": stale, "flag_owner_review": stale,
-        "status": status, "indexable": indexable,
-        "requires_human_review": status in ("acesso_exposto", "duplicata_nao_resolvida"),
-    }, f"Voce e {spec['id']}: documento {status}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "agent_id": spec["id"],
+            "classified": classified,
+            "dedup_resolved": dedup_resolved,
+            "access_applied": access_applied,
+            "stale": stale,
+            "flag_owner_review": stale,
+            "status": status,
+            "indexable": indexable,
+            "requires_human_review": status in ("acesso_exposto", "duplicata_nao_resolvida"),
+        },
+        f"Voce e {spec['id']}: documento {status}.",
+        llm,
+    )

@@ -12,7 +12,9 @@ ou env FLEET_KILL_SWITCH — TODO agente se comporta como SHADOW, independente d
 modo promovido: sem entrega, sem cobrança, sem pausa de aprovação. Contenção da
 frota inteira em 1 comando, sem deploy e sem mexer nos modos persistidos.
 """
+
 from __future__ import annotations
+
 import os
 
 from langgraph.types import interrupt
@@ -63,12 +65,14 @@ def gate(state: dict, *, spec: dict, store=None) -> dict:
         return {"output": out, "_gate": "proceed"}
 
     if mode == "ASSISTED":
-        decision = interrupt({
-            "type": "approval_required",
-            "agent": spec["id"],
-            "proposed_output": out,
-            "cost_tokens": state.get("cost_tokens", 0),
-        })
+        decision = interrupt(
+            {
+                "type": "approval_required",
+                "agent": spec["id"],
+                "proposed_output": out,
+                "cost_tokens": state.get("cost_tokens", 0),
+            }
+        )
         if not decision or not decision.get("approved"):
             return {"output": None, "_gate": "halt"}
         if c3_blocked:

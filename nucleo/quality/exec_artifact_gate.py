@@ -4,13 +4,14 @@ O `exec_report.json` é a fonte machine-readable para crédito de entrega real. 
 módulo valida um ou mais artifacts e retorna exit code != 0 quando o nightly não
 pode creditar delivery com execução de verdade.
 """
+
 from __future__ import annotations
 
 import argparse
 import json
+from collections.abc import Iterable
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Iterable
 
 
 @dataclass(frozen=True)
@@ -85,7 +86,8 @@ def _artifact_failures(path: str | Path, data: dict) -> list[str]:
         if row.get("oracle_correct") is False:
             failures.append(
                 f"{label}: row {row_id}: oracle_incorrect "
-                f"(static_ok={row.get('static_ok')} != expected {row.get('expected_static_ok')})")
+                f"(static_ok={row.get('static_ok')} != expected {row.get('expected_static_ok')})"
+            )
         # Falso-positivo grave: caso que o expected manda rejeitar no estático foi creditado.
         if row.get("expected_static_ok") is False and row.get("execution_credit") == "credited":
             failures.append(f"{label}: row {row_id}: credited_but_should_reject")
@@ -104,13 +106,17 @@ def evaluate_paths(paths: Iterable[str | Path]) -> GateResult:
         try:
             data = _load_json(path)
             failures.extend(_artifact_failures(path, data))
-        except Exception as exc:  # noqa: BLE001 — gate deve reportar artifact ruim sem traceback ruidoso
+        except (
+            Exception
+        ) as exc:  # noqa: BLE001 — gate deve reportar artifact ruim sem traceback ruidoso
             failures.append(f"{Path(path).name}: invalid artifact ({exc})")
     return GateResult(checked=checked, failures=failures)
 
 
 def _parse(argv: list[str] | None = None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Valida artifacts JSON do VERIFY-IN-EVAL foundry-exec.")
+    parser = argparse.ArgumentParser(
+        description="Valida artifacts JSON do VERIFY-IN-EVAL foundry-exec."
+    )
     parser.add_argument("artifacts", nargs="+", help="Caminhos dos exec_report*.json")
     return parser.parse_args(argv)
 

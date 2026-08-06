@@ -21,14 +21,16 @@ DESCER nunca tem gate (resiliência operacional, NIST "sobreviver ao inevitável
 comportar como SHADOW) sem tocar nos modos persistidos. Ambos auditados
 append-only no Brain.
 """
+
 from __future__ import annotations
+
 import datetime
 import hashlib
 import json
 
 from ..factory.factory import load_spec
 from ..kernel.execution import get_executor
-from ..kernel.gates import KILL_SWITCH_NS, KILL_SWITCH_KEY
+from ..kernel.gates import KILL_SWITCH_KEY, KILL_SWITCH_NS
 from ..kernel.guardians import validate_outcome_clause
 from ..quality import exec_report
 from ..quality.eval_harness import run_evals, run_security_evals
@@ -40,7 +42,7 @@ REQUIRED = {
     ("ASSISTED", "AUTONOMOUS"): ["G1", "G2", "G3", "G4", "G5", "G6", "G7"],
 }
 EVAL_THRESHOLD = 0.9
-DELIVERED_THRESHOLD = 0.95   # SLA de entrega (decisão CEO 2026-06-30): >=95% por agente
+DELIVERED_THRESHOLD = 0.95  # SLA de entrega (decisão CEO 2026-06-30): >=95% por agente
 
 
 def _delivered_summary(spec_dir):
@@ -81,29 +83,38 @@ def _gate(g, spec, spec_dir, req, deps):
         sec = run_security_evals(spec_dir, **deps)
         sec_ok = sec["total"] == 0 or sec["rate"] >= 1.0  # 0 casos = vácuo (catraca cobra)
         ok = rep["rate"] >= EVAL_THRESHOLD and sec_ok
-        return ok, (f"eval {rep['passed']}/{rep['total']} ({rep['rate']*100:.0f}%) "
-                    f"thr={EVAL_THRESHOLD*100:.0f}% · security {sec['passed']}/{sec['total']}")
+        return ok, (
+            f"eval {rep['passed']}/{rep['total']} ({rep['rate']*100:.0f}%) "
+            f"thr={EVAL_THRESHOLD*100:.0f}% · security {sec['passed']}/{sec['total']}"
+        )
     if g == "G5":  # cross-approval (anti-self-approval)
         po, pr = req.get("approver_po"), req.get("approver_promotion_officer")
         ok = bool(po) and bool(pr) and po != pr
         return ok, f"po={po} promotion_officer={pr} distintos={ok}"
     if g == "G6":  # CI/CD ativo (assisted->autonomous)
         return bool(req.get("cicd_active")), f"cicd_active={bool(req.get('cicd_active'))}"
-    if g == "G7":  # SLA de ENTREGA — delivered_eligible_rate do oráculo executável >= 95% (CEO 2026-06-30)
+    if (
+        g == "G7"
+    ):  # SLA de ENTREGA — delivered_eligible_rate do oráculo executável >= 95% (CEO 2026-06-30)
         proof_note = "execução local ao vivo (sem perímetro de credencial)"
         if req.get("delivery_proof") == "ci-perimeter":
             # G-PERÍMETRO: a prova vem do artefato do nightly em main (identidade do CI,
             # distinta do promotor), buscada via API — FAIL-CLOSED se não houver.
             from . import perimeter
+
             got = perimeter.fetch_perimeter_summary(spec["id"])
             if not got:
-                return False, ("SLA entrega: prova de PERÍMETRO indisponível (sem nightly "
-                               "foundry-exec verde recente em main com este agente). Promoção "
-                               "bloqueada (fail-closed) — G-PERÍMETRO não degrada p/ prova local.")
+                return False, (
+                    "SLA entrega: prova de PERÍMETRO indisponível (sem nightly "
+                    "foundry-exec verde recente em main com este agente). Promoção "
+                    "bloqueada (fail-closed) — G-PERÍMETRO não degrada p/ prova local."
+                )
             s = got["summary"]
             p = got["proof"]
-            proof_note = (f"perímetro CI: run {p['run_id']} @ {str(p['commit'])[:12]} "
-                          f"({p['workflow']}, {p['artifact']})")
+            proof_note = (
+                f"perímetro CI: run {p['run_id']} @ {str(p['commit'])[:12]} "
+                f"({p['workflow']}, {p['artifact']})"
+            )
         else:
             s = _delivered_summary(spec_dir)
         ex = s.get("executor") or {}
@@ -112,28 +123,36 @@ def _gate(g, spec, spec_dir, req, deps):
         fp = int(s.get("false_positive_delivery_count") or 0)
         if not ex.get("available"):
             # FAIL-CLOSED: sem execução real não há prova de entrega — não promove.
-            return False, (f"SLA entrega: executor '{ex.get('name')}' indisponível — delivered_rate "
-                           f"não medível (sem prova executável). Promoção bloqueada (fail-closed).")
+            return False, (
+                f"SLA entrega: executor '{ex.get('name')}' indisponível — delivered_rate "
+                f"não medível (sem prova executável). Promoção bloqueada (fail-closed)."
+            )
         if total <= 0:
             # FAIL-CLOSED: a suíte não declara nenhum caso elegível (expected.exec_delivered=True)
             # — natureza sem oráculo executável de entrega (estrutural/browser) ou suíte
             # não-instrumentada. Sem denominador não há SLA medível, logo não promove.
-            return False, ("SLA entrega: 0 casos elegíveis (expected.delivered_ok=True) na suíte — "
-                           "entrega não medível para esta natureza. Promoção bloqueada (fail-closed).")
+            return False, (
+                "SLA entrega: 0 casos elegíveis (expected.delivered_ok=True) na suíte — "
+                "entrega não medível para esta natureza. Promoção bloqueada (fail-closed)."
+            )
         if fp > 0:
             # HARD-FAIL do fail-safe: um negativo-por-design ENTREGOU = resposta errada
             # silenciosa. Viola o invariante dos <=5% (decisão D3), independe da taxa.
-            return False, (f"SLA entrega: {fp} falso-positivo(s) de entrega (negativo-por-design "
-                           f"creditado) — fail-safe violado (resposta errada silenciosa). HARD-FAIL.")
+            return False, (
+                f"SLA entrega: {fp} falso-positivo(s) de entrega (negativo-por-design "
+                f"creditado) — fail-safe violado (resposta errada silenciosa). HARD-FAIL."
+            )
         rate = pct / 100.0
-        not_delivered = max(total - passed, 0)   # os <=5%: runtime force delivered=False/billing=0
+        not_delivered = max(total - passed, 0)  # os <=5%: runtime force delivered=False/billing=0
         ok = rate >= DELIVERED_THRESHOLD
         raw = s.get("delivered_rate") or {}
-        return ok, (f"SLA entrega: delivered_eligible_rate {passed}/{total} ({pct:.0f}%) "
-                    f"thr={DELIVERED_THRESHOLD*100:.0f}% · bruto {raw.get('passed')}/{raw.get('total')} · "
-                    f"falso-positivo=0 · {not_delivered} não-entregue(s) caem no "
-                    f"fail-safe do runtime (delivered=False/billing=0, sem resposta-errada-silenciosa) "
-                    f"· prova: {proof_note}")
+        return ok, (
+            f"SLA entrega: delivered_eligible_rate {passed}/{total} ({pct:.0f}%) "
+            f"thr={DELIVERED_THRESHOLD*100:.0f}% · bruto {raw.get('passed')}/{raw.get('total')} · "
+            f"falso-positivo=0 · {not_delivered} não-entregue(s) caem no "
+            f"fail-safe do runtime (delivered=False/billing=0, sem resposta-errada-silenciosa) "
+            f"· prova: {proof_note}"
+        )
     return False, "gate desconhecido"
 
 
@@ -150,20 +169,34 @@ def promote(spec_dir, to_mode, req, deps, brain, store) -> dict:
         checks.append({"gate": g, "ok": ok, "evidence": ev})
     if to_mode == "AUTONOMOUS":  # assinatura extra do security guardian
         sec = bool(req.get("approver_security"))
-        checks.append({"gate": "SEC", "ok": sec, "evidence": f"security-privacy-guardian={req.get('approver_security')}"})
+        checks.append(
+            {
+                "gate": "SEC",
+                "ok": sec,
+                "evidence": f"security-privacy-guardian={req.get('approver_security')}",
+            }
+        )
 
     passed = all(c["ok"] for c in checks)
     record = {
-        "actor": "promotion-officer", "action": "promotion_attempt", "agent": aid,
-        "from": frm, "to": to_mode, "passed": passed, "gates": checks,
-        "spec_hash": _spec_hash(spec), "approvals": req,
+        "actor": "promotion-officer",
+        "action": "promotion_attempt",
+        "agent": aid,
+        "from": frm,
+        "to": to_mode,
+        "passed": passed,
+        "gates": checks,
+        "spec_hash": _spec_hash(spec),
+        "approvals": req,
         "ts": datetime.datetime.now().isoformat(timespec="seconds"),
     }
     brain.emit_event(record)
     if passed:
         store.put(("modes", aid), "current", to_mode)
         log = store.get(("promotions", aid), "log") or []
-        log.append({"from": frm, "to": to_mode, "spec_hash": record["spec_hash"], "ts": record["ts"]})
+        log.append(
+            {"from": frm, "to": to_mode, "spec_hash": record["spec_hash"], "ts": record["ts"]}
+        )
         store.put(("promotions", aid), "log", log)  # append-only
     return {"ok": passed, "agent": aid, "from": frm, "to": to_mode, "gates": checks}
 
@@ -175,16 +208,28 @@ def demote(spec_dir, reason: str, req: dict, brain, store) -> dict:
     aid = spec["id"]
     frm = current_mode(store, aid)
     record = {
-        "actor": req.get("actor", "promotion-officer"), "action": "demotion", "agent": aid,
-        "from": frm, "to": "SHADOW", "reason": reason,
+        "actor": req.get("actor", "promotion-officer"),
+        "action": "demotion",
+        "agent": aid,
+        "from": frm,
+        "to": "SHADOW",
+        "reason": reason,
         "spec_hash": _spec_hash(spec),
         "ts": datetime.datetime.now().isoformat(timespec="seconds"),
     }
     brain.emit_event(record)
     store.put(("modes", aid), "current", "SHADOW")
     log = store.get(("promotions", aid), "log") or []
-    log.append({"from": frm, "to": "SHADOW", "action": "demotion", "reason": reason,
-                "spec_hash": record["spec_hash"], "ts": record["ts"]})
+    log.append(
+        {
+            "from": frm,
+            "to": "SHADOW",
+            "action": "demotion",
+            "reason": reason,
+            "spec_hash": record["spec_hash"],
+            "ts": record["ts"],
+        }
+    )
     store.put(("promotions", aid), "log", log)  # append-only
     return {"ok": True, "agent": aid, "from": frm, "to": "SHADOW", "reason": reason}
 
@@ -195,10 +240,16 @@ def set_fleet_kill_switch(on: bool, reason: str, req: dict, brain, store) -> dic
     modos persistidos — soltar o switch devolve a frota ao estado promovido."""
     actor = req.get("actor", "promotion-officer")
     record = {
-        "actor": actor, "action": "fleet_kill_switch", "on": on, "reason": reason,
+        "actor": actor,
+        "action": "fleet_kill_switch",
+        "on": on,
+        "reason": reason,
         "ts": datetime.datetime.now().isoformat(timespec="seconds"),
     }
     brain.emit_event(record)
-    store.put(KILL_SWITCH_NS, KILL_SWITCH_KEY,
-              {"on": on, "reason": reason, "actor": actor, "ts": record["ts"]})
+    store.put(
+        KILL_SWITCH_NS,
+        KILL_SWITCH_KEY,
+        {"on": on, "reason": reason, "actor": actor, "ts": record["ts"]},
+    )
     return {"ok": True, "on": on, "reason": reason}

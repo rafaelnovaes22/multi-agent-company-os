@@ -2,7 +2,9 @@
 por processo e cacheiam (helper pattern BMAD). Agentes L1/L2 herdam; ninguém
 redefine o ICP localmente (C8). Ver 02-ARQUITETURA.md (camada L0) e company/icp.md.
 """
+
 from __future__ import annotations
+
 import os
 
 _COMPANY_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "company")

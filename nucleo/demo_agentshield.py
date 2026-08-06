@@ -2,13 +2,15 @@
 
 Roda:  python -m nucleo.demo_agentshield
 """
+
 from __future__ import annotations
+
 import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from nucleo.security.agentshield import scan_fleet, scan_c8  # noqa: E402
+from nucleo.security.agentshield import scan_c8, scan_fleet  # noqa: E402
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 

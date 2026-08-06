@@ -7,11 +7,12 @@ calcula a partir de state["task"] e devolve campos no top-level do output (o gra
 genérico de contrato valida `expected` de domínio direto). Importado no fim de skills.py.
 A assinatura é a padrão: handler(state, *, llm, store, spec) -> {output, cost_tokens, citations}.
 """
+
 from __future__ import annotations
 
 import math
 
-from .skills import register, _tokens, _spec_citations
+from .skills import _spec_citations, _tokens, register
 
 # SLA de remediação por severidade (dias) — política explícita, sem datas do sistema.
 _CVE_SLA_DAYS = {"critica": 2, "alta": 7, "media": 30, "baixa": 90}
@@ -24,7 +25,11 @@ def _out(spec, state, fields, rationale_prompt, llm):
     out["rationale"] = rationale
     out["by"] = spec["id"]
     out["tenant"] = state.get("task", {}).get("tenant_id")
-    return {"output": out, "cost_tokens": _tokens(rationale), "citations": _spec_citations(state, spec)}
+    return {
+        "output": out,
+        "cost_tokens": _tokens(rationale),
+        "citations": _spec_citations(state, spec),
+    }
 
 
 def _severity_from_cvss(cvss):
@@ -57,10 +62,15 @@ def cve_prioritization(state, *, llm, store, spec):
         priority = round(cvss * epss * exposure, 3)
         severity = _severity_from_cvss(cvss)
         exploitable = active and (epss >= 0.5 or bool(it.get("exploit_public")))
-        ranked.append({
-            "id": cid, "severity": severity, "priority": priority,
-            "exploitable": exploitable, "sla_days": _CVE_SLA_DAYS[severity],
-        })
+        ranked.append(
+            {
+                "id": cid,
+                "severity": severity,
+                "priority": priority,
+                "exploitable": exploitable,
+                "sla_days": _CVE_SLA_DAYS[severity],
+            }
+        )
     ranked.sort(key=lambda x: -x["priority"])
     critical_open = sum(1 for r in ranked if r["severity"] == "critica")
     exploitable_count = sum(1 for r in ranked if r["exploitable"])
@@ -68,16 +78,22 @@ def cve_prioritization(state, *, llm, store, spec):
     dispatch = critical_open > 0 or exploitable_count > 0
     delivered_event = "cve.remediation_dispatched" if dispatch else "cve.scan_completed"
     top_id = ranked[0]["id"] if ranked else None
-    return _out(spec, state, {
-        "cve_count": len(items),
-        "ranked": ranked,
-        "critical_open": critical_open,
-        "exploitable_count": exploitable_count,
-        "top_priority_id": top_id,
-        "remediation_dispatched": dispatch,
-        "delivered_event": delivered_event,
-    }, f"Voce e {spec['id']}: {len(items)} CVEs, {critical_open} criticas, "
-       f"{exploitable_count} exploraveis; dispatch={dispatch}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "cve_count": len(items),
+            "ranked": ranked,
+            "critical_open": critical_open,
+            "exploitable_count": exploitable_count,
+            "top_priority_id": top_id,
+            "remediation_dispatched": dispatch,
+            "delivered_event": delivered_event,
+        },
+        f"Voce e {spec['id']}: {len(items)} CVEs, {critical_open} criticas, "
+        f"{exploitable_count} exploraveis; dispatch={dispatch}.",
+        llm,
+    )
 
 
 @register("fraud_score")
@@ -89,16 +105,20 @@ def fraud_score(state, *, llm, store, spec):
     score 0-100 = soma ponderada dos sinais (cada um 0-1). Limiares explícitos.
     """
     f = state["task"].get("fraud", {}) or {}
-    velocity = f.get("velocity", 0) or 0           # 0-1 (transações/janela normalizado)
-    device_risk = f.get("device_risk", 0) or 0     # 0-1 (device/fingerprint suspeito)
-    behavior = f.get("behavior_anomaly", 0) or 0   # 0-1 (desvio comportamental)
-    coordination = f.get("coordination", 0) or 0   # 0-1 (padrão multi-conta/anel)
+    velocity = f.get("velocity", 0) or 0  # 0-1 (transações/janela normalizado)
+    device_risk = f.get("device_risk", 0) or 0  # 0-1 (device/fingerprint suspeito)
+    behavior = f.get("behavior_anomaly", 0) or 0  # 0-1 (desvio comportamental)
+    coordination = f.get("coordination", 0) or 0  # 0-1 (padrão multi-conta/anel)
     impossible_travel = bool(f.get("impossible_travel"))  # login impossível -> ATO
 
     weights = {"velocity": 25, "device": 25, "behavior": 25, "coordination": 25}
     score = round(
-        velocity * weights["velocity"] + device_risk * weights["device"]
-        + behavior * weights["behavior"] + coordination * weights["coordination"], 1)
+        velocity * weights["velocity"]
+        + device_risk * weights["device"]
+        + behavior * weights["behavior"]
+        + coordination * weights["coordination"],
+        1,
+    )
 
     # Login impossível é sinal forte de account takeover: força bloqueio.
     if impossible_travel:
@@ -117,14 +137,20 @@ def fraud_score(state, *, llm, store, spec):
     risk_level = "alto" if score >= 70 else ("medio" if score >= 40 else "baixo")
     confirmed = decision == "bloquear"
     delivered_event = "fraud.case_confirmed" if confirmed else "fraud.event_scored"
-    return _out(spec, state, {
-        "risk_score": score,
-        "decision": decision,
-        "risk_level": risk_level,
-        "account_takeover": ato,
-        "case_confirmed": confirmed,
-        "delivered_event": delivered_event,
-    }, f"Voce e {spec['id']}: score {score}, decisao {decision} (ATO={ato}).", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "risk_score": score,
+            "decision": decision,
+            "risk_level": risk_level,
+            "account_takeover": ato,
+            "case_confirmed": confirmed,
+            "delivered_event": delivered_event,
+        },
+        f"Voce e {spec['id']}: score {score}, decisao {decision} (ATO={ato}).",
+        llm,
+    )
 
 
 def _shannon_entropy(s):
@@ -141,8 +167,8 @@ def _shannon_entropy(s):
 
 # Prefixos/regex de provedores conhecidos (formato de chave) — alta confiança.
 _SECRET_PREFIXES = ("AKIA", "sk-", "ghp_", "xoxb-", "AIza", "ASIA", "glpat-")
-_ENTROPY_THRESHOLD = 3.5   # bits/char acima do qual o token é candidato a segredo
-_MIN_LEN = 16              # comprimento mínimo para considerar entropia
+_ENTROPY_THRESHOLD = 3.5  # bits/char acima do qual o token é candidato a segredo
+_MIN_LEN = 16  # comprimento mínimo para considerar entropia
 
 
 @register("secret_scan")
@@ -167,22 +193,33 @@ def secret_scan(state, *, llm, store, spec):
         entropy_hit = len(value) >= _MIN_LEN and ent >= _ENTROPY_THRESHOLD
         if prefix_hit or entropy_hit:
             confidence = "alta" if prefix_hit else "media"
-            findings.append({
-                "location": location, "confidence": confidence, "entropy": ent,
-            })
+            findings.append(
+                {
+                    "location": location,
+                    "confidence": confidence,
+                    "entropy": ent,
+                }
+            )
     finding_count = len(findings)
     high_confidence = sum(1 for x in findings if x["confidence"] == "alta")
     blocked = finding_count > 0
     delivered_event = "secrets.finding_opened" if blocked else "secrets.scan_completed"
-    return _out(spec, state, {
-        "scanned_count": len(candidates),
-        "finding_count": finding_count,
-        "high_confidence_count": high_confidence,
-        "findings": findings,
-        "blocked": blocked,
-        "delivered_event": delivered_event,
-    }, f"Voce e {spec['id']}: {len(candidates)} candidatos, {finding_count} segredos "
-       f"({high_confidence} alta confianca); blocked={blocked}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "scanned_count": len(candidates),
+            "finding_count": finding_count,
+            "high_confidence_count": high_confidence,
+            "findings": findings,
+            "blocked": blocked,
+            "delivered_event": delivered_event,
+        },
+        f"Voce e {spec['id']}: {len(candidates)} candidatos, {finding_count} segredos "
+        f"({high_confidence} alta confianca); blocked={blocked}.",
+        llm,
+    )
+
 
 # ---------------------------------------------------------------------------
 # Burn-down Track A — g5-access-auditor: auditoria determinística de IAM.
@@ -206,27 +243,54 @@ def access_review(state, *, llm, store, spec):
         recertified = bool(ident.get("recertified", False))
         sod = ident.get("sod_conflicts", []) or []
         if not owner_active:
-            findings.append({"id": iid, "type": "orphan", "severity": "alta"}); revoke_actions += 1
+            findings.append({"id": iid, "type": "orphan", "severity": "alta"})
+            revoke_actions += 1
         if extra:
-            findings.append({"id": iid, "type": "over_privilege", "severity": "media", "extra_count": len(extra)}); revoke_actions += 1
+            findings.append(
+                {
+                    "id": iid,
+                    "type": "over_privilege",
+                    "severity": "media",
+                    "extra_count": len(extra),
+                }
+            )
+            revoke_actions += 1
         if last_used >= idle_days:
-            findings.append({"id": iid, "type": "stale_credential", "severity": "media"}); revoke_actions += 1
+            findings.append({"id": iid, "type": "stale_credential", "severity": "media"})
+            revoke_actions += 1
         if sod:
-            findings.append({"id": iid, "type": "sod_violation", "severity": "alta", "conflict_count": len(sod)}); recertify_actions += 1
+            findings.append(
+                {"id": iid, "type": "sod_violation", "severity": "alta", "conflict_count": len(sod)}
+            )
+            recertify_actions += 1
         if not recertified:
             recertify_actions += 1
     orphan_count = sum(1 for f in findings if f["type"] == "orphan")
     over_privilege_count = sum(1 for f in findings if f["type"] == "over_privilege")
     sod_violation_count = sum(1 for f in findings if f["type"] == "sod_violation")
-    least_privilege_pct = round((len(identities) - over_privilege_count) / len(identities) * 100, 1) if identities else 100.0
+    least_privilege_pct = (
+        round((len(identities) - over_privilege_count) / len(identities) * 100, 1)
+        if identities
+        else 100.0
+    )
     status = "remediar" if findings else "ok"
-    return _out(spec, state, {
-        "identity_count": len(identities), "finding_count": len(findings),
-        "orphan_count": orphan_count, "over_privilege_count": over_privilege_count,
-        "sod_violation_count": sod_violation_count, "least_privilege_pct": least_privilege_pct,
-        "revoke_actions": revoke_actions, "recertify_actions": recertify_actions,
-        "status": status,
-    }, f"Voce e {spec['id']}: {len(findings)} achados IAM, status {status}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "identity_count": len(identities),
+            "finding_count": len(findings),
+            "orphan_count": orphan_count,
+            "over_privilege_count": over_privilege_count,
+            "sod_violation_count": sod_violation_count,
+            "least_privilege_pct": least_privilege_pct,
+            "revoke_actions": revoke_actions,
+            "recertify_actions": recertify_actions,
+            "status": status,
+        },
+        f"Voce e {spec['id']}: {len(findings)} achados IAM, status {status}.",
+        llm,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -274,7 +338,9 @@ def agentshield_scan(state, *, llm, store, spec):
         findings.append(("med", "sem_guardians"))
     # drift: escalada de autonomia entre releases sem aprovação cruzada
     drift_detected = bool(
-        prev_mode and mode and _AUTONOMY_ORDER.get(mode, 0) > _AUTONOMY_ORDER.get(prev_mode, 0)
+        prev_mode
+        and mode
+        and _AUTONOMY_ORDER.get(mode, 0) > _AUTONOMY_ORDER.get(prev_mode, 0)
         and not mode_change_approved
     )
     if drift_detected:
@@ -282,13 +348,25 @@ def agentshield_scan(state, *, llm, store, spec):
 
     high_count = sum(1 for sev, _ in findings if sev == "high")
     verdict = "fail" if high_count else ("warn" if findings else "pass")
-    return _out(spec, state, {
-        "agent_id": spec["id"], "scanned_agent": sc.get("agent_id"),
-        "verdict": verdict, "finding_count": len(findings), "high_count": high_count,
-        "over_privilege": bool(over) and role == "worker", "c7_violation": bool(c7_violations),
-        "drift_detected": drift_detected, "missing_evals": not has_evals,
-        "missing_guardians": not guardians, "requires_human_review": verdict == "fail",
-    }, f"Voce e {spec['id']}: scan de {sc.get('agent_id')} -> {verdict} ({len(findings)} achados).", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "agent_id": spec["id"],
+            "scanned_agent": sc.get("agent_id"),
+            "verdict": verdict,
+            "finding_count": len(findings),
+            "high_count": high_count,
+            "over_privilege": bool(over) and role == "worker",
+            "c7_violation": bool(c7_violations),
+            "drift_detected": drift_detected,
+            "missing_evals": not has_evals,
+            "missing_guardians": not guardians,
+            "requires_human_review": verdict == "fail",
+        },
+        f"Voce e {spec['id']}: scan de {sc.get('agent_id')} -> {verdict} ({len(findings)} achados).",
+        llm,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -319,18 +397,24 @@ def prompt_injection_guard(state, *, llm, store, spec):
 
     risk = "high" if score >= 60 else ("medium" if score >= 30 else "low")
     verdict = "block" if score >= 60 else ("sanitize" if score >= 30 else "allow")
-    return _out(spec, state, {
-        "handler_kind": "prompt_injection_guard",
-        "content_id": g.get("content_id"),
-        "risk_score": score,
-        "risk": risk,
-        "verdict": verdict,
-        "blocked": verdict == "block",
-        "requires_human_review": score >= 60,
-        "untrusted_source": untrusted_source,
-        "disallowed_tool_count": len(disallowed_tools),
-        "delivered_event": "prompt_injection.review_completed",
-    }, f"Voce e {spec['id']}: prompt risk={risk} score={score} verdict={verdict}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "handler_kind": "prompt_injection_guard",
+            "content_id": g.get("content_id"),
+            "risk_score": score,
+            "risk": risk,
+            "verdict": verdict,
+            "blocked": verdict == "block",
+            "requires_human_review": score >= 60,
+            "untrusted_source": untrusted_source,
+            "disallowed_tool_count": len(disallowed_tools),
+            "delivered_event": "prompt_injection.review_completed",
+        },
+        f"Voce e {spec['id']}: prompt risk={risk} score={score} verdict={verdict}.",
+        llm,
+    )
 
 
 @register("lgpd_privacy_review")
@@ -369,18 +453,24 @@ def lgpd_privacy_review(state, *, llm, store, spec):
         or (international_transfer and not transfer_safeguard)
     )
     status = "blocked" if blocked else ("remediate" if issue_weights else "approved")
-    return _out(spec, state, {
-        "handler_kind": "lgpd_privacy_review",
-        "artifact_id": p.get("artifact_id"),
-        "pii_detected": pii_detected,
-        "special_category": special_category,
-        "compliance_score": compliance_score,
-        "status": status,
-        "blocked": blocked,
-        "requires_human_review": blocked or special_category or compliance_score < 70,
-        "issue_count": len(issue_weights),
-        "delivered_event": "privacy.review_completed",
-    }, f"Voce e {spec['id']}: LGPD status={status} score={compliance_score}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "handler_kind": "lgpd_privacy_review",
+            "artifact_id": p.get("artifact_id"),
+            "pii_detected": pii_detected,
+            "special_category": special_category,
+            "compliance_score": compliance_score,
+            "status": status,
+            "blocked": blocked,
+            "requires_human_review": blocked or special_category or compliance_score < 70,
+            "issue_count": len(issue_weights),
+            "delivered_event": "privacy.review_completed",
+        },
+        f"Voce e {spec['id']}: LGPD status={status} score={compliance_score}.",
+        llm,
+    )
 
 
 @register("threat_model_review")
@@ -418,16 +508,30 @@ def threat_model_review(state, *, llm, store, spec):
         missing_controls.append("audit_log")
     score = min(100, score + 10 * len(missing_controls))
 
-    risk_level = "critical" if score >= 80 else ("high" if score >= 60 else ("medium" if score >= 30 else "low"))
-    status = "blocked" if score >= 80 else ("needs_controls" if missing_controls or score >= 60 else "approved")
-    return _out(spec, state, {
-        "handler_kind": "threat_model_review",
-        "feature_id": t.get("feature_id"),
-        "risk_score": score,
-        "risk_level": risk_level,
-        "missing_controls": missing_controls,
-        "missing_control_count": len(missing_controls),
-        "status": status,
-        "requires_human_review": score >= 60 or bool(missing_controls),
-        "delivered_event": "threat_model.review_completed",
-    }, f"Voce e {spec['id']}: threat risk={risk_level} score={score} status={status}.", llm)
+    risk_level = (
+        "critical"
+        if score >= 80
+        else ("high" if score >= 60 else ("medium" if score >= 30 else "low"))
+    )
+    status = (
+        "blocked"
+        if score >= 80
+        else ("needs_controls" if missing_controls or score >= 60 else "approved")
+    )
+    return _out(
+        spec,
+        state,
+        {
+            "handler_kind": "threat_model_review",
+            "feature_id": t.get("feature_id"),
+            "risk_score": score,
+            "risk_level": risk_level,
+            "missing_controls": missing_controls,
+            "missing_control_count": len(missing_controls),
+            "status": status,
+            "requires_human_review": score >= 60 or bool(missing_controls),
+            "delivered_event": "threat_model.review_completed",
+        },
+        f"Voce e {spec['id']}: threat risk={risk_level} score={score} status={status}.",
+        llm,
+    )

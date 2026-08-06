@@ -7,7 +7,9 @@ Roda:  python -m nucleo.demo_evolve
 Agrupa os fatos de memória de todos os agentes por tópico e promove os tópicos
 com suporte suficiente a skills compartilhadas em nucleo/company/skills/.
 """
+
 from __future__ import annotations
+
 import os
 import sys
 
@@ -27,14 +29,18 @@ def main():
     print("=== /evolve (instincts recorrentes -> skills compartilhadas) ===")
     res = run_evolve(store, brain, min_support=2, verbose=True)
 
-    print(f"\nCorpus analisado: {res['corpus_size']} fatos. "
-          f"Skills promovidas: {len(res['promoted'])}.")
+    print(
+        f"\nCorpus analisado: {res['corpus_size']} fatos. "
+        f"Skills promovidas: {len(res['promoted'])}."
+    )
     skills_dir = os.path.join(ROOT, "company", "skills")
     if os.path.isdir(skills_dir):
         print("Skills em nucleo/company/skills/:")
         for fn in sorted(os.listdir(skills_dir)):
             print(f"  - {fn}")
-    print("\nOK - o aprendizado individual virou capacidade da frota (a empresa fica mais inteligente).")
+    print(
+        "\nOK - o aprendizado individual virou capacidade da frota (a empresa fica mais inteligente)."
+    )
 
 
 if __name__ == "__main__":

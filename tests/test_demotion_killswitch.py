@@ -8,6 +8,7 @@ Prova que o caminho de DESCIDA não tem fricção nem gate:
   - soltar o switch devolve a frota ao estado promovido (caminho feliz intacto).
 Roda offline (FakeLLM, FileStore em tmp).
 """
+
 from __future__ import annotations
 
 import os
@@ -26,15 +27,30 @@ from nucleo.kernel.providers.llm import get_llm
 _NUCLEO = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "nucleo")
 _Q_SPEC = os.path.join(_NUCLEO, "guilds", "g08_vendas", "g8-lead-qualifier")
 
-LEAD = {"id": "L-900", "company": "Contencao Rapida", "revenue_brl_year": 2_500_000,
-        "founder_led": True, "sells_well": True, "lacks_process": True, "firefighter": True}
+LEAD = {
+    "id": "L-900",
+    "company": "Contencao Rapida",
+    "revenue_brl_year": 2_500_000,
+    "founder_led": True,
+    "sells_well": True,
+    "lacks_process": True,
+    "firefighter": True,
+}
 
 
 def _task(mode: str) -> dict:
-    return {"task": {"agent_id": "g8-lead-qualifier", "guild": "G08-vendas-receita",
-                     "statement": "Qualificar lead contra o ICP", "lead": LEAD},
-            "mode": mode, "ledger": "billable",
-            "run_id": "ks-" + uuid.uuid4().hex[:6], "verbose": False}
+    return {
+        "task": {
+            "agent_id": "g8-lead-qualifier",
+            "guild": "G08-vendas-receita",
+            "statement": "Qualificar lead contra o ICP",
+            "lead": LEAD,
+        },
+        "mode": mode,
+        "ledger": "billable",
+        "run_id": "ks-" + uuid.uuid4().hex[:6],
+        "verbose": False,
+    }
 
 
 class _Base(unittest.TestCase):
@@ -52,8 +68,9 @@ class _Base(unittest.TestCase):
         self._tmp.cleanup()
 
     def _agent(self):
-        _, agent, _ = build_from_spec(_Q_SPEC, get_llm("worker"), self.brain,
-                                      self.store, MemorySaver())
+        _, agent, _ = build_from_spec(
+            _Q_SPEC, get_llm("worker"), self.brain, self.store, MemorySaver()
+        )
         return agent
 
     def _invoke(self, mode: str) -> dict:
@@ -73,8 +90,13 @@ class Demote(_Base):
     def test_demote_e_auditada_append_only(self):
         """O evento sai no Brain e a transição entra no log de promoções com reason."""
         self.store.put(("modes", "g8-lead-qualifier"), "current", "AUTONOMOUS")
-        demote(_Q_SPEC, "exploit em producao", {"actor": "security-privacy-guardian"},
-               self.brain, self.store)
+        demote(
+            _Q_SPEC,
+            "exploit em producao",
+            {"actor": "security-privacy-guardian"},
+            self.brain,
+            self.store,
+        )
         evs = [e for e in self.brain.events() if e.get("action") == "demotion"]
         self.assertEqual(len(evs), 1)
         self.assertEqual(evs[0]["from"], "AUTONOMOUS")

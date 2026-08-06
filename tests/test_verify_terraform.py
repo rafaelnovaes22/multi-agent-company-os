@@ -10,23 +10,28 @@ Prova as extensões HCL/terraform do oráculo sem tocar Python/JS:
   - offline segue honesto: delivered_ok=False mesmo com HCL correto.
 Roda offline, stdlib pura (terraform real só no nightly).
 """
+
 from __future__ import annotations
+
 import unittest
 
-from nucleo.kernel.verification import verify_code, sha, _hcl_structurally_valid
 from nucleo.kernel.execution import ExecutionProvider
+from nucleo.kernel.verification import _hcl_structurally_valid, sha, verify_code
 
 CONTRACT = "# Contrato: resource_name = lower(env-app).\n"
-SKELETON = ('# TODO_IMPLEMENT: resource_name = lower(env-app)\n'
-            'variable "env" { type = string }\nvariable "app" { type = string }\n'
-            'output "resource_name" {\n  value = "TODO_IMPLEMENT"\n}\n')
+SKELETON = (
+    "# TODO_IMPLEMENT: resource_name = lower(env-app)\n"
+    'variable "env" { type = string }\nvariable "app" { type = string }\n'
+    'output "resource_name" {\n  value = "TODO_IMPLEMENT"\n}\n'
+)
 HELDOUT = (
     'run "dev_api" {\n  command = plan\n  variables {\n    env = "DEV"\n    app = "API"\n  }\n'
     '  assert {\n    condition     = output.resource_name == "dev-api"\n'
     '    error_message = "lower(env-app)"\n  }\n}\n'
     'run "prod_web" {\n  command = plan\n  variables {\n    env = "PROD"\n    app = "Web"\n  }\n'
     '  assert {\n    condition     = output.resource_name == "prod-web"\n'
-    '    error_message = "lower(env-app)"\n  }\n}\n')
+    '    error_message = "lower(env-app)"\n  }\n}\n'
+)
 SEED = {"main.tf": SKELETON, "docs/naming_contract.md": CONTRACT}
 ORACLE = {
     "bug_file": "main.tf",
@@ -36,17 +41,33 @@ ORACLE = {
     "runtime": "terraform",
     "test_cmd": "terraform init -backend=false && terraform validate && terraform test",
 }
-FIX_OK = {"files": {"main.tf": (
-    'variable "env" { type = string }\nvariable "app" { type = string }\n'
-    'output "resource_name" {\n  value = lower("${var.env}-${var.app}")\n}\n')}}
-SINTAXE = {"files": {"main.tf": (  # bloco não fechado, mas contém o marcador
-    'output "resource_name" {\n  value = lower("${var.env}-${var.app}")\n')}}
-GAMING_MOCK = {"files": {"main.tf": FIX_OK["files"]["main.tf"],
-                         "extra.tf": 'mock_provider "null" {}\n'}}
-GAMING_OVERRIDE = {"files": {"main.tf": FIX_OK["files"]["main.tf"],
-                             "extra.tf": 'override_resource {\n  target = null\n}\n'}}
-AUTORA_PROVA = {"files": {"main.tf": FIX_OK["files"]["main.tf"],
-                          "tests/naming.tftest.hcl": HELDOUT}}
+FIX_OK = {
+    "files": {
+        "main.tf": (
+            'variable "env" { type = string }\nvariable "app" { type = string }\n'
+            'output "resource_name" {\n  value = lower("${var.env}-${var.app}")\n}\n'
+        )
+    }
+}
+SINTAXE = {
+    "files": {
+        "main.tf": (  # bloco não fechado, mas contém o marcador
+            'output "resource_name" {\n  value = lower("${var.env}-${var.app}")\n'
+        )
+    }
+}
+GAMING_MOCK = {
+    "files": {"main.tf": FIX_OK["files"]["main.tf"], "extra.tf": 'mock_provider "null" {}\n'}
+}
+GAMING_OVERRIDE = {
+    "files": {
+        "main.tf": FIX_OK["files"]["main.tf"],
+        "extra.tf": "override_resource {\n  target = null\n}\n",
+    }
+}
+AUTORA_PROVA = {
+    "files": {"main.tf": FIX_OK["files"]["main.tf"], "tests/naming.tftest.hcl": HELDOUT}
+}
 
 
 class _FakeExecutor(ExecutionProvider):
@@ -72,12 +93,12 @@ class ParserEstruturalHCL(unittest.TestCase):
     def test_delimitador_nao_fechado_reprova(self):
         self.assertFalse(_hcl_structurally_valid('output "o" {\n  value = '))
         self.assertFalse(_hcl_structurally_valid(""))
-        self.assertFalse(_hcl_structurally_valid('x = <<EOF\nsem fim\n'))  # heredoc aberto
+        self.assertFalse(_hcl_structurally_valid("x = <<EOF\nsem fim\n"))  # heredoc aberto
 
     def test_delimitadores_em_literais_e_comentarios_nao_contam(self):
-        self.assertTrue(_hcl_structurally_valid('s = "} ) ] ${x}"\n'))   # interpolação em string
-        self.assertTrue(_hcl_structurally_valid('# ) } ] solto em comentario\nx = 1\n'))
-        self.assertTrue(_hcl_structurally_valid('b = <<EOT\n{ chave solta\nEOT\n'))  # heredoc
+        self.assertTrue(_hcl_structurally_valid('s = "} ) ] ${x}"\n'))  # interpolação em string
+        self.assertTrue(_hcl_structurally_valid("# ) } ] solto em comentario\nx = 1\n"))
+        self.assertTrue(_hcl_structurally_valid("b = <<EOT\n{ chave solta\nEOT\n"))  # heredoc
 
     def test_sintaxe_no_artefato_reprova_estatico(self):
         r = verify_code(SINTAXE, SEED, ORACLE)
@@ -115,10 +136,10 @@ class HeldoutTerraformEExecucao(unittest.TestCase):
         ex = _FakeExecutor(True)
         r = verify_code(FIX_OK, SEED, ORACLE, executor=ex)
         files, test_cmd = ex.called_with
-        self.assertEqual(ex.runtime, "terraform")          # seleciona a imagem terraform na F2
+        self.assertEqual(ex.runtime, "terraform")  # seleciona a imagem terraform na F2
         self.assertIn("terraform test", test_cmd)
         self.assertEqual(files.get("tests/naming.tftest.hcl"), HELDOUT)  # critério é o do oráculo
-        self.assertTrue(r["delivered_ok"])                 # fiação F2 intacta p/ terraform
+        self.assertTrue(r["delivered_ok"])  # fiação F2 intacta p/ terraform
 
     def test_execucao_falha_nao_credita(self):
         r = verify_code(FIX_OK, SEED, ORACLE, executor=_FakeExecutor(False))

@@ -22,6 +22,7 @@ são código versionado, não capacidade injetada — entram quando virarem prov
 O kernel (load_context/gate/emit_artifact/snapshot) usa brain/store CRUS: a
 permissão governa o handler, não a operação do template.
 """
+
 from __future__ import annotations
 
 import re
@@ -38,7 +39,8 @@ class ToolDenied(PermissionError):
         self.agent, self.capability = agent, capability
         super().__init__(
             f"{agent}: capacidade '{capability}' negada — não declarada em spec.tools "
-            f"(least-privilege; declare a tool ou remova o uso)")
+            f"(least-privilege; declare a tool ou remova o uso)"
+        )
 
 
 def grants_from_spec(spec: dict) -> set:
@@ -74,10 +76,15 @@ class _Guard:
         if self.grants & ALIASES[capability]:
             return
         if self.brain is not None:
-            self.brain.emit_event({
-                "actor": self.aid, "action": "tool_denied", "capability": capability,
-                "enforced": self.enforce, "run_id": self.run_id,
-            })
+            self.brain.emit_event(
+                {
+                    "actor": self.aid,
+                    "action": "tool_denied",
+                    "capability": capability,
+                    "enforced": self.enforce,
+                    "run_id": self.run_id,
+                }
+            )
         if self.enforce:
             raise ToolDenied(self.aid, capability)
 

@@ -6,7 +6,9 @@ Roda:  python -m nucleo.demo_eval
 gabarito conhecido. Em produção, o Gate 4 da promoção exige pass-rate >= threshold.
 Usa um Brain de eval separado (.brain-eval) para não poluir o Company Brain.
 """
+
 from __future__ import annotations
+
 import glob
 import os
 import sys
@@ -29,8 +31,10 @@ def main():
     llm = get_llm("worker")
     cp = MemorySaver()
 
-    spec_dirs = sorted(os.path.dirname(p) for p in
-                       glob.glob(os.path.join(ROOT, "guilds", "**", "spec.yaml"), recursive=True))
+    spec_dirs = sorted(
+        os.path.dirname(p)
+        for p in glob.glob(os.path.join(ROOT, "guilds", "**", "spec.yaml"), recursive=True)
+    )
     print(f"eval-harness | {len(spec_dirs)} agentes | LLM={llm.name}\n")
     print(f"{'Agente':<24}{'handler':<22}{'pass':>6}{'/tot':>5}{'rate':>7}")
     print("-" * 64)
@@ -41,7 +45,9 @@ def main():
         reports.append(rep)
         rate = f"{rep['rate']*100:.0f}%"
         warn = "" if rep["grader_found"] else "  (sem grader!)"
-        print(f"{rep['id']:<24}{rep['act_handler']:<22}{rep['passed']:>6}{rep['total']:>5}{rate:>7}{warn}")
+        print(
+            f"{rep['id']:<24}{rep['act_handler']:<22}{rep['passed']:>6}{rep['total']:>5}{rate:>7}{warn}"
+        )
 
     tot = sum(r["total"] for r in reports)
     pas = sum(r["passed"] for r in reports)
@@ -49,7 +55,9 @@ def main():
     print(f"{'TOTAL':<46}{pas:>6}{tot:>5}{(pas/tot*100 if tot else 0):>6.0f}%")
 
     # detalhe das falhas (se houver)
-    fails = [(r["id"], c["id"], c["desc"]) for r in reports for c in r["results"] if not c["passed"]]
+    fails = [
+        (r["id"], c["id"], c["desc"]) for r in reports for c in r["results"] if not c["passed"]
+    ]
     if fails:
         print("\nFalhas:")
         for aid, cid, desc in fails:

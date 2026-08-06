@@ -9,20 +9,29 @@ Prova as extensões JS/TS do oráculo sem tocar o lado Python:
   - offline segue honesto: delivered_ok=False mesmo com TS correto.
 Roda offline, stdlib pura (vitest real só no nightly).
 """
+
 from __future__ import annotations
+
 import unittest
 
-from nucleo.kernel.verification import verify_code, sha, _js_structurally_valid
 from nucleo.kernel.execution import ExecutionProvider
+from nucleo.kernel.verification import _js_structurally_valid, sha, verify_code
 
 CONTRACT = "# Contrato: total = soma de price*qty; vazio -> Error.\n"
-SKELETON = ("export function total(items: { price: number; qty: number }[]): number {\n"
-            "  throw new Error('not implemented');\n}\n")
-HELDOUT = ("import { it, expect } from 'vitest';\n"
-           "import { total } from './cart';\n"
-           "it('soma', () => { expect(total([{ price: 10, qty: 2 }])).toBe(20); });\n")
-SEED = {"src/cart.ts": SKELETON, "docs/cart_contract.md": CONTRACT,
-        "package.json": '{ "type": "module" }\n'}
+SKELETON = (
+    "export function total(items: { price: number; qty: number }[]): number {\n"
+    "  throw new Error('not implemented');\n}\n"
+)
+HELDOUT = (
+    "import { it, expect } from 'vitest';\n"
+    "import { total } from './cart';\n"
+    "it('soma', () => { expect(total([{ price: 10, qty: 2 }])).toBe(20); });\n"
+)
+SEED = {
+    "src/cart.ts": SKELETON,
+    "docs/cart_contract.md": CONTRACT,
+    "package.json": '{ "type": "module" }\n',
+}
 ORACLE = {
     "bug_file": "src/cart.ts",
     "protected_files": {"docs/cart_contract.md": sha(CONTRACT)},
@@ -31,19 +40,38 @@ ORACLE = {
     "runtime": "node",
     "test_cmd": "vitest run --reporter=dot",
 }
-FIX_OK = {"files": {"src/cart.ts": (
-    "export function total(items: { price: number; qty: number }[]): number {\n"
-    "  if (items.length === 0) throw new Error('vazio');\n"
-    "  return items.reduce((a, i) => a + i.price * i.qty, 0);\n}\n")}}
-SINTAXE = {"files": {"src/cart.ts": (
-    "export function total(items): number {\n"
-    "  return items.reduce((a, i) => a + i.price * i.qty, 0);\n")}}  # chave não fechada
-GAMING_EXIT = {"files": {"src/cart.ts": FIX_OK["files"]["src/cart.ts"].rstrip() + "\nprocess.exit(0);\n"}}
-GAMING_SKIP = {"files": {"src/cart.ts": FIX_OK["files"]["src/cart.ts"].rstrip()
-                         + "\nit.skip('todo', () => {});\n"}}
-AUTORA_PROVA = {"files": {"src/cart.ts": FIX_OK["files"]["src/cart.ts"],
-                          "src/cart.test.ts": "import { it, expect } from 'vitest';\n"
-                          "it('ok', () => { expect(true).toBe(true); });\n"}}
+FIX_OK = {
+    "files": {
+        "src/cart.ts": (
+            "export function total(items: { price: number; qty: number }[]): number {\n"
+            "  if (items.length === 0) throw new Error('vazio');\n"
+            "  return items.reduce((a, i) => a + i.price * i.qty, 0);\n}\n"
+        )
+    }
+}
+SINTAXE = {
+    "files": {
+        "src/cart.ts": (
+            "export function total(items): number {\n"
+            "  return items.reduce((a, i) => a + i.price * i.qty, 0);\n"
+        )
+    }
+}  # chave não fechada
+GAMING_EXIT = {
+    "files": {"src/cart.ts": FIX_OK["files"]["src/cart.ts"].rstrip() + "\nprocess.exit(0);\n"}
+}
+GAMING_SKIP = {
+    "files": {
+        "src/cart.ts": FIX_OK["files"]["src/cart.ts"].rstrip() + "\nit.skip('todo', () => {});\n"
+    }
+}
+AUTORA_PROVA = {
+    "files": {
+        "src/cart.ts": FIX_OK["files"]["src/cart.ts"],
+        "src/cart.test.ts": "import { it, expect } from 'vitest';\n"
+        "it('ok', () => { expect(true).toBe(true); });\n",
+    }
+}
 
 
 class _FakeExecutor(ExecutionProvider):
@@ -75,7 +103,9 @@ class ParserEstruturalJS(unittest.TestCase):
         # chaves/parênteses dentro de strings e templates não desbalanceiam
         self.assertTrue(_js_structurally_valid("export const s = '} ) ]';\n"))
         self.assertTrue(_js_structurally_valid("export const t = `a ${b} c`;\n"))
-        self.assertTrue(_js_structurally_valid("export const c = 1; // ) } ] solto em comentario\n"))
+        self.assertTrue(
+            _js_structurally_valid("export const c = 1; // ) } ] solto em comentario\n")
+        )
 
     def test_sintaxe_no_artefato_reprova_estatico(self):
         r = verify_code(SINTAXE, SEED, ORACLE)
@@ -113,10 +143,10 @@ class HeldoutNodeEExecucao(unittest.TestCase):
         ex = _FakeExecutor(True)
         r = verify_code(FIX_OK, SEED, ORACLE, executor=ex)
         files, test_cmd = ex.called_with
-        self.assertEqual(ex.runtime, "node")               # seleciona a imagem vitest na F2
+        self.assertEqual(ex.runtime, "node")  # seleciona a imagem vitest na F2
         self.assertEqual(test_cmd, "vitest run --reporter=dot")
         self.assertEqual(files.get("src/cart.test.ts"), HELDOUT)  # critério é o do oráculo
-        self.assertTrue(r["delivered_ok"])                 # fiação F2 intacta p/ node
+        self.assertTrue(r["delivered_ok"])  # fiação F2 intacta p/ node
 
     def test_execucao_falha_nao_credita(self):
         r = verify_code(FIX_OK, SEED, ORACLE, executor=_FakeExecutor(False))

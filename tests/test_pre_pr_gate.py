@@ -5,6 +5,7 @@ Trava o comportamento que torna os pontos da avaliação do Hermes executáveis 
 natureza REPROVA; handler genérico é fora de escopo; o exemplo correto passa. Ver o episódio
 #30/#31/#32 (evals tautológicos que passaram em todos os gates verdes).
 """
+
 import json
 import os
 import tempfile
@@ -31,8 +32,13 @@ class PrePrGateAuditTest(unittest.TestCase):
         self.tmp = tempfile.mkdtemp()
 
     def test_handler_generico_fora_de_escopo(self):
-        sp = _mk_agent(self.tmp, "g-router", "supervisor_route", "G09-customer-operations",
-                       [{"id": "r1", "expected": {"routed_to": "x"}}])
+        sp = _mk_agent(
+            self.tmp,
+            "g-router",
+            "supervisor_route",
+            "G09-customer-operations",
+            [{"id": "r1", "expected": {"routed_to": "x"}}],
+        )
         self.assertEqual(pre_pr_gate._audit_agent(sp), [])
 
     def test_calculo_sem_proveniencia_reprova(self):
@@ -45,8 +51,10 @@ class PrePrGateAuditTest(unittest.TestCase):
         # A exigência de >=1 independent fabricou os 380 do #66-80 (mesmo mecanismo do
         # guardrail 'não exigir human'): catalog-only é o estado HONESTO de cálculo/decisão
         # até existir fonte externa real — não reprova.
-        cases = [{"id": "c1", "provenance": "catalog", "expected": {"cost_ratio": 0.2}},
-                 {"id": "c2", "provenance": "catalog", "expected": {"cost_ratio": 0.3}}]
+        cases = [
+            {"id": "c1", "provenance": "catalog", "expected": {"cost_ratio": 0.2}},
+            {"id": "c2", "provenance": "catalog", "expected": {"cost_ratio": 0.3}},
+        ]
         sp = _mk_agent(self.tmp, "g8-calc-ok", "billing_calc", "G08-vendas-receita", cases)
         self.assertEqual(pre_pr_gate._audit_agent(sp), [])
 
@@ -58,16 +66,26 @@ class PrePrGateAuditTest(unittest.TestCase):
         self.assertTrue(any("SEM lastro" in v for v in viol))
 
     def test_independent_com_source_externo_passa(self):
-        cases = [{"id": "c1", "provenance": "independent",
-                  "source": "https://exemplo.gov/tabela-2026#v3",
-                  "expected": {"cost_ratio": 0.2}}]
+        cases = [
+            {
+                "id": "c1",
+                "provenance": "independent",
+                "source": "https://exemplo.gov/tabela-2026#v3",
+                "expected": {"cost_ratio": 0.2},
+            }
+        ]
         sp = _mk_agent(self.tmp, "g8-fonte", "billing_calc", "G08-vendas-receita", cases)
         self.assertEqual(pre_pr_gate._audit_agent(sp), [])
 
     def test_independent_com_heldout_executavel_passa(self):
-        cases = [{"id": "b1", "provenance": "independent",
-                  "oracle": {"heldout_files": {"test_x.py": "assert True"}},
-                  "expected": {"status": "pass"}}]
+        cases = [
+            {
+                "id": "b1",
+                "provenance": "independent",
+                "oracle": {"heldout_files": {"test_x.py": "assert True"}},
+                "expected": {"status": "pass"},
+            }
+        ]
         sp = _mk_agent(self.tmp, "g3-exec-ok", "build_handler", "G03-engenharia", cases)
         self.assertEqual(pre_pr_gate._audit_agent(sp), [])
 
@@ -85,9 +103,14 @@ class PrePrGateAuditTest(unittest.TestCase):
         self.assertTrue(any("held-out" in v for v in viol))
 
     def test_build_com_heldout_passa(self):
-        cases = [{"id": "b1", "provenance": "catalog",
-                  "oracle": {"heldout_files": {"test_x.py": "assert True"}},
-                  "expected": {"status": "pass"}}]
+        cases = [
+            {
+                "id": "b1",
+                "provenance": "catalog",
+                "oracle": {"heldout_files": {"test_x.py": "assert True"}},
+                "expected": {"status": "pass"},
+            }
+        ]
         sp = _mk_agent(self.tmp, "g3-build-ok", "spec_executor", "G03-engenharia", cases)
         self.assertEqual(pre_pr_gate._audit_agent(sp), [])
 

@@ -7,9 +7,10 @@ top-level do output (o grader genérico de contrato valida `expected` direto).
 Mesmo padrão de skills_finance/skills_custops: assinatura
 handler(state, *, llm, store, spec) -> {output, cost_tokens, citations}.
 """
+
 from __future__ import annotations
 
-from .skills import register, _tokens, _spec_citations
+from .skills import _spec_citations, _tokens, register
 
 
 def _out(spec, state, fields, rationale_prompt, llm):
@@ -18,7 +19,11 @@ def _out(spec, state, fields, rationale_prompt, llm):
     out["rationale"] = rationale
     out["by"] = spec["id"]
     out["tenant"] = state.get("task", {}).get("tenant_id")
-    return {"output": out, "cost_tokens": _tokens(rationale), "citations": _spec_citations(state, spec)}
+    return {
+        "output": out,
+        "cost_tokens": _tokens(rationale),
+        "citations": _spec_citations(state, spec),
+    }
 
 
 def _pct_at(values, q):
@@ -43,7 +48,8 @@ def coverage_check(state, *, llm, store, spec):
     coverage_pct = round(covered_lines / total_lines * 100, 1) if total_lines else 0.0
     # Gaps críticos: módulo marcado critical e descoberto (covered < lines).
     critical_gaps = [
-        m.get("name") for m in modules
+        m.get("name")
+        for m in modules
         if m.get("critical") and (m.get("covered", 0) or 0) < (m.get("lines", 0) or 0)
     ]
     baseline = c.get("baseline_pct")
@@ -51,11 +57,22 @@ def coverage_check(state, *, llm, store, spec):
     rising_debt = coverage_delta is not None and coverage_delta < 0
     passed = coverage_pct >= threshold and not critical_gaps
     decision = "PASS" if passed else "FAIL"
-    return _out(spec, state, {
-        "coverage_pct": coverage_pct, "threshold": threshold, "decision": decision,
-        "passed": passed, "critical_gaps": critical_gaps, "critical_gap_count": len(critical_gaps),
-        "coverage_delta": coverage_delta, "rising_debt": rising_debt,
-    }, f"Voce e {spec['id']}: cobertura {coverage_pct}% (min {threshold}%), {len(critical_gaps)} gaps criticos, {decision}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "coverage_pct": coverage_pct,
+            "threshold": threshold,
+            "decision": decision,
+            "passed": passed,
+            "critical_gaps": critical_gaps,
+            "critical_gap_count": len(critical_gaps),
+            "coverage_delta": coverage_delta,
+            "rising_debt": rising_debt,
+        },
+        f"Voce e {spec['id']}: cobertura {coverage_pct}% (min {threshold}%), {len(critical_gaps)} gaps criticos, {decision}.",
+        llm,
+    )
 
 
 @register("regression_drift")
@@ -79,11 +96,21 @@ def regression_drift(state, *, llm, store, spec):
     cost_drift = cost_ratio > 1.15
     drift = "FAIL" if (severity == "P0") else ("WARN" if (quality_drift or cost_drift) else "OK")
     regression_confirmed = quality_drift or cost_drift
-    return _out(spec, state, {
-        "delta_vs_baseline": delta_pp, "cost_ratio": cost_ratio, "drift": drift,
-        "severity": severity, "quality_drift": quality_drift, "cost_drift": cost_drift,
-        "regression_confirmed": regression_confirmed,
-    }, f"Voce e {spec['id']}: delta {delta_pp}pp vs baseline, custo {cost_ratio}x, drift {drift} ({severity}).", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "delta_vs_baseline": delta_pp,
+            "cost_ratio": cost_ratio,
+            "drift": drift,
+            "severity": severity,
+            "quality_drift": quality_drift,
+            "cost_drift": cost_drift,
+            "regression_confirmed": regression_confirmed,
+        },
+        f"Voce e {spec['id']}: delta {delta_pp}pp vs baseline, custo {cost_ratio}x, drift {drift} ({severity}).",
+        llm,
+    )
 
 
 @register("load_sla")
@@ -112,11 +139,23 @@ def load_sla(state, *, llm, store, spec):
         cost_ratio = round(cost / price, 4)
         c3_ok = cost_ratio <= 0.25
     sla_verdict = "PASS" if (sla_ok and c3_ok) else "FAIL"
-    return _out(spec, state, {
-        "p50_ms": p50, "p95_ms": p95, "p99_ms": p99, "throughput_rps": throughput,
-        "error_rate_pct": error_rate, "sla_ok": sla_ok, "c3_ok": c3_ok,
-        "cost_ratio": cost_ratio, "sla_verdict": sla_verdict,
-    }, f"Voce e {spec['id']}: p95 {p95}ms (target {p95_target}), erro {error_rate}%, veredito {sla_verdict}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "p50_ms": p50,
+            "p95_ms": p95,
+            "p99_ms": p99,
+            "throughput_rps": throughput,
+            "error_rate_pct": error_rate,
+            "sla_ok": sla_ok,
+            "c3_ok": c3_ok,
+            "cost_ratio": cost_ratio,
+            "sla_verdict": sla_verdict,
+        },
+        f"Voce e {spec['id']}: p95 {p95}ms (target {p95_target}), erro {error_rate}%, veredito {sla_verdict}.",
+        llm,
+    )
 
 
 @register("eval_pass_at_k")
@@ -144,11 +183,19 @@ def eval_pass_at_k(state, *, llm, store, spec):
         for cat in cat_succ
     }
     avg_cost_per_case = round(total_cost / n_cases, 4) if n_cases else 0.0
-    return _out(spec, state, {
-        "case_count": n_cases, "k": k, "pass_at_k": pass_at_k,
-        "pass_rate_by_category": pass_rate_by_category,
-        "avg_cost_per_case": avg_cost_per_case,
-    }, f"Voce e {spec['id']}: {n_cases} cases, pass@{k} {pass_at_k}%, custo medio {avg_cost_per_case}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "case_count": n_cases,
+            "k": k,
+            "pass_at_k": pass_at_k,
+            "pass_rate_by_category": pass_rate_by_category,
+            "avg_cost_per_case": avg_cost_per_case,
+        },
+        f"Voce e {spec['id']}: {n_cases} cases, pass@{k} {pass_at_k}%, custo medio {avg_cost_per_case}.",
+        llm,
+    )
 
 
 @register("agreement_rate")
@@ -173,8 +220,7 @@ def agreement_rate(state, *, llm, store, spec):
         elif p.get("agent_more_conservative"):
             cat_conservative[cat] = cat_conservative.get(cat, 0) + 1
     agreement_rate_by_category = {
-        cat: round(cat_agree.get(cat, 0) / cat_total[cat] * 100, 1)
-        for cat in cat_total
+        cat: round(cat_agree.get(cat, 0) / cat_total[cat] * 100, 1) for cat in cat_total
     }
     # Viés sistemático: categoria onde >=60% das discordâncias são do mesmo lado.
     bias_flags = []
@@ -192,13 +238,23 @@ def agreement_rate(state, *, llm, store, spec):
         recommendation = "reter_amostra_insuficiente"
     else:
         recommendation = "reter"
-    return _out(spec, state, {
-        "agreement_rate": global_rate, "agreement_rate_by_category": agreement_rate_by_category,
-        "sample_size": sample_size, "shadow_window_days": window_days,
-        "window_ok": window_ok, "sample_ok": sample_ok,
-        "bias_flags": bias_flags, "weak_categories": weak_categories,
-        "recommendation": recommendation,
-    }, f"Voce e {spec['id']}: agreement {global_rate}% em {window_days}d ({sample_size} pares), recomendacao {recommendation}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "agreement_rate": global_rate,
+            "agreement_rate_by_category": agreement_rate_by_category,
+            "sample_size": sample_size,
+            "shadow_window_days": window_days,
+            "window_ok": window_ok,
+            "sample_ok": sample_ok,
+            "bias_flags": bias_flags,
+            "weak_categories": weak_categories,
+            "recommendation": recommendation,
+        },
+        f"Voce e {spec['id']}: agreement {global_rate}% em {window_days}d ({sample_size} pares), recomendacao {recommendation}.",
+        llm,
+    )
 
 
 @register("quality_gate_decision")
@@ -227,11 +283,20 @@ def quality_gate_decision(state, *, llm, store, spec):
     if technical_pass:
         decision, valid = "PASS", True
     elif bypass:
-        decision, valid = "PASS_BYPASS", True   # override de incidente auditado
+        decision, valid = "PASS_BYPASS", True  # override de incidente auditado
     else:
         decision, valid = "FAIL", False
-    return _out(spec, state, {
-        "decision": decision, "valid": valid, "criteria": criteria,
-        "failed_criteria": failed, "lovability": lovability,
-        "bypass_used": bypass and not technical_pass,
-    }, f"Voce e {spec['id']}: gate {decision}, {len(failed)} criterios falhos, lovability {lovability}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "decision": decision,
+            "valid": valid,
+            "criteria": criteria,
+            "failed_criteria": failed,
+            "lovability": lovability,
+            "bypass_used": bypass and not technical_pass,
+        },
+        f"Voce e {spec['id']}: gate {decision}, {len(failed)} criterios falhos, lovability {lovability}.",
+        llm,
+    )

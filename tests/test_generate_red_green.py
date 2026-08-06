@@ -10,21 +10,30 @@ O que estes testes garantem (offline, LLM roteirizado + executor fake):
   6. erro de infra (None) não itera às cegas;
   7. run_generative mede SÓ os elegíveis e publica delivered_eligible_rate generativo.
 """
+
 from __future__ import annotations
 
 import json
 import unittest
 
-from nucleo.kernel.generate import generate_red_green, _extract_files
+from nucleo.kernel.generate import _extract_files, generate_red_green
 from nucleo.quality import exec_report
 
 SECRET = "HELDOUT_SECRET_TOKEN_XYZ"
 
-SEED = {"app.py": "def soma(a, b):\n    return a - b\n",
-        "test_app.py": "from app import soma\n\ndef test_soma():\n    assert soma(2, 2) == 4\n"}
-ORACLE = {"bug_file": "app.py", "runtime": "python", "test_cmd": "pytest -q",
-          "heldout_files": {"test_held.py": f"# {SECRET}\nfrom app import soma\n"
-                                            f"def test_h():\n    assert soma(1, 1) == 2\n"}}
+SEED = {
+    "app.py": "def soma(a, b):\n    return a - b\n",
+    "test_app.py": "from app import soma\n\ndef test_soma():\n    assert soma(2, 2) == 4\n",
+}
+ORACLE = {
+    "bug_file": "app.py",
+    "runtime": "python",
+    "test_cmd": "pytest -q",
+    "heldout_files": {
+        "test_held.py": f"# {SECRET}\nfrom app import soma\n"
+        f"def test_h():\n    assert soma(1, 1) == 2\n"
+    },
+}
 GOOD = json.dumps({"files": {"app.py": "def soma(a, b):\n    return a + b\n"}})
 BAD = json.dumps({"files": {"app.py": "def soma(a, b):\n    return a * b\n"}})
 
@@ -80,16 +89,21 @@ class RedGreenLoopTest(unittest.TestCase):
         self.assertIn("AssertionError", llm.prompts[1])
 
     def test_heldout_jamais_vaza_no_prompt_e_patch_em_heldout_e_descartado(self):
-        malicious = json.dumps({"files": {
-            "app.py": "def soma(a, b):\n    return a + b\n",
-            "test_held.py": "def test_h():\n    assert True\n"}})   # tenta escrever o critério
+        malicious = json.dumps(
+            {
+                "files": {
+                    "app.py": "def soma(a, b):\n    return a + b\n",
+                    "test_held.py": "def test_h():\n    assert True\n",
+                }
+            }
+        )  # tenta escrever o critério
         llm = ScriptedLLM([malicious])
         ex = ScriptedExecutor([True])
         r = generate_red_green("corrija soma", SEED, ORACLE, llm, ex)
         for prompt in llm.prompts:
-            self.assertNotIn(SECRET, prompt)          # conteúdo held-out fora do prompt
+            self.assertNotIn(SECRET, prompt)  # conteúdo held-out fora do prompt
             self.assertNotIn("test_held.py", prompt)  # nem o path é anunciado
-        self.assertNotIn("test_held.py", r["artifact"]["files"])   # autor != provador
+        self.assertNotIn("test_held.py", r["artifact"]["files"])  # autor != provador
         self.assertEqual(r["history"][0]["dropped_heldout_paths"], ["test_held.py"])
         # e o held-out não entrou na execução VISÍVEL do loop
         self.assertNotIn("test_held.py", ex.executed_files[0])
@@ -100,9 +114,14 @@ class RedGreenLoopTest(unittest.TestCase):
         # tocado, (c) devolver feedback nomeando o arquivo. Na 2ª tentativa limpa, green.
         oracle = dict(ORACLE)
         oracle["protected_files"] = {"test_app.py": "sha-qualquer"}
-        gaming = json.dumps({"files": {
-            "app.py": "def soma(a, b):\n    return a + b\n",
-            "test_app.py": "def test_soma():\n    assert True\n"}})
+        gaming = json.dumps(
+            {
+                "files": {
+                    "app.py": "def soma(a, b):\n    return a + b\n",
+                    "test_app.py": "def test_soma():\n    assert True\n",
+                }
+            }
+        )
         llm = ScriptedLLM([gaming, GOOD])
         ex = ScriptedExecutor([True, True])
         r = generate_red_green("corrija soma", SEED, oracle, llm, ex)
@@ -129,7 +148,7 @@ class RedGreenLoopTest(unittest.TestCase):
         self.assertTrue(r["loop_green"])
         self.assertEqual(r["attempts"], 2)
         self.assertFalse(r["history"][0]["parsed"])
-        self.assertIn("JSON", llm.prompts[1])   # feedback pediu o contrato
+        self.assertIn("JSON", llm.prompts[1])  # feedback pediu o contrato
 
     def test_sem_executor_e_one_shot_honesto(self):
         llm = ScriptedLLM([GOOD])
@@ -143,7 +162,7 @@ class RedGreenLoopTest(unittest.TestCase):
         ex = ScriptedExecutor([None])
         r = generate_red_green("corrija soma", SEED, ORACLE, llm, ex)
         self.assertFalse(r["loop_green"])
-        self.assertEqual(r["attempts"], 1)   # parou no None, não gastou budget às cegas
+        self.assertEqual(r["attempts"], 1)  # parou no None, não gastou budget às cegas
 
     def test_green_executavel_com_estatico_vermelho_nao_fecha_o_loop(self):
         # infra real: terraform validate passa com o marcador TODO ainda no arquivo — o
@@ -152,29 +171,44 @@ class RedGreenLoopTest(unittest.TestCase):
         oracle["bug_markers"] = {"must_remove": ["TODO-MARK"], "must_contain": []}
         seed = dict(SEED)
         seed["app.py"] = "def soma(a, b):\n    return a - b  # TODO-MARK\n"
-        marker_left = json.dumps({"files": {"app.py": "def soma(a, b):\n    return a + b  # TODO-MARK\n"}})
+        marker_left = json.dumps(
+            {"files": {"app.py": "def soma(a, b):\n    return a + b  # TODO-MARK\n"}}
+        )
         clean = json.dumps({"files": {"app.py": "def soma(a, b):\n    return a + b\n"}})
         llm = ScriptedLLM([marker_left, clean])
-        ex = ScriptedExecutor([True, True])   # executável green nas duas
+        ex = ScriptedExecutor([True, True])  # executável green nas duas
         r = generate_red_green("corrija soma", seed, oracle, llm, ex)
         self.assertTrue(r["loop_green"])
         self.assertEqual(r["attempts"], 2)
         self.assertIs(r["history"][0]["static_ok"], False)
-        self.assertIn("bug_addressed", llm.prompts[1])   # feedback nomeou o critério
+        self.assertIn("bug_addressed", llm.prompts[1])  # feedback nomeou o critério
 
     def test_semente_sem_teste_visivel_usa_sonda_estatica_sem_executar(self):
         # backend/frontend/mobile: o único teste é o held-out (oculto). O loop não pode
         # executar (rodaria vazio) nem ver o held-out: itera contra a SONDA ESTÁTICA e
         # vaza só o NOME do critério reprovado. O executor não é chamado no loop.
         seed = {"api/orders.py": "def total(items):\n    return 0  # TODO-BUG\n"}
-        oracle = {"bug_file": "api/orders.py", "runtime": "python",
-                  "test_cmd": "pytest -q",
-                  "bug_markers": {"must_remove": ["TODO-BUG"], "must_contain": []},
-                  "heldout_files": {"test_orders.py": f"# {SECRET}\n"}}
-        still_bad = json.dumps({"files": {"api/orders.py":
-                                          "def total(items):\n    # ajuste\n    return 0  # TODO-BUG\n"}})
-        good = json.dumps({"files": {"api/orders.py":
-                                     "def total(items):\n    return sum(i['price'] * i['qty'] for i in items)\n"}})
+        oracle = {
+            "bug_file": "api/orders.py",
+            "runtime": "python",
+            "test_cmd": "pytest -q",
+            "bug_markers": {"must_remove": ["TODO-BUG"], "must_contain": []},
+            "heldout_files": {"test_orders.py": f"# {SECRET}\n"},
+        }
+        still_bad = json.dumps(
+            {
+                "files": {
+                    "api/orders.py": "def total(items):\n    # ajuste\n    return 0  # TODO-BUG\n"
+                }
+            }
+        )
+        good = json.dumps(
+            {
+                "files": {
+                    "api/orders.py": "def total(items):\n    return sum(i['price'] * i['qty'] for i in items)\n"
+                }
+            }
+        )
         llm = ScriptedLLM([still_bad, good])
         ex = ScriptedExecutor([True] * 5)
         r = generate_red_green("some o carrinho", seed, oracle, llm, ex)
@@ -182,25 +216,39 @@ class RedGreenLoopTest(unittest.TestCase):
         self.assertTrue(r["history"][0]["static_probe"])
         self.assertEqual(r["history"][0]["first_fail"], "bug_addressed")
         self.assertTrue(r["history"][1]["static_ok"])
-        self.assertEqual(ex.executed_files, [])          # loop não executou nada
-        self.assertIn("bug_addressed", llm.prompts[1])   # feedback = só o nome do critério
+        self.assertEqual(ex.executed_files, [])  # loop não executou nada
+        self.assertIn("bug_addressed", llm.prompts[1])  # feedback = só o nome do critério
         for p in llm.prompts:
-            self.assertNotIn(SECRET, p)                  # held-out continua fora
+            self.assertNotIn(SECRET, p)  # held-out continua fora
 
     def test_selftest_do_agente_itera_no_loop_mas_nao_entra_na_entrega(self):
         # fronteira real (backend-03/frontend-07): sem teste visível, one-shot perfeito era
         # a única via. Agora o agente escreve o PRÓPRIO teste do contrato: roda no loop
         # (red→feedback→green), mas é REMOVIDO da entrega — teste de agente não é prova.
         seed = {"api/orders.py": "def total(items):\n    return 0  # TODO-BUG\n"}
-        oracle = {"bug_file": "api/orders.py", "runtime": "python", "test_cmd": "pytest -q",
-                  "bug_markers": {"must_remove": ["TODO-BUG"], "must_contain": []},
-                  "heldout_files": {"test_orders.py": f"# {SECRET}\n"}}
-        wrong = json.dumps({"files": {
-            "api/orders.py": "def total(items):\n    return sum(i['price'] for i in items)\n",
-            "test_selfcheck.py": "from api.orders import total\n\ndef test_qty():\n    assert total([{'price': 2, 'qty': 3}]) == 6\n"}})
-        right = json.dumps({"files": {
-            "api/orders.py": "def total(items):\n    return sum(i['price'] * i['qty'] for i in items)\n",
-            "test_selfcheck.py": "from api.orders import total\n\ndef test_qty():\n    assert total([{'price': 2, 'qty': 3}]) == 6\n"}})
+        oracle = {
+            "bug_file": "api/orders.py",
+            "runtime": "python",
+            "test_cmd": "pytest -q",
+            "bug_markers": {"must_remove": ["TODO-BUG"], "must_contain": []},
+            "heldout_files": {"test_orders.py": f"# {SECRET}\n"},
+        }
+        wrong = json.dumps(
+            {
+                "files": {
+                    "api/orders.py": "def total(items):\n    return sum(i['price'] for i in items)\n",
+                    "test_selfcheck.py": "from api.orders import total\n\ndef test_qty():\n    assert total([{'price': 2, 'qty': 3}]) == 6\n",
+                }
+            }
+        )
+        right = json.dumps(
+            {
+                "files": {
+                    "api/orders.py": "def total(items):\n    return sum(i['price'] * i['qty'] for i in items)\n",
+                    "test_selfcheck.py": "from api.orders import total\n\ndef test_qty():\n    assert total([{'price': 2, 'qty': 3}]) == 6\n",
+                }
+            }
+        )
         llm = ScriptedLLM([wrong, right])
         ex = ScriptedExecutor([False, True], outputs=["assert 2 == 6"])
         r = generate_red_green("some price*qty", seed, oracle, llm, ex)
@@ -221,11 +269,21 @@ class RedGreenLoopTest(unittest.TestCase):
 
     def test_resposta_so_com_teste_gera_feedback_pedindo_o_patch(self):
         seed = {"api/orders.py": "def total(items):\n    return 0  # TODO-BUG\n"}
-        oracle = {"bug_file": "api/orders.py", "runtime": "python", "test_cmd": "pytest -q",
-                  "bug_markers": {"must_remove": ["TODO-BUG"], "must_contain": []},
-                  "heldout_files": {"test_orders.py": "# oculto\n"}}
+        oracle = {
+            "bug_file": "api/orders.py",
+            "runtime": "python",
+            "test_cmd": "pytest -q",
+            "bug_markers": {"must_remove": ["TODO-BUG"], "must_contain": []},
+            "heldout_files": {"test_orders.py": "# oculto\n"},
+        }
         only_test = json.dumps({"files": {"test_selfcheck.py": "def test_x():\n    assert True\n"}})
-        good = json.dumps({"files": {"api/orders.py": "def total(items):\n    return sum(i['price'] * i['qty'] for i in items)\n"}})
+        good = json.dumps(
+            {
+                "files": {
+                    "api/orders.py": "def total(items):\n    return sum(i['price'] * i['qty'] for i in items)\n"
+                }
+            }
+        )
         llm = ScriptedLLM([only_test, good])
         ex = ScriptedExecutor([True] * 3)
         r = generate_red_green("some o carrinho", seed, oracle, llm, ex)
@@ -237,13 +295,12 @@ class RedGreenLoopTest(unittest.TestCase):
     def test_selftest_nao_e_instruido_quando_ha_teste_visivel(self):
         llm = ScriptedLLM([GOOD])
         ex = ScriptedExecutor([True])
-        generate_red_green("corrija soma", SEED, ORACLE, llm, ex)   # SEED tem test_app.py
+        generate_red_green("corrija soma", SEED, ORACLE, llm, ex)  # SEED tem test_app.py
         self.assertNotIn("test_selfcheck.py", llm.prompts[0])
 
     def test_extract_files_aceita_json_cercado(self):
         text = "Aqui está:\n```json\n" + GOOD + "\n```\nEspero que ajude!"
-        self.assertEqual(_extract_files(text),
-                         {"app.py": "def soma(a, b):\n    return a + b\n"})
+        self.assertEqual(_extract_files(text), {"app.py": "def soma(a, b):\n    return a + b\n"})
 
 
 class RunGenerativeTest(unittest.TestCase):
@@ -260,7 +317,7 @@ class RunGenerativeTest(unittest.TestCase):
         ex = ScriptedExecutor([False] * 200)
         rep = exec_report.run_generative(self.SPEC_DIR, llm=llm, executor=ex)
         self.assertTrue(rep["generative"])
-        self.assertEqual(rep["n"], n_eligible)          # negativos-por-design FORA
+        self.assertEqual(rep["n"], n_eligible)  # negativos-por-design FORA
         summary = exec_report.summarize(rep, executor_name=ex.name, executor_available=True)
         self.assertEqual(summary["delivered_eligible_rate"]["total"], n_eligible)
         self.assertEqual(summary["delivered_eligible_rate"]["passed"], 0)
@@ -271,6 +328,7 @@ class RunGenerativeTest(unittest.TestCase):
     def test_main_generative_exige_llm_real_quando_pedido(self):
         import io
         from contextlib import redirect_stderr
+
         buf = io.StringIO()
         with redirect_stderr(buf):
             code = exec_report.main(["--generative", "--require-real-llm", self.SPEC_DIR])

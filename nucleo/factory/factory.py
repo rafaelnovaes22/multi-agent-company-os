@@ -4,7 +4,9 @@ Lê uma spec (+ eval-cases), roda o gate de fábrica (C1/C2/C3/C4) e materializa
 o agente via o template universal. "Implementar cada agente" = escrever a spec;
 a Fábrica gera o resto. Ver 02-ARQUITETURA.md §5.
 """
+
 from __future__ import annotations
+
 import json
 import os
 
@@ -54,7 +56,9 @@ def factory_gate(spec: dict, *, strict: bool = False) -> dict:
 
     # C4 — eval-suite (produção exige >=30; Sprint 0 apenas avisa)
     if spec.get("eval_count", 0) < 30:
-        warnings.append(f"C4: eval-suite com {spec.get('eval_count', 0)} casos (<30) — ok p/ Sprint 0")
+        warnings.append(
+            f"C4: eval-suite com {spec.get('eval_count', 0)} casos (<30) — ok p/ Sprint 0"
+        )
 
     if problems and strict:
         raise FactoryGateError("; ".join(problems))

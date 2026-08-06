@@ -1,7 +1,9 @@
 """skills_registry — registro e helpers base para handlers (SRP: só registro)."""
+
 from __future__ import annotations
 
-from typing import Any, Callable
+from collections.abc import Callable
+from typing import Any
 
 _HANDLERS: dict[str, Callable[..., Any]] = {}
 
@@ -10,6 +12,7 @@ def register(name: str) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
     def deco(fn: Callable[..., Any]) -> Callable[..., Any]:
         _HANDLERS[name] = fn
         return fn
+
     return deco
 
 
@@ -24,9 +27,9 @@ def _tokens(text: str) -> int:
 def _spec_citations(state: dict[str, Any], spec: dict[str, Any]) -> list[str]:
     """Deriva citations da spec (C6): consumes_l0 + tools + delivered_event + tenant."""
     cites = []
-    for ref in (spec.get("consumes_l0") or []):
+    for ref in spec.get("consumes_l0") or []:
         cites.append("l0:" + str(ref))
-    for tool in (spec.get("tools") or []):
+    for tool in spec.get("tools") or []:
         cites.append("tool:" + str(tool))
     dev = (spec.get("outcome_clause") or {}).get("delivered_event")
     if dev:

@@ -7,7 +7,9 @@
 Em produção: Postgres + pgvector + grafo. Aqui: arquivos locais, para a demo rodar
 sem infra. A fronteira (a interface) é a mesma.
 """
+
 from __future__ import annotations
+
 import datetime
 import json
 import os
@@ -55,7 +57,9 @@ class FileStore:
         return d
 
     def put(self, namespace: tuple, key: str, value) -> None:
-        with open(os.path.join(self._dir(namespace), _safe(key) + ".json"), "w", encoding="utf-8") as f:
+        with open(
+            os.path.join(self._dir(namespace), _safe(key) + ".json"), "w", encoding="utf-8"
+        ) as f:
             json.dump({"key": key, "value": value}, f, ensure_ascii=False, indent=2)
 
     def get(self, namespace: tuple, key: str):

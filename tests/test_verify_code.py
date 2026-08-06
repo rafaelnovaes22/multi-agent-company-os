@@ -5,12 +5,14 @@ fix correto — distinção que o generic_contract_grader (contrato) NÃO faz. E
 honesto: offline `delivered_ok` é SEMPRE False (sem executar não se afirma correção).
 Roda offline, stdlib pura.
 """
+
 from __future__ import annotations
+
 import unittest
 
-from nucleo.kernel.verification import verify_code, sha
-from nucleo.kernel.skills_exec import spec_executor
 from nucleo.kernel.providers.llm import FakeLLMProvider
+from nucleo.kernel.skills_exec import spec_executor
+from nucleo.kernel.verification import sha, verify_code
 from nucleo.quality.graders import generic_contract_grader
 
 SEED = {
@@ -22,18 +24,31 @@ ORACLE = {
     "protected_files": {"test_app.py": sha(SEED["test_app.py"])},
     "bug_markers": {"must_remove": ["pct"], "must_contain": ["percent"]},
 }
-FIX_OK = {"files": {"app.py": "def discount(price, percent):\n    return price - price * percent / 100\n"}}
+FIX_OK = {
+    "files": {"app.py": "def discount(price, percent):\n    return price - price * percent / 100\n"}
+}
 DELETA = {"files": {"app.py": FIX_OK["files"]["app.py"], "test_app.py": "def t():\n    pass\n"}}
-GAMING = {"files": {"app.py": "import sys\ndef discount(price, percent):\n    sys.exit(0)\n    return price * percent\n"}}
+GAMING = {
+    "files": {
+        "app.py": "import sys\ndef discount(price, percent):\n    sys.exit(0)\n    return price * percent\n"
+    }
+}
 SINTAXE = {"files": {"app.py": "def discount(price, percent)\n    return percent\n"}}
-TEXTO = {"content": "Eu corrigiria a variável...", "rationale": "x", "by": "g3-build-error-resolver"}
-PLAUSIVEL = {"files": {"app.py": "def discount(price, percent):\n    return price - percent / 100\n"}}
+TEXTO = {
+    "content": "Eu corrigiria a variável...",
+    "rationale": "x",
+    "by": "g3-build-error-resolver",
+}
+PLAUSIVEL = {
+    "files": {"app.py": "def discount(price, percent):\n    return price - percent / 100\n"}
+}
 
 
 def _run(artifact):
     state = {"task": {"artifact": artifact, "seed": SEED, "oracle": ORACLE}}
-    return spec_executor(state, llm=FakeLLMProvider(), store=None,
-                         spec={"id": "g3-build-error-resolver"})["output"]
+    return spec_executor(
+        state, llm=FakeLLMProvider(), store=None, spec={"id": "g3-build-error-resolver"}
+    )["output"]
 
 
 class VerifyCodeOracle(unittest.TestCase):

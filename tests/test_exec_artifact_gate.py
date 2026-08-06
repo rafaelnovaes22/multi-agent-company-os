@@ -7,6 +7,7 @@ de propósito. O gate por isso NÃO exige `credited == total` nem `tests_failed_
 creditou entregas legítimas (>0), o oráculo classificou cada caso conforme o `expected`
 (`oracle_correct`), e nenhum caso que o expected manda rejeitar foi creditado.
 """
+
 from __future__ import annotations
 
 import io
@@ -21,24 +22,49 @@ from nucleo.quality import exec_artifact_gate
 
 def _row(rid, *, static_ok, expected_static_ok, credit, tests_pass=None):
     oc = (static_ok == expected_static_ok) if isinstance(expected_static_ok, bool) else None
-    return {"id": rid, "static_ok": static_ok, "expected_static_ok": expected_static_ok,
-            "execution_credit": credit, "tests_pass": tests_pass, "oracle_correct": oc}
+    return {
+        "id": rid,
+        "static_ok": static_ok,
+        "expected_static_ok": expected_static_ok,
+        "execution_credit": credit,
+        "tests_pass": tests_pass,
+        "oracle_correct": oc,
+    }
 
 
 def _healthy_rows():
     # 1 correto creditado + 1 plausível-mas-errado (passa estático, execução barra) +
     # 1 adversarial rejeitado no estático. Suíte discriminante SAUDÁVEL.
     return [
-        _row("correto", static_ok=True, expected_static_ok=True, credit="credited", tests_pass=True),
-        _row("plausivel-errado", static_ok=True, expected_static_ok=True,
-             credit="blocked_by_execution_failure", tests_pass=False),
-        _row("adversarial", static_ok=False, expected_static_ok=False,
-             credit="not_static_ok", tests_pass="UNVERIFIED"),
+        _row(
+            "correto", static_ok=True, expected_static_ok=True, credit="credited", tests_pass=True
+        ),
+        _row(
+            "plausivel-errado",
+            static_ok=True,
+            expected_static_ok=True,
+            credit="blocked_by_execution_failure",
+            tests_pass=False,
+        ),
+        _row(
+            "adversarial",
+            static_ok=False,
+            expected_static_ok=False,
+            credit="not_static_ok",
+            tests_pass="UNVERIFIED",
+        ),
     ]
 
 
-def _summary(agent_id="agent", *, can_credit=True, credited=1, total=3,
-             reason="execution_validated", rows=None):
+def _summary(
+    agent_id="agent",
+    *,
+    can_credit=True,
+    credited=1,
+    total=3,
+    reason="execution_validated",
+    rows=None,
+):
     return {
         "agent_id": agent_id,
         "total": total,
@@ -92,8 +118,15 @@ class ExecArtifactGateTest(unittest.TestCase):
     def test_falha_quando_oracle_classifica_errado(self):
         # regressão REAL: um caso que deveria passar o estático não passou (static_ok != expected).
         rows = _healthy_rows()
-        rows.append(_row("regrediu", static_ok=False, expected_static_ok=True,
-                         credit="not_static_ok", tests_pass="UNVERIFIED"))
+        rows.append(
+            _row(
+                "regrediu",
+                static_ok=False,
+                expected_static_ok=True,
+                credit="not_static_ok",
+                tests_pass="UNVERIFIED",
+            )
+        )
         bad = _summary(total=4, rows=rows)
         with tempfile.TemporaryDirectory() as td:
             result = exec_artifact_gate.evaluate_paths([_write(td, "exec_report.json", bad)])
@@ -103,22 +136,36 @@ class ExecArtifactGateTest(unittest.TestCase):
     def test_falha_quando_caso_a_rejeitar_e_creditado(self):
         # falso-positivo grave: expected manda rejeitar no estático, mas foi creditado.
         rows = _healthy_rows()
-        rows.append(_row("falso-positivo", static_ok=True, expected_static_ok=False,
-                         credit="credited", tests_pass=True))
+        rows.append(
+            _row(
+                "falso-positivo",
+                static_ok=True,
+                expected_static_ok=False,
+                credit="credited",
+                tests_pass=True,
+            )
+        )
         bad = _summary(total=4, credited=2, rows=rows)
         with tempfile.TemporaryDirectory() as td:
             result = exec_artifact_gate.evaluate_paths([_write(td, "exec_report.json", bad)])
         self.assertFalse(result.ok)
         rendered = result.render()
-        self.assertIn("row falso-positivo: oracle_incorrect", rendered)  # static_ok=True != expected False
+        self.assertIn(
+            "row falso-positivo: oracle_incorrect", rendered
+        )  # static_ok=True != expected False
         self.assertIn("row falso-positivo: credited_but_should_reject", rendered)
 
     def test_falha_quando_negativo_por_design_entrega(self):
         # fail-safe violado (D3): caso com expected.exec_delivered=False que ENTREGOU —
         # plausível-mas-errado passando o held-out é resposta errada silenciosa.
         rows = _healthy_rows()
-        row = _row("neg-entregou", static_ok=True, expected_static_ok=True,
-                   credit="credited", tests_pass=True)
+        row = _row(
+            "neg-entregou",
+            static_ok=True,
+            expected_static_ok=True,
+            credit="credited",
+            tests_pass=True,
+        )
         row.update({"expected_exec_delivered": False, "delivered_ok": True})
         rows.append(row)
         bad = _summary(total=4, credited=2, rows=rows)

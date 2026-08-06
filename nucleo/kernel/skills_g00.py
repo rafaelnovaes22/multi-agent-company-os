@@ -1,13 +1,21 @@
 """Handlers determinísticos da G00."""
+
 from __future__ import annotations
-from .skills import register, _tokens, _spec_citations
+
+from .skills import _spec_citations, _tokens, register
 
 
 def _out(spec, state, fields, rationale_prompt, llm):
     rationale = llm.complete(rationale_prompt)
-    out = dict(fields); out["rationale"] = rationale; out["by"] = spec["id"]
+    out = dict(fields)
+    out["rationale"] = rationale
+    out["by"] = spec["id"]
     out["tenant"] = state.get("task", {}).get("tenant_id")
-    return {"output": out, "cost_tokens": _tokens(rationale), "citations": _spec_citations(state, spec)}
+    return {
+        "output": out,
+        "cost_tokens": _tokens(rationale),
+        "citations": _spec_citations(state, spec),
+    }
 
 
 @register("brain_reconcile_outcomes_traces")
@@ -51,16 +59,22 @@ def brain_reconcile_outcomes_traces(state, *, llm, store, spec):
     # Run é DELIVERED quando reconciliado E sem run não-contável E schema 100% válido.
     delivered = reconciled and uncountable == 0 and schema_valid
 
-    return _out(spec, state, {
-        "deviation_pct": deviation_pct,
-        "threshold_pct": threshold,
-        "reconciled": reconciled,
-        "status": status,
-        "total_runs": total_runs,
-        "uncountable_runs": uncountable,
-        "coverage_pct": coverage_pct,
-        "schema_invalid_count": schema_invalid,
-        "schema_valid": schema_valid,
-        "delivered": delivered,
-    }, f"Voce e {spec['id']}: desvio {deviation_pct}% (limite {threshold}%) -> {status}, "
-       f"cobertura {coverage_pct}%, {uncountable} runs nao-contaveis.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "deviation_pct": deviation_pct,
+            "threshold_pct": threshold,
+            "reconciled": reconciled,
+            "status": status,
+            "total_runs": total_runs,
+            "uncountable_runs": uncountable,
+            "coverage_pct": coverage_pct,
+            "schema_invalid_count": schema_invalid,
+            "schema_valid": schema_valid,
+            "delivered": delivered,
+        },
+        f"Voce e {spec['id']}: desvio {deviation_pct}% (limite {threshold}%) -> {status}, "
+        f"cobertura {coverage_pct}%, {uncountable} runs nao-contaveis.",
+        llm,
+    )

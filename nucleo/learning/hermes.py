@@ -9,12 +9,17 @@ Pipeline (ver 02-ARQUITETURA.md §4 e 04-IMPLEMENTACAO.md §2.6):
 
 Confiança do fato sobe com o modo em que foi observado (C4): SHADOW->shadow, etc.
 """
+
 from __future__ import annotations
 
 
 def mode_to_confidence(mode: str) -> str:
-    return {"SHADOW": "shadow", "PILOT": "shadow",
-            "ASSISTED": "assisted", "AUTONOMOUS": "autonomous"}.get(mode, "local")
+    return {
+        "SHADOW": "shadow",
+        "PILOT": "shadow",
+        "ASSISTED": "assisted",
+        "AUTONOMOUS": "autonomous",
+    }.get(mode, "local")
 
 
 def extract_instincts(snap: dict) -> list:
@@ -29,18 +34,24 @@ def extract_instincts(snap: dict) -> list:
         if not v.get("valid") and v.get("missing"):
             facts.append("Specs reprovadas costumam faltar: " + ", ".join(v["missing"]) + ".")
         elif v.get("valid"):
-            facts.append("Spec com statement + 3 positivos + 3 negativos + delivered_event passa na validação C2.")
+            facts.append(
+                "Spec com statement + 3 positivos + 3 negativos + delivered_event passa na validação C2."
+            )
 
     # Padrões de um qualificador de leads (g8-lead-qualifier)
     if "decision" in out:
         sig = out.get("icp_fit_signals") or {}
         if out.get("decision") == "disqualified" and sig.get("ops_madura"):
-            facts.append("Operação já madura desqualifica o lead mesmo com faturamento na faixa R$1-20M.")
+            facts.append(
+                "Operação já madura desqualifica o lead mesmo com faturamento na faixa R$1-20M."
+            )
         if out.get("decision") == "disqualified" and not sig.get("faturamento_1a5M"):
             facts.append("Fora da faixa de faturamento R$1-20M é um motivo frequente de descarte.")
         if out.get("decision") == "qualified" and (out.get("score") or 0) >= 75:
             true_sig = [k for k, val in sig.items() if val]
-            facts.append(f"Sinais {true_sig} produzem lead high-fit (score>=75 -> trilha assistida).")
+            facts.append(
+                f"Sinais {true_sig} produzem lead high-fit (score>=75 -> trilha assistida)."
+            )
 
     return facts
 
@@ -69,10 +80,15 @@ def run_hermes(store, brain, agent_ids=None, verbose: bool = True) -> dict:
             for fact in extract_instincts(snap):
                 pool = existing + [p["fact"] for p in proposed]
                 if assess_novelty(fact, pool):
-                    proposed.append({"fact": fact, "confidence": conf,
-                                     "run_id": snap.get("run_id"),
-                                     "date": (snap.get("ts", "") or "")[:10]})
-            snap["processed"] = True               # idempotência: não reprocessa
+                    proposed.append(
+                        {
+                            "fact": fact,
+                            "confidence": conf,
+                            "run_id": snap.get("run_id"),
+                            "date": (snap.get("ts", "") or "")[:10],
+                        }
+                    )
+            snap["processed"] = True  # idempotência: não reprocessa
             store.put(("snapshots", aid), key, snap)
 
         # "PR de memória": persiste os fatos novos na MEMORY do agente (a próxima run carrega)
@@ -80,11 +96,15 @@ def run_hermes(store, brain, agent_ids=None, verbose: bool = True) -> dict:
             line = f"§ [confidence:{p['confidence']}] [{p['date']}] [run:{p['run_id']}] {p['fact']}"
             store.put(("agent", aid, "memory"), f"learned-{p['run_id']}-{i}", line)
 
-        brain.emit_event({
-            "actor": "hermes-learning-loop", "action": "memory_proposed",
-            "target_agent": aid, "facts_count": len(proposed),
-            "facts": [p["fact"] for p in proposed],
-        })
+        brain.emit_event(
+            {
+                "actor": "hermes-learning-loop",
+                "action": "memory_proposed",
+                "target_agent": aid,
+                "facts_count": len(proposed),
+                "facts": [p["fact"] for p in proposed],
+            }
+        )
 
         summary["agents"][aid] = proposed
         summary["total_proposed"] += len(proposed)

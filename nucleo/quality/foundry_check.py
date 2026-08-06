@@ -15,7 +15,9 @@ Uso:
     python -m nucleo.quality.foundry_check                 # gate (exit 1 se houver violação nova)
     python -m nucleo.quality.foundry_check --update-baseline   # recongela o baseline (uso raro, deliberado)
 """
+
 from __future__ import annotations
+
 import glob
 import json
 import os
@@ -38,8 +40,17 @@ PRODUCT = os.path.join(ROOT, "nucleo", "product")
 BASELINE_PATH = os.path.join(ROOT, "nucleo", "quality", "foundry_baseline.json")
 
 GENERIC = {"spec_driven", "guardian_check", "supervisor_route"}
-CONTRACT_KEYS = {"agent_id", "handler_kind", "artifact_type", "status", "risk",
-                 "requires_human_review", "routed_to", "capabilities_any", "capabilities"}
+CONTRACT_KEYS = {
+    "agent_id",
+    "handler_kind",
+    "artifact_type",
+    "status",
+    "risk",
+    "requires_human_review",
+    "routed_to",
+    "capabilities_any",
+    "capabilities",
+}
 MIN_CASES = 30
 
 # Descrições de caso "de harness" (geradas em massa por script, não autoradas a partir
@@ -50,9 +61,11 @@ MIN_CASES = 30
 # DISTINCT_DESC_MAX abaixo, ex.: "burn scenario 1..30" tem 30 desc distintos).
 _TEMPLATE_DESC = re.compile(
     r"\b(domain eval|varied|smoke test|placeholder|scenario\s*\d+|cen[áa]rio\s*\d+|"
-    r"test\s*case\s*\d+|caso\s*\d+|dummy|exemplo\s*\d+)\b", re.I)
-TEMPLATE_DESC_FRAC = 0.9   # ≥90% dos casos com desc-template
-DISTINCT_DESC_MAX = 2      # e ≤2 descrições distintas no total
+    r"test\s*case\s*\d+|caso\s*\d+|dummy|exemplo\s*\d+)\b",
+    re.I,
+)
+TEMPLATE_DESC_FRAC = 0.9  # ≥90% dos casos com desc-template
+DISTINCT_DESC_MAX = 2  # e ≤2 descrições distintas no total
 
 
 def _load(spec_path):
@@ -67,20 +80,28 @@ def _is_billable(spec):
 
 def collect():
     """Varre a frota e devolve (specs_index, dimensões de violação como conjuntos de ids)."""
-    hard = {"c2_incompleto": set(), "c3_sem_max_ratio": set(), "expected_proibido": set(),
-            "sem_cases": set(), "ids_duplicados": set(),
-            "sem_tools": set()}                  # spec sem tools: declaradas (least-privilege)
-    ratchet = {"handler_generico": set(),      # agente com handler de eco (capability gap)
-               "eval_theater": set(),           # handler determinístico mas casos só de contrato
-               "c3_nao_enforcado": set(),        # billable + handler genérico (declara mas não checa)
-               "sem_target_mode": set(),         # perdeu o modo-alvo do catálogo
-               "abaixo_min_casos": set(),        # < MIN_CASES casos
-               "tools_nao_enforcadas": set(),    # toolbox em observe (sem tools_enforce: true)
-               "sem_security_cases": set()}      # billable/AUTONOMOUS sem suite adversarial
+    hard = {
+        "c2_incompleto": set(),
+        "c3_sem_max_ratio": set(),
+        "expected_proibido": set(),
+        "sem_cases": set(),
+        "ids_duplicados": set(),
+        "sem_tools": set(),
+    }  # spec sem tools: declaradas (least-privilege)
+    ratchet = {
+        "handler_generico": set(),  # agente com handler de eco (capability gap)
+        "eval_theater": set(),  # handler determinístico mas casos só de contrato
+        "c3_nao_enforcado": set(),  # billable + handler genérico (declara mas não checa)
+        "sem_target_mode": set(),  # perdeu o modo-alvo do catálogo
+        "abaixo_min_casos": set(),  # < MIN_CASES casos
+        "tools_nao_enforcadas": set(),  # toolbox em observe (sem tools_enforce: true)
+        "sem_security_cases": set(),
+    }  # billable/AUTONOMOUS sem suite adversarial
     index = {}
 
-    paths = glob.glob(os.path.join(GUILDS, "**", "spec.yaml"), recursive=True) + \
-            glob.glob(os.path.join(PRODUCT, "**", "spec.yaml"), recursive=True)
+    paths = glob.glob(os.path.join(GUILDS, "**", "spec.yaml"), recursive=True) + glob.glob(
+        os.path.join(PRODUCT, "**", "spec.yaml"), recursive=True
+    )
     for sp in paths:
         spec = _load(sp)
         aid = spec.get("id") or os.path.basename(os.path.dirname(sp))
@@ -90,8 +111,12 @@ def collect():
 
         # --- C2 (dura) ---
         oc = spec.get("outcome_clause") or {}
-        if not (oc.get("statement") and len(oc.get("positive_examples") or []) >= 3
-                and len(oc.get("negative_examples") or []) >= 3 and oc.get("delivered_event")):
+        if not (
+            oc.get("statement")
+            and len(oc.get("positive_examples") or []) >= 3
+            and len(oc.get("negative_examples") or []) >= 3
+            and oc.get("delivered_event")
+        ):
             hard["c2_incompleto"].add(aid)
 
         # --- C3 (dura): billable precisa de economics.max_ratio ---
@@ -122,8 +147,9 @@ def collect():
         # --- security evals (catraca): quem cobra ou mira autonomia precisa de suite
         #     adversarial (evals/security_cases.json) — casos passam se o agente NÃO
         #     obedece ao ataque; G4 exige 100% quando existem ---
-        if (_is_billable(spec) or spec.get("target_mode") == "AUTONOMOUS") and \
-                not os.path.exists(os.path.join(os.path.dirname(sp), "evals", "security_cases.json")):
+        if (_is_billable(spec) or spec.get("target_mode") == "AUTONOMOUS") and not os.path.exists(
+            os.path.join(os.path.dirname(sp), "evals", "security_cases.json")
+        ):
             ratchet["sem_security_cases"].add(aid)
 
         # --- cases ---
@@ -152,8 +178,9 @@ def collect():
                 domain_keys |= {k for k in (c.get("expected", {}) or {}) if k not in CONTRACT_KEYS}
                 descs.append((c.get("desc") or "").strip())
             distinct = len(set(descs))
-            template_frac = (sum(1 for d in descs if _TEMPLATE_DESC.search(d)) / len(descs)
-                             if descs else 0.0)
+            template_frac = (
+                sum(1 for d in descs if _TEMPLATE_DESC.search(d)) / len(descs) if descs else 0.0
+            )
             templated = distinct <= DISTINCT_DESC_MAX and template_frac >= TEMPLATE_DESC_FRAC
             if not domain_keys or templated:
                 ratchet["eval_theater"].add(aid)
@@ -166,9 +193,15 @@ def main(argv):
     index, hard, ratchet = collect()
 
     if update:
-        json.dump({k: sorted(v) for k, v in ratchet.items()},
-                  open(BASELINE_PATH, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-        print(f"foundry_baseline.json atualizado ({sum(len(v) for v in ratchet.values())} itens grandfathered).")
+        json.dump(
+            {k: sorted(v) for k, v in ratchet.items()},
+            open(BASELINE_PATH, "w", encoding="utf-8"),
+            ensure_ascii=False,
+            indent=2,
+        )
+        print(
+            f"foundry_baseline.json atualizado ({sum(len(v) for v in ratchet.values())} itens grandfathered)."
+        )
         return 0
 
     baseline = {}
@@ -188,7 +221,9 @@ def main(argv):
         if new:
             failures.append((f"CATRACA(nova): {name}", sorted(new)))
         if fixed:
-            print(f"  burn-down: {name} reduziu em {len(fixed)} -> rode --update-baseline p/ travar o ganho: {sorted(fixed)[:8]}")
+            print(
+                f"  burn-down: {name} reduziu em {len(fixed)} -> rode --update-baseline p/ travar o ganho: {sorted(fixed)[:8]}"
+            )
 
     total_agents = len(index)
     print(f"\nfoundry_check — {total_agents} agentes varridos.")
@@ -200,7 +235,9 @@ def main(argv):
         print("\n❌ FOUNDRY CHECK REPROVADO — violações novas (fora do baseline):")
         for label, ids in failures:
             print(f"  [{label}] {len(ids)}: {ids[:12]}{' ...' if len(ids) > 12 else ''}")
-        print("\nCorrija (handler real / casos de domínio / target_mode / C2-C3) ou, se for intencional,")
+        print(
+            "\nCorrija (handler real / casos de domínio / target_mode / C2-C3) ou, se for intencional,"
+        )
         print("rode `python -m nucleo.quality.foundry_check --update-baseline` e justifique no PR.")
         return 1
 

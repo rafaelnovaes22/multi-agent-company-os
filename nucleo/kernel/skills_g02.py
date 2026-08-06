@@ -6,9 +6,10 @@ campos no top-level do output, grader genérico valida `expected` de domínio di
 Registrados via @register de kernel.skills; importado no fim de skills.py.
 Assinatura padrão: handler(state, *, llm, store, spec) -> {output, cost_tokens, citations}.
 """
+
 from __future__ import annotations
 
-from .skills import register, _tokens, _spec_citations
+from .skills import _spec_citations, _tokens, register
 
 # Mapeamento de feature para a camada de pricing de 3 níveis (postura outcome-native).
 _TIERS = ("assinatura", "top_up", "outcome_based")
@@ -23,7 +24,11 @@ def _out(spec, state, fields, rationale_prompt, llm):
     out["rationale"] = rationale
     out["by"] = spec["id"]
     out["tenant"] = state.get("task", {}).get("tenant_id")
-    return {"output": out, "cost_tokens": _tokens(rationale), "citations": _spec_citations(state, spec)}
+    return {
+        "output": out,
+        "cost_tokens": _tokens(rationale),
+        "citations": _spec_citations(state, spec),
+    }
 
 
 @register("rice_score")
@@ -34,10 +39,10 @@ def rice_score(state, *, llm, store, spec):
     sinalizados para validação em experimento antes de subir no ranking.
     """
     r = state["task"].get("rice", {}) or {}
-    reach = r.get("reach", 0) or 0                # alcance (usuarios/periodo)
-    impact = r.get("impact", 0) or 0             # 0.25,0.5,1,2,3 (minimo..massivo)
-    confidence = r.get("confidence", 0) or 0     # 0..1
-    effort = r.get("effort", 0) or 0             # pessoa-mes
+    reach = r.get("reach", 0) or 0  # alcance (usuarios/periodo)
+    impact = r.get("impact", 0) or 0  # 0.25,0.5,1,2,3 (minimo..massivo)
+    confidence = r.get("confidence", 0) or 0  # 0..1
+    effort = r.get("effort", 0) or 0  # pessoa-mes
     score = round(reach * impact * confidence / effort, 2) if effort > 0 else 0.0
     # Fatores com fonte rastreavel: todo fator declarado tem origem registrada.
     sources = r.get("sources", {}) or {}
@@ -46,12 +51,29 @@ def rice_score(state, *, llm, store, spec):
     all_sourced = sourced == len(factors)
     low_confidence = confidence < 0.5
     needs_experiment = low_confidence
-    status = "rebaixado_experimento" if needs_experiment else ("auditavel" if all_sourced else "sem_fonte")
-    return _out(spec, state, {
-        "rice_score": score, "reach": reach, "impact": impact, "confidence": confidence,
-        "effort": effort, "factors_sourced": sourced, "all_factors_sourced": all_sourced,
-        "low_confidence": low_confidence, "needs_experiment": needs_experiment, "status": status,
-    }, f"Voce e {spec['id']}: RICE {score} (status {status}, fontes {sourced}/4).", llm)
+    status = (
+        "rebaixado_experimento"
+        if needs_experiment
+        else ("auditavel" if all_sourced else "sem_fonte")
+    )
+    return _out(
+        spec,
+        state,
+        {
+            "rice_score": score,
+            "reach": reach,
+            "impact": impact,
+            "confidence": confidence,
+            "effort": effort,
+            "factors_sourced": sourced,
+            "all_factors_sourced": all_sourced,
+            "low_confidence": low_confidence,
+            "needs_experiment": needs_experiment,
+            "status": status,
+        },
+        f"Voce e {spec['id']}: RICE {score} (status {status}, fontes {sourced}/4).",
+        llm,
+    )
 
 
 @register("experiment_sample_size")
@@ -63,15 +85,15 @@ def experiment_sample_size(state, *, llm, store, spec):
     Bloqueia start sem metrica guardrail ou se a duracao exceder a janela disponivel.
     """
     e = state["task"].get("experiment", {}) or {}
-    p = e.get("baseline_rate", 0) or 0            # taxa base da metrica primaria (0..1)
-    mde = e.get("mde", 0) or 0                     # minimo efeito detectavel absoluto (0..1)
-    variants = e.get("variants", 2) or 2          # numero de variantes (controle + tratamentos)
-    daily = e.get("daily_traffic", 0) or 0        # trafego diario total
+    p = e.get("baseline_rate", 0) or 0  # taxa base da metrica primaria (0..1)
+    mde = e.get("mde", 0) or 0  # minimo efeito detectavel absoluto (0..1)
+    variants = e.get("variants", 2) or 2  # numero de variantes (controle + tratamentos)
+    daily = e.get("daily_traffic", 0) or 0  # trafego diario total
     has_guardrail = bool(e.get("guardrail_metric"))
-    window = e.get("window_days")                 # janela disponivel (opcional)
-    z_sum_sq = (1.96 + 0.84) ** 2                  # = 7.84
+    window = e.get("window_days")  # janela disponivel (opcional)
+    z_sum_sq = (1.96 + 0.84) ** 2  # = 7.84
     if mde > 0:
-        n_per_variant = int(-(-(z_sum_sq * 2 * p * (1 - p)) // (mde ** 2)))  # ceil
+        n_per_variant = int(-(-(z_sum_sq * 2 * p * (1 - p)) // (mde**2)))  # ceil
     else:
         n_per_variant = 0
     total_n = n_per_variant * variants
@@ -87,11 +109,22 @@ def experiment_sample_size(state, *, llm, store, spec):
         decision = "pre_registrado"
     else:
         decision = "bloqueado"
-    return _out(spec, state, {
-        "sample_size_per_variant": n_per_variant, "total_sample_size": total_n,
-        "duration_days": duration_days, "variants": variants, "has_guardrail": has_guardrail,
-        "fits_window": fits_window, "can_start": can_start, "decision": decision,
-    }, f"Voce e {spec['id']}: n={n_per_variant}/variante, {duration_days}d, decisao {decision}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "sample_size_per_variant": n_per_variant,
+            "total_sample_size": total_n,
+            "duration_days": duration_days,
+            "variants": variants,
+            "has_guardrail": has_guardrail,
+            "fits_window": fits_window,
+            "can_start": can_start,
+            "decision": decision,
+        },
+        f"Voce e {spec['id']}: n={n_per_variant}/variante, {duration_days}d, decisao {decision}.",
+        llm,
+    )
 
 
 @register("pricing_c3_fit")
@@ -103,10 +136,10 @@ def pricing_c3_fit(state, *, llm, store, spec):
     senao a oferta viola C3 e e bloqueada. Mapeia a feature para a camada de pricing.
     """
     pp = state["task"].get("pricing", {}) or {}
-    cheap = pp.get("too_cheap", 0) or 0           # preco percebido "barato demais"
-    expensive = pp.get("too_expensive", 0) or 0   # preco percebido "caro demais"
-    sample = pp.get("sample_size", 0) or 0        # amostra do estudo de WTP
-    cost = pp.get("outcome_cost", 0) or 0         # custo do outcome
+    cheap = pp.get("too_cheap", 0) or 0  # preco percebido "barato demais"
+    expensive = pp.get("too_expensive", 0) or 0  # preco percebido "caro demais"
+    sample = pp.get("sample_size", 0) or 0  # amostra do estudo de WTP
+    cost = pp.get("outcome_cost", 0) or 0  # custo do outcome
     billable = bool(pp.get("billable"))
     tier = pp.get("tier", "assinatura")
     if tier not in _TIERS:
@@ -124,11 +157,24 @@ def pricing_c3_fit(state, *, llm, store, spec):
     else:
         status = "aprovado"
     blocked = (not has_wtp) or (not c3_pass)
-    return _out(spec, state, {
-        "recommended_price": recommended_price, "has_wtp": has_wtp, "sample_size": sample,
-        "c3_ratio": c3_ratio, "c3_pass": c3_pass, "min_price_c3": min_price_c3,
-        "billable": billable, "tier": tier, "blocked": blocked, "status": status,
-    }, f"Voce e {spec['id']}: preco {recommended_price}, C3 {c3_ratio} (pass={c3_pass}), {status}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "recommended_price": recommended_price,
+            "has_wtp": has_wtp,
+            "sample_size": sample,
+            "c3_ratio": c3_ratio,
+            "c3_pass": c3_pass,
+            "min_price_c3": min_price_c3,
+            "billable": billable,
+            "tier": tier,
+            "blocked": blocked,
+            "status": status,
+        },
+        f"Voce e {spec['id']}: preco {recommended_price}, C3 {c3_ratio} (pass={c3_pass}), {status}.",
+        llm,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -136,14 +182,69 @@ def pricing_c3_fit(state, *, llm, store, spec):
 # Núcleo determinístico (não-LLM): keyword-classify -> guilda-rota -> severidade -> temas.
 # ---------------------------------------------------------------------------
 _FB_RULES = (
-    ("churn_risk", "g1-strategy-supervisor",
-     ["cancelar", "cancelamento", "vou sair", "reembolso", "insatisfeito", "decepcion", "piorou", "nunca mais"]),
-    ("bug", "g3-eng-supervisor",
-     ["erro", "bug", "nao funciona", "não funciona", "quebrou", "travou", "travando", "falha", "crash", "caiu"]),
-    ("request", "g2-jobs-to-be-done",
-     ["queria", "poderia", "sugest", "gostaria", "adicionar", "faltando", "falta ", "feature", "funcionalidade", "seria bom"]),
-    ("elogio", "g7-growth-supervisor",
-     ["otimo", "ótimo", "excelente", "adorei", "perfeito", "parabens", "parabéns", "melhor", "incrivel", "incrível", "amei"]),
+    (
+        "churn_risk",
+        "g1-strategy-supervisor",
+        [
+            "cancelar",
+            "cancelamento",
+            "vou sair",
+            "reembolso",
+            "insatisfeito",
+            "decepcion",
+            "piorou",
+            "nunca mais",
+        ],
+    ),
+    (
+        "bug",
+        "g3-eng-supervisor",
+        [
+            "erro",
+            "bug",
+            "nao funciona",
+            "não funciona",
+            "quebrou",
+            "travou",
+            "travando",
+            "falha",
+            "crash",
+            "caiu",
+        ],
+    ),
+    (
+        "request",
+        "g2-jobs-to-be-done",
+        [
+            "queria",
+            "poderia",
+            "sugest",
+            "gostaria",
+            "adicionar",
+            "faltando",
+            "falta ",
+            "feature",
+            "funcionalidade",
+            "seria bom",
+        ],
+    ),
+    (
+        "elogio",
+        "g7-growth-supervisor",
+        [
+            "otimo",
+            "ótimo",
+            "excelente",
+            "adorei",
+            "perfeito",
+            "parabens",
+            "parabéns",
+            "melhor",
+            "incrivel",
+            "incrível",
+            "amei",
+        ],
+    ),
 )
 
 
@@ -159,7 +260,10 @@ def _fb_severity(cat, text):
     tl = (text or "").lower()
     if cat == "churn_risk":
         return "alta"
-    if cat == "bug" and any(k in tl for k in ["critico", "crítico", "todos", "parado", "producao", "produção", "urgente"]):
+    if cat == "bug" and any(
+        k in tl
+        for k in ["critico", "crítico", "todos", "parado", "producao", "produção", "urgente"]
+    ):
         return "alta"
     if cat in ("bug", "request"):
         return "media"
@@ -182,12 +286,23 @@ def feedback_route(state, *, llm, store, spec):
     emerging = sorted([c for c, n in by_cat.items() if n >= emerging_threshold and c != "outro"])
     churn = by_cat.get("churn_risk", 0)
     high_sev = sum(1 for r in routed if r["severity"] == "alta")
-    return _out(spec, state, {
-        "agent_id": spec["id"], "total": len(items), "routed": routed,
-        "counts_by_category": by_cat, "counts_by_route": by_route,
-        "emerging_themes": emerging, "churn_risk_count": churn, "high_severity_count": high_sev,
-        "requires_human_review": bool(churn or emerging),
-    }, f"Voce e {spec['id']}: {len(items)} feedbacks, {churn} churn-risk, emergentes={emerging}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "agent_id": spec["id"],
+            "total": len(items),
+            "routed": routed,
+            "counts_by_category": by_cat,
+            "counts_by_route": by_route,
+            "emerging_themes": emerging,
+            "churn_risk_count": churn,
+            "high_severity_count": high_sev,
+            "requires_human_review": bool(churn or emerging),
+        },
+        f"Voce e {spec['id']}: {len(items)} feedbacks, {churn} churn-risk, emergentes={emerging}.",
+        llm,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -203,8 +318,8 @@ def competitor_signal_triage(state, *, llm, store, spec):
     source_public = bool(s.get("source_public", True)) and bool(source)
     duplicate_of = s.get("duplicate_of")
     substance = bool(s.get("substance", True))
-    jtbd = (s.get("jtbd_relevance") or "none").lower()   # core | adjacent | none
-    threat = (s.get("threat_level") or "none").lower()   # high | medium | low | none
+    jtbd = (s.get("jtbd_relevance") or "none").lower()  # core | adjacent | none
+    threat = (s.get("threat_level") or "none").lower()  # high | medium | low | none
 
     if not source_public:
         status, recommendation, routed = "rejeitado_fonte", "ignorar", False
@@ -223,12 +338,23 @@ def competitor_signal_triage(state, *, llm, store, spec):
         status = "classificado"
 
     signal_committed = status == "classificado"
-    return _out(spec, state, {
-        "agent_id": spec["id"], "source_public": source_public, "is_duplicate": bool(duplicate_of),
-        "has_substance": substance, "status": status, "recommendation": recommendation,
-        "routed": routed, "signal_committed": signal_committed,
-        "requires_human_review": recommendation == "responder",
-    }, f"Voce e {spec['id']}: sinal {status} -> {recommendation}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "agent_id": spec["id"],
+            "source_public": source_public,
+            "is_duplicate": bool(duplicate_of),
+            "has_substance": substance,
+            "status": status,
+            "recommendation": recommendation,
+            "routed": routed,
+            "signal_committed": signal_committed,
+            "requires_human_review": recommendation == "responder",
+        },
+        f"Voce e {spec['id']}: sinal {status} -> {recommendation}.",
+        llm,
+    )
 
 
 @register("jobs_to_be_done")
@@ -243,13 +369,24 @@ def jobs_to_be_done(state, *, llm, store, spec):
     habit = forces.get("habit", 0) or 0
     switch_score = round(push + pull - anxiety - habit, 2)
     will_switch = switch_score > 0
-    return _out(spec, state, {
-        "job_statement": job, "switch_score": switch_score, "will_switch": will_switch,
-        "forces": forces, "artifact_type": state["task"].get("artifact_type") or "jobs-to-be-done.artifact",
-        "status": state["task"].get("status") or "ready", "risk": state["task"].get("risk") or "low",
-        "requires_human_review": False, "routed_to": state["task"].get("routed_to") or "human-review",
-        "handler_kind": "jobs_to_be_done",
-    }, f"Voce e {spec['id']}: JTBD switch {switch_score} -> {will_switch}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "job_statement": job,
+            "switch_score": switch_score,
+            "will_switch": will_switch,
+            "forces": forces,
+            "artifact_type": state["task"].get("artifact_type") or "jobs-to-be-done.artifact",
+            "status": state["task"].get("status") or "ready",
+            "risk": state["task"].get("risk") or "low",
+            "requires_human_review": False,
+            "routed_to": state["task"].get("routed_to") or "human-review",
+            "handler_kind": "jobs_to_be_done",
+        },
+        f"Voce e {spec['id']}: JTBD switch {switch_score} -> {will_switch}.",
+        llm,
+    )
 
 
 @register("prd_author")
@@ -258,16 +395,28 @@ def prd_author(state, *, llm, store, spec):
     task = state["task"] or {}
     prd = task.get("prd", {}) or {}
     ac = prd.get("acceptance_criteria", []) or []
-    coverage = round(len([c for c in ac if c.get("verifiable")]) / max(1, len(ac)) * 100, 1) if ac else 0.0
+    coverage = (
+        round(len([c for c in ac if c.get("verifiable")]) / max(1, len(ac)) * 100, 1) if ac else 0.0
+    )
     is_complete = coverage == 100.0 and len(ac) >= 3
-    return _out(spec, state, {
-        "ac_count": len(ac), "verifiable_count": len([c for c in ac if c.get("verifiable")]),
-        "coverage": coverage, "is_complete": is_complete,
-        "artifact_type": task.get("artifact_type") or "prd.artifact",
-        "status": task.get("status") or "ready", "risk": task.get("risk") or "low",
-        "requires_human_review": not is_complete, "routed_to": task.get("routed_to") or "human-review",
-        "handler_kind": "prd_author",
-    }, f"Voce e {spec['id']}: PRD {len(ac)} ACs, coverage {coverage}% -> {is_complete}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "ac_count": len(ac),
+            "verifiable_count": len([c for c in ac if c.get("verifiable")]),
+            "coverage": coverage,
+            "is_complete": is_complete,
+            "artifact_type": task.get("artifact_type") or "prd.artifact",
+            "status": task.get("status") or "ready",
+            "risk": task.get("risk") or "low",
+            "requires_human_review": not is_complete,
+            "routed_to": task.get("routed_to") or "human-review",
+            "handler_kind": "prd_author",
+        },
+        f"Voce e {spec['id']}: PRD {len(ac)} ACs, coverage {coverage}% -> {is_complete}.",
+        llm,
+    )
 
 
 @register("prototype_builder")
@@ -279,14 +428,24 @@ def prototype_builder(state, *, llm, store, spec):
     integrations = proto.get("integrations", []) or []
     tech_risk = "high" if len(integrations) > 2 else ("medium" if screens else "low")
     is_buildable = len(screens) > 0 and tech_risk != "high"
-    return _out(spec, state, {
-        "screen_count": len(screens), "integration_count": len(integrations),
-        "tech_risk": tech_risk, "is_buildable": is_buildable,
-        "artifact_type": task.get("artifact_type") or "prototype.artifact",
-        "status": task.get("status") or "ready", "risk": task.get("risk") or "low",
-        "requires_human_review": tech_risk == "high", "routed_to": task.get("routed_to") or "human-review",
-        "handler_kind": "prototype_builder",
-    }, f"Voce e {spec['id']}: {len(screens)} screens, risco {tech_risk}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "screen_count": len(screens),
+            "integration_count": len(integrations),
+            "tech_risk": tech_risk,
+            "is_buildable": is_buildable,
+            "artifact_type": task.get("artifact_type") or "prototype.artifact",
+            "status": task.get("status") or "ready",
+            "risk": task.get("risk") or "low",
+            "requires_human_review": tech_risk == "high",
+            "routed_to": task.get("routed_to") or "human-review",
+            "handler_kind": "prototype_builder",
+        },
+        f"Voce e {spec['id']}: {len(screens)} screens, risco {tech_risk}.",
+        llm,
+    )
 
 
 @register("release_notes")
@@ -298,14 +457,24 @@ def release_notes(state, *, llm, store, spec):
     with_notes = sum(1 for pr in prs if pr.get("notes"))
     coverage = round(with_notes / max(1, len(prs)) * 100, 1) if prs else 100.0
     is_ready = coverage == 100.0
-    return _out(spec, state, {
-        "pr_count": len(prs), "with_notes_count": with_notes, "coverage": coverage,
-        "is_ready": is_ready,
-        "artifact_type": task.get("artifact_type") or "release-notes.artifact",
-        "status": task.get("status") or "ready", "risk": task.get("risk") or "low",
-        "requires_human_review": not is_ready, "routed_to": task.get("routed_to") or "human-review",
-        "handler_kind": "release_notes",
-    }, f"Voce e {spec['id']}: {with_notes}/{len(prs)} PRs com notas ({coverage}%).", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "pr_count": len(prs),
+            "with_notes_count": with_notes,
+            "coverage": coverage,
+            "is_ready": is_ready,
+            "artifact_type": task.get("artifact_type") or "release-notes.artifact",
+            "status": task.get("status") or "ready",
+            "risk": task.get("risk") or "low",
+            "requires_human_review": not is_ready,
+            "routed_to": task.get("routed_to") or "human-review",
+            "handler_kind": "release_notes",
+        },
+        f"Voce e {spec['id']}: {with_notes}/{len(prs)} PRs com notas ({coverage}%).",
+        llm,
+    )
 
 
 @register("roadmap_keeper")
@@ -316,15 +485,27 @@ def roadmap_keeper(state, *, llm, store, spec):
     items = roadmap.get("items", []) or []
     aligned = sum(1 for it in items if it.get("okr_ref"))
     alignment = round(aligned / max(1, len(items)) * 100, 1) if items else 0.0
-    horizon_ok = all(it.get("horizon") in ("now", "next", "later") for it in items) if items else True
-    return _out(spec, state, {
-        "item_count": len(items), "aligned_count": aligned, "alignment": alignment,
-        "horizon_ok": horizon_ok,
-        "artifact_type": task.get("artifact_type") or "roadmap.artifact",
-        "status": task.get("status") or "ready", "risk": task.get("risk") or "low",
-        "requires_human_review": not horizon_ok, "routed_to": task.get("routed_to") or "human-review",
-        "handler_kind": "roadmap_keeper",
-    }, f"Voce e {spec['id']}: {aligned}/{len(items)} alinhados ({alignment}%).", llm)
+    horizon_ok = (
+        all(it.get("horizon") in ("now", "next", "later") for it in items) if items else True
+    )
+    return _out(
+        spec,
+        state,
+        {
+            "item_count": len(items),
+            "aligned_count": aligned,
+            "alignment": alignment,
+            "horizon_ok": horizon_ok,
+            "artifact_type": task.get("artifact_type") or "roadmap.artifact",
+            "status": task.get("status") or "ready",
+            "risk": task.get("risk") or "low",
+            "requires_human_review": not horizon_ok,
+            "routed_to": task.get("routed_to") or "human-review",
+            "handler_kind": "roadmap_keeper",
+        },
+        f"Voce e {spec['id']}: {aligned}/{len(items)} alinhados ({alignment}%).",
+        llm,
+    )
 
 
 @register("usability_critic")
@@ -336,14 +517,24 @@ def usability_critic(state, *, llm, store, spec):
     score = round(10 - critical * 2 - len(findings) * 0.5, 1)
     score = max(0.0, min(10.0, score))
     needs_rework = critical > 0 or score < 7
-    return _out(spec, state, {
-        "finding_count": len(findings), "critical_count": critical, "score": score,
-        "needs_rework": needs_rework,
-        "artifact_type": task.get("artifact_type") or "usability-critic.artifact",
-        "status": task.get("status") or "ready", "risk": task.get("risk") or "low",
-        "requires_human_review": needs_rework, "routed_to": task.get("routed_to") or "human-review",
-        "handler_kind": "usability_critic",
-    }, f"Voce e {spec['id']}: score {score}, critical {critical}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "finding_count": len(findings),
+            "critical_count": critical,
+            "score": score,
+            "needs_rework": needs_rework,
+            "artifact_type": task.get("artifact_type") or "usability-critic.artifact",
+            "status": task.get("status") or "ready",
+            "risk": task.get("risk") or "low",
+            "requires_human_review": needs_rework,
+            "routed_to": task.get("routed_to") or "human-review",
+            "handler_kind": "usability_critic",
+        },
+        f"Voce e {spec['id']}: score {score}, critical {critical}.",
+        llm,
+    )
 
 
 @register("interview_synth")
@@ -357,11 +548,21 @@ def interview_synth(state, *, llm, store, spec):
             themes[t] = themes.get(t, 0) + 1
     top_theme = max(themes, key=themes.get) if themes else None
     quote_count = sum(len(iv.get("quotes", []) or []) for iv in interviews)
-    return _out(spec, state, {
-        "interview_count": len(interviews), "theme_count": len(themes), "top_theme": top_theme,
-        "quote_count": quote_count,
-        "artifact_type": task.get("artifact_type") or "interview-synth.artifact",
-        "status": task.get("status") or "ready", "risk": task.get("risk") or "low",
-        "requires_human_review": len(themes) == 0, "routed_to": task.get("routed_to") or "human-review",
-        "handler_kind": "interview_synth",
-    }, f"Voce e {spec['id']}: {len(interviews)} entrevistas, top {top_theme}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "interview_count": len(interviews),
+            "theme_count": len(themes),
+            "top_theme": top_theme,
+            "quote_count": quote_count,
+            "artifact_type": task.get("artifact_type") or "interview-synth.artifact",
+            "status": task.get("status") or "ready",
+            "risk": task.get("risk") or "low",
+            "requires_human_review": len(themes) == 0,
+            "routed_to": task.get("routed_to") or "human-review",
+            "handler_kind": "interview_synth",
+        },
+        f"Voce e {spec['id']}: {len(interviews)} entrevistas, top {top_theme}.",
+        llm,
+    )

@@ -5,7 +5,9 @@ Roda:  python -m nucleo.demo_product_inbox
 Dois clientes de segmentos diferentes, MESMO agente: cada caixa de entrada é
 triada com o contexto do tenant. Depois roda a eval-suite.
 """
+
 from __future__ import annotations
+
 import os
 import sys
 import uuid
@@ -14,9 +16,9 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from langgraph.checkpoint.memory import MemorySaver  # noqa: E402
 
+from nucleo.factory.factory import build_from_spec  # noqa: E402
 from nucleo.kernel.brain import Brain, FileStore  # noqa: E402
 from nucleo.kernel.providers.llm import get_llm  # noqa: E402
-from nucleo.factory.factory import build_from_spec  # noqa: E402
 from nucleo.quality.eval_harness import run_evals  # noqa: E402
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -24,8 +26,16 @@ BRAIN = os.path.join(ROOT, ".brain-product")
 SPEC = os.path.join(ROOT, "product", "inbox-triage")
 
 TENANTS = {
-    "novais-digital-limpeza": {"name": "Novais Digital Limpeza", "segment": "serviços de limpeza B2B", "currency": "BRL"},
-    "bella-padaria": {"name": "Bella Padaria", "segment": "padaria / varejo alimentício", "currency": "BRL"},
+    "novais-digital-limpeza": {
+        "name": "Novais Digital Limpeza",
+        "segment": "serviços de limpeza B2B",
+        "currency": "BRL",
+    },
+    "bella-padaria": {
+        "name": "Bella Padaria",
+        "segment": "padaria / varejo alimentício",
+        "currency": "BRL",
+    },
 }
 INBOX = {
     "novais-digital-limpeza": [
@@ -44,12 +54,24 @@ INBOX = {
 
 def run_tenant(agent, spec, tid):
     rid = "run-" + uuid.uuid4().hex[:8]
-    state = {"task": {"agent_id": spec["id"], "guild": spec["guild"], "tenant_id": tid,
-                      "statement": "Triagem da caixa de entrada", "inbox": {"messages": INBOX[tid]}},
-             "mode": "SHADOW", "ledger": spec.get("ledger"), "run_id": rid, "verbose": True}
+    state = {
+        "task": {
+            "agent_id": spec["id"],
+            "guild": spec["guild"],
+            "tenant_id": tid,
+            "statement": "Triagem da caixa de entrada",
+            "inbox": {"messages": INBOX[tid]},
+        },
+        "mode": "SHADOW",
+        "ledger": spec.get("ledger"),
+        "run_id": rid,
+        "verbose": True,
+    }
     print(f"\n=== {TENANTS[tid]['name']} ({TENANTS[tid]['segment']}) ===")
     o = agent.invoke(state, config={"configurable": {"thread_id": rid}}).get("output") or {}
-    print(f"  {o.get('total')} mensagens | urgentes: {o.get('urgent_count')} | por categoria: {o.get('counts_by_category')}")
+    print(
+        f"  {o.get('total')} mensagens | urgentes: {o.get('urgent_count')} | por categoria: {o.get('counts_by_category')}"
+    )
     for x in o.get("triaged", []):
         u = " [URGENTE]" if x["urgency"] == "alta" else ""
         print(f"     #{x['id']} {x['category']:<11} -> {x['route']}{u}")
@@ -64,7 +86,9 @@ def main():
         store.put(("tenant", tid), "profile", prof)
 
     spec, agent, gate = build_from_spec(SPEC, llm, brain, store, cp)
-    print(f"Produto: '{spec['id']}' (fleet={spec.get('fleet')}, multi_tenant={spec.get('multi_tenant')}) | gate ok={gate['ok']}")
+    print(
+        f"Produto: '{spec['id']}' (fleet={spec.get('fleet')}, multi_tenant={spec.get('multi_tenant')}) | gate ok={gate['ok']}"
+    )
 
     run_tenant(agent, spec, "novais-digital-limpeza")
     run_tenant(agent, spec, "bella-padaria")

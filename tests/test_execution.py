@@ -8,14 +8,16 @@ Prova que o ponto de injeção de execução está fiado e HONESTO, antes de exi
     (anti verde-por-fixture: tests_pass vem do executor, jamais de um booleano do caso).
 Roda offline, sem Docker.
 """
+
 from __future__ import annotations
+
 import os
 import unittest
 from unittest import mock
 
-from nucleo.kernel.verification import verify_code, sha
 from nucleo.kernel import execution as execmod
-from nucleo.kernel.execution import InertExecutor, DockerExecutor, get_executor, ExecutionProvider
+from nucleo.kernel.execution import DockerExecutor, ExecutionProvider, InertExecutor, get_executor
+from nucleo.kernel.verification import sha, verify_code
 
 SEED = {
     "app.py": "def discount(price, percent):\n    return price - price * pct / 100\n",
@@ -27,13 +29,16 @@ ORACLE = {
     "bug_markers": {"must_remove": ["pct"], "must_contain": ["percent"]},
     "test_cmd": "pytest -q",
 }
-FIX_OK = {"files": {"app.py": "def discount(price, percent):\n    return price - price * percent / 100\n"}}
+FIX_OK = {
+    "files": {"app.py": "def discount(price, percent):\n    return price - price * percent / 100\n"}
+}
 SINTAXE = {"files": {"app.py": "def discount(price, percent)\n    return percent\n"}}  # static FAIL
 
 
 class _FakeExecutor(ExecutionProvider):
     """Executor de teste: simula execução real (available=True) com veredito fixo, e REGISTRA
     se foi chamado. Injetado programaticamente — nunca vem do eval-case."""
+
     def __init__(self, verdict):
         self._verdict = verdict
         self.called_with = None
@@ -101,9 +106,16 @@ class DockerCommandHardening(unittest.TestCase):
 
     def test_flags_de_seguranca_presentes(self):
         cmd = " ".join(self._captura_cmd({"app.py": "print(1)\n"}))
-        for flag in ("--rm", "--network none", "--cap-drop ALL",
-                     "--security-opt no-new-privileges", "--read-only",
-                     "--pids-limit", "--memory 512m", "--cpus 1"):
+        for flag in (
+            "--rm",
+            "--network none",
+            "--cap-drop ALL",
+            "--security-opt no-new-privileges",
+            "--read-only",
+            "--pids-limit",
+            "--memory 512m",
+            "--cpus 1",
+        ):
             self.assertIn(flag, cmd, f"flag de sandbox ausente: {flag}")
 
     def test_paths_inseguros_nao_executam(self):

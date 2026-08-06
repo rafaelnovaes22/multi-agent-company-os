@@ -2,10 +2,11 @@
 cumprimento de SLA, deflection, ativação, reembolso, sentimento e priorização de VoC.
 Mesmo padrão de skills_finance: campos no top-level do output, grader genérico valida.
 """
+
 from __future__ import annotations
 
-from .skills import register, _spec_citations
-from .skills_finance import _out   # helper comum (rationale + by + tenant + citations)
+from .skills import _spec_citations, register
+from .skills_finance import _out  # helper comum (rationale + by + tenant + citations)
 
 
 @register("csat_nps_score")
@@ -19,9 +20,18 @@ def csat_nps_score(state, *, llm, store, spec):
     prev = c.get("prev_csat_pct")
     drop = prev is not None and csat < prev - 5
     status = "queda" if drop else ("ok" if csat >= 70 else "atencao")
-    return _out(spec, state, {
-        "csat_pct": csat, "detractor_count": detractors, "responses": n, "status": status,
-    }, f"Voce e {spec['id']}: CSAT {csat}% ({n} respostas), {detractors} detratores.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "csat_pct": csat,
+            "detractor_count": detractors,
+            "responses": n,
+            "status": status,
+        },
+        f"Voce e {spec['id']}: CSAT {csat}% ({n} respostas), {detractors} detratores.",
+        llm,
+    )
 
 
 @register("fulfillment_sla")
@@ -34,10 +44,20 @@ def fulfillment_sla(state, *, llm, store, spec):
     pending = sum(1 for t in txns if t.get("status") == "pendente")
     delivered = on_time + late
     sla = round(on_time / delivered * 100, 1) if delivered else 100.0
-    return _out(spec, state, {
-        "total": len(txns), "on_time_count": on_time, "late_count": late,
-        "pending_count": pending, "sla_pct": sla, "delivered_outcomes": delivered,
-    }, f"Voce e {spec['id']}: SLA {sla}% ({on_time}/{delivered} no prazo), {late} atrasadas.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "total": len(txns),
+            "on_time_count": on_time,
+            "late_count": late,
+            "pending_count": pending,
+            "sla_pct": sla,
+            "delivered_outcomes": delivered,
+        },
+        f"Voce e {spec['id']}: SLA {sla}% ({on_time}/{delivered} no prazo), {late} atrasadas.",
+        llm,
+    )
 
 
 @register("kb_deflection")
@@ -49,10 +69,23 @@ def kb_deflection(state, *, llm, store, spec):
     deflected = sum(t.get("tickets", 0) for t in themes if t.get("has_article"))
     gaps = [t.get("theme") for t in themes if not t.get("has_article")]
     rate = round(deflected / total * 100, 1) if total else 0.0
-    coverage = round(sum(1 for t in themes if t.get("has_article")) / len(themes) * 100, 1) if themes else 0.0
-    return _out(spec, state, {
-        "deflection_rate": rate, "coverage_pct": coverage, "gap_count": len(gaps), "gaps": gaps,
-    }, f"Voce e {spec['id']}: deflection {rate}%, {len(gaps)} lacunas de cobertura.", llm)
+    coverage = (
+        round(sum(1 for t in themes if t.get("has_article")) / len(themes) * 100, 1)
+        if themes
+        else 0.0
+    )
+    return _out(
+        spec,
+        state,
+        {
+            "deflection_rate": rate,
+            "coverage_pct": coverage,
+            "gap_count": len(gaps),
+            "gaps": gaps,
+        },
+        f"Voce e {spec['id']}: deflection {rate}%, {len(gaps)} lacunas de cobertura.",
+        llm,
+    )
 
 
 @register("activation_score")
@@ -67,10 +100,19 @@ def activation_score(state, *, llm, store, spec):
     target = o.get("target_days", 7) or 7
     on_time = days <= target
     status = "ativado" if activated else ("em_risco" if not on_time else "em_andamento")
-    return _out(spec, state, {
-        "activated": activated, "activation_pct": pct, "time_to_value_days": days,
-        "on_time": on_time, "status": status,
-    }, f"Voce e {spec['id']}: ativado={activated}, {pct}% dos passos, {days}d (alvo {target}d).", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "activated": activated,
+            "activation_pct": pct,
+            "time_to_value_days": days,
+            "on_time": on_time,
+            "status": status,
+        },
+        f"Voce e {spec['id']}: ativado={activated}, {pct}% dos passos, {days}d (alvo {target}d).",
+        llm,
+    )
 
 
 @register("refund_eligibility")
@@ -81,14 +123,31 @@ def refund_eligibility(state, *, llm, store, spec):
     window = r.get("policy_window_days", 30) or 30
     fraud = bool(r.get("fraud_flag"))
     if fraud:
-        eligible, decision, reason = False, "flag_fraude", "Indício de abuso — encaminhar a fraude antes de pagar"
+        eligible, decision, reason = (
+            False,
+            "flag_fraude",
+            "Indício de abuso — encaminhar a fraude antes de pagar",
+        )
     elif days <= window:
         eligible, decision, reason = True, "aprovar_com_gate", "Dentro da janela de política"
     else:
-        eligible, decision, reason = False, "negar_fora_politica", f"Fora da janela ({days}d > {window}d)"
-    return _out(spec, state, {
-        "eligible": eligible, "decision": decision, "requires_human_gate": True, "reason": reason,
-    }, f"Voce e {spec['id']}: {decision} (gate humano obrigatório).", llm)
+        eligible, decision, reason = (
+            False,
+            "negar_fora_politica",
+            f"Fora da janela ({days}d > {window}d)",
+        )
+    return _out(
+        spec,
+        state,
+        {
+            "eligible": eligible,
+            "decision": decision,
+            "requires_human_gate": True,
+            "reason": reason,
+        },
+        f"Voce e {spec['id']}: {decision} (gate humano obrigatório).",
+        llm,
+    )
 
 
 @register("sentiment_score")
@@ -100,9 +159,18 @@ def sentiment_score(state, *, llm, store, spec):
     score = round(sum(signals) / len(signals), 3) if signals else 0.0
     alert = score < threshold
     status = "negativo" if score < -0.2 else ("positivo" if score > 0.2 else "neutro")
-    return _out(spec, state, {
-        "sentiment_score": score, "alert_raised": alert, "signal_count": len(signals), "status": status,
-    }, f"Voce e {spec['id']}: sentimento {score}, alerta={alert}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "sentiment_score": score,
+            "alert_raised": alert,
+            "signal_count": len(signals),
+            "status": status,
+        },
+        f"Voce e {spec['id']}: sentimento {score}, alerta={alert}.",
+        llm,
+    )
 
 
 @register("voc_priority")
@@ -111,13 +179,26 @@ def voc_priority(state, *, llm, store, spec):
     v = state["task"].get("voc", {}) or {}
     items = v.get("items", []) or []
     ranked = sorted(
-        ({"theme": i.get("theme"), "impact": (i.get("frequency", 0) or 0) * (i.get("severity", 0) or 0)}
-         for i in items),
-        key=lambda x: -x["impact"])
-    return _out(spec, state, {
-        "item_count": len(items), "top_theme": ranked[0]["theme"] if ranked else None,
-        "ranked": ranked,
-    }, f"Voce e {spec['id']}: {len(items)} temas, top '{ranked[0]['theme'] if ranked else '-'}'.", llm)
+        (
+            {
+                "theme": i.get("theme"),
+                "impact": (i.get("frequency", 0) or 0) * (i.get("severity", 0) or 0),
+            }
+            for i in items
+        ),
+        key=lambda x: -x["impact"],
+    )
+    return _out(
+        spec,
+        state,
+        {
+            "item_count": len(items),
+            "top_theme": ranked[0]["theme"] if ranked else None,
+            "ranked": ranked,
+        },
+        f"Voce e {spec['id']}: {len(items)} temas, top '{ranked[0]['theme'] if ranked else '-'}'.",
+        llm,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -131,33 +212,62 @@ def _c3_payload(state):
 def _c3_billable_out(spec, state, llm, handler_kind, artifact_type, domain_status="ready"):
     econ = _c3_payload(state)
     price = round(float(econ.get("price_brl", econ.get("published_price_brl", 0)) or 0), 2)
-    cost = round(float(econ.get("unit_cost_brl", econ.get("delivery_cost_brl", econ.get("inference_cost_brl", 0))) or 0), 2)
-    max_ratio = float(econ.get("max_ratio", (spec.get("economics") or {}).get("max_ratio", 0.25)) or 0.25)
+    cost = round(
+        float(
+            econ.get(
+                "unit_cost_brl", econ.get("delivery_cost_brl", econ.get("inference_cost_brl", 0))
+            )
+            or 0
+        ),
+        2,
+    )
+    max_ratio = float(
+        econ.get("max_ratio", (spec.get("economics") or {}).get("max_ratio", 0.25)) or 0.25
+    )
     cost_ratio = round(cost / price, 4) if price else 1.0
     c3_ok = cost_ratio <= max_ratio
     min_price = round(cost / max_ratio, 2) if max_ratio else 0.0
     status = "blocked" if not c3_ok else domain_status
     requires_review = bool((not c3_ok) or econ.get("requires_human_review", False))
-    return _out(spec, state, {
-        "agent_id": spec["id"], "handler_kind": handler_kind, "artifact_type": artifact_type,
-        "price_brl": price, "unit_cost_brl": cost, "cost_ratio": cost_ratio,
-        "max_ratio": max_ratio, "c3_ok": c3_ok, "min_viable_price_brl": min_price,
-        "status": status, "requires_human_review": requires_review,
-        "recommended_action": "deliver" if c3_ok else "raise_price_or_reduce_cost",
-        "_spec_citations": _spec_citations(state, spec),
-    }, f"Voce e {spec['id']}: C3 price={price}, cost={cost}, ratio={cost_ratio}, status={status}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "agent_id": spec["id"],
+            "handler_kind": handler_kind,
+            "artifact_type": artifact_type,
+            "price_brl": price,
+            "unit_cost_brl": cost,
+            "cost_ratio": cost_ratio,
+            "max_ratio": max_ratio,
+            "c3_ok": c3_ok,
+            "min_viable_price_brl": min_price,
+            "status": status,
+            "requires_human_review": requires_review,
+            "recommended_action": "deliver" if c3_ok else "raise_price_or_reduce_cost",
+            "_spec_citations": _spec_citations(state, spec),
+        },
+        f"Voce e {spec['id']}: C3 price={price}, cost={cost}, ratio={cost_ratio}, status={status}.",
+        llm,
+    )
 
 
 @register("dispute_mediator_c3")
 def dispute_mediator_c3(state, *, llm, store, spec):
-    return _c3_billable_out(spec, state, llm, "dispute_mediator_c3", "dispute-mediator.resolution_plan")
+    return _c3_billable_out(
+        spec, state, llm, "dispute_mediator_c3", "dispute-mediator.resolution_plan"
+    )
 
 
 @register("escalation_manager_c3")
 def escalation_manager_c3(state, *, llm, store, spec):
-    return _c3_billable_out(spec, state, llm, "escalation_manager_c3", "escalation-manager.case_plan")
+    return _c3_billable_out(
+        spec, state, llm, "escalation_manager_c3", "escalation-manager.case_plan"
+    )
 
 
 @register("messaging_concierge_c3")
 def messaging_concierge_c3(state, *, llm, store, spec):
-    return _c3_billable_out(spec, state, llm, "messaging_concierge_c3", "messaging-concierge.response")
+    return _c3_billable_out(
+        spec, state, llm, "messaging_concierge_c3", "messaging-concierge.response"
+    )

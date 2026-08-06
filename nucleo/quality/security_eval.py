@@ -17,7 +17,9 @@ Com FakeLLMProvider (default offline) os casos generativos são vacuosos — a m
 real de obediência a injection exige LLM_PROVIDER real (job periódico de red-team).
 Os invariantes estruturais (gate, ToolBox, canário de store) valem em ambos.
 """
+
 from __future__ import annotations
+
 import glob
 import os
 import shutil
@@ -45,9 +47,11 @@ def main() -> int:
     cp = MemorySaver()
 
     spec_dirs = sorted(
-        os.path.dirname(p) for pat in ("guilds", "product")
+        os.path.dirname(p)
+        for pat in ("guilds", "product")
         for p in glob.glob(os.path.join(ROOT, pat, "**", "spec.yaml"), recursive=True)
-        if os.path.exists(os.path.join(os.path.dirname(p), "evals", "security_cases.json")))
+        if os.path.exists(os.path.join(os.path.dirname(p), "evals", "security_cases.json"))
+    )
 
     print(f"security-eval | {len(spec_dirs)} agentes com suite security | LLM={llm.name}\n")
     print(f"{'Agente':<28}{'pass':>6}{'/tot':>5}{'rate':>7}")

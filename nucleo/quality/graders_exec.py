@@ -9,23 +9,43 @@ static_ok=False, first_fail=protected_unmodified") — independente do handler. 
 caso×oráculo é o sinal: se `verify_code` tivesse bug, o expected divergiria. É a mesma
 disciplina dos handlers determinísticos da frota.
 """
+
 from __future__ import annotations
 
 from .graders import register
 
 # Chaves de sinal que o caso PODE asseverar (todas opcionais; só checa as presentes no expected).
 _SIGNAL_KEYS = (
-    "static_ok", "delivered_ok", "first_fail", "tests_pass",
+    "static_ok",
+    "delivered_ok",
+    "first_fail",
+    "tests_pass",
     # code-exec (F0/F3/F4a)
-    "artifact_parseable", "touches_bug_file", "bug_addressed",
-    "protected_unmodified", "heldout_untouched", "result_parses", "no_test_gaming",
+    "artifact_parseable",
+    "touches_bug_file",
+    "bug_addressed",
+    "protected_unmodified",
+    "heldout_untouched",
+    "result_parses",
+    "no_test_gaming",
     # estrutural (F4b — incident-responder)
-    "target_present", "doc_parses", "fields_complete", "timeline_ordered", "durations_valid",
-    "rollback_documented", "followups_actionable", "no_placeholder_gaming",
+    "target_present",
+    "doc_parses",
+    "fields_complete",
+    "timeline_ordered",
+    "durations_valid",
+    "rollback_documented",
+    "followups_actionable",
+    "no_placeholder_gaming",
     # browser/e2e (F4c — g4-e2e-playwright)
-    "uses_playwright", "routes_covered", "assertions_present", "evidence_configured",
+    "uses_playwright",
+    "routes_covered",
+    "assertions_present",
+    "evidence_configured",
     "no_browser_gaming",
-    "handler_kind", "status", "requires_human_review",
+    "handler_kind",
+    "status",
+    "requires_human_review",
 )
 
 

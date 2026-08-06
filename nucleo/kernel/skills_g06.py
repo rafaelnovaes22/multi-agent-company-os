@@ -7,9 +7,10 @@ Mesmo padrão de skills_finance/skills_custops: cada handler é puro/determinís
 sem aleatoriedade e sem datas do sistema; os campos calculados vão no TOP-LEVEL do
 output e o grader genérico de contrato valida `expected` direto.
 """
+
 from __future__ import annotations
 
-from .skills import register, _tokens, _spec_citations
+from .skills import _spec_citations, _tokens, register
 
 
 def _out(spec, state, fields, rationale_prompt, llm):
@@ -19,7 +20,11 @@ def _out(spec, state, fields, rationale_prompt, llm):
     out["rationale"] = rationale
     out["by"] = spec["id"]
     out["tenant"] = state.get("task", {}).get("tenant_id")
-    return {"output": out, "cost_tokens": _tokens(rationale), "citations": _spec_citations(state, spec)}
+    return {
+        "output": out,
+        "cost_tokens": _tokens(rationale),
+        "citations": _spec_citations(state, spec),
+    }
 
 
 @register("cohort_retention")
@@ -32,21 +37,34 @@ def cohort_retention(state, *, llm, store, spec):
     c = state["task"].get("cohort", {}) or {}
     size = c.get("size", 0) or 0
     ret = c.get("retained", {}) or {}
+
     def _pct(day):
         v = ret.get(day, 0) or 0
         return round(v / size * 100, 1) if size else 0.0
+
     d1, d7, d30 = _pct("d1"), _pct("d7"), _pct("d30")
     prev = c.get("prev_d30_pct")
     drop_pp = round(prev - d30, 1) if prev is not None else 0.0
     retention_drop = prev is not None and drop_pp >= 10
     status = "queda" if retention_drop else ("saudavel" if d30 >= 30 else "atencao")
-    return _out(spec, state, {
-        "cohort_size": size, "segment": c.get("segment"),
-        "d1_pct": d1, "d7_pct": d7, "d30_pct": d30,
-        "retention_drop": retention_drop, "drop_pp": drop_pp,
-        "alert_churn_predictor": retention_drop, "status": status,
-        "metric_canonical": True,
-    }, f"Voce e {spec['id']}: coorte {size}, D30 {d30}%, status {status}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "cohort_size": size,
+            "segment": c.get("segment"),
+            "d1_pct": d1,
+            "d7_pct": d7,
+            "d30_pct": d30,
+            "retention_drop": retention_drop,
+            "drop_pp": drop_pp,
+            "alert_churn_predictor": retention_drop,
+            "status": status,
+            "metric_canonical": True,
+        },
+        f"Voce e {spec['id']}: coorte {size}, D30 {d30}%, status {status}.",
+        llm,
+    )
 
 
 @register("churn_risk_score")
@@ -62,17 +80,17 @@ def churn_risk_score(state, *, llm, store, spec):
     scored = []
     for cu in customers:
         inactive = cu.get("days_inactive", 0) or 0
-        eng = cu.get("engagement", 0) or 0          # 0..1
+        eng = cu.get("engagement", 0) or 0  # 0..1
         activated = bool(cu.get("activated"))
         tickets = cu.get("support_tickets", 0) or 0
         score = 0
         factors = []
         if inactive > 0:
-            pts = min(40, inactive * 2)             # 2pts/dia inativo, teto 40
+            pts = min(40, inactive * 2)  # 2pts/dia inativo, teto 40
             score += pts
             if pts >= 10:
                 factors.append(f"inatividade {inactive}d")
-        eng_pts = round((1 - eng) * 30)             # baixo engajamento -> +ate 30
+        eng_pts = round((1 - eng) * 30)  # baixo engajamento -> +ate 30
         score += eng_pts
         if eng < 0.4:
             factors.append("baixo engajamento")
@@ -83,9 +101,14 @@ def churn_risk_score(state, *, llm, store, spec):
             score += 10
             factors.append(f"{tickets} tickets de suporte")
         score = max(0, min(100, score))
-        scored.append({"id": cu.get("id"), "risk_score": score,
-                       "risk_band": "alto" if score >= 60 else ("medio" if score >= 30 else "baixo"),
-                       "top_factors": factors})
+        scored.append(
+            {
+                "id": cu.get("id"),
+                "risk_score": score,
+                "risk_band": "alto" if score >= 60 else ("medio" if score >= 30 else "baixo"),
+                "top_factors": factors,
+            }
+        )
     high_risk = [s for s in scored if s["risk_score"] >= 60]
     avg = round(sum(s["risk_score"] for s in scored) / len(scored), 1) if scored else 0.0
     # C3: firewall econômico
@@ -93,12 +116,21 @@ def churn_risk_score(state, *, llm, store, spec):
     value = ch.get("value_per_retained", 0) or 0
     c3_ratio = round(inf / value, 4) if value else 0.0
     c3_ok = c3_ratio <= 0.25
-    return _out(spec, state, {
-        "scored_count": len(scored), "high_risk_count": len(high_risk),
-        "avg_risk_score": avg, "scores": scored,
-        "explainable": all(len(s["top_factors"]) > 0 for s in high_risk) if high_risk else True,
-        "c3_ratio": c3_ratio, "c3_ok": c3_ok,
-    }, f"Voce e {spec['id']}: {len(high_risk)}/{len(scored)} de alto risco, C3 ok={c3_ok}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "scored_count": len(scored),
+            "high_risk_count": len(high_risk),
+            "avg_risk_score": avg,
+            "scores": scored,
+            "explainable": all(len(s["top_factors"]) > 0 for s in high_risk) if high_risk else True,
+            "c3_ratio": c3_ratio,
+            "c3_ok": c3_ok,
+        },
+        f"Voce e {spec['id']}: {len(high_risk)}/{len(scored)} de alto risco, C3 ok={c3_ok}.",
+        llm,
+    )
 
 
 @register("demand_revenue_forecast")
@@ -143,12 +175,23 @@ def demand_revenue_forecast(state, *, llm, store, spec):
     mape = round(sum(abs(a - p) / a for a, p in pairs) / len(pairs) * 100, 1) if pairs else 0.0
     target = f.get("mape_target", 15.0)
     backtest_passed = mape <= target
-    return _out(spec, state, {
-        "point_forecast": point, "growth_rate": round(growth, 4),
-        "ci_low": ci_low, "ci_high": ci_high, "ci_margin": margin,
-        "scenarios": scenarios, "mape_pct": mape, "backtest_passed": backtest_passed,
-        "has_interval": True,
-    }, f"Voce e {spec['id']}: forecast {point} (IC [{ci_low},{ci_high}]), MAPE {mape}%.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "point_forecast": point,
+            "growth_rate": round(growth, 4),
+            "ci_low": ci_low,
+            "ci_high": ci_high,
+            "ci_margin": margin,
+            "scenarios": scenarios,
+            "mape_pct": mape,
+            "backtest_passed": backtest_passed,
+            "has_interval": True,
+        },
+        f"Voce e {spec['id']}: forecast {point} (IC [{ci_low},{ci_high}]), MAPE {mape}%.",
+        llm,
+    )
 
 
 @register("anomaly_score")
@@ -176,11 +219,21 @@ def anomaly_score(state, *, llm, store, spec):
         severity = "normal"
     detected = az >= 2
     direction = "queda" if z < 0 else ("pico" if z > 0 else "estavel")
-    return _out(spec, state, {
-        "z_score": z, "expected_value": round(expected, 2), "observed_value": value,
-        "anomaly_detected": detected, "severity": severity, "direction": direction,
-        "alert_routed": detected,
-    }, f"Voce e {spec['id']}: z={z}, severidade {severity}, detectado={detected}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "z_score": z,
+            "expected_value": round(expected, 2),
+            "observed_value": value,
+            "anomaly_detected": detected,
+            "severity": severity,
+            "direction": direction,
+            "alert_routed": detected,
+        },
+        f"Voce e {spec['id']}: z={z}, severidade {severity}, detectado={detected}.",
+        llm,
+    )
 
 
 @register("drift_check")
@@ -206,11 +259,20 @@ def drift_check(state, *, llm, store, spec):
     drifted = [k for k, v in dims.items() if v]
     drift_confirmed = len(drifted) > 0
     demote_mode = drift_confirmed
-    return _out(spec, state, {
-        "dimensions": dims, "drifted_dimensions": drifted,
-        "drift_confirmed": drift_confirmed, "drift_count": len(drifted),
-        "demote_mode": demote_mode, "target_mode": "ASSISTED" if demote_mode else "AUTONOMOUS",
-    }, f"Voce e {spec['id']}: {len(drifted)} dimensoes em drift {drifted}, rebaixar={demote_mode}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "dimensions": dims,
+            "drifted_dimensions": drifted,
+            "drift_confirmed": drift_confirmed,
+            "drift_count": len(drifted),
+            "demote_mode": demote_mode,
+            "target_mode": "ASSISTED" if demote_mode else "AUTONOMOUS",
+        },
+        f"Voce e {spec['id']}: {len(drifted)} dimensoes em drift {drifted}, rebaixar={demote_mode}.",
+        llm,
+    )
 
 
 @register("dataquality_suite")
@@ -241,12 +303,24 @@ def dataquality_suite(state, *, llm, store, spec):
     }
     failed = [k for k, v in checks.items() if not v]
     suite_passed = len(failed) == 0
-    return _out(spec, state, {
-        "row_count": rows, "null_pct": null_pct, "duplicate_pct": dup_pct,
-        "checks": checks, "failed_checks": failed, "failed_count": len(failed),
-        "suite_passed": suite_passed, "contract_certified": suite_passed,
-        "block_load": not suite_passed, "trigger_lgpd": pii,
-    }, f"Voce e {spec['id']}: {len(failed)} testes reprovados {failed}, passou={suite_passed}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "row_count": rows,
+            "null_pct": null_pct,
+            "duplicate_pct": dup_pct,
+            "checks": checks,
+            "failed_checks": failed,
+            "failed_count": len(failed),
+            "suite_passed": suite_passed,
+            "contract_certified": suite_passed,
+            "block_load": not suite_passed,
+            "trigger_lgpd": pii,
+        },
+        f"Voce e {spec['id']}: {len(failed)} testes reprovados {failed}, passou={suite_passed}.",
+        llm,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -264,16 +338,34 @@ def metric_definition_check(state, *, llm, store, spec):
     dup = None
     for e in existing:
         if e.get("name") and e.get("name") == m.get("name"):
-            dup = e.get("name"); break
-        if e.get("formula") and e.get("formula") == m.get("formula") and m.get("grain") and e.get("grain") == m.get("grain"):
-            dup = e.get("name"); break
+            dup = e.get("name")
+            break
+        if (
+            e.get("formula")
+            and e.get("formula") == m.get("formula")
+            and m.get("grain")
+            and e.get("grain") == m.get("grain")
+        ):
+            dup = e.get("name")
+            break
     valid = (not missing) and dup is None
     status = "accepted" if valid else ("duplicate" if dup else "needs_revision")
-    return _out(spec, state, {
-        "agent_id": spec["id"], "metric": m.get("name"), "valid": valid,
-        "missing_fields": missing, "duplicate_of": dup, "status": status,
-        "requires_human_review": not valid,
-    }, f"Voce e {spec['id']}: metrica {m.get('name')} valid={valid} status={status}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "agent_id": spec["id"],
+            "metric": m.get("name"),
+            "valid": valid,
+            "missing_fields": missing,
+            "duplicate_of": dup,
+            "status": status,
+            "requires_human_review": not valid,
+        },
+        f"Voce e {spec['id']}: metrica {m.get('name')} valid={valid} status={status}.",
+        llm,
+    )
+
 
 # ---------------------------------------------------------------------------
 # Burn-down Track A — g6-experiment-analyst: leitura determinística de A/B.
@@ -290,6 +382,7 @@ def experiment_readout(state, *, llm, store, spec):
     Usa z-test aproximado de duas proporções; aplica Bonferroni por comparisons.
     """
     import math
+
     e = state["task"].get("experiment_readout", {}) or {}
     cn = e.get("control_n", 0) or 0
     tn = e.get("treatment_n", 0) or 0
@@ -303,11 +396,17 @@ def experiment_readout(state, *, llm, store, spec):
     tr = tc / tn if tn else 0.0
     uplift_pp = round((tr - cr) * 100, 2)
     pooled = (cc + tc) / (cn + tn) if (cn + tn) else 0.0
-    se = math.sqrt(pooled * (1 - pooled) * (1 / cn + 1 / tn)) if cn and tn and 0 < pooled < 1 else 0.0
+    se = (
+        math.sqrt(pooled * (1 - pooled) * (1 / cn + 1 / tn))
+        if cn and tn and 0 < pooled < 1
+        else 0.0
+    )
     z_stat = round((tr - cr) / se, 3) if se else 0.0
     significant = abs(z_stat) >= z_threshold
     guardrail_delta = e.get("guardrail_delta_pct", 0) or 0
-    guardrail_min = e.get("guardrail_min_delta_pct", -5) if e.get("guardrail_min_delta_pct") is not None else -5
+    guardrail_min = (
+        e.get("guardrail_min_delta_pct", -5) if e.get("guardrail_min_delta_pct") is not None else -5
+    )
     guardrail_ok = guardrail_delta >= guardrail_min
     pre_registered = bool(e.get("pre_registered"))
     canonical = bool(e.get("primary_metric_canonical", True))
@@ -322,12 +421,24 @@ def experiment_readout(state, *, llm, store, spec):
         decision = "kill"
     else:
         decision = "iterate"
-    return _out(spec, state, {
-        "control_rate_pct": round(cr * 100, 2), "treatment_rate_pct": round(tr * 100, 2),
-        "uplift_pp": uplift_pp, "z_stat": z_stat, "adjusted_alpha": adjusted_alpha,
-        "significant": significant, "guardrail_ok": guardrail_ok, "valid_readout": valid,
-        "decision": decision, "learning_registered": valid,
-    }, f"Voce e {spec['id']}: uplift {uplift_pp}pp, z={z_stat}, decisao {decision}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "control_rate_pct": round(cr * 100, 2),
+            "treatment_rate_pct": round(tr * 100, 2),
+            "uplift_pp": uplift_pp,
+            "z_stat": z_stat,
+            "adjusted_alpha": adjusted_alpha,
+            "significant": significant,
+            "guardrail_ok": guardrail_ok,
+            "valid_readout": valid,
+            "decision": decision,
+            "learning_registered": valid,
+        },
+        f"Voce e {spec['id']}: uplift {uplift_pp}pp, z={z_stat}, decisao {decision}.",
+        llm,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -366,11 +477,22 @@ def pipeline_run_review(state, *, llm, store, spec):
 
     load_blocked = status != "ok"
     run_clean = run_succeeded and contract_passed and duplicate_count == 0
-    return _out(spec, state, {
-        "agent_id": spec["id"], "fresh": fresh, "duplicate_count": duplicate_count,
-        "contract_passed": contract_passed, "status": status, "load_blocked": load_blocked,
-        "run_clean": run_clean, "requires_human_review": load_blocked,
-    }, f"Voce e {spec['id']}: run {status}, load {'bloqueado' if load_blocked else 'ok'}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "agent_id": spec["id"],
+            "fresh": fresh,
+            "duplicate_count": duplicate_count,
+            "contract_passed": contract_passed,
+            "status": status,
+            "load_blocked": load_blocked,
+            "run_clean": run_clean,
+            "requires_human_review": load_blocked,
+        },
+        f"Voce e {spec['id']}: run {status}, load {'bloqueado' if load_blocked else 'ok'}.",
+        llm,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -379,13 +501,25 @@ def pipeline_run_review(state, *, llm, store, spec):
 _NL2SQL_METRICS = {
     "north_star": {"table": "events", "expr": "SUM(value)", "time_col": "event_date"},
     "revenue": {"table": "invoices", "expr": "SUM(amount)", "time_col": "issued_at"},
-    "activation_rate": {"table": "product_events", "expr": "AVG(activated)", "time_col": "event_date"},
+    "activation_rate": {
+        "table": "product_events",
+        "expr": "AVG(activated)",
+        "time_col": "event_date",
+    },
     "churn_rate": {"table": "subscriptions", "expr": "AVG(churned)", "time_col": "period_start"},
 }
 _NL2SQL_PII_FIELDS = {"email", "phone", "cpf", "name"}
 _NL2SQL_INJECTION_MARKERS = (
-    "ignore previous", "ignore as instrucoes", "ignore as instruções", "drop table",
-    "delete from", "password", "secret", "segredo", "admin token", "system prompt",
+    "ignore previous",
+    "ignore as instrucoes",
+    "ignore as instruções",
+    "drop table",
+    "delete from",
+    "password",
+    "secret",
+    "segredo",
+    "admin token",
+    "system prompt",
 )
 
 
@@ -448,21 +582,45 @@ def nl2sql_query_plan(state, *, llm, store, spec):
         where = [f"{meta['time_col']} >= CURRENT_DATE - INTERVAL '{days} days'"]
         for key in sorted(filters):
             where.append(f"{key} = :{key}")
-        sql = "SELECT " + ", ".join(select_parts) + f" FROM {selected_table} WHERE " + " AND ".join(where)
+        sql = (
+            "SELECT "
+            + ", ".join(select_parts)
+            + f" FROM {selected_table} WHERE "
+            + " AND ".join(where)
+        )
         if group_by:
             sql += f" GROUP BY {group_by}"
 
     sql_ready = status == "ready"
     requires_human_review = status in {"needs_metric_mapping", "needs_source_citation"}
-    risk = "high" if status.startswith("blocked") else ("medium" if requires_human_review else "low")
-    suggests_dashboard = bool(req.get("repeated_by_dris", 0) and req.get("repeated_by_dris", 0) >= 3)
+    risk = (
+        "high" if status.startswith("blocked") else ("medium" if requires_human_review else "low")
+    )
+    suggests_dashboard = bool(
+        req.get("repeated_by_dris", 0) and req.get("repeated_by_dris", 0) >= 3
+    )
 
-    return _out(spec, state, {
-        "agent_id": spec["id"], "handler_kind": "nl2sql_query_plan",
-        "selected_metric": metric, "selected_table": selected_table,
-        "metric_canonical": metric_canonical, "source_cited": source_cited,
-        "access_granted": access_granted, "pii_blocked": pii_blocked,
-        "injection_blocked": injection_blocked, "forbidden_fields": forbidden_fields,
-        "sql_ready": sql_ready, "sql": sql, "status": status, "risk": risk,
-        "requires_human_review": requires_human_review, "suggests_dashboard": suggests_dashboard,
-    }, f"Voce e {spec['id']}: metrica {metric}, status {status}, SQL pronto={sql_ready}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "agent_id": spec["id"],
+            "handler_kind": "nl2sql_query_plan",
+            "selected_metric": metric,
+            "selected_table": selected_table,
+            "metric_canonical": metric_canonical,
+            "source_cited": source_cited,
+            "access_granted": access_granted,
+            "pii_blocked": pii_blocked,
+            "injection_blocked": injection_blocked,
+            "forbidden_fields": forbidden_fields,
+            "sql_ready": sql_ready,
+            "sql": sql,
+            "status": status,
+            "risk": risk,
+            "requires_human_review": requires_human_review,
+            "suggests_dashboard": suggests_dashboard,
+        },
+        f"Voce e {spec['id']}: metrica {metric}, status {status}, SQL pronto={sql_ready}.",
+        llm,
+    )

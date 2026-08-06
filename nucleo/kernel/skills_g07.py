@@ -6,11 +6,12 @@ top-level do output, grader genérico de contrato valida `expected` de domínio.
 
 A assinatura é a padrão: handler(state, *, llm, store, spec) -> {output, cost_tokens, citations}.
 """
+
 from __future__ import annotations
 
 import math
 
-from .skills import register, _tokens, _spec_citations
+from .skills import _spec_citations, _tokens, register
 
 
 def _out(spec, state, fields, rationale_prompt, llm):
@@ -20,7 +21,11 @@ def _out(spec, state, fields, rationale_prompt, llm):
     out["rationale"] = rationale
     out["by"] = spec["id"]
     out["tenant"] = state.get("task", {}).get("tenant_id")
-    return {"output": out, "cost_tokens": _tokens(rationale), "citations": _spec_citations(state, spec)}
+    return {
+        "output": out,
+        "cost_tokens": _tokens(rationale),
+        "citations": _spec_citations(state, spec),
+    }
 
 
 @register("paid_roas_cac")
@@ -61,12 +66,24 @@ def paid_roas_cac(state, *, llm, store, spec):
         decision = "escalar"
 
     status = "escala" if decision == "escalar" else "ajuste"
-    return _out(spec, state, {
-        "roas": roas, "cac": cac, "cac_payback_months": payback_months,
-        "delight_ratio": delight_ratio, "roas_ok": roas_ok, "payback_ok": payback_ok,
-        "delight_ok": delight_ok, "pause_creative": pause_creative,
-        "decision": decision, "status": status,
-    }, f"Voce e {spec['id']}: ROAS {roas} (alvo {target_roas}), CAC-payback {payback_months}m, decisao {decision}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "roas": roas,
+            "cac": cac,
+            "cac_payback_months": payback_months,
+            "delight_ratio": delight_ratio,
+            "roas_ok": roas_ok,
+            "payback_ok": payback_ok,
+            "delight_ok": delight_ok,
+            "pause_creative": pause_creative,
+            "decision": decision,
+            "status": status,
+        },
+        f"Voce e {spec['id']}: ROAS {roas} (alvo {target_roas}), CAC-payback {payback_months}m, decisao {decision}.",
+        llm,
+    )
 
 
 @register("ab_sizing_significance")
@@ -78,8 +95,8 @@ def ab_sizing_significance(state, *, llm, store, spec):
     amostra (sem peeking) E o p-valor cruzou alpha; senão, segue coletando.
     """
     e = state["task"].get("experiment", {}) or {}
-    baseline = e.get("baseline_rate", 0) or 0          # conversão do controle (0..1)
-    mde = e.get("mde", 0) or 0                          # uplift absoluto detectável (0..1)
+    baseline = e.get("baseline_rate", 0) or 0  # conversão do controle (0..1)
+    mde = e.get("mde", 0) or 0  # uplift absoluto detectável (0..1)
     alpha = e.get("alpha", 0.05) or 0.05
     power = e.get("power", 0.8) or 0.8
     # z para teste bicaudal (alpha) e poder (beta)
@@ -89,9 +106,11 @@ def ab_sizing_significance(state, *, llm, store, spec):
     p1, p2 = baseline, baseline + mde
     pbar = (p1 + p2) / 2
     if mde > 0 and 0 < pbar < 1:
-        num = (z_alpha * math.sqrt(2 * pbar * (1 - pbar)) +
-               z_beta * math.sqrt(p1 * (1 - p1) + p2 * (1 - p2))) ** 2
-        sample_per_arm = math.ceil(num / (mde ** 2))
+        num = (
+            z_alpha * math.sqrt(2 * pbar * (1 - pbar))
+            + z_beta * math.sqrt(p1 * (1 - p1) + p2 * (1 - p2))
+        ) ** 2
+        sample_per_arm = math.ceil(num / (mde**2))
     else:
         sample_per_arm = 0
 
@@ -119,11 +138,22 @@ def ab_sizing_significance(state, *, llm, store, spec):
     else:
         decision = "desenho_pronto"
 
-    return _out(spec, state, {
-        "sample_per_arm": sample_per_arm, "z_alpha": z_alpha, "z_beta": z_beta,
-        "z_stat": z_stat, "observed_uplift": observed_uplift,
-        "significant": significant, "sample_reached": sample_reached, "decision": decision,
-    }, f"Voce e {spec['id']}: amostra/braco {sample_per_arm}, z {z_stat}, decisao {decision}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "sample_per_arm": sample_per_arm,
+            "z_alpha": z_alpha,
+            "z_beta": z_beta,
+            "z_stat": z_stat,
+            "observed_uplift": observed_uplift,
+            "significant": significant,
+            "sample_reached": sample_reached,
+            "decision": decision,
+        },
+        f"Voce e {spec['id']}: amostra/braco {sample_per_arm}, z {z_stat}, decisao {decision}.",
+        llm,
+    )
 
 
 @register("referral_kfactor_score")
@@ -152,12 +182,16 @@ def referral_kfactor_score(state, *, llm, store, spec):
 
     # Referral Propensity Score (0..100) — engajamento/NPS/histórico
     sig = r.get("propensity_signals", {}) or {}
-    engagement = sig.get("engagement", 0) or 0      # 0..1
-    nps = sig.get("nps", 0) or 0                     # -100..100
+    engagement = sig.get("engagement", 0) or 0  # 0..1
+    nps = sig.get("nps", 0) or 0  # -100..100
     past_referrals = sig.get("past_referrals", 0) or 0
     propensity_score = round(
-        min(100.0, max(0.0,
-            engagement * 50 + (nps + 100) / 200 * 30 + min(past_referrals, 5) / 5 * 20)), 1)
+        min(
+            100.0,
+            max(0.0, engagement * 50 + (nps + 100) / 200 * 30 + min(past_referrals, 5) / 5 * 20),
+        ),
+        1,
+    )
 
     if fraud_rate > 5:
         status = "fraude_alta"
@@ -168,12 +202,23 @@ def referral_kfactor_score(state, *, llm, store, spec):
     else:
         status = "abaixo_viral"
 
-    return _out(spec, state, {
-        "k_factor": k_factor, "invites_per_user": invites_per_user, "invite_conv_rate": conv_rate,
-        "cost_per_conversion": cost_per_conversion, "budget_ok": budget_ok,
-        "fraud_rate_pct": fraud_rate, "viral": viral,
-        "propensity_score": propensity_score, "status": status,
-    }, f"Voce e {spec['id']}: k-factor {k_factor}, propensity {propensity_score}, status {status}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "k_factor": k_factor,
+            "invites_per_user": invites_per_user,
+            "invite_conv_rate": conv_rate,
+            "cost_per_conversion": cost_per_conversion,
+            "budget_ok": budget_ok,
+            "fraud_rate_pct": fraud_rate,
+            "viral": viral,
+            "propensity_score": propensity_score,
+            "status": status,
+        },
+        f"Voce e {spec['id']}: k-factor {k_factor}, propensity {propensity_score}, status {status}.",
+        llm,
+    )
 
 
 @register("attribution_cac_payback")
@@ -187,9 +232,9 @@ def attribution_cac_payback(state, *, llm, store, spec):
     quando a soma dos créditos por canal excede o total reconciliado.
     """
     a = state["task"].get("attribution", {}) or {}
-    journeys = a.get("journeys", []) or []     # [{"touches": ["paid","social"], "converted": true}]
-    spend = a.get("spend", {}) or {}            # {"paid": 1000, ...}
-    g6_total = a.get("g6_total_conversions")    # fonte de verdade
+    journeys = a.get("journeys", []) or []  # [{"touches": ["paid","social"], "converted": true}]
+    spend = a.get("spend", {}) or {}  # {"paid": 1000, ...}
+    g6_total = a.get("g6_total_conversions")  # fonte de verdade
 
     credits = {}
     total_converted = 0.0
@@ -229,12 +274,23 @@ def attribution_cac_payback(state, *, llm, store, spec):
     best_channel = ranked[0][0] if ranked else None
     worst_channel = ranked[-1][0] if ranked else None
 
-    return _out(spec, state, {
-        "attributed_conversions": attributed_total, "total_converted": round(total_converted, 4),
-        "channels": channels, "reconciled": reconciled, "recon_diff_pct": recon_diff_pct,
-        "double_counting": double_counting, "best_channel": best_channel,
-        "worst_channel": worst_channel, "channel_count": len(channels),
-    }, f"Voce e {spec['id']}: {attributed_total} conversoes atribuidas, reconciliado={reconciled}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "attributed_conversions": attributed_total,
+            "total_converted": round(total_converted, 4),
+            "channels": channels,
+            "reconciled": reconciled,
+            "recon_diff_pct": recon_diff_pct,
+            "double_counting": double_counting,
+            "best_channel": best_channel,
+            "worst_channel": worst_channel,
+            "channel_count": len(channels),
+        },
+        f"Voce e {spec['id']}: {attributed_total} conversoes atribuidas, reconciliado={reconciled}.",
+        llm,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -248,21 +304,44 @@ def _c3_payload(state):
 def _c3_out(spec, state, llm, handler_kind, artifact_type, domain_status="ready"):
     econ = _c3_payload(state)
     price = round(float(econ.get("price_brl", econ.get("published_price_brl", 0)) or 0), 2)
-    cost = round(float(econ.get("unit_cost_brl", econ.get("delivery_cost_brl", econ.get("inference_cost_brl", 0))) or 0), 2)
-    max_ratio = float(econ.get("max_ratio", (spec.get("economics") or {}).get("max_ratio", 0.25)) or 0.25)
+    cost = round(
+        float(
+            econ.get(
+                "unit_cost_brl", econ.get("delivery_cost_brl", econ.get("inference_cost_brl", 0))
+            )
+            or 0
+        ),
+        2,
+    )
+    max_ratio = float(
+        econ.get("max_ratio", (spec.get("economics") or {}).get("max_ratio", 0.25)) or 0.25
+    )
     cost_ratio = round(cost / price, 4) if price else 1.0
     c3_ok = cost_ratio <= max_ratio
     min_price = round(cost / max_ratio, 2) if max_ratio else 0.0
     status = "blocked" if not c3_ok else domain_status
     requires_review = bool((not c3_ok) or econ.get("requires_human_review", False))
-    return _out(spec, state, {
-        "agent_id": spec["id"], "handler_kind": handler_kind, "artifact_type": artifact_type,
-        "price_brl": price, "unit_cost_brl": cost, "cost_ratio": cost_ratio,
-        "max_ratio": max_ratio, "c3_ok": c3_ok, "min_viable_price_brl": min_price,
-        "status": status, "requires_human_review": requires_review,
-        "recommended_action": "deliver" if c3_ok else "raise_price_or_reduce_cost",
-        "_spec_citations": _spec_citations(state, spec),
-    }, f"Voce e {spec['id']}: C3 price={price}, cost={cost}, ratio={cost_ratio}, status={status}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "agent_id": spec["id"],
+            "handler_kind": handler_kind,
+            "artifact_type": artifact_type,
+            "price_brl": price,
+            "unit_cost_brl": cost,
+            "cost_ratio": cost_ratio,
+            "max_ratio": max_ratio,
+            "c3_ok": c3_ok,
+            "min_viable_price_brl": min_price,
+            "status": status,
+            "requires_human_review": requires_review,
+            "recommended_action": "deliver" if c3_ok else "raise_price_or_reduce_cost",
+            "_spec_citations": _spec_citations(state, spec),
+        },
+        f"Voce e {spec['id']}: C3 price={price}, cost={cost}, ratio={cost_ratio}, status={status}.",
+        llm,
+    )
 
 
 @register("copywriter_c3")
@@ -274,6 +353,7 @@ def copywriter_c3(state, *, llm, store, spec):
 def lifecycle_crm_c3(state, *, llm, store, spec):
     return _c3_out(spec, state, llm, "lifecycle_crm_c3", "lifecycle-crm.campaign")
 
+
 # ---------------------------------------------------------------------------
 # Burn-down Track A — g7-seo-strategist: mapa determinístico de oportunidades SEO.
 # ---------------------------------------------------------------------------
@@ -284,7 +364,9 @@ def seo_keyword_map(state, *, llm, store, spec):
     keywords = s.get("keywords", []) or []
     max_difficulty = s.get("max_difficulty", 60) or 60
     min_volume = s.get("min_volume", 100) or 100
-    allowed_intents = set(s.get("allowed_intents", ["informational", "commercial", "transactional"]) or [])
+    allowed_intents = set(
+        s.get("allowed_intents", ["informational", "commercial", "transactional"]) or []
+    )
     opportunities = []
     cluster_counts = {}
     technical = s.get("technical", {}) or {}
@@ -298,17 +380,39 @@ def seo_keyword_map(state, *, llm, store, spec):
         intent = kw.get("intent")
         vertical_assumed = bool(kw.get("vertical_assumed"))
         score = round(volume * (100 - difficulty) / 100, 1)
-        eligible = volume >= min_volume and difficulty <= max_difficulty and intent in allowed_intents and not vertical_assumed
+        eligible = (
+            volume >= min_volume
+            and difficulty <= max_difficulty
+            and intent in allowed_intents
+            and not vertical_assumed
+        )
         if eligible:
-            opportunities.append({"keyword": kw.get("term"), "cluster": cluster, "opportunity_score": score, "intent": intent})
+            opportunities.append(
+                {
+                    "keyword": kw.get("term"),
+                    "cluster": cluster,
+                    "opportunity_score": score,
+                    "intent": intent,
+                }
+            )
     opportunities.sort(key=lambda x: -x["opportunity_score"])
     briefs_count = min(len(opportunities), s.get("brief_limit", 10) or 10)
     audit_passed = non_indexed == 0 and cwv_fail == 0
     status = "briefs_ready" if briefs_count else "sem_oportunidade"
-    return _out(spec, state, {
-        "keyword_count": len(keywords), "cluster_count": len(cluster_counts),
-        "opportunity_count": len(opportunities), "briefs_count": briefs_count,
-        "top_keyword": opportunities[0]["keyword"] if opportunities else None,
-        "audit_passed": audit_passed, "non_indexed_pages": non_indexed,
-        "core_web_vitals_fail": cwv_fail, "status": status,
-    }, f"Voce e {spec['id']}: {len(opportunities)} oportunidades SEO, {briefs_count} briefs.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "keyword_count": len(keywords),
+            "cluster_count": len(cluster_counts),
+            "opportunity_count": len(opportunities),
+            "briefs_count": briefs_count,
+            "top_keyword": opportunities[0]["keyword"] if opportunities else None,
+            "audit_passed": audit_passed,
+            "non_indexed_pages": non_indexed,
+            "core_web_vitals_fail": cwv_fail,
+            "status": status,
+        },
+        f"Voce e {spec['id']}: {len(opportunities)} oportunidades SEO, {briefs_count} briefs.",
+        llm,
+    )

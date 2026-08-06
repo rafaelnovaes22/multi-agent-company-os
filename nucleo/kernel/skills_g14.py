@@ -7,9 +7,10 @@ Mesmo padrão de skills_finance/skills_custops: handlers puros/determinísticos,
 campos no top-level do output, grader genérico valida `expected` de domínio.
 A assinatura é a padrão: handler(state, *, llm, store, spec) -> {output, cost_tokens, citations}.
 """
+
 from __future__ import annotations
 
-from .skills import register, _tokens, _spec_citations
+from .skills import _spec_citations, _tokens, register
 
 # Tiers de modelo: custo relativo por chamada (unidade) e qualidade nominal (0..1).
 # Determinístico: tabela explícita, sem rede nem aleatoriedade.
@@ -27,7 +28,11 @@ def _out(spec, state, fields, rationale_prompt, llm):
     out["rationale"] = rationale
     out["by"] = spec["id"]
     out["tenant"] = state.get("task", {}).get("tenant_id")
-    return {"output": out, "cost_tokens": _tokens(rationale), "citations": _spec_citations(state, spec)}
+    return {
+        "output": out,
+        "cost_tokens": _tokens(rationale),
+        "citations": _spec_citations(state, spec),
+    }
 
 
 @register("model_routing_decision")
@@ -36,9 +41,9 @@ def model_routing_decision(state, *, llm, store, spec):
     da tarefa, aplica fallback se o provider primário caiu e bloqueia/rebaixa chamada
     billable que estouraria o teto C3 (custo máximo por chamada)."""
     r = state["task"].get("routing", {}) or {}
-    min_quality = r.get("min_quality", 0.85) or 0.85       # SLA de qualidade da tarefa
+    min_quality = r.get("min_quality", 0.85) or 0.85  # SLA de qualidade da tarefa
     ledger = r.get("ledger", "operating")
-    cost_cap = r.get("cost_cap")                            # teto C3 (billable)
+    cost_cap = r.get("cost_cap")  # teto C3 (billable)
     primary_down = bool(r.get("primary_down"))
 
     # Modelos ordenados do mais barato ao mais caro que atende a qualidade mínima.
@@ -72,11 +77,22 @@ def model_routing_decision(state, *, llm, store, spec):
             blocked = True
 
     status = "blocked" if blocked else ("fallback" if fell_back else "ok")
-    return _out(spec, state, {
-        "selected_model": selected, "cost": cost, "quality": quality,
-        "latency_ms": latency, "fell_back": fell_back, "blocked": blocked,
-        "candidate_count": len(candidates), "status": status,
-    }, f"Voce e {spec['id']}: modelo '{selected}' (custo {cost}), status {status}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "selected_model": selected,
+            "cost": cost,
+            "quality": quality,
+            "latency_ms": latency,
+            "fell_back": fell_back,
+            "blocked": blocked,
+            "candidate_count": len(candidates),
+            "status": status,
+        },
+        f"Voce e {spec['id']}: modelo '{selected}' (custo {cost}), status {status}.",
+        llm,
+    )
 
 
 @register("model_scorecard")
@@ -87,11 +103,11 @@ def model_scorecard(state, *, llm, store, spec):
     s = state["task"].get("scorecard", {}) or {}
     cur = s.get("current", {}) or {}
     cand = s.get("candidate", {}) or {}
-    cur_q = cur.get("quality", 0) or 0                     # 0..1 no golden set
+    cur_q = cur.get("quality", 0) or 0  # 0..1 no golden set
     cand_q = cand.get("quality", 0) or 0
-    cur_cost = cur.get("cost", 0) or 0                     # custo por outcome
+    cur_cost = cur.get("cost", 0) or 0  # custo por outcome
     cand_cost = cand.get("cost", 0) or 0
-    tol = s.get("quality_tolerance", 0.02) or 0.02         # tolerância de regressão
+    tol = s.get("quality_tolerance", 0.02) or 0.02  # tolerância de regressão
 
     quality_delta = round(cand_q - cur_q, 4)
     cost_delta = round(cand_cost - cur_cost, 4)
@@ -106,13 +122,23 @@ def model_scorecard(state, *, llm, store, spec):
     elif cost_delta <= 0 and quality_delta >= -tol:
         recommendation, adopt = "adotar", True
     else:
-        recommendation, adopt = "revisar", False           # mais caro sem ganho claro
+        recommendation, adopt = "revisar", False  # mais caro sem ganho claro
 
-    return _out(spec, state, {
-        "quality_delta": quality_delta, "cost_delta": cost_delta,
-        "cost_savings_pct": cost_savings_pct, "monthly_savings": monthly_savings,
-        "regression": regression, "recommendation": recommendation, "adopt": adopt,
-    }, f"Voce e {spec['id']}: recomendacao '{recommendation}' (dq {quality_delta}, dcusto {cost_delta}).", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "quality_delta": quality_delta,
+            "cost_delta": cost_delta,
+            "cost_savings_pct": cost_savings_pct,
+            "monthly_savings": monthly_savings,
+            "regression": regression,
+            "recommendation": recommendation,
+            "adopt": adopt,
+        },
+        f"Voce e {spec['id']}: recomendacao '{recommendation}' (dq {quality_delta}, dcusto {cost_delta}).",
+        llm,
+    )
 
 
 @register("retrieval_quality_score")
@@ -121,12 +147,12 @@ def retrieval_quality_score(state, *, llm, store, spec):
     chunks recuperados contra os relevantes, frescor médio do índice e flag de
     vazamento de Tier (C5). Aprova só se F1 >= limiar e sem leakage."""
     r = state["task"].get("retrieval", {}) or {}
-    retrieved = r.get("retrieved", []) or []               # ids recuperados
-    relevant = set(r.get("relevant", []) or [])            # ids realmente relevantes
-    threshold = r.get("threshold", 0.7) or 0.7             # limiar de F1
-    stale_days = r.get("stale_days", 0) or 0               # frescor: dias desde reindex
+    retrieved = r.get("retrieved", []) or []  # ids recuperados
+    relevant = set(r.get("relevant", []) or [])  # ids realmente relevantes
+    threshold = r.get("threshold", 0.7) or 0.7  # limiar de F1
+    stale_days = r.get("stale_days", 0) or 0  # frescor: dias desde reindex
     max_stale = r.get("max_stale_days", 30) or 30
-    tier_leak = bool(r.get("tier_leak"))                   # mistura de Tiers (C5)
+    tier_leak = bool(r.get("tier_leak"))  # mistura de Tiers (C5)
 
     ret_set = list(retrieved)
     tp = sum(1 for x in ret_set if x in relevant)
@@ -135,11 +161,24 @@ def retrieval_quality_score(state, *, llm, store, spec):
     f1 = round(2 * precision * recall / (precision + recall), 3) if (precision + recall) else 0.0
     stale = stale_days > max_stale
     passed = (f1 >= threshold) and (not tier_leak) and (not stale)
-    status = "tier_leak" if tier_leak else ("stale" if stale else ("ok" if passed else "abaixo_limiar"))
-    return _out(spec, state, {
-        "precision": precision, "recall": recall, "f1": f1,
-        "tier_leak": tier_leak, "stale": stale, "passed": passed, "status": status,
-    }, f"Voce e {spec['id']}: F1 {f1} (limiar {threshold}), status {status}.", llm)
+    status = (
+        "tier_leak" if tier_leak else ("stale" if stale else ("ok" if passed else "abaixo_limiar"))
+    )
+    return _out(
+        spec,
+        state,
+        {
+            "precision": precision,
+            "recall": recall,
+            "f1": f1,
+            "tier_leak": tier_leak,
+            "stale": stale,
+            "passed": passed,
+            "status": status,
+        },
+        f"Voce e {spec['id']}: F1 {f1} (limiar {threshold}), status {status}.",
+        llm,
+    )
 
 
 @register("inference_cost_savings")
@@ -148,11 +187,11 @@ def inference_cost_savings(state, *, llm, store, spec):
     compressão de prompt, validando qualidade >= baseline (tolerância). Só aplica
     se a economia for positiva e a qualidade não regredir além da tolerância."""
     c = state["task"].get("optimization", {}) or {}
-    base_cost = c.get("baseline_cost", 0) or 0             # custo por outcome antes
-    cache_hit = c.get("cache_hit_rate", 0) or 0            # 0..1 chamadas servidas do cache
-    batch_factor = c.get("batch_savings", 0) or 0          # fração economizada por batching
-    compression = c.get("prompt_compression", 0) or 0      # fração de tokens cortados
-    quality_after = c.get("quality_after", 1.0) or 1.0     # qualidade pós-otimização
+    base_cost = c.get("baseline_cost", 0) or 0  # custo por outcome antes
+    cache_hit = c.get("cache_hit_rate", 0) or 0  # 0..1 chamadas servidas do cache
+    batch_factor = c.get("batch_savings", 0) or 0  # fração economizada por batching
+    compression = c.get("prompt_compression", 0) or 0  # fração de tokens cortados
+    quality_after = c.get("quality_after", 1.0) or 1.0  # qualidade pós-otimização
     baseline_quality = c.get("baseline_quality", 1.0) or 1.0
     tol = c.get("quality_tolerance", 0.02) or 0.02
 
@@ -166,11 +205,22 @@ def inference_cost_savings(state, *, llm, store, spec):
     quality_ok = quality_regression <= tol
     applied = quality_ok and savings > 0
     status = "applied" if applied else ("quality_regression" if not quality_ok else "no_savings")
-    return _out(spec, state, {
-        "optimized_cost": optimized_cost, "savings": savings, "savings_pct": savings_pct,
-        "quality_regression": quality_regression, "quality_ok": quality_ok,
-        "applied": applied, "status": status,
-    }, f"Voce e {spec['id']}: economia {savings_pct}% (de {base_cost} p/ {optimized_cost}), status {status}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "optimized_cost": optimized_cost,
+            "savings": savings,
+            "savings_pct": savings_pct,
+            "quality_regression": quality_regression,
+            "quality_ok": quality_ok,
+            "applied": applied,
+            "status": status,
+        },
+        f"Voce e {spec['id']}: economia {savings_pct}% (de {base_cost} p/ {optimized_cost}), status {status}.",
+        llm,
+    )
+
 
 # ---------------------------------------------------------------------------
 # Burn-down Track A — g14-prompt-context-registry: registry determinístico.
@@ -179,6 +229,7 @@ def inference_cost_savings(state, *, llm, store, spec):
 def prompt_context_registry(state, *, llm, store, spec):
     """g14-prompt-context-registry — versiona prompt/contexto, hash, A/B e recalc C3."""
     import hashlib
+
     p = state["task"].get("prompt_registry", {}) or {}
     prompt_id = p.get("prompt_id")
     content = p.get("content", "") or ""
@@ -189,17 +240,35 @@ def prompt_context_registry(state, *, llm, store, spec):
     variants = ab.get("variants", []) or []
     winner = None
     if variants:
-        winner = sorted(variants, key=lambda v: (v.get("quality", 0) or 0, -(v.get("cost", 0) or 0)), reverse=True)[0].get("id")
+        winner = sorted(
+            variants,
+            key=lambda v: (v.get("quality", 0) or 0, -(v.get("cost", 0) or 0)),
+            reverse=True,
+        )[0].get("id")
     context_tiers = p.get("context_tiers", []) or []
     max_allowed_tier = p.get("max_allowed_tier", 1) if p.get("max_allowed_tier") is not None else 1
     tier_leak = any((t or 0) > max_allowed_tier for t in context_tiers)
     cacheable = bool(p.get("cacheable", False)) and not tier_leak
     version_registered = bool(prompt_id and prompt_hash and not tier_leak)
     recalc_unit_economics = hash_changed
-    status = "blocked_tier_leak" if tier_leak else ("versioned" if version_registered else "invalid")
-    return _out(spec, state, {
-        "prompt_id": prompt_id, "prompt_hash": prompt_hash, "hash_changed": hash_changed,
-        "version_registered": version_registered, "recalc_unit_economics": recalc_unit_economics,
-        "variant_count": len(variants), "winner_variant": winner, "tier_leak": tier_leak,
-        "cacheable": cacheable, "status": status,
-    }, f"Voce e {spec['id']}: prompt {prompt_id}, status {status}, hash_changed={hash_changed}.", llm)
+    status = (
+        "blocked_tier_leak" if tier_leak else ("versioned" if version_registered else "invalid")
+    )
+    return _out(
+        spec,
+        state,
+        {
+            "prompt_id": prompt_id,
+            "prompt_hash": prompt_hash,
+            "hash_changed": hash_changed,
+            "version_registered": version_registered,
+            "recalc_unit_economics": recalc_unit_economics,
+            "variant_count": len(variants),
+            "winner_variant": winner,
+            "tier_leak": tier_leak,
+            "cacheable": cacheable,
+            "status": status,
+        },
+        f"Voce e {spec['id']}: prompt {prompt_id}, status {status}, hash_changed={hash_changed}.",
+        llm,
+    )

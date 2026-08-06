@@ -12,6 +12,7 @@ vivo pelo artefato do último nightly verde. FAIL-CLOSED por construção: qualq
 (gh ausente/não autenticado, sem run verde recente, artifact sem o agente) => None, e o
 G7 reprova com o motivo. Nunca degrada silenciosamente para prova local.
 """
+
 from __future__ import annotations
 
 import json
@@ -34,9 +35,22 @@ def _gh(args, *, timeout=60):
 
 
 def _latest_green_run(runner):
-    out = runner(["run", "list", "--workflow", WORKFLOW, "--branch", "main",
-                  "--status", "success", "--limit", "5", "--json",
-                  "databaseId,headSha,createdAt,event,workflowName"])
+    out = runner(
+        [
+            "run",
+            "list",
+            "--workflow",
+            WORKFLOW,
+            "--branch",
+            "main",
+            "--status",
+            "success",
+            "--limit",
+            "5",
+            "--json",
+            "databaseId,headSha,createdAt,event,workflowName",
+        ]
+    )
     if not out:
         return None
     try:
@@ -51,11 +65,12 @@ def _latest_green_run(runner):
 
 def _too_old(created_at: str) -> bool:
     import datetime
+
     try:
         created = datetime.datetime.fromisoformat(created_at.replace("Z", "+00:00"))
     except ValueError:
-        return True   # timestamp ilegível = não confia
-    age = datetime.datetime.now(datetime.timezone.utc) - created
+        return True  # timestamp ilegível = não confia
+    age = datetime.datetime.now(datetime.UTC) - created
     return age.days >= MAX_AGE_DAYS
 
 
@@ -73,8 +88,10 @@ def fetch_perimeter_summary(agent_id: str, *, generative: bool = False, runner=_
     if not run_id:
         return None
     with tempfile.TemporaryDirectory(prefix="perimeter-") as td:
-        if runner(["run", "download", run_id, "-n", "verify-in-eval-exec-report",
-                   "-D", td]) is None:
+        if (
+            runner(["run", "download", run_id, "-n", "verify-in-eval-exec-report", "-D", td])
+            is None
+        ):
             return None
         for name in sorted(os.listdir(td)):
             if not name.endswith(".json"):
@@ -87,8 +104,14 @@ def fetch_perimeter_summary(agent_id: str, *, generative: bool = False, runner=_
                 continue
             if bool(data.get("generative")) != bool(generative):
                 continue
-            return {"summary": data,
-                    "proof": {"run_id": run_id, "commit": run.get("headSha"),
-                              "created_at": run.get("createdAt"),
-                              "workflow": WORKFLOW, "artifact": name}}
+            return {
+                "summary": data,
+                "proof": {
+                    "run_id": run_id,
+                    "commit": run.get("headSha"),
+                    "created_at": run.get("createdAt"),
+                    "workflow": WORKFLOW,
+                    "artifact": name,
+                },
+            }
     return None

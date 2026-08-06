@@ -1,14 +1,15 @@
 """skills_sales — handlers G08/G02/G01 (lead, diagnose, market sizing)."""
+
 from __future__ import annotations
 
-from .guardians import validate_outcome_clause
-from .loaders import load_icp, load_offerings
 from ..product.catalog import recommend as recommend_product_agents
-from .skills_registry import register, _tokens, _spec_citations
+from .loaders import load_icp, load_offerings
+from .skills_registry import _tokens, register
+
 
 @register("lead_qualifier")
 def lead_qualifier(state, *, llm, store, spec):
-    icp = load_icp()                       # C5 — carrega o ICP estratégico (cacheado)
+    icp = load_icp()  # C5 — carrega o ICP estratégico (cacheado)
     lead = state["task"].get("lead", {}) or {}
     score, signals, reasons = _score_lead_against_icp(lead)
     decision = "qualified" if score >= 60 else "disqualified"
@@ -20,9 +21,14 @@ def lead_qualifier(state, *, llm, store, spec):
     icp_ref = "icp:" + icp.get("path", "").split("Multi-Agentes")[-1].replace("\\", "/")
     return {
         "output": {
-            "decision": decision, "score": score, "track": track,
-            "icp_fit_signals": signals, "reasons": reasons,
-            "lead_id": lead.get("id"), "rationale": rationale, "by": spec["id"],
+            "decision": decision,
+            "score": score,
+            "track": track,
+            "icp_fit_signals": signals,
+            "reasons": reasons,
+            "lead_id": lead.get("id"),
+            "rationale": rationale,
+            "by": spec["id"],
         },
         "cost_tokens": _tokens(rationale),
         "citations": [icp_ref, "lead:" + str(lead.get("id", "?"))],
@@ -32,39 +38,68 @@ def lead_qualifier(state, *, llm, store, spec):
 @register("outbound_sdr")
 def outbound_sdr(state, *, llm, store, spec):
     """Monta uma sequência de cold B2B outreach personalizada (Tier 2 do ICP), respeitando consentimento (LGPD)."""
-    icp = load_icp()                                   # C5 — ancora a mensagem nas dores do ICP
+    icp = load_icp()  # C5 — ancora a mensagem nas dores do ICP
     lead = state["task"].get("lead", {}) or {}
     qual = state["task"].get("qualification", {}) or {}
     if qual.get("decision") == "disqualified":
         # respeita a qualificação (auditoria 2026-07-03, decisão §6.7): lead desqualificado
         # NÃO recebe sequência de prospecção — bloqueio explícito, nunca outreach silencioso.
-        reason = ("lead disqualified na qualificação — prospecção bloqueada "
-                  "(respeita qualification.decision)")
+        reason = (
+            "lead disqualified na qualificação — prospecção bloqueada "
+            "(respeita qualification.decision)"
+        )
         return {
-            "output": {"account_id": lead.get("id"), "sequence": [], "blocked": True,
-                       "reason": reason, "consent_required": True,
-                       "requires_human_review": True, "rationale": reason, "by": spec["id"]},
+            "output": {
+                "account_id": lead.get("id"),
+                "sequence": [],
+                "blocked": True,
+                "reason": reason,
+                "consent_required": True,
+                "requires_human_review": True,
+                "rationale": reason,
+                "by": spec["id"],
+            },
             "cost_tokens": 0,
             "citations": ["icp:/nucleo/company/icp.md", "lead:" + str(lead.get("id", "?"))],
         }
     pains = [k for k, v in (qual.get("icp_fit_signals") or {}).items() if v]
-    skus = (state["task"].get("diagnostic") or {}).get("sku_candidates", [])   # pitch vindo do diagnóstico
+    skus = (state["task"].get("diagnostic") or {}).get(
+        "sku_candidates", []
+    )  # pitch vindo do diagnóstico
     sequence = [
-        {"step": 1, "channel": "email", "angle": "dor: vende bem mas opera no caos / sem processo",
-         "subject": f"{lead.get('company', '')}: tirar o caos da operação"},
-        {"step": 2, "channel": "email", "angle": "prova social + build-in-public (founder brand)",
-         "subject": "como CEOs R$1-20M e enterprises ~R$100M tiram caos da operação"},
-        {"step": 3, "channel": "messaging", "angle": "follow-up curto, CTA 15min",
-         "subject": "vale 15 min?"},
+        {
+            "step": 1,
+            "channel": "email",
+            "angle": "dor: vende bem mas opera no caos / sem processo",
+            "subject": f"{lead.get('company', '')}: tirar o caos da operação",
+        },
+        {
+            "step": 2,
+            "channel": "email",
+            "angle": "prova social + build-in-public (founder brand)",
+            "subject": "como CEOs R$1-20M e enterprises ~R$100M tiram caos da operação",
+        },
+        {
+            "step": 3,
+            "channel": "messaging",
+            "angle": "follow-up curto, CTA 15min",
+            "subject": "vale 15 min?",
+        },
     ]
     rationale = llm.complete(
         f"Voce e {spec['id']}. Monte cold outreach para {lead.get('company', '?')} "
         f"ancorado nas dores {pains} do ICP. Respeite consentimento/LGPD."
     )
     return {
-        "output": {"account_id": lead.get("id"), "sequence": sequence,
-                   "consent_required": True, "personalization_signals": pains, "sku_pitch": skus[:2],
-                   "rationale": rationale, "by": spec["id"]},
+        "output": {
+            "account_id": lead.get("id"),
+            "sequence": sequence,
+            "consent_required": True,
+            "personalization_signals": pains,
+            "sku_pitch": skus[:2],
+            "rationale": rationale,
+            "by": spec["id"],
+        },
         "cost_tokens": _tokens(rationale),
         "citations": ["icp:/nucleo/company/icp.md", "lead:" + str(lead.get("id", "?"))],
     }
@@ -76,7 +111,7 @@ def diagnose(state, *, llm, store, spec):
     cliente — problema, baseline humano, outcome proposto, métrica e candidatos a SKU.
     É o PRIMEIRO entregável cobrável (vende-se o diagnóstico antes de construir)."""
     icp = load_icp()
-    offerings = load_offerings()                       # pode não existir ainda (pré-workshop)
+    offerings = load_offerings()  # pode não existir ainda (pré-workshop)
     client = state["task"].get("client", {}) or {}
 
     # 1. Fit com o ICP (reusa o scorer)
@@ -92,8 +127,10 @@ def diagnose(state, *, llm, store, spec):
     # 3. Problema, outcome proposto e métrica
     proc = client.get("process", "o processo crítico")
     problem = client.get("pain") or "Vende bem mas opera no caos: sem processo definido."
-    proposed_outcome = (f"Automatizar '{proc}' entregando o resultado dentro do SLA, "
-                        f"com acurácia >= 95%, reduzindo o custo humano do baseline.")
+    proposed_outcome = (
+        f"Automatizar '{proc}' entregando o resultado dentro do SLA, "
+        f"com acurácia >= 95%, reduzindo o custo humano do baseline."
+    )
     success_metric = f"'{proc}' concluído e verificável por evento técnico (DELIVERED)."
 
     # 4. Quais AGENTES DE PRODUTO ativar para este cliente (mapeado pelo catálogo)
@@ -107,14 +144,23 @@ def diagnose(state, *, llm, store, spec):
     )
 
     diagnostic = {
-        "client_id": client.get("id"), "fit_icp_score": fit_score, "fit_signals": fit_signals,
+        "client_id": client.get("id"),
+        "fit_icp_score": fit_score,
+        "fit_signals": fit_signals,
         "problem": problem,
-        "baseline": {"monthly_volume": vol, "hours_per_unit": hpu, "hourly_cost_brl": cph,
-                     "baseline_hours_month": baseline_hours, "baseline_cost_brl_month": baseline_cost},
-        "proposed_outcome": proposed_outcome, "success_metric": success_metric,
+        "baseline": {
+            "monthly_volume": vol,
+            "hours_per_unit": hpu,
+            "hourly_cost_brl": cph,
+            "baseline_hours_month": baseline_hours,
+            "baseline_cost_brl_month": baseline_cost,
+        },
+        "proposed_outcome": proposed_outcome,
+        "success_metric": success_metric,
         "recommended_agents": recommended,
         "recommendation": "go" if go else "no-go (qualificar mais ou recusar)",
-        "rationale": rationale, "by": spec["id"],
+        "rationale": rationale,
+        "by": spec["id"],
     }
     cites = ["icp:/nucleo/company/icp.md", "client:" + str(client.get("id", "?"))]
     if offerings.get("present"):
@@ -141,24 +187,38 @@ def market_intel(state, *, llm, store, spec):
     c = state["task"].get("candidate", {}) or {}
     vert = c.get("vertical", "?")
     est = c.get("est_companies_brazil", 0) or 0
-    founder_share = c.get("founder_led_share", 0) or 0          # 0..1
-    pain = c.get("process_pain_evidence", 0) or 0               # 0..5
+    founder_share = c.get("founder_led_share", 0) or 0  # 0..1
+    pain = c.get("process_pain_evidence", 0) or 0  # 0..5
     tier2 = c.get("tier2_sources", []) or []
-    reg_risk = c.get("regulatory_risk", 0) or 0                 # 0..5
+    reg_risk = c.get("regulatory_risk", 0) or 0  # 0..5
     icp_pool = int(est * founder_share)
     density = _bucket(icp_pool, [(0, 1), (1_000, 2), (10_000, 3), (50_000, 4), (200_000, 5)])
-    hard = {"F1_icp_presente": icp_pool > 0, "F2_dor_processo": pain >= 3, "F4_acessivel_tier2": len(tier2) > 0}
+    hard = {
+        "F1_icp_presente": icp_pool > 0,
+        "F2_dor_processo": pain >= 3,
+        "F4_acessivel_tier2": len(tier2) > 0,
+    }
     passes = all(hard.values())
     rationale = llm.complete(
         f"Voce e {spec['id']}. Vertical '{vert}': pool ICP ~{icp_pool}, dor {pain}/5, "
         f"{len(tier2)} fontes Tier2, risco reg {reg_risk}/5. Passa hard-filters={passes}."
     )
-    return {"output": {"vertical": vert, "icp_pool_estimate": icp_pool, "density_score": density,
-                       "process_pain_0a5": pain, "tier2_sources": tier2, "regulatory_risk_0a5": reg_risk,
-                       "hard_filters": hard, "passes_hard_filters": passes,
-                       "rationale": rationale, "by": spec["id"]},
-            "cost_tokens": _tokens(rationale),
-            "citations": ["icp:/nucleo/company/icp.md", "vertical:" + str(vert)]}
+    return {
+        "output": {
+            "vertical": vert,
+            "icp_pool_estimate": icp_pool,
+            "density_score": density,
+            "process_pain_0a5": pain,
+            "tier2_sources": tier2,
+            "regulatory_risk_0a5": reg_risk,
+            "hard_filters": hard,
+            "passes_hard_filters": passes,
+            "rationale": rationale,
+            "by": spec["id"],
+        },
+        "cost_tokens": _tokens(rationale),
+        "citations": ["icp:/nucleo/company/icp.md", "vertical:" + str(vert)],
+    }
 
 
 @register("opportunity_sizer")
@@ -167,8 +227,8 @@ def opportunity_sizer(state, *, llm, store, spec):
     c = state["task"].get("candidate", {}) or {}
     vert = c.get("vertical", "?")
     companies = c.get("icp_pool_estimate") or c.get("est_companies_brazil", 0) or 0
-    reach = c.get("reachable_share", 0.0) or 0.0                # 0..1 (alcançável via Tier 2)
-    conv = c.get("conversion", 0.0) or 0.0                      # 0..1
+    reach = c.get("reachable_share", 0.0) or 0.0  # 0..1 (alcançável via Tier 2)
+    conv = c.get("conversion", 0.0) or 0.0  # 0..1
     ticket = c.get("avg_ticket_brl_year", 0) or 0
     tam = companies * ticket
     sam = int(companies * reach) * ticket
@@ -177,12 +237,24 @@ def opportunity_sizer(state, *, llm, store, spec):
         f"Voce e {spec['id']}. Sizing '{vert}': TAM R${tam}, SAM R${sam}, SOM R${som}. "
         f"Premissas: {companies} empresas, reach {reach}, conv {conv}, ticket R${ticket}/ano."
     )
-    return {"output": {"vertical": vert, "tam_brl": tam, "sam_brl": sam, "som_brl": som,
-                       "assumptions": {"companies": companies, "reachable_share": reach,
-                                       "conversion": conv, "avg_ticket_brl_year": ticket},
-                       "rationale": rationale, "by": spec["id"]},
-            "cost_tokens": _tokens(rationale),
-            "citations": ["vertical:" + str(vert)]}
+    return {
+        "output": {
+            "vertical": vert,
+            "tam_brl": tam,
+            "sam_brl": sam,
+            "som_brl": som,
+            "assumptions": {
+                "companies": companies,
+                "reachable_share": reach,
+                "conversion": conv,
+                "avg_ticket_brl_year": ticket,
+            },
+            "rationale": rationale,
+            "by": spec["id"],
+        },
+        "cost_tokens": _tokens(rationale),
+        "citations": ["vertical:" + str(vert)],
+    }
 
 
 def _bucket(value, thresholds):
@@ -215,56 +287,81 @@ def _score_lead_against_icp(lead: dict):
     elif 1_000_000 <= rev <= 6_000_000:
         tier = "bombeiro"
     elif 6_000_000 < rev < 50_000_000:
-        tier = "fora_do_alvo"   # R$6-50M desconsiderada por enquanto — não pontua nem com dor
+        tier = "fora_do_alvo"  # R$6-50M desconsiderada por enquanto — não pontua nem com dor
     else:
-        tier = "fora"   # <R$1M ou faturamento não informado — faixa não validada não pontua
+        tier = "fora"  # <R$1M ou faturamento não informado — faixa não validada não pontua
     signals["icp_tier"] = tier
 
     if tier == "bombeiro":
-        score += 35; signals["faturamento_1a6M"] = True
+        score += 35
+        signals["faturamento_1a6M"] = True
         reasons.append("Faturamento na faixa R$1-6M (ICP-1 bombeiro/PAF)")
         if lead.get("founder_led"):
-            score += 20; signals["founder_led"] = True; reasons.append("Decisao founder-led")
+            score += 20
+            signals["founder_led"] = True
+            reasons.append("Decisao founder-led")
         if lead.get("sells_well"):
-            score += 15; signals["vende_bem"] = True; reasons.append("Vende bem (gargalo nao e receita)")
+            score += 15
+            signals["vende_bem"] = True
+            reasons.append("Vende bem (gargalo nao e receita)")
         if lead.get("lacks_process"):
-            score += 20; signals["sem_processo"] = True; reasons.append("Sem processos definidos (dor central)")
+            score += 20
+            signals["sem_processo"] = True
+            reasons.append("Sem processos definidos (dor central)")
         if lead.get("firefighter") or lead.get("adhd_traits"):
-            score += 10; signals["perfil_bombeiro"] = True; reasons.append("Perfil bombeiro/TDAH")
+            score += 10
+            signals["perfil_bombeiro"] = True
+            reasons.append("Perfil bombeiro/TDAH")
         if lead.get("ops_mature"):
-            score -= 30; signals["ops_madura"] = True; reasons.append("Operacao ja madura (desqualifica)")
+            score -= 30
+            signals["ops_madura"] = True
+            reasons.append("Operacao ja madura (desqualifica)")
 
     elif tier == "enterprise":
-        score += 30; signals["faturamento_100M+"] = True
+        score += 30
+        signals["faturamento_100M+"] = True
         reasons.append("Faturamento >R$100M ou setor publico (ICP-2 enterprise)")
         if lead.get("public_sector"):
-            score += 15; signals["setor_publico"] = True
+            score += 15
+            signals["setor_publico"] = True
             reasons.append("Setor publico (alta desorganizacao = alvo)")
         if lead.get("lacks_process") or lead.get("process_disorganized"):
-            score += 20; signals["processos_desorganizados"] = True
+            score += 20
+            signals["processos_desorganizados"] = True
             reasons.append("Desorganizada em processos (dor central)")
         if lead.get("large_team") or (lead.get("team_size", 0) or 0) >= 50:
-            score += 15; signals["time_grande"] = True; reasons.append("Time grande (muitas pessoas)")
+            score += 15
+            signals["time_grande"] = True
+            reasons.append("Time grande (muitas pessoas)")
         if lead.get("high_personnel_cost"):
-            score += 20; signals["custo_pessoal_alto"] = True
+            score += 20
+            signals["custo_pessoal_alto"] = True
             reasons.append("Custo de pessoal alto substituivel por agentes Novais Digital")
 
     elif tier == "mid_market":
-        score += 30; signals["faturamento_50a100M"] = True
+        score += 30
+        signals["faturamento_50a100M"] = True
         reasons.append("Faturamento na faixa R$50-100M (ICP-3 mid-market)")
         if lead.get("lacks_process") or lead.get("process_disorganized"):
-            score += 20; signals["processos_desorganizados"] = True
+            score += 20
+            signals["processos_desorganizados"] = True
             reasons.append("Processos nao acompanharam o porte (dor central)")
         if lead.get("high_personnel_cost"):
-            score += 20; signals["custo_pessoal_alto"] = True
+            score += 20
+            signals["custo_pessoal_alto"] = True
             reasons.append("Custo de pessoal alto substituivel por agentes Novais Digital")
         if lead.get("large_team") or (lead.get("team_size", 0) or 0) >= 50:
-            score += 15; signals["time_grande"] = True; reasons.append("Time grande (muitas pessoas)")
+            score += 15
+            signals["time_grande"] = True
+            reasons.append("Time grande (muitas pessoas)")
         if lead.get("founder_led") or lead.get("firefighter"):
-            score += 10; signals["fundador_gargalo"] = True
+            score += 10
+            signals["fundador_gargalo"] = True
             reasons.append("Fundador ainda e gargalo de decisao")
         if lead.get("ops_mature"):
-            score -= 30; signals["ops_madura"] = True; reasons.append("Operacao ja madura (desqualifica)")
+            score -= 30
+            signals["ops_madura"] = True
+            reasons.append("Operacao ja madura (desqualifica)")
 
     elif tier == "fora_do_alvo":
         signals["faturamento"] = False
@@ -292,9 +389,21 @@ def _route(score: int) -> str:
 # act_handler nominal (rice_score, churn_risk_score, secret_scan, ...). C8: a
 # variação continua na spec; aqui mora só o cálculo, reusado por todos os tenants.
 # ---------------------------------------------------------------------------
-from . import skills_finance  # noqa: E402,F401  (G10)
-from . import skills_custops   # noqa: E402,F401  (G09)
-from . import skills_g00, skills_g01, skills_g02, skills_g03, skills_g04  # noqa: E402,F401
-from . import skills_g05, skills_g06, skills_g07, skills_g08, skills_g11  # noqa: E402,F401
-from . import skills_g12, skills_g13, skills_g14  # noqa: E402,F401
-from . import skills_exec  # noqa: E402,F401  (spec_executor — VERIFY-IN-EVAL F0)
+from . import (  # noqa: E402,F401  # noqa: E402,F401  # noqa: E402,F401
+    skills_custops,  # noqa: E402,F401  (G09)
+    skills_exec,  # noqa: E402,F401  (spec_executor — VERIFY-IN-EVAL F0)
+    skills_finance,  # noqa: E402,F401  (G10)
+    skills_g00,
+    skills_g01,
+    skills_g02,
+    skills_g03,
+    skills_g04,
+    skills_g05,
+    skills_g06,
+    skills_g07,
+    skills_g08,
+    skills_g11,
+    skills_g12,
+    skills_g13,
+    skills_g14,
+)

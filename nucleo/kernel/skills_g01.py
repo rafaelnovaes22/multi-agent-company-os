@@ -7,9 +7,10 @@ skills_finance/skills_custops: campos calculados no top-level do output, sem
 aleatoriedade e sem datas do sistema; o grader genérico de contrato valida o
 `expected` de domínio direto.
 """
+
 from __future__ import annotations
 
-from .skills import register, _tokens, _spec_citations
+from .skills import _spec_citations, _tokens, register
 
 
 def _out(spec, state, fields, rationale_prompt, llm):
@@ -19,7 +20,11 @@ def _out(spec, state, fields, rationale_prompt, llm):
     out["rationale"] = rationale
     out["by"] = spec["id"]
     out["tenant"] = state.get("task", {}).get("tenant_id")
-    return {"output": out, "cost_tokens": _tokens(rationale), "citations": _spec_citations(state, spec)}
+    return {
+        "output": out,
+        "cost_tokens": _tokens(rationale),
+        "citations": _spec_citations(state, spec),
+    }
 
 
 @register("northstar_daily_value")
@@ -54,12 +59,27 @@ def northstar_daily_value(state, *, llm, store, spec):
             at_risk.append(k.get("name"))
     n = len(scored)
     attainment = round(sum(s["score"] for s in scored) / n, 3) if n else 0.0
-    health = "verde" if attainment >= 0.7 and not at_risk else ("amarelo" if attainment >= 0.4 else "vermelho")
-    return _out(spec, state, {
-        "daily_value": daily_value, "quality_factor": round(quality, 3),
-        "kr_count": n, "attainment": attainment, "at_risk_krs": at_risk,
-        "at_risk_count": len(at_risk), "scorecard": scored, "health": health,
-    }, f"Voce e {spec['id']}: north-star {daily_value}, attainment {attainment}, saude {health}.", llm)
+    health = (
+        "verde"
+        if attainment >= 0.7 and not at_risk
+        else ("amarelo" if attainment >= 0.4 else "vermelho")
+    )
+    return _out(
+        spec,
+        state,
+        {
+            "daily_value": daily_value,
+            "quality_factor": round(quality, 3),
+            "kr_count": n,
+            "attainment": attainment,
+            "at_risk_krs": at_risk,
+            "at_risk_count": len(at_risk),
+            "scorecard": scored,
+            "health": health,
+        },
+        f"Voce e {spec['id']}: north-star {daily_value}, attainment {attainment}, saude {health}.",
+        llm,
+    )
 
 
 @register("scenario_sensitivity")
@@ -78,7 +98,7 @@ def scenario_sensitivity(state, *, llm, store, spec):
 
     raw_base = 1.0
     for v in variables:
-        raw_base *= (v.get("value", 0) or 0)
+        raw_base *= v.get("value", 0) or 0
     base_value = round(raw_base, 2)
 
     drivers = []
@@ -115,11 +135,22 @@ def scenario_sensitivity(state, *, llm, store, spec):
     # conta (sp-03: 0.375/0.225 arredondados davam 53.3% em vez de 50.0% — auditoria
     # 2026-07-03). Arredondamento é apresentação, nunca insumo de cálculo.
     spread_pct = round((up - down) / raw_base * 100, 1) if raw_base else 0.0
-    return _out(spec, state, {
-        "base_value": base_value, "driver_count": len(drivers), "top_driver": top_driver,
-        "drivers": drivers, "scenarios": scenarios, "spread_pct": spread_pct,
-        "tripwires": tripwires, "tripwire_count": len(tripwires),
-    }, f"Voce e {spec['id']}: base {base_value}, top driver '{top_driver}', spread {spread_pct}%.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "base_value": base_value,
+            "driver_count": len(drivers),
+            "top_driver": top_driver,
+            "drivers": drivers,
+            "scenarios": scenarios,
+            "spread_pct": spread_pct,
+            "tripwires": tripwires,
+            "tripwire_count": len(tripwires),
+        },
+        f"Voce e {spec['id']}: base {base_value}, top driver '{top_driver}', spread {spread_pct}%.",
+        llm,
+    )
 
 
 @register("board_deck_author")
@@ -142,20 +173,26 @@ def board_deck_author(state, *, llm, store, spec):
     is_delivered = taste_gate == "pass"
     # compat: mantém campos de contrato esperados pelos 30 casos legado (eval theater ainda passa)
     task = state.get("task", {}) or {}
-    return _out(spec, state, {
-        "lineage_coverage": lineage_coverage,
-        "taste_gate": taste_gate,
-        "deck_version": deck_version,
-        "is_delivered": is_delivered,
-        "metric_count": total,
-        "with_lineage_count": with_lineage,
-        "artifact_type": task.get("artifact_type") or "board-deck-author.artifact",
-        "status": task.get("status") or "ready",
-        "risk": task.get("risk") or "low",
-        "requires_human_review": bool(task.get("requires_human_review", False)),
-        "routed_to": task.get("routed_to") or "human-review",
-        "handler_kind": "board_deck_author",
-    }, f"Voce e {spec['id']}: coverage {lineage_coverage}%, taste {taste_gate}, deck {deck_version}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "lineage_coverage": lineage_coverage,
+            "taste_gate": taste_gate,
+            "deck_version": deck_version,
+            "is_delivered": is_delivered,
+            "metric_count": total,
+            "with_lineage_count": with_lineage,
+            "artifact_type": task.get("artifact_type") or "board-deck-author.artifact",
+            "status": task.get("status") or "ready",
+            "risk": task.get("risk") or "low",
+            "requires_human_review": bool(task.get("requires_human_review", False)),
+            "routed_to": task.get("routed_to") or "human-review",
+            "handler_kind": "board_deck_author",
+        },
+        f"Voce e {spec['id']}: coverage {lineage_coverage}%, taste {taste_gate}, deck {deck_version}.",
+        llm,
+    )
 
 
 @register("competitive_teardown")
@@ -173,18 +210,24 @@ def competitive_teardown(state, *, llm, store, spec):
                 if f.get("is_wedge"):
                     wedges.append(f.get("name"))
     confidence = round(evidence / max(1, len(competitors)), 2)
-    return _out(spec, state, {
-        "wedge_count": len(wedges),
-        "wedges": wedges[:3],
-        "evidence_count": evidence,
-        "confidence": confidence,
-        "artifact_type": task.get("artifact_type") or "competitive-teardown.artifact",
-        "status": task.get("status") or "ready",
-        "risk": task.get("risk") or "low",
-        "requires_human_review": bool(task.get("requires_human_review", False)),
-        "routed_to": task.get("routed_to") or "human-review",
-        "handler_kind": "competitive_teardown",
-    }, f"Voce e {spec['id']}: {len(wedges)} wedges, {evidence} evidencias, conf {confidence}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "wedge_count": len(wedges),
+            "wedges": wedges[:3],
+            "evidence_count": evidence,
+            "confidence": confidence,
+            "artifact_type": task.get("artifact_type") or "competitive-teardown.artifact",
+            "status": task.get("status") or "ready",
+            "risk": task.get("risk") or "low",
+            "requires_human_review": bool(task.get("requires_human_review", False)),
+            "routed_to": task.get("routed_to") or "human-review",
+            "handler_kind": "competitive_teardown",
+        },
+        f"Voce e {spec['id']}: {len(wedges)} wedges, {evidence} evidencias, conf {confidence}.",
+        llm,
+    )
 
 
 @register("investor_update")
@@ -197,17 +240,23 @@ def investor_update(state, *, llm, store, spec):
     mismatches = sum(1 for k in metrics if k not in str(okr))
     consistency = "consistent" if mismatches == 0 else "inconsistent"
     section_count = len(metrics) + (1 if okr else 0)
-    return _out(spec, state, {
-        "section_count": section_count,
-        "consistency": consistency,
-        "mismatch_count": mismatches,
-        "artifact_type": task.get("artifact_type") or "investor-update.verdict",
-        "status": task.get("status") or "ready",
-        "risk": task.get("risk") or "low",
-        "requires_human_review": bool(task.get("requires_human_review", True)),
-        "routed_to": task.get("routed_to") or "human-review",
-        "handler_kind": "investor_update",
-    }, f"Voce e {spec['id']}: {section_count} secoes, {consistency}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "section_count": section_count,
+            "consistency": consistency,
+            "mismatch_count": mismatches,
+            "artifact_type": task.get("artifact_type") or "investor-update.verdict",
+            "status": task.get("status") or "ready",
+            "risk": task.get("risk") or "low",
+            "requires_human_review": bool(task.get("requires_human_review", True)),
+            "routed_to": task.get("routed_to") or "human-review",
+            "handler_kind": "investor_update",
+        },
+        f"Voce e {spec['id']}: {section_count} secoes, {consistency}.",
+        llm,
+    )
 
 
 @register("narrative_synthesizer")
@@ -217,17 +266,25 @@ def narrative_synthesizer(state, *, llm, store, spec):
     ships = task.get("ships", []) or []
     narratives = task.get("narratives", []) or []
     divergence = len(set(narratives)) > 1
-    synthesis_score = round(1 - (len(set(narratives)) / max(1, len(narratives))) if narratives else 1.0, 2)
+    synthesis_score = round(
+        1 - (len(set(narratives)) / max(1, len(narratives))) if narratives else 1.0, 2
+    )
     post_ready = not divergence and len(ships) > 0
-    return _out(spec, state, {
-        "ship_count": len(ships),
-        "divergence": divergence,
-        "synthesis_score": synthesis_score,
-        "post_ready": post_ready,
-        "artifact_type": task.get("artifact_type") or "narrative-synthesizer.artifact",
-        "status": task.get("status") or "ready",
-        "risk": task.get("risk") or "low",
-        "requires_human_review": bool(task.get("requires_human_review", False)),
-        "routed_to": task.get("routed_to") or "human-review",
-        "handler_kind": "narrative_synthesizer",
-    }, f"Voce e {spec['id']}: synthesis {synthesis_score}, divergencia={divergence}.", llm)
+    return _out(
+        spec,
+        state,
+        {
+            "ship_count": len(ships),
+            "divergence": divergence,
+            "synthesis_score": synthesis_score,
+            "post_ready": post_ready,
+            "artifact_type": task.get("artifact_type") or "narrative-synthesizer.artifact",
+            "status": task.get("status") or "ready",
+            "risk": task.get("risk") or "low",
+            "requires_human_review": bool(task.get("requires_human_review", False)),
+            "routed_to": task.get("routed_to") or "human-review",
+            "handler_kind": "narrative_synthesizer",
+        },
+        f"Voce e {spec['id']}: synthesis {synthesis_score}, divergencia={divergence}.",
+        llm,
+    )

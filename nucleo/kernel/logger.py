@@ -7,6 +7,7 @@ Uso:
 
 Fora de produção, formata como JSON por linha (parseável com jq).
 """
+
 from __future__ import annotations
 
 import json
@@ -49,7 +50,30 @@ class _JsonFormatter(logging.Formatter):
         }
         # campos extras via extra={}
         for k, v in record.__dict__.items():
-            if k not in ("name", "msg", "args", "levelname", "levelno", "pathname", "filename", "module", "exc_info", "exc_text", "stack_info", "lineno", "funcName", "created", "msecs", "relativeCreated", "thread", "threadName", "taskName", "processName", "process", "message"):
+            if k not in (
+                "name",
+                "msg",
+                "args",
+                "levelname",
+                "levelno",
+                "pathname",
+                "filename",
+                "module",
+                "exc_info",
+                "exc_text",
+                "stack_info",
+                "lineno",
+                "funcName",
+                "created",
+                "msecs",
+                "relativeCreated",
+                "thread",
+                "threadName",
+                "taskName",
+                "processName",
+                "process",
+                "message",
+            ):
                 payload[k] = v
         # mescla dicionário passado como msg
         if isinstance(record.msg, dict):

@@ -33,22 +33,15 @@ A resposta virou a **arquitetura de verificação** do framework — independên
 
 > Não construímos 150 agentes à mão. Construímos um **Company-OS** (codinome **NÚCLEO**) que **fabrica, governa e evolui** uma frota de 150+ agentes — fundindo a **constituição governável do agent-governance-framework** (C1–C8, gates de promoção, economia, self-harness) com os **padrões de escala e aprendizado do ECC** (instincts, eval-harness, orquestração multi-agente), executados sobre o **runtime LangGraph** (grafos com estado, checkpoint, human-in-the-loop), operando segundo os **8 princípios da YC**.
 
-```
-  agent-governance-framework            ECC (everything-claude-code)         LangGraph
-  ────────────            ───────────────────────────         ─────────
-  CONSTITUIÇÃO            ESCALA + APRENDIZADO RUNTIME         SUBSTRATO
-  (governança C1-C8,      (instincts c/ confidence,            (StateGraph,
-   gates SHADOW→          eval-harness, quality-gate,          checkpointer,
-   ASSISTED→AUTONOMOUS,   AgentShield, orquestração            interrupt p/
-   self-harness/Hermes)   multi-agente, Hermes ops)            human-in-loop)
-            \                      |                              /
-             \                     |                             /
-              ▼                    ▼                            ▼
-        ┌──────────────────────────────────────────────────────────┐
-        │                  NÚCLEO — Company-OS                       │
-        │   constituição + frota de 150+ agentes + fábrica + loops   │
-        │            de aprendizado, sob doutrina YC                 │
-        └──────────────────────────────────────────────────────────┘
+```mermaid
+graph TD
+    A[agent-governance-framework<br/>CONSTITUIÇÃO<br/>C1-C8, gates SHADOW→AUTONOMOUS] --> D[NÚCLEO — Company-OS<br/>constituição + frota 150+ agentes + fábrica + loops YC]
+    B[ECC<br/>ESCALA + APRENDIZADO<br/>instincts, eval-harness, AgentShield] --> D
+    C[LangGraph<br/>SUBSTRATO<br/>StateGraph, checkpointer, interrupt] --> D
+    D --> E[Fábrica de Agentes]
+    D --> F[Guildas 14]
+    D --> G[Company Brain]
+    style D fill:#1a1a2e,stroke:#e94560,stroke-width:3px,color:#fff
 ```
 
 ---

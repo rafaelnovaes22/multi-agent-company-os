@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: guardian_check
+act_handler: investor_update
 outcome_clause:
   statement: 'Redator de Updates a Investidores entrega investor-update.verdict verificável
     para: redigir updates periódicos a investidores/board, factuais, consistentes

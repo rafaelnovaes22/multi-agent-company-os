@@ -156,3 +156,78 @@ def board_deck_author(state, *, llm, store, spec):
         "routed_to": task.get("routed_to") or "human-review",
         "handler_kind": "board_deck_author",
     }, f"Voce e {spec['id']}: coverage {lineage_coverage}%, taste {taste_gate}, deck {deck_version}.", llm)
+
+
+@register("competitive_teardown")
+def competitive_teardown(state, *, llm, store, spec):
+    """g1-competitive-teardown — teardown com wedges evidenciados (C2)."""
+    task = state.get("task", {}) or {}
+    competitors = task.get("competitors", []) or []
+    wedges = []
+    evidence = 0
+    for c in competitors:
+        findings = c.get("findings", []) or []
+        for f in findings:
+            if f.get("evidence_ref"):
+                evidence += 1
+                if f.get("is_wedge"):
+                    wedges.append(f.get("name"))
+    confidence = round(evidence / max(1, len(competitors)), 2)
+    return _out(spec, state, {
+        "wedge_count": len(wedges),
+        "wedges": wedges[:3],
+        "evidence_count": evidence,
+        "confidence": confidence,
+        "artifact_type": task.get("artifact_type") or "competitive-teardown.artifact",
+        "status": task.get("status") or "ready",
+        "risk": task.get("risk") or "low",
+        "requires_human_review": bool(task.get("requires_human_review", False)),
+        "routed_to": task.get("routed_to") or "human-review",
+        "handler_kind": "competitive_teardown",
+    }, f"Voce e {spec['id']}: {len(wedges)} wedges, {evidence} evidencias, conf {confidence}.", llm)
+
+
+@register("investor_update")
+def investor_update(state, *, llm, store, spec):
+    """g1-investor-update — update factual com consistência OKR."""
+    task = state.get("task", {}) or {}
+    metrics = task.get("metrics", {}) or {}
+    okr = task.get("okr", {}) or {}
+    # consistência: métricas do update batem com okr scorecard
+    mismatches = sum(1 for k in metrics if k not in str(okr))
+    consistency = "consistent" if mismatches == 0 else "inconsistent"
+    section_count = len(metrics) + (1 if okr else 0)
+    return _out(spec, state, {
+        "section_count": section_count,
+        "consistency": consistency,
+        "mismatch_count": mismatches,
+        "artifact_type": task.get("artifact_type") or "investor-update.verdict",
+        "status": task.get("status") or "ready",
+        "risk": task.get("risk") or "low",
+        "requires_human_review": bool(task.get("requires_human_review", True)),
+        "routed_to": task.get("routed_to") or "human-review",
+        "handler_kind": "investor_update",
+    }, f"Voce e {spec['id']}: {section_count} secoes, {consistency}.", llm)
+
+
+@register("narrative_synthesizer")
+def narrative_synthesizer(state, *, llm, store, spec):
+    """g1-narrative-synthesizer — sintetiza narrativa sem divergência."""
+    task = state.get("task", {}) or {}
+    ships = task.get("ships", []) or []
+    narratives = task.get("narratives", []) or []
+    divergence = len(set(narratives)) > 1
+    synthesis_score = round(1 - (len(set(narratives)) / max(1, len(narratives))) if narratives else 1.0, 2)
+    post_ready = not divergence and len(ships) > 0
+    return _out(spec, state, {
+        "ship_count": len(ships),
+        "divergence": divergence,
+        "synthesis_score": synthesis_score,
+        "post_ready": post_ready,
+        "artifact_type": task.get("artifact_type") or "narrative-synthesizer.artifact",
+        "status": task.get("status") or "ready",
+        "risk": task.get("risk") or "low",
+        "requires_human_review": bool(task.get("requires_human_review", False)),
+        "routed_to": task.get("routed_to") or "human-review",
+        "handler_kind": "narrative_synthesizer",
+    }, f"Voce e {spec['id']}: synthesis {synthesis_score}, divergencia={divergence}.", llm)

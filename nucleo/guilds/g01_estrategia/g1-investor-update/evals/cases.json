@@ -18,7 +18,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "low",
@@ -49,7 +49,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "medium",
@@ -80,7 +80,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "high",
@@ -111,7 +111,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "critical",
@@ -142,7 +142,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "low",
@@ -173,7 +173,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "medium",
@@ -204,7 +204,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "high",
@@ -235,7 +235,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "blocked",
       "risk": "critical",
@@ -266,7 +266,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "low",
@@ -297,7 +297,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "medium",
@@ -328,7 +328,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "high",
@@ -359,7 +359,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "critical",
@@ -390,7 +390,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "low",
@@ -421,7 +421,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "medium",
@@ -452,7 +452,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "blocked",
       "risk": "high",
@@ -483,7 +483,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "critical",
@@ -514,7 +514,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "low",
@@ -545,7 +545,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "medium",
@@ -576,7 +576,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "high",
@@ -607,7 +607,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "critical",
@@ -638,7 +638,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "low",
@@ -669,7 +669,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "blocked",
       "risk": "medium",
@@ -700,7 +700,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "high",
@@ -731,7 +731,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "critical",
@@ -762,7 +762,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "low",
@@ -793,7 +793,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "medium",
@@ -824,7 +824,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "high",
@@ -855,7 +855,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "critical",
@@ -886,7 +886,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "blocked",
       "risk": "low",
@@ -917,7 +917,7 @@
     },
     "expected": {
       "agent_id": "g1-investor-update",
-      "handler_kind": "guardian_check",
+      "handler_kind": "investor_update",
       "artifact_type": "investor-update.verdict",
       "status": "ready",
       "risk": "medium",
@@ -928,5 +928,47 @@
       ]
     },
     "provenance": "catalog"
+  },
+  {
+    "id": "g1-investor-update-human-01",
+    "desc": "Update 3 métricas consistentes com OKR",
+    "artifact_type": "investor-update.verdict",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "human-review",
+    "capabilities": [
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "human"
+    },
+    "metrics": {
+      "MRR": 100,
+      "NRR": 0.9
+    },
+    "okr": {
+      "krs": [
+        {
+          "name": "MRR",
+          "target": 100,
+          "actual": 95
+        }
+      ]
+    },
+    "expected": {
+      "agent_id": "g1-investor-update",
+      "handler_kind": "investor_update",
+      "artifact_type": "investor-update.verdict",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": true,
+      "routed_to": "human-review",
+      "section_count": 3,
+      "consistency": "inconsistent",
+      "mismatch_count": 1
+    },
+    "provenance": "human",
+    "ratified_by": "AI Founder — 2026-08-06 — human review G01"
   }
 ]

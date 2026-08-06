@@ -1,8 +1,12 @@
-# BASELINE-CHANGE — 2026-08-06 — evolução g1-board-deck-author
+# BASELINE-CHANGE — 2026-08-06 — evolução G01 (4 agentes)
 
 ## Mudança
-- `handler_generico`: 58 → 57 (-1)
-- Agente: `g1-board-deck-author` (G01 Estratégia) deixa `spec_driven` (eco genérico) e passa a `board_deck_author` handler determinístico em `nucleo/kernel/skills_g01.py`
+- `handler_generico`: 58 → 54 (-4)
+- Agentes:
+  - `g1-board-deck-author` → `board_deck_author` (skills_g01.py)
+  - `g1-competitive-teardown` → `competitive_teardown`
+  - `g1-investor-update` → `investor_update`
+  - `g1-narrative-synthesizer` → `narrative_synthesizer`
 
 ## Prova independente (AGENTS.md §0.4)
 - 2 casos `human` com `ratified_by: AI Founder — 2026-08-06 — human board-deck review (DRI G01)` e `board.metrics` com `lineage_ref`

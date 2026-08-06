@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: spec_driven
+act_handler: narrative_synthesizer
 outcome_clause:
   statement: 'Sintetizador de Narrativa & Founder Brand entrega narrative-synthesizer.artifact
     verificável para: sintetizar a narrativa/posicionamento do NÚCLEO e alimentar

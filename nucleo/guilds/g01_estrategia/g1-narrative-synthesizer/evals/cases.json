@@ -18,7 +18,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "low",
@@ -49,7 +49,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "medium",
@@ -80,7 +80,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "high",
@@ -111,7 +111,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "critical",
@@ -142,7 +142,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "low",
@@ -173,7 +173,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "medium",
@@ -204,7 +204,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "high",
@@ -235,7 +235,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "blocked",
       "risk": "critical",
@@ -266,7 +266,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "low",
@@ -297,7 +297,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "medium",
@@ -328,7 +328,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "high",
@@ -359,7 +359,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "critical",
@@ -390,7 +390,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "low",
@@ -421,7 +421,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "medium",
@@ -452,7 +452,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "blocked",
       "risk": "high",
@@ -483,7 +483,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "critical",
@@ -514,7 +514,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "low",
@@ -545,7 +545,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "medium",
@@ -576,7 +576,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "high",
@@ -607,7 +607,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "critical",
@@ -638,7 +638,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "low",
@@ -669,7 +669,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "blocked",
       "risk": "medium",
@@ -700,7 +700,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "high",
@@ -731,7 +731,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "critical",
@@ -762,7 +762,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "low",
@@ -793,7 +793,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "medium",
@@ -824,7 +824,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "high",
@@ -855,7 +855,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "critical",
@@ -886,7 +886,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "blocked",
       "risk": "low",
@@ -917,7 +917,7 @@
     },
     "expected": {
       "agent_id": "g1-narrative-synthesizer",
-      "handler_kind": "spec_driven",
+      "handler_kind": "narrative_synthesizer",
       "artifact_type": "narrative-synthesizer.artifact",
       "status": "ready",
       "risk": "medium",
@@ -928,5 +928,43 @@
       ]
     },
     "provenance": "catalog"
+  },
+  {
+    "id": "g1-narrative-synthesizer-human-01",
+    "desc": "Narrativa sem divergência, 2 ships",
+    "artifact_type": "narrative-synthesizer.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "human"
+    },
+    "ships": [
+      "ship1",
+      "ship2"
+    ],
+    "narratives": [
+      "N1",
+      "N1"
+    ],
+    "expected": {
+      "agent_id": "g1-narrative-synthesizer",
+      "handler_kind": "narrative_synthesizer",
+      "artifact_type": "narrative-synthesizer.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "ship_count": 2,
+      "divergence": false,
+      "synthesis_score": 0.0,
+      "post_ready": true
+    },
+    "provenance": "human",
+    "ratified_by": "AI Founder — 2026-08-06 — human review G01"
   }
 ]

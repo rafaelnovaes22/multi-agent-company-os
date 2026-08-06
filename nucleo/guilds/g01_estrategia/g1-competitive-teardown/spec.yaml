@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: spec_driven
+act_handler: competitive_teardown
 outcome_clause:
   statement: 'Analista de Teardown Competitivo entrega competitive-teardown.artifact
     verificável para: produzir teardown detalhado de produtos concorrentes, expondo

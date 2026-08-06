@@ -37,6 +37,7 @@ from __future__ import annotations
 import ast
 import hashlib
 import json
+from typing import Any
 
 NECESSARIOS = ["artifact_parseable", "touches_bug_file", "bug_addressed",
                "protected_unmodified", "heldout_untouched", "result_parses", "no_test_gaming"]
@@ -308,7 +309,7 @@ def verify_code(artifact: dict, seed: dict, oracle: dict, executor=None) -> dict
             "tests_pass": tests_pass, "delivered_ok": delivered_ok}
 
 
-def _walk_strings(obj):
+def _walk_strings(obj: Any) -> Any:
     """Itera recursivamente todas as strings de um objeto JSON (valores e chaves)."""
     if isinstance(obj, str):
         yield obj

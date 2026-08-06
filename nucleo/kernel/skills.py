@@ -20,7 +20,10 @@ from .skills_registry import (  # noqa: F401 — re-export para handlers
 # Re-exporta handlers de domínio para registro lateral (import registra via @register)
 from . import skills_billing  # noqa: F401
 from . import skills_sales  # noqa: F401
-from .skills_sales import _route, _score_lead_against_icp  # noqa: F401 — compat: teste importa de skills
+from .skills_sales import (
+    _route,
+    _score_lead_against_icp,
+)  # noqa: F401 — compat: teste importa de skills
 
 
 # G13 — po-guardian: valida a cláusula de outcome (C2) de uma spec-alvo

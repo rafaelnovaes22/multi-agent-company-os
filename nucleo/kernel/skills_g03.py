@@ -386,7 +386,9 @@ def planner(state: dict, *, llm, store, spec: dict) -> dict:
             has_cycle = True
             break
     is_valid = not missing and not has_cycle and total > 0
-    status = "valid" if is_valid else ("cycle" if has_cycle else "missing_reqs" if missing else "empty")
+    status = (
+        "valid" if is_valid else ("cycle" if has_cycle else "missing_reqs" if missing else "empty")
+    )
     return _out(
         spec,
         state,
@@ -418,7 +420,11 @@ def refactorer(state: dict, *, llm, store, spec: dict) -> dict:
     tests_passed = bool(r.get("tests_passed", False))
     before = r.get("complexity_before")
     after = r.get("complexity_after")
-    delta = (after - before) if isinstance(before, (int, float)) and isinstance(after, (int, float)) else None
+    delta = (
+        (after - before)
+        if isinstance(before, (int, float)) and isinstance(after, (int, float))
+        else None
+    )
     complexity_increased = delta is not None and delta > 0
     impact_size = len(files)
     if not target:
@@ -432,7 +438,11 @@ def refactorer(state: dict, *, llm, store, spec: dict) -> dict:
     else:
         decision = "approve"
     safe_to_merge = decision == "approve"
-    risk = "high" if complexity_increased or not tests_passed else ("medium" if impact_size > 5 else "low")
+    risk = (
+        "high"
+        if complexity_increased or not tests_passed
+        else ("medium" if impact_size > 5 else "low")
+    )
     return _out(
         spec,
         state,

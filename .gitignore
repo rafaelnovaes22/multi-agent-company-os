@@ -41,3 +41,6 @@ secrets.*
 .claude/
 .reflex/
 .venv-uv/
+
+# Skills importadas (scripts auxiliares, não versionar)
+.agents/

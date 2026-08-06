@@ -9,6 +9,8 @@ if [ ! -x "$PY" ]; then
 fi
 echo "==> bin/test — suíte completa (PY=$PY)"
 "$PY" -m compileall -q nucleo
+"$PY" -m ruff check . 2>&1 | tail -n 20 || true
+"$PY" -m black --check .
 "$PY" -m nucleo.quality.pre_pr_gate
 "$PY" -m nucleo.quality.foundry_check
 "$PY" -m unittest discover -s tests -v 2>&1 | tee /tmp/nucleo-test.log

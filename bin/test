@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+# bin/test — comando único, parseável, sem credenciais secretas
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
+echo "==> bin/test — suíte completa"
+python3 -m compileall -q nucleo
+python3 -m nucleo.quality.pre_pr_gate
+python3 -m nucleo.quality.foundry_check
+python3 -m unittest discover -s tests -v 2>&1 | tee /tmp/nucleo-test.log
+echo "==> bin/test OK — log: /tmp/nucleo-test.log"

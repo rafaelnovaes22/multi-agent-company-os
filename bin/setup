@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+set -euo pipefail
+# bin/setup — idempotente, funciona em máquina limpa e pode rodar 2x sem quebrar
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
+
+echo "==> bin/setup — NÚCLEO (idempotente)"
+
+# 1. pip — instala se ausente (Ubuntu WSL sem pip)
+if ! python3 -m pip --version >/dev/null 2>&1; then
+  echo "  pip ausente — instalando via apt..."
+  sudo apt-get update -qq && sudo apt-get install -y -qq python3-pip python3-venv
+fi
+
+# 2. venv opcional — usa venv se .venv existe, senão sistema
+if [ -d .venv ]; then
+  echo "  venv .venv detectado — usando"
+  # shellcheck disable=SC1091
+  source .venv/bin/activate
+else
+  echo "  sem .venv — instalando no ambiente atual (use python3 -m venv .venv para isolar)"
+fi
+
+# 3. deps — idempotente (reinstala só se necessário)
+echo "  instalando requirements.txt..."
+python3 -m pip install --upgrade pip -q 2>&1 | tail -n 1 || true
+python3 -m pip install -r requirements.txt -q 2>&1 | tail -n 5 || python3 -m pip install -r requirements.txt
+
+# 4. validação offline — sem credenciais, sem rede após deps
+echo "  compilando..."
+python3 -m compileall -q nucleo
+
+echo "  gates offline (sem LLM)..."
+python3 -m nucleo.quality.pre_pr_gate || true
+python3 -m nucleo.quality.foundry_check || true
+
+echo "==> setup OK — próximo: bin/test  |  python -m nucleo.demo"

@@ -1,0 +1,11 @@
+# ai-jail config — NÚCLEO (commitar este arquivo)
+# Gerado via: ai-jail --dry-run --verbose -- python -m nucleo.quality.foundry_check
+# Docs: https://github.com/ayghri/i-have-adhd / ai-jail v1.13.0
+
+# Montagens — só a pasta do projeto tem escrita; segredos mascarados
+mask = [".env", "**/*.env", ".secrets/**"]
+
+# Read-write extra se precisar (descomente):
+# rw_map = ["~/.cache/uv"]
+
+# Landlock/bubblewrap já isola .ssh, .aws, resto do C:\ como ro/deny por padrão

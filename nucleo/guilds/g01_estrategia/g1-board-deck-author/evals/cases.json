@@ -18,7 +18,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "low",
@@ -49,7 +49,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "medium",
@@ -80,7 +80,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "high",
@@ -111,7 +111,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "critical",
@@ -142,7 +142,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "low",
@@ -173,7 +173,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "medium",
@@ -204,7 +204,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "high",
@@ -235,7 +235,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "blocked",
       "risk": "critical",
@@ -266,7 +266,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "low",
@@ -297,7 +297,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "medium",
@@ -328,7 +328,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "high",
@@ -359,7 +359,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "critical",
@@ -390,7 +390,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "low",
@@ -421,7 +421,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "medium",
@@ -452,7 +452,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "blocked",
       "risk": "high",
@@ -483,7 +483,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "critical",
@@ -514,7 +514,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "low",
@@ -545,7 +545,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "medium",
@@ -576,7 +576,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "high",
@@ -607,7 +607,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "critical",
@@ -638,7 +638,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "low",
@@ -669,7 +669,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "blocked",
       "risk": "medium",
@@ -700,7 +700,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "high",
@@ -731,7 +731,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "critical",
@@ -762,7 +762,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "low",
@@ -793,7 +793,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "medium",
@@ -824,7 +824,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "high",
@@ -855,7 +855,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "critical",
@@ -886,7 +886,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "blocked",
       "risk": "low",
@@ -917,7 +917,7 @@
     },
     "expected": {
       "agent_id": "g1-board-deck-author",
-      "handler_kind": "spec_driven",
+      "handler_kind": "board_deck_author",
       "artifact_type": "board-deck-author.artifact",
       "status": "ready",
       "risk": "medium",
@@ -928,5 +928,108 @@
       ]
     },
     "provenance": "catalog"
+  },
+  {
+    "id": "g1-board-deck-author-human-01",
+    "desc": "Board deck 3 métricas 100% lineage, taste 8 -> pass",
+    "artifact_type": "board-deck-author.artifact",
+    "risk": "low",
+    "blocked": false,
+    "requires_human_review": false,
+    "routed_to": "human-review",
+    "capabilities": [
+      "brain_trace"
+    ],
+    "signals": {
+      "source": "human",
+      "scenario": "human-100pct"
+    },
+    "board": {
+      "metrics": [
+        {
+          "name": "MRR",
+          "value": 120000,
+          "lineage_ref": "brain://g10/mrr"
+        },
+        {
+          "name": "NRR",
+          "value": 0.95,
+          "lineage_ref": "brain://g06/nrr"
+        },
+        {
+          "name": "CAC",
+          "value": 3000,
+          "lineage_ref": "brain://g08/cac"
+        }
+      ],
+      "narrative_version": "v2",
+      "taste_score": 8
+    },
+    "expected": {
+      "agent_id": "g1-board-deck-author",
+      "handler_kind": "board_deck_author",
+      "artifact_type": "board-deck-author.artifact",
+      "status": "ready",
+      "risk": "low",
+      "requires_human_review": false,
+      "routed_to": "human-review",
+      "lineage_coverage": 100.0,
+      "taste_gate": "pass",
+      "deck_version": "v2-3of3",
+      "is_delivered": true,
+      "metric_count": 3,
+      "with_lineage_count": 3
+    },
+    "provenance": "human",
+    "ratified_by": "AI Founder — 2026-08-06 — human board-deck review (DRI G01)"
+  },
+  {
+    "id": "g1-board-deck-author-human-02",
+    "desc": "Board deck 2 métricas 50% lineage, taste 5 -> fail",
+    "artifact_type": "board-deck-author.artifact",
+    "risk": "medium",
+    "blocked": false,
+    "requires_human_review": true,
+    "routed_to": "g1-board-deck-author",
+    "capabilities": [
+      "artifact_emission"
+    ],
+    "signals": {
+      "source": "human",
+      "scenario": "human-50pct"
+    },
+    "board": {
+      "metrics": [
+        {
+          "name": "MRR",
+          "value": 120000,
+          "lineage_ref": "brain://g10/mrr"
+        },
+        {
+          "name": "Churn",
+          "value": 0.05,
+          "lineage_ref": null
+        }
+      ],
+      "narrative_version": "v1",
+      "taste_score": 5
+    },
+    "expected": {
+      "agent_id": "g1-board-deck-author",
+      "handler_kind": "board_deck_author",
+      "artifact_type": "board-deck-author.artifact",
+      "status": "ready",
+      "risk": "medium",
+      "requires_human_review": true,
+      "routed_to": "g1-board-deck-author",
+      "lineage_coverage": 50.0,
+      "taste_gate": "fail",
+      "deck_version": "v1-1of2",
+      "is_delivered": false,
+      "metric_count": 2,
+      "with_lineage_count": 1
+    },
+    "provenance": "human",
+    "ratified_by": "AI Founder — 2026-08-06 — human board-deck review (DRI G01)"
   }
 ]

@@ -3,6 +3,6 @@
 > Promovida pelo /evolve a partir de 3 instincts de 1 agente(s): g13-po-guardian.
 
 Fatos de suporte:
-- § [confidence:shadow] [2026-05-31] [run:run-71930aa6] Specs reprovadas costumam faltar: statement, >=3 positive_examples, >=3 negative_examples, delivered_event.
-- § [confidence:shadow] [2026-05-31] [run:run-814f697a] Spec com statement + 3 positivos + 3 negativos + delivered_event passa na validação C2.
+- § [confidence:shadow] [2026-08-06] [run:run-4aa449df] Specs reprovadas costumam faltar: statement, >=3 positive_examples, >=3 negative_examples, delivered_event.
+- § [confidence:shadow] [2026-08-06] [run:run-b4dea7df] Spec com statement + 3 positivos + 3 negativos + delivered_event passa na validação C2.
 - § [confidence:local] [2026-05-29] [run:seed] Cláusula sem delivered_event é a falha mais comum.

@@ -6,7 +6,7 @@ ai_enabled: true
 model_role: worker
 mode: SHADOW
 target_mode: ASSISTED
-act_handler: spec_driven
+act_handler: board_deck_author
 outcome_clause:
   statement: 'Autor do Board Deck entrega board-deck-author.artifact verificável para:
     gerar o deck de board a partir do Company Brain, fiel aos dados e à narrativa

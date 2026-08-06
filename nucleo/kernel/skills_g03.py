@@ -6,10 +6,18 @@ top-level do output; o grader genérico de contrato valida `expected` direto.
 
 from __future__ import annotations
 
+from typing import Any
+
 from .skills import _spec_citations, _tokens, register
 
 
-def _out(spec, state, fields, rationale_prompt, llm):
+def _out(
+    spec: dict[str, Any],
+    state: dict[str, Any],
+    fields: dict[str, Any],
+    rationale_prompt: str,
+    llm: Any,
+) -> dict[str, Any]:
     rationale = llm.complete(rationale_prompt)
     out = dict(fields)
     out["rationale"] = rationale
@@ -308,7 +316,9 @@ def dependency_bump_review(state, *, llm, store, spec):
 # C2: docs consultáveis e resposta rastreável (top doc + score + found).
 # ---------------------------------------------------------------------------
 @register("docs_lookup")
-def docs_lookup(state: dict, *, llm, store, spec: dict) -> dict:
+def docs_lookup(
+    state: dict[str, Any], *, llm: Any, store: Any, spec: dict[str, Any]
+) -> dict[str, Any]:
     t = state.get("task", {}) or {}
     query = (t.get("query") or "").strip()
     docs = t.get("docs", []) or []
@@ -349,7 +359,7 @@ def docs_lookup(state: dict, *, llm, store, spec: dict) -> dict:
 # requirements vs phases[covers, depends_on]: cobertura 100% e grafo acíclico.
 # ---------------------------------------------------------------------------
 @register("planner")
-def planner(state: dict, *, llm, store, spec: dict) -> dict:
+def planner(state: dict[str, Any], *, llm: Any, store: Any, spec: dict[str, Any]) -> dict[str, Any]:
     t = state.get("task", {}) or {}
     reqs = t.get("requirements", []) or []
     phases = t.get("phases", []) or []
@@ -412,7 +422,9 @@ def planner(state: dict, *, llm, store, spec: dict) -> dict:
 # penaliza complexidade aumentada, falha de testes e impacto não mapeado.
 # ---------------------------------------------------------------------------
 @register("refactorer")
-def refactorer(state: dict, *, llm, store, spec: dict) -> dict:
+def refactorer(
+    state: dict[str, Any], *, llm: Any, store: Any, spec: dict[str, Any]
+) -> dict[str, Any]:
     t = state.get("task", {}) or {}
     r = t.get("refactor", {}) or {}
     target = r.get("target") or ""
@@ -468,7 +480,9 @@ def refactorer(state: dict, *, llm, store, spec: dict) -> dict:
 # bloqueia SDK direto; exige interface abstraída e config-over-code.
 # ---------------------------------------------------------------------------
 @register("integration_builder")
-def integration_builder(state: dict, *, llm, store, spec: dict) -> dict:
+def integration_builder(
+    state: dict[str, Any], *, llm: Any, store: Any, spec: dict[str, Any]
+) -> dict[str, Any]:
     t = state.get("task", {}) or {}
     integ = t.get("integration", {}) or {}
     provider = integ.get("provider") or ""

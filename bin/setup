@@ -43,6 +43,13 @@ else
   python3 -m pip install -r requirements.txt -q 2>&1 | tail -n 5 || python3 -m pip install -r requirements.txt
 fi
 
+export PRE_COMMIT_HOME=/tmp/pre-commit
+if [ -d .venv-uv ] && [ -x .venv-uv/bin/pre-commit ]; then
+  .venv-uv/bin/pre-commit install 2>&1 | tail -n 2 || true
+elif command -v pre-commit >/dev/null 2>&1; then
+  pre-commit install 2>&1 | tail -n 2 || true
+fi
+
 # 4. validação offline — sem credenciais, sem rede após deps
 echo "  compilando..."
 python3 -m compileall -q nucleo

@@ -1,6 +1,8 @@
-# CLAUDE.md — NÚCLEO (Company-OS)
+﻿# CLAUDE.md — NÚCLEO (Company-OS)
 
 > Regras imperativas para qualquer agente. Leia antes de codar. Leia `AGENTS.md` para doutrina completa.
+
+Antes de explorar o código para localizar um comportamento, leia `HARNESS_HANDBOOK.md` (mapa comportamento→código com âncoras).
 
 ## Comandos (copie-e-cole)
 

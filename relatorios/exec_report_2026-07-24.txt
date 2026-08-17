@@ -1,0 +1,12 @@
+exec_report — g3-build-error-resolver  | modo=replay de fixtures | executor=InertExecutor available=False
+
+  static_pass_rate = 12/30  (40%)  ← F0 move
+  delivered_rate   = 0/30  (0%)  ← só execução real move
+  delivered_eligible_rate = 0/8  (0%)  ← SLA G7 (só casos expected.exec_delivered=True)
+  false_positive_deliveries = 0  ← fail-safe (tem de ser 0)
+  executed_count   = 0/30
+  tests_passed     = 0/30
+  static_sem_delivery = 12/30  ← gap a maturar
+  execution_credit = 0/30 (executor_unavailable)
+
+  (executor inerte/indisponível — delivered_rate=0 é honesto: não executou)

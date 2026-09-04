@@ -1,0 +1,32 @@
+name: guardrails-stop
+
+# PORQUE: break-before-prod (C1-C8). Vermelho aqui bloqueia merge e deploy.
+# Camada 1 injection (32 padroes) + golden anti-alucinacao (>94%) + custo SLM (<25%).
+
+on:
+  pull_request:
+  push:
+    branches: [main, "chore/**", "feat/**", "fix/**"]
+
+jobs:
+  guardrails-stop:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Compile
+        run: python -m compileall -q nucleo
+      - name: Guardrails stop (BLOQUEADO se golden <=94% ou custo >=25%)
+        run: python -m nucleo.quality.guardrails_stop
+      - name: Testes guardrails
+        run: python -m unittest tests.test_guardrails_stop
+      - name: Gate
+        run: "echo BREAK-BEFORE-PROD-PASS. Merge e deploy liberados."

@@ -19,6 +19,8 @@ import os
 
 from langgraph.types import interrupt
 
+from nucleo.guardrails.injection_guard import screen_task
+
 KILL_SWITCH_NS = ("fleet",)
 KILL_SWITCH_KEY = "kill_switch"
 KILL_SWITCH_ENV = "FLEET_KILL_SWITCH"
@@ -37,6 +39,15 @@ def gate(state: dict, *, spec: dict, store=None) -> dict:
     mode = state.get("mode", "SHADOW")
     out = dict(state.get("output") or {})
 
+    # Camada 1 anti-injection (guardrails-stop-94-25): task com injection
+    # nunca entrega nem cobra, em qualquer modo — mesmo racional do C3 block.
+    injection = screen_task(state.get("task"))
+    if injection["blocked"]:
+        out.update(delivered=False, billing_amount=0, status="blocked",
+                   blocked_by=f"injection:{injection['pattern']}")
+        if state.get("verbose"):
+            print(f"  -> gate[INJECTION]: bloqueado por {injection['pattern']} (sem entrega/cobranca)")
+        return {"output": out, "_gate": "proceed"}
     if kill_switch_on(store):
         out.update(delivered=False, billing_amount=0, fleet_kill_switch=True)
         if state.get("verbose"):

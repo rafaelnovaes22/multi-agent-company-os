@@ -23,6 +23,8 @@ import sys
 import uuid
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from typing import BinaryIO
+from urllib.parse import urlsplit
 
 FRONT = Path(__file__).resolve().parent
 REPO = FRONT.parents[1]
@@ -30,6 +32,7 @@ sys.path.insert(0, str(REPO))
 
 from langgraph.checkpoint.memory import MemorySaver  # noqa: E402
 
+from demo.live.http_contract import MAX_BODY_BYTES, validate_intent_request  # noqa: E402
 from nucleo.kernel.brain import Brain, FileStore  # noqa: E402
 from nucleo.kernel.providers.llm import get_llm  # noqa: E402
 from nucleo.kernel.registry import build_company  # noqa: E402
@@ -70,7 +73,7 @@ def _bootstrap_gcp_adc() -> None:
 
 _bootstrap_gcp_adc()
 
-print("Materializando a empresa-OS (164 agentes)...")
+print(json.dumps({"event": "company_bootstrap"}))
 BRAIN_DIR = FRONT / ".brain-web"
 brain = Brain(str(BRAIN_DIR / "events"))
 store = FileStore(str(BRAIN_DIR / "store"))
@@ -79,7 +82,11 @@ ROOT_GRAPH, GUILD_SUPS, FLEET = build_company(
     str(REPO / "nucleo"), llm, brain, store, MemorySaver()
 )
 N_AGENTS = sum(len(ws) for ws in FLEET.values())
-print(f"pronto: {N_AGENTS} agentes | {len(FLEET)} guildas | LLM={llm.name}")
+print(
+    json.dumps(
+        {"event": "company_ready", "agents": N_AGENTS, "guilds": len(FLEET), "llm": llm.name}
+    )
+)
 
 
 def _safe(v, depth=0):
@@ -170,27 +177,49 @@ class Handler(SimpleHTTPRequestHandler):
         self.send_header("Access-Control-Allow-Headers", "Content-Type")
         self.end_headers()
 
-    def do_GET(self):
-        if self.path.startswith("/api/health"):
+    def do_GET(self) -> None:
+        if urlsplit(self.path).path in {"/api/health", "/health"}:
             return self._json(200, {"agents": N_AGENTS, "guilds": len(FLEET), "llm": llm.name})
         return super().do_GET()
 
-    def do_POST(self):
-        if not self.path.startswith("/api/intent"):
+    def send_head(self) -> BinaryIO | None:
+        # Runtime events and source files share FRONT; only the page is public.
+        if urlsplit(self.path).path not in {"/", "/index.html", "/styles.css", "/app.js"}:
+            self.send_error(404, "Recurso indisponível")
+            return None
+        return super().send_head()
+
+    def _read_intent(self) -> tuple[str, dict]:
+        n = int(self.headers.get("Content-Length") or 0)
+        if not 0 < n <= MAX_BODY_BYTES:
+            raise OverflowError("Corpo deve conter de 1 a 16384 bytes.")
+        return validate_intent_request(json.loads(self.rfile.read(n)))
+
+    def do_POST(self) -> None:
+        if urlsplit(self.path).path != "/api/intent":
             return self._json(404, {"error": "rota desconhecida"})
         try:
-            n = int(self.headers.get("Content-Length") or 0)
-            req = json.loads(self.rfile.read(n) or b"{}")
-            intent = (req.get("intent") or "").strip()
-            if not intent:
-                return self._json(400, {"error": "intent vazia"})
-            return self._json(200, run_intent(intent, req.get("context") or {}))
+            if self.headers.get_content_type() != "application/json":
+                return self._json(415, {"error": "Use Content-Type application/json."})
+            intent, context = self._read_intent()
+            return self._json(200, run_intent(intent, context))
+        except OverflowError as exc:
+            return self._json(413, {"error": str(exc)})
+        except (ValueError, UnicodeDecodeError) as exc:
+            return self._json(400, {"error": str(exc)[:200]})
         except Exception as exc:  # noqa: BLE001 — demo: erro vira JSON, não stacktrace na tela
-            return self._json(500, {"error": str(exc)[:300]})
+            print(json.dumps({"event": "intent_failed", "exception": type(exc).__name__}))
+            return self._json(
+                500, {"error": "Não foi possível executar a intenção. Tente novamente."}
+            )
 
-    def log_message(self, fmt, *args):  # silencia o ruído por request
-        if "/api/" in (args[0] if args else ""):
-            super().log_message(fmt, *args)
+    def log_request(self, code: int | str = "-", size: int | str = "-") -> None:
+        # Do not log arbitrary URLs, query strings or user-supplied content.
+        print(json.dumps({"event": "http_request", "method": self.command, "status": code}))
+
+    def log_message(self, fmt: str, *args: object) -> None:
+        # The stdlib error logger also passes integers; keep one structured event per request.
+        return None
 
 
 if __name__ == "__main__":

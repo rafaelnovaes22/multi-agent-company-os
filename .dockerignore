@@ -2,6 +2,12 @@
 node_modules
 videos
 .venv
+.venv-*
+.env
+**/*.env
+**/.env*
+**/cost-log.json
+**/golden-log.json
 venv
 **/.brain
 **/.brain-*

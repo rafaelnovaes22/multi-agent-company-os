@@ -20,12 +20,21 @@ from langgraph.checkpoint.memory import MemorySaver  # noqa: E402
 from nucleo.kernel.brain import Brain, FileStore  # noqa: E402
 from nucleo.kernel.providers.llm import get_llm  # noqa: E402
 from nucleo.quality.eval_harness import run_evals  # noqa: E402
+from nucleo.quality.rate_floor import (  # noqa: E402
+    FLOOR_FILENAME,
+    FLOOR_PATH,
+    build_floor,
+    check_floor,
+    load_floor,
+    write_floor,
+)
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 EVAL_DIR = os.path.join(ROOT, ".brain-eval")
 
 
-def main():
+def main(argv=None):
+    update_floor = "--update-floor" in (argv or [])
     brain = Brain(os.path.join(EVAL_DIR, "events"))
     store = FileStore(os.path.join(EVAL_DIR, "store"))
     llm = get_llm("worker")
@@ -65,6 +74,29 @@ def main():
     else:
         print("\nOK - toda a eval-suite da frota passou (gabarito conhecido). Gate 4 verde.")
 
+    # Piso de pass-rate (ratchet executável): o run reprova (exit 1) abaixo do piso
+    # congelado — fecha a classe "0% executável mas verde-estrutural" (lote G01–G03).
+    if update_floor:
+        write_floor(FLOOR_PATH, build_floor(reports))
+        print(f"\nPiso de pass-rate atualizado em {FLOOR_FILENAME} ({len(reports)} agentes).")
+        return 0
+    floor = load_floor()
+    if floor is None:
+        print(
+            f"\nPISO AUSENTE ({FLOOR_FILENAME} não encontrado/ilegível) — "
+            "rode com --update-floor após revisar."
+        )
+        return 1
+    ok, violations = check_floor(reports, floor)
+    if not ok:
+        print(f"\nPISO DE PASS-RATE VIOLADO ({len(violations)}):")
+        for v in violations:
+            print(f"  - {v}")
+        print("Suba o piso só após melhora genuína: python -m nucleo.demo_eval --update-floor.")
+        return 1
+    print(f"\nPiso de pass-rate OK: {len(reports)} agentes no/acima do piso; TOTAL {pas}/{tot}.")
+    return 0
+
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main(sys.argv[1:]))

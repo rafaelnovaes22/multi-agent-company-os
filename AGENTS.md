@@ -101,7 +101,7 @@ python -m compileall -q nucleo
 python -m nucleo.quality.pre_pr_gate                # HARD-FAIL (regra de ouro #4): proveniência +
                                                     #   prova independente nos agentes que você tocou
 python -m nucleo.quality.foundry_check                # DEFINITION OF DONE (ratchet)
-python -m nucleo.demo_eval                           # C4 — eval-harness da frota
+python -m nucleo.demo_eval                           # C4 — eval-harness da frota (+ piso de pass-rate: exit 1 abaixo do congelado)
 python -m nucleo.demo_agentshield                    # C8 — sem violação HIGH
 python -m unittest discover -s tests                 # suíte completa (NÃO uma lista parcial)
 ```

@@ -17,6 +17,7 @@ def _out(spec, state, fields, rationale_prompt, llm):
     """Monta o retorno padrão: campos calculados + rationale + by + tenant + citations."""
     rationale = llm.complete(rationale_prompt)
     out = dict(fields)
+    out["agent_id"] = spec["id"]
     out["rationale"] = rationale
     out["by"] = spec["id"]
     out["tenant"] = state.get("task", {}).get("tenant_id")
@@ -266,8 +267,10 @@ def narrative_synthesizer(state, *, llm, store, spec):
     ships = task.get("ships", []) or []
     narratives = task.get("narratives", []) or []
     divergence = len(set(narratives)) > 1
-    synthesis_score = round(
-        1 - (len(set(narratives)) / max(1, len(narratives))) if narratives else 1.0, 2
+    # synthesis_score e medida de DIVERGENCIA em [0,1]: 0.0 = narrativas identicas,
+    # 1.0 = todas distintas (contrato ratificado: "sem divergencia" -> 0.0).
+    synthesis_score = (
+        round((len(set(narratives)) - 1) / (len(narratives) - 1), 2) if len(narratives) > 1 else 0.0
     )
     post_ready = not divergence and len(ships) > 0
     return _out(

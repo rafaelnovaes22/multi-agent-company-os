@@ -1,0 +1,830 @@
+{
+  "version": 1,
+  "agents": {
+    "brain-indexer": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g1-board-deck-author": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g1-competitive-teardown": {
+      "passed": 31,
+      "total": 31,
+      "rate": 1.0
+    },
+    "g1-investor-update": {
+      "passed": 31,
+      "total": 31,
+      "rate": 1.0
+    },
+    "g1-market-intel": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g1-narrative-synthesizer": {
+      "passed": 31,
+      "total": 31,
+      "rate": 1.0
+    },
+    "g1-okr-steward": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g1-opportunity-sizer": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g1-scenario-planner": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g1-strategy-supervisor": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g10-burn-monitor": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g10-finance-supervisor": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g10-fpna": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g10-invoicing": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g10-margin-watch": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g10-reconciliation": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g10-tax-compliance": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g10-token-cost-accountant": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g10-treasury": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g10-unit-economist": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g11-interview-scheduler": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g11-jd-author": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g11-km-curator": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g11-meeting-notetaker": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g11-onboarding-buddy": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g11-people-supervisor": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g11-policy-author": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g11-recruiter-sourcer": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g12-contract-reviewer": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g12-dpa-manager": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g12-ip-trademark": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g12-legal-supervisor": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g12-litigation-tracker": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g12-regulatory-monitor": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g12-risk-register": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g12-tos-privacy-author": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g13-artifact-architect": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g13-eval-engineer-guardian": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g13-governance-supervisor": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g13-learning-curator": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g13-monthly-reviewer": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g13-observability-guardian": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g13-po-guardian": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g13-promotion-officer": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g13-security-privacy-guardian": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g13-tenant-context-curator": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g13-unit-economist-guardian": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g14-aiops-supervisor": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g14-eval-data-curator": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g14-inference-cost-optimizer": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g14-model-eval-bench": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g14-model-router": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g14-prompt-context-registry": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g14-rag-knowledge-ops": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g14-responsible-ai": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g2-competitor-feature-watch": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g2-diagnose": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g2-experiment-designer": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g2-feedback-router": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g2-jobs-to-be-done": {
+      "passed": 31,
+      "total": 31,
+      "rate": 1.0
+    },
+    "g2-prd-author": {
+      "passed": 31,
+      "total": 31,
+      "rate": 1.0
+    },
+    "g2-pricing-product-fit": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g2-prioritizer": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g2-product-supervisor": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g2-prototype-builder": {
+      "passed": 31,
+      "total": 31,
+      "rate": 1.0
+    },
+    "g2-release-notes": {
+      "passed": 31,
+      "total": 31,
+      "rate": 1.0
+    },
+    "g2-roadmap-keeper": {
+      "passed": 31,
+      "total": 31,
+      "rate": 1.0
+    },
+    "g2-usability-critic": {
+      "passed": 31,
+      "total": 31,
+      "rate": 1.0
+    },
+    "g2-user-interview-synth": {
+      "passed": 31,
+      "total": 31,
+      "rate": 1.0
+    },
+    "g3-api-contract": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g3-backend-builder": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g3-build-error-resolver": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g3-code-reviewer-go": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g3-code-reviewer-py": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g3-code-reviewer-ts": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g3-db-schema": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g3-dependency-warden": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g3-docs-lookup": {
+      "passed": 31,
+      "total": 31,
+      "rate": 1.0
+    },
+    "g3-eng-supervisor": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g3-feature-flagger": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g3-frontend-builder": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g3-incident-responder": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g3-infra-devops": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g3-integration-builder": {
+      "passed": 31,
+      "total": 31,
+      "rate": 1.0
+    },
+    "g3-mobile-builder": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g3-perf-optimizer": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g3-planner": {
+      "passed": 31,
+      "total": 31,
+      "rate": 1.0
+    },
+    "g3-refactorer": {
+      "passed": 31,
+      "total": 31,
+      "rate": 1.0
+    },
+    "g4-e2e-playwright": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g4-eval-case-author": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g4-eval-harness-runner": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g4-load-tester": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g4-prompt-eval": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g4-quality-gate": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g4-quality-supervisor": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g4-regression-watcher": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g4-shadow-comparator": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g4-test-coverage": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g5-access-auditor": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g5-agentshield-scanner": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g5-dependency-cve": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g5-fraud-abuse-detector": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g5-incident-forensics": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g5-lgpd-privacy": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g5-pentest-agent": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g5-prompt-injection-guard": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g5-secrets-scanner": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g5-security-supervisor": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g5-threat-modeler": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g6-anomaly-detector": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g6-churn-predictor": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g6-cohort-analyst": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g6-dashboard-builder": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g6-data-quality": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g6-data-supervisor": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g6-drift-detector": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g6-experiment-analyst": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g6-forecaster": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g6-metrics-modeler": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g6-nl2sql": {
+      "passed": 28,
+      "total": 30,
+      "rate": 0.9333333333333333
+    },
+    "g6-pipeline-builder": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g7-ab-growth-runner": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g7-attribution-analyst": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g7-community-manager": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g7-content-writer": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g7-copywriter": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g7-creative-generator": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g7-growth-supervisor": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g7-influencer-scout": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g7-landing-builder": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g7-lifecycle-crm": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g7-paid-ads-optimizer": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g7-referral-designer": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g7-seo-strategist": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g7-social-manager": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g8-billing-agent": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g8-contract-closer": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g8-crm-hygiene": {
+      "passed": 31,
+      "total": 32,
+      "rate": 0.96875
+    },
+    "g8-dunning-agent": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g8-lead-qualifier": {
+      "passed": 40,
+      "total": 40,
+      "rate": 1.0
+    },
+    "g8-outbound-sdr": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g8-pricing-engine": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g8-proposal-author": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g8-revenue-reporter": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g8-sales-supervisor": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g8-upsell-crosssell": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g9-csat-analyst": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g9-custops-supervisor": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g9-dispute-mediator": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g9-escalation-manager": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g9-fulfillment-tracker": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g9-kb-curator": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g9-messaging-concierge": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g9-onboarding-guide": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g9-refund-handler": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g9-sentiment-monitor": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "g9-support-triage": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g9-tier1-resolver": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "g9-voice-of-customer": {
+      "passed": 32,
+      "total": 32,
+      "rate": 1.0
+    },
+    "hermes-learning-loop": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "mcp-gateway-comms": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "mcp-gateway-external": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "mcp-gateway-payments": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    },
+    "root-supervisor": {
+      "passed": 30,
+      "total": 30,
+      "rate": 1.0
+    }
+  },
+  "total": {
+    "passed": 5055,
+    "total": 5058,
+    "rate": 0.9994068801897983
+  }
+}

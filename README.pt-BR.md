@@ -25,6 +25,7 @@ A resposta virou a **arquitetura de verificação** do framework — independên
 | **Juiz externo de família distinta** com relatório de correlação interno×externo em CI | gate interno inflado | `nucleo/quality/judge_eval.py`, `.github/workflows/judge-correlation.yml` |
 | **Anti-tautologia no red team**: um agente deliberadamente vulnerável TEM que reprovar | suíte de segurança decorativa | `nucleo/quality/` + `tests/test_redteam.py` |
 | **Detector de homogeneidade de diff** (blocos de casos clonados) + **baseline que só encolhe** | "fechar métrica" com casos-clone | `nucleo/quality/diff_homogeneity.py`, `foundry_baseline.json` |
+| **Piso de pass-rate do eval-harness** (ratchet: o run reprova abaixo do piso congelado por agente) | regressão de entrega invisível aos gates estruturais | `nucleo/quality/rate_floor.py`, `eval_rate_floor.json` |
 | **Separação autor × auditor**: quem gera o agente nunca gera o teste; o auditor nunca autora nem faz merge | o mesmo ator atestar a própria entrega | [AGENTS.md](AGENTS.md) §0.5, [docs/CONTRATO-NUCLEO-HERMES-ORACULO.md](docs/CONTRATO-NUCLEO-HERMES-ORACULO.md) |
 
 > Detalhe do episódio e das decisões: [FABRICA-DE-AGENTES.md](FABRICA-DE-AGENTES.md) e [docs/PLANO-AJUSTE-ROTA.md](docs/PLANO-AJUSTE-ROTA.md).

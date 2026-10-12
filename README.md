@@ -27,6 +27,7 @@ The fix became the **verification architecture** of the framework. Structural in
 | **External judge from a different model family**, with an internal-vs-external correlation report in CI | inflated internal gate | `nucleo/quality/judge_eval.py`, `.github/workflows/judge-correlation.yml` |
 | **Anti-tautology red team**: a deliberately vulnerable agent MUST fail the suite | decorative security tests | `nucleo/quality/` + `tests/test_redteam.py` |
 | **Diff homogeneity detector** (cloned case blocks) plus a **baseline that only shrinks** | gaming the metric with clone cases | `nucleo/quality/diff_homogeneity.py`, `foundry_baseline.json` |
+| **Eval-harness pass-rate floor** (ratchet: the run fails below the frozen per-agent floor) | delivery regression invisible to structural gates | `nucleo/quality/rate_floor.py`, `eval_rate_floor.json` |
 | **Author/auditor separation**: whoever generates the agent never generates its tests; the auditor never authors and never merges | the same actor attesting its own delivery | [AGENTS.md](AGENTS.md) §0.5, [docs/CONTRATO-NUCLEO-HERMES-ORACULO.md](docs/CONTRATO-NUCLEO-HERMES-ORACULO.md) |
 
 > Full episode write-up and the decisions that followed: [FABRICA-DE-AGENTES.md](FABRICA-DE-AGENTES.md) and [docs/PLANO-AJUSTE-ROTA.md](docs/PLANO-AJUSTE-ROTA.md).

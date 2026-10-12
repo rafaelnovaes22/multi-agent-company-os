@@ -20,6 +20,7 @@ def _out(
 ) -> dict[str, Any]:
     rationale = llm.complete(rationale_prompt)
     out = dict(fields)
+    out["agent_id"] = spec["id"]
     out["rationale"] = rationale
     out["by"] = spec["id"]
     out["tenant"] = state.get("task", {}).get("tenant_id")
@@ -341,6 +342,7 @@ def docs_lookup(
         state,
         {
             "agent_id": spec["id"],
+            "handler_kind": "docs_lookup",
             "query": query,
             "docs_count": len(docs),
             "top_score": top_score,
@@ -404,6 +406,7 @@ def planner(state: dict[str, Any], *, llm: Any, store: Any, spec: dict[str, Any]
         state,
         {
             "agent_id": spec["id"],
+            "handler_kind": "planner",
             "total_requirements": total,
             "covered_count": covered_count,
             "coverage_pct": coverage_pct,
@@ -460,6 +463,7 @@ def refactorer(
         state,
         {
             "agent_id": spec["id"],
+            "handler_kind": "refactorer",
             "target": target,
             "impact_size": impact_size,
             "complexity_delta": delta,
@@ -506,6 +510,7 @@ def integration_builder(
         state,
         {
             "agent_id": spec["id"],
+            "handler_kind": "integration_builder",
             "provider": provider,
             "interface": interface,
             "uses_abstraction": uses_abstraction,

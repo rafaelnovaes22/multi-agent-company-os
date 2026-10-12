@@ -21,6 +21,7 @@ def _out(spec, state, fields, rationale_prompt, llm):
     """Monta o retorno padrão: campos calculados + rationale + by + tenant + citations."""
     rationale = llm.complete(rationale_prompt)
     out = dict(fields)
+    out["agent_id"] = spec["id"]
     out["rationale"] = rationale
     out["by"] = spec["id"]
     out["tenant"] = state.get("task", {}).get("tenant_id")

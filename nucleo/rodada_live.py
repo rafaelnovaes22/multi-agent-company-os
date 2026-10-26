@@ -20,6 +20,8 @@ from __future__ import annotations
 import json
 import os
 import sys
+import time
+import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 
@@ -39,6 +41,9 @@ AUTH_CANDIDATES = [
     os.path.expanduser("~/.local/share/com.vercel.cli/auth.json"),
 ]
 API = "https://api.vercel.com"
+
+# Mesmo limiar do handler nv_channel_health (kernel/skills_novais.py)
+_LATENCY_DEGRADED_MS = 2000
 
 # Canais de entrada da Novais (o que um cliente toca antes de falar com a gente)
 CHANNELS = [
@@ -135,26 +140,46 @@ def coletar_projetos(token: str, team_id: str | None) -> list[dict]:
     return payload
 
 
+def _probe_once(url: str) -> tuple[int, int]:
+    """Um GET de saúde: (status_code, latência_ms). 0 = inalcançável/timeout."""
+    t0 = datetime.now(timezone.utc)
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "nucleo-ponte/0.1"})
+        with urllib.request.urlopen(req, timeout=10) as r:
+            return r.status, int((datetime.now(timezone.utc) - t0).total_seconds() * 1000)
+    except urllib.error.HTTPError as e:
+        return e.code, int((datetime.now(timezone.utc) - t0).total_seconds() * 1000)
+    except Exception:
+        return 0, int((datetime.now(timezone.utc) - t0).total_seconds() * 1000)
+
+
 def probe_canais() -> list[dict]:
     """Um GET por canal: código + latência. Latência = experiência do primeiro
-    contato do cliente (cold start incluído — é o sinal, não ruído)."""
+    contato do cliente (cold start incluído — é o sinal, não ruído).
+
+    Warm-retry (26/10): canal degradado/down no 1º probe ganha até 2 remedições
+    (10s e 20s). Se aquecer, o status/latência canônicos passam a ser os QUENTES
+    e a entrada carrega cold_start=True com o 1º probe preservado como fonte —
+    cold start é anotado, não vira falso alerta de manhã."""
     out = []
     for name, url in CHANNELS:
-        t0 = datetime.now(timezone.utc)
-        code = 0
-        try:
-            req = urllib.request.Request(url, headers={"User-Agent": "nucleo-ponte/0.1"})
-            with urllib.request.urlopen(req, timeout=10) as r:
-                code = r.status
-        except urllib.error.HTTPError as e:
-            code = e.code
-        except Exception:
-            code = 0
+        code, ms = _probe_once(url)
+        cold, first_ms = False, ms
+        for wait_s in (10, 20):
+            if code == 200 and ms < _LATENCY_DEGRADED_MS:
+                break
+            time.sleep(wait_s)
+            code2, ms2 = _probe_once(url)
+            if code2 == 200 and ms2 < _LATENCY_DEGRADED_MS:
+                cold, code, ms = True, code2, ms2
+                break
         out.append(
             {
                 "name": name,
                 "status_code": code,
-                "latency_ms": int((datetime.now(timezone.utc) - t0).total_seconds() * 1000),
+                "latency_ms": ms,
+                "cold_start": cold,
+                "first_probe_ms": first_ms,
             }
         )
     return out
@@ -221,8 +246,11 @@ def main() -> int:
         f"\nPonte — canais de entrada: {out_p.get('green_count')} verdes, "
         f"{out_p.get('degraded_count')} degradados, {out_p.get('down_count')} down"
     )
+    raw_by_name = {c["name"]: c for c in canais}
     for c in out_p.get("channels", []):
-        print(f"  {c['name']:<16} {c['status']:<9} {c['latency_ms']} ms")
+        r = raw_by_name.get(c["name"], {})
+        cold = " [frio -> quente]" if r.get("cold_start") else ""
+        print(f"  {c['name']:<16} {c['status']:<9} {c['latency_ms']} ms{cold}")
     for a in out_p.get("recommended_actions", [])[:3]:
         print(f"  acao: {a}")
 
@@ -233,6 +261,26 @@ def main() -> int:
             dias = p.get("age_days")
             tag = p["name"] + (f" há {int(dias)}d" if dias is not None else "")
             (fire if (dias is not None and dias <= 2) else debt).append(tag)
+
+    # Anotação de cold start: canal degradado no output do agente + aquecido no
+    # retry vira "(nome frio Xms -> quente Yms)"; canal ainda degradado é real.
+    cold_notes, real_bad = [], []
+    raw = {c["name"]: c for c in canais}
+    for c in out_p["channels"]:
+        if c["status"] == "green":
+            if raw.get(c["name"], {}).get("cold_start"):
+                cold_notes.append(
+                    f"{c['name']} frio {raw[c['name']]['first_probe_ms']}ms -> "
+                    f"quente {c['latency_ms']}ms"
+                )
+            continue
+        r = raw.get(c["name"], {})
+        cold_notes.append(
+            f"{c['name']} {c['status'].upper()} "
+            f"{r.get('first_probe_ms', c['latency_ms'])}ms -> {c['latency_ms']}ms"
+        )
+        real_bad.append(c)
+
     alert = (
         f"[FROTA {t0.strftime('%d/%m %H:%M')}] Novais | "
         + (f"INCÊNDIO: {', '.join(fire)} | " if fire else "")
@@ -243,12 +291,11 @@ def main() -> int:
         )
         + f" | {out_t['orphan_count']} sem Git | "
         + f"Ponte: {out_p['green_count']}/{out_p['total']} canais verdes"
-        + (
-            f" ({', '.join(c['name'] + ' ' + str(c['latency_ms']) + 'ms' for c in out_p['channels'] if c['status'] != 'green')})"
-            if out_p["degraded_count"] or out_p["down_count"]
-            else ""
-        )
     )
+    if cold_notes:
+        alert += f" | {', '.join(cold_notes)}"
+    if real_bad:
+        alert += " | ATENÇÃO: canal não aqueceu no retry"
     print(f"\nALERTA:\n{alert}")
 
     if notify:

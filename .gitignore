@@ -44,3 +44,6 @@ secrets.*
 
 # Skills importadas (scripts auxiliares, não versionar)
 .agents/
+
+# Rodadas ao vivo (nomes de projetos do time — nao versionar)
+relatorios/rodada-turno-*.json

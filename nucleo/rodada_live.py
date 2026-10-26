@@ -1,14 +1,18 @@
-"""Rodada AO VIVO do turno — saúde real dos projetos Vercel da Novais Digital.
+"""Rodada AO VIVO da Fase 0.5 — turno (deploys Vercel) + ponte (canais de entrada).
 
-Roda:  python -m nucleo.rodada_live
+Roda:  python -m nucleo.rodada_live [--notify]
 
-Substitui o payload de exemplo do demo_fase0 pela fonte viva: lista os projetos
-do team novaisdigital na API da Vercel, verifica o último deploy de produção de
-cada um e o link de Git, e alimenta o agente `turno` (SHADOW) que produz o
-relatório da rodada com as ações do dia. Read-only: só requests GET.
+Substitui os payloads de exemplo do demo_fase0 por fontes vivas e alimenta os
+agentes `turno` e `ponte` (SHADOW) do plano de times:
+- turno: projetos do team novaisdigital via API Vercel (v9 projects, 1 request;
+  latestDeployments embutido dá estado + data do último deploy de produção);
+- ponte: probes HTTP nos /health dos canais de entrada da Novais (latência medida
+  = o que um cliente de primeira viagem experimenta, inclusive cold start).
 
-Token resolvido em ordem: env VERCEL_TOKEN -> auth.json do CLI Vercel.
-Salva o snapshot em relatorios/rodada-turno-YYYY-MM-DD.json.
+Read-only (só GET). Alerta compacto copiar/colar; snapshot com fonte em
+relatorios/rodada-turno-YYYY-MM-DD.json. Com --notify, envia por Telegram se
+TELEGRAM_BOT_TOKEN e TELEGRAM_CHAT_ID estiverem no ambiente (ainda sem canal:
+avisa e segue).
 """
 
 from __future__ import annotations
@@ -35,7 +39,14 @@ AUTH_CANDIDATES = [
     os.path.expanduser("~/.local/share/com.vercel.cli/auth.json"),
 ]
 API = "https://api.vercel.com"
-_TEAM = [None]  # teamId corrente (usado pelo fallback do deploy_state)
+
+# Canais de entrada da Novais (o que um cliente toca antes de falar com a gente)
+CHANNELS = [
+    ("novais-site", "https://novaisdigital.com.br/health"),
+    ("carinsight-bot", "https://carinsight-sandbox.vercel.app/health"),
+    ("claria", "https://claria.novaisdigital.com.br/api/health"),
+    ("geraboleto", "https://geraboleto-novaisdigital.vercel.app/api/health"),
+]
 
 
 def _token() -> str:
@@ -53,17 +64,14 @@ def _token() -> str:
     sys.exit(1)
 
 
-def _get(path: str, token: str, **params) -> dict:
-    qs = "&".join(f"{k}={v}" for k, v in params.items() if v is not None)
-    url = f"{API}{path}" + (f"?{qs}" if qs else "")
+def _get(url: str, token: str) -> dict:
     req = urllib.request.Request(url, headers={"Authorization": f"Bearer {token}"})
     with urllib.request.urlopen(req, timeout=30) as r:
         return json.load(r)
 
 
 def resolve_team(token: str) -> str | None:
-    """Devolve o teamId do team-alvo, ou None para o escopo pessoal."""
-    data = _get("/v2/teams", token, limit=100)
+    data = _get(f"{API}/v2/teams?limit=100", token)
     for t in data.get("teams", []):
         if t.get("slug") == TEAM_SLUG:
             return t.get("id")
@@ -71,113 +79,208 @@ def resolve_team(token: str) -> str | None:
     return None
 
 
-def list_projects(token: str, team_id: str | None) -> list[dict]:
+def _build_agent(name: str, llm, brain, store, cp):
+    spec, agent, gate = build_from_spec(
+        os.path.join(ROOT, "company", "fleet", name), llm, brain, store, cp
+    )
+    if not gate["ok"]:
+        print(f"FAIL gate da fábrica em {name}: {gate['problems']}")
+        sys.exit(1)
+    return spec, agent
+
+
+def _invoke(agent, task, ledger):
+    return agent.invoke(
+        {"task": task, "mode": "SHADOW", "ledger": ledger, "run_id": "live",
+         "verbose": False},
+        config={"configurable": {"thread_id": "rodada-live"}},
+    ).get("output") or {}
+
+
+def coletar_projetos(token: str, team_id: str | None) -> list[dict]:
+    """Lista projetos com estado+data do último deploy de produção e link de Git."""
     projects, until = [], None
     while True:
-        data = _get(
-            "/v9/projects", token, teamId=team_id, limit=100, until=until
-        )
+        qs = f"teamId={team_id}&limit=100" + (f"&until={until}" if until else "")
+        data = _get(f"{API}/v9/projects?{qs}", token)
         projects += data.get("projects", [])
         until = data.get("pagination", {}).get("next")
         if not until:
-            return projects
-
-
-def deploy_state(p: dict) -> str:
-    """Estado do último deploy de produção, direto do list (v9 projects já
-    embute latestDeployments — 1 request total). Fallback: v6/deployments."""
-    deps = p.get("latestDeployments") or []
-    if not deps:
-        try:
-            deps = _get(
-                "/v6/deployments", _token(), teamId=_TEAM[0],
-                project=p.get("name"), limit=5,
-            ).get("deployments", [])
-        except Exception:
-            deps = []
-    prod = [d for d in deps if d.get("target") == "production"] or deps
-    if not prod:
-        return "NEVER_DEPLOYED"
-    latest = max(prod, key=lambda d: d.get("createdAt") or 0)
-    state = latest.get("readyState") or latest.get("state") or "UNKNOWN"
-    if state in ("BUILDING", "QUEUED", "INITIALIZING"):
-        return "BUILDING"
-    return state
-
-
-def main() -> int:
-    token = _token()
-    team_id = resolve_team(token)
-    _TEAM[0] = team_id
-    t0 = datetime.now(timezone.utc)
-
-    projects = list_projects(token, team_id)
-    print(f"Turno — rodada ao vivo | team '{TEAM_SLUG}' | {len(projects)} projetos Vercel\n")
+            break
 
     payload = []
+    now_ms = datetime.now(timezone.utc).timestamp() * 1000
     for p in projects:
+        deps = p.get("latestDeployments") or []
+        prod = [d for d in deps if d.get("target") == "production"] or deps
+        status, age_days = "NEVER_DEPLOYED", None
+        if prod:
+            latest = max(prod, key=lambda d: d.get("createdAt") or 0)
+            state = latest.get("readyState") or latest.get("state") or "UNKNOWN"
+            status = (
+                "BUILDING" if state in ("BUILDING", "QUEUED", "INITIALIZING") else state
+            )
+            if status == "ERROR":
+                created = latest.get("createdAt") or 0
+                if created:
+                    age_days = int((now_ms - created) // 86_400_000)
         payload.append(
             {
                 "name": p["name"],
-                "deploy_status": deploy_state(p),
+                "deploy_status": status,
                 "repo_ok": p.get("link") is not None,
+                "age_days": age_days,
             }
         )
+    return payload
+
+
+def probe_canais() -> list[dict]:
+    """Um GET por canal: código + latência. Latência = experiência do primeiro
+    contato do cliente (cold start incluído — é o sinal, não ruído)."""
+    out = []
+    for name, url in CHANNELS:
+        t0 = datetime.now(timezone.utc)
+        code = 0
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "nucleo-ponte/0.1"})
+            with urllib.request.urlopen(req, timeout=10) as r:
+                code = r.status
+        except urllib.error.HTTPError as e:
+            code = e.code
+        except Exception:
+            code = 0
+        out.append(
+            {
+                "name": name,
+                "status_code": code,
+                "latency_ms": int((datetime.now(timezone.utc) - t0).total_seconds() * 1000),
+            }
+        )
+    return out
+
+
+def _notify_telegram(text: str) -> bool:
+    tok = os.environ.get("TELEGRAM_BOT_TOKEN")
+    chat = os.environ.get("TELEGRAM_CHAT_ID")
+    if not (tok and chat):
+        return False
+    import urllib.parse
+
+    url = (
+        f"https://api.telegram.org/bot{tok}/sendMessage"
+        f"?chat_id={urllib.parse.quote(chat)}&text={urllib.parse.quote(text)}"
+    )
+    try:
+        urllib.request.urlopen(url, timeout=15)
+        return True
+    except Exception as e:
+        print(f"  notify falhou: {e}")
+        return False
+
+
+def main() -> int:
+    notify = "--notify" in sys.argv
+    token = _token()
+    team_id = resolve_team(token)
+    t0 = datetime.now(timezone.utc)
 
     llm = get_llm("worker")
     brain = Brain(os.path.join(ROOT, ".brain-fase0", "events"))
     store = FileStore(os.path.join(ROOT, ".brain-fase0", "store"))
-    spec, agent, gate = build_from_spec(
-        os.path.join(ROOT, "company", "fleet", "turno"), llm, brain, store, MemorySaver()
+    cp = MemorySaver()
+
+    # --- turno: deploys Vercel -------------------------------------------------
+    payload = coletar_projetos(token, team_id)
+    spec_t, turno = _build_agent("turno", llm, brain, store, cp)
+    out_t = _invoke(turno, {"projects": payload}, spec_t["ledger"])
+
+    # --- ponte: canais de entrada ---------------------------------------------
+    canais = probe_canais()
+    spec_p, ponte = _build_agent("ponte", llm, brain, store, cp)
+    out_p = _invoke(ponte, {"channels": canais}, spec_p["ledger"])
+
+    # --- relatório -------------------------------------------------------------
+    print(
+        f"Turno — rodada ao vivo | team '{TEAM_SLUG}' | {out_t.get('total_projects')} projetos\n"
     )
-    if not gate["ok"]:
-        print(f"FAIL gate da fábrica: {gate['problems']}")
-        return 1
-
-    out = agent.invoke(
-        {"task": {"projects": payload}, "mode": "SHADOW", "ledger": spec["ledger"],
-         "run_id": "live-" + t0.strftime("%Y%m%d%H%M%S"), "verbose": False},
-        config={"configurable": {"thread_id": "rodada-live"}},
-    ).get("output") or {}
-
-    print(f"  verdes: {out.get('green_count')}/{out.get('total_projects')} "
-          f"({out.get('health_pct')}%)  | erros: {out.get('error_count')}  "
-          f"| em build: {out.get('building_count')}  | órfãos (sem Git): {out.get('orphan_count')}\n")
-    errors = [e for e in out.get("recommended_actions", []) if "ERROR" in e]
-    for a in errors[:5]:
+    print(
+        f"  verdes: {out_t.get('green_count')}/{out_t.get('total_projects')} "
+        f"({out_t.get('health_pct')}%)  | erros: {out_t.get('error_count')}  "
+        f"| órfãos (sem Git): {out_t.get('orphan_count')}"
+    )
+    for a in out_t.get("recommended_actions", [])[:5]:
         print(f"  acao: {a}")
-    if out.get("orphan_count"):
-        print(f"  higiene: {out['orphan_count']} projeto(s) sem Git integrado no Vercel "
-              "(deploy via CLI) — adotar repo em lote, não é urgência")
+    if out_t.get("orphan_count"):
+        print(
+            f"  higiene: {out_t['orphan_count']} projeto(s) sem Git integrado no Vercel "
+            "(deploy via CLI) — dívida, não urgência"
+        )
 
-    # Alerta compacto (formato WhatsApp — o "passo 2" do plano, versão copiar/colar)
-    err_names = [p["name"] for p in payload if p["deploy_status"] == "ERROR"]
-    alert = (
-        f"[TURNO {t0.strftime('%d/%m %H:%M')}] Vercel '{TEAM_SLUG}': "
-        f"{out.get('total_projects')} projetos | "
-        f"{out.get('error_count')} deploy(s) em ERROR"
-        + (f" ({', '.join(err_names[:3])})" if err_names else "")
-        + f" | {out.get('orphan_count')} sem Git integrado | "
-        f"saudável pelo critério READY+Git: {out.get('health_pct')}%"
+    print(
+        f"\nPonte — canais de entrada: {out_p.get('green_count')} verdes, "
+        f"{out_p.get('degraded_count')} degradados, {out_p.get('down_count')} down"
     )
-    print(f"\nALERTA (copiar/colar):\n{alert}")
+    for c in out_p.get("channels", []):
+        print(f"  {c['name']:<16} {c['status']:<9} {c['latency_ms']} ms")
+    for a in out_p.get("recommended_actions", [])[:3]:
+        print(f"  acao: {a}")
 
-    # Snapshot com fonte (prova do painel) — tudo que o Prefeito precisa citar
-    stamp = t0.strftime("%Y-%m-%d")
+    # --- alerta compacto (copiar/colar ou Telegram) ----------------------------
+    fire, debt = [], []
+    for p in payload:
+        if p["deploy_status"] == "ERROR":
+            dias = p.get("age_days")
+            tag = p["name"] + (f" há {int(dias)}d" if dias is not None else "")
+            (fire if (dias is not None and dias <= 2) else debt).append(tag)
+    alert = (
+        f"[FROTA {t0.strftime('%d/%m %H:%M')}] Novais | "
+        + (f"INCÊNDIO: {', '.join(fire)} | " if fire else "")
+        + (
+            f"Vercel: {out_t['error_count']} em ERROR há tempo ({', '.join(debt[:3])})"
+            if debt
+            else "Vercel: deploys ok"
+        )
+        + f" | {out_t['orphan_count']} sem Git | "
+        + f"Ponte: {out_p['green_count']}/{out_p['total']} canais verdes"
+        + (
+            f" ({', '.join(c['name'] + ' ' + str(c['latency_ms']) + 'ms' for c in out_p['channels'] if c['status'] != 'green')})"
+            if out_p["degraded_count"] or out_p["down_count"]
+            else ""
+        )
+    )
+    print(f"\nALERTA:\n{alert}")
+
+    if notify:
+        if _notify_telegram(alert):
+            print("(alerta enviado por Telegram)")
+        else:
+            print(
+                "(--notify sem TELEGRAM_BOT_TOKEN/TELEGRAM_CHAT_ID no ambiente; "
+                "alerta apenas impresso/salvo)"
+            )
+
+    # --- snapshot com fonte -----------------------------------------------------
     rel_dir = os.path.join(os.path.dirname(ROOT), "relatorios")
     os.makedirs(rel_dir, exist_ok=True)
-    rel_path = os.path.join(rel_dir, f"rodada-turno-{stamp}.json")
+    rel_path = os.path.join(rel_dir, f"rodada-turno-{t0.strftime('%Y-%m-%d')}.json")
     with open(rel_path, "w", encoding="utf-8") as f:
         json.dump(
             {
                 "date": t0.isoformat(),
                 "team": TEAM_SLUG,
-                "source": "vercel api v9/v9 (read-only)",
-                "summary": {k: out.get(k) for k in
-                            ("total_projects", "green_count", "error_count",
-                             "building_count", "orphan_count", "health_pct")},
+                "sources": {
+                    "deploys": "vercel api v9/projects (latestDeployments, read-only)",
+                    "canais": "probes HTTP /health (nucleo.rodada_live.CHANNELS)",
+                },
+                "turno": {k: out_t.get(k) for k in
+                          ("total_projects", "green_count", "error_count",
+                           "orphan_count", "health_pct")},
+                "ponte": {k: out_p.get(k) for k in
+                          ("total", "green_count", "degraded_count", "down_count")},
                 "whatsapp_alert": alert,
                 "projects": payload,
+                "channels": canais,
             },
             f, ensure_ascii=False, indent=2,
         )

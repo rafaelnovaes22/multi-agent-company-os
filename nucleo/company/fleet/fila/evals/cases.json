@@ -1,0 +1,49 @@
+[
+  {
+    "id": "fl-01",
+    "desc": "3 na fila, 1 estourou SLA 15min, 1 respondida -> 2 pendentes ordenadas por espera",
+    "now": "2026-10-26T09:00",
+    "inbound": [
+      {"id": "w1", "channel": "whatsapp", "subject": "quer site 48h", "arrived_at": "2026-10-26T08:20", "sla_min": 15, "status": "waiting"},
+      {"id": "w2", "channel": "formulario", "subject": "diagnostico", "arrived_at": "2026-10-26T08:52", "sla_min": 15, "status": "waiting"},
+      {"id": "w3", "channel": "instagram", "subject": "duvida curso", "arrived_at": "2026-10-26T08:30", "sla_min": 15, "status": "answered"}
+    ],
+    "expected": {
+      "pending_count": 2,
+      "overdue_count": 1,
+      "oldest_wait_min": 40,
+      "top_urgent": ["w1", "w2"]
+    },
+    "provenance": "plano-fase0"
+  },
+  {
+    "id": "fl-02",
+    "desc": "tudo respondido -> fila limpa, zero acoes",
+    "now": "2026-10-26T09:00",
+    "inbound": [
+      {"id": "w1", "channel": "whatsapp", "subject": "ok", "arrived_at": "2026-10-26T08:00", "sla_min": 15, "status": "answered"}
+    ],
+    "expected": {
+      "pending_count": 0,
+      "overdue_count": 0,
+      "oldest_wait_min": 0,
+      "top_urgent": [],
+      "recommended_actions": []
+    },
+    "provenance": "plano-fase0"
+  },
+  {
+    "id": "fl-03",
+    "desc": "SLA custom 60min respeitado -> pendente mas nao overdue",
+    "now": "2026-10-26T10:00",
+    "inbound": [
+      {"id": "w9", "channel": "whatsapp", "subject": "parceria contador", "arrived_at": "2026-10-26T09:20", "sla_min": 60, "status": "waiting"}
+    ],
+    "expected": {
+      "pending_count": 1,
+      "overdue_count": 0,
+      "oldest_wait_min": 40
+    },
+    "provenance": "plano-fase0"
+  }
+]

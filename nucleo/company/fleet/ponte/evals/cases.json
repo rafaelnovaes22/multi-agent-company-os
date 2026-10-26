@@ -1,0 +1,51 @@
+[
+  {
+    "id": "pt-01",
+    "desc": "1 verde, 1 degradado (latencia), 1 down (500)",
+    "channels": [
+      {"name": "bot-whatsapp", "status_code": 200, "latency_ms": 850},
+      {"name": "form-site", "status_code": 200, "latency_ms": 2400},
+      {"name": "webhook-canal", "status_code": 500, "latency_ms": 120}
+    ],
+    "expected": {
+      "total": 3,
+      "green_count": 1,
+      "degraded_count": 1,
+      "down_count": 1,
+      "all_green": false
+    },
+    "provenance": "plano-fase0"
+  },
+  {
+    "id": "pt-02",
+    "desc": "tudo verde -> sem acoes",
+    "channels": [
+      {"name": "bot-whatsapp", "status_code": 200, "latency_ms": 400},
+      {"name": "form-site", "status_code": 200, "latency_ms": 900}
+    ],
+    "expected": {
+      "total": 2,
+      "green_count": 2,
+      "degraded_count": 0,
+      "down_count": 0,
+      "all_green": true,
+      "recommended_actions": []
+    },
+    "provenance": "plano-fase0"
+  },
+  {
+    "id": "pt-03",
+    "desc": "cold start: 200 mas latencia 5s -> degradado com keep-alive",
+    "channels": [
+      {"name": "bot-whatsapp", "status_code": 200, "latency_ms": 5000}
+    ],
+    "expected": {
+      "total": 1,
+      "green_count": 0,
+      "degraded_count": 1,
+      "down_count": 0,
+      "all_green": false
+    },
+    "provenance": "plano-fase0"
+  }
+]

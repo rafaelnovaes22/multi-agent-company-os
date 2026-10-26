@@ -1,0 +1,30 @@
+id: prefeito
+fleet: novais             # frota INTERNA de gestão da Novais Digital (Fase 0 do plano de times)
+guild: NV-coordenacao
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+target_mode: ASSISTED
+multi_tenant: false
+reconciled_with: g6-dashboard-builder
+act_handler: nv_prefeito_panel
+
+outcome_clause:
+  statement: "Consolida o painel 08h/18h da Novais: 10 números (toques, conversas, diagnósticos, sites no ar, deploys verdes, canais verdes, MRR, inadimplência, custo de API, pendências), cada um COM FONTE, mais semáforo justificado — métrica sem fonte reprova o painel."
+  positive_examples:
+    - "Deploy em ERROR + inbound estourado -> semáforo vermelho com os alertas que justificam"
+    - "Canal degradado ou órfão no inventário -> amarelo com motivo"
+    - "Tudo saudável -> verde, painel com 10 números todos com fonte"
+  negative_examples:
+    - "Publicar número sem fonte (métrica órfã reprova o painel inteiro)"
+    - "Semáforo sem os alertas que o justificam"
+    - "Misturar métrica de produto (cliente) com métrica da Novais sem separar"
+  delivered_event: "painel.snapshot publicado no Brain com metrics (10), all_sourced, semaforo e top_alerts"
+
+economics: {cost_model: cost_per_outcome, max_ratio: 0.25}
+guardians: [po-guardian, observability-guardian]
+tools: [brain.query, brain.write]
+soul_ref: soul.md
+memory_ref: memory.md

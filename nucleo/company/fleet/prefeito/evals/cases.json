@@ -1,0 +1,66 @@
+[
+  {
+    "id": "pf-01",
+    "desc": "dia com deploy quebrado e inbound estourado -> vermelho, 10 numeros com fonte",
+    "fila_out": {"pending_count": 2, "overdue_count": 1},
+    "ponte_out": {"green_count": 2, "degraded_count": 1, "down_count": 0, "total": 3},
+    "turno_out": {"total_projects": 61, "green_count": 57, "error_count": 2, "orphan_count": 22, "health_pct": 93.4},
+    "ciclo_out": {"mrr": 1131, "paying_count": 3, "overdue_total": 67, "overdue_count": 1},
+    "funnel": {
+      "touches": {"value": 50, "source": "checklist-segunda (contagem no bloco)"},
+      "conversations": {"value": 10, "source": "checklist-segunda (contagem no bloco)"},
+      "diagnoses": {"value": 3, "source": "checklist-segunda (agenda)"},
+      "sites_live": {"value": 4, "source": "anexo-b / inventario"}
+    },
+    "api_cost_month_brl": {"value": 310.0, "source": "g10-token-cost"},
+    "expected": {
+      "metrics_count": 10,
+      "all_sourced": true,
+      "semaforo": "red"
+    },
+    "provenance": "plano-fase0"
+  },
+  {
+    "id": "pf-02",
+    "desc": "dia saudavel -> verde sem alertas",
+    "fila_out": {"pending_count": 0, "overdue_count": 0},
+    "ponte_out": {"green_count": 3, "degraded_count": 0, "down_count": 0, "total": 3},
+    "turno_out": {"total_projects": 61, "green_count": 61, "error_count": 0, "orphan_count": 0, "health_pct": 100.0},
+    "ciclo_out": {"mrr": 1064, "paying_count": 2, "overdue_total": 0, "overdue_count": 0},
+    "funnel": {
+      "touches": {"value": 50, "source": "checklist-segunda"},
+      "conversations": {"value": 10, "source": "checklist-segunda"},
+      "diagnoses": {"value": 3, "source": "checklist-segunda"},
+      "sites_live": {"value": 4, "source": "anexo-b"}
+    },
+    "api_cost_month_brl": {"value": 280.0, "source": "g10-token-cost"},
+    "expected": {
+      "metrics_count": 10,
+      "all_sourced": true,
+      "semaforo": "green",
+      "top_alerts": []
+    },
+    "provenance": "plano-fase0"
+  },
+  {
+    "id": "pf-03",
+    "desc": "metrica sem fonte -> painel reprovado (vermelho por regra)",
+    "fila_out": {"pending_count": 0, "overdue_count": 0},
+    "ponte_out": {"green_count": 3, "degraded_count": 0, "down_count": 0, "total": 3},
+    "turno_out": {"total_projects": 61, "green_count": 61, "error_count": 0, "orphan_count": 0, "health_pct": 100.0},
+    "ciclo_out": {"mrr": 1064, "paying_count": 2, "overdue_total": 0, "overdue_count": 0},
+    "funnel": {
+      "touches": {"value": 50},
+      "conversations": {"value": 10, "source": "checklist-segunda"},
+      "diagnoses": {"value": 3, "source": "checklist-segunda"},
+      "sites_live": {"value": 4, "source": "anexo-b"}
+    },
+    "api_cost_month_brl": {"value": 280.0, "source": "g10-token-cost"},
+    "expected": {
+      "metrics_count": 10,
+      "all_sourced": false,
+      "semaforo": "red"
+    },
+    "provenance": "plano-fase0"
+  }
+]

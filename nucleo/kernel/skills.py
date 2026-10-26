@@ -416,6 +416,7 @@ def painel_dono(state, *, llm, store, spec):
 
 from . import (  # noqa: E402,F401  # noqa: E402,F401  # noqa: E402,F401
     skills_custops,  # noqa: E402,F401  (G09)
+    skills_novais,  # noqa: E402,F401  (frota interna Novais — Fase 0 do plano de times)
     skills_exec,  # noqa: E402,F401  (spec_executor — VERIFY-IN-EVAL F0)
     skills_finance,  # noqa: E402,F401  (G10)
     skills_g00,

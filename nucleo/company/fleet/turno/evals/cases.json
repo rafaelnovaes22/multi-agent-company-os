@@ -1,0 +1,55 @@
+[
+  {
+    "id": "tr-01",
+    "desc": "5 projetos: 3 verdes, 1 erro, 1 verde sem repo (orfao)",
+    "projects": [
+      {"name": "novais-digital", "deploy_status": "READY", "repo_ok": true},
+      {"name": "geraboleto", "deploy_status": "READY", "repo_ok": true},
+      {"name": "claria-reforma", "deploy_status": "READY", "repo_ok": true},
+      {"name": "site-cliente-x", "deploy_status": "ERROR", "repo_ok": true},
+      {"name": "espelho-antigo", "deploy_status": "READY", "repo_ok": false}
+    ],
+    "expected": {
+      "total_projects": 5,
+      "green_count": 3,
+      "error_count": 1,
+      "orphan_count": 1,
+      "health_pct": 60.0
+    },
+    "provenance": "plano-fase0"
+  },
+  {
+    "id": "tr-02",
+    "desc": "tudo verde com repo -> 100% sem acoes",
+    "projects": [
+      {"name": "novais-digital", "deploy_status": "READY", "repo_ok": true},
+      {"name": "curso-deep-dive", "deploy_status": "READY", "repo_ok": true}
+    ],
+    "expected": {
+      "total_projects": 2,
+      "green_count": 2,
+      "error_count": 0,
+      "orphan_count": 0,
+      "health_pct": 100.0,
+      "recommended_actions": []
+    },
+    "provenance": "plano-fase0"
+  },
+  {
+    "id": "tr-03",
+    "desc": "build em andamento nao conta como erro nem verde",
+    "projects": [
+      {"name": "carinsight-site", "deploy_status": "BUILDING", "repo_ok": true},
+      {"name": "bras-ai", "deploy_status": "READY", "repo_ok": true}
+    ],
+    "expected": {
+      "total_projects": 2,
+      "green_count": 1,
+      "error_count": 0,
+      "building_count": 1,
+      "orphan_count": 0,
+      "health_pct": 50.0
+    },
+    "provenance": "plano-fase0"
+  }
+]

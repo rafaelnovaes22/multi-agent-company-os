@@ -1,0 +1,30 @@
+id: ciclo
+fleet: novais             # frota INTERNA de gestão da Novais Digital (Fase 0 do plano de times)
+guild: NV-financeiro
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+target_mode: ASSISTED
+multi_tenant: false
+reconciled_with: g10-treasury
+act_handler: nv_billing_cycle
+
+outcome_clause:
+  statement: "Apura a recorrência da Novais (assinaturas dos SKUs: Site 48h R$67/mês, Atendente WhatsApp R$497-1.497/mês, Financeiro IA R$97-297/mês): MRR, inadimplência e risco de churn, com a régua de cobrança (lembrete dia 5, firme dia 10) no tom de voz — sem nunca confirmar número com cliente."
+  positive_examples:
+    - "MRR somado das assinaturas ativas com a contagem de pagantes na fonte"
+    - "Assinatura em atraso listada com cliente, valor e régua de cobrança a disparar"
+    - "Tudo pago -> MRR reportado, zero inadimplência, nenhuma ação"
+  negative_examples:
+    - "Confirmar, renegociar ou prometer número/reajuste direto ao cliente (banda pro Rafael, por escrito)"
+    - "Contar assinatura cancelada no MRR"
+    - "Cobrança fora do tom de voz (ameaça, urgência artificial, cheiro de robô)"
+  delivered_event: "nv.billing_cycle publicado no Brain com mrr, overdue_total, churn_risk e recommended_actions"
+
+economics: {cost_model: cost_per_outcome, max_ratio: 0.25}
+guardians: [po-guardian, unit-economist-guardian, security-privacy-guardian]
+tools: [billing.read, brain.write]
+soul_ref: soul.md
+memory_ref: memory.md

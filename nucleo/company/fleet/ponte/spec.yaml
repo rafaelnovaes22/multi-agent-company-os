@@ -1,0 +1,30 @@
+id: ponte
+fleet: novais             # frota INTERNA de gestão da Novais Digital (Fase 0 do plano de times)
+guild: NV-atendimento
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+target_mode: ASSISTED
+multi_tenant: false
+reconciled_with: g9-messaging-concierge
+act_handler: nv_channel_health
+
+outcome_clause:
+  statement: "Verifica a saúde de cada canal de entrada da Novais (bot WhatsApp, formulário do site, webhook): status HTTP, latência e suspeita de cold start; classifica verde/degradado/down e recomenda a correção (keep-alive, recheck, restauração)."
+  positive_examples:
+    - "Canal com HTTP 200 e latência <2s -> verde, nenhuma ação"
+    - "Endpoint /health com latência alta -> degradado com ação de keep-alive"
+    - "Webhook retornando 500 -> down com ação de restauração e fila serial religada"
+  negative_examples:
+    - "Marcar verde um canal que responde 500"
+    - "Recomendar ação sem nomear o canal e o motivo"
+    - "Executar restart/alteração em SHADOW sem aprovação humana"
+  delivered_event: "nv.channel_health publicado no Brain com green_count, degraded_count, down_count e recommended_actions"
+
+economics: {cost_model: cost_per_outcome, max_ratio: 0.25}
+guardians: [po-guardian, observability-guardian]
+tools: [health.probe, brain.write]
+soul_ref: soul.md
+memory_ref: memory.md

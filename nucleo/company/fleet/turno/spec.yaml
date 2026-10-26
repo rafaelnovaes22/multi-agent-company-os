@@ -1,0 +1,30 @@
+id: turno
+fleet: novais             # frota INTERNA de gestão da Novais Digital (Fase 0 do plano de times)
+guild: NV-operacoes
+ledger: operating
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW
+target_mode: ASSISTED
+multi_tenant: false
+reconciled_with: g14-aiops-supervisor
+act_handler: nv_ops_round
+
+outcome_clause:
+  statement: "Roda a saúde dos projetos da Novais (deploys Vercel, repos GitHub, domínios): conta verdes, erros e órfãos (deploy sem repo), calcula o percentual saudável e recomenda as correções do dia — tudo no ar, medido e com dono."
+  positive_examples:
+    - "Deploy em ERROR listado com ação de redeploy/rollback"
+    - "Projeto Vercel sem repo correspondente apontado como órfão para adoção"
+    - "Tudo READY com repo -> 100% saudável, nenhuma ação"
+  negative_examples:
+    - "Contar órfão como verde (deploy vivo sem fonte não é ativo controlado)"
+    - "Erro de deploy sem ação recomendada"
+    - "Publicar número de saúde sem a fonte da contagem (N verdes / total)"
+  delivered_event: "nv.ops_round publicado no Brain com total_projects, error_count, orphan_count e health_pct"
+
+economics: {cost_model: cost_per_outcome, max_ratio: 0.25}
+guardians: [po-guardian, observability-guardian]
+tools: [vercel.projects.read, repos.read, brain.write]
+soul_ref: soul.md
+memory_ref: memory.md

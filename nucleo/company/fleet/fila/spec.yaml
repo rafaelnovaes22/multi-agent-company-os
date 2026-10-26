@@ -1,0 +1,30 @@
+id: fila
+fleet: novais             # frota INTERNA de gestão da Novais Digital (Fase 0 do plano de times)
+guild: NV-atendimento
+ledger: operating          # interno -> token-max, nao cobrado (C3 nao trava promocao)
+tier: L2
+ai_enabled: true
+model_role: worker
+mode: SHADOW               # nasce sempre aqui (C4)
+target_mode: ASSISTED
+multi_tenant: false
+reconciled_with: g9-custops-supervisor
+act_handler: nv_inbound_queue
+
+outcome_clause:
+  statement: "Prioriza a fila de inbound da Novais (WhatsApp, formulários do site, redes): o que está sem resposta, há quanto tempo, o que estourou o SLA de 15 min e as 3 ações mais urgentes — nenhuma mensagem perdida."
+  positive_examples:
+    - "Fila ordenada por tempo de espera com as 3 respostas mais urgentes destacadas"
+    - "Mensagem esperando mais que o SLA de 15 min marcada como overdue com ação de resposta"
+    - "Sem pendências -> fila vazia, zero overdue, nenhuma ação recomendada"
+  negative_examples:
+    - "Responder externamente em SHADOW antes de aprovação humana"
+    - "Prometer preço, desconto ou prazo fora da tabela pública (/quanto-custa)"
+    - "Deixar mensagem na fila sem idade conhecida (espera não calculada)"
+  delivered_event: "nv.inbound_queue publicado no Brain com pending_count, overdue_count e top_urgent"
+
+economics: {cost_model: cost_per_outcome, max_ratio: 0.25}
+guardians: [po-guardian, security-privacy-guardian, observability-guardian]
+tools: [novais.inbox.read, brain.write]
+soul_ref: soul.md
+memory_ref: memory.md

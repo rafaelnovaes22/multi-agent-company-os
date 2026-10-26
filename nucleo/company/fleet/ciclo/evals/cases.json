@@ -1,0 +1,52 @@
+[
+  {
+    "id": "cc-01",
+    "desc": "MRR com 3 pagantes (1 em atraso) e 1 cancelado fora",
+    "subscriptions": [
+      {"client": "petshop-saudepet", "sku": "site-48h", "amount_monthly": 67, "status": "active"},
+      {"client": "alfaiataria-ai", "sku": "site-48h", "amount_monthly": 67, "status": "overdue", "cycles_overdue": 1},
+      {"client": "hg-autos", "sku": "atendente-whatsapp", "amount_monthly": 997, "status": "active"},
+      {"client": "lanchonete-ai", "sku": "site-48h", "amount_monthly": 67, "status": "canceled"}
+    ],
+    "expected": {
+      "mrr": 1131,
+      "paying_count": 3,
+      "overdue_count": 1,
+      "overdue_total": 67,
+      "churn_risk": ["alfaiataria-ai"]
+    },
+    "provenance": "plano-fase0"
+  },
+  {
+    "id": "cc-02",
+    "desc": "tudo pago -> zero inadimplencia, sem acoes",
+    "subscriptions": [
+      {"client": "petshop-saudepet", "sku": "site-48h", "amount_monthly": 67, "status": "active"},
+      {"client": "hg-autos", "sku": "atendente-whatsapp", "amount_monthly": 997, "status": "active"}
+    ],
+    "expected": {
+      "mrr": 1064,
+      "paying_count": 2,
+      "overdue_count": 0,
+      "overdue_total": 0,
+      "churn_risk": [],
+      "recommended_actions": []
+    },
+    "provenance": "plano-fase0"
+  },
+  {
+    "id": "cc-03",
+    "desc": "ticket alto 2 ciclos em atraso -> churn risk com conversa de retencao",
+    "subscriptions": [
+      {"client": "hg-autos", "sku": "atendente-whatsapp", "amount_monthly": 997, "status": "overdue", "cycles_overdue": 2}
+    ],
+    "expected": {
+      "mrr": 997,
+      "paying_count": 1,
+      "overdue_count": 1,
+      "overdue_total": 997,
+      "churn_risk": ["hg-autos"]
+    },
+    "provenance": "plano-fase0"
+  }
+]

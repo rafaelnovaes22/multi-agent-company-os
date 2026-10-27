@@ -35,6 +35,9 @@ from nucleo.kernel.providers.llm import get_llm  # noqa: E402
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 TEAM_SLUG = os.environ.get("VERCEL_TEAM_SLUG", "novaisdigital")
+BRAIN_DIR = os.path.join(ROOT, ".brain-fase0")
+SECRETS_PATH = os.path.join(BRAIN_DIR, "secrets-novais.json")
+FILA_STATE_PATH = os.path.join(BRAIN_DIR, "fila-state.json")
 AUTH_CANDIDATES = [
     os.path.expandvars(r"%APPDATA%\com.vercel.cli\Data\auth.json"),
     os.path.expanduser("~/.vercel/auth.json"),
@@ -153,6 +156,53 @@ def _probe_once(url: str) -> tuple[int, int]:
         return 0, int((datetime.now(timezone.utc) - t0).total_seconds() * 1000)
 
 
+def coletar_inbound() -> tuple[list[dict], int]:
+    """Inbound novo do site (formulários) desde a última rodada.
+
+    Retorna (pendentes, total_no_store). total -1 = fonte indisponível (sem
+    secrets). Na PRIMEIRA rodada com histórico existente, marca baseline e
+    não dispara fila velha — o SLA conta só para o que chegar a partir de agora.
+    Estado de receipts vistos em .brain-fase0/fila-state.json."""
+    if not os.path.exists(SECRETS_PATH):
+        return [], -1
+    cfg = json.load(open(SECRETS_PATH, encoding="utf-8"))
+    if not cfg.get("app_origin") or not cfg.get("admin_token_prod"):
+        return [], -1
+    try:
+        req = urllib.request.Request(
+            f"{cfg['app_origin']}/api/submissions",
+            headers={"Authorization": f"Bearer {cfg['admin_token_prod']}"},
+        )
+        subs = json.load(urllib.request.urlopen(req, timeout=20)).get("submissions", [])
+    except Exception as e:
+        print(f"  (fila: fonte indisponível: {type(e).__name__})")
+        return [], -1
+
+    seen: set[str] = set()
+    if os.path.exists(FILA_STATE_PATH):
+        seen = set(json.load(open(FILA_STATE_PATH, encoding="utf-8")))
+    baseline = not seen and bool(subs)
+    novos = [s for s in subs if s.get("receipt") not in seen]
+    os.makedirs(BRAIN_DIR, exist_ok=True)
+    with open(FILA_STATE_PATH, "w", encoding="utf-8") as f:
+        json.dump(sorted({s["receipt"] for s in subs}), f)
+
+    if baseline:
+        return [], len(subs)
+    inbound = [
+        {
+            "id": (s.get("receipt") or "?")[:8],
+            "channel": "site-form",
+            "subject": (s.get("payload") or {}).get("name", "lead sem nome"),
+            "arrived_at": s.get("createdAt", ""),
+            "sla_min": 15,
+            "status": "waiting",
+        }
+        for s in novos
+    ]
+    return inbound, len(subs)
+
+
 def probe_canais() -> list[dict]:
     """Um GET por canal: código + latência. Latência = experiência do primeiro
     contato do cliente (cold start incluído — é o sinal, não ruído).
@@ -225,6 +275,13 @@ def main() -> int:
     spec_p, ponte = _build_agent("ponte", llm, brain, store, cp)
     out_p = _invoke(ponte, {"channels": canais}, spec_p["ledger"])
 
+    # --- fila: inbound novo do site (formulários) -------------------------------
+    inbound, total_inbound = coletar_inbound()
+    out_f = None
+    if total_inbound >= 0:
+        spec_f, fila = _build_agent("fila", llm, brain, store, cp)
+        out_f = _invoke(fila, {"inbound": inbound, "now": t0.isoformat()}, spec_f["ledger"])
+
     # --- relatório -------------------------------------------------------------
     print(
         f"Turno — rodada ao vivo | team '{TEAM_SLUG}' | {out_t.get('total_projects')} projetos\n"
@@ -253,6 +310,21 @@ def main() -> int:
         print(f"  {c['name']:<16} {c['status']:<9} {c['latency_ms']} ms{cold}")
     for a in out_p.get("recommended_actions", [])[:3]:
         print(f"  acao: {a}")
+
+    if out_f is not None:
+        base_note = (
+            f" (baseline: {total_inbound} no histórico)"
+            if not inbound and total_inbound > 0
+            else ""
+        )
+        print(
+            f"\nFila — inbound do site: {out_f.get('pending_count')} pendente(s), "
+            f"{out_f.get('overdue_count')} com SLA estourado{base_note}"
+        )
+        for m in out_f.get("queue", [])[:3]:
+            print(f"  {m.get('id')} | {m.get('channel')} | esperando {m.get('wait_min')} min")
+        for a in out_f.get("recommended_actions", [])[:3]:
+            print(f"  acao: {a}")
 
     # --- alerta compacto (copiar/colar ou Telegram) ----------------------------
     fire, debt = [], []
@@ -296,6 +368,14 @@ def main() -> int:
         alert += f" | {', '.join(cold_notes)}"
     if real_bad:
         alert += " | ATENÇÃO: canal não aqueceu no retry"
+    if out_f is not None:
+        if (out_f.get("pending_count") or 0) > 0:
+            alert += (
+                f" | FILA: {out_f['pending_count']} inbound novo(s) do site, "
+                f"mais antigo há {out_f.get('oldest_wait_min', 0)} min"
+            )
+        elif out_f.get("overdue_count") == 0 and total_inbound == 0:
+            alert += " | Fila: vazia (sem histórico)"
     print(f"\nALERTA:\n{alert}")
 
     if notify:
@@ -319,12 +399,18 @@ def main() -> int:
                 "sources": {
                     "deploys": "vercel api v9/projects (latestDeployments, read-only)",
                     "canais": "probes HTTP /health (nucleo.rodada_live.CHANNELS)",
+                    "inbound": "GET /api/submissions do site (admin, receipts em fila-state.json)",
                 },
                 "turno": {k: out_t.get(k) for k in
                           ("total_projects", "green_count", "error_count",
                            "orphan_count", "health_pct")},
                 "ponte": {k: out_p.get(k) for k in
                           ("total", "green_count", "degraded_count", "down_count")},
+                "fila": (
+                    {k: out_f.get(k) for k in
+                     ("pending_count", "overdue_count", "oldest_wait_min")}
+                    if out_f is not None else None
+                ),
                 "whatsapp_alert": alert,
                 "projects": payload,
                 "channels": canais,

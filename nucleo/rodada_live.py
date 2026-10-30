@@ -50,7 +50,7 @@ _LATENCY_DEGRADED_MS = 2000
 
 # Canais de entrada da Novais (o que um cliente toca antes de falar com a gente)
 CHANNELS = [
-    ("novais-site", "https://novaisdigital.com.br/health"),
+    ("novais-site", "https://inovais.tech/health"),
     ("carinsight-bot", "https://carinsight-sandbox.vercel.app/health"),
     ("claria", "https://claria.novaisdigital.com.br/api/health"),
     ("geraboleto", "https://geraboleto-novaisdigital.vercel.app/api/health"),

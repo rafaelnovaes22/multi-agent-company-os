@@ -52,7 +52,7 @@ _LATENCY_DEGRADED_MS = 2000
 CHANNELS = [
     ("novais-site", "https://inovais.tech/health"),
     ("carinsight-bot", "https://carinsight-sandbox.vercel.app/health"),
-    ("claria", "https://claria.novaisdigital.com.br/api/health"),
+    ("claria", "https://claria.inovais.tech/api/health"),
     ("geraboleto", "https://geraboleto-novaisdigital.vercel.app/api/health"),
 ]
 

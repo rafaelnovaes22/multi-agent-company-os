@@ -171,7 +171,10 @@ def coletar_inbound() -> tuple[list[dict], int]:
     try:
         req = urllib.request.Request(
             f"{cfg['app_origin']}/api/submissions",
-            headers={"Authorization": f"Bearer {cfg['admin_token_prod']}"},
+            headers={
+                "Authorization": f"Bearer {cfg['admin_token_prod']}",
+                "User-Agent": "nucleo-fila/0.1",
+            },
         )
         subs = json.load(urllib.request.urlopen(req, timeout=20)).get("submissions", [])
     except Exception as e:
